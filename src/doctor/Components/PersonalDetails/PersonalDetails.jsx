@@ -1,0 +1,303 @@
+import { useEffect, useState, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import Header from "../Header/Header"
+
+import axios from "axios"
+import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../environment"
+
+import './personalDetails.scss'
+
+const DocPersonalDetails = () =>{
+
+    const navigate = useNavigate();
+
+    let phoneNumber = localStorage.getItem('phoneNumber');
+
+    const [number, setNumber] = useState('');
+    const [isNumValid, setNumValid] = useState(false);
+    const [isPanValid, setPanValid] = useState(false);
+
+    const [fullName, setFullName] = useState('');
+    const [panNumber, setPanNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [dob, setDob] = useState('');
+    
+    const [joiningDate, setJoiningDate] = useState('');
+
+    const [apiError, setApiError] = useState(false);
+    const [canSubmit, setCanSubmit] = useState(true);
+    
+    let ref = useRef(0);
+    useEffect(()=>{
+        ref.current = document.getElementById('animation-wrapper');
+    },[])
+
+    const [id, setId] = useState("");
+
+    useEffect(()=>{
+        if(phoneNumber){
+            async function getCall(){
+                showWrapper(ref.current);
+                setNumber(phoneNumber);
+                setNumValid(true)
+                await axios.get(env.api_Url + "getDoctorDetailsByPhoneNumber?mobileNo=" + phoneNumber)
+                .then((response) => {
+                    console.log(response)
+                    if(response.data.data != null){
+                        setId(response?.data?.data?.id);
+                        localStorage.setItem("doctorId", response?.data?.data?.doctorId);
+                        let birthdate = response?.data?.data?.dob.split(" ")[0];
+                        birthdate = birthdate.split("-").reverse().join("-");
+                        setDob(birthdate);
+                        let emailId = response?.data?.data?.emailId;
+                        // console.log(emailId)
+                        setEmail(emailId);
+                        let name = response?.data?.data?.name;
+                        setFullName(name);
+                        let pan = response?.data?.data?.pan;
+                        setPanNumber(pan);
+                        handlePan(pan);
+                        setJoiningDate(response?.data?.data?.joiningDate ?? "");
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+                hideWrapper(ref.current)
+            };
+            getCall();
+        }
+    },[]);
+
+    //////////////////////////////// DOB restriction ///////////////////////////////////////
+    ////// Below code is to calculate the maximum date the user can input as DOB.///////////
+    const today = new Date();
+    let day = today.getDate();
+    day = (day<10? "0"+day : day);
+    let month = today.getMonth() + 1;
+    month = (month<10? "0"+month : month);
+    let year = today.getFullYear();
+    year = year-18; // to restrict the minimum age of user to 15 years.
+
+    let maxDateForDob = `${year}-${month}-${day}`; // 'yyyy-mm-dd' - format compulsion
+    ////////////////////////// DOB restriction code ended //////////////////////////////////
+
+
+    ///////////// To validate Date of Birth & Email format ///////////////////
+    function isDataValid(data, datatype){
+        switch(datatype){
+            case "dob":
+                if(!data) return false;
+                data = data.split('-')[0];
+                data = data * 1; // to convert string to number
+                year = year * 1;
+                if(data <= year) return true;
+                return false;
+
+            case "email":
+                if(data.match(
+                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                )) return true;
+                return false;
+        }
+    }
+
+    function numberChange(e){
+        let val = e.target.value;
+        // console.log(val)
+        if(val.length > 10) return
+        if(val.length <= 10){
+            setNumber(val);
+            if(val[0] < 6){
+                document.getElementById('number-msg').style.display = "block";
+                setNumValid(false);
+            }else{
+                document.getElementById('number-msg').style.display = "none";
+                setNumValid(true);
+            }
+            if(val.length < 10) setNumValid(false)
+        }
+        // setNumber(val)
+        // console.log(val)
+    }
+
+    function handlePan(val){
+        val = val.toUpperCase();
+        if(val.length == 10){
+            let regex = new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/);
+            console.log(regex.test(val))
+            if (regex.test(val) == false) {
+                let errorMsg = document.getElementById('panFormat');
+                errorMsg.style.display = "block";
+                setPanValid(false);
+            }else{
+                let errorMsg = document.getElementById('panFormat');
+                errorMsg.style.display = "none";
+                setPanValid(true);
+            }
+        }
+        if(val.length > 10) return
+        setPanNumber(val);
+    }
+
+    // function showErrorOnUI(elem){
+    //     elem.scrollIntoView({ behavior: "smooth", block: "center"});
+    //     elem.classList.add('inputBoxError');
+    //     navigator.vibrate(
+    //         [100, 30, 100, 30]
+    //     );
+
+    //     setTimeout(()=>{
+    //         elem.classList.remove('inputBoxError');
+    //     }, 1000)
+    // }
+
+    async function submit(){
+        if(! isNumValid){
+            let elem = document.getElementById('number');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(! fullName){
+            let elem = document.getElementById('fullname');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(! (isPanValid && Boolean(panNumber))){
+            let elem = document.getElementById('pan');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(!isDataValid(email, "email")){ // validate Email
+            let elem2 = document.querySelectorAll('[type="email"]')[0];
+            if(elem2) showErrorOnUI(elem2);
+            return;
+        }
+        if(!isDataValid(dob, "dob")){ // validate Date of Birth
+            let elem1 = document.querySelectorAll('[type="date"]')[0];
+            if(elem1) showErrorOnUI(elem1);
+            return;
+        }
+
+        if(! canSubmit){
+            return;
+        }
+        setCanSubmit(false);
+        showWrapper(ref.current)
+
+        localStorage.setItem("email", email);
+
+        let birthdate = dob;
+        birthdate = birthdate.split("-").reverse().join("-");
+        // console.log(birthdate)
+        await axios.post(env.api_Url + "saveOrUpdateDoctorDetails", {
+            "id": id,
+            "doctorId": localStorage.getItem("doctorId"),
+            "dob": birthdate,
+            "phoneNumber": number,
+            "emailId": email,
+            "name": fullName,
+            "pan": panNumber,
+            "joiningDate": joiningDate
+        }).then((response) => {
+            // console.log(birthdate, panNumber)
+            console.log(response)
+            if(response.data.status == 200){
+                localStorage.setItem("doctorId", response.data.data.doctorId)
+                localStorage.setItem("emailId", response.data.data.emailId)
+                navigate('/doctor/PracticeDetails')
+            }else{
+                apiErrorHandler();
+            }
+        }).catch(error => {
+            apiErrorHandler();
+            console.log(error);
+        });
+        setCanSubmit(true);
+        hideWrapper(ref.current);
+    }
+    function apiErrorHandler(){
+        setApiError(true)
+        setTimeout(()=>{
+            setApiError(false);
+        }, 1500);
+    }
+
+    return(
+        <>
+        <main id="personalDetails">
+        <Header progressbarDisplay="block" progress={40} canGoBack />
+            <p className="heading">Personal details</p>
+
+            <div className="inputGroup">
+                <p className='group-title'>Phone Number</p>
+                <input
+                    className='group-input'
+                    disabled
+                    id="number"
+                    type="number"
+                    inputMode="numeric"
+                    onChange={(e)=>numberChange(e)}
+                    value={number}
+                    placeholder="Enter your mobile number" 
+                />
+                <p id="number-msg">Please enter a correct mobile number</p>
+            </div>
+
+            <div className="inputGroup">
+                <p className='group-title'>Full name</p>
+                <input
+                    className='group-input'
+                    id="fullname"
+                    onChange={(e)=>setFullName(e.target.value)}
+                    value={fullName}
+                    placeholder="Enter full name as per PAN card" 
+                />
+                <span className="fieldError">This field can't be empty.</span>
+            </div>
+            <div className="inputGroup">
+                <p className='group-title'>PAN</p>
+                <input
+                    id="pan"
+                    className='group-input'
+                    onChange={(e)=>handlePan(e.target.value)}
+                    value={panNumber}
+                    placeholder="Enter PAN" 
+                    autoCapitalize="characters"
+                />
+                <span id="panFormat">Please enter correct PAN number</span>
+            </div>
+
+            <div className="inputGroup">
+                <p className='group-title'>Email</p>
+                <input
+                    type="email"
+                    className='group-input'
+                    onChange={(e)=>setEmail(e.target.value)}
+                    value={email}
+                    placeholder="Enter your mail id" 
+                />
+                <span className="fieldError">Please enter a correct email ID.</span>
+            </div>
+            <div className="inputGroup">
+                <p className='group-title'>Date of birth</p>
+                <input 
+                    className="group-input"
+                    type="date" 
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                    placeholder="Select Date"
+                    max ={maxDateForDob}
+                />
+                <span className="fieldError">Please enter your date of birth</span>
+            </div>
+            <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
+            <button onClick={()=>submit()} className="submit">Next</button>
+        </main>
+        </>
+    )
+}
+
+export default DocPersonalDetails

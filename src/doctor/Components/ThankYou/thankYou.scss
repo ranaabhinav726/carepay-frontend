@@ -1,0 +1,39 @@
+main#thankYou{
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    div.head{
+        width: 100%;
+    }
+
+    img#lens{
+        width: 50%;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+    p.line1{
+        font-size: 15.75px;
+    }
+    p.line2{
+        color: #333333;
+        font-weight: 600;
+        margin: 16px 0 24px 0;
+    }
+
+    div.msg{
+        background: #FAE1CD;
+        border-radius: 10px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    h2, p{
+        text-align: center;
+    }
+    p{
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,30 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.verifying{
+    
+    div.centerSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 50%;
+        transform: translateY(20%);
+        
+        img{
+            width: 70%;
+        }
+
+        p.redirectionMsg{
+            font-weight: 400;
+            font-size: $size-M;
+            line-height: 18px;
+
+            text-align: center;
+            
+            color: #000000;
+        }
+
+    }
+}

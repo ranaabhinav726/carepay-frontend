@@ -1,0 +1,58 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.kycAlreadyVerified{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+    img{
+        margin-top: 2rem;
+    }
+    p.title{
+        margin: 24px 0 8px 0;
+        font-weight: 700;
+        font-size: $size-L;
+        line-height: 19px;
+
+        /* primary green */
+        color: #1C8769;
+    }
+    p.subtitle{
+        
+        padding: 8px 0;
+
+        text-align: center;
+        font-weight: 400;
+        font-size: $size-M;
+        line-height: 18px;
+
+        color: rgba(0, 0, 0, 0.8);
+    }
+
+    
+    div{
+        padding: 5px;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 2rem;
+        text-align: left;
+
+        background: #ECEBFF;
+        border-radius: 10px;
+
+        p{
+            padding: 8px;
+            text-align: center;
+            font-weight: 400;
+            font-size: $size-M;
+            line-height: 18px;
+
+            color: #514C9F;
+        }
+    }
+}

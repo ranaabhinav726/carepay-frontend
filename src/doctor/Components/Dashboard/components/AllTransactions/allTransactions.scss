@@ -1,0 +1,77 @@
+main.allTransactions{
+    padding: 20px 10px;
+    background: white;
+    min-height: 100vh;
+    div.header{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .icon{
+            font-size: 22px;
+            cursor: pointer;
+        }
+        span{
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+    div.loanType{
+        margin: 24px 0 10px 0;
+        span{
+            padding: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: rgba(82, 76, 159, 0.4);
+            cursor: pointer;
+        }
+        span.active{
+            color: #514C9F;
+            border-bottom: 2px solid rgba(82, 76, 159, 0.6);
+        }
+    }
+
+    div.loan{
+        margin: 16px 0;
+        div.head{
+            font-size: 13.5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            span.loanId{
+                color: rgba(0, 0, 0, 0.4);
+
+                .options{
+                    cursor: pointer;
+                }
+            }
+        }
+
+        div.loanDetail{
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+
+            span.title{
+                color: rgba(82, 76, 159, 0.7);
+                font-size: 14px;
+            }
+            span.value{
+                color: rgba(0, 0, 0, 0.6);
+                font-size: 15px;
+            }
+
+            span.amount::before{
+                content: '\20B9  ';
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+    }
+    hr{
+        color: rgba(0, 0, 0, 0.4);
+    }
+}

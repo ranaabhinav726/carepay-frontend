@@ -1,0 +1,19 @@
+main.endApplication{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img{
+        width: 20%;
+        margin: 40px;
+    }
+
+    p.line{
+        font-size: 15.5px;
+        line-height: 24px;
+        text-align: center;
+        font-weight: 700;
+        color: #514C9F;
+    }
+}

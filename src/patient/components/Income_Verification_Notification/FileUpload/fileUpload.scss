@@ -1,0 +1,251 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.fileUpload{
+    padding: 0 10px;
+
+    h3{
+        font-weight: 700;
+        font-size: $size-L;
+        line-height: 19px;
+
+        margin-bottom: 16px;
+    }
+
+    div.msg{
+        padding: 10px;
+        margin-bottom: 6px;
+
+        width: 100%;
+
+        background: #ECEBFF;
+        border-radius: 10px;
+
+        font-weight: 400;
+        font-size: $size-M;
+        line-height: 18px;
+
+        color: #514C9F;
+
+        span.date{
+            font-weight: 700;
+        }
+    }
+    p#errorMsg{
+        visibility: hidden;
+        font-size: $size-M;
+        color: red;
+        text-align: center;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    div.fileList{
+        margin-bottom: 36px;
+        min-height: 120px;
+
+        div.file{
+            color: #514C9F;
+            font-size: $size-M;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 10px;
+
+            .remove{
+                margin: 5px 5px 5px auto;
+                font-size: 22px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    div.uploadedFiles{
+        margin-bottom: 20px;
+        p{
+            margin-bottom: 16px;
+
+            font-weight: 700;
+            font-size: $size-L;
+            line-height: 19px;
+
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        div.fileIconList{
+            display: flex;
+            img.pdfIcon{
+                width: 51.2px;
+                height: 64px;
+
+                margin-right: 16px;
+            }
+            div.uploadPDF{
+                text-align: center;
+                padding: 10px 16px;
+
+                cursor: pointer;
+
+                background: #ECEBFF;
+                border-radius: 10px;
+                p{
+                    font-weight: 700;
+                    font-size: $size-M;
+                    line-height: 18px;
+
+                    margin-bottom: 0;
+                    
+                    color: #514C9F;
+                }
+            }
+        }
+    }
+
+
+    div.pdfPassword{
+        div.passTitle{
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            p{
+                font-weight: 400;
+                font-size: $size-M;
+                line-height: 17px;
+                display: inline-block;
+
+                margin-right: 10px;
+            }
+            .tooltip {
+                position: relative;
+                display: inline-block;
+                // border-bottom: 1px dotted black;
+              }
+              
+              .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 200px;
+                // text-align: center;
+                padding: 10px;
+                font-weight: 400;
+                font-size: 12px;
+                color: #514C9F;
+                background: #ECEBFF;
+                border: 1px solid #514C9F;
+                border-radius: 4px;
+                padding: 4px;
+
+                line-height: 14px;
+              
+                /* Position the tooltip */
+                position: absolute;
+                bottom: -20px;
+                left: 25px;
+                z-index: 1;
+              }
+              .tooltip:hover .tooltiptext {
+                visibility: visible;
+              }
+
+            // span.tooltip{
+
+            //     position: relative;
+            //     left: 40%;
+            //     bottom: 30px;
+            //     height: max-content;
+            //     padding: 8px;
+            //     width: 50%;
+            //     font-weight: 400;
+            //     font-size: 10px;
+            //     color: #908dc1;
+            //     background: rgba(0, 0, 0, 0.7);
+            //     border-radius: 4px;
+            //     // 
+            //     // display: inline-block;
+            // }
+        }
+        p.fileNote{
+            color: #514C9F;
+            font-size: $size-S;
+            margin-bottom: 10px;
+        }
+
+        input#password{
+            padding: 10px;
+
+            width: 100%;
+            height: 48px;
+
+            background: #ECEBFF;
+            border-radius: 4px;
+            border: none;
+
+            letter-spacing: 10px;
+        }
+        input#password::placeholder{
+            letter-spacing: 0px;
+        }
+        div.eye{
+            display: inline-block;
+            position: relative;
+            top: -35px;
+            font-size: 25px;
+            left: 90%;
+            color: #908dc1;
+        }
+        p#passError{
+            display: none;
+            margin: -20px 0 10px 0;
+            font-size: $size-S;
+            color: red;
+        }
+
+        span.safe{
+            display: block;
+            font-size: $size-S;
+            line-height: 15px;
+            // margin-left: -24px;
+            // margin-bottom: 10px;
+            color: #1C8769;
+        }
+    }
+
+    button.uploadAccountStatement{
+        position: relative;
+        top: calc(90vh - 270px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 30px;
+
+        width: 100%;
+        height: 48px;
+
+        border: none;
+
+        /* Tertiary purple */
+        background: #ECEBFF;
+        border-radius: 4px;
+
+        span{
+            font-weight: 700;
+            font-size: $size-M;
+            line-height: 18px;
+
+            color: #514C9F;
+        }
+
+    }
+
+    input#filePicker{
+        display: none;
+    }
+
+}
+
+// .inputBoxError{
+//     border: 1px solid red;
+//     background: #ffe8e8;
+//   }

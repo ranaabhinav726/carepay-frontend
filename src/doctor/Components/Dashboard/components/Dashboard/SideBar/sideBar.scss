@@ -1,0 +1,151 @@
+div#overlay{
+    position: absolute;
+    min-height: 100vh;
+    left: -100%;
+    width: 100%;
+    z-index: 1;
+    background: rgba($color: #000, $alpha: 0.4);
+    opacity: 0;
+    transition: all 0.3s;
+    overflow: hidden;
+    
+    div.sideBar{
+        padding: 20px 20px;
+        height: 100%;
+        width: 80%;
+        border-radius: 0 0 16px 0;
+        background: white;
+        opacity: 1;
+
+        .cross{
+            font-size: 24px;
+            color: #514C9F;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        div.doctorDetails{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background: #ECEBFF;
+            div.userImage{
+                width: 40px;
+                height: 40px;
+                padding: 2px;
+                border-radius: 50%;
+                background: white;
+                border: 2px solid #F1A164;
+                
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                overflow: hidden;
+          
+                user-select: none;
+                cursor: pointer;
+            
+                p.initials{
+                  width: 100%;
+                  height: 100%;
+                  font-weight: 600;
+                  color: #514C9F;
+                  border-radius: 50%;
+                  font-size: 18px;
+                  letter-spacing: 0.75px;
+                  background: white;
+            
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+            }
+            div.doctorCred{
+                width: 70%;
+                // text-align: left;
+
+                p.docQualification{
+                    color: rgba($color: #000, $alpha: 0.4);
+                    font-weight: 700;
+                }   
+            }
+            .arrow{
+                font-size: 20px;
+            }
+        }
+
+        div.clinicName{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: max-content;
+            gap: 20px;
+            padding: 10px 20px;
+
+            color: #514C9F;
+            font-size: 14px;
+
+            border-radius: 4px;
+            border: 1.5px solid rgba(82, 76, 159, 0.4);
+        }
+
+        div.qrCode{
+            text-align: center;
+            img{
+                width: 80%;
+                aspect-ratio: 1/1;
+            }
+        }
+
+        a{
+            display: block;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #514C9F;
+        }
+        a.shareLink{
+            padding: 10px 20px;
+            border: 1px solid #514C9F;
+            width: max-content;
+            border-radius: 100px;
+        }
+
+        hr{
+            height: 2px;
+            background: #514C9F;
+        }
+
+        div.support{
+            margin: 20px 10px;
+            p{
+                display: flex;
+                margin: 15px 0;
+                .icon{
+                    font-size: 26px;
+                    color: rgba(0, 0, 0, 0.4);
+                    margin-right: 20px;
+                }
+            }
+            p.head{
+                font-weight: 700;
+                color: rgba(82, 76, 159, 0.7);
+            }
+
+        }
+
+    }
+}
+div#overlay.show{
+    left: 0;
+    opacity: 1;
+}
+
+.center{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}

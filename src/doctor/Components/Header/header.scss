@@ -1,0 +1,51 @@
+$width : attr(progress);
+
+header.doctor{
+    position: sticky;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    // gap: 10px;
+
+    width: 100%;
+    min-height: 82px;
+    max-height: 100px;
+    left: 0px;
+    z-index: 2;
+
+    background: #FFFFFF;
+
+    .header--logo{
+        margin: 10px 0 10px 10px;
+        width: 148px;
+        height: 36px;
+    }
+
+    .back{
+        font-size: 30px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    div.lower{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        // align-items: start;
+    }
+
+    div.childDiv{
+        // animation: anim 10s linear 1 forwards
+        animation: anim 1.75s cubic-bezier(0,1.02,1,1) 1 forwards;
+    }
+    @keyframes anim {
+        0%{
+            width: 0;
+        }100%{
+            width: attr(progress);
+        }
+        
+    }
+}

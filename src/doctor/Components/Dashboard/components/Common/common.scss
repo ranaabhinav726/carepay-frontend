@@ -1,0 +1,150 @@
+div.faqs{
+    grid-area: faq;
+    padding: 15px;
+    background: #ECEBFF;
+    border-radius: 16px 16px 0px 0px;
+    margin-top: 40px;
+    div.faqs-head{
+      display: flex;
+      align-items: center;
+  
+      img{
+        height: 28px;
+        width: 28px;
+      }
+      span.faqs-heading{
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 31px;
+        margin-left: 10px;
+        margin-top: -4px;
+        color: rgba(82, 76, 159, 0.6);
+      }
+    }
+    div.faq{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  
+      span.question{
+        font-size: 15px;
+        line-height: 23px;
+        font-weight: 400;
+        // width: 80%;
+        letter-spacing: 0.25px;
+        padding: 10px 5px 5px;
+        // word-spacing: 1px;
+      }
+      span.gotoArrow{
+        width: 15%;
+        text-align: right;
+        font-size: 26px;
+        font-weight: 700;
+        color: #514C9F;
+      }
+    }
+  
+    p.allFaqs{
+      font-weight: 700;
+      font-size: 15.5px;
+      line-height: 23px;
+      padding: 15px 10px 0 ;
+      margin-bottom: 0;
+  
+      text-align: right;
+      text-decoration-line: underline;
+      cursor: pointer;
+  
+      color: #514C9F;
+    }
+  }
+  
+  div.help{
+    grid-area: help;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #CFE5DF;
+    padding: 20px 0 10px 0;
+    p.line1{
+      margin: 0;
+      font-size: 16px;
+      line-height: 26px;
+      color: rgba($color: #000000, $alpha: 0.8);
+    }
+    p.line2{
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 31px;
+      color: rgba(28, 135, 105, 0.8);
+    }
+    button.roundBtn{
+      background: white;
+      color: #1C8769;
+    }
+  }
+  
+  div.advice{
+    grid-area: advice;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 30px 0;
+    padding-bottom: 5rem;
+  
+    p.line1{
+      margin: 0;
+      font-size: 16px;
+      line-height: 26px;
+      color: rgba($color: #000000, $alpha: 0.8);
+    }
+    p.line2{
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 31px;
+      color: rgb(241, 161, 100);
+    }
+    button.roundBtn{
+      color: white;
+      background: rgb(241, 161, 100);
+    }
+  }
+  
+  button.submit{
+    width: 100%;
+    height: 48px;
+    padding: 10px 16px 6px;
+  
+    border-radius: 4px;
+    border: none;
+  
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+  
+    cursor: pointer;
+  }
+  
+  button.roundBtn{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: none;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    .btnIcon{
+      font-size: 24px;
+      padding-right: 10px;
+    }
+  }

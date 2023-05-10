@@ -1,0 +1,413 @@
+import Header from "../../Header/Header"
+import './employmentDetails.scss'
+
+import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+// import { useData } from "../../data";
+import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
+
+const EmploymentDetails = () =>{
+    // let token = localStorage.getItem('access_token');
+    // const config = {
+    //     headers: { Authorization: `Bearer ${token}` }
+    // };
+    
+    // useEffect(()=>{
+    //     axios.post(env.api_Url + "update_user_stage", {
+    //             "onboarding_stage": "Employment_Details"
+    //         },
+    //             config
+    //         )
+    //     .then((response) => {
+    //         console.log(response)
+    //     }).catch(error => {
+    //         console.log(error);
+    //     });
+    // }, [])
+
+    // const data = useData();
+    const navigate = useNavigate();
+
+    const [empType, setEmpType] = useState('salaried');
+    const [salary, setSalary] = useState('');
+    const [salaryDate, setSalaryDate] = useState('1');
+    const [familyIncome, setFamilyIncome] = useState();
+    const [companyName, setCompanyName] = useState('');
+    const [companyAddL1, setCompanyAddL1] = useState('');
+    const [companyAddL2, setCompanyAddL2] = useState('');
+    const [pincode, setPincode] = useState('');
+    const [IndustryType, setIndustryType] = useState('Ecommerce');
+
+    const [totalExpYear, setTotalExpYear] = useState(0);
+    const [totalExpMonth, setTotalExpMonth] = useState(0);
+    const [jobExpYear, setJobExpYear] = useState(0);
+    const [jobExpMonth, setJobExpMonth] = useState(0);
+
+    const [consent, setConsent] = useState(false);
+    
+    const [apiError, setApiError] = useState(false);
+    const [canSubmit, setCanSubmit] = useState(true);
+
+    let userId = localStorage.getItem("userId");
+
+    let ref = useRef(0);
+    useEffect(()=>{
+        ref.current = document.getElementById('animation-wrapper');
+        if(!! userId){
+            axios.get(env.api_Url + "userDetails/getUserEmploymentDetailsByUserId?userId=" + userId)
+            .then(response => {
+                if(response.data.status === 200){
+                    console.log(response)
+                    let data = response.data.data;
+                    if(!! data){
+                        setSalary(data.nettakehomesalary);
+                        setSalaryDate(data.salaryDay);
+                        setFamilyIncome(data.monthlyFamilyIncome);
+                        setCompanyName(data.organizationName);
+                        setCompanyAddL1(data.workplaceAddress1);
+                        setCompanyAddL2(data.workplaceAddress2);
+                        setPincode(data.workplacePincode);
+                        setIndustryType(data.industry);
+                        setTotalExpYear(data.totalJobExpInYears);
+                        setTotalExpMonth(data.totalJobExpInMonth);
+                        setJobExpMonth(data.currentJobExpInMonth);
+                        setJobExpYear(data.currentJobExpInYears)
+                    }
+                }
+            })
+        }
+    },[])
+
+    const today = new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth()+1;
+
+    // function showErrorOnUI(elem){
+    //     elem.classList.add('inputBoxError');
+
+    //     setTimeout(()=>{
+    //         elem.classList.remove('inputBoxError');
+    //     }, 1000)
+    // }
+
+    function expError(){
+        let elem = document.getElementById('expError');
+        if(elem) elem.style.display = "block";
+        
+        setTimeout(()=>{
+            if(elem) elem.style.display = "none";
+        }, 3000)
+    }
+
+    async function handleSubmit(){
+        // && totalExpYear && totalExpMonth && jobExpYear && jobExpMonth
+
+        if(!(empType && salary && salaryDate 
+            && companyName && companyAddL1 
+            && pincode && IndustryType && consent)){
+
+                console.log(empType, salary, salaryDate, familyIncome 
+                , companyName, companyAddL1, companyAddL2 
+                , pincode, IndustryType, totalExpYear, 
+                    totalExpMonth, jobExpYear, jobExpMonth, consent)
+
+                    
+                // return;
+        }
+
+        if(!salary){ 
+            let elem = document.getElementById('salary');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(!companyName){ 
+            let elem = document.getElementById('companyName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(!companyAddL1){ 
+            let elem = document.getElementById('companyAddL1');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(!pincode){
+            let elem = document.getElementById('pincode');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        // if(!IndustryType){
+        //     let elem = document.getElementById('selectIndustryType');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
+
+        if(totalExpYear < jobExpYear){
+            expError();
+            return;
+        }else if(totalExpYear == jobExpYear && totalExpMonth < jobExpMonth){
+            expError();
+            return;
+        }
+
+        if(!consent){
+            let elem = document.getElementById('consent');
+            if(elem) showErrorOnUI(elem, false);
+            return;
+        }
+
+        if(! canSubmit){
+            return;
+        }
+        setCanSubmit(false);
+        showWrapper(ref.current);
+        
+        let submitObj = {
+            "userId" : userId,
+            "employmentType": empType,
+            "netTakeHomeSalary": salary,
+            "salaryDay": salaryDate,
+            "organizationName": companyName,
+            "workplaceAddress1": companyAddL1,
+            "workplacePincode": pincode,
+            "industry": IndustryType,
+            "totalJobExpInYears": parseInt(totalExpYear),
+            "totalJobExpInMonth": parseInt(totalExpMonth),
+            "currentJobExpInYears": parseInt(jobExpYear),
+            "currentJobExpInMonth": parseInt(jobExpMonth),
+            "formStatus": "Employment_details"
+          };
+
+          if(!!familyIncome){
+            submitObj.monthlyFamilyIncome = familyIncome;
+          }
+
+          if(!!companyAddL2){
+            submitObj.workplaceAddress2 = companyAddL2;
+          }
+
+        await axios.post(env.api_Url + "userDetails/employmentDetail", 
+            submitObj)
+            .then((response) => {
+                console.log(response)
+                if(response.data.status == 200){
+                    navigate('/patient/BankDetails');
+                }else{
+                    apiErrorHandler();
+                }
+            }).catch(error => {
+                console.log(error);
+                apiErrorHandler();
+              });
+    setCanSubmit(true);
+    hideWrapper(ref.current)
+    }
+    function apiErrorHandler(){
+        setApiError(true)
+        setTimeout(()=>{
+            setApiError(false);
+        }, 1500);
+    }
+
+
+
+    const list = ["Ecommerce","FMCG","Healthcare & Diagnostics","IT & ITeS",
+                    "Oil and Gas","Railways","Telecommunications","Cement","Consumer Durables",
+                    "Education and Training","Engineering & Infrastructure","Capital Goods",
+                    "Auto Components","Automobiles","Gems and Jewellery","Aviation","Manufacturing",
+                    "Media and Entertainment","Metals And Mining","Power","Real Estate","Retail",
+                    "Textiles","Insurance (Life and health)","Pharmaceuticals","Dairy Products",
+                    "Fertilisers & Seeds","Food & Food Products","Sugar, Tea, Coffee",
+                    "Hotel, Restaurants & Tourism","Microfinance Institutions","Shipping",
+                    "Ports & Port Services","Banking and Finance","Agriculture and Allied"
+                ];
+
+    // useEffect(()=>{
+    //     axios.post(env.login_api_Url + "industry_list", {
+    //             }, config )
+    //         .then((response) => {
+    //             console.log(response)
+    //             if(response.status == '200'){
+    //                 setList(response.data.industry_list);
+    //             }
+    //         }).catch(error => {
+    //             console.log(error);
+    //             });
+    // }, []);
+
+    let options = list.map((item, idx)=>{
+        return <option value={item} key={idx}>{item}</option>
+    })
+
+    let dates =[];
+    for(let i=1; i<32; i++){
+        dates.push(<option value={i} key={i}>{i}</option>)
+    }
+   return(
+
+    <>
+    <main className="employmentDetails">
+    <Header progressbarDisplay="block" progress="80" canGoBack="/patient/AddressDetails" />
+        <h3>Employment Details</h3>
+
+        <div className="employementType">
+            <p>Employment type</p>
+            <select 
+                onChange={(e)=>setEmpType(e.target.value)}
+                name="empType" 
+                id="selectEmployementType"
+            >
+                <option value="salaried">Salaried</option>
+                {/* <option value="self_employed">Self employed</option>
+                <option value="unemployed">Unemployed</option>
+                <option value="student">Student</option> */}
+            </select>
+        </div>
+
+        <div className="income">
+            <p>Monthly in-hand salary/income</p>
+            <input 
+                id="salary"
+                type="number" 
+                value={salary ?? ""}
+                onChange={(e)=>setSalary(e.target.value)}
+                placeholder="Enter your monthly in-hand income" 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+
+        <div className="salaryDate">
+            <p>Salary credit date</p>
+            <select 
+                onChange={(e)=>setSalaryDate(e.target.value)}
+                name="salaryDateSelection" 
+                id="selectSalaryDate"
+            >
+                {dates}
+            </select>
+        </div>
+
+        <div className="familyIncome">
+            <p>Monthly family income (Optional)</p>
+            <input 
+                type="number" 
+                value={familyIncome ?? ""}
+                onChange={(e)=>setFamilyIncome(e.target.value)}
+                placeholder="Enter your family's monthly income" 
+            />
+        </div>
+
+        <div className="companyName">
+            <p>Current company name</p>
+            <input 
+                id="companyName"
+                type="text" 
+                value={companyName ?? ""}
+                onChange={(e)=>setCompanyName(e.target.value)}
+                placeholder="Enter your current company name" 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+        <div className="companyAddress-line1">
+            <p>Current workplace address (line 1)</p>
+            <input 
+                id="companyAddL1"
+                type="text" 
+                value={companyAddL1 ?? ""}
+                onChange={(e)=>setCompanyAddL1(e.target.value)}
+                placeholder="Enter here" 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+        <div className="companyAddress-line2">
+            <p>Current workplace address (line 2)</p>
+            <input 
+                type="text" 
+                value={companyAddL2 ?? ""}
+                onChange={(e)=>setCompanyAddL2(e.target.value)}
+                placeholder="Enter here" 
+            />
+        </div>
+        <div className="companyPincode">
+            <p>Current workplace Pincode</p>
+            <input 
+                id="pincode"
+                type="number" 
+                value={pincode ?? ""}
+                onChange={(e)=>setPincode(e.target.value)}
+                placeholder="Enter here" 
+                inputMode="numeric" 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+
+        <div className="IndustryType">
+            <p>Industry</p>
+            <select 
+                onChange={(e)=>setIndustryType(e.target.value)} 
+                name="IndType" 
+                id="selectIndustryType"
+                value={IndustryType ?? ""}
+            >
+            {options}
+            </select>
+        </div>
+
+
+        <div className="timeInJob">
+            <p>Time in this job</p>
+            <div className="inputGroup">
+                <input 
+                    type="number" 
+                    value={jobExpYear ?? ""}
+                    onChange={(e)=>setJobExpYear(e.target.value)}
+                    placeholder="-" />
+                <p>Years</p>
+                <input 
+                    type="number" 
+                    value={jobExpMonth ?? ""}
+                    onChange={(e)=>setJobExpMonth(e.target.value)}
+                    placeholder="-" />
+                <p>Months</p>
+            </div>
+        </div>
+
+        <div className="totalExp">
+            <p>Total professional work experience</p>
+            <div className="inputGroup">
+                <input 
+                    type="number" 
+                    value={totalExpYear ?? ""}
+                    onChange={(e)=>setTotalExpYear(e.target.value)} 
+                    placeholder="-" />
+                <p>Years</p>
+                <input 
+                    type="number" 
+                    value={totalExpMonth ?? ""}
+                    onChange={(e)=>setTotalExpMonth(e.target.value)}
+                    placeholder="-" />
+                <p>Months</p>
+            </div>
+            <span id="expError" className="fieldError">Time in current job can't be less than total experience</span>
+        </div>
+        
+        <div id="consent" className="consentBox">
+            <input
+            onClick={(e)=>setConsent(e.target.checked)} type="checkbox" />
+            <label htmlFor="consent">I declare the above information is true and correct. I allow CareCoin Technologies Pvt Ltd and its lending partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax.</label><br />
+        </div>
+        
+        <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
+        <button onClick={handleSubmit} className="submit">Submit</button>
+    </main>
+    </>
+   )
+}
+
+
+export default EmploymentDetails

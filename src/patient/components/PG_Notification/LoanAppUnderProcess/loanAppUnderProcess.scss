@@ -1,0 +1,42 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.loanAppUnderProcess{
+    padding: 10px;
+    text-align: center;
+
+    padding-top: 2rem;
+    
+    h3{
+        padding: 24px 0 10px 0;
+        font-weight: 700;
+        font-size: $size-L;
+        line-height: 19px;
+
+        color: #EA6B0C;
+    }
+
+    p{
+        margin-bottom: 16px;
+        line-height: 22px;
+
+        .rupee{
+            // display: inline-block;
+            margin: 0 -6px -2px 0;
+        }
+    }
+
+    div.msg{
+        padding: 16px 12px;
+        margin-bottom: 2rem;
+
+        background: #FAE1CD;
+        border-radius: 10px;
+
+        font-size: $size-M;
+        line-height: 22px;
+    }
+
+}

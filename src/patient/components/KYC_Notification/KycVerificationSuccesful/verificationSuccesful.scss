@@ -1,0 +1,44 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.verificationSuccesful{
+    
+    div.centerSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 50%;
+        transform: translateY(50%);
+        
+        img{
+            width: 30%;
+            animation: fadeIn 0.8s ease-in 1 forwards;
+        }
+
+        @keyframes fadeIn {
+            0%{
+                padding-top: 1rem;
+                opacity: 0;
+            }
+            100%{
+                padding-top: 0rem;
+                opacity: 1;
+            }
+        }
+
+        p.redirectionMsg{
+            margin-top: 3rem;
+
+            font-weight: 700;
+            font-size: $size-L;
+            line-height: 24px;
+
+            text-align: center;
+
+            color: #514C9F;
+        }
+
+    }
+}

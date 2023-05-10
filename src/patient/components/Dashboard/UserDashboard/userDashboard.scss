@@ -1,0 +1,366 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.userDashboard{
+    padding: 0 10px;
+    position: relative;
+    overflow-x: hidden;
+
+    div.dashboard{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    
+        padding-top: 10px;
+    
+        img.hamburgerIcon{
+            height: 24px;
+            width: 32px;
+            cursor: pointer;
+        }
+
+        div.help{
+            display: flex;
+            justify-content: space-around;
+            font-weight: 700;
+            font-size: $size-S;
+            line-height: 16px;
+    
+            padding: 10px;
+            height: 36px;
+            width: 73px;
+    
+            color: #514C9F;
+            background: #FAE1CD;
+            border-radius: 8px;
+
+            cursor: pointer;
+    
+        }
+    }
+
+    p.username{
+        padding: 24px 0 20px 0;
+
+        font-size: $size-XL;
+        line-height: 24px;
+    }
+    p{
+        font-size: $size-M;
+        line-height: 18px;
+
+        padding-bottom: 10px;
+    }
+
+    div.currPlanCard{
+        padding: 10px;
+
+        background: #ECEBFF;
+        border-radius: 8px;
+
+        div{
+            display: flex;
+            width: 100%;
+
+            div{
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 15px;
+                span{
+                    font-weight: 700;
+                    font-size: $size-L;
+                    line-height: 24px;
+
+                    display: flex;
+                    align-items: center;
+
+                    padding: 4px 0;
+                }
+                p{
+                    font-weight: 400;
+                    font-size: $size-S;
+                    line-height: 16px;
+                }
+            }
+            div.DueAmt, div.nextInst{
+                span{
+                    font-size: $size-M;
+                }
+            }
+        }
+
+        div.lower{
+            display: flex;
+            flex-direction: column;
+
+            p{
+                font-weight: 700;
+                font-size: $size-L;
+                line-height: 24px;
+
+            }
+
+            div.tenureBar{
+                display: flex;
+                flex-direction: row;
+
+                div.bar{
+                    height: 6px;
+                    width: 100%;
+
+                    border: 1px solid #514C9F;
+
+                    border-radius: 3px;
+                }
+
+                div.f{
+                    background: #514C9F;
+                }
+            }
+            
+        }
+        div.loanDetails{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+
+            span{
+                font-size: $size-M;
+                line-height: 16px;
+                color: rgba(#000, 0.8);
+            }
+            span.bold{
+                font-weight: 700;
+            }
+
+        }
+
+        button.payInst{
+            padding: 10px;
+            margin-bottom: 20px;
+
+            width: 100%;
+            height: 47px;
+
+            color: white;
+            font-weight: 700;
+            font-size: $size-M;
+            line-height: 17px;
+
+            background: #514C9F;
+            border-radius: 50px;
+            border: none;
+
+        }
+    }
+
+    div.myTransactions{
+        margin-top: 20px;
+        h3{
+            padding: 24px 0 20px 0;
+        }
+    }
+
+    div.contactSupport{
+        padding: 15px;
+        margin-bottom: 1rem;
+        text-align: center;
+
+        span{
+            font-weight: 700;
+            font-size: $size-M;
+            line-height: 17px;
+
+            color: #514C9F;
+            text-decoration-line: underline;
+
+            cursor: pointer;
+        }
+    }
+
+    div.loanAgreement{
+        width: 100%;
+        height: 48px;
+        padding: 10px 40px 10px 40px;
+        margin-bottom: 2rem;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border-radius: 8px;
+        background: #ECEBFF;
+        color: #514C9F;
+
+        cursor: pointer;
+
+        span{
+            font-size: $size-M;
+            font-weight: 700;
+            line-height: 17px;
+
+        }
+        .download{
+            height: 30px;
+            width: 24px;
+        }
+    }
+
+    div.menu{
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 100%;
+    
+        z-index: 1;
+    
+        background: #514C9F;
+        color: white;
+    
+        padding: 4rem 10px;
+
+        transition: left 0.5s ease;
+    
+        div.top{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 4rem;
+            
+            img{
+                padding-left: 5px;
+            }
+            
+            svg.close{
+                font-size: 32px;  
+                cursor: pointer;  
+                
+                path{
+                    stroke:#fff;
+                }
+            }
+        }
+
+        nav{
+            ul{
+                list-style: none;
+
+                li{
+                    padding: 10px;
+                    margin-bottom: 24px;
+
+                    font-weight: 400;
+                    font-size: 24px;
+                    line-height: 22px;
+
+                    cursor: pointer;
+                }
+
+                li.active{
+                    text-decoration-line: underline;
+                }
+
+                li:last-child{
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 22px;
+
+                    margin-top: 10rem;
+                    color: #EA6B0C;
+                }
+
+                
+            }
+
+        }
+    
+    }
+
+    div.menu.show{
+        left: 0;
+    }
+}
+
+div.transxCard{
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(#000, 0.1);
+    margin-bottom: 16px;
+    div.head{
+        display: flex;
+        justify-content: space-between;
+
+        div.timestamp{
+            font-size: $size-S;
+            line-height: 16px;
+
+            color: rgba($color: #000000, $alpha: 0.8);
+
+            span.status{
+                padding: 4px 6px;
+                margin-left: 10px;
+
+                font-weight: 700;
+                line-height: 18px;
+                color: #1C8769;
+
+                background: #CFE5DF;
+                border-radius: 4px;
+            }
+        }
+
+        span.share-btn{
+            width: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 10px;
+
+            color: white;
+            font-weight: 700;
+            font-size: $size-S;
+            line-height: 18px;
+
+            border-radius: 4px;
+            background: #514C9F;
+
+            cursor: pointer;
+        }
+    }
+
+    div.transaction{
+        display: flex;
+
+        div{
+            width: 100%;
+            span{
+                font-weight: 700;
+                font-size: $size-L;
+                line-height: 24px;
+
+                color: rgba(#000, 0.8);
+    
+                display: flex;
+                align-items: center;
+    
+                padding: 4px 0;
+            }
+            p{
+                font-weight: 400;
+                font-size: $size-S;
+                line-height: 16px;
+                color: rgba(#000, 0.8);
+                padding-bottom: 0;
+            }
+        }
+    }
+}
+
+

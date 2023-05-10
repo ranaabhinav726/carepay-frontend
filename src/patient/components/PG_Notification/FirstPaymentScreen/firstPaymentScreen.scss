@@ -1,0 +1,62 @@
+main.firstPayment{
+    padding: 0 10px;
+    h3{
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 19px;
+        padding: 24px 0 24px 0;
+    }
+
+    p.subheading{
+        font-size: 15.5px;
+        line-height: 24px;
+        color: #071329;
+        margin-bottom: 24px;
+    }
+
+    div.msgBox{
+        padding: 20px 10px;
+        background: #ECEBFF;
+        border-radius: 10px;
+
+        letter-spacing: 0.25px;
+
+        div.line{
+            margin: 10px 1.5rem;
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 24px;
+
+            p.title{
+                font-size: 12.5px;
+            }
+            p.value{
+                font-size: 17px;
+                color: rgba(0, 0, 0, 0.8);
+            }
+        }
+    }
+
+    img{
+        width: 15%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 30px 0;
+    }
+
+    div.paymentBar{
+        padding: 15px 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        background: #1C8769;
+        border-radius: 8px;
+
+        color: white;
+
+        margin-bottom: 2rem;
+        cursor: pointer;
+        user-select: none;
+    }
+}

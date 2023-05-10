@@ -1,0 +1,148 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.loanDetails{
+    padding: 0px 12px 12px 12px;
+    margin-bottom: 2rem;
+    h3{
+        padding: 24px 0 4px 0;
+
+        font-weight: 700;
+        font-size: $size-L;
+        line-height: 19px;
+    }
+
+    div{
+        p{
+            font-weight: 400;
+            font-size: $size-M;
+            line-height: 17px;
+
+            padding-top: 4px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        input, select{
+            padding: 10px;
+            
+            
+            width: 100%;
+            height: 48px;
+            
+            background: #ECEBFF;
+            border-radius: 4px;
+            border: none;
+        }
+        p.warning{
+            font-weight: 400;
+            font-size: $size-S;
+            line-height: 15px;
+            margin-top: 6px;
+            color: #FF0000;
+        }
+
+    }
+
+    div.loan{
+        input{
+            appearance: textfield;
+        }
+    }
+    p.subheading{
+        font-size: $size-M;
+        margin: 30px 0 15px 0;
+    }
+
+    div.msgBox{
+        background: #FAE1CD;
+        padding: 10px;
+        border-radius: 8px;
+
+        color: #514C9F;
+
+        p{
+            margin: 8px 0;
+        }
+    }
+
+    // button.submit{
+    //     width: 100%;
+    //     height: 48px;
+    //     background: #514C9F;
+    //     margin-top: 26px;
+    //     color: #fff;
+    //     font-weight: 700;
+    //     font-size: 14px;
+    //     line-height: 17px;
+    //     border-radius: 8px;
+    //     border: none;
+    //     cursor: pointer;
+    // }
+}
+
+
+div.card{
+    position: relative;
+    padding: 5px 10px 5px 44px;
+    margin-top: 10px;
+
+    width: 100%;
+
+    border-radius: 10px;
+
+    background: #ECEBFF;
+
+
+    div.whiteCircle{
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        top: 0%;
+        left: 0%;
+
+        margin: 20px 0 0 10px;
+        
+        height: 24px;
+        width: 24px;
+        background: white;
+
+        border-radius: 50%;
+
+        div.innercircle.true{
+            height: 16px;
+            width: 16px;
+            background: #514C9F;
+
+            border-radius: 50%;
+        }
+    }
+
+    div.cardLower{
+        display: flex;
+        div{
+            width: 50%;
+
+            .text{
+                font-size: $size-M;
+                line-height: 16px;
+                font-weight: 700;
+                color: rgba($color: #000000, $alpha: 0.4);
+                margin: 5px 0;
+            }
+            .amt{
+                margin: 5px 0;
+                display: flex;
+                align-items: center;
+                padding: 4px 0px;
+                font-size: $size-L;
+                line-height: 24px;
+            }
+
+        }
+    }
+}

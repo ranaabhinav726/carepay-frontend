@@ -1,0 +1,70 @@
+main{
+    div.inputGroup{
+        p.group-title{
+            margin-top: 16px;
+            a.uploaded{
+                font-size: inherit;
+                margin-left: 0.8rem;
+                color: #514C9F;
+                font-weight: 700;
+                // text-decoration: none;
+            }
+        }
+        label{
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            margin-bottom: 6px;
+            cursor: pointer;
+    
+            border-radius: 4px;
+            background: #ECEBFF;
+            color: rgba(0, 0, 0, 0.4);
+            .upload-icon{
+                font-size: 24px;
+                margin-right: 10px;
+            }
+            input{
+                display: none;
+            }
+        }
+        label.uploaded{
+            background: #cfe5df;
+        }
+    }
+    p.fileTypeError{
+        font-size: 13.5px;
+        color: red;
+        margin-bottom: 16px;
+        display: none;
+    }
+
+    div.termsAndConditions{
+        display: flex;
+        padding: 10px 10px 10px 2px;
+        border-radius: 5px;
+
+        input, p{
+            font-size: 15.75px;
+            padding-left: 10px;
+            font-weight: 400;
+        }
+        input[type="checkbox"]{
+            width: 16px;
+            height: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-radius: 2px;
+            accent-color: #514C9F;
+        }
+
+        p{
+            a.termsAndCond{
+                font-weight: 600;
+                color: black;
+                text-decoration-line: underline;
+            }
+        }
+    }
+}

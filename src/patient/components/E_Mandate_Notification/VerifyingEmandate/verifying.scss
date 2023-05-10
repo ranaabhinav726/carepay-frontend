@@ -1,0 +1,25 @@
+main.verifying{
+    
+    div.centerSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 50%;
+        transform: translateY(20%);
+        
+        img{
+            width: 70%;
+        }
+
+        p.redirectionMsg{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+
+            text-align: center;
+            
+            color: #000000;
+        }
+
+    }
+}

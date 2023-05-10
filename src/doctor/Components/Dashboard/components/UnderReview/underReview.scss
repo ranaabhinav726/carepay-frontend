@@ -1,0 +1,71 @@
+main#underReview{
+
+    div.container{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-areas: "hero"
+                            "faq"
+                            "help"
+                            "advice";
+
+        div.card.hero{
+        grid-area: hero;
+        padding: 10px;
+            div.reviewCard{
+                display: flex;
+                justify-content: space-around;
+                margin: 20px 0px;
+                padding: 20px 10px;
+                border-radius: 16px;
+                background: linear-gradient(103.24deg, #FFC699 -1.19%, #F29F73 100%);
+            
+                img{
+                    width: 40%;
+                    height: 40%;
+                }
+                div.info{
+                    width: 60%;
+                    margin: auto;
+                    text-align: center;
+                    h2{
+                        color: #47438D;
+                        font-size: 24px;
+                        line-height: 42px;
+                    } 
+                    p{
+                        color: #514C9F;
+                        font-size: 13.5px;
+                        // letter-spacing: 0.5px;
+                    }
+                }
+            }
+        
+            button.submit{
+                color: white;
+                background: #514C9F;
+            }
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    div.hero{
+        background: white;
+        border-radius: 16px 16px 0 0;
+
+        div.reviewCard{
+            div.info{
+                h2{
+                    font-size: 16px;
+                }
+                p{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    div.faqs{
+        background: white;
+        border-radius: 0;
+    }
+}

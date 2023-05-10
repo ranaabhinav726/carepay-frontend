@@ -1,0 +1,112 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.kycWebview{
+    padding: 10px;
+    text-align: center;
+
+    padding-top: 2rem;
+    
+    h3{
+        padding: 24px 0 10px 0;
+        font-weight: 700;
+        font-size: $size-L;
+        line-height: 19px;
+
+        color: #EA6B0C;
+    }
+
+    p{
+        margin-bottom: 16px;
+        line-height: 22px;
+    }
+
+    div.msg{
+        padding: 16px 12px;
+        margin-bottom: 2rem;
+
+        background: #FAE1CD;
+        border-radius: 10px;
+
+        font-size: $size-M;
+        line-height: 22px;
+    }
+}
+
+// main.kycWebview{
+//     padding: 10px;
+//     height: calc(100vh - 82px);
+
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     // iframe{
+//     //     height: 100%;
+//     //     width: 100%;
+//     // }
+
+//     div.symbol{
+        
+//         .icon{
+//             padding: 0;
+//             height: 100px;
+//             width: 100px;
+//             // background: #ECEBFF;
+//             border-radius: 50%;
+            
+//         }
+//         .icon.red{
+//             color: #fe8787;
+//         }
+//         .icon.green{
+//             color: rgb(32, 180, 32);
+//         }
+//     }
+
+//     div.kycStatus{
+//         width: 26ch;
+
+//         color: #514C9F;
+//         // text-align: center;
+//         // margin-left: 1rem;
+//         margin-top: 4rem;
+
+//         span.kycStatusValue.red{
+//             color: red;
+//         }
+//         span.kycStatusValue.green{
+//             color: rgb(32, 180, 32);
+//         }
+//     }
+
+//     div#redirect{
+//         visibility: hidden;
+//         margin-top: 4rem;
+//     }
+
+//     div.refreshKycStatus{
+//         width: 60%;
+//         height: 50px;
+
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         color: #514C9F;
+//         background: #ECEBFF;
+
+//         margin-top: 6rem;
+
+//         border: 2px solid #514C9F;
+//         border-radius: 4px;
+
+//         text-align: center;
+
+//         cursor: pointer;
+        
+//     }
+//     a.tryAgain{
+//         margin-top: 2rem;
+//     }
+// }

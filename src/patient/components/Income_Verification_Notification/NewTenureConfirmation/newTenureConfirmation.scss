@@ -1,0 +1,45 @@
+main.newTenureConfirmation{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img{
+        width: 20%;
+        margin: 40px;
+    }
+
+    p.line{
+        font-size: 15.5px;
+        line-height: 24px;
+        text-align: center;
+    }
+    p.line1{
+        word-spacing: 1px;
+        letter-spacing: 0.5px;
+        margin-bottom: 20px;
+    }
+
+    p.line2{
+        font-weight: 500;
+        margin-bottom: 20px;
+
+        strong{
+            font-size: 17px;
+        }
+    }
+
+    button.submitOutlined{
+        width: 100%;
+        height: 48px;
+        background: #fff;
+        color: #514C9F;
+        border: 1px solid #514C9F;
+        margin: 20px 0;
+        font-weight: 700;
+        font-size: 15.75px;
+        line-height: 17px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+}

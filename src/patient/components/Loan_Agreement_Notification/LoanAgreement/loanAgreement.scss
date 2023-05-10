@@ -1,0 +1,49 @@
+main.loanAgreement{
+    padding: 0 12px;
+
+    h3{
+        padding: 14px 0 20px 0;
+
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+    }
+
+    div.upperSection{
+        margin-bottom: 6rem;
+
+        p.note{
+            padding: 10px 4px auto 4px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+
+            color: #071329;
+        }
+    }
+
+    div.lowerSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            // width: 70%;
+            margin-bottom: 4rem;
+        }
+
+        button.submit{
+            width: 100%;
+            height: 48px;
+            background: #514C9F;
+            margin: 20px 0 10px 0;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 17px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+}

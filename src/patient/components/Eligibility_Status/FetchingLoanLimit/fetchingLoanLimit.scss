@@ -1,0 +1,65 @@
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.fetchingLoanLimit{
+    padding: 0 12px;
+
+    div.centerSection{
+        text-align: center;
+
+        img{
+            height: 40%;
+            width: 40%;
+            margin: 0;
+            margin-top: 6rem;
+            margin-bottom: 2rem;
+        }
+        p{
+            font-weight: 400;
+            font-size: $size-M;
+            line-height: 18px;
+            margin-bottom: 1rem;
+        }
+        div.msgBox{
+            // height: 100px;
+            padding: 10px;
+            background: #ECEBFF;
+            border-radius: 10px;
+
+            margin-bottom: 1rem;
+
+            p{
+                color: #514C9F;
+                font-weight: 700;
+                font-size: $size-M;
+                line-height: 18px;
+            }
+            span{
+                width: 100%;
+                text-align: center;
+                font-size: $size-M;
+                line-height: 18px;
+            }
+        }
+        div.docsMsg{
+            width: 100%;
+            padding: 10px;
+            background: #FAE1CD;
+            border-radius: 10px;
+
+            color: #514C9F;
+
+            text-align: left;
+
+            p.head{
+                text-align: center;
+                font-weight: 700;
+            }
+
+            ul{
+                margin-left: 15px;
+            }
+        }
+    }
+}

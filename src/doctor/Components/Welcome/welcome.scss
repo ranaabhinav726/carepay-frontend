@@ -1,0 +1,23 @@
+main#welcome{
+    // text-align: center;
+    // margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    img#logo{
+        margin: 10px 0 0 0;
+        height: 48px;
+    }
+    h2, p{
+        text-align: center;
+    }
+    p{
+        font-size: 16px;
+        // margin-bottom: 60vh;
+    }
+    img.hero{
+        width: 75%;
+        margin: 20px auto 30px auto;
+    }
+}

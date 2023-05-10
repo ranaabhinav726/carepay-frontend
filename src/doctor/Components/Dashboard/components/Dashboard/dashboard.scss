@@ -1,0 +1,298 @@
+main.dashboard{
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    div.header{
+        // width: 360px;
+        padding: 14px 10px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+        
+        div.header-upper{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+    
+            div.left{
+                display: flex;
+                align-items: center;
+                .hamIcon{
+                    font-size: 24px;
+                    // font-weight: 700;
+                    color: rgba(82, 76, 159, 0.8);
+                    cursor: pointer;
+                }
+                img{
+                    height: 24px;
+                    width: 105px;
+                    padding-left: 10px;
+                }
+            }
+            button{
+                padding: 8px 12px;
+                background: #ECEBFF;
+                color: #514C9F;
+                /* primary purple */
+                border: 1px solid #514c9f;
+                border-radius: 15px 4px;
+                cursor: pointer;
+            }
+        }
+        div.header-lower{
+            div.btn-group{
+                padding: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin: 12px auto 0px auto;            
+                // height: 40px;
+                width: max-content;
+                background: #ECEBFF;
+                border-radius: 4px;
+    
+                div{
+                    border-radius: 4px;
+                    padding: 4px 12px;
+                    // margin: 2px;
+                    font-size: 13.5px;
+                    color: rgba(82, 76, 159, 0.7);
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+                div.active{
+                    background: white;
+                    color: #514C9F;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 576px) {
+    main.dashboard{
+        background: white;
+    }   
+}
+
+section.insights{
+    padding: 10px;
+    // width: 360px;
+
+    div.card{
+        width: 100%;
+        padding: 16px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: linear-gradient(272.81deg, #1BA269 -6.73%, #50D88F 105.47%, #3ECFA4 105.47%);
+        border-radius: 8px;
+        margin-bottom: 20px;
+
+        div{
+            width: max-content;
+            text-align: center;
+            color: white;
+            
+            p.value{
+                font-size: 20px;
+                font-weight: 700;
+            }
+            p.title{
+                font-size: 14px;
+            }
+
+            p.rupee::before{
+                content: '\20B9';
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+    }
+
+    // div.loanType{
+    ///// MOVED OUT AS A COMMON DECLARATION
+    // }
+    
+    div.filters{
+        display: flex;
+        align-items: center;
+        div.btn-group{
+            padding: 2px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            // margin: auto;            
+            // height: 40px;
+            width: max-content;
+            background: #ECEBFF;
+            border-radius: 4px;
+    
+            div{
+                border-radius: 4px;
+                padding: 6px 10px;
+                // margin: 2px;
+                font-size: 12px;
+                color: rgba(82, 76, 159, 0.7);
+                font-weight: 700;
+                cursor: pointer;
+            }
+            div.active{
+                background: white;
+                color: #514C9F;
+                font-weight: 500;
+            }
+        }
+
+        .icon{
+            background: #ECEBFF;
+            font-size: 24px;
+            border-radius: 4px;
+            width: max-content;
+            margin-left: 10px;
+            padding: 5px;
+            height: 30px;
+            color: #514C9F;
+            transform: rotateZ(90deg);
+            cursor: pointer;
+        }
+    }
+
+    div.graph{
+        tspan{
+            text-transform: uppercase;
+        }
+    }
+
+    p.note{
+        padding: 10px;
+        font-size: 12.5px;
+        line-height: 20px;
+        color: #514C9F;
+        background: #ECEBFF;
+        border-radius: 4px;
+    }
+}
+
+section.transactions{
+    padding: 10px;
+
+    div.viewAll{
+        width: 100%;
+        padding: 14px;
+        font-weight: 700;
+        text-align: center;
+        color: rgba(82, 76, 159, 0.9);
+        background: #ECEBFF;
+        border-radius: 4px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+}
+
+div.transaction{
+    padding: 6px 0;
+    display: flex;
+    gap: 5px;
+    div.date{
+        padding: 5px;
+        color: #514C9F;
+        font-size: 14px;
+        font-weight: 700;
+        background: #ECEBFF;
+        border-radius: 4px;
+        height: max-content;
+        text-align: center;
+    }
+    div.transactionCard{
+        width: 100%;
+        background: #ECEBFF;
+        border-radius: 4px;
+
+        div.upper, div.lower{
+            display: flex;
+            div{
+                padding: 10px 16px;
+                width: 50%;
+
+                p.title{
+                    font-size: 12px;
+                    margin-top: 6px;
+                }
+            }
+        }
+        div.upper{
+            div.left{
+                p.amount{
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                p.amount::before{
+                    content: '\20B9  ';
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+            }
+            div.right{
+                p.badge{
+                    padding: 4px 10px;
+                    width: max-content;
+                    color: white;
+                    font-size: 12px;
+                    font-weight: 500;
+                    background: #EA6B0C;
+                    border-radius: 4px;
+                }
+            }
+        }
+        div.lower{
+            div{
+                max-width: 30ch;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            div.left{
+                p.userName{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+div.transaction:nth-child(odd){
+    div.date, div.transactionCard{
+        background: #FAE1CD;
+    }
+    div.date{
+        color: #EA6B0C;
+    }
+}
+
+div.loanType{
+    margin: 24px 0;
+    span{
+        padding: 10px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: rgba(82, 76, 159, 0.4);
+        cursor: pointer;
+    }
+    span.active{
+        color: #514C9F;
+        border-bottom: 2px solid rgba(82, 76, 159, 0.6);
+    }
+}
+div.heading{
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    p{
+        font-size: 15.5px;
+        font-weight: 500;
+        line-height: 23px;
+    }
+}
+
+// 
