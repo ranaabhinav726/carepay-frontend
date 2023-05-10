@@ -89,7 +89,7 @@ const VerifyOTP = () =>{
                     .then((response) => {
                         console.log(response)
                         if(response.data.data != null){
-                            setId(response?.data?.data?.id);
+                            // setId(response?.data?.data?.id);
                             localStorage.setItem("doctorId", response?.data?.data?.doctorId);
                             navigate('/doctor/dashboard')
                         }else{

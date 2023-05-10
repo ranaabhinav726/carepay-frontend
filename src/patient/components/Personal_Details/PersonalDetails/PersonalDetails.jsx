@@ -62,7 +62,9 @@ const PersonalDetails = () =>{
                     setFullName(data?.firstName)
                     setNumber(data?.mobileNumber)
                     setGender(data?.gender);
-                    setDob(data?.dateOfBirth.split('-').reverse().join('-'))
+                    // let date = data?.dateOfBirth.split('-').reverse().join('-');
+                    // console.log(data?.dateOfBirth)
+                    setDob(data?.dateOfBirth)
                     setEmail(data?.emailId)
                     setAltNumber(data?.alternateNumber ?? "")
                 }
@@ -275,19 +277,19 @@ const PersonalDetails = () =>{
         <div className="gender" id="gender">
             <p>Gender</p>
             <div className="radioOption">
-                <input type="radio" id="male" name="gender" checked={gender == "Male"} onClick={(e)=> setGender(e.target.value)} value="Male" />
+                <input type="radio" id="male" name="gender" checked={gender === "Male"} onClick={(e)=> setGender(e.target.value)} value="Male" />
                 <label htmlFor="male">Male</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="female" name="gender" checked={gender == "Female"} onClick={(e)=> setGender(e.target.value)} value="Female" />
+                <input type="radio" id="female" name="gender" checked={gender === "Female"} onClick={(e)=> setGender(e.target.value)} value="Female" />
                 <label htmlFor="female">Female</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="other" name="gender" checked={gender == "Other"} onClick={(e)=> setGender(e.target.value)} value="Other" />
+                <input type="radio" id="other" name="gender" checked={gender === "Other"} onClick={(e)=> setGender(e.target.value)} value="Other" />
                 <label htmlFor="other">Other</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="preferNotToSay" name="gender" checked={gender == "Prefer not to say"} onClick={(e)=> setGender(e.target.value)} value="Prefer not to say" />
+                <input type="radio" id="preferNotToSay" name="gender" checked={gender === "Prefer not to say"} onClick={(e)=> setGender(e.target.value)} value="Prefer not to say" />
                 <label htmlFor="preferNotToSay">Prefer not to say</label>
             </div>
         </div>
@@ -310,9 +312,7 @@ const PersonalDetails = () =>{
                 value={dob ?? ""}
                 onChange={(e) => setDob(e.target.value)}
                 placeholder="Select Date"
-                maxLength={10}
                 max ={maxDateForDob}
-                required
             />
             <span className="fieldError">Please enter correct DOB.</span>
         </div>
