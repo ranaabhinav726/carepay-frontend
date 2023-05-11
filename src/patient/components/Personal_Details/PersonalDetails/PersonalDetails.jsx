@@ -218,10 +218,10 @@ const PersonalDetails = () =>{
     function handlePan(val){
         val = val.toUpperCase();
         if(val.length<10) setPanValid(false);
-        if(val.length == 10){
+        if(val.length === 10){
             let regex = new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/);
             console.log(regex.test(val))
-            if (regex.test(val) == false) {
+            if (regex.test(val) === false) {
                 let errorMsg = document.getElementById('panFormat');
                 errorMsg.style.display = "block";
                 setPanValid(false);

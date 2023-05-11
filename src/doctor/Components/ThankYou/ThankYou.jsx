@@ -14,23 +14,22 @@ let doctorId = localStorage.getItem('doctorId');
 
 const ThankYou = () =>{
     useEffect(()=>{
-        let doctorId = localStorage.getItem('doctorId');
-        // if(doctorId){
-        //     console.log(doctorId)
-        //     axios.get(env.api_Url+"generateQRCode?doctorId=" + doctorId)
-        //     .then(response =>{
-        //         console.log(response)
-        //     })
+        doctorId = localStorage.getItem('doctorId');
+        phoneNo = localStorage.getItem('phoneNumber');
+        email = localStorage.getItem('email');
 
-        //     axios.get(env.api_Url+"sendWelcomeMailToDoctor?doctorId=" + doctorId)
-        //     .then(response =>{
-        //         console.log(response)
-        //     })
-        // }
-            axios.get(env.api_Url + "sendUnderReviewMail?doctorId=" + doctorId)
+        if(doctorId){
+            console.log(doctorId)
+            axios.get(env.api_Url+"generateQRCode?doctorId=" + doctorId)
             .then(response =>{
                 console.log(response)
             })
+        }
+        
+        axios.get(env.api_Url + "sendUnderReviewMail?doctorId=" + doctorId)
+        .then(response =>{
+            console.log(response)
+        })
     }, [])
     return(
         <main id='thankYou'>

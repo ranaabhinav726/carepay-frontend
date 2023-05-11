@@ -13,6 +13,7 @@ const DocAddressDetails = () =>{
     const [locality, setLocality] = useState("");
     const [pincode, setPincode] = useState("");
     const [city, setCity] = useState("");
+    const [state, setState] = useState("");
 
     const [id, setId] = useState("");
     const [apiError, setApiError] = useState(false);
@@ -42,6 +43,8 @@ const DocAddressDetails = () =>{
                         setPincode(pinCode);
                         let city = response?.data?.data?.city;
                         setCity(city);
+                        let state = response?.data?.data?.state;
+                        setState(state);
                     }
                 }).catch((error)=>{
                     console.log(error)
@@ -74,6 +77,9 @@ const DocAddressDetails = () =>{
                 console.log(response)
                 let city = response?.data?.city;
                 setCity(city);
+                let state = response?.data?.state;
+                setState(state);
+                console.log()
             })
         }
     }
@@ -116,7 +122,8 @@ const DocAddressDetails = () =>{
             "building": building,
             "locality": locality,
             "pinCode": pincode,
-            "city": city
+            "city": city,
+            "state": state
         })
         .then(response =>{
             console.log(response);

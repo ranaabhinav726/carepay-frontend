@@ -179,10 +179,10 @@ function App() {
         <Route path='/doctor/UploadDocuments' element={<UploadDocuments />} ></Route>
         <Route path='/doctor/ThankYou' element={<ThankYou />} ></Route>
 
-        <Route path='/doctor/Dashboard/' element={<Dashboard />} />
-        <Route path='/doctor/Dashboard/AllTransactions' element={<AllTransactions />} />
-        <Route path='/doctor/Dashboard/addPatient' element={<AddPatient />} />
-        <Route path='/doctor/Dashboard/UnderReview' element={<UnderReview />} />
+        <Route path='/doctor/dashboard/' element={<Dashboard />} />
+        <Route path='/doctor/dashboard/AllTransactions' element={<AllTransactions />} />
+        <Route path='/doctor/dashboard/addPatient' element={<AddPatient />} />
+        <Route path='/doctor/dashboard/UnderReview' element={<UnderReview />} />
 
       </Routes>
     // {/* </div> */}

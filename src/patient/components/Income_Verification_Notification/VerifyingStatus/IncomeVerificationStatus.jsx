@@ -113,8 +113,8 @@ const IncomeVerificationStatus = ({data = "Verifying bank account statement..."}
                 console.log(loanStatus)
                 if(loanStatus == "APPROVED" || loanStatus == "VERIFIED"){
                     navigate('/patient/BankDetailsUnderProcess');
-                }else if(loanStatus == ""){ ////////// no. of emi reduction prompt
-                    navigate('/patient/NewTenureConfirmation'); /////////new screen of EMI confirmation
+                }else if(typeof(loanStatus) === 'object'){ ////////// no. of emi reduction prompt
+                    navigate('/patient/NewTenureConfirmation'); ////// ///new screen of EMI confirmation
                 }else{
                     navigate(-1);
                 }
@@ -127,6 +127,9 @@ const IncomeVerificationStatus = ({data = "Verifying bank account statement..."}
                 }else{
                     navigate(-1)
                 }
+            }
+            if(response?.data?.errorCode != null){
+                navigate(-1)
             }
         }).catch(error => {
                 console.log(error);

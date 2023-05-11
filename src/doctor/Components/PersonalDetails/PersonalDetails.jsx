@@ -33,6 +33,7 @@ const DocPersonalDetails = () =>{
     },[])
 
     const [id, setId] = useState("");
+    const [doctorId, setDoctorId] = useState("");
 
     useEffect(()=>{
         if(phoneNumber){
@@ -46,6 +47,8 @@ const DocPersonalDetails = () =>{
                     if(response.data.data != null){
                         setId(response?.data?.data?.id);
                         localStorage.setItem("doctorId", response?.data?.data?.doctorId);
+                        let doctorId = response?.data?.data?.doctorId;
+                        setDoctorId(doctorId);
                         let birthdate = response?.data?.data?.dob.split(" ")[0];
                         birthdate = birthdate.split("-").reverse().join("-");
                         setDob(birthdate);
@@ -191,17 +194,23 @@ const DocPersonalDetails = () =>{
 
         let birthdate = dob;
         birthdate = birthdate.split("-").reverse().join("-");
-        // console.log(birthdate)
-        await axios.post(env.api_Url + "saveOrUpdateDoctorDetails", {
+
+        let submitObj = {
             "id": id,
-            "doctorId": localStorage.getItem("doctorId"),
             "dob": birthdate,
             "phoneNumber": number,
             "emailId": email,
             "name": fullName,
             "pan": panNumber,
             "joiningDate": joiningDate
-        }).then((response) => {
+        };
+
+        if(!! doctorId){
+            submitObj.doctorId = doctorId;
+        }
+
+        // console.log(birthdate)
+        await axios.post(env.api_Url + "saveOrUpdateDoctorDetails", submitObj ).then((response) => {
             // console.log(birthdate, panNumber)
             console.log(response)
             if(response.data.status == 200){

@@ -24,10 +24,10 @@ const AllTransactions = () =>{
         })
     }, [loanType])
 
-    let trsxns = loanData.map((loan)=>{
+    let trsxns = loanData.map((loan, idx)=>{
         let date = new Date(loan.apply_date);
-        let loanDate = date.getDate() + "/" + date.getMonth()+1 + "/" + date.getFullYear();
-        return <Loan id={loan.user_id} date={loanDate} loanId={loan.loan_id} patientName={loan.first_name} amount={loan.loan_amount} status={loan.loan_sanction_status} purpose={loan.loan_reason} />
+        let loanDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
+        return <Loan key={idx} date={loanDate} loanId={loan.loan_id} patientName={loan.first_name} amount={loan.loan_amount} status={loan.loan_sanction_status} purpose={loan.loan_reason} />
     })
     return(
         <main className="allTransactions">

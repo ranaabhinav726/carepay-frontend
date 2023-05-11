@@ -77,6 +77,7 @@ const DocBankDetails = () =>{
 
     function handleIFSC(e){
         let val = e.target.value;
+        val = val.toUpperCase();
         if(val.length < 11){
             setIFSC(val);
         }else if(val.length == 11){

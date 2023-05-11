@@ -47,7 +47,7 @@ const Dashboard = () =>{
                     <RxHamburgerMenu onClick={()=>handleSidebar()} className='hamIcon' />
                     <img src={Logo} alt="" />
                 </div>
-                <button onClick={()=>navigate('/addPatient')}>Add patient</button>
+                <button onClick={()=>navigate('/doctor/dashboard/addPatient')}>Add patient</button>
             </div>
             <div className="header-lower">
                 <div className="btn-group">
@@ -176,10 +176,10 @@ const Transactions = () =>{
         })
     }, [loanType])
 
-    let trsxns = loanData.map((loan)=>{
+    let trsxns = loanData.map((loan, idx)=>{
         let date = new Date(loan.apply_date);
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        return <TrxnCard id={loan.user_id} day={date.getDate()} month={months[date.getMonth()]} amount={loan.loan_amount} status={loan.loan_sanction_status} name={loan.first_name} purpose={loan.loan_reason} />
+        return <TrxnCard key={idx} day={date.getDate()} month={months[date.getMonth()]} amount={loan.loan_amount} status={loan.loan_sanction_status} name={loan.first_name} purpose={loan.loan_reason} />
     })
     return(
         <section className="transactions">
@@ -195,7 +195,7 @@ const Transactions = () =>{
         
         {trsxns}
             
-        {(loanData.length >= 3) && <div onClick={()=>navigate('/allTransactions')} className="viewAll">View all</div>}        </section>
+        {(loanData.length >= 3) && <div onClick={()=>navigate('/doctor/dashboard/AllTransactions')} className="viewAll">View all</div>}        </section>
     )
 }
 
