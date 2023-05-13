@@ -180,7 +180,7 @@ const EmploymentDetails = () =>{
             "totalJobExpInMonth": parseInt(totalExpMonth),
             "currentJobExpInYears": parseInt(jobExpYear),
             "currentJobExpInMonth": parseInt(jobExpMonth),
-            "formStatus": "Employment_details"
+            "formStatus": "BankDetails"
           };
 
           if(!!familyIncome){

@@ -172,7 +172,7 @@ const AddressDetails = () =>{
             "pincode": pincode,
             "state": state,
             "city": city,
-            "formStatus": "Address_details"
+            "formStatus": "EmploymentDetails"
         };
 
         // if(!!landmark){

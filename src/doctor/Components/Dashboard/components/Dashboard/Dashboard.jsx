@@ -81,7 +81,8 @@ const Insights = () =>{
             if(response.data.status == "200"){
                 console.log(response);
                 setLoans(response.data.data.count);
-                setEarnings(response.data.data.disbursed_amount ?? "0");
+                let earning = response.data.data.disbursed_amount ?? 0;
+                setEarnings(earning.toLocaleString('en-IN',{maximumFractionDigits: 2}));
             }
         }).catch(error =>{
             console.log(error)
@@ -110,11 +111,11 @@ const Insights = () =>{
             </div>
             <div className="card">
                 <div className="loans">
-                    <p className="value">{loans}</p>
+                    <p className="value">{loans!=0? loans : "No data yet"}</p>
                     <p className="title">Loans</p>
                 </div>
                 <div className="earning">
-                    <p className="rupee value">{" " + earnings.toLocaleString('en-IN',{maximumFractionDigits: 2})}</p>
+                    <p className={earnings!=0? "rupee value" : "value"}>{earnings!=0? earnings : "No data yet"}</p>
                     <p className="title">Earnings</p>
                 </div>
             </div>

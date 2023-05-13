@@ -87,8 +87,73 @@ const EnterOTP = () =>{
                 console.log(response)
                 if(response?.data?.status == 200){
                     let userId = response.data.data;
-                    if(userId) localStorage.setItem("userId", userId);
-                    navigate('/patient/PhoneNumberVerified')
+                    if(userId){
+                        localStorage.setItem("userId", userId);
+                        axios.get(env.api_Url + "/userDetails/getFormStatusByUserId?userId=" + userId)
+                        .then(response =>{
+                            if(response.data.status === 200){
+                                let stage = response?.data?.data;
+                                let path;
+                                switch(stage){
+                                    case "bank_statement_uploaded":
+                                        path = "LoanDetails"
+                                    case "CREATE_CUSTOMER":
+                                        path = "KycVerification";
+                                        break;
+                                    case "KYC_INITIATED":
+                                        path = "KycVerification";
+                                        break;
+                                    case "KYC_COMPLETED":
+                                        path = "StatementVerificationUnderProcess";
+                                        break;
+                                    case "DOCUMENT_UPLOAD":
+                                        path = "StatementVerificationUnderProcess";
+                                        break;
+                                    case "DOCUMENT_VERIFIED":
+                                        path = "StatementVerificationUnderProcess";
+                                        break;
+                                    case "BANK_DETAILS":
+                                        path = "BankDetailsUnderProcess";
+                                        break;
+                                    case "BANK_DETAILS_VERIFIED":
+                                        path = "LoanAgreement";
+                                        break;
+                                    case "ESIGN_INITIATED":
+                                        path = "LoanAgreement";
+                                        break;
+                                    case "ESIGN_COMPLETED":
+                                        path = "Emandate";
+                                        break;
+                                    case "EMANDATE_INITIATED":
+                                        path = "Emandate";
+                                        break;
+                                    case "EMANDATE_COMPLETED":
+                                        path = "FirstPaymentScreen";
+                                        break;
+                                    case "LOAN_APPLIED":
+                                        path = "FirstPaymentScreen";
+                                        break;
+                                    case "LOAN_APPROVED":
+                                        path = "LoanAppUnderProcess";
+                                        break;
+                                    case "DISBURSED":
+                                        path = "LoanAppUnderProcess";
+                                        break;
+                                    case "PAID":
+                                        path = "UserDashboard";
+                                        break;
+                                    default:
+                                        path = "PhoneNumberVerified"
+                                }
+                                navigate("/patient/"+path)
+                                // if(stage !== null){
+                                //     navigate("/patient/"+stage)
+                                // }else{
+                                //     navigate('/patient/PhoneNumberVerified')
+                                // }
+                            }
+                        })
+                    } 
                 }else{
                     apiErrorHandler();
                 }

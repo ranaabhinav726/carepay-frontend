@@ -23,6 +23,13 @@ const DocPersonalDetails = () =>{
     const [dob, setDob] = useState('');
     
     const [joiningDate, setJoiningDate] = useState('');
+    const [doctorCode, setDoctorCode] = useState('');
+    const [creatorId, setCreatorId] = useState('');
+    const [scoutCode, setScoutCode] = useState('');
+    const [important, setImportant] = useState('');
+    const [appDownloadStatus, setAppDownloadStatus] = useState('');
+    const [verified, setVerified] = useState('');
+    const [mobileVerified, setMobileVerified] = useState('');
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
@@ -50,6 +57,15 @@ const DocPersonalDetails = () =>{
                         let doctorId = response?.data?.data?.doctorId;
                         setDoctorId(doctorId);
                         let birthdate = response?.data?.data?.dob.split(" ")[0];
+                        let doctorCode = response?.data?.data?.doctorCode;
+                        setDoctorCode(doctorCode);
+                        setCreatorId(response?.data?.data?.creatorId)
+                        setScoutCode(response?.data?.data?.scoutCode)
+                        setImportant(response?.data?.data?.important)
+                        setAppDownloadStatus(response?.data?.data?.appDownloadStatus)
+                        setVerified(response?.data?.data?.verified)
+                        setMobileVerified(response?.data?.data?.mobileVerified)
+
                         birthdate = birthdate.split("-").reverse().join("-");
                         setDob(birthdate);
                         let emailId = response?.data?.data?.emailId;
@@ -202,7 +218,14 @@ const DocPersonalDetails = () =>{
             "emailId": email,
             "name": fullName,
             "pan": panNumber,
-            "joiningDate": joiningDate
+            "joiningDate": joiningDate,
+            "doctorCode": doctorCode,
+            "creatorId": creatorId,
+            "scoutCode" : scoutCode,
+            "important" : important,
+            "appDownloadStatus" : appDownloadStatus,
+            "verified" : verified,
+            "mobileVerified" : mobileVerified
         };
 
         if(!! doctorId){

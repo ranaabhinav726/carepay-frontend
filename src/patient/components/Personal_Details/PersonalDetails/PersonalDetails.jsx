@@ -36,6 +36,7 @@ const PersonalDetails = () =>{
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
     const [fullname, setFullName] = useState("")
+    const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
     const [gender, setGender] = useState("")
     const [email, setEmail] = useState("")
@@ -60,6 +61,7 @@ const PersonalDetails = () =>{
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
                     setFullName(data?.firstName)
+                    setNameOnPan(data?.panCardName)
                     setNumber(data?.mobileNumber)
                     setGender(data?.gender);
                     // let date = data?.dateOfBirth.split('-').reverse().join('-');
@@ -162,13 +164,15 @@ const PersonalDetails = () =>{
 
         let submitObj = {
             "panCard": panNumber,
-            "panCardName": fullname,
+            "panCardName": nameOnPan,
+            "firstName": fullname,
             "gender": gender,
             "emailId": email,
             "dateOfBirth": dob,
             "mobileNumber": number,
             "alternateNumber":altNumber,
-            "formStatus": "Personal_details"
+            "userId" : localStorage.getItem('userId'),
+            "formStatus": "AddressDetails"
         };
 
         await axios.post(env.api_Url + "userDetails/basicDetail",

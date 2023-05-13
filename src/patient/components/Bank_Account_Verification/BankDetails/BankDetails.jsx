@@ -162,7 +162,8 @@ const BankDetails = () =>{
                     // "bank_address": branchAddress,
                     // "branch_name": branchName,
                     "bankName": bankName,
-                    "ifscCode": IFSC
+                    "ifscCode": IFSC,
+                    "formStatus": "IncomeVerification"
                 })
             .then((response) => {
                 console.log(response)
