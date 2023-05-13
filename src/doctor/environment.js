@@ -1,5 +1,5 @@
 export const env = {
-    api_Url: "http://44.202.61.10:8075/"
+    api_Url: "http://3.92.13.36:8076/"
 }
 
 export function showWrapper(elem){
