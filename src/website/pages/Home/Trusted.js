@@ -1,4 +1,6 @@
 import React from "react";
+import Glider from "react-glider";
+import "glider-js/glider.min.css";
 
 //material ui
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
@@ -43,15 +45,39 @@ const Trusted = () => {
         Patients
       </Typography>
       <Box sx={{ textAlign: "center", my: "4rem", position: "relative" }}>
-        <img
-          src={Card}
-          alt=""
+
+
+        <Typography
           style={{
-            width: match ? "70%" : "35%",
+            width: match ? "70%" : "50%",
+            margin: "auto",
             position: "relative",
             zIndex: 2,
           }}
-        />
+        >
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" >
+      <div style={{width: "80%", margin: "auto"}}>
+      <img class="d-block w-100 mx-8"  src={Card} alt="First slide" />
+      </div>
+      
+    </div>
+    <div class="carousel-item" >
+    <div style={{width: "80%", margin: "auto"}}>
+      <img class="d-block w-100 mx-8"  src={Card} alt="Second slide" />
+      </div>
+    </div>
+    <div class="carousel-item" >
+    <div style={{width: "80%", margin: "auto"}}>
+      <img class="d-block w-100 mx-8"  src={Card} alt="Third slide" />
+      </div>
+    </div>
+  </div>
+
+</div>
+        </Typography>
 
         <img
           src={Dots}
@@ -74,26 +100,7 @@ const Trusted = () => {
             left: match ? "2rem" : "18.75rem",
           }}
         />
-        <img
-          src={Card2}
-          alt=""
-          style={{
-            display: match ? "initial" : "none",
-            height: "100%",
-            position: "absolute",
-            left: 0,
-          }}
-        />
-        <img
-          src={Card3}
-          alt=""
-          style={{
-            display: match ? "initial" : "none",
-            height: "100%",
-            position: "absolute",
-            right: 0,
-          }}
-        />
+
       </Box>
       <img
         src={Trusted1}
@@ -168,21 +175,43 @@ const Trusted = () => {
           width: "6%",
         }}
       />
-      <img
+
+    <img
+        class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"
         src={larrow}
         alt=""
         style={{
-          // position: "absolute",
-          // bottom: match ? "3rem" : "4rem",
-          // left: match ? "50rem" : "20rem",
-          // width: "10%",
+          position: "absolute",
+          top: "85%",
+          left: "47%",
+          width: "10%",
+        }}
+      />
+    <img
+       class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"
+        src={rarrow}
+        alt=""
+        style={{
+          position: "absolute",
+          top: "85%",
+          left: "57%",
+          width: "10%",
+        }}
+      />
+
+      {/* <img
+        class="sr-only"
+        src={larrow}
+        alt=""
+        style={{
           position: "absolute",
           bottom: "2rem",
           left: "47%",
           width: "10%",
         }}
-      />
-      <img
+      /> */}
+      {/* <img
+        class="sr-only"
         src={rarrow}
         alt=""
         style={{
@@ -191,7 +220,7 @@ const Trusted = () => {
           left: "57%",
           width: "10%",
         }}
-      />
+      /> */}
     </Box>
   );
 };

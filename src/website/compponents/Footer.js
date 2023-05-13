@@ -95,7 +95,7 @@ const Footer = () => {
         >
           <Typography sx={{ fontWeight: "bold" }}>Quick Links</Typography>
           <Typography>Privacy Policy</Typography>
-          <Typography>Contact Us</Typography>
+          <NavLink to={"/contactUs"}><Typography>Contact Us</Typography></NavLink>
           <Typography>
             <NavLink to={"/about"}>About Us</NavLink>
           </Typography>
@@ -174,7 +174,7 @@ const Footer = () => {
           </Box>
         </Box>
         <Box sx={{ display: { xs: "none", md: "block" } }}>
-          <Typography sx={{ fontWeight: "bold", fontSize: "1.2rem", mb: 1 }}>
+          <Typography id="getInTouch" sx={{ fontWeight: "bold", fontSize: "1.2rem", mb: 1 }}>
             Get In Touch
           </Typography>
           <ContactForm />

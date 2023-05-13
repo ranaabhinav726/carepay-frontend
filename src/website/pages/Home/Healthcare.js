@@ -36,7 +36,7 @@ const Healthcare = () => {
         alt=""
       /> */}
       <Typography sx={{ fontSize: "3.3rem", fontWeight: "bold", mb: "45px" }}>
-        Get The Healthcare You Need Now
+      Catering  all your Healthcare Needs
       </Typography>
       {/* <Box
         sx={{

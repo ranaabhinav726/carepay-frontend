@@ -15,7 +15,7 @@ const OurWork = () => {
   const match = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box sx={{ my: "2rem" }}>
+    <Box id="ourWork" sx={{ my: "2rem" }}>
       <Typography
         sx={{
           fontSize: "3.3rem",

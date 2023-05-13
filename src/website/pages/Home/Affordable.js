@@ -9,6 +9,7 @@ import Rings from "../../assets/images/Rings.svg";
 import Rings2 from "../../assets/images/Rings2.svg";
 import Hospitality from "../../assets/images/Hospitality.svg";
 import { ArrowForwardIos } from "@mui/icons-material";
+import { HashLink } from 'react-router-hash-link';
 
 const Affordable = () => {
   return (
@@ -60,6 +61,7 @@ const Affordable = () => {
         <Typography sx={{ fontSize: "1.8rem", color: "#514c9f" }}>
           financial stress.
         </Typography>
+        <HashLink smooth to={'/#ourWork'}>
         <Button
           variant="contained"
           endIcon={<ArrowForwardIos />}
@@ -77,6 +79,7 @@ const Affordable = () => {
         >
           Discover How it Works
         </Button>
+        </HashLink>
       </Box>
       <Box sx={{ flex: 1, textAlign: "end", position: "relative" }}>
         <img src={Rectandle} alt="" style={{ width: "90%" }} />

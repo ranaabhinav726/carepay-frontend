@@ -11,6 +11,7 @@ import Carousel from "./Carousel";
 import Faqs from "./Faqs";
 import Trusted from "./Trusted";
 import Footer from "../../compponents/Footer";
+import BusinessPartnerCarousel from "./Carousel-bootstrap";
 
 const Home = () => {
 
@@ -22,7 +23,8 @@ const Home = () => {
       <Features />
       <Products  />
       <OurWork />
-      <Carousel />
+      <BusinessPartnerCarousel />
+      {/* <Carousel /> */}
       <Trusted />
       <Faqs />
       <Footer />

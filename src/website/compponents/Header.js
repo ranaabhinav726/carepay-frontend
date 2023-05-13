@@ -125,18 +125,18 @@ const Header = ({navbar, menu, menuOpen, handleClick, handleClose, HighlightLink
           }}
         >
        
-            <Typography  sx={{ fontSize: "1rem", color: "#514C9F" }} >
+            <Typography  sx={{  fontSize: "1rem", color: "#514C9F", fontWeight: "bold" }} >
             <Link id="Products" smooth to={"/#products"} onClick={ (e)=> handleLinkClick(e)}> Products</Link>
             </Typography>
 
           <Typography 
-            sx={{ fontSize: "1rem", color: "#514C9F", marginLeft: "1.5rem" } }
+            sx={{ fontSize: "1rem", color: "#514C9F", marginLeft: "1.5rem", fontWeight: "bold" } }
           >
             <NavLink id="AboutUs" to={"/about"} onClick={ (e)=> handleLinkClick(e)}>About Us</NavLink>
           </Typography>
 
           <Typography 
-            sx={{ fontSize: "1rem", color: "#514C9F", marginLeft: "1.5rem" }} 
+            sx={{ fontSize: "1rem", color: "#514C9F", marginLeft: "1.5rem", fontWeight: "bold" }} 
           >
             <NavLink id="ContactUs" to={"/contactUs"} onClick={ (e)=> handleLinkClick(e)}>Contact Us</NavLink>
           </Typography>

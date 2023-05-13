@@ -27,7 +27,7 @@ const Experience = () => {
           textAlign: "center",
         }}
       >
-        Creating Extraordinary Customer Experience
+        Why we are the first Choice
       </Typography>
       <Box
         sx={{

@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link';
 //material ui
 import { Box, Button, Typography } from "@mui/material";
 
@@ -47,7 +47,7 @@ const Faqs = () => {
         </Typography>
       </Box>
       <Box sx={{ textAlign: "center", mt: "2rem" }}>
-     <NavLink to={'/contactUs'}>
+     <HashLink smooth to={'/#getInTouch'}>
      <Button
           variant="contained"
           sx={{
@@ -64,7 +64,7 @@ const Faqs = () => {
         >
           Contact
         </Button>
-     </NavLink>
+     </HashLink>
       </Box>
     </Box>
   );
