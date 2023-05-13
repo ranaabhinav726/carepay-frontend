@@ -95,8 +95,24 @@ const EnterOTP = () =>{
                                 let stage = response?.data?.data;
                                 let path;
                                 switch(stage){
+                                    case "AddressDetails":
+                                        path = "AddressDetails";
+                                        break;
+                                    case "EmploymentDetails":
+                                        path = "EmploymentDetails";
+                                        break;
+                                    case "BankDetails":
+                                        path = "BankDetails";
+                                        break;
+                                    case "IncomeVerification":
+                                        path = "IncomeVerification";
+                                        break;
+                                    case "FileUpload":
+                                        path = "FileUpload";
+                                        break;
                                     case "bank_statement_uploaded":
-                                        path = "LoanDetails"
+                                        path = "LoanDetails";
+                                        break;
                                     case "CREATE_CUSTOMER":
                                         path = "KycVerification";
                                         break;
@@ -145,6 +161,7 @@ const EnterOTP = () =>{
                                     default:
                                         path = "PhoneNumberVerified"
                                 }
+
                                 navigate("/patient/"+path)
                                 // if(stage !== null){
                                 //     navigate("/patient/"+stage)
