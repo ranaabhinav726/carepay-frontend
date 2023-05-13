@@ -19,7 +19,7 @@ const Homepage = () =>{
     if(!!clinicName) localStorage.setItem("clinicName", clinicName);
     if(!!doctorName) localStorage.setItem("doctorName", doctorName);
     if(!!doctorID) localStorage.setItem("doctorId", doctorID);
-    console.log(cityCode, clinicName, doctorName, doctorID, " .-._.");
+    console.log(cityCode, clinicName, doctorName, doctorID, " |_|");
 
     // const data = useContext(DataContext);
 

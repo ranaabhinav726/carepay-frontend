@@ -8,6 +8,10 @@ main.mobileNumberVerification{
     padding: 0 10px;
     height: 100%;
 
+    p{
+        margin-bottom: 10px;
+    }
+
     h3.mobileVerificationHeading{
         font-size: $size-L;
         font-weight: 700;
@@ -23,7 +27,7 @@ main.mobileNumberVerification{
 
     div.number-group{
         display: flex;
-        height: 77px;
+        // height: 77px;
         width: 100%;
 
         .number-group--leftHalf{
@@ -91,7 +95,9 @@ main.mobileNumberVerification{
 
     
 
-    // button.sendOTP{
+    button.sendOTP{
+        margin-top: 10px;
+    }
     //     width: 100%;
     //     height: 48px;
     //     background: #514C9F;
