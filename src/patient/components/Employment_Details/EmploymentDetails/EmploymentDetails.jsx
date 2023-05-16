@@ -80,9 +80,9 @@ const EmploymentDetails = () =>{
         }
     },[])
 
-    const today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth()+1;
+    // const today = new Date();
+    // let year = today.getFullYear();
+    // let month = today.getMonth()+1;
 
     // function showErrorOnUI(elem){
     //     elem.classList.add('inputBoxError');
@@ -150,7 +150,7 @@ const EmploymentDetails = () =>{
         if(totalExpYear < jobExpYear){
             expError();
             return;
-        }else if(totalExpYear == jobExpYear && totalExpMonth < jobExpMonth){
+        }else if(totalExpYear === jobExpYear && totalExpMonth < jobExpMonth){
             expError();
             return;
         }
@@ -195,7 +195,7 @@ const EmploymentDetails = () =>{
             submitObj)
             .then((response) => {
                 console.log(response)
-                if(response.data.status == 200){
+                if(response.data.status === 200){
                     navigate('/patient/BankDetails');
                 }else{
                     apiErrorHandler();
@@ -364,14 +364,14 @@ const EmploymentDetails = () =>{
             <div className="inputGroup">
                 <input 
                     type="number" 
-                    value={jobExpYear ?? ""}
-                    onChange={(e)=>setJobExpYear(e.target.value)}
+                    value={jobExpYear ?? 0}
+                    onChange={(e)=>setJobExpYear(parseInt(e.target.value))}
                     placeholder="-" />
                 <p>Years</p>
                 <input 
                     type="number" 
-                    value={jobExpMonth ?? ""}
-                    onChange={(e)=>setJobExpMonth(e.target.value)}
+                    value={jobExpMonth ?? 0}
+                    onChange={(e)=>setJobExpMonth(parseInt(e.target.value))}
                     placeholder="-" />
                 <p>Months</p>
             </div>
@@ -382,18 +382,18 @@ const EmploymentDetails = () =>{
             <div className="inputGroup">
                 <input 
                     type="number" 
-                    value={totalExpYear ?? ""}
-                    onChange={(e)=>setTotalExpYear(e.target.value)} 
+                    value={totalExpYear ?? 0}
+                    onChange={(e)=>setTotalExpYear(parseInt(e.target.value))} 
                     placeholder="-" />
                 <p>Years</p>
                 <input 
                     type="number" 
-                    value={totalExpMonth ?? ""}
-                    onChange={(e)=>setTotalExpMonth(e.target.value)}
+                    value={totalExpMonth ?? 0}
+                    onChange={(e)=>setTotalExpMonth(parseInt(e.target.value))}
                     placeholder="-" />
                 <p>Months</p>
             </div>
-            <span id="expError" className="fieldError">Time in current job can't be less than total experience</span>
+            <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
         </div>
         
         <div id="consent" className="consentBox">
