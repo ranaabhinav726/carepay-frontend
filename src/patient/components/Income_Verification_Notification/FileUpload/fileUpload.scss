@@ -42,6 +42,25 @@ main.fileUpload{
         font-weight: 600;
     }
 
+    div.previouslyUploaded{
+        margin-bottom: calc(100vh / 3.3);
+        p.h2{
+            font-size: 18px;
+            font-weight: 600;
+        }
+        p.prevFile{
+            font-size: 16px;
+            color: #514C9F;
+            margin-bottom: 5px;
+
+            a.viewFile{
+                font-weight: 700;
+                color: #514C9F;
+                padding-left: 10px;
+            }
+        }
+    }
+
     div.fileList{
         margin-bottom: 36px;
         min-height: 120px;
@@ -49,9 +68,9 @@ main.fileUpload{
         div.file{
             color: #514C9F;
             font-size: $size-M;
-            line-height: 18px;
+            // line-height: 18px;
             display: flex;
-            align-items: center;
+            flex-direction: row;
 
             margin-bottom: 10px;
 
@@ -116,15 +135,16 @@ main.fileUpload{
                 line-height: 17px;
                 display: inline-block;
 
-                margin-right: 10px;
+                margin: 0 10px 0 0;
             }
-            .tooltip {
+            .pass-tooltip {
                 position: relative;
                 display: inline-block;
+                cursor: pointer;
                 // border-bottom: 1px dotted black;
               }
               
-              .tooltip .tooltiptext {
+              .pass-tooltip .tooltiptext {
                 visibility: hidden;
                 width: 200px;
                 // text-align: center;
@@ -145,7 +165,7 @@ main.fileUpload{
                 left: 25px;
                 z-index: 1;
               }
-              .tooltip:hover .tooltiptext {
+              .pass-tooltip:hover .tooltiptext {
                 visibility: visible;
               }
 
@@ -190,16 +210,17 @@ main.fileUpload{
         div.eye{
             display: inline-block;
             position: relative;
-            top: -35px;
+            top: -45px;
             font-size: 25px;
-            left: 90%;
+            left: 92%;
             color: #908dc1;
         }
         p#passError{
             display: none;
-            margin: -20px 0 10px 0;
+            margin: -32px 0 10px 0;
             font-size: $size-S;
             color: red;
+            line-height: 100%;
         }
 
         span.safe{
@@ -213,8 +234,6 @@ main.fileUpload{
     }
 
     button.uploadAccountStatement{
-        position: relative;
-        top: calc(90vh - 270px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -241,6 +260,10 @@ main.fileUpload{
 
     input#filePicker{
         display: none;
+    }
+
+    button.submit{
+        margin-top: 5px;
     }
 
 }

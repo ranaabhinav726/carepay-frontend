@@ -5,7 +5,6 @@ import PDFIcon from '../../../assets/PDFIcon.png'
 
 import { AiFillCheckCircle, AiFillEye, AiFillEyeInvisible, AiFillInfoCircle, AiOutlineClose } from 'react-icons/ai'
 
-// import { VscError } from 'react-icons/vsc'
 import { FaPlus, FaArrowUp } from 'react-icons/fa'
 
 import axios from "axios";
@@ -28,6 +27,8 @@ const FileUpload = () =>{
 
     const [fileCount, setFileCount] = useState(0);
     const [files, setFiles] = useState([]);
+    
+    const [prevFiles, setPrevFiles] = useState([]);
 
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
@@ -40,6 +41,19 @@ const FileUpload = () =>{
     let ref = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
+
+        async function makeApiCall(){
+            await axios.get(env.api_Url + "/getDocumentsByUserId?userId=" + userId)
+            .then(response =>{
+                if(response.data.status === 200){
+                    console.log(response)
+                    let uploadedFiles = response?.data?.data?.multipleBankStatements?.split(',');
+                    console.log(uploadedFiles)
+                    setPrevFiles(uploadedFiles);
+                }
+            })
+        }
+        makeApiCall();
     },[])
 
     const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
@@ -74,6 +88,11 @@ const FileUpload = () =>{
     let fileIconList = [];
     for(let i=0; i<fileCount; i++){
         fileIconList.push(<FileIcon key={i} />);
+    }
+
+    let prevFilesList = [];
+    for(let i=1; i<=prevFiles.length; i++){
+        prevFilesList.push(<PrevFile link={prevFiles[i-1]} count={i} key={i} />)
     }
 
     function handleEyeClick(){
@@ -122,6 +141,11 @@ const FileUpload = () =>{
 
     async function uploadFiles(){
         // console.log(files[0])
+
+        if(prevFiles.length > 0 && files.length === 0){
+            navigate('/patient/LoanDetails');
+            return;
+        }
         if(!password){
             let elem = document.getElementById('password');
             let elem2 = document.getElementById('passError');
@@ -245,6 +269,13 @@ const FileUpload = () =>{
         <div className="msg">Upload Bank Statement for the last 3 months from <span className='date'>{from_month} {year}</span> to <span className='date'>{to_month} {year}</span></div>
         <p id="errorMsg">Only PDFs are allowed to upload</p>
 
+        {fileCount === 0 && 
+            <div className="previouslyUploaded">
+                <p className='h2'>Previously uploaded files</p>
+                {prevFilesList}
+            </div>
+        }
+
         {fileCount>0 &&
         <>
             <div className="fileList">
@@ -268,7 +299,7 @@ const FileUpload = () =>{
             <div className="pdfPassword">
                 <div className="passTitle">
                     <p>PDF Password</p>
-                    <div className='tooltip'>
+                    <div className='pass-tooltip'>
                         <AiFillInfoCircle style={{color:"#908dc1", fontSize:"20px"}} />
                         <span className='tooltiptext'>This is the password to open your bank statement. Typically a combination of your DOB and phone number. You can find it in your bank's monthly statement email to you.</span>
                     </div>
@@ -288,16 +319,18 @@ const FileUpload = () =>{
                 <span className='safe'>Your data is encrypted and will be safe with us!</span>
             </div>
             <p className={apiError?"apiError": "apiError hide"} style={{marginTop:"10px"}}>An error has occured, please try again.</p>
-            <button onClick={()=>uploadFiles()} className='submit'>Continue</button>
         </>
         }
-
+        {(fileCount>0 || prevFiles.length>0) &&
+            <button onClick={()=>uploadFiles()} className='submit'>Continue</button>
+        }
         {fileCount == 0 &&
             <button onClick={()=>invokeFileHandler()} className="uploadAccountStatement">
                 <FaArrowUp style={{ color:"#514C9F", fontSize:"20px", marginRight:"10px"}} />
                 <span>Upload Account Statement PDF</span>
             </button>
         }
+
         <input type="file" name="" id="filePicker" accept='.pdf' onChange={(e)=>uploadHandler(e)} />
 
         </main>
@@ -307,7 +340,7 @@ const FileUpload = () =>{
 
 export default FileUpload
 
-const File = ({fileName, files, setFiles, fileCount, setFileCount}) =>{
+const File = ({fileName, files, setFiles, setFileCount}) =>{
 
     let name = fileName;
     name = name.split('.')[0];
@@ -344,5 +377,11 @@ const File = ({fileName, files, setFiles, fileCount, setFileCount}) =>{
 const FileIcon = () =>{
     return(
         <img className='pdfIcon' src={PDFIcon} alt="pdfIcon" />
+    )
+}
+
+const PrevFile = ({link, count}) =>{
+    return(
+        <p className='prevFile'>File-{count} <a href={link} target='_blank' className="viewFile">Click to view</a></p>
     )
 }
