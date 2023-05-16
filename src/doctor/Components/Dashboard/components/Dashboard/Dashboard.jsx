@@ -109,7 +109,7 @@ const Insights = () =>{
                 <img src={knapsack} alt="" />
                 <p>Loan summary</p>
             </div>
-            <div className="card">
+            <div className="insights-card">
                 <div className="loans">
                     <p className="value">{loans!=0? loans : "No data yet"}</p>
                     <p className="title">Loans</p>

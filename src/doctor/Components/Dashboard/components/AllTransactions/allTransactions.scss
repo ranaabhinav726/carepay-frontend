@@ -33,6 +33,9 @@ main.allTransactions{
 
     div.loan{
         margin: 16px 0;
+        hr{
+            margin: 0;
+        }
         div.head{
             font-size: 13.5px;
             padding: 10px;
@@ -68,6 +71,13 @@ main.allTransactions{
                 content: '\20B9  ';
                 font-size: 14px;
                 font-weight: 500;
+            }
+
+            span.Disbursed{
+                color: #1c8769;
+            }
+            span.Approved{
+                color: #EA6B0C;
             }
         }
     }

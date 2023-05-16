@@ -70,7 +70,7 @@ const Loan = ({date, loanId, patientName, amount, status, purpose}) =>{
             </div>
             <div className="loanDetail">
                 <span className="title">Loan status</span>
-                <span className="value">{status}</span>
+                <span className={"value " + status}>{status}</span>
             </div>
             <div className="loanDetail">
                 <span className="title">Loan purpose</span>
