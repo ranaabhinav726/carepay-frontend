@@ -220,6 +220,7 @@ const PersonalDetails = () =>{
     //     // console.log(val)
     // }
     function handlePan(val){
+        if(val === null) return;
         val = val.toUpperCase();
         if(val.length<10) setPanValid(false);
         if(val.length === 10){
