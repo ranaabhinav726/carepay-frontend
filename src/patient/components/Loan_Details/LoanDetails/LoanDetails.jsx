@@ -252,7 +252,7 @@ const LoanDetails = () =>{
 
 const EMIcard = ({EMIAmount, NumOfEMIs, checked, checkValue, setEMIOption}) =>{
     return(
-        <div onClick={()=>setEMIOption(checkValue)} className={"card"}>
+        <div onClick={()=>setEMIOption(checkValue)} className="loan-card">
             <div className="whiteCircle"><div className={checked? "innercircle true" : "innercircle"}></div></div>
             <div className="cardLower">
                 <div className="totalEMIs">
