@@ -1,7 +1,7 @@
 import './addPatient.scss'
 import { useNavigate } from 'react-router-dom'
 import { BsArrowLeft } from 'react-icons/bs'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import axios from 'axios';
 import { env, showErrorOnUI } from '../../environment';
@@ -15,6 +15,25 @@ const AddPatient = () =>{
     const [clinicName, setClinicName] = useState('');
     const [purpose, setPurpose] = useState('');
     const [loanAmount, setLoanAmount] = useState('');
+
+    let doctorId = localStorage.getItem('doctorId');
+    useEffect(()=>{
+        if(doctorId){
+            async function getCall(){
+                await axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
+                .then((response)=>{
+                    console.log(response)
+                    if(response.data.data != null){
+                        let clinicName = response?.data?.data?.clinicName;
+                        setClinicName(clinicName);
+                    }
+                }).catch((error)=>{
+                    console.log(error)
+                })
+            }
+            getCall();
+        }
+    },[])
 
     function handleSubmit(){
         if(! patientName){
