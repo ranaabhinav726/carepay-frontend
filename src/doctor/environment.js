@@ -26,5 +26,5 @@ export function showErrorOnUI(elem, errorLineDisplay=true){
     setTimeout(()=>{
         elem.classList.remove('inputBoxError');
         if(elem.nextSibling) elem.nextSibling.style.display = "none"
-    }, 1500)
+    }, 3000)
 }
