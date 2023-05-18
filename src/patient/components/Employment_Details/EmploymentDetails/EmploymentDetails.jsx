@@ -39,6 +39,7 @@ const EmploymentDetails = () =>{
     const [companyAddL2, setCompanyAddL2] = useState('');
     const [pincode, setPincode] = useState('');
     const [IndustryType, setIndustryType] = useState('Ecommerce');
+    const [IndustryTypeOther, setIndustryTypeOther] = useState('');
 
     const [totalExpYear, setTotalExpYear] = useState(0);
     const [totalExpMonth, setTotalExpMonth] = useState(0);
@@ -53,6 +54,23 @@ const EmploymentDetails = () =>{
     let userId = localStorage.getItem("userId");
 
     let ref = useRef(0);
+
+    const list = ["Ecommerce","FMCG","Healthcare & Diagnostics","IT & ITeS",
+                    "Oil and Gas","Railways","Telecommunications","Cement","Consumer Durables",
+                    "Education and Training","Engineering & Infrastructure","Capital Goods",
+                    "Auto Components","Automobiles","Gems and Jewellery","Aviation","Manufacturing",
+                    "Media and Entertainment","Metals And Mining","Power","Real Estate","Retail",
+                    "Textiles","Insurance (Life and health)","Pharmaceuticals","Dairy Products",
+                    "Fertilisers & Seeds","Food & Food Products","Sugar, Tea, Coffee",
+                    "Hotel, Restaurants & Tourism","Microfinance Institutions","Shipping",
+                    "Ports & Port Services","Banking and Finance","Agriculture and Allied", "Other"
+                ];
+
+    let options = list.map((item, idx)=>{
+        return <option value={item} key={idx}>{item}</option>
+    })
+            
+
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         if(!! userId){
@@ -69,7 +87,14 @@ const EmploymentDetails = () =>{
                         setCompanyAddL1(data.workplaceAddress1);
                         setCompanyAddL2(data.workplaceAddress2);
                         setPincode(data.workplacePincode);
-                        setIndustryType(data.industry);
+                        let industry = data.industry;
+                        if(list.includes(industry)){
+                            setIndustryType(industry);
+                            console.log(industry)
+                        }else{
+                            setIndustryType("Other");
+                            setIndustryTypeOther(industry);
+                        }
                         setTotalExpYear(data.totalJobExpInYears);
                         setTotalExpMonth(data.totalJobExpInMonth);
                         setJobExpMonth(data.currentJobExpInMonth);
@@ -141,11 +166,11 @@ const EmploymentDetails = () =>{
             return;
         }
 
-        // if(!IndustryType){
-        //     let elem = document.getElementById('selectIndustryType');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
+        if(IndustryType==="Other" && (! IndustryTypeOther)){
+            let elem = document.getElementById('IndustryTypeOther');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(totalExpYear < jobExpYear){
             expError();
@@ -175,13 +200,18 @@ const EmploymentDetails = () =>{
             "organizationName": companyName,
             "workplaceAddress1": companyAddL1,
             "workplacePincode": pincode,
-            "industry": IndustryType,
             "totalJobExpInYears": parseInt(totalExpYear),
             "totalJobExpInMonth": parseInt(totalExpMonth),
             "currentJobExpInYears": parseInt(jobExpYear),
             "currentJobExpInMonth": parseInt(jobExpMonth),
             "formStatus": "BankDetails"
           };
+
+        if(IndustryType === "Other"){
+            submitObj.industry = IndustryTypeOther;
+        }else{
+            submitObj.industry = IndustryType;
+        }
 
           if(!!familyIncome){
             submitObj.monthlyFamilyIncome = familyIncome;
@@ -216,16 +246,7 @@ const EmploymentDetails = () =>{
 
 
 
-    const list = ["Ecommerce","FMCG","Healthcare & Diagnostics","IT & ITeS",
-                    "Oil and Gas","Railways","Telecommunications","Cement","Consumer Durables",
-                    "Education and Training","Engineering & Infrastructure","Capital Goods",
-                    "Auto Components","Automobiles","Gems and Jewellery","Aviation","Manufacturing",
-                    "Media and Entertainment","Metals And Mining","Power","Real Estate","Retail",
-                    "Textiles","Insurance (Life and health)","Pharmaceuticals","Dairy Products",
-                    "Fertilisers & Seeds","Food & Food Products","Sugar, Tea, Coffee",
-                    "Hotel, Restaurants & Tourism","Microfinance Institutions","Shipping",
-                    "Ports & Port Services","Banking and Finance","Agriculture and Allied"
-                ];
+    
 
     // useEffect(()=>{
     //     axios.post(env.login_api_Url + "industry_list", {
@@ -240,9 +261,6 @@ const EmploymentDetails = () =>{
     //             });
     // }, []);
 
-    let options = list.map((item, idx)=>{
-        return <option value={item} key={idx}>{item}</option>
-    })
 
     let dates =[];
     for(let i=1; i<32; i++){
@@ -349,15 +367,26 @@ const EmploymentDetails = () =>{
         <div className="IndustryType">
             <p>Industry</p>
             <select 
+                id="selectIndustryType"
                 onChange={(e)=>setIndustryType(e.target.value)} 
                 name="IndType" 
-                id="selectIndustryType"
-                value={IndustryType ?? ""}
+                value={IndustryType}
             >
             {options}
             </select>
         </div>
 
+        {IndustryType==="Other" &&
+            <div className="IndustryTypeOther">
+                <p>Type-In your industry</p>
+                <input 
+                    id="IndustryTypeOther"
+                    type="text" 
+                    value={IndustryTypeOther ?? ""}
+                    onChange={(e)=>setIndustryTypeOther(e.target.value)}
+                    placeholder="Please enter your working Industry" 
+                />
+            </div>}
 
         <div className="timeInJob">
             <p>Time in this job</p>
