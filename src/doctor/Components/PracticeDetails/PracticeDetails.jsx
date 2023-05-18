@@ -10,6 +10,7 @@ const PracticeDetails = () =>{
 
     const [licenseNum, setLisenceNum] = useState("")
     const [speciality, setSpeciality] = useState("Dentistry")
+    const [specialityOther, setSpecialityOther] = useState("")
     const [clinicName, setClinicName] = useState("")
     const [businessName, setBusinessName] = useState("")
     const [entityType, setEntityType] = useState("Private Limited Company")
@@ -20,12 +21,24 @@ const PracticeDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
-    let doctorId = localStorage.getItem('doctorId');
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+
+    // let doctorId = 
 
     let ref = useRef(0);
     useEffect(()=>{
+        setDoctorId(localStorage.getItem('doctorId'));
         ref.current = document.getElementById('animation-wrapper');
     },[])
+
+    let branches = ["Dentistry", "Dental Surgery", "Radiology", "Immunology", 
+                    "Neurology", "Gynecology and obstetrics", "Pediatrics", "Psychiatry", 
+                    "Internal medicine", "General", "Cardiology", "Orthopedics", "Emergency medicine", 
+                    "Endocrinology", "Gastroenterology", "Nephrology", "Pulmonology", "Dietetics", 
+                    "Urology", "Cosmetology", "Vascular Surgery", "Anesthesiology", "Genetics", 
+                    "Nuclear medicine", "Forensic medicine", "Dermatology", "Oncology", "Pathology", 
+                    "Physiotherapy", "ENT", "Plastic surgery", "Rheumatology", "Bariatric Surgery", 
+                    "Psychology", "Diabetology", "Neurosurgery", "Other"]
 
     useEffect(()=>{
         if(doctorId){
@@ -39,7 +52,12 @@ const PracticeDetails = () =>{
                         let license = response?.data?.data?.licenceNumber;
                         setLisenceNum(license);
                         let speciality = response?.data?.data?.speciality;
-                        setSpeciality(speciality);
+                        if(branches.includes(speciality)){
+                            setSpeciality(speciality);
+                        }else{
+                            setSpeciality("Other");
+                            setSpecialityOther(speciality);
+                        }
                         let clinicName = response?.data?.data?.clinicName;
                         setClinicName(clinicName);
                         let business = response?.data?.data?.businessEntityName;
@@ -57,8 +75,16 @@ const PracticeDetails = () =>{
                 hideWrapper(ref.current)
             }
             getCall();
+        }else{
+            navigate('/doctor/')
         }
-    },[])
+    },[doctorId])
+
+    
+
+    let branchOptions = branches.map((branch) =>{
+        return <option value={branch}>{branch}</option>
+    })
 
     // function showErrorOnUI(elem){
     //     elem.scrollIntoView({ behavior: "smooth", block: "center"});
@@ -86,6 +112,12 @@ const PracticeDetails = () =>{
             return;
         }
 
+        if( speciality==="Other" && (! specialityOther)){
+            let elem = document.getElementById('specialityOther');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
         if(! clinicName){
             let elem = document.getElementById('clinicName');
             if(elem) showErrorOnUI(elem);
@@ -103,8 +135,8 @@ const PracticeDetails = () =>{
         }
         setCanSubmit(false);
         showWrapper(ref.current)
-        
-        await axios.post(env.api_Url+"saveOrUpdateDoctorProfessionalDetails",{
+
+        let submitObj = {
             "id": id,
             "doctorId" : doctorId,
             "licenceNumber": licenseNum,
@@ -113,8 +145,15 @@ const PracticeDetails = () =>{
             "businessEntityType": entityType,
             "cinLlpin": LLpin,
             "gstIn": GSTIN,
-            "speciality": speciality
-        })
+        }
+
+        if(speciality === "Other"){
+            submitObj.speciality = specialityOther;
+        }else{
+            submitObj.speciality = speciality;
+        }
+        
+        await axios.post(env.api_Url+"saveOrUpdateDoctorProfessionalDetails", submitObj)
         .then(response =>{
             if(response.data.status == 200){
                 console.log(response);
@@ -165,45 +204,23 @@ const PracticeDetails = () =>{
                     value={speciality} 
                     placeholder="Enter your Speciality"
                 >
-                    <option>Dentistry</option>
-                    <option>Dental Surgery</option>
-                    <option>Radiology</option>
-                    <option>Immunology</option>
-                    <option>Neurology</option>
-                    <option>Gynecology and obstetrics</option>
-                    <option>Pediatrics</option>
-                    <option>Psychiatry</option>
-                    <option>Internal medicine</option>
-                    <option>General</option>
-                    <option>Cardiology</option>
-                    <option>Orthopedics</option>
-                    <option>Emergency medicine</option>
-                    <option>Endocrinology</option>
-                    <option>Gastroenterology</option>
-                    <option>Nephrology</option>
-                    <option>Pulmonology</option>
-                    <option>Dietetics</option>
-                    <option>Urology</option>
-                    <option>Cosmetology</option>
-                    <option>Vascular Surgery</option>
-                    <option>Anesthesiology</option>
-                    <option>Genetics</option>
-                    <option>Nuclear medicine</option>
-                    <option>Forensic medicine</option>
-                    <option>Dermatology</option>
-                    <option>Oncology</option>
-                    <option>Pathology</option>
-                    <option>Physiotherapy</option>
-                    <option>ENT</option>
-                    <option>Plastic surgery</option>
-                    <option>Rheumatology</option>
-                    <option>Bariatric Surgery</option>
-                    <option>Psychology</option>
-                    <option>Diabetology</option>
-                    <option>Neurosurgery</option>
-                    <option>Others</option>
+                    {branchOptions}
                 </select>
             </div>
+
+            {speciality === "Other" && 
+                <div className="inputGroup">
+                    <p className='group-title'>Kindly tell us your speciality</p>
+                    <input
+                    id="specialityOther"
+                        className='group-input'
+                        onChange={(e)=>setSpecialityOther(e.target.value)}
+                        value={specialityOther}
+                        placeholder="Enter your speciality" 
+                    />
+                    <span className="fieldError">Please type-in your speciality</span>
+                </div>
+            }
 
             <div className="inputGroup">
                 <p className='group-title'>Clinic name</p>

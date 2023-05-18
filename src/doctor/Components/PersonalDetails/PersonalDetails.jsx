@@ -11,7 +11,8 @@ const DocPersonalDetails = () =>{
 
     const navigate = useNavigate();
 
-    let phoneNumber = localStorage.getItem('phoneNumber');
+    // let phoneNumber = ;
+    const [phoneNumber, setPhoneNumber] = useState(localStorage.getItem('phoneNumber'))
 
     const [number, setNumber] = useState('');
     const [isNumValid, setNumValid] = useState(false);
@@ -34,13 +35,14 @@ const DocPersonalDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
     
+    const [id, setId] = useState("");
+    const[doctorId, setDoctorId] = useState('');
+
     let ref = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
 
-    const [id, setId] = useState("");
-    const [doctorId, setDoctorId] = useState("");
 
     useEffect(()=>{
         if(phoneNumber){
@@ -84,8 +86,10 @@ const DocPersonalDetails = () =>{
                 hideWrapper(ref.current)
             };
             getCall();
+        }else{
+            navigate('/doctor/')
         }
-    },[]);
+    },[phoneNumber]);
 
     //////////////////////////////// DOB restriction ///////////////////////////////////////
     ////// Below code is to calculate the maximum date the user can input as DOB.///////////
@@ -232,6 +236,10 @@ const DocPersonalDetails = () =>{
             submitObj.doctorId = doctorId;
         }
 
+        if(!! scoutCode){
+            submitObj.scoutCode = scoutCode;
+        }
+
         // console.log(birthdate)
         await axios.post(env.api_Url + "saveOrUpdateDoctorDetails", submitObj ).then((response) => {
             // console.log(birthdate, panNumber)
@@ -324,6 +332,15 @@ const DocPersonalDetails = () =>{
                     max ={maxDateForDob}
                 />
                 <span className="fieldError">Please enter your date of birth</span>
+            </div>
+            <div className="inputGroup">
+                <p className='group-title'>Scout code (optional)</p>
+                <input 
+                    className="group-input"
+                    value={scoutCode}
+                    onChange={(e) => setScoutCode(e.target.value)}
+                    placeholder="Enter referral code here"
+                />
             </div>
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
             <button onClick={()=>submit()} className="submit">Next</button>

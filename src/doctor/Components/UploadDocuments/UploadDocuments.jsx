@@ -14,7 +14,7 @@ const UploadDocuments = () =>{
         headers: { "Content-Type": "multipart/form-data" }
     };
 
-    let doctorId = localStorage.getItem('doctorId');
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
 
     const [panCard, setPanCard] = useState("");
     const [GSTIN, setGSTIN] = useState("");
@@ -41,24 +41,28 @@ const UploadDocuments = () =>{
     },[])
 
     useEffect(()=>{
-        async function getCall(){
-            showWrapper(ref.current);
-            axios.get(env.api_Url+"getDocumentsByDoctorId?doctorId=" + doctorId)
-            .then(response =>{
-                console.log(response)
-                if(response.data.status == "200"){
-                    // console.log(response?.data?.data?.panCardUrl)
-                    setPanCardUrl(response?.data?.data?.panCardUrl)
-                    setGSTINUrl(response?.data?.data?.gstUrl)
-                    setMiscUrl(response?.data?.data?.otherDocUrl)
-                }
-            }).catch(error =>{
-                console.log(error)
-            })
-            hideWrapper(ref.current)
+        if(doctorId){
+            async function getCall(){
+                showWrapper(ref.current);
+                axios.get(env.api_Url+"getDocumentsByDoctorId?doctorId=" + doctorId)
+                .then(response =>{
+                    console.log(response)
+                    if(response.data.status == "200"){
+                        // console.log(response?.data?.data?.panCardUrl)
+                        setPanCardUrl(response?.data?.data?.panCardUrl)
+                        setGSTINUrl(response?.data?.data?.gstUrl)
+                        setMiscUrl(response?.data?.data?.otherDocUrl)
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+                hideWrapper(ref.current)
+            }
+            getCall();
+        }else{
+            navigate('/doctor/')
         }
-        getCall();
-    }, [])
+    }, [doctorId])
 
 
     function panUploadHandler(event){

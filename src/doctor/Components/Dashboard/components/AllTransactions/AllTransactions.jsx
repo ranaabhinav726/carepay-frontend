@@ -12,17 +12,21 @@ const AllTransactions = () =>{
     const navigate = useNavigate();
 
     const [loanData, setLoanData] = useState([]);
-    let doctorId = localStorage.getItem('doctorId') || "";
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
 
     useEffect(()=>{
-        axios.get(env.api_Url + "getAllLoansByDoctorId?doctorId=" + doctorId + "&status=" + loanType + "&pageNo=1&noOfEntry=100")
-        .then(response =>{
-            if(response.data.status === 200){
-                console.log(response);
-                setLoanData(response.data.data);
-            }
-        })
-    }, [loanType])
+        if(doctorId){
+            axios.get(env.api_Url + "getAllLoansByDoctorId?doctorId=" + doctorId + "&status=" + loanType + "&pageNo=1&noOfEntry=100")
+            .then(response =>{
+                if(response.data.status === 200){
+                    console.log(response);
+                    setLoanData(response.data.data);
+                }
+            })
+        }else{
+            navigate('/doctor/')
+        }
+    }, [loanType, doctorId])
 
     let trsxns = loanData.map((loan, idx)=>{
         let date = new Date(loan.apply_date);

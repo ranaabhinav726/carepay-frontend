@@ -16,7 +16,7 @@ const AddPatient = () =>{
     const [purpose, setPurpose] = useState('');
     const [loanAmount, setLoanAmount] = useState('');
 
-    let doctorId = localStorage.getItem('doctorId');
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
     useEffect(()=>{
         if(doctorId){
             async function getCall(){
@@ -32,8 +32,10 @@ const AddPatient = () =>{
                 })
             }
             getCall();
+        }else{
+            navigate('/doctor/')
         }
-    },[])
+    },[doctorId])
 
     function handleSubmit(){
         if(! patientName){
@@ -86,7 +88,7 @@ const AddPatient = () =>{
             "firstName" : patientName,
             "phoneNumber" : contactNumber,
             "emailId" : email,
-            "doctorId" : localStorage.getItem('doctorId'),
+            "doctorId" : doctorId,
             "loanAmount" : loanAmount,
             "purposeOfLoan" : purpose
         }

@@ -23,7 +23,7 @@ const DocBankDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
-    let doctorId = localStorage.getItem('doctorId');
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
 
     let ref = useRef(0);
     useEffect(()=>{
@@ -31,37 +31,40 @@ const DocBankDetails = () =>{
     },[])
 
     useEffect(()=>{
-        async function getCall(){
-            showWrapper(ref.current);
-            await axios.get(env.api_Url+"getBankDetailsByDoctorId?doctorId=" + doctorId)
-            .then((response)=>{
-                console.log(response)
-                if(response.data.data != null){
-                    setId(response?.data?.data?.id);
-                    let accountHolderName = response?.data?.data?.accountHolderName;
-                    setAccountHolderName(accountHolderName);
-                    let accountNumber = response?.data?.data?.accountNumber;
-                    setAccountNum(accountNumber);
-                    setConfirmAccountNum(accountNumber);
-                    let accountType = response?.data?.data?.accountType;
-                    setAccType(accountType);
-                    let bankAddress = response?.data?.data?.bankAddress;
-                    setBankAddress(bankAddress);
-                    let bankName = response?.data?.data?.bankName;
-                    setBankName(bankName);
-                    let branchName = response?.data?.data?.branchName;
-                    setBranchName(branchName);
-                    let ifscCode = response?.data?.data?.ifscCode;
-                    setIFSC(ifscCode);
-                    setIfscValid(true)
-                }
-            }).catch((error)=>{
-                console.log(error)
-            })
-            hideWrapper(ref.current)
+        if(doctorId){
+            async function getCall(){
+                showWrapper(ref.current);
+                await axios.get(env.api_Url+"getBankDetailsByDoctorId?doctorId=" + doctorId)
+                .then((response)=>{
+                    console.log(response)
+                    if(response.data.data != null){
+                        setId(response?.data?.data?.id);
+                        let accountHolderName = response?.data?.data?.accountHolderName;
+                        setAccountHolderName(accountHolderName);
+                        let accountNumber = response?.data?.data?.accountNumber;
+                        setAccountNum(accountNumber);
+                        setConfirmAccountNum(accountNumber);
+                        let accountType = response?.data?.data?.accountType;
+                        setAccType(accountType);
+                        let bankAddress = response?.data?.data?.bankAddress;
+                        setBankAddress(bankAddress);
+                        let bankName = response?.data?.data?.bankName;
+                        setBankName(bankName);
+                        let branchName = response?.data?.data?.branchName;
+                        setBranchName(branchName);
+                        let ifscCode = response?.data?.data?.ifscCode;
+                        handleIFSC(ifscCode);
+                    }
+                }).catch((error)=>{
+                    console.log(error)
+                })
+                hideWrapper(ref.current)
+            }
+            getCall();
+        }else{
+            navigate('/doctor/')
         }
-        getCall();
-    },[])
+    },[doctorId])
 
     // function showErrorOnUI(elem){
     //     elem.scrollIntoView({ behavior: "smooth", block: "center"});
@@ -75,11 +78,11 @@ const DocBankDetails = () =>{
     //     }, 1000)
     // }
 
-    function handleIFSC(e){
-        let val = e.target.value;
+    function handleIFSC(val){
         val = val.toUpperCase();
         if(val.length < 11){
             setIFSC(val);
+            setIfscValid(false);
         }else if(val.length == 11){
             setIFSC(val);
             fetchBankDetailsFromIFSC(val);
@@ -233,7 +236,7 @@ const DocBankDetails = () =>{
                 <input
                     id="IFSC"
                     className='group-input'
-                    onChange={(e)=>handleIFSC(e)}
+                    onChange={(e)=>handleIFSC(e.target.value)}
                     value={IFSC}
                     autoCapitalize="characters"
                     placeholder="Enter IFSC" 

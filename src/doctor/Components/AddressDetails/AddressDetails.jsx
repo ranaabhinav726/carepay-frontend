@@ -19,7 +19,8 @@ const DocAddressDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
-    let doctorId = localStorage.getItem('doctorId');
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    
 
     let ref = useRef(0);
     useEffect(()=>{
@@ -52,8 +53,10 @@ const DocAddressDetails = () =>{
                 hideWrapper(ref.current)
             }
             getCall();
+        }else{
+            navigate('/doctor/')
         }
-    },[])
+    },[doctorId])
 
     // function showErrorOnUI(elem){
     //     elem.scrollIntoView({ behavior: "smooth", block: "center"});

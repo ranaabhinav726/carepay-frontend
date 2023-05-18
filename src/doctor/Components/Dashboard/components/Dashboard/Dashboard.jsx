@@ -31,12 +31,15 @@ const Dashboard = () =>{
     
     const navigate = useNavigate()
     let ref = useRef(0);
+    let sidebar = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('overlay');
+        sidebar.current = document.getElementById('sideBar');
     },[])
 
     function handleSidebar(){
         if(ref.current) ref.current.classList.add('show');
+        if(sidebar.current) sidebar.current.classList.add('show');
     }
     return(
         <main className="dashboard">
@@ -73,34 +76,43 @@ const Insights = () =>{
     const [loans, setLoans] = useState(0);
     const [earnings, setEarnings] = useState(0);
 
-    let doctorId = localStorage.getItem('doctorId') || "";
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const navigate = useNavigate()
 
     useEffect(()=>{
-        axios.get(env.api_Url + "loanSummary?doctorId=" + doctorId)
-        .then(response => {
-            if(response.data.status == "200"){
-                // console.log(response);
-                setLoans(response.data.data.count);
-                let earning = response.data.data.disbursed_amount ?? 0;
-                setEarnings(earning.toLocaleString('en-IN',{maximumFractionDigits: 2}));
-            }
-        }).catch(error =>{
-            console.log(error)
-        })
-    }, [])
+        if(doctorId){
+            axios.get(env.api_Url + "loanSummary?doctorId=" + doctorId)
+            .then(response => {
+                if(response.data.status == "200"){
+                    // console.log(response);
+                    setLoans(response.data.data.count);
+                    let earning = response.data.data.disbursed_amount ?? 0;
+                    setEarnings(earning.toLocaleString('en-IN',{maximumFractionDigits: 2}));
+                }
+            }).catch(error =>{
+                console.log(error)
+            })
+        }else{
+            navigate('/doctor/')
+        }
+    }, [doctorId])
     
     const [data, setData] = useState([]);
     useEffect(()=>{
-        axios.get(env.api_Url + "/loanCountTrend?doctorId="+ doctorId + "&base=monthly&status=" + graphSelector +"&resultType=" + ((filter==="money")?"sum":""))
-        .then(response => {
-           if(response.data.status === 200){
-            //    console.log(response);
-               setData(response.data.data)
-           }
-        }).catch(error =>{
-           console.log(error);
-        })
-    }, [filter, graphSelector])
+        if(doctorId){
+            axios.get(env.api_Url + "/loanCountTrend?doctorId="+ doctorId + "&base=monthly&status=" + graphSelector +"&resultType=" + ((filter==="money")?"sum":""))
+            .then(response => {
+               if(response.data.status === 200){
+                //    console.log(response);
+                   setData(response.data.data)
+               }
+            }).catch(error =>{
+               console.log(error);
+            })
+        }else{
+            navigate('/doctor/')
+        }
+    }, [filter, graphSelector, doctorId])
 
     return(
         <section className="insights">
@@ -167,17 +179,21 @@ const Transactions = () =>{
 
     const [loanData, setLoanData] = useState([]);
 
-    let doctorId = localStorage.getItem('doctorId') || "";
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
 
     useEffect(()=>{
-        axios.get(env.api_Url + "getAllLoansByDoctorId?doctorId=" + doctorId + "&status=" + loanType +"&pageNo=1&noOfEntry=3")
-        .then(response =>{
-            if(response.data.status === 200){
-                console.log(response);
-                setLoanData(response.data.data);
-            }
-        })
-    }, [loanType])
+        if(doctorId){
+            axios.get(env.api_Url + "getAllLoansByDoctorId?doctorId=" + doctorId + "&status=" + loanType +"&pageNo=1&noOfEntry=3")
+            .then(response =>{
+                if(response.data.status === 200){
+                    console.log(response);
+                    setLoanData(response.data.data);
+                }
+            })
+        }else{
+            navigate('/doctor/')
+        }
+    }, [loanType, doctorId])
 
     let trsxns = loanData.map((loan, idx)=>{
         let date = new Date(loan.apply_date);
