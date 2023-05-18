@@ -6,7 +6,7 @@ main.addPatient{
         display: flex;
         align-items: center;
         gap: 16px;
-        padding: 16px 10px;
+        // padding: 16px 10px;
 
         .icon{
             font-size: 22px;
@@ -24,7 +24,7 @@ main.addPatient{
 
     div.inputGroup{
         p.group-title{
-            margin-top: 16px;
+            margin: 16px 0 0 0;
         }
         input.group-input{
             width: 100%;
@@ -33,7 +33,7 @@ main.addPatient{
             padding: 16px 10px;
             font-size: 15.5px;
             border-radius: 4px;
-            margin-top: 12px;
+            margin: 12px 0 0 0;
             appearance: textfield;
         }
     }
