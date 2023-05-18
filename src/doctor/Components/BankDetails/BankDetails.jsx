@@ -94,13 +94,15 @@ const DocBankDetails = () =>{
             .get( env.api_Url + "userDetails/codeDetail?code="+ IFSC +"&type=branch")
             .then((response) => {
                 console.log(response)
-                let bankName = response?.data.branchName;
-                setBankName(bankName);
-                let branchName = response?.data?.branchCode;
-                setBranchName(branchName)
-                let branchAddress = response?.data?.bankAddress;
-                setBankAddress(branchAddress);
-                setIfscValid(true);
+                if(response.data.status === "success"){
+                    let bankName = response?.data.branchName;
+                    setBankName(bankName);
+                    let branchName = response?.data?.branchCode;
+                    setBranchName(branchName)
+                    let branchAddress = response?.data?.bankAddress;
+                    setBankAddress(branchAddress);
+                    setIfscValid(true);
+                }
             }).catch(error => {
                     console.log(error);
                     setIfscValid(false)
