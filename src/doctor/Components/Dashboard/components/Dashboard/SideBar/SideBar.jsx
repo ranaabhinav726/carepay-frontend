@@ -17,38 +17,45 @@ const SideBar = () =>{
     // let clinicName = "Smiles club";
 
     let overlay = useRef(0);
+    let sidebar = useRef(0);
     // let body = useRef(0);
-    let doctorId = localStorage.getItem('doctorId') || "";
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
 
     useEffect(()=>{
         overlay.current = document.getElementById('overlay');
+        sidebar.current = document.getElementById('sideBar');
         // body.current = document.querySelector("body");
-        axios.get(env.api_Url + "getDoctorDetailByDoctorId?doctorId=" + doctorId)
-        .then(response =>{
-            if(response.data.status === 200){
-                console.log(response);
-                setDoctorName(response.data?.data.name);
-                setClinicName(response.data?.data.clinic);
-                setSpeciality(response.data?.data.speciality)
-                setQrLink(response.data?.data.qr_url)
-                let nameArr = response.data?.data?.name?.split(' ');
-                let init = "";
-                for(let i=0; i<2; i++){
-                    init += nameArr[i][0];
+        if(doctorId){
+            axios.get(env.api_Url + "getDoctorDetailByDoctorId?doctorId=" + doctorId)
+            .then(response =>{
+                if(response.data.status === 200){
+                    console.log(response);
+                    setDoctorName(response.data?.data.name);
+                    setClinicName(response.data?.data.clinic);
+                    setSpeciality(response.data?.data.speciality)
+                    setQrLink(response.data?.data.qr_url)
+                    let nameArr = response.data?.data?.name?.split(' ');
+                    let init = "";
+                    for(let i=0; i<2; i++){
+                        init += nameArr[i][0];
+                    }
+                    setInitials(init);
                 }
-                setInitials(init);
-            }
-        })
-    },[])
+            })
+        }
+    },[doctorId])
 
     function handleSidebar(e){
         if(overlay.current) overlay.current.classList.remove('show');
+        if(sidebar.current) sidebar.current.classList.remove('show');
         // body.current.style.overflow = "hidden";
     }
 
     return(
-        <div id="overlay">
-        <div className="sideBar">
+        <>
+        <div id="overlay" onClick={()=>handleSidebar()}>
+        </div>
+        <div id='sideBar' className="sideBar">
             <RxCross1 onClick={()=>handleSidebar()} className='cross' />
             <div className="doctorDetails">
                 <div className="userImage">
@@ -74,7 +81,7 @@ const SideBar = () =>{
                 <p className="way2"><BsHeadset className='icon' /> Help</p>
             </div>
         </div>
-        </div>
+        </>
     )
 }
 
