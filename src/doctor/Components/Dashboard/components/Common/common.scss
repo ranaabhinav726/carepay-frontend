@@ -83,7 +83,7 @@ div.faqs{
       line-height: 31px;
       color: rgba(28, 135, 105, 0.8);
     }
-    button.roundBtn{
+    a.roundBtn{
       background: white;
       color: #1C8769;
     }
@@ -110,7 +110,7 @@ div.faqs{
       line-height: 31px;
       color: rgb(241, 161, 100);
     }
-    button.roundBtn{
+    a.roundBtn{
       color: white;
       background: rgb(241, 161, 100);
     }
@@ -131,7 +131,7 @@ div.faqs{
     cursor: pointer;
   }
   
-  button.roundBtn{
+  a.roundBtn{
     display: flex;
     align-items: center;
     padding: 10px 20px;
