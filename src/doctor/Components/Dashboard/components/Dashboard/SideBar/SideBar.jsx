@@ -1,7 +1,7 @@
 import './sideBar.scss'
 import { RxCross1 } from 'react-icons/rx'
-import { MdMessage } from 'react-icons/md'
-import { BsShareFill, BsHeadset, BsChevronRight, BsChevronDown } from 'react-icons/bs'
+import { MdMessage, MdContentCopy, MdCheck } from 'react-icons/md'
+import { BsHeadset, BsChevronRight, BsChevronDown } from 'react-icons/bs'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { env } from '../../../environment'
@@ -13,6 +13,8 @@ const SideBar = () =>{
     const [clinicName, setClinicName] = useState('')
     const [speciality, setSpeciality] = useState('')
     const [qrLink, setQrLink] = useState('')
+
+    const [isCopied, setIsCopied] = useState(false);
 
     // let clinicName = "Smiles club";
 
@@ -51,6 +53,35 @@ const SideBar = () =>{
         // body.current.style.overflow = "hidden";
     }
 
+    function downloadQR(){
+        fetch(qrLink)
+        .then(resp => resp.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            // the filename you want
+            a.download = 'My-QR.png';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            alert('your file has downloaded!'); // or you know, something with better UX...
+        })
+        .catch(() => alert('oh no!'));
+    }
+
+    function copyQRLinktoClipboard(){
+        if(!! navigator.clipboard){
+            navigator.clipboard.writeText(qrLink);
+            setIsCopied(true);
+
+            setTimeout(()=>{
+                setIsCopied(false);
+            }, 2000)
+        }
+    }
+
     return(
         <>
         <div id="overlay" onClick={()=>handleSidebar()}>
@@ -71,14 +102,14 @@ const SideBar = () =>{
             <div className="qrCode">
                 <img src={qrLink} alt="" />
             </div>
-            <a href={qrLink} className="downloadQR" target='_blank' download="qrCode">Download QR</a>
-            <a href="" className="shareLink center">Share Link <BsShareFill /></a>
+            <p onClick={()=>downloadQR()} className="downloadQR">Download QR</p>
+            <p onClick={()=>copyQRLinktoClipboard()} className={isCopied?"copyLink center copied":"copyLink center"}>{isCopied? <MdCheck /> : <MdContentCopy />} {isCopied? "Copied" : "Copy Link"} </p>
             <hr />
 
             <div className="support">
                 <p className="head">Support</p>
-                <p className="way1"><MdMessage className='icon' /> Chat with us</p>
-                <p className="way2"><BsHeadset className='icon' /> Help</p>
+                <a href="mailto:connect@carepay.money" className="way1"><MdMessage className='icon' /> Email to us</a >
+                <a href="tel:+918069489655" className="way2"><BsHeadset className='icon' /> Help</a >
             </div>
         </div>
         </>

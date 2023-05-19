@@ -112,18 +112,25 @@ div.sideBar{
         }
     }
 
-    a{
+    p.downloadQR{
         display: block;
         text-align: center;
         font-weight: 600;
         margin-bottom: 30px;
         color: #514C9F;
+        cursor: pointer;
     }
-    a.shareLink{
+    p.copyLink{
         padding: 10px 20px;
         border: 1px solid #514C9F;
         width: max-content;
         border-radius: 100px;
+
+        cursor: pointer;
+    }
+    p.copyLink.copied{
+        background: rgba(62, 207, 164, 0.6);
+        border: none;
     }
 
     hr{
@@ -133,7 +140,7 @@ div.sideBar{
 
     div.support{
         margin: 20px 10px;
-        p{
+        a{
             display: flex;
             margin: 15px 0;
             .icon{
