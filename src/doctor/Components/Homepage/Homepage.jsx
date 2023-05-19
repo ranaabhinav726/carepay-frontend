@@ -16,10 +16,27 @@ const DocHomepage = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
+
+    const [doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+
     let ref = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
+
+    useEffect(()=>{
+        if(!! doctorId){
+            axios.get(env.api_Url + "getDoctorVerificationStatus?doctorId=" + doctorId)
+            .then(response =>{
+                console.log(response);
+                if(response.data.status === 200){
+                    if(response.data.data === "VERIFIED"){
+                        navigate('/doctor/dashboard')
+                    }
+                }
+            })
+        }
+    }, [doctorId])
 
 
 
