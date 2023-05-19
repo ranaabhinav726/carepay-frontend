@@ -60,7 +60,7 @@ const Dashboard = () =>{
             </div>
         </div>
         {section === "insights"? <Insights /> : <Transactions />}
-        <Faq />
+        {/* <Faq /> */}
         <Help />
         <Advice />
         </main>
@@ -70,7 +70,7 @@ const Dashboard = () =>{
 export default Dashboard
 
 const Insights = () =>{
-    const [graphSelector, setGraphSelector] = useState('disbursed')
+    const [graphSelector, setGraphSelector] = useState('attempted')
     const [filter, setFilter] = useState('money');
 
     const [loans, setLoans] = useState(0);
@@ -137,9 +137,9 @@ const Insights = () =>{
                     <p>Insights</p>
                 </div>
                 <div className="loanType">
-                    <span onClick={()=>setGraphSelector('disbursed')} className={graphSelector==="disbursed"?"active":""}>Disbursed</span>
                     <span onClick={()=>setGraphSelector('attempted')} className={graphSelector==="attempted"?"active":""}>Attempted</span>
                     <span onClick={()=>setGraphSelector('approved')} className={graphSelector==="approved"?"active":""}>Approved</span>
+                    <span onClick={()=>setGraphSelector('disbursed')} className={graphSelector==="disbursed"?"active":""}>Disbursed</span>
                 </div>
                 <div className="filters">
                     <div className="btn-group">
@@ -162,7 +162,7 @@ const Insights = () =>{
                         <YAxis dataKey="count" fontSize={12} />
                         <Tooltip cursor={{fill: '#ECEBFF'}} />
                         {/* <Legend /> */}
-                        <Bar dataKey="count" fill="url(#colorUv)" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="count" barSize={20} fill="url(#colorUv)" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
                 </div>
@@ -178,6 +178,7 @@ const Transactions = () =>{
     const [loanType, setLoanType] = useState('all-Loans')
 
     const [loanData, setLoanData] = useState([]);
+    const [max, setmax] = useState(0);
 
     const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
 
@@ -188,6 +189,9 @@ const Transactions = () =>{
                 if(response.data.status === 200){
                     console.log(response);
                     setLoanData(response.data.data);
+                    if(max===0){
+                        setmax(response.data.data.length)
+                    }
                 }
             })
         }else{
@@ -202,7 +206,7 @@ const Transactions = () =>{
     })
     return(
         <section className="transactions">
-            {loanData.length>0 && 
+            {max>0 && 
             <>
                 <div className="loanType">
                     <span onClick={()=>setLoanType('all-Loans')} className={loanType==="all-Loans"?"active":""}>All loans</span>
@@ -215,10 +219,14 @@ const Transactions = () =>{
                 <TrxnCard day={"14"} month={"Apr"} amount={80000} status={"In Approval"} name={"Vikas Gupta"} purpose={"R.C.T"} /> */}
             
                 {trsxns}
+                {loanData.length === 0 &&
+                    <p>No data yet !!</p>
+                }
                     
                 {(loanData.length >= 3) && <div onClick={()=>navigate('/doctor/dashboard/AllTransactions')} className="viewAll">View all</div>}        
             </>
             }
+            
         </section>
     )
 }
