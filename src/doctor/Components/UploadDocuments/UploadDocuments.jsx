@@ -243,7 +243,11 @@ const UploadDocuments = () =>{
         setTimeout(() => {
             console.log((Boolean(panCard) == panCardUploaded) , (Boolean(GSTIN) == GSTINUploaded) , (Boolean(misc) == miscUploaded) )
             if((Boolean(panCard) == panCardUploaded) && (Boolean(GSTIN) == GSTINUploaded) && (Boolean(misc) == miscUploaded) ){
-                navigate('/doctor/ThankYou')
+                axios.get(env.api_Url + "sendUnderReviewMail?doctorId=" + doctorId)
+                .then(response =>{
+                    navigate('/doctor/ThankYou')
+                    console.log(response)
+                })
             }else{
                 // error
                 apiErrorHandler();
