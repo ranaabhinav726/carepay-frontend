@@ -87,7 +87,7 @@ const SideBar = () =>{
     }
 
     function doctorLogout(){
-        localStorage.clear();
+        localStorage.removeItem('doctorId');
         navigate('/doctor');
     }
 
