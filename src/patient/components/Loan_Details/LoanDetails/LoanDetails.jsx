@@ -122,8 +122,7 @@ const LoanDetails = () =>{
             "doctorId": doctorId,
             "loanReason": loanPurpose,
             "loanAmount": loanAmt,
-            "loanEmi" : loanEmi,
-            "formStatus": "KycVerification"
+            "loanEmi" : loanEmi
         };
 
         await axios

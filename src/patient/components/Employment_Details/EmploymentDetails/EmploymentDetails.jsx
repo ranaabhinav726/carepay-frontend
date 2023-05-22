@@ -203,8 +203,7 @@ const EmploymentDetails = () =>{
             "totalJobExpInYears": parseInt(totalExpYear),
             "totalJobExpInMonth": parseInt(totalExpMonth),
             "currentJobExpInYears": parseInt(jobExpYear),
-            "currentJobExpInMonth": parseInt(jobExpMonth),
-            "formStatus": "BankDetails"
+            "currentJobExpInMonth": parseInt(jobExpMonth)
           };
 
         if(IndustryType === "Other"){
