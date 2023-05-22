@@ -95,23 +95,23 @@ const EnterOTP = () =>{
                                 let stage = response?.data?.data;
                                 let path;
                                 switch(stage){
-                                    case "AddressDetails":
+                                    case "Basic":
                                         path = "AddressDetails";
                                         break;
-                                    case "EmploymentDetails":
+                                    case "Address":
                                         path = "EmploymentDetails";
                                         break;
-                                    case "BankDetails":
+                                    case "Occupation":
                                         path = "BankDetails";
                                         break;
-                                    case "IncomeVerification":
+                                    case "AccountDetails":
                                         path = "IncomeVerification";
                                         break;
                                     case "FileUpload":
-                                        path = "FileUpload";
+                                        path = "LoanDetails";
                                         break;
                                     case "bank_statement_uploaded":
-                                        path = "LoanDetails";
+                                        path = "KycVerification";
                                         break;
                                     case "CREATE_CUSTOMER":
                                         path = "KycVerification";
