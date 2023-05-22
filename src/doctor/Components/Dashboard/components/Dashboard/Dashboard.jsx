@@ -1,14 +1,14 @@
 import './dashboard.scss'
 import Logo from '../../assets/Logo-carepay.webp'
 import { RxHamburgerMenu } from 'react-icons/rx'
-import { VscSettings } from 'react-icons/vsc'
+// import { VscSettings } from 'react-icons/vsc'
 import { useEffect, useRef, useState } from 'react'
 import {
     BarChart,
     Bar,
     XAxis,
     YAxis,
-    CartesianGrid,
+    // CartesianGrid,
     Tooltip,
     ResponsiveContainer
   } from "recharts";
@@ -17,7 +17,7 @@ import axios from 'axios'
 import knapsack from '../../assets/knapsack.png'
 import bulb from '../../assets/bulb.png'
 
-import Faq from '../Common/Faq'
+// import Faq from '../Common/Faq'
 import Help from '../Common/Help'
 import Advice from '../Common/Advice'
 import SideBar from './SideBar/SideBar'
