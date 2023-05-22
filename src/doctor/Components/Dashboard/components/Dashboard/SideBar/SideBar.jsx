@@ -1,10 +1,12 @@
 import './sideBar.scss'
 import { RxCross1 } from 'react-icons/rx'
 import { MdMessage, MdContentCopy, MdCheck } from 'react-icons/md'
+import { FiLogOut } from 'react-icons/fi'
 import { BsHeadset, BsChevronRight, BsChevronDown } from 'react-icons/bs'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { env } from '../../../environment'
+import { useNavigate } from 'react-router-dom'
 
 const SideBar = () =>{
     // let initials = "DJ";
@@ -22,6 +24,8 @@ const SideBar = () =>{
     let sidebar = useRef(0);
     // let body = useRef(0);
     const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         overlay.current = document.getElementById('overlay');
@@ -82,6 +86,11 @@ const SideBar = () =>{
         }
     }
 
+    function doctorLogout(){
+        localStorage.clear();
+        navigate('/doctor');
+    }
+
     return(
         <>
         <div id="overlay" onClick={()=>handleSidebar()}>
@@ -96,7 +105,10 @@ const SideBar = () =>{
                     <p className="docName">Dr. {doctorName}</p>
                     <p className="docQualification">{speciality}</p>
                 </div>
-                <BsChevronRight className='arrow' />
+                <div onClick={()=>doctorLogout()} className="doctor-logout">
+                    <FiLogOut />
+                    <span>Logout</span>
+                </div>
             </div>
             <div className="clinicName center">{clinicName} <BsChevronDown /></div>
             <div className="qrCode">
