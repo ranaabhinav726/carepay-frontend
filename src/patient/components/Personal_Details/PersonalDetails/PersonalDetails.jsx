@@ -171,7 +171,8 @@ const PersonalDetails = () =>{
             "dateOfBirth": dob,
             "mobileNumber": number,
             "alternateNumber":altNumber,
-            "userId" : localStorage.getItem('userId')
+            "userId" : localStorage.getItem('userId'),
+            "formStatus": ""
         };
 
         await axios.post(env.api_Url + "userDetails/basicDetail",

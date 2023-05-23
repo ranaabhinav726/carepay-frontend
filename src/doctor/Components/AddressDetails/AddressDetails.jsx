@@ -126,7 +126,8 @@ const DocAddressDetails = () =>{
             "locality": locality,
             "pinCode": pincode,
             "city": city,
-            "state": state
+            "state": state,
+            "formStatus":""
         })
         .then(response =>{
             console.log(response);
@@ -201,7 +202,7 @@ const DocAddressDetails = () =>{
                     value={city}
                     placeholder="Enter name of your city" 
                 />
-                <span className="fieldError">This enter your state</span>
+                <span className="fieldError">Please enter your state</span>
             </div>
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
             <button onClick={()=> onSubmit()} className="submit">Next</button>
