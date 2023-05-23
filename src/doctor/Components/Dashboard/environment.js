@@ -1,5 +1,6 @@
 export const env = {
-    api_Url: "https://backend.carepay.money/"
+    api_Url: "http://3.92.13.36:8075/"
+    // api_Url: "https://backend.carepay.money/"
 }
 
 // export function showWrapper(elem){
