@@ -96,6 +96,26 @@ const VerifyOTP = () =>{
                             apiErrorHandler();
                         }
                     })
+                }else if(!! status){
+                    let path = "/doctor/welcome";
+                    switch(status){
+                        case "PERSONAL":
+                            path = "/doctor/PracticeDetails";
+                            break;
+                        case "PRACTICE":
+                            path = "/doctor/AddressDetails";
+                            break;
+                        case "ADDRESS":
+                            path = "/doctor/BankDetails";
+                            break;
+                        case "BANK":
+                            path = "/doctor/UploadDocuments";
+                            break;
+                        case "DOCUMENTS":
+                            path = "/doctor/ThankYou";
+                            break;
+                    }
+                    navigate(path);
                 }else{
                     apiErrorHandler();
                 }
