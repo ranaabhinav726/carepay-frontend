@@ -171,7 +171,8 @@ const AddressDetails = () =>{
             "landmark" : landmark,
             "pincode": pincode,
             "state": state,
-            "city": city
+            "city": city,
+            "formStatus":""
         };
 
         // if(!!landmark){
