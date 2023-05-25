@@ -13,6 +13,7 @@ const DocHomepage = () =>{
     let URLparts = URL.split('/');
     // http://3.92.13.36:3003/doctor/Verma/SC0002/
     let scoutName = URLparts[4]
+    scoutName = scoutName.split('_').join(' ');
     let scoutCode = URLparts[5]
 
     if(!! scoutName) localStorage.setItem("scoutName", scoutName);
