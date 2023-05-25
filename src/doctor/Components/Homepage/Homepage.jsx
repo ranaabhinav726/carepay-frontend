@@ -8,6 +8,18 @@ import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../environment'
 import axios from 'axios'
 
 const DocHomepage = () =>{
+
+    let URL = window.location.href;
+    let URLparts = URL.split('/');
+    // http://3.92.13.36:3003/doctor/Verma/SC0002/
+    let scoutName = URLparts[4]
+    let scoutCode = URLparts[5]
+
+    if(!! scoutName) localStorage.setItem("scoutName", scoutName);
+    if(!! scoutCode) localStorage.setItem("scoutCode", scoutCode);
+
+    console.log(scoutName, scoutCode, "v1.1");
+
     const navigate = useNavigate();
 
     const [number, setNumber] = useState('')
