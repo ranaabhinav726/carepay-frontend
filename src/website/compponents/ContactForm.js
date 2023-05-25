@@ -9,6 +9,7 @@ import {
 
 } from "@mui/icons-material";
 import PhoneIcon from '@mui/icons-material/Phone';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 
 
 const ContactForm = () => {
@@ -42,6 +43,12 @@ const ContactForm = () => {
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <PhoneIcon sx={{ color: "#313896", mr: 1, my: 0.5 }} />
         <TextField id="input-with-sx" label="Phone Number" variant="standard" InputLabelProps={{
+            style: { color: '#313896' },
+          }} />
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <EditNoteOutlinedIcon sx={{ color: "#313896", mr: 1, my: 0.5 }} />
+        <TextField id="input-with-sx" label="Your query" variant="standard" InputLabelProps={{
             style: { color: '#313896' },
           }} />
       </Box>
