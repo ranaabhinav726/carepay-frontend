@@ -38,6 +38,8 @@ const DocPersonalDetails = () =>{
     const [id, setId] = useState("");
     const[doctorId, setDoctorId] = useState('');
 
+    const [scoutList, setScoutList] = useState([]);
+
     let ref = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
@@ -90,6 +92,20 @@ const DocPersonalDetails = () =>{
             navigate('/doctor/')
         }
     },[phoneNumber]);
+
+    useEffect(()=>{
+        axios.get(env.api_Url + "getAllScoutCodes")
+        .then(response => {
+            console.log(response);
+            if(response.data.status === 200){
+                setScoutList(response.data.data);
+            }
+        })
+    })
+
+    let scoutOptions = scoutList.map((scout, idx)=>{
+        return <option className="scout-option" key={idx} value={scout.code}>{scout.code}</option>
+    })
 
     //////////////////////////////// DOB restriction ///////////////////////////////////////
     ////// Below code is to calculate the maximum date the user can input as DOB.///////////
@@ -335,12 +351,14 @@ const DocPersonalDetails = () =>{
             </div>
             <div className="inputGroup">
                 <p className='group-title'>Scout code (optional)</p>
-                <input 
+                <select 
                     className="group-input"
                     value={scoutCode}
                     onChange={(e) => setScoutCode(e.target.value)}
                     placeholder="Enter referral code here"
-                />
+                >
+                    {scoutOptions}
+                </select>
             </div>
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
             <button onClick={()=>submit()} className="submit">Next</button>
