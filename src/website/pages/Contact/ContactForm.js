@@ -2,6 +2,9 @@ import React, { useState } from "react";
 
 //material ui
 import { TextField, Typography, Grid, Button } from "@mui/material";
+import { env } from "../../../patient/environment/environment";
+
+import axios from "axios";
 
 const inputStyle = {
   "& .MuiInputBase-root": {
@@ -25,12 +28,42 @@ const ContactForm = () => {
     clinicName: "",
   });
 
+  const [submitted, setSubmitted] = useState(false);
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  let submitObj = {
+    "firstName": values.firstName,
+    "lastName": values.lastName,
+    "emailId": values.email,
+    "phoneNumber": values.number,
+    "city": values.city,
+    "specialization": values.specialization,
+    "clinicName": values.clinicName
+  }
+
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+
+    axios.post(env.api_Url + "saveOrUpdateContactUsDetail", submitObj)
+    .then(response => {
+      console.log(response);
+      if(response.data.status === 200){
+        setSubmitted(true);
+
+        setValues({
+          firstName: "",
+          lastName: "",
+          email: "",
+          number: "",
+          city: "",
+          specialization: "",
+          clinicName: "",
+        });
+      }
+    })
     console.log(values);
   };
 
@@ -150,7 +183,7 @@ const ContactForm = () => {
       </Grid>
       <Grid item xs={12} sx={{ textAlign: "center" }}>
         <Button
-          onClick={handleSubmit}
+          onClick={(e)=>handleSubmit(e)}
           variant="contained"
           sx={{
             bgcolor: "#EA6B0C",
@@ -160,7 +193,7 @@ const ContactForm = () => {
             mt: 3,
           }}
         >
-          Request a Callback
+          {submitted?"Submitted" : "Request a Call"}
         </Button>
       </Grid>
     </Grid>
