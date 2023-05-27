@@ -115,7 +115,7 @@ const LoanDetails = () =>{
 
         localStorage.setItem("loanAmt", loanAmt);
 
-        let loanEmi = (EMIOption == true ? "3" : "6");
+        let loanEmi = (EMIOption === true ? "3" : "6");
         let submitObj = {
             "userId" : userId,
             "doctorName": doctorName,
