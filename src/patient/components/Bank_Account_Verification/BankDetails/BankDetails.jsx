@@ -46,6 +46,8 @@ const BankDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
+    const [focus, setFocus] = useState(false);
+
     // useEffect(()=>{
     //     axios.post(env.api_Url + "update_user_stage", {
     //             "onboarding_stage": "BankDetails"
@@ -133,7 +135,7 @@ const BankDetails = () =>{
             setTimeout(() => {
                 let err = document.getElementById('error');
                 if(err) err.style.display = "none";
-            }, 1500);
+            }, 3000);
             return;
         }
 
@@ -191,10 +193,11 @@ const BankDetails = () =>{
         <div className="accountName">
             <p>Account number</p>
             <input 
-                type="number"
+                type={focus ? "number" : "password"}
                 id="accountNumber"
                 value={accountNumber ?? ""}
                 onChange={(e)=>setAccountNumber(e.target.value)}
+                onFocus={()=>setFocus(true)}
                 placeholder="Enter account number here" 
             />
             <span className="fieldError">This field can't be empty.</span>
@@ -202,10 +205,12 @@ const BankDetails = () =>{
         <div className="confirmAccountName">
             <p>Confirm account number</p>
             <input 
-                type="number" 
+                type={focus ? "password" : "number"}
                 id="confirmAccountNumber"
                 value={confirmAccountNumber ?? ""}
                 onChange={(e)=> setConfirmAccountNumber(e.target.value)}
+                onFocus={()=>setFocus(false)}
+                
                 placeholder="Re-enter account number here" 
             />
             <span className="fieldError">This field can't be empty.</span>
