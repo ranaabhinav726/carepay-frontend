@@ -7,6 +7,7 @@ const Progressbar = ({progress = "40", data="1", height = "12px", display}) => {
         borderRadius: 40,
         display:display,
         marginTop: 10,
+        padding:0
       }
       
       const Childdiv = {
