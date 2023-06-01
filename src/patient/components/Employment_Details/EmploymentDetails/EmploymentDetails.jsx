@@ -266,6 +266,19 @@ const EmploymentDetails = () =>{
     for(let i=1; i<32; i++){
         dates.push(<option value={i} key={i}>{i}</option>)
     }
+
+    let expYears=[];
+    for(let i=0; i<=20; i++){
+        if(i==20){
+            expYears.push(<option value={i} key={i}>{i}+</option>)
+        }else{
+            expYears.push(<option value={i} key={i}>{i}</option>)
+        }
+    }
+    let expMonths=[];
+    for(let i=0; i<=11; i++){
+        expMonths.push(<option value={i} key={i}>{i}</option>)
+    }
    return(
 
     <>
@@ -391,17 +404,31 @@ const EmploymentDetails = () =>{
         <div className="timeInJob">
             <p>Time in this job</p>
             <div className="inputGroup">
-                <input 
+                <select name=""
+                    id=""
+                    value={jobExpYear ?? 0}
+                    onChange={(e)=>setJobExpYear(parseInt(e.target.value))}
+                >
+                    {expYears}
+                </select>
+                {/* <input 
                     type="number" 
                     value={jobExpYear ?? 0}
                     onChange={(e)=>setJobExpYear(parseInt(e.target.value))}
-                    placeholder="-" />
+                    placeholder="-" /> */}
                 <p>Years</p>
-                <input 
+                {/* <input 
                     type="number" 
                     value={jobExpMonth ?? 0}
                     onChange={(e)=>setJobExpMonth(parseInt(e.target.value))}
-                    placeholder="-" />
+                    placeholder="-" /> */}
+                <select name=""
+                    id=""
+                    value={jobExpMonth ?? 0}
+                    onChange={(e)=>setJobExpMonth(parseInt(e.target.value))}
+                >
+                    {expMonths}
+                </select>
                 <p>Months</p>
             </div>
         </div>
@@ -409,17 +436,31 @@ const EmploymentDetails = () =>{
         <div className="totalExp">
             <p>Total professional work experience</p>
             <div className="inputGroup">
-                <input 
+                <select name=""
+                    id=""
+                    value={totalExpYear ?? 0}
+                    onChange={(e)=>setTotalExpYear(parseInt(e.target.value))}
+                >
+                    {expYears}
+                </select>
+                {/* <input 
                     type="number" 
                     value={totalExpYear ?? 0}
                     onChange={(e)=>setTotalExpYear(parseInt(e.target.value))} 
-                    placeholder="-" />
+                    placeholder="-" /> */}
                 <p>Years</p>
-                <input 
+                {/* <input 
                     type="number" 
                     value={totalExpMonth ?? 0}
                     onChange={(e)=>setTotalExpMonth(parseInt(e.target.value))}
-                    placeholder="-" />
+                    placeholder="-" /> */}
+                <select name=""
+                    id=""
+                    value={totalExpMonth ?? 0}
+                    onChange={(e)=>setTotalExpMonth(parseInt(e.target.value))}
+                >
+                    {expMonths}
+                </select>
                 <p>Months</p>
             </div>
             <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
