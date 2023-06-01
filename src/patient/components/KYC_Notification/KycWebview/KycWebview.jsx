@@ -1,9 +1,6 @@
 import './kycWebview.scss'
 import Header from '../../Header/Header'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import axios from 'axios'
-import { env } from '../../../environment/environment'
 
 import underProcess from '../../../assets/underProcess.png'
 
@@ -34,8 +31,8 @@ const KycWebview = () =>{
 
     return(
         <>
-            <Header progressbarDisplay="block" progress="96" canGoBack='/patient/KycVerification' />
             <main className='kycWebview'>
+            <Header progressbarDisplay="block" progress="96" canGoBack='/patient/KycVerification' />
                 <img src={underProcess} alt="" />
                 <h3>Under Process</h3>
                 <p className="text">Your KYC documents are being reviewed.</p>
