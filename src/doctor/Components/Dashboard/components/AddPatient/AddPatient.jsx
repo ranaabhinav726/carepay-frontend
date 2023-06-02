@@ -16,6 +16,8 @@ const AddPatient = () =>{
     const [purpose, setPurpose] = useState('');
     const [loanAmount, setLoanAmount] = useState('');
 
+    const [tenure, setTenure] = useState(3);
+
     const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
     // useEffect(()=>{
     //     if(doctorId){
@@ -90,7 +92,8 @@ const AddPatient = () =>{
             "emailId" : email,
             "doctorId" : doctorId,
             "loanAmount" : loanAmount,
-            "purposeOfLoan" : purpose
+            "purposeOfLoan" : purpose,
+            "loanEmi": tenure
         }
 
         axios.post(env.api_Url + "addLead", submitObj)
@@ -187,6 +190,14 @@ const AddPatient = () =>{
                     onChange={(e)=>setLoanAmount(e.target.value)} 
                 />
                 <span className="fieldError">This field can't be empty.</span>
+            </div>
+
+            <div className="inputGroup">
+                <p className="group-title">Loan amount</p>
+                <select value={tenure ?? ""} onChange={(e)=>setTenure(e.target.value)}>
+                    <option value="3">3 months</option>
+                    <option value="6">6 months</option>
+                </select>
             </div>
 
             <p id="successMsg">Patient added successfully</p>
