@@ -1,7 +1,7 @@
 import './addPatient.scss'
 import { useNavigate } from 'react-router-dom'
 import { BsArrowLeft } from 'react-icons/bs'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import axios from 'axios';
 import { env, showErrorOnUI } from '../../environment';
@@ -12,30 +12,30 @@ const AddPatient = () =>{
     const [patientName, setPatientName] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const [email, setEmail] = useState('');
-    const [clinicName, setClinicName] = useState('');
+    // const [clinicName, setClinicName] = useState('');
     const [purpose, setPurpose] = useState('');
     const [loanAmount, setLoanAmount] = useState('');
 
     const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
-    useEffect(()=>{
-        if(doctorId){
-            async function getCall(){
-                await axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
-                .then((response)=>{
-                    console.log(response)
-                    if(response.data.data != null){
-                        let clinicName = response?.data?.data?.clinicName;
-                        setClinicName(clinicName);
-                    }
-                }).catch((error)=>{
-                    console.log(error)
-                })
-            }
-            getCall();
-        }else{
-            navigate('/doctor/')
-        }
-    },[doctorId])
+    // useEffect(()=>{
+    //     if(doctorId){
+    //         async function getCall(){
+    //             await axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
+    //             .then((response)=>{
+    //                 console.log(response)
+    //                 if(response.data.data != null){
+    //                     let clinicName = response?.data?.data?.clinicName;
+    //                     setClinicName(clinicName);
+    //                 }
+    //             }).catch((error)=>{
+    //                 console.log(error)
+    //             })
+    //         }
+    //         getCall();
+    //     }else{
+    //         navigate('/doctor/')
+    //     }
+    // },[doctorId])
 
     function handleSubmit(){
         if(! patientName){
@@ -56,11 +56,11 @@ const AddPatient = () =>{
             return;
         }
 
-        if(! clinicName){
-            let elem = document.getElementById('clinicName');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(! clinicName){
+        //     let elem = document.getElementById('clinicName');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
         if(! purpose){
             let elem = document.getElementById('purpose');
@@ -74,7 +74,7 @@ const AddPatient = () =>{
             return;
         }
 
-    //     private String firstName;
+    // private String firstName;
     // private String phoneNumber;
     // private String emailId;
     // private String doctorId;
@@ -152,7 +152,7 @@ const AddPatient = () =>{
                 />
                 <span className="fieldError">This field can't be empty.</span>
             </div>
-            <div className="inputGroup">
+            {/* <div className="inputGroup">
                 <p className="group-title">Clinic name</p>
                 <input 
                     id='clinicName'
@@ -163,7 +163,7 @@ const AddPatient = () =>{
                     onChange={(e)=>setClinicName(e.target.value)} 
                 />
                 <span className="fieldError">This field can't be empty.</span>
-            </div>
+            </div> */}
             <div className="inputGroup">
                 <p className="group-title">Purpose of loan</p>
                 <input 
