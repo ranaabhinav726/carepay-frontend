@@ -32,7 +32,7 @@ const EnterOTP = () =>{
 
     function handleOTP(e){
         const {keyCode} = e;
-        if(keyCode!=8 && keyCode < 48 || keyCode > 57){
+        if((keyCode!=8) && (keyCode < 48) || (keyCode > 57)){
             e.target.value = "";
             return
         }
@@ -104,13 +104,13 @@ const EnterOTP = () =>{
                                     case "Occupation":
                                         path = "BankDetails";
                                         break;
-                                    case "AccountDetails":
+                                    case "BankDetails":
                                         path = "IncomeVerification";
                                         break;
-                                    case "FileUpload":
+                                    case "BankStatement":
                                         path = "LoanDetails";
                                         break;
-                                    case "bank_statement_uploaded":
+                                    case "LoanDetails":
                                         path = "KycVerification";
                                         break;
                                     case "CREATE_CUSTOMER":
