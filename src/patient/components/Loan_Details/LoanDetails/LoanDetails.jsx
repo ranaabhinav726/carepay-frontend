@@ -122,7 +122,7 @@ const LoanDetails = () =>{
             "doctorId": doctorId,
             "loanReason": loanPurpose,
             "loanAmount": loanAmt,
-            "loanEmi" : loanEmi,
+            "loanEMI" : loanEmi,
             "formStatus": ""
         };
 
@@ -130,7 +130,7 @@ const LoanDetails = () =>{
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(async(response) => {
                 console.log(response)
-                if(response.data.status == 200){
+                if(response.data.status === 200){
                     // await handleNavigation();
                     navigate('/patient/KycVerification');
                 }else{
