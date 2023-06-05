@@ -193,7 +193,7 @@ const AddPatient = () =>{
             </div>
 
             <div className="inputGroup">
-                <p className="group-title">Loan amount</p>
+                <p className="group-title">Tenure</p>
                 <select value={tenure ?? ""} onChange={(e)=>setTenure(e.target.value)}>
                     <option value="3">3 months</option>
                     <option value="6">6 months</option>
