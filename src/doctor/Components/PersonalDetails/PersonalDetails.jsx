@@ -101,7 +101,7 @@ const DocPersonalDetails = () =>{
                 setScoutList(response.data.data);
             }
         })
-    })
+    }, [])
 
     let scoutOptions = scoutList.map((scout, idx)=>{
         return <option className="scout-option" key={idx} value={scout.code}>{scout.code}</option>
