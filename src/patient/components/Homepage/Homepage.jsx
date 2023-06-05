@@ -14,12 +14,12 @@ const Homepage = () =>{
     let cityCode = URLparts[4]
     let clinicName = URLparts[5]
     let doctorName = URLparts[6]
-    let doctorID = URLparts[7]
+    let doctorId = URLparts[7]
     if(!!cityCode) localStorage.setItem("cityCode", cityCode);
     if(!!clinicName) localStorage.setItem("clinicName", clinicName);
     if(!!doctorName) localStorage.setItem("doctorName", doctorName);
-    if(!!doctorID) localStorage.setItem("doctorId", doctorID);
-    console.log(cityCode, clinicName, doctorName, doctorID, " |_|");
+    if(!!doctorId) localStorage.setItem("doctorId", doctorId);
+    console.log(cityCode, clinicName, doctorName, doctorId, " |_|");
 
     // const data = useContext(DataContext);
 
