@@ -88,8 +88,6 @@ const DocPersonalDetails = () =>{
                 hideWrapper(ref.current)
             };
             getCall();
-        }else{
-            navigate('/doctor/')
         }
     },[phoneNumber]);
 

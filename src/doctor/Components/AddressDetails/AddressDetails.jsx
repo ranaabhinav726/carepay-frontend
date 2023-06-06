@@ -53,8 +53,6 @@ const DocAddressDetails = () =>{
                 hideWrapper(ref.current)
             }
             getCall();
-        }else{
-            navigate('/doctor/')
         }
     },[doctorId])
 

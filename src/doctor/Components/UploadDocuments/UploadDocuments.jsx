@@ -59,8 +59,6 @@ const UploadDocuments = () =>{
                 hideWrapper(ref.current)
             }
             getCall();
-        }else{
-            navigate('/doctor/')
         }
     }, [doctorId])
 

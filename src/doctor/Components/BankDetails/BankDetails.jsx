@@ -61,8 +61,6 @@ const DocBankDetails = () =>{
                 hideWrapper(ref.current)
             }
             getCall();
-        }else{
-            navigate('/doctor/')
         }
     },[doctorId])
 

@@ -75,8 +75,6 @@ const PracticeDetails = () =>{
                 hideWrapper(ref.current)
             }
             getCall();
-        }else{
-            navigate('/doctor/')
         }
     },[doctorId])
 
