@@ -1,8 +1,8 @@
 
-
+console.log(process.env.REACT_APP_BACKEND);
 export const env = {
     // api_Url: "http://3.92.13.36:8075/"
-    api_Url: process.env.BACKEND
+    api_Url: process.env.REACT_APP_BACKEND
     // api_Url: "https://backend.carepay.money/"
 }
 
