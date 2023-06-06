@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom';
 
 const ThankYou = () =>{
 
-    const [email, setEmail] = useState(localStorage.getItem('emailId'));
-    const [doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
-    const [phoneNo, setPhoneNo] = useState(localStorage.getItem('phoneNumber'));
+    const [email, setEmail] = useState(localStorage.getItem('D-emailId'));
+    const [doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
+    const [phoneNo, setPhoneNo] = useState(localStorage.getItem('D-phoneNumber'));
 
     const navigate = useNavigate();
 

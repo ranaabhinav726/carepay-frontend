@@ -31,7 +31,7 @@ const DocHomepage = () =>{
     const [canSubmit, setCanSubmit] = useState(true);
 
 
-    const [doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const [doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     let ref = useRef(0);
     useEffect(()=>{
@@ -82,7 +82,7 @@ const DocHomepage = () =>{
     }
 
     useEffect(()=>{
-        let phoneNumber = localStorage.getItem('phoneNumber');
+        let phoneNumber = localStorage.getItem('D-phoneNumber');
         if(phoneNumber){
             numberChange(phoneNumber);
         }
@@ -101,7 +101,7 @@ const DocHomepage = () =>{
         setCanSubmit(false);
         showWrapper(ref.current)
 
-        localStorage.setItem('phoneNumber', number)
+        localStorage.setItem('D-phoneNumber', number)
         console.log("called")
         await axios.get(env.api_Url + "sendOtp?phoneNumber=" + number)
         .then((response) => {

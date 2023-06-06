@@ -21,13 +21,13 @@ const PracticeDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     // let doctorId = 
 
     let ref = useRef(0);
     useEffect(()=>{
-        setDoctorId(localStorage.getItem('doctorId'));
+        setDoctorId(localStorage.getItem('D-doctorId'));
         ref.current = document.getElementById('animation-wrapper');
     },[])
 

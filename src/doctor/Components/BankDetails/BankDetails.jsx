@@ -23,7 +23,7 @@ const DocBankDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     let ref = useRef(0);
     useEffect(()=>{

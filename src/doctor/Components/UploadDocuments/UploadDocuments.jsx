@@ -14,7 +14,7 @@ const UploadDocuments = () =>{
         headers: { "Content-Type": "multipart/form-data" }
     };
 
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     const [panCard, setPanCard] = useState("");
     const [GSTIN, setGSTIN] = useState("");

@@ -12,7 +12,7 @@ const AllTransactions = () =>{
     const navigate = useNavigate();
 
     const [loanData, setLoanData] = useState([]);
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     useEffect(()=>{
         if(doctorId){

@@ -18,7 +18,7 @@ const AddPatient = () =>{
 
     const [tenure, setTenure] = useState(3);
 
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
     // useEffect(()=>{
     //     if(doctorId){
     //         async function getCall(){

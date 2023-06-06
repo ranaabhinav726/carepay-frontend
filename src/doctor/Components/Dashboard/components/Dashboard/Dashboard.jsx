@@ -76,7 +76,7 @@ const Insights = () =>{
     const [loans, setLoans] = useState(0);
     const [earnings, setEarnings] = useState(0);
 
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -180,7 +180,7 @@ const Transactions = () =>{
     const [loanData, setLoanData] = useState([]);
     const [max, setmax] = useState(0);
 
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     useEffect(()=>{
         if(doctorId){

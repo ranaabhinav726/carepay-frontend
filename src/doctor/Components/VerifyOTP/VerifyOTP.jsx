@@ -18,7 +18,7 @@ const VerifyOTP = () =>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
 
-    let phoneNumber = localStorage.getItem('phoneNumber')
+    let phoneNumber = localStorage.getItem('D-phoneNumber')
     // const [counter, setCounter] = useState(60);
     // useEffect(() => {
     //     const timer =
@@ -90,7 +90,7 @@ const VerifyOTP = () =>{
                         console.log(response)
                         if(response.data.data != null){
                             // setId(response?.data?.data?.id);
-                            localStorage.setItem("doctorId", response?.data?.data?.doctorId);
+                            localStorage.setItem("D-doctorId", response?.data?.data?.doctorId);
                             navigate('/doctor/dashboard')
                         }else{
                             apiErrorHandler();

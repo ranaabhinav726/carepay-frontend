@@ -23,7 +23,7 @@ const SideBar = () =>{
     let overlay = useRef(0);
     let sidebar = useRef(0);
     // let body = useRef(0);
-    const[doctorId, setDoctorId] = useState(localStorage.getItem('doctorId'));
+    const[doctorId, setDoctorId] = useState(localStorage.getItem('D-doctorId'));
 
     const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ const SideBar = () =>{
     }
 
     function doctorLogout(){
-        localStorage.removeItem('doctorId');
+        localStorage.removeItem('D-doctorId');
         navigate('/doctor');
     }
 

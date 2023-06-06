@@ -12,7 +12,7 @@ const DocPersonalDetails = () =>{
     const navigate = useNavigate();
 
     // let phoneNumber = ;
-    const [phoneNumber, setPhoneNumber] = useState(localStorage.getItem('phoneNumber'))
+    const [phoneNumber, setPhoneNumber] = useState(localStorage.getItem('D-phoneNumber'))
 
     const [number, setNumber] = useState('');
     const [isNumValid, setNumValid] = useState(false);
@@ -57,7 +57,7 @@ const DocPersonalDetails = () =>{
                     console.log(response)
                     if(response.data.data != null){
                         setId(response?.data?.data?.id);
-                        localStorage.setItem("doctorId", response?.data?.data?.doctorId);
+                        localStorage.setItem("D-doctorId", response?.data?.data?.doctorId);
                         let doctorId = response?.data?.data?.doctorId;
                         setDoctorId(doctorId);
                         let birthdate = response?.data?.data?.dob.split(" ")[0];
@@ -226,7 +226,7 @@ const DocPersonalDetails = () =>{
         setCanSubmit(false);
         showWrapper(ref.current)
 
-        localStorage.setItem("email", email);
+        localStorage.setItem("D-email", email);
 
         let birthdate = dob;
         birthdate = birthdate.split("-").reverse().join("-");
@@ -261,8 +261,8 @@ const DocPersonalDetails = () =>{
             // console.log(birthdate, panNumber)
             console.log(response)
             if(response.data.status == 200){
-                localStorage.setItem("doctorId", response.data.data.doctorId)
-                localStorage.setItem("emailId", response.data.data.emailId)
+                localStorage.setItem("D-doctorId", response.data.data.doctorId)
+                localStorage.setItem("D-emailId", response.data.data.emailId)
                 navigate('/doctor/PracticeDetails')
             }else{
                 apiErrorHandler();
