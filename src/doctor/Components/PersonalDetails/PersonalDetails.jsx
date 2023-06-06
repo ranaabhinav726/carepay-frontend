@@ -282,7 +282,7 @@ const DocPersonalDetails = () =>{
     return(
         <>
         <main id="personalDetails">
-        <Header progressbarDisplay="block" progress={40} canGoBack />
+        <Header progressbarDisplay="block" progress={40} />
             <p className="heading">Personal details</p>
 
             <div className="inputGroup">

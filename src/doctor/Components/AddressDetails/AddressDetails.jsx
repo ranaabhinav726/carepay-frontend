@@ -151,7 +151,7 @@ const DocAddressDetails = () =>{
     return(
         <>
         <main id="addressDetails">
-        <Header progressbarDisplay="block" progress={80} canGoBack />
+        <Header progressbarDisplay="block" progress={80} canGoBack={"/doctor/PracticeDetails"} />
             <p className="heading">Address</p>
 
             <div className="inputGroup">

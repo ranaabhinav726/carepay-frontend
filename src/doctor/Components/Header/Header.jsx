@@ -7,7 +7,7 @@ import './header.scss'
 import ProgressBar from "./Progressbar";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({progressbarDisplay, progress, canGoBack}) => {
+const Header = ({progressbarDisplay, progress, canGoBack="0"}) => {
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -17,7 +17,7 @@ const Header = ({progressbarDisplay, progress, canGoBack}) => {
      <header className='doctor'>
       <img className="header--logo" src={Logo}></img>
       <div className="lower">
-        {canGoBack && <BiArrowBack onClick={()=>navigate(-1)} className="back" />}
+        {canGoBack!=="0" && <BiArrowBack onClick={()=>navigate(canGoBack)} className="back" />}
         <ProgressBar display={progressbarDisplay} progress={progress} />
       </div>
      </header>

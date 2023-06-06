@@ -266,7 +266,7 @@ const UploadDocuments = () =>{
     return(
         <>
         <main id="uploadDocuments">
-        <Header progressbarDisplay="block" progress={95} canGoBack />
+        <Header progressbarDisplay="block" progress={95} canGoBack={"/doctor/BankDetails"} />
             <p className="heading">Upload documents</p>
 
             <div className="inputGroup">

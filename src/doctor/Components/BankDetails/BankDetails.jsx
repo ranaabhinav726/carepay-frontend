@@ -189,7 +189,7 @@ const DocBankDetails = () =>{
     return(
         <>
         <main id="bankDetails">
-        <Header progressbarDisplay="block" progress={95} canGoBack />
+        <Header progressbarDisplay="block" progress={95} canGoBack={"/doctor/AddressDetails"} />
             <p className="heading">Bank details</p>
 
             <div className="inputGroup">
