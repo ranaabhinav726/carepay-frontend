@@ -200,7 +200,7 @@ const DocAddressDetails = () =>{
                     value={city}
                     placeholder="Enter name of your city" 
                 />
-                <span className="fieldError">Please enter your state</span>
+                <span className="fieldError">Please enter your city</span>
             </div>
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
             <button onClick={()=> onSubmit()} className="submit">Next</button>
