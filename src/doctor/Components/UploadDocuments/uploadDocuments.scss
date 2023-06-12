@@ -16,7 +16,7 @@ main{
             align-items: center;
             justify-content: center;
     
-            margin-bottom: 6px;
+            margin-bottom: 20px;
             cursor: pointer;
     
             border-radius: 4px;
@@ -43,6 +43,7 @@ main{
 
     div.termsAndConditions{
         display: flex;
+        align-items: center;
         padding: 10px 10px 10px 2px;
         border-radius: 5px;
 
@@ -60,6 +61,7 @@ main{
         }
 
         p{
+            margin: 0;
             a.termsAndCond{
                 font-weight: 600;
                 color: black;
