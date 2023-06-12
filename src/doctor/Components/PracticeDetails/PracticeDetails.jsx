@@ -46,7 +46,7 @@ const PracticeDetails = () =>{
                 showWrapper(ref.current);
                 await axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
                 .then((response)=>{
-                    console.log(response)
+                    // console.log(response)
                     if(response.data.data != null){
                         setId(response?.data?.data?.id);
                         let license = response?.data?.data?.licenceNumber;
@@ -80,8 +80,8 @@ const PracticeDetails = () =>{
 
     
 
-    let branchOptions = branches.map((branch) =>{
-        return <option value={branch}>{branch}</option>
+    let branchOptions = branches.map((branch, idx) =>{
+        return <option value={branch} key={idx}>{branch}</option>
     })
 
     // function showErrorOnUI(elem){

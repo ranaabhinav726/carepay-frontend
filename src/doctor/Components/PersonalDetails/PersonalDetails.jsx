@@ -257,7 +257,7 @@ const DocPersonalDetails = () =>{
         // console.log(birthdate)
         await axios.post(env.api_Url + "saveOrUpdateDoctorDetails", submitObj ).then((response) => {
             // console.log(birthdate, panNumber)
-            console.log(response)
+            // console.log(response)
             if(response.data.status == 200){
                 localStorage.setItem("D-doctorId", response.data.data.doctorId)
                 localStorage.setItem("D-emailId", response.data.data.emailId)
