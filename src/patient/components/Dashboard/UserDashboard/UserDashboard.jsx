@@ -44,12 +44,9 @@ const UserDashboard = () =>{
             if(response.data.status == "200"){
                 let data = response.data.data.firstName;
                 setUsername(data)
-            }else{
-                navigate(-1)
             }
         }).catch(error => {
             console.log(error);
-            navigate(-1)
         });
 })
     useEffect(()=>{

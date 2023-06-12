@@ -127,7 +127,7 @@ const DocHomepage = () =>{
     return(
         <main id='homepage'>
             <div id="head"><img id='logo' src={Logo} alt="Carepay's Logo" /></div>
-            <h1 className='clr-purple'>Grow your revenue<br/>& patient retention</h1>
+            <h1 className='clr-purple'>Grow Your Revenue<br/>& Patient Retention</h1>
             <img id='hero' src={HeroImage} alt="Main banner" />
 
             <div className="number">

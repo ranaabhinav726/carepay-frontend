@@ -39,7 +39,7 @@ const KycVerifying = ({data = "Verifying KYC documents..."}) =>{
                 }
             }).catch(error => {
                     console.log(error);
-            });
+        });
     }
 
     useEffect(()=>{

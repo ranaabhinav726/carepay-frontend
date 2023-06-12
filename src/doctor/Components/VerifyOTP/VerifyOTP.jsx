@@ -153,7 +153,7 @@ const VerifyOTP = () =>{
                 <input className="otpDigit" id="digit-4" onKeyUp={handleOTP} type="number" inputMode="numeric" placeholder="-" />
             </div>
             <p id="error">Please enter correct OTP</p>
-            <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
+            <p className={apiError?"apiError": "apiError hide"}>Incorrect OTP, please check.</p>
             <button onClick={()=> login()} className="submit">Submit</button>
             {/* <div id="timer">00:{counter}</div> */}
         </div>

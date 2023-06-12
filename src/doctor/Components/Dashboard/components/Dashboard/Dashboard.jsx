@@ -15,6 +15,7 @@ import {
 
 import axios from 'axios'
 import knapsack from '../../assets/knapsack.png'
+import book from '../../assets/book.png'
 import bulb from '../../assets/bulb.png'
 
 // import Faq from '../Common/Faq'
@@ -92,8 +93,6 @@ const Insights = () =>{
             }).catch(error =>{
                 console.log(error)
             })
-        }else{
-            navigate('/doctor/')
         }
     }, [doctorId])
     
@@ -109,8 +108,6 @@ const Insights = () =>{
             }).catch(error =>{
                console.log(error);
             })
-        }else{
-            navigate('/doctor/')
         }
     }, [filter, graphSelector, doctorId])
 
@@ -122,11 +119,11 @@ const Insights = () =>{
                 </div>
                 <div className="insights-card">
                     <div className="loans">
-                        <p className="value">{loans!=0? loans : "No data yet"}</p>
+                        <p className="value">{loans!=0? loans : "--"}</p>
                         <p className="title">Loans</p>
                     </div>
                     <div className="earning">
-                        <p className={earnings!=0? "rupee value" : "value"}>{earnings!=0? earnings : "No data yet"}</p>
+                        <p className={earnings!=0? "rupee value" : "value"}>{earnings!=0? earnings : "--"}</p>
                         <p className="title">Earnings</p>
                     </div>
                 </div>
@@ -194,8 +191,6 @@ const Transactions = () =>{
                     }
                 }
             })
-        }else{
-            navigate('/doctor/')
         }
     }, [loanType, doctorId])
 
@@ -206,6 +201,10 @@ const Transactions = () =>{
     })
     return(
         <section className="transactions">
+            <div className="section-heading">
+                    <img src={book} alt="" />
+                    <p>All transactions</p>
+                </div>
             {max>0 && 
             <>
                 <div className="loanType">

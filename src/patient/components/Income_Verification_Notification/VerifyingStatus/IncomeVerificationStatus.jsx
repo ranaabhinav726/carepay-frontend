@@ -108,21 +108,21 @@ const IncomeVerificationStatus = ({data = "Verifying bank account statement..."}
         .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=bank_statement_verified", {},)
         .then((response) => {
             console.log(response)
-            if(response.data.status == "200"){
+            if(response.data.status === 200){
                 let loanStatus = response.data.data;
                 console.log(loanStatus)
-                if(loanStatus == "APPROVED" || loanStatus == "VERIFIED"){
+                if(loanStatus === "APPROVED" || loanStatus === "VERIFIED"){
                     navigate('/patient/BankDetailsUnderProcess');
                 }else if(typeof(loanStatus) === 'object'){ ////////// no. of emi reduction prompt
                     navigate('/patient/NewTenureConfirmation'); ////// ///new screen of EMI confirmation
                 }else{
                     navigate(-1);
                 }
-            }else if(response.data.status == "500"){
+            }else if(response.data.status === 500){
                 let loanStatus = response.data.data;
-                if(loanStatus == "REJECTED"){
+                if(loanStatus === "REJECTED"){
                     navigate('/patient/ApprovedLoanLimitNeg')
-                }else if(loanStatus == "can_apply_for_loan value is false"){
+                }else if(loanStatus === "can_apply_for_loan value is false"){
                     navigate(-1);
                 }else{
                     navigate(-1)
