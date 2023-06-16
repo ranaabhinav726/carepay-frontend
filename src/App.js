@@ -83,6 +83,8 @@ import Dashboard from './doctor/Components/Dashboard/components/Dashboard/Dashbo
 import AllTransactions from './doctor/Components/Dashboard/components/AllTransactions/AllTransactions';
 import AddPatient from './doctor/Components/Dashboard/components/AddPatient/AddPatient';
 
+import QrPdfMaker from './qrData/QRPDF';
+// import QrTemplate from './qrData/QrTemplate';
 
 ///////////////////website imports//////////////////////
 import { lazy } from "react";
@@ -91,6 +93,8 @@ import Loadable from "./website/compponents/Loadable";
 const Home = Loadable(lazy(() => import("./website/pages/Home")));
 const About = Loadable(lazy(() => import("./website/pages/About")));
 const ContactUs = Loadable(lazy(() => import("./website/pages/Contact")));
+
+
 
 
 function App() {
@@ -183,6 +187,8 @@ function App() {
         <Route path='/doctor/dashboard/AllTransactions' element={<AllTransactions />} />
         <Route path='/doctor/dashboard/addPatient' element={<AddPatient />} />
         <Route path='/doctor/dashboard/UnderReview' element={<UnderReview />} />
+
+        <Route path='/qrData/:doctorId' element={<QrPdfMaker />}></Route>
 
       </Routes>
     // {/* </div> */}
