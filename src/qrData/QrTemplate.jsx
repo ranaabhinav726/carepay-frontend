@@ -46,7 +46,7 @@ const QrTemplate = ({clinicName, qrUrl}, ref)=>{
                     width: 260,
                     background: "#ECEBFF",
                     borderRadius: 8,
-                    height: 66,
+                    minHeight: 66,
                     margin: "25px auto 0 auto",
                     fontSize: 18,
                     lineHeight: 32,
@@ -57,7 +57,7 @@ const QrTemplate = ({clinicName, qrUrl}, ref)=>{
                 }}
                 >
                 <p
-                    style={{ maxWidth: "16ch", margin: 0, textAlign: "center" }}
+                    style={{ maxWidth: "16ch", margin: 0, textAlign: "center", overflowWrap:"break-word", lineHeight:"120%" }}
                     id="clinicName"
                 >
                     {clinicName}
