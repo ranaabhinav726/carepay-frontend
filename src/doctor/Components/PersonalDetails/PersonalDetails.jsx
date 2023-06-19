@@ -172,8 +172,11 @@ const DocPersonalDetails = () =>{
                 setPanValid(true);
             }
         }
-        if(val.length > 10) return
-        setPanNumber(val);
+        else if(val.length > 10) return
+        else{
+            setPanNumber(val);
+            setPanValid(false);
+        }
     }
 
     // function showErrorOnUI(elem){
