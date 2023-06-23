@@ -306,7 +306,7 @@ const UploadDocuments = () =>{
 
             <div className="termsAndConditions">
                 <input type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
-                <p id="terms">I accept the <a href="" className="termsAndCond">Terms & Conditions</a></p>
+                <p id="terms">I accept the <a href="https://docs.google.com/document/d/1ahwOUCCj6uWcx96PQ2wBup3MhxbLdf82ONzMnLvwEek/edit?usp=sharing" target="_blank" className="termsAndCond">Terms & Conditions</a></p>
             </div>
 
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
