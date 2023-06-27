@@ -186,7 +186,7 @@ const BankDetails = () =>{
    return(
     <>
     <main className="bankDetails">
-    <Header progressbarDisplay="block" progress="94" canGoBack="/patient/EmploymentDetails" />
+    <Header progressbarDisplay="block" progress="80" canGoBack="/patient/EmploymentDetails" />
         <h3>Bank Details</h3>
 
         {/* <p className="note"><b>NOTE:</b> Please add bank details of the same account as the bank statement submitted.</p> */}

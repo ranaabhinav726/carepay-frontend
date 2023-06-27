@@ -61,7 +61,7 @@ const FirstPaymentScreen = () =>{
     return(
         <>
         <main className='firstPayment'>
-        <Header progressbarDisplay="block" progress="80" canGoBack='/patient/EmandateUnderProcess' />
+        <Header progressbarDisplay="block" progress="99" canGoBack='/patient/EmandateUnderProcess' />
             <h3>1st Instalment</h3>
 
             <p className='subheading'>Please pay the 1st instalment now, to proceed with disbursal of your loan of Rs. {loanAmt}</p>

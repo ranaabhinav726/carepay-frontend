@@ -33,7 +33,7 @@ const LoanAgreement = () =>{
     return(
     <>
         <main className='loanAgreement'>
-        <Header progressbarDisplay="block" progress="90" />
+        <Header progressbarDisplay="block" progress="97" />
         <h3>Credit Agreement</h3>
         <div className="upperSection">                
             <p className="note">You will be redirected to our lending partner’s<br/>platform to sign the credit agreement.<br/><br/>Read the agreement carefully, scroll the<br />agreement till the end and then sign it via an OTP<br/>verification.</p>

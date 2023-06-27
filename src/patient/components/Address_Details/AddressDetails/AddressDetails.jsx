@@ -205,7 +205,7 @@ const AddressDetails = () =>{
     <>
 
     <main className="addressDetails">
-    <Header progressbarDisplay="block" progress="50" canGoBack="/patient/PersonalDetails" />
+    <Header progressbarDisplay="block" progress="55" canGoBack="/patient/PersonalDetails" />
         <h3>Address Details</h3>
 
         <div className="addressType">

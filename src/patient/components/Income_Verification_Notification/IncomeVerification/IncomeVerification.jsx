@@ -36,7 +36,7 @@ const IncomeVerification = () =>{
     return(
     <>
         <main className='incomeVerification'>
-        <Header progressbarDisplay="block" progress="90" canGoBack='/patient/BankDetails' />
+        <Header progressbarDisplay="block" progress="86" canGoBack='/patient/BankDetails' />
         <h3>Bank account statement upload</h3>
         <div className="upperSection">                
             <p className="note">To verify your income, we need to access your bank statement for the latest 3 months. This data sharing is completely secured and encrypted.</p>

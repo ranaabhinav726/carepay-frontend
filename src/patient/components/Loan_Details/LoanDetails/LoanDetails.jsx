@@ -182,7 +182,7 @@ const LoanDetails = () =>{
    return(
     <>
     <main className="loanDetails">
-    <Header progressbarDisplay="block" progress="60" canGoBack="/patient/FileUpload" />
+    <Header progressbarDisplay="block" progress="94" canGoBack="/patient/FileUpload" />
         <h3>Credit Details</h3>
 
         <div className="doctorName">

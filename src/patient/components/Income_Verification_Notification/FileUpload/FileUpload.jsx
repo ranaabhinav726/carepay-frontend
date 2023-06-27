@@ -263,7 +263,7 @@ const FileUpload = () =>{
     return(
     <>
         <main className='fileUpload'>
-        <Header progressbarDisplay="block" progress="98" canGoBack='/patient/IncomeVerification' />
+        <Header progressbarDisplay="block" progress="91" canGoBack='/patient/IncomeVerification' />
         <h3>Account statement upload</h3>
             
         <div className="msg">Upload Bank Statement for the last 3 months from <span className='date'>{from_month} {year}</span> to <span className='date'>{to_month} {year}</span></div>

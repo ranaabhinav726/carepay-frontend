@@ -251,7 +251,7 @@ const PersonalDetails = () =>{
    return(
     <>
     <main className="personalDetails">
-    <Header progressbarDisplay="block" progress="20" />
+    <Header progressbarDisplay="block" progress="32" />
         <h3>Personal Details</h3>
 
         <div className="PAN">

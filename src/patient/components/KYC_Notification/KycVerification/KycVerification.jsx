@@ -57,7 +57,7 @@ const KycVerification = () =>{
     return(
     <>
     <main className='kycVerification'>
-    <Header progressbarDisplay="block" progress="80" canGoBack='/patient/LoanDetails' />
+    <Header progressbarDisplay="block" progress="96" canGoBack='/patient/LoanDetails' />
         <h3>KYC Verification</h3>
         <div className="upperSection">                
             <p className="note">To process your loan application, you<br />will be redirected to our lending partner’s<br />platform for KYC verification.</p>

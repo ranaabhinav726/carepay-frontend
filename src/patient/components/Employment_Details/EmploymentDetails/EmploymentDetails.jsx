@@ -283,7 +283,7 @@ const EmploymentDetails = () =>{
 
     <>
     <main className="employmentDetails">
-    <Header progressbarDisplay="block" progress="80" canGoBack="/patient/AddressDetails" />
+    <Header progressbarDisplay="block" progress="70" canGoBack="/patient/AddressDetails" />
         <h3>Employment Details</h3>
 
         <div className="employementType">

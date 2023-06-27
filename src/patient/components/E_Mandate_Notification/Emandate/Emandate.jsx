@@ -33,7 +33,7 @@ const Emandate = () =>{
     return(
     <>
         <main className='emandate'>
-        <Header progressbarDisplay="block" progress="90" />
+        <Header progressbarDisplay="block" progress="98" />
         <h3>E- Mandate</h3>
         <div className="upperSection">   
         <p className="note">E-Mandate allows the lender to auto-debit the EMI amount from your bank account. This will ensure timely repayment of your credit and improve your credit score.</p>             
