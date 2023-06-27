@@ -127,6 +127,8 @@ const IncomeVerificationStatus = ({data = "Verifying bank account statement..."}
                 }else{
                     navigate(-1)
                 }
+            }else{
+                navigate(-1)
             }
             if(response?.data?.errorCode != null){
                 navigate(-1)
