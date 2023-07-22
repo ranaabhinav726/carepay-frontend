@@ -30,27 +30,92 @@ const EnterOTP = () =>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
 
-    function handleOTP(e){
-        const {keyCode} = e;
-        if((keyCode!=8) && (keyCode < 48) || (keyCode > 57)){
-            e.target.value = "";
-            return
-        }
+    // function handleOTP(e){
+    //     const {keyCode} = e;
+    //     if((keyCode!=8) && (keyCode < 48) || (keyCode > 57)){
+    //         e.target.value = "";
+    //         return
+    //     }
 
-        if(keyCode == 8){
-            e.target.value = "";
-            let inputBox = e.target.id.charAt(6) * 1;
-            if(inputBox == 1) return;
-            let prev = "digit-" + (inputBox-1);
-            document.getElementById(prev).focus();
-        }else{
-            e.target.value = e.key;
-            let inputBox = e.target.id.charAt(6) * 1;
-            if(inputBox == 4) return;
-            let next = "digit-" + (inputBox+1);
-            document.getElementById(next).focus();
+    //     if(keyCode == 8){
+    //         e.target.value = "";
+    //         let inputBox = e.target.id.charAt(6) * 1;
+    //         if(inputBox == 1) return;
+    //         let prev = "digit-" + (inputBox-1);
+    //         document.getElementById(prev).focus();
+    //     }else{
+    //         e.target.value = e.key;
+    //         let inputBox = e.target.id.charAt(6) * 1;
+    //         if(inputBox == 4) return;
+    //         let next = "digit-" + (inputBox+1);
+    //         document.getElementById(next).focus();
+    //     }
+    // }
+
+    const handleOTP = (e) => {
+        const inputValue = e.target.value;
+    
+        if (!/^\d?$/.test(inputValue)) {
+          // If input is not empty or not a digit, reset the input value
+          e.target.value = '';
+          return;
         }
-    }
+    
+        const inputBox = e.target.id.charAt(6) * 1;
+        const prev = 'digit-' + (inputBox - 1);
+        const next = 'digit-' + (inputBox + 1);
+    
+        if (e.key === 'Backspace') {
+          // Backspace is pressed
+          if (inputValue === '' && inputBox > 1) {
+            // Empty current input box and shift focus to the previous one
+            e.preventDefault(); // Prevent the default backspace behavior (going back in history)
+            document.getElementById(prev).focus();
+          } else if (inputValue === '' && inputBox === 1) {
+            // Empty current input box and focus remains on the first box
+            e.preventDefault(); // Prevent the default backspace behavior (going back in history)
+          } else if (inputBox > 1) {
+            // Non-empty input box, so clear it and shift focus to the previous one
+            e.preventDefault(); // Prevent the default backspace behavior (going back in history)
+            e.target.value = '';
+            document.getElementById(prev).focus();
+          }
+        } else if (/^\d$/.test(inputValue) && inputBox < 4) {
+          // Valid digit input, and the current input box is not the last one
+          document.getElementById(next).focus();
+        }
+      };
+
+      const handlePaste = (e) => {
+        const pastedData = e.clipboardData?.getData('text/plain');
+        if (!pastedData) {
+          // Fallback: if clipboardData is not available, try getting the pasted content from the event value
+          const pastedDataFallback = e.target.value;
+          const digits = pastedDataFallback.match(/\d/g);
+          if (digits && digits.length === 4) {
+            const inputBoxes = document.querySelectorAll('[id^=digit-]');
+            for (let i = 0; i < Math.min(digits.length, inputBoxes.length); i++) {
+              inputBoxes[i].value = digits[i];
+              if (i < inputBoxes.length - 1) {
+                inputBoxes[i].dispatchEvent(new Event('input', { bubbles: true }));
+              }
+            }
+          }
+        } else {
+          const digits = pastedData.match(/\d/g);
+          if (digits && digits.length === 4) {
+            const inputBoxes = document.querySelectorAll('[id^=digit-]');
+            for (let i = 0; i < Math.min(digits.length, inputBoxes.length); i++) {
+              inputBoxes[i].value = digits[i];
+              if (i < inputBoxes.length - 1) {
+                inputBoxes[i].dispatchEvent(new Event('input', { bubbles: true }));
+              }
+            }
+          }
+        }
+    
+        e.preventDefault();
+      };
 
     useEffect(()=>{
         document.getElementById('digit-1').focus()
@@ -202,10 +267,10 @@ const EnterOTP = () =>{
                 <a onClick={()=>navigate(-1)} className="changeNumber">Change Number</a>
             </div>
             <div className="otpInputGroup">
-                <input className="otpDigit" id="digit-1" onKeyUp={handleOTP} type="number" inputMode="numeric" placeholder="-" />
-                <input className="otpDigit" id="digit-2" onKeyUp={handleOTP} type="number" inputMode="numeric" placeholder="-" />
-                <input className="otpDigit" id="digit-3" onKeyUp={handleOTP} type="number" inputMode="numeric" placeholder="-" />
-                <input className="otpDigit" id="digit-4" onKeyUp={handleOTP} type="number" inputMode="numeric" placeholder="-" />
+                <input className="otpDigit" id="digit-1" onInput={handleOTP} onPaste={handlePaste} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
+                <input className="otpDigit" id="digit-2" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
+                <input className="otpDigit" id="digit-3" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
+                <input className="otpDigit" id="digit-4" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
             </div>
             <p id="error">Please enter correct OTP</p>
         </div>
