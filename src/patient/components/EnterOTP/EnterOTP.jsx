@@ -113,7 +113,6 @@ const EnterOTP = () =>{
             }
           }
         }
-    
         e.preventDefault();
       };
 
