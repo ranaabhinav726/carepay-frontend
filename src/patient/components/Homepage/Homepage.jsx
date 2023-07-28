@@ -19,7 +19,7 @@ const Homepage = () =>{
     if(!!clinicName) localStorage.setItem("clinicName", clinicName);
     if(!!doctorName) localStorage.setItem("doctorName", doctorName);
     if(!!doctorId) localStorage.setItem("doctorId", doctorId);
-    console.log(cityCode, clinicName, doctorName, doctorId, " |_|");
+    console.log("Last update - 7/28/2023");
 
     // const data = useContext(DataContext);
 
