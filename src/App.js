@@ -89,6 +89,7 @@ import QrPdfMaker from './qrData/QRPDF';
 ///////////////////website imports//////////////////////
 import { lazy } from "react";
 import Loadable from "./website/compponents/Loadable";
+import PrivacyPolicy from './website/pages/PrivacyPolicy';
 
 const Home = Loadable(lazy(() => import("./website/pages/Home")));
 const About = Loadable(lazy(() => import("./website/pages/About")));
@@ -104,6 +105,7 @@ function App() {
         <Route index element={<Home />} ></Route>
         <Route path='/about' element={<About />} ></Route>
         <Route path='/contactUs' element={<ContactUs />} ></Route>
+        <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route>
 
         <Route path='/patient' element={<Homepage />}></Route>
         <Route path='/patient/MobileNumberVerification' element={<MobileNumberVerification />} />

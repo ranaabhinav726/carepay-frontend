@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html{
+  scroll-behavior: smooth;
+  // scroll-margin: 6rem;
+  scroll-padding-top: 5rem;
+}
