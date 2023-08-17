@@ -15,7 +15,7 @@ import {
   Instagram,
   LocationOnOutlined,
 } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -94,7 +94,7 @@ const Footer = () => {
           }}
         >
           <Typography sx={{ fontWeight: "bold" }}>Quick Links</Typography>
-          <Typography>Privacy Policy</Typography>
+          <Typography><Link to={"/PrivacyPolicy"}>Privacy Policy</Link></Typography>
           <NavLink to={"/contactUs"}><Typography>Contact Us</Typography></NavLink>
           <Typography>
             <NavLink to={"/about"}>About Us</NavLink>
