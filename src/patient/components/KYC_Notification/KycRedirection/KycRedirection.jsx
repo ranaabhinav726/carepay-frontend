@@ -32,11 +32,19 @@ const KycRedirection = ({line1 = "Redirecting to", line2 = "lending partner’s 
                 console.log(response)
                 if(response.data.status == "200"){
                     let link = response.data.data;
-                    setURL(link);
-                    setCanClick(true);
+                    if(link.length > 30){
+                        setURL(link);
+                        setCanClick(true);
+                    }else{
+                        navigate(-1);
+                    }
                 }else{
+                    navigate(-1);
                     // apiErrorHandler();
                 }
+            }).catch(error =>{
+                console.log(error)
+                navigate(-1);
             })
     }
 

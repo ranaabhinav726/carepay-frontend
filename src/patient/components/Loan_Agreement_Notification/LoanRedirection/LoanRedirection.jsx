@@ -33,11 +33,18 @@ const LoanRedirection = ({line1 = "Redirecting to ", line2 = "lending partner’
             console.log(response)
             if(response.data.status == "200"){
                 let link = response.data.data;
-                console.log(link)
-                setURL(link);
-                setCanClick(true);
+                if(link.length > 30){
+                    console.log(link)
+                    setURL(link);
+                    setCanClick(true);
+                }else{
+                    navigate(-1)
+                }
+            }else{
+                navigate(-1)
             }
         }).catch(error => {
+                navigate(-1)
                 console.log(error);
         });
     }, [])
