@@ -141,9 +141,9 @@ const Footer = () => {
               gap: 2,
             }}
           >
-            <Typography>Products</Typography>
-            <Typography>Privacy Policy</Typography>
-            <Typography>Contact Us</Typography>
+            <Typography><Link id="Products" smooth to={"/#products"}> Products</Link></Typography>
+            <Typography><Link to={"/PrivacyPolicy"}>Privacy Policy</Link></Typography>
+            <Typography><Link to={"/contactUs"}>Contact Us</Link></Typography>
             <Typography sx={{ fontSize: "1.3rem" }}>
               <NavLink to={"/about"}>About Us</NavLink>
             </Typography>
