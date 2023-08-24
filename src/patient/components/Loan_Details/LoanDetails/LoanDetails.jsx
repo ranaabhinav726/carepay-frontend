@@ -39,17 +39,19 @@ const LoanDetails = () =>{
 
     const navigate = useNavigate();
 
-    let doctorName = localStorage.getItem('doctorName') || "";
-    doctorName = doctorName.split('_').join(' ');
-    let doctorId = localStorage.getItem('doctorId') || "";
-    let clinicName = localStorage.getItem('clinicName') || "";
-    clinicName = clinicName.split('_').join(' ');
+    // let doctorName = localStorage.getItem('doctorName') || "";
+    // doctorName = doctorName.split('_').join(' ');
+    // let doctorId = localStorage.getItem('doctorId') || "";
+    // let clinicName = localStorage.getItem('clinicName') || "";
+    // clinicName = clinicName.split('_').join(' ');
 
     let userId = localStorage.getItem("userId");
     // let amount = localStorage.getItem("limit") * 1 || 1;
 
-    const [loanAmt, setLoanAmount] = useState('');
+    const [loanAmt, setLoanAmount] = useState('0');
     const [loanPurpose, setLoanPurpose] = useState('');
+    const [doctorName, setDoctorName] = useState('');
+    const [doctorId, setDoctorId] = useState('');
 
     const [EMIOption, setEMIOption] = useState(true);
 
@@ -67,6 +69,8 @@ const LoanDetails = () =>{
                     if(!! data){
                         setLoanAmount(data.loanAmount);
                         setLoanPurpose(data.loanReason);
+                        setDoctorName(data.doctorName);
+                        setDoctorId(data.doctorId);
                     }
                 }
             })
@@ -130,9 +134,40 @@ const LoanDetails = () =>{
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(async(response) => {
                 console.log(response)
-                if(response.data.status === 200){
+                if(response.data.message === "success"){
                     // await handleNavigation();
-                    navigate('/patient/KycVerification');
+                    if(loanAmt <= 75000){
+                        await axios
+                            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
+                            .then(response =>{
+                                console.log(response)
+                                if(response.data.message === "success"){
+                                    // let link = response.data.data;
+                                    navigate('/patient/WaitingForApproval')
+                                }else if(response.data.message === "failure"){
+                                    // apiErrorHandler();
+                                    axios
+                                        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
+                                        .then(response =>{
+                                            console.log(response)
+                                            if(response.data.message === "success"){
+                                                // let link = response.data.data;
+                                                navigate('/patient/WaitingForApproval')
+                                            }
+                                        }).catch(error =>{
+                                            console.log(error);
+                                        })
+                                }else{
+                                    apiErrorHandler();
+                                }
+                            }).catch(error =>{
+                                console.log(error)
+                                apiErrorHandler();
+                            })
+                        
+                    }else{
+                        navigate('/patient/BankDetails');
+                    }
                 }else{
                     apiErrorHandler();
                 }
@@ -182,10 +217,13 @@ const LoanDetails = () =>{
    return(
     <>
     <main className="loanDetails">
-    <Header progressbarDisplay="block" progress="94" canGoBack="/patient/FileUpload" />
-        <h3>Credit Details</h3>
+    <Header progressbarDisplay="block" progress="94" canGoBack="/patient/EmploymentDetails" />
+        <h3>EMI Details</h3>
 
-        <div className="doctorName">
+        <p style={{marginBottom:"10px", color:"rgba(0,0,0,0.6)"}}>Credit amount</p>
+        <p style={{margin:"0"}}>Rs. {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}</p>
+
+        {/* <div className="doctorName">
             <p>Doctor's name</p>
             <input type="text" value={doctorName} disabled placeholder="Enter name here" />
         </div>
@@ -216,13 +254,15 @@ const LoanDetails = () =>{
                 onChange={(e)=>setLoanAmount(e.target.value)}
                 placeholder="Enter here"
             />
-            {/* <p className="warning">Cannot be greater than your pre approved credit limit.</p> */}
-        </div>
+            <p className="warning">Cannot be greater than your pre approved credit limit.</p>
+        </div> */}
+
+
 
         <p className="subheading">Select EMI options</p>
         <div className="msgBox">
             <h4>Please note:</h4>
-            <p>The first EMI will be collected in advance before processing your credit.</p>
+            <p>The first EMI will be collected in advance before disbursing your credit.</p>
             <p>Select options accordingly.</p>
         </div>
 

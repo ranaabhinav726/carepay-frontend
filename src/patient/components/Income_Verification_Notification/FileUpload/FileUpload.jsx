@@ -139,11 +139,41 @@ const FileUpload = () =>{
     };
     
 
+    function checkAssignedNbfcAndNavigate(){
+        //call initateFlow -> customer , if success, below code else same screen...
+        axios
+            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
+            .then(response =>{
+                console.log(response)
+                if(response.data.message === "success"){
+                    axios
+                        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+                        .then((response) => {
+                            if(response.data.message === "success"){
+                                let nbfc = response?.data?.data?.nbfcAssigned;
+                                if(nbfc === "CREDIT FAIR"){
+                                    navigate("/patient/WaitingForApproval");
+                                }else if(nbfc === "PAYME"){
+                                    navigate("/patient/KycVerification");
+                                }
+                            }
+                        }).catch(error => {
+                            console.log(error);
+                            // navigate(-1)
+                        });
+                }
+            }).catch(error =>{
+                console.log(error)
+                // navigate(-1);
+            })
+    }
+
     async function uploadFiles(){
         // console.log(files[0])
 
         if(prevFiles.length > 0 && files.length === 0){
-            navigate('/patient/LoanDetails');
+            // navigate('/patient/KycVerification');
+            checkAssignedNbfcAndNavigate();
             return;
         }
         if(!password){
@@ -182,8 +212,9 @@ const FileUpload = () =>{
         await axios.post(env.api_Url + "uploadMultipleBankStatements", data, fileConfig )
             .then((response) => {
                 console.log(response)
-                if(response.data.status == "200"){
-                    navigate('/patient/LoanDetails');
+                if(response.data.message === "success"){
+                    // navigate('/patient/KycVerification');
+                    checkAssignedNbfcAndNavigate();
                 }else{
                     apiErrorHandler();
                 }

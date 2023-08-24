@@ -1,0 +1,95 @@
+section.aboutUs{
+    width: 100%;
+    padding: 0vw 0;
+  }
+
+
+
+div.cards-grid-wrapper{
+    display: grid;
+    padding: 0 3rem;
+    gap: 1rem;
+    row-gap: 2rem;
+    grid-template-columns: repeat(auto-fill, 220px);
+    justify-content: space-around;
+}
+
+
+
+
+.member-card{
+    // padding: 10px;
+    width: 220px;
+    img.member-card-img{
+        aspect-ratio: 1/1;
+        width: 100%;
+    }
+    h5.member-card-name{
+        color: rgba(0, 0, 0, 0.80);
+        font-family: DM Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 145.455%;
+        margin-bottom: 4px;
+    }
+    p.member-card-designation, p.member-card-area, p.member-card-type{
+        color: rgba(0, 0, 0, 0.80);
+
+        /* Desktop B1 Regular */
+        font-family: DM Sans;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 145.455%;
+    }
+    p.member-card-area, p.member-card-type{
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    div.cards-grid-wrapper{
+        grid-template-columns: repeat(auto-fill, 160px);
+    }
+    .member-card{
+        width: 160px;
+    }
+}
+
+@media (min-width: 576px) {
+    div.cards-grid-wrapper{
+        grid-template-columns: repeat(auto-fill, 180px);
+    }
+    .member-card{
+        width: 180px;
+    }
+}
+
+@media (min-width: 768px) {
+    div.cards-grid-wrapper{
+        grid-template-columns: repeat(auto-fill, 160px);
+    }
+    .member-card{
+        width: 160px;
+    }
+}
+
+@media (min-width: 992px) {
+    div.cards-grid-wrapper{
+        grid-template-columns: repeat(auto-fill, 160px);
+    }
+    .member-card{
+        width: 160px;
+    }
+}
+
+@media (min-width: 1200px) {
+    div.cards-grid-wrapper{
+        grid-template-columns: repeat(4, 160px);
+    }
+    .member-card{
+        width: 160px;
+    }
+}

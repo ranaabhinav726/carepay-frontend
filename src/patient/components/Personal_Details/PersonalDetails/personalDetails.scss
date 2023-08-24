@@ -12,7 +12,7 @@ main.personalDetails{
         padding: 24px 0 20px 0;
     }
 
-    div.fullName, div.PAN, div.gender, div.email, div.altNumber{
+    div.fullName, div.PAN, div.gender, div.email, div.altNumber, div.marital-status{
         margin-bottom: 20px;
         p{
             font-weight: 400;
@@ -21,7 +21,7 @@ main.personalDetails{
             // margin-top: 20px;
             padding-bottom: 10px;
         }
-        input{
+        input, select{
             padding: 10px;
             // margin-bottom: 20px;
 

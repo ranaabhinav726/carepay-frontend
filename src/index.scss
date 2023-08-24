@@ -1,8 +1,15 @@
+@font-face {
+  font-family: 'sigmundpro-semibold';
+  src: url('./website/assets/Fonts/sigmundpro-semibold-webfont.woff2') format('woff2'),
+       url('./website/assets/Fonts/sigmundpro-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "sigmundpro-semibold";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

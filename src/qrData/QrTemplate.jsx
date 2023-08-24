@@ -105,7 +105,7 @@ const QrTemplate = ({clinicName, qrUrl}, ref)=>{
                         padding: "5px 0"
                         }}
                     >
-                        Pay in easy 3 and 6 EMI
+                        Pay in easy EMIs
                     </div>
                     <div
                         style={{

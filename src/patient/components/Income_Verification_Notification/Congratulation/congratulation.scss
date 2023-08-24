@@ -7,58 +7,59 @@ main.congrats{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // align-items: center;
+    align-items: center;
     padding: 0 10px 10px 10px;
 
-    // img{
-    //     // margin-top: 1rem;
-    // }
-    div.card{
-        width: 100%;
-
-        padding: 10px;
-        margin-bottom: 14px;
-
-        color: white;
-
-        /* Green gradient */
-        background: linear-gradient(99.82deg, #6DB29F 0%, #1C8769 99.49%);
-        border-radius: 10px;
-
-        p.referenceID{
-            font-weight: 400;
-            font-size: $size-S;
-            line-height: 16px;
-            margin-bottom: 14px;
-            color: white;
-        }
-        p.congrats{
-            padding: 4px 0;
-            margin-bottom: 14px;
-            font-weight: 700;
-            font-size: $size-L;
-            line-height: 24px;
-            color: white;
-        }
-        div.amount{
-            padding: 14px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 100%;
-            height: 52px;
-
-            font-weight: 700;
-            font-size: $size-XL;
-            line-height: 24px;
-
-            color: #1C8769;
-
-            background: #FFFFFF;
-            border-radius: 4px;
-        }
+    img{
+        // margin-top: 1rem;
+        max-width: 50%;
     }
+    // div.card{
+    //     width: 100%;
+
+    //     padding: 10px;
+    //     margin-bottom: 14px;
+
+    //     color: white;
+
+    //     /* Green gradient */
+    //     background: linear-gradient(99.82deg, #6DB29F 0%, #1C8769 99.49%);
+    //     border-radius: 10px;
+
+    //     p.referenceID{
+    //         font-weight: 400;
+    //         font-size: $size-S;
+    //         line-height: 16px;
+    //         margin-bottom: 14px;
+    //         color: white;
+    //     }
+    //     p.congrats{
+    //         padding: 4px 0;
+    //         margin-bottom: 14px;
+    //         font-weight: 700;
+    //         font-size: $size-L;
+    //         line-height: 24px;
+    //         color: white;
+    //     }
+    //     div.amount{
+    //         padding: 14px 10px;
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: center;
+
+    //         width: 100%;
+    //         height: 52px;
+
+    //         font-weight: 700;
+    //         font-size: $size-XL;
+    //         line-height: 24px;
+
+    //         color: #1C8769;
+
+    //         background: #FFFFFF;
+    //         border-radius: 4px;
+    //     }
+    // }
     p.title{
         margin: 16px 0 8px 0;
         font-weight: 700;
@@ -80,18 +81,20 @@ main.congrats{
         color: rgba(0, 0, 0, 0.8);
     }
 
-    
     div{
+        // margin-top: 1rem;
+    }
+    
+    div.stepCard{
         padding: 10px 10px 15px 15px;
         width: 100%;
-        margin-top: 2rem;
         // margin-bottom: 1rem;
         // width: max-content;
         text-align: left;
         // display: flex;
         // justify-content: center;
 
-        background: #ECEBFF;
+        background: #FAE1CD;
         border-radius: 10px;
 
         p{
@@ -140,8 +143,24 @@ main.congrats{
                     height: 16px;
                     width: 1px;
                     border-right: 1px solid #514C9F;
+
                 }
             }
         }
     }
+}
+div.stepName{
+    display: inline-flex;
+    flex-direction: row;
+    width: 90%;
+    height: max-content;
+    align-items: center;
+    justify-content: space-between;
+
+    .boltIcon{
+        color: goldenrod;
+        font-size: 16px;
+        padding-top: 5px;
+    }
+
 }

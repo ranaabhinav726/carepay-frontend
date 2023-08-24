@@ -16,7 +16,7 @@ const PhoneNumberVerified = () =>{
         //if it doesn't, navigate to personal details
 
         setTimeout(()=>{
-            navigate('/patient/PersonalDetails',{ replace: true })
+            navigate('/patient/CreditDetails',{ replace: true })
         },3000)
     }, [])
 

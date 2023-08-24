@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
+import SelectAndVerify from "../../utility/SelectAndVerify";
 
 
-const AddressDetails = () =>{
+const AddressDetails = () => {
 
     // const data = useData();
     const navigate = useNavigate();
+    let fullName = localStorage.getItem('P_userName');
+    let userId = localStorage.getItem('userId');
     
     // let token = localStorage.getItem('access_token');
     // const config = {
@@ -43,6 +46,8 @@ const AddressDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
+    const [isDecentroCall, setDecentroCall] = useState(false);
+
     let ref = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
@@ -61,10 +66,48 @@ const AddressDetails = () =>{
                         setState(data.state);
                         setCity(data.city);
                     }
+                    if(data.addressType === null){
+                        getDataFromDecentro();
+                    }
+                }else{
+                    getDataFromDecentro();
                 }
+            }).catch(error =>{
+                getDataFromDecentro();
             })
         }
     },[])
+
+    const [addresses, setAddresses] = useState([]);
+
+    function getDataFromDecentro(){
+        setDecentroCall(true);
+        axios.get(env.api_Url+"/getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + fullName)
+        .then(response=>{
+            console.log(response);
+            if(response.data.status === 200){
+                const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
+                setAddresses(idandContactInfo?.addressInfo || []);
+            }
+        })
+    }
+
+
+    let addressOptions = addresses.map((address, idx)=>{
+        return <option key={idx+1} value={idx+1}>{address.address}</option>
+    })
+    addressOptions.splice(0,0, <option key={0} value={0}>Select address …</option>)
+
+    function selectAddress(idx){
+        if(idx==0  || addresses.length===0){
+            setFirstLine("");
+            return;
+        }
+        let obj = addresses[idx-1];
+        console.log(obj)
+        setFirstLine(obj?.address);
+        handlePincode(obj?.postal);
+    }
 
     // function fetchCityAndState(pin){
     //     axios
@@ -82,7 +125,6 @@ const AddressDetails = () =>{
     //     }).catch(error => {
     //         console.log(error);
     //         });
-
     // }
 
     // function handlePincode(e){
@@ -139,6 +181,12 @@ const AddressDetails = () =>{
             return;
         }
 
+        if(!landmark){
+            let elem = document.getElementById('landmark');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
         if(!pincode){
             let elem = document.getElementById('pincode');
             if(elem) showErrorOnUI(elem);
@@ -151,11 +199,11 @@ const AddressDetails = () =>{
             return;
         }
 
-        if(!state){
-            let elem = document.getElementById('state');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(!state){
+        //     let elem = document.getElementById('state');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
         if(! canSubmit){
             return;
@@ -183,7 +231,7 @@ const AddressDetails = () =>{
             submitObj)
             .then((response) => {
                 console.log(response)
-                if(response.data.status === 200){
+                if(response.data.message === "success"){
                     navigate('/patient/EmploymentDetails');
                 }else{
                     apiErrorHandler();
@@ -206,8 +254,17 @@ const AddressDetails = () =>{
 
     <main className="addressDetails">
     <Header progressbarDisplay="block" progress="55" canGoBack="/patient/PersonalDetails" />
+    <SelectAndVerify />
         <h3>Address Details</h3>
 
+
+        {isDecentroCall && (addresses.length>0) && <div className="addressType">
+            <p>Select address</p>
+            <select name="selectAddress" id="selectAddress" onChange={(e)=>selectAddress(e.target.value)}>
+                {addressOptions}
+            </select>
+        </div>}
+        
         <div className="addressType">
             <p>Address type</p>
             <select name="addType" id="selectAddressType" onChange={(e) => setAddressType(e.target.value)} required>
@@ -246,8 +303,9 @@ const AddressDetails = () =>{
         </div>
 
         <div className="landmark">
-            <p>Landmark (Optional)</p>
+            <p>Landmark</p>
             <input type="text" 
+                id="landmark"
                 value={landmark ?? ""} 
                 onChange={(e)=> setLandmark(e.target.value)}
                 placeholder="Enter landmark here" 
@@ -280,7 +338,7 @@ const AddressDetails = () =>{
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
-        <div className="state">
+        {/* <div className="state">
             <p>State</p>
             <input type="text" 
                 id="state"
@@ -290,7 +348,7 @@ const AddressDetails = () =>{
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
-        </div>
+        </div> */}
 
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={()=>handleForm()} className="submit">Submit</button>

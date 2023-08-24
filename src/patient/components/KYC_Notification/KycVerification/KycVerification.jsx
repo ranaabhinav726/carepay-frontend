@@ -3,8 +3,8 @@ import './kycVerification.scss'
 
 import fingerprint from '../../../assets/fingerprint.png'
 // import { env } from "../../../environment/environment"
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { BsArrowRight } from 'react-icons/bs'
 import axios from 'axios';
 import { env } from '../../../environment/environment';
 
@@ -59,8 +59,14 @@ const KycVerification = () =>{
     <main className='kycVerification'>
     <Header progressbarDisplay="block" progress="96" canGoBack='/patient/LoanDetails' />
         <h3>KYC Verification</h3>
-        <div className="upperSection">                
-            <p className="note">To process your loan application, you<br />will be redirected to our lending partner’s<br />platform for KYC verification.</p>
+        {/* <div className="skipMsg" style={{background:"#ECEBFF", padding:"10px", borderRadius:"4px"}}>
+            <p style={{margin:"0"}}>You can skip this step if the required credit amount is less than ₹ 75,000</p>
+            <div className="skippable" style={{display:"flex", justifyContent:"flex-end"}}>
+                <p style={{fontWeight:"600", margin:"0", color:"rgba(0, 0, 0, 0.8"}}><Link to={'/patient/kycVerification'}>Skip this step <BsArrowRight style={{fontSize:"26px"}} /></Link></p>
+            </div>
+        </div> */}
+        <div className="upperSection" style={{marginTop:"10px"}}>                
+            <p className="note">Complete your KYC to process your credit application.</p>
         </div>
 
         <img className='fingerPrint' src={fingerprint} alt="" />

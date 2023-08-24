@@ -169,7 +169,7 @@ const BankDetails = () =>{
                 })
             .then((response) => {
                 console.log(response)
-                if(response.data.status == "200"){
+                if(response.data.message === "success"){
                     localStorage.setItem("bankName", bankName);
                     navigate('/patient/IncomeVerification');
                 }
@@ -188,6 +188,10 @@ const BankDetails = () =>{
     <main className="bankDetails">
     <Header progressbarDisplay="block" progress="80" canGoBack="/patient/EmploymentDetails" />
         <h3>Bank Details</h3>
+
+        <div style={{background:"#FAE1CD", padding:"16px", borderRadius:"8px", color:"#514C9F", textAlign:"center", wordSpacing:"1px", letterSpacing:"0.5px"}}>
+            Please enter details of your <strong>salary bank account</strong> only and make sure it has an active debit card or net banking.
+        </div>
 
         {/* <p className="note"><b>NOTE:</b> Please add bank details of the same account as the bank statement submitted.</p> */}
         <div className="accountName">

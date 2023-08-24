@@ -12,8 +12,14 @@ import { env, showWrapper, hideWrapper } from "../../environment/environment"
 
 const MobileNumberVerification = () =>{
     const [number, setNumber] = useState('')
+    const [clinicName, setClinicName] = useState('')
     const [isNumValid, setNumValid] = useState(false)
+    const [declare, setDeclare] = useState(false)
     const [accepted, setAccept] = useState(false)
+
+    const [fullName, setFullName] = useState("");
+    const [amount, setAmount] = useState("");
+    const [treatment, setTreatment] = useState("");
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
@@ -27,6 +33,7 @@ const MobileNumberVerification = () =>{
         ref.current = document.getElementById('animation-wrapper');
 
         setNumber(localStorage.getItem("phoneNumber"));
+        setClinicName(localStorage.getItem("clinicName"));
         setNumValid(true)
     },[])
 
@@ -90,6 +97,7 @@ const MobileNumberVerification = () =>{
                 console.log(response)
                 if(response.data.status == 200){
                     localStorage.setItem("phoneNumber", number);
+                    localStorage.setItem("fullName", fullName);
                     navigate('/patient/EnterOTP');
                 }else{
                     apiErrorHandler();
@@ -112,8 +120,13 @@ const MobileNumberVerification = () =>{
     <>
     <main className="mobileNumberVerification">
     <Header progressbarDisplay="none" />
-        <h3 className="mobileVerificationHeading">Mobile Number Verification</h3>
-        <p className="mobileVerificationSubheading">Enter mobile number</p>
+        <h3 className="mobileVerificationHeading">Basic Details</h3>
+        <div className="inputGroup">
+            <p>Clinic's name</p>
+            <input type="text" value={clinicName} disabled />
+        </div>
+        
+        <p className="mobileVerificationSubheading">Enter mobile number (linked to PAN)</p>
         <div className="number-group">
             <div className="number-group--leftHalf">+91</div>
             <div className="number-group--rightHalf">
@@ -123,8 +136,12 @@ const MobileNumberVerification = () =>{
         </div>
 
         <div className="termsAndConditions">
-            <input type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
-            <p id="terms">I accept the <a href="" className="termsAndCond">Terms & Conditions</a></p>
+            <input id="declare" type="checkbox" checked={declare} onChange={e => setDeclare(e.target.checked)} />
+            <label htmlFor="declare">I declare the above information is true and correct. I allow CareCoin Technologies Pvt Ltd and its lending partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax.</label>
+        </div>
+        <div className="termsAndConditions">
+            <input id="terms" type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
+            <label htmlFor="terms">I accept the <a href="" className="termsAndCond">Terms & Conditions</a></label>
         </div>
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={()=> verifyAndNavigate()} className="submit">Send OTP</button>

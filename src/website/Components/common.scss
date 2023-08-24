@@ -1,0 +1,78 @@
+a.primary-btn-wrapper, a.floating-btn-wrapper{
+    text-decoration: none;
+}
+button{
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;   
+
+    &:active{
+        filter: brightness(140%);
+    }
+}
+
+button.primary-btn{
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 100% */
+    border: 0;
+    
+    padding: 16px 30px; 
+    border-radius: 2px;
+
+}
+button.primary-btn.dark{
+    color: #FFF;
+    background: var(--primary-purple, #514C9F);
+}
+button.primary-btn.light{
+    color: var(--primary-purple, #514C9F);;
+    background: #fff
+}
+
+button.floating-btn{
+    display: none;
+    position: fixed;
+    bottom: 48px;
+    right: 24px;
+    height: 48px;
+    padding: 6px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    transition: all 0.6s ease-in;
+    z-index: 2;
+
+    border-radius: 2px;
+    border: 1px solid #263238;
+    background: var(--tertiary-purple, #ECEBFF);
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.18);
+
+    color: var(--primary-purple, #514C9F);
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 157.143% */
+}
+button.floating-btn:active{
+    transform: scale(120%);
+    filter: brightness(150%);
+}
+
+@media (max-width: 576px) {
+    a.primary-btn-wrapper.vanishable{
+        display: none;
+    }
+    button.primary-btn{
+        display: block;
+        margin: 0 auto;
+    }
+
+    button.floating-btn{
+        display: block;
+    }
+}

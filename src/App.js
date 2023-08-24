@@ -87,14 +87,18 @@ import QrPdfMaker from './qrData/QRPDF';
 // import QrTemplate from './qrData/QrTemplate';
 
 ///////////////////website imports//////////////////////
-import { lazy } from "react";
-import Loadable from "./website/compponents/Loadable";
-import PrivacyPolicy from './website/pages/PrivacyPolicy';
+// import { lazy } from "react";
+// import Loadable from "./website/compponents/Loadable";
+// import PrivacyPolicy from './website/pages/PrivacyPolicy';
+import CreditDetails from './patient/components/Personal_Details/CreditDetails/CreditDetails';
+import WaitingForApproval from './patient/components/Loan_Details/WaitingForApproval/WaitingForApproval';
 
-const Home = Loadable(lazy(() => import("./website/pages/Home")));
-const About = Loadable(lazy(() => import("./website/pages/About")));
-const ContactUs = Loadable(lazy(() => import("./website/pages/Contact")));
+// const Home = Loadable(lazy(() => import("./website/pages/Home")));
+// const About = Loadable(lazy(() => import("./website/pages/About")));
+// const ContactUs = Loadable(lazy(() => import("./website/pages/Contact")));
 
+import WebHomepage from "./website/pages/Homepage"
+import About from './website/pages/About';
 
 
 
@@ -102,10 +106,10 @@ function App() {
   return (
     // <div className="App">
       <Routes>
-        <Route index element={<Home />} ></Route>
+        <Route index element={<WebHomepage />} ></Route>
         <Route path='/about' element={<About />} ></Route>
-        <Route path='/contactUs' element={<ContactUs />} ></Route>
-        <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route>
+        {/* <Route path='/contactUs' element={<ContactUs />} ></Route>
+        <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route> */}
 
         <Route path='/patient' element={<Homepage />}></Route>
         <Route path='/patient/MobileNumberVerification' element={<MobileNumberVerification />} />
@@ -115,12 +119,15 @@ function App() {
         <Route path='/patient/PhoneNumberVerified' element={<PhoneNumberVerified />} />
 
         <Route path='/patient/PersonalDetails' element={<PersonalDetails />} />
+        <Route path='/patient/CreditDetails' element={<CreditDetails />} />
 
         <Route path='/patient/AddressDetails' element={<AddressDetails />} />
 
         <Route path='/patient/EmploymentDetails' element={<EmploymentDetails />} />
 
         <Route path='/patient/LoanDetails' element={<LoanDetails />} />
+        <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
+
 
         <Route path='/patient/FetchingLoanLimit' element={<FetchingLoanLimit />} />
         <Route path='/patient/ApprovedLoanLimitNeg' element={<ApprovedLoanLimitNeg />} />

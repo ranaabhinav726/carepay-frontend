@@ -149,13 +149,13 @@ const EnterOTP = () =>{
             .post(env.api_Url + "userDetails/verifyOtp?mobile=" + number + "&otp=" + otp, {}, )
             .then((response) => {
                 console.log(response)
-                if(response?.data?.status == 200){
+                if(response.data.message === "success"){
                     let userId = response.data.data;
                     if(userId){
                         localStorage.setItem("userId", userId);
-                        axios.get(env.api_Url + "/userDetails/getFormStatusByUserId?userId=" + userId)
+                        axios.get(env.api_Url + "userDetails/getFormStatusByUserId?userId=" + userId)
                         .then(response =>{
-                            if(response.data.status === 200){
+                            if(response.data.message === "success"){
                                 let stage = response?.data?.data;
                                 let path;
                                 switch(stage){
@@ -226,13 +226,15 @@ const EnterOTP = () =>{
                                         path = "PhoneNumberVerified"
                                 }
 
-                                navigate("/patient/"+path)
+                                navigate("/patient/" + path)
                                 // if(stage !== null){
                                 //     navigate("/patient/"+stage)
                                 // }else{
                                 //     navigate('/patient/PhoneNumberVerified')
                                 // }
                             }
+                        }).catch(error =>{
+                            console.log(error);
                         })
                     } 
                 }else{
@@ -241,7 +243,7 @@ const EnterOTP = () =>{
             }).catch(error => {
                 console.log(error);
                 apiErrorHandler();
-                });
+            });
 
             setCanSubmit(true);
             hideWrapper(ref.current)

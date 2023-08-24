@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
+import SelectAndVerify from '../../utility/SelectAndVerify'
 
 const PersonalDetails = () =>{
 
@@ -35,12 +36,13 @@ const PersonalDetails = () =>{
     
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
-    const [fullname, setFullName] = useState("")
+    const [fullName, setFullName] = useState("")
     const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
     const [gender, setGender] = useState("")
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState("")
+    const [maritalStatus, setMaritalStatus] = useState("Married")
     
     const [altNumber, setAltNumber] = useState("")
     
@@ -49,15 +51,17 @@ const PersonalDetails = () =>{
 
     
     let ref = useRef(0);
+    let userId = localStorage.getItem('userId');
+    let name = localStorage.getItem('fullName');
+
     useEffect(()=>{
         setNumber(localStorage.getItem('phoneNumber'))
         ref.current = document.getElementById('animation-wrapper');
 
-        let userId = localStorage.getItem('userId');
         if(!!userId){
             axios.get(env.api_Url + "userDetails/getUserDetailsByUserId?userId=" + userId)
             .then(response =>{
-                if(response.data.status === 200){
+                if(response.data.message === "success"){
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
                     setFullName(data?.firstName)
@@ -68,13 +72,47 @@ const PersonalDetails = () =>{
                     // console.log(data?.dateOfBirth)
                     setDob(data?.dateOfBirth)
                     setEmail(data?.emailId)
+                    setMaritalStatus(data.maritalStatus ?? "Married");
                     setAltNumber(data?.alternateNumber ?? "")
+                    if(response.data.data.panNo === null){
+                        getDataFromDecentro();
+                    }
+                }else{
+                    getDataFromDecentro();
                 }
             }).catch(error =>{
+                getDataFromDecentro();
                 console.log(error)
             })
         }
     },[])
+
+
+    function getDataFromDecentro(){
+        axios.get(env.api_Url+"getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + name)
+        .then(response=>{
+            console.log(response);
+            if(response.data.message === "success"){
+                const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
+                let panCardData = idandContactInfo?.identityInfo?.panid[0]?.idNumber;
+                handlePan(panCardData);
+                let emailData = "";
+                if(idandContactInfo?.emailAddressInfo){
+                    emailData = idandContactInfo.emailAddressInfo[0]?.emailAddress
+                }
+                setEmail(emailData);
+                let dobData = idandContactInfo?.personalInfo?.dateOfBirth;
+                setDob(dobData);
+                let genderData = idandContactInfo?.personalInfo?.gender;
+                setGender(genderData);
+                let fullNameData = idandContactInfo?.personalInfo?.name?.fullName;
+                setFullName(fullNameData);
+            }
+        })
+    }
+
+
+
     //////////////////////////////// DOB restriction ///////////////////////////////////////
     ////// Below code is to calculate the maximum date the user can input as DOB.///////////
     const today = new Date();
@@ -119,7 +157,7 @@ const PersonalDetails = () =>{
     // }
 
     async function handleForm(){
-        // if(!(panNumber && fullname && gender && email && dob)){ // All feilds must have something
+        // if(!(panNumber && fullName && gender && email && dob)){ // All feilds must have something
         //     return;
         // }
 
@@ -129,7 +167,7 @@ const PersonalDetails = () =>{
             return;
         }
 
-        if(! fullname){
+        if(! fullName){
             let elem = document.getElementById('fullName');
             if(elem) showErrorOnUI(elem);
             return;
@@ -165,11 +203,12 @@ const PersonalDetails = () =>{
         let submitObj = {
             "panCard": panNumber,
             "panCardName": nameOnPan,
-            "firstName": fullname,
+            "firstName": fullName,
             "gender": gender,
             "emailId": email,
             "dateOfBirth": dob,
             "mobileNumber": number,
+            "maritalStatus": maritalStatus,
             "alternateNumber":altNumber,
             "userId" : localStorage.getItem('userId'),
             "formStatus": ""
@@ -179,8 +218,8 @@ const PersonalDetails = () =>{
             submitObj)
             .then((response) => {
                 console.log(response)
-                if(response.data.status === 200){
-                    localStorage.setItem("username", fullname);
+                if(response.data.message === "success"){
+                    localStorage.setItem("username", fullName);
                     let id = response.data.data.userId;
                     localStorage.setItem("userId", id);
                     navigate('/patient/AddressDetails');
@@ -220,7 +259,7 @@ const PersonalDetails = () =>{
     //     // console.log(val)
     // }
     function handlePan(val){
-        if(val === null) return;
+        if(val === null || val === undefined) return;
         val = val.toUpperCase();
         if(val.length<10) setPanValid(false);
         if(val.length === 10){
@@ -252,6 +291,7 @@ const PersonalDetails = () =>{
     <>
     <main className="personalDetails">
     <Header progressbarDisplay="block" progress="32" />
+    <SelectAndVerify />
         <h3>Personal Details</h3>
 
         <div className="PAN">
@@ -271,7 +311,7 @@ const PersonalDetails = () =>{
             <p>Full name (as per PAN)</p>
             <input type="text" 
                 id="fullName"
-                value={fullname ?? ""} 
+                value={fullName ?? ""} 
                 onChange={(e)=> setFullName(e.target.value)} 
                 placeholder="Enter your full name" 
                 required 
@@ -321,6 +361,16 @@ const PersonalDetails = () =>{
             />
             <span className="fieldError">Please enter correct DOB.</span>
         </div>
+
+        <div className="marital-status">
+            <p>Marital status</p>
+            <select name="marital-status" onChange={(e)=>setMaritalStatus(e.target.value)}>
+                <option value="married">Married</option>
+                <option value="unmarried">Unmarried</option>
+            </select>            
+        </div>
+
+
 
         <div className="altNumber">
             <p>Alternate number (optional)</p>

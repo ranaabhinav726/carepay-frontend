@@ -4,14 +4,17 @@ $size-S : 13.5px;
 
 main.addressDetails{
     padding: 0 10px;
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
     h3{
         font-weight: 700;
         font-size: $size-L;
         line-height: 19px;
         padding: 24px 0 20px 0;
     }
-    div{
+    div.verifyPrompt{
+        margin-top: 0;
+    }
+    div:not(.verifyPrompt){
         margin-bottom: 16px;
         p{
             padding: 4px;

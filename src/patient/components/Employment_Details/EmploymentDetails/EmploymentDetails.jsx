@@ -33,7 +33,7 @@ const EmploymentDetails = () =>{
     const [empType, setEmpType] = useState('salaried');
     const [salary, setSalary] = useState('');
     const [salaryDate, setSalaryDate] = useState('1');
-    const [familyIncome, setFamilyIncome] = useState();
+    const [familyIncome, setFamilyIncome] = useState("0");
     const [companyName, setCompanyName] = useState('');
     const [companyAddL1, setCompanyAddL1] = useState('');
     const [companyAddL2, setCompanyAddL2] = useState('');
@@ -82,7 +82,7 @@ const EmploymentDetails = () =>{
                     if(!! data){
                         setSalary(data.nettakehomesalary);
                         setSalaryDate(data.salaryDay);
-                        setFamilyIncome(data.monthlyFamilyIncome);
+                        setFamilyIncome(data.monthlyFamilyIncome ?? "0");
                         setCompanyName(data.organizationName);
                         setCompanyAddL1(data.workplaceAddress1);
                         setCompanyAddL2(data.workplaceAddress2);
@@ -204,6 +204,7 @@ const EmploymentDetails = () =>{
             "totalJobExpInMonth": parseInt(totalExpMonth),
             "currentJobExpInYears": parseInt(jobExpYear),
             "currentJobExpInMonth": parseInt(jobExpMonth),
+            "monthlyFamilyIncome": familyIncome,
             "formStatus": ""
           };
 
@@ -213,9 +214,9 @@ const EmploymentDetails = () =>{
             submitObj.industry = IndustryType;
         }
 
-          if(!!familyIncome){
-            submitObj.monthlyFamilyIncome = familyIncome;
-          }
+        //   if(!!familyIncome){
+        //     submitObj.monthlyFamilyIncome = familyIncome;
+        //   }
 
           if(!!companyAddL2){
             submitObj.workplaceAddress2 = companyAddL2;
@@ -225,8 +226,8 @@ const EmploymentDetails = () =>{
             submitObj)
             .then((response) => {
                 console.log(response)
-                if(response.data.status === 200){
-                    navigate('/patient/BankDetails');
+                if(response.data.message === "success"){
+                    navigate('/patient/LoanDetails');
                 }else{
                     apiErrorHandler();
                 }
