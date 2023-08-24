@@ -168,8 +168,9 @@ const AddressDetails = () => {
             // All feilds must have something, if not, console log
             console.log(addressType, firstLine, locality, landmark, pincode, city, state)
         }
+        let addressWordLength = firstLine.split(" ").length;
 
-        if(!firstLine){
+        if(!firstLine || addressWordLength<2){
             let elem = document.getElementById('firstLine');
             if(elem) showErrorOnUI(elem);
             return;
@@ -284,10 +285,10 @@ const AddressDetails = () => {
                 id="firstLine"
                 value={firstLine ?? ""} 
                 onChange={(e)=> setFirstLine(e.target.value)} 
-                placeholder="Enter first line of address here" 
+                placeholder="Please enter your address" 
                 required 
             />
-            <span className="fieldError">This field can't be empty.</span>
+            <span className="fieldError">Please enter your complete address</span>
         </div>
 
         <div className="locality">
