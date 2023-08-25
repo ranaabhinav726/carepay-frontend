@@ -46,7 +46,7 @@ const EmploymentDetails = () =>{
     const [jobExpYear, setJobExpYear] = useState(0);
     const [jobExpMonth, setJobExpMonth] = useState(0);
 
-    const [consent, setConsent] = useState(false);
+    // const [consent, setConsent] = useState(false);
     
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
@@ -131,12 +131,12 @@ const EmploymentDetails = () =>{
 
         if(!(empType && salary && salaryDate 
             && companyName && companyAddL1 
-            && pincode && IndustryType && consent)){
+            && pincode && IndustryType)){
 
                 console.log(empType, salary, salaryDate, familyIncome 
                 , companyName, companyAddL1, companyAddL2 
                 , pincode, IndustryType, totalExpYear, 
-                    totalExpMonth, jobExpYear, jobExpMonth, consent)
+                    totalExpMonth, jobExpYear, jobExpMonth)
 
                     
                 // return;
@@ -180,11 +180,11 @@ const EmploymentDetails = () =>{
             return;
         }
 
-        if(!consent){
-            let elem = document.getElementById('consent');
-            if(elem) showErrorOnUI(elem, false);
-            return;
-        }
+        // if(!consent){
+        //     let elem = document.getElementById('consent');
+        //     if(elem) showErrorOnUI(elem, false);
+        //     return;
+        // }
 
         if(! canSubmit){
             return;
@@ -325,7 +325,7 @@ const EmploymentDetails = () =>{
         </div>
 
         <div className="familyIncome">
-            <p>Monthly family income (Optional)</p>
+            <p>Monthly family income (optional)</p>
             <input 
                 type="number" 
                 value={familyIncome ?? ""}
@@ -467,11 +467,11 @@ const EmploymentDetails = () =>{
             <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
         </div>
         
-        <div id="consent" className="consentBox">
+        {/* <div id="consent" className="consentBox">
             <input
             onClick={(e)=>setConsent(e.target.checked)} type="checkbox" />
             <label htmlFor="consent">I declare the above information is true and correct. I allow CareCoin Technologies Pvt Ltd and its lending partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax.</label><br />
-        </div>
+        </div> */}
         
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={handleSubmit} className="submit">Submit</button>

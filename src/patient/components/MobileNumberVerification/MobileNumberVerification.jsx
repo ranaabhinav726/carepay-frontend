@@ -18,8 +18,8 @@ const MobileNumberVerification = () =>{
     const [accepted, setAccept] = useState(false)
 
     const [fullName, setFullName] = useState("");
-    const [amount, setAmount] = useState("");
-    const [treatment, setTreatment] = useState("");
+    // const [amount, setAmount] = useState("");
+    // const [treatment, setTreatment] = useState("");
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
@@ -72,7 +72,7 @@ const MobileNumberVerification = () =>{
             },1000)
             return;
         }
-        if(! accepted){    
+        if(! accepted){  
             // let elem = document.getElementsByClassName('termsAndConditions')[0];
             elem.style.color = "red";
             elem2.style.color = "red";
@@ -82,6 +82,10 @@ const MobileNumberVerification = () =>{
             // );
 
             setTimeout(consentError.bind(this), 400);
+            return;
+        }
+
+        if(! declare){
             return;
         }
 

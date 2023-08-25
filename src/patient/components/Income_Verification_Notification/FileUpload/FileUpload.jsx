@@ -124,7 +124,7 @@ const FileUpload = () =>{
             document.getElementById('errorMsg').style.visibility = "visible";
             setTimeout(()=>{
                 document.getElementById('errorMsg').style.visibility = "hidden";
-            }, 1500)
+            }, 3500)
             return;
         }
         setFiles(files => [...files, file])

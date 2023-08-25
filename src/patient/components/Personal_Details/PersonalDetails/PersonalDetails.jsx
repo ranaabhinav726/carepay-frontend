@@ -42,7 +42,7 @@ const PersonalDetails = () =>{
     const [gender, setGender] = useState("")
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState("")
-    const [maritalStatus, setMaritalStatus] = useState("Married")
+    const [maritalStatus, setMaritalStatus] = useState("Unmarried")
     
     const [altNumber, setAltNumber] = useState("")
     
@@ -72,7 +72,7 @@ const PersonalDetails = () =>{
                     // console.log(data?.dateOfBirth)
                     setDob(data?.dateOfBirth)
                     setEmail(data?.emailId)
-                    setMaritalStatus(data.maritalStatus ?? "Married");
+                    setMaritalStatus(data.maritalStatus ?? "Unmarried");
                     setAltNumber(data?.alternateNumber ?? "")
                     if(response.data.data.panNo === null){
                         getDataFromDecentro();
@@ -291,7 +291,7 @@ const PersonalDetails = () =>{
     <>
     <main className="personalDetails">
     <Header progressbarDisplay="block" progress="32" />
-    <SelectAndVerify />
+    <SelectAndVerify text={"Please verify your details"} />
         <h3>Personal Details</h3>
 
         <div className="PAN">
@@ -365,12 +365,10 @@ const PersonalDetails = () =>{
         <div className="marital-status">
             <p>Marital status</p>
             <select name="marital-status" onChange={(e)=>setMaritalStatus(e.target.value)}>
-                <option value="married">Married</option>
-                <option value="unmarried">Unmarried</option>
+                <option value="Married">Married</option>
+                <option value="Unmarried">Unmarried</option>
             </select>            
         </div>
-
-
 
         <div className="altNumber">
             <p>Alternate number (optional)</p>

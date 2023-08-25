@@ -97,6 +97,7 @@ const AddressDetails = () => {
         return <option key={idx+1} value={idx+1}>{address.address}</option>
     })
     addressOptions.splice(0,0, <option key={0} value={0}>Select address …</option>)
+    addressOptions.splice(0,0, <option key={0} value={0}>Address not found, Enter new</option>)
 
     function selectAddress(idx){
         if(idx==0  || addresses.length===0){
@@ -259,12 +260,12 @@ const AddressDetails = () => {
         <h3>Address Details</h3>
 
 
-        {isDecentroCall && (addresses.length>0) && <div className="addressType">
+        <div className="addressType">
             <p>Select address</p>
             <select name="selectAddress" id="selectAddress" onChange={(e)=>selectAddress(e.target.value)}>
                 {addressOptions}
             </select>
-        </div>}
+        </div>
         
         <div className="addressType">
             <p>Address type</p>

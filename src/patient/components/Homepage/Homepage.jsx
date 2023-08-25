@@ -65,11 +65,11 @@ const Homepage = () =>{
 
         <div className="lower-section">
             <div className="line line1">Instant credit for your treatment</div>
-            <div className="line line2">0% Interest</div>
-            <div className="line line3">3 or 6 EMIs</div>
+            <div className="line line2">Starting from 0% Interest</div>
+            <div className="line line3">Flexible EMIs options</div>
 
             {/* <Link to='/MobileNumberVerification'> */}
-                <button onClick={navigateToNext} className="submit">Check Eligibility</button>
+                <button onClick={navigateToNext} className="submit">Apply for credit</button>
             {/* </Link> */}
         </div>
         </main>
