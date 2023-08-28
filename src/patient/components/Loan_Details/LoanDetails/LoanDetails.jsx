@@ -131,51 +131,68 @@ const LoanDetails = () =>{
         };
 
         await axios
-            .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
-            .then(async(response) => {
-                console.log(response)
-                if(response.data.message === "success"){
-                    // await handleNavigation();
-                    if(loanAmt <= 75000){
-                        await axios
-                            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
-                            .then(response =>{
-                                console.log(response)
-                                if(response.data.message === "success"){
-                                    // let link = response.data.data;
-                                    navigate('/patient/WaitingForApproval')
-                                }else if(response.data.message === "failure"){
-                                    // apiErrorHandler();
-                                    axios
-                                        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
-                                        .then(response =>{
-                                            console.log(response)
-                                            if(response.data.message === "success"){
-                                                // let link = response.data.data;
-                                                navigate('/patient/WaitingForApproval')
-                                            }
-                                        }).catch(error =>{
-                                            console.log(error);
-                                        })
-                                }else{
-                                    apiErrorHandler();
-                                }
-                            }).catch(error =>{
-                                console.log(error)
-                                apiErrorHandler();
-                            })
-                        
-                    }else{
-                        navigate('/patient/BankDetails');
-                    }
-                }else{
-                    apiErrorHandler();
-                }
-            }).catch(error => {
+        .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
+        .then(response => {
+            console.log(response)
+            if(response.data.message === "success"){
+                // await handleNavigation();
+                navigate('/patient/KycVerification');
+            }else{
                 apiErrorHandler();
-                console.log(error);
-            });
+            }
+        }).catch(error => {
+            apiErrorHandler();
+            console.log(error);
+        });
 
+
+        // await axios
+        //     .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
+        //     .then(async(response) => {
+        //         console.log(response)
+        //         if(response.data.message === "success"){
+        //             // await handleNavigation();
+        //             if(loanAmt <= 75000){
+        //                 await axios
+        //                     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
+        //                     .then(response =>{
+        //                         console.log(response)
+        //                         if(response.data.message === "success"){
+        //                             // let link = response.data.data;
+        //                             navigate('/patient/WaitingForApproval')
+        //                         }else if(response.data.message === "failure"){
+        //                             // apiErrorHandler();
+        //                             axios
+        //                                 .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
+        //                                 .then(response =>{
+        //                                     console.log(response)
+        //                                     if(response.data.message === "success"){
+        //                                         // let link = response.data.data;
+        //                                         navigate('/patient/WaitingForApproval')
+        //                                     }
+        //                                 }).catch(error =>{
+        //                                     console.log(error);
+        //                                 })
+        //                         }else{
+        //                             apiErrorHandler();
+        //                         }
+        //                     }).catch(error =>{
+        //                         console.log(error)
+        //                         apiErrorHandler();
+        //                     })
+                        
+        //             }else{
+        //                 navigate('/patient/BankDetails');
+        //             }
+        //         }else{
+        //             apiErrorHandler();
+        //         }
+        //     }).catch(error => {
+        //         apiErrorHandler();
+        //         console.log(error);
+        //     });
+
+        
     setCanSubmit(true);
     hideWrapper(ref.current);
     }
@@ -220,7 +237,7 @@ const LoanDetails = () =>{
     <Header progressbarDisplay="block" progress="94" canGoBack="/patient/EmploymentDetails" />
         <h3>EMI Details</h3>
 
-        <p style={{marginBottom:"10px", color:"rgba(0,0,0,0.6)"}}>Credit amount</p>
+        <p style={{margin:"16px 0 10px 0", color:"rgba(0,0,0,0.6)"}}>Credit amount</p>
         <p style={{margin:"0"}}>Rs. {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}</p>
 
         {/* <div className="doctorName">

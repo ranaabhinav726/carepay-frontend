@@ -99,6 +99,7 @@ import WaitingForApproval from './patient/components/Loan_Details/WaitingForAppr
 
 import WebHomepage from "./website/pages/Homepage"
 import About from './website/pages/About';
+import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
 
 
 
@@ -126,6 +127,7 @@ function App() {
         <Route path='/patient/EmploymentDetails' element={<EmploymentDetails />} />
 
         <Route path='/patient/LoanDetails' element={<LoanDetails />} />
+        <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
 
 

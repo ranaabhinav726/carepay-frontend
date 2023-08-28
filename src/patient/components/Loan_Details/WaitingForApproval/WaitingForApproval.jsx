@@ -40,7 +40,7 @@ function WaitingForApproval(){
                         if(loanAmt <= 75000){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
                             navigate("/patient/BankDetails");       // Navigate to collect Bank details.
                         }else{                                      // if loan amount is greater than 75k then bank details have already been collected
-                            navigate("/patient/KycVerification");   // Enter Payms's flow
+                            navigate("/patient/LoanDetails");   // Enter Payms's flow
                         }
                     }
                 }

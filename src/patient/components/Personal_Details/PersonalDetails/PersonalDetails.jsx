@@ -364,7 +364,7 @@ const PersonalDetails = () =>{
 
         <div className="marital-status">
             <p>Marital status</p>
-            <select name="marital-status" onChange={(e)=>setMaritalStatus(e.target.value)}>
+            <select name="marital-status" value={maritalStatus} onChange={(e)=>setMaritalStatus(e.target.value)}>
                 <option value="Married">Married</option>
                 <option value="Unmarried">Unmarried</option>
             </select>            

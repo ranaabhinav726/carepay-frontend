@@ -97,7 +97,7 @@ const AddressDetails = () => {
         return <option key={idx+1} value={idx+1}>{address.address}</option>
     })
     addressOptions.splice(0,0, <option key={0} value={0}>Select address …</option>)
-    addressOptions.splice(0,0, <option key={0} value={0}>Address not found, Enter new</option>)
+    addressOptions.splice(addressOptions.length,0, <option key={addressOptions.length} value={0}>Address not found, Enter new</option>)
 
     function selectAddress(idx){
         if(idx==0  || addresses.length===0){

@@ -46,6 +46,8 @@ const EmploymentDetails = () =>{
     const [jobExpYear, setJobExpYear] = useState(0);
     const [jobExpMonth, setJobExpMonth] = useState(0);
 
+    const [loanAmt, setLoanAmount] = useState('0');
+
     // const [consent, setConsent] = useState(false);
     
     const [apiError, setApiError] = useState(false);
@@ -54,6 +56,22 @@ const EmploymentDetails = () =>{
     let userId = localStorage.getItem("userId");
 
     let ref = useRef(0);
+
+    useEffect(()=>{
+        ref.current = document.getElementById('animation-wrapper');
+        if(!! userId){
+            axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+            .then(response =>{
+                if(response.data.status === 200){
+                    let data = response.data.data;
+                    if(!! data){
+                        setLoanAmount(data.loanAmount);
+                    }
+                }
+            })
+        }
+
+    },[])
 
     const list = ["Ecommerce","FMCG","Healthcare & Diagnostics","IT & ITeS",
                     "Oil and Gas","Railways","Telecommunications","Cement","Consumer Durables",
@@ -227,7 +245,13 @@ const EmploymentDetails = () =>{
             .then((response) => {
                 console.log(response)
                 if(response.data.message === "success"){
-                    navigate('/patient/LoanDetails');
+
+                    if(loanAmt <= 75000){
+                        navigate('/patient/CreditFairOffers');
+                    }else{
+                        navigate('/patient/BankDetails');
+                    }
+                    // navigate('/patient/LoanDetails');
                 }else{
                     apiErrorHandler();
                 }

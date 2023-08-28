@@ -152,9 +152,9 @@ const FileUpload = () =>{
                             if(response.data.message === "success"){
                                 let nbfc = response?.data?.data?.nbfcAssigned;
                                 if(nbfc === "CREDIT FAIR"){
-                                    navigate("/patient/WaitingForApproval");
+                                    navigate("/patient/CreditFairOffers");
                                 }else if(nbfc === "PAYME"){
-                                    navigate("/patient/KycVerification");
+                                    navigate("/patient/LoanDetails");
                                 }
                             }
                         }).catch(error => {
