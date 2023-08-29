@@ -50,7 +50,7 @@ const CreditFairOffers = () =>{
             console.log(error);
         })
 
-        axios.get(env.api_Url + "getCreditFairOffers")
+        axios.get(env.api_Url + "getCreditFairOffer")
         .then(response =>{
             console.log(response)
             if(response.data.message === "success"){
@@ -99,6 +99,12 @@ const CreditFairOffers = () =>{
             "loanReason": loanPurpose,
             "loanEMI": selected.tenure,
             "productId": selected.productId
+        }
+
+        if(!(submitObj.loanEMI && submitObj.productId)){
+            setErrorMsg("Please select a offer.");
+            apiErrorHandler();
+            return;
         }
 
         showWrapper(ref.current);

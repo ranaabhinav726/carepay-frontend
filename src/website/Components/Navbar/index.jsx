@@ -44,10 +44,10 @@ function CustomNavbar(){
                         </div>
                     <div className="navItems-wrapper">
                         <NavLink className='navItem' onClick={handleClose} to={"/"}>Home</NavLink>
-                        <NavLink className='navItem' onClick={handleClose} to={"/solutions"}>Solutions</NavLink>
+                        {/* <NavLink className='navItem' onClick={handleClose} to={"/solutions"}>Solutions</NavLink> */}
                         <NavLink className='navItem' onClick={handleClose} to={"/about"}>About Us</NavLink>
-                        <NavLink className='navItem' onClick={handleClose} to={"/blogs"}>Blogs</NavLink>
-                        <NavLink className='navItem' onClick={handleClose} to={"/contact"}>Contact Us</NavLink>
+                        {/* <NavLink className='navItem' onClick={handleClose} to={"/blogs"}>Blogs</NavLink> */}
+                        <NavLink className='navItem' onClick={()=>{handleClose(); handleFooterScroll()}} to={""}>Contact Us</NavLink>
                     </div>
                     <PrimaryButton content='Partner Up' to={"javascript:void(0)"} variant='dark' callback={handleContactScroll} />
                 </div>
