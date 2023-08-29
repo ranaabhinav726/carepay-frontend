@@ -108,7 +108,7 @@ const EmploymentDetails = () =>{
                         let industry = data.industry;
                         if(list.includes(industry)){
                             setIndustryType(industry);
-                            console.log(industry)
+                            // console.log(industry)
                         }else{
                             setIndustryType("Other");
                             setIndustryTypeOther(industry);

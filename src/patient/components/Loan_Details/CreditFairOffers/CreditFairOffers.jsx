@@ -34,7 +34,7 @@ const CreditFairOffers = () =>{
         ref.current = document.getElementById('animation-wrapper');
         axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
         .then(response =>{
-            if(response.data.status === 200){
+            if(response.data.message === "success"){
                 let data = response.data.data;
                 if(!! data){
                     setLoanAmount(parseInt(data.loanAmount));
@@ -50,7 +50,9 @@ const CreditFairOffers = () =>{
         axios.get(env.api_Url + "getCreditFairOffers")
         .then(response =>{
             console.log(response)
-            setOffers(response?.data?.data)
+            if(response.data.message === "success"){
+                setOffers(response?.data?.data)
+            }
         }).catch(error =>{
             console.log(error);
         })
