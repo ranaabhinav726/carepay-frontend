@@ -19,6 +19,7 @@ const EnterOTP = () =>{
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
+    const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.")
 
     // let phoneNumber = data?.userData.phone_number || "98xxxx9898";
     // let phoneNumber = localStorage.getItem("phone_number") || "98xxxx9898";
@@ -120,6 +121,44 @@ const EnterOTP = () =>{
         document.getElementById('digit-1').focus()
     },[])
 
+    let userId = "";
+
+    async function getNbfc(){
+        if(! userId) return "";
+        let nbfc = "";
+        await axios
+        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+            .then(async(response) => {
+                console.log(response)
+                if(response.data.message === "success"){
+                    // console.log(response)
+                    nbfc = response?.data?.data?.nbfcAssigned;
+                }
+            }).catch(()=>{
+                
+            })
+
+        return nbfc;
+    }
+
+    async function getLoanAmount(){
+        if(! userId) return;
+        let amount = 0;
+        await axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+        .then(response =>{
+            if(response.data.message === "success"){
+                let data = response?.data?.data;
+                if(!! data){
+                    amount = parseInt(data.loanAmount);
+                }
+            }
+        }).catch(error =>{
+            console.log(error);
+        })
+
+        return amount;
+    }
+
     async function login(){
         let otp = "";
         let digit1 = document.getElementById('digit-1').value;
@@ -150,14 +189,15 @@ const EnterOTP = () =>{
             .then((response) => {
                 console.log(response)
                 if(response.data.message === "success"){
-                    let userId = response.data.data;
+                    userId = response.data.data;
                     if(userId){
                         localStorage.setItem("userId", userId);
                         axios.get(env.api_Url + "userDetails/getFormStatusByUserId?userId=" + userId)
-                        .then(response =>{
+                        .then(async(response) =>{
                             if(response.data.message === "success"){
                                 let stage = response?.data?.data;
                                 let path;
+                                let nbfc;
                                 switch(stage){
                                     case "Basic":
                                         path = "AddressDetails";
@@ -165,14 +205,64 @@ const EnterOTP = () =>{
                                     case "Address":
                                         path = "EmploymentDetails";
                                         break;
-                                    case "Occupation":
+                                    case "Occupation": 
+                                    let loanAmount = await getLoanAmount();
+                                    if(loanAmount <= 75000){
+                                        path = "CreditFairOffers";
+                                    }else{
                                         path = "BankDetails";
-                                        break;
+                                    }
+                                    // (async () => {
+                                    //         // if loan Amount <= 75k , "credit fair offers screen" else "bank details screen"
+                                    //         await axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+                                    //         .then(response =>{
+                                    //             if(response.data.message === "success"){
+                                    //                 let data = response?.data?.data;
+                                    //                 if(!! data){
+                                    //                     let loanAmount = parseInt(data.loanAmount)
+                                    //                     if(loanAmount <= 75000){
+                                    //                         path = "CreditFairOffers";
+                                    //                     }else{
+                                    //                         path = "BankDetails";
+                                    //                     }
+                                    //                 }
+                                    //             }
+                                    //         }).catch(error =>{
+                                    //             console.log(error);
+                                    //         })
+                                    //       })();
+                                    break;
+                                        
                                     case "BankDetails":
                                         path = "IncomeVerification";
                                         break;
                                     case "BankStatement":
-                                        path = "LoanDetails";
+                                        nbfc = await getNbfc();
+                                        console.log(nbfc);
+                                        if(nbfc === "CREDIT FAIR"){
+                                            path = "CreditFairOffers";
+                                        }else{
+                                            path = "LoanDetails";
+                                        }
+                                        // (async () => {
+                                        //     // if nbfc=== PAYME , "3/6 offers screen" else "credit fair offer screen"
+                                        //     await axios
+                                        //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+                                        //         .then(async(response) => {
+                                        //             console.log(response)
+                                        //             if(response.data.message === "success"){
+                                        //                 // console.log(response)
+                                        //                 let nbfc = response?.data?.data?.nbfcAssigned;
+                                        //                 if(nbfc === "CREDIT FAIR"){
+                                        //                     path = "CreditFairOffers";
+                                        //                 }else{
+                                        //                     path = "LoanDetails";
+                                        //                 }
+                                        //             }
+                                        //         }).catch(()=>{
+                                                    
+                                        //         })
+                                        // })
                                         break;
                                     case "LoanDetails":
                                         path = "KycVerification";
@@ -187,13 +277,47 @@ const EnterOTP = () =>{
                                         path = "StatementVerificationUnderProcess";
                                         break;
                                     case "DOCUMENT_UPLOAD":
-                                        path = "StatementVerificationUnderProcess";
+                                        nbfc = await getNbfc();
+                                        console.log(nbfc);
+                                        if(nbfc === "CREDIT FAIR"){
+                                            path = "WaitingForApproval";
+                                        }else{
+                                            path = "StatementVerificationUnderProcess";
+                                        }
                                         break;
                                     case "DOCUMENT_VERIFIED":
                                         path = "StatementVerificationUnderProcess";
                                         break;
                                     case "BANK_DETAILS":
-                                        path = "BankDetailsUnderProcess";
+                                        nbfc = await getNbfc();
+                                        console.log(nbfc);
+                                        if(nbfc === "CREDIT FAIR"){
+                                            path = "WaitingForApproval";
+                                        }else{
+                                            path = "BankDetailsUnderProcess";
+                                        }
+                                        // (async () => {
+                                        //     // if nbfc=== CREDIT FAIR , "Waiting for approval" else "BankDetailsUnderProcess"
+                                        //     await axios
+                                        //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+                                        //         .then(async(response) => {
+                                        //             console.log(response)
+                                        //             if(response.data.message === "success"){
+                                        //                 // console.log(response)
+                                        //                 let nbfc = response?.data?.data?.nbfcAssigned;
+                                        //                 if(nbfc === "CREDIT FAIR"){
+                                        //                     path = "WaitingForApproval";
+                                        //                 }else{
+                                        //                     path = "BankDetailsUnderProcess";
+                                        //                 }
+                                        //             }
+                                        //         }).catch(()=>{
+                                                    
+                                        //         })
+                                        // })
+                                        break;
+                                    case "APPROVED": // ... Credit fair
+                                        path = "Congrats";
                                         break;
                                     case "BANK_DETAILS_VERIFIED":
                                         path = "LoanAgreement";
@@ -204,9 +328,18 @@ const EnterOTP = () =>{
                                     case "ESIGN_COMPLETED":
                                         path = "Emandate";
                                         break;
-                                    case "EMANDATE_INITIATED":
-                                        path = "Emandate";
+                                    case "EMANDATE_INITIATED": // ... Credit fair
+                                        // if nbfc=== CREDIT FAIR , "congrats" else "Emandate"
+                                        nbfc = await getNbfc();
+                                        console.log(nbfc);
+                                        if(nbfc === "CREDIT FAIR"){
+                                            path = "Congrats";
+                                        }else{
+                                            path = "Emandate";
+                                        }
                                         break;
+
+
                                     case "EMANDATE_COMPLETED":
                                         path = "FirstPaymentScreen";
                                         break;
@@ -216,9 +349,17 @@ const EnterOTP = () =>{
                                     case "LOAN_APPROVED":
                                         path = "LoanAppUnderProcess";
                                         break;
-                                    case "DISBURSED":
-                                        path = "LoanAppUnderProcess";
+                                    case "DISBURSED": // ... Credit fair
+                                        // if nbfc=== CREDIT FAIR , "congrats" else "LoanAppUnderProcess"
+                                        nbfc = await getNbfc();
+                                        console.log(nbfc);
+                                        if(nbfc === "CREDIT FAIR"){
+                                            path = "Congrats";
+                                        }else{
+                                            path = "LoanAppUnderProcess";
+                                        }
                                         break;
+
                                     case "PAID":
                                         path = "UserDashboard";
                                         break;
@@ -238,6 +379,11 @@ const EnterOTP = () =>{
                         })
                     } 
                 }else{
+                    if(response.data.data === "INCORRECT OTP!"){
+                        setErrorMsg("Incorrect OTP, please check.");
+                    }else{
+                        setErrorMsg("An error has occured, please try again.");
+                    }
                     apiErrorHandler();
                 }
             }).catch(error => {
@@ -276,7 +422,7 @@ const EnterOTP = () =>{
             <p id="error">Please enter correct OTP</p>
         </div>
         
-        <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
+        <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
         <button onClick={()=>login()} className="submit">Submit</button>
 
     </main>

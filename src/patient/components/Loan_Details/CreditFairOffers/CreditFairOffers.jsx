@@ -30,6 +30,9 @@ const CreditFairOffers = () =>{
 
     let userId = localStorage.getItem('userId');
 
+    // let errorMsg = "An error has occured, please try again.";
+    const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.")
+
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
@@ -122,6 +125,11 @@ const CreditFairOffers = () =>{
                                                 if(response.data.message === "success"){
                                                     navigate('/patient/WaitingForApproval')
                                                 }else{
+                                                    if(response.data.data === "It seems like it has been less than 3 months since you applied to Credit Fair . We'll be happy to serve you after 3 Month"){
+                                                        setErrorMsg("Please apply after 3 months");
+                                                    }else{
+                                                        setErrorMsg("An error has occured, please try again.");
+                                                    }
                                                     apiErrorHandler();
                                                 }
                                             }).catch( () =>{
@@ -189,6 +197,8 @@ const CreditFairOffers = () =>{
         }, 1500);
     }
 
+    
+
     return(
         <>
             <main className="creditFairOffers">
@@ -212,7 +222,7 @@ const CreditFairOffers = () =>{
                 <OfferCard /> */}
 
 
-                <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
+                <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
 
                 <button className='submit' onClick={()=>submitLoanData()}>Submit</button>
 
