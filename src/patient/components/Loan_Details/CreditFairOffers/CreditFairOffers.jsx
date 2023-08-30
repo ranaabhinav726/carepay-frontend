@@ -50,7 +50,7 @@ const CreditFairOffers = () =>{
             console.log(error);
         })
 
-        axios.get(env.api_Url + "getCreditFairOffer")
+        axios.get(env.api_Url + "getCreditFairOffers")
         .then(response =>{
             console.log(response)
             if(response.data.message === "success"){
@@ -218,7 +218,7 @@ const CreditFairOffers = () =>{
                 <p className="subheading">Select EMI options</p>
                 <div className="msgBox">
                     <h4>Please note:</h4>
-                    <p>The first EMI will be collected in advance before disbursing your credit.</p>
+                    <p>An amount will be collected before disbursing your credit as advance EMI payment.</p>
                     <p>Select options accordingly.</p>
                 </div>
 
@@ -266,14 +266,14 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
             <div className="offerContent">
                 <div className="offerContentLeft">
                     <span className='offerCardSpan'>Tenure</span>
-                    <span className='offerCardSpan' style={{fontSize:"20px"}}>{months} month{months>1 && "s"}</span>
+                    <span className='offerCardSpan'>EMI amount</span>
                     <span className='offerCardSpan'>Processing fees</span>
                     <span className='offerCardSpan'>Interest rate</span>
                     <span className='offerCardSpan'>Advance EMI(s)</span>
                 </div>
                 <div className="offerContentRight">
-                    <span className='offerCardSpan'>EMI amount</span>
-                    <span className='offerCardSpan' style={{fontSize:"20px"}}><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                    <span className='offerCardSpan'>{months} month{months>1 && "s"}</span>
+                    <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
                     <span className='offerCardSpan'><BiRupee style={{margin:"0 -4px -2px -2px"}} /> {pf}</span>
                     <span className='offerCardSpan'>{interest}</span>
                     <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>

@@ -56,7 +56,7 @@ const Homepage = () =>{
 
         <div className="upper-section">
             <h1 className="heading">Don't Postpone<br /> your Treatment</h1>
-            <p className="subheading">Get an instant medical credit<br/>in just 3 easy steps!</p>
+            <p className="subheading">Instant finance is just 4 easy steps!</p>
         </div>
 
         <div className="middle-section">
@@ -64,9 +64,9 @@ const Homepage = () =>{
         </div>
 
         <div className="lower-section">
-            <div className="line line1">Instant credit for your treatment</div>
+            <div className="line line1">Digital process with quick approvals</div>
             <div className="line line2">Starting from 0% Interest</div>
-            <div className="line line3">Flexible EMIs options</div>
+            <div className="line line3">Flexible EMI options</div>
 
             {/* <Link to='/MobileNumberVerification'> */}
                 <button onClick={navigateToNext} className="submit">Apply for credit</button>

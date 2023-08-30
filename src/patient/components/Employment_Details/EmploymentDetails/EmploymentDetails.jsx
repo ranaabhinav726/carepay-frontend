@@ -48,6 +48,7 @@ const EmploymentDetails = () =>{
 
     const [loanAmt, setLoanAmount] = useState('0');
 
+    const [cityName, setCityName] = useState("");
     // const [consent, setConsent] = useState(false);
     
     const [apiError, setApiError] = useState(false);
@@ -104,7 +105,7 @@ const EmploymentDetails = () =>{
                         setCompanyName(data.organizationName);
                         setCompanyAddL1(data.workplaceAddress1);
                         setCompanyAddL2(data.workplaceAddress2);
-                        setPincode(data.workplacePincode);
+                        handlePincode(data.workplacePincode);
                         let industry = data.industry;
                         if(list.includes(industry)){
                             setIndustryType(industry);
@@ -122,6 +123,20 @@ const EmploymentDetails = () =>{
             })
         }
     },[])
+
+    function handlePincode(val){
+        if(val.length < 6){
+            setPincode(val);
+        }else if(val.length == 6){
+            setPincode(val);
+            axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
+            .then(response =>{
+                console.log(response)
+                let city = response?.data?.city;
+                setCityName(city);
+            })
+        }
+    }
 
     // const today = new Date();
     // let year = today.getFullYear();
@@ -395,12 +410,13 @@ const EmploymentDetails = () =>{
                 id="pincode"
                 type="number" 
                 value={pincode ?? ""}
-                onChange={(e)=>setPincode(e.target.value)}
+                onChange={(e)=>handlePincode(e.target.value)}
                 placeholder="Enter here" 
                 inputMode="numeric" 
             />
             <span className="fieldError">This field can't be empty.</span>
         </div>
+        <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p>
 
         <div className="IndustryType">
             <p>Industry</p>

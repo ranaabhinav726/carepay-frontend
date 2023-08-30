@@ -55,11 +55,17 @@ const MobileNumberVerification = () =>{
     }
     
     let elem = document.getElementById('terms');
+    let elem3 = document.getElementsByClassName('termsAndConditions')[0];
     let elem2 = document.getElementsByClassName('termsAndCond')[0];
     function consentError(){
         elem.classList.remove('errorAnimate');
         elem.style.color = "black";
         elem2.style.color = "black";
+    }
+
+    function consentError2(){
+        elem3.style.color = "black";
+        elem3.classList.remove('errorAnimate');
     }
 
     async function verifyAndNavigate(){
@@ -72,7 +78,17 @@ const MobileNumberVerification = () =>{
             },1000)
             return;
         }
-        if(! accepted){  
+
+        if(! declare){
+            elem3.style.color = "red";
+            elem3.classList.add('errorAnimate');
+            setTimeout(() => {
+                consentError2();
+            }, 400);
+            return;
+        }
+
+        if(! accepted){
             // let elem = document.getElementsByClassName('termsAndConditions')[0];
             elem.style.color = "red";
             elem2.style.color = "red";
@@ -82,10 +98,6 @@ const MobileNumberVerification = () =>{
             // );
 
             setTimeout(consentError.bind(this), 400);
-            return;
-        }
-
-        if(! declare){
             return;
         }
 

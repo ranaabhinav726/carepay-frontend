@@ -279,7 +279,7 @@ const LoanDetails = () =>{
         <p className="subheading">Select EMI options</p>
         <div className="msgBox">
             <h4>Please note:</h4>
-            <p>The first EMI will be collected in advance before disbursing your credit.</p>
+            <p>An amount will be collected before disbursing your credit as advance EMI payment.</p>
             <p>Select options accordingly.</p>
         </div>
 
