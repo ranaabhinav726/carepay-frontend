@@ -192,6 +192,11 @@ const EmploymentDetails = () =>{
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(!companyAddL2){ 
+            let elem = document.getElementById('companyAddL2');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(!pincode){
             let elem = document.getElementById('pincode');
@@ -232,12 +237,13 @@ const EmploymentDetails = () =>{
             "salaryDay": salaryDate,
             "organizationName": companyName,
             "workplaceAddress1": companyAddL1,
+            "workplaceAddress2":companyAddL2,
             "workplacePincode": pincode,
             "totalJobExpInYears": parseInt(totalExpYear),
             "totalJobExpInMonth": parseInt(totalExpMonth),
             "currentJobExpInYears": parseInt(jobExpYear),
             "currentJobExpInMonth": parseInt(jobExpMonth),
-            "monthlyFamilyIncome": familyIncome,
+            "monthlyFamilyIncome": (familyIncome?familyIncome:0),
             "formStatus": ""
           };
 
@@ -251,9 +257,9 @@ const EmploymentDetails = () =>{
         //     submitObj.monthlyFamilyIncome = familyIncome;
         //   }
 
-          if(!!companyAddL2){
-            submitObj.workplaceAddress2 = companyAddL2;
-          }
+        //   if(!!companyAddL2){
+        //     submitObj.workplaceAddress2 = companyAddL2;
+        //   }
 
         await axios.post(env.api_Url + "userDetails/employmentDetail", 
             submitObj)
@@ -398,6 +404,7 @@ const EmploymentDetails = () =>{
         <div className="companyAddress-line2">
             <p>Current workplace address (line 2)</p>
             <input 
+                id="companyAddL2"
                 type="text" 
                 value={companyAddL2 ?? ""}
                 onChange={(e)=>setCompanyAddL2(e.target.value)}
