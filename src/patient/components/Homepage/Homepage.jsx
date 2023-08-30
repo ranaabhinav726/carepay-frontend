@@ -56,7 +56,7 @@ const Homepage = () =>{
 
         <div className="upper-section">
             <h1 className="heading">Don't Postpone<br /> your Treatment</h1>
-            <p className="subheading">Instant finance is just 4 easy steps!</p>
+            <p className="subheading">Instant finance in just 4 easy steps!</p>
         </div>
 
         <div className="middle-section">
