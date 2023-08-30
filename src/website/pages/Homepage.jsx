@@ -66,7 +66,8 @@ function Hero(){
             <div className="container">
                 <div className="flex-content-wrapper">
                     <div className="section-content hero-container-content">
-                        <h1>Increase your <br />Revenue <br/>by 50 <div className="percent-wrapper" style={{font:"inherit", fontSize:"0.6em"}}>%</div></h1>
+                        {/* <h1>Increase your <br />Revenue <br/>by 50 <div className="percent-wrapper" style={{font:"inherit", fontSize:"0.6em"}}>%</div></h1> */}
+                        <h1>Increase your <br />Revenue <br/>by 50 <sup style={{font:"inherit", fontSize:"0.5em", marginLeft:"-5px"}}>%</sup></h1>
                         <p className="text-content">Empower your journey with CarePay’s cutting-edge <br/>financial solutions for healthcare.</p>
                         <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' vanishOnCollapse callback={handleContactScroll} />
                         <FloatingButton content={"Partner up"} to={"javascript:void(0)"} callback={handleContactScroll} />
@@ -83,7 +84,7 @@ function Hero(){
                 </div>
                 <div className="container" style={{marginTop:"100px"}}>
                     <h2>Holistic <span className='highlight' style={{font:"inherit"}}>Solutions</span> for Progressive Healthcare</h2>
-                    <p className="text-content">Harness the synergy of patient financing and intelligent healthcare solutions.</p>
+                    <p className="text-content" style={{textAlign:"center"}}>Harness the synergy of patient financing and intelligent healthcare solutions.</p>
                 </div>
             </div>
         </section>
@@ -480,7 +481,7 @@ export function Footer(){
                                 <p className="address">CareCoin Technologies Pvt Ltd <br />5th Floor, DLF Two Horizon Centre, <br />DLF Phase 5, Gurugram, <br/>Haryana, 122002</p>
                             </div>
                             <div className="socials">
-                                <Link to={"https://www.instagram.com"} target='_blank'><img src={InstaIcon} alt="" /></Link>
+                                <Link to={"https://www.instagram.com/care_pay/"} target='_blank'><img src={InstaIcon} alt="" /></Link>
                                 <Link to={"https://www.linkedin.com/company/carepayin/"} target='_blank'><img src={LinkedinIcon} alt="" /></Link>
                             </div>
                         </div>

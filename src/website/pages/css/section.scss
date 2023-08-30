@@ -422,31 +422,34 @@ section.footer{
             }
             div.quick-links{
                 h5{
-                    color: var(--secondary-purple, #514C9F);
+                    color: var(--secondary-purple, #908dc1);
                     font-family: DM Sans;
                     font-size: 28px;
                     font-style: normal;
                     font-weight: 500;
                     line-height: 200%; /* 200% */
+                    margin-bottom: 10px;
                 }
                 a{
                     display: block;
-                    padding: 10px;
+                    padding: 10px 10px 10px 0;
                     margin: 24px 0;
                     color: white;
                     font-size: 20px;
+                    text-decoration: underline;
                 }
             }
             div.contact-us{
                 border-left: 2px solid #ECEBFF;
                 padding-left: 2rem;
                 h5{
-                    color: var(--secondary-purple, #514C9F);
+                    color: var(--secondary-purple, #908dc1);
                     font-family: DM Sans;
                     font-size: 28px;
                     font-style: normal;
                     font-weight: 500;
                     line-height: 200%; /* 200% */
+                    margin-bottom: 10px;
                 }
                 div.contact{
                     display: flex;
@@ -456,6 +459,7 @@ section.footer{
 
                     img{
                         margin-right: 1rem;
+                        max-width: 10%;
                     }
                     a, p{
                         color: white;
