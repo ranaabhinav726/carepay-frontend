@@ -31,14 +31,55 @@ const PracticeDetails = () =>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
 
-    let branches = ["Dentistry", "Dental Surgery", "Radiology", "Immunology", 
-                    "Neurology", "Gynecology and obstetrics", "Pediatrics", "Psychiatry", 
-                    "Internal medicine", "General", "Cardiology", "Orthopedics", "Emergency medicine", 
-                    "Endocrinology", "Gastroenterology", "Nephrology", "Pulmonology", "Dietetics", 
-                    "Urology", "Cosmetology", "Vascular Surgery", "Anesthesiology", "Genetics", 
-                    "Nuclear medicine", "Forensic medicine", "Dermatology", "Oncology", "Pathology", 
-                    "Physiotherapy", "ENT", "Plastic surgery", "Rheumatology", "Bariatric Surgery", 
-                    "Psychology", "Diabetology", "Neurosurgery", "Other"]
+    // let branches = ["Dentistry", "Dental Surgery", "Radiology", "Immunology", 
+    //                 "Neurology", "Gynecology and obstetrics", "Pediatrics", "Psychiatry", 
+    //                 "Internal medicine", "General", "Cardiology", "Orthopedics", "Emergency medicine", 
+    //                 "Endocrinology", "Gastroenterology", "Nephrology", "Pulmonology", "Dietetics", 
+    //                 "Urology", "Cosmetology", "Vascular Surgery", "Anesthesiology", "Genetics", 
+    //                 "Nuclear medicine", "Forensic medicine", "Dermatology", "Oncology", "Pathology", 
+    //                 "Physiotherapy", "ENT", "Plastic surgery", "Rheumatology", "Bariatric Surgery", 
+    //                 "Psychology", "Diabetology", "Neurosurgery", "Other"]
+
+    let branches = [
+        'Anesthesiology',
+        'Bariatric Surgery',
+        'Cardiology',
+        'Cosmetology',
+        'Dental Surgery',
+        'Dentistry',
+        'Dermatology',
+        'Diabetology',
+        'Dietetics',
+        'ENT',
+        'Emergency medicine',
+        'Endocrinology',
+        'Forensic medicine',
+        'Gastroenterology',
+        'General',
+        'Genetics',
+        'Gynecology and obstetrics',
+        'IVF',
+        'Immunology',
+        'Internal medicine',
+        'Nephrology',
+        'Neurology',
+        'Neurosurgery',
+        'Nuclear medicine',
+        'Oncology',
+        'Orthopedics',
+        'Pathology',
+        'Pediatrics',
+        'Physiotherapy',
+        'Plastic surgery',
+        'Psychiatry',
+        'Psychology',
+        'Pulmonology',
+        'Radiology',
+        'Rheumatology',
+        'Urology',
+        'Vascular Surgery',
+        'Other'
+      ]
 
     useEffect(()=>{
         if(doctorId){
