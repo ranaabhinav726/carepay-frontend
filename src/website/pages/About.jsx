@@ -1,6 +1,6 @@
 import './css/section.scss'
 import './css/about.scss'
-import HeroImg from '../assets/About-hero-banner.png'
+import HeroImg from '../assets/About-hero-banner.webp'
 import { Contact, Footer } from './Homepage'
 import user from '../assets/People/user.webp'
 

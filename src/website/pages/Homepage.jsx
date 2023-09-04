@@ -1,14 +1,14 @@
 import './css/section.scss'
 import PrimaryButton from '../Components/PrimaryButton'
-import HeroImg from '../assets/hero-banner.png'
-import FinanceImg from '../assets/Finance.png'
+import HeroImg from '../assets/hero-banner.webp'
+import FinanceImg from '../assets/Finance.webp'
 import FloatingButton from '../Components/FloatingButton'
 
 import { handleContactScroll } from '../Components/utility'
 
 
-import RevenueImg from '../assets/revenue.png'
-import OperationsImg from '../assets/operations.png'
+import RevenueImg from '../assets/revenue.webp'
+import OperationsImg from '../assets/operations.webp'
 import { useEffect, useRef, useState } from 'react'
 
 import Step1Gif from '../assets/GIFs/Step 1.gif'
@@ -18,17 +18,17 @@ import Step4Gif from '../assets/GIFs/Step 4.gif'
 import Step5Gif from '../assets/GIFs/Step 5.gif'
 
 import FutureHealthcare from '../assets/healthcare finance.png'
-import TrustedBy1 from '../assets/trustedBy-1.png'
-import TrustedBy2 from '../assets/trustedBy-2.png'
-import TrustedBy3 from '../assets/trustedBy-3.png'
+import TrustedBy1 from '../assets/trustedBy-1.webp'
+import TrustedBy2 from '../assets/trustedBy-2.webp'
+import TrustedBy3 from '../assets/trustedBy-3.webp'
 import { Link } from 'react-router-dom'
 
 import FooterLogo from '../assets/footerLogo.png'
-import CallIcon from '../assets/call.png'
-import EmailIcon from '../assets/email.png'
-import LocationIcon from '../assets/location.png'
-import LinkedinIcon from '../assets/linkedIn.png'
-import InstaIcon from '../assets/instaIcon.png'
+import CallIcon from '../assets/call.webp'
+import EmailIcon from '../assets/email.webp'
+import LocationIcon from '../assets/location.webp'
+import LinkedinIcon from '../assets/linkedIn.webp'
+import InstaIcon from '../assets/instaIcon.webp'
 import axios from 'axios'
 import CustomNavbar from '../Components/Navbar'
 
@@ -48,7 +48,7 @@ function WebHomepage(){
             <Operations />
             <HowItWorks />
             <HealthcareFinance />
-            <Reviews />
+            {/* <Reviews /> */}
             <Branding />
             <HomepageFAQs />
             <Contact />
@@ -68,7 +68,7 @@ function Hero(){
                     <div className="section-content hero-container-content">
                         {/* <h1>Increase your <br />Revenue <br/>by 50 <div className="percent-wrapper" style={{font:"inherit", fontSize:"0.6em"}}>%</div></h1> */}
                         <h1>Increase your <br />Revenue <br/>by 50 <sup style={{font:"inherit", fontSize:"0.5em", marginLeft:"-5px"}}>%</sup></h1>
-                        <p className="text-content">Empower your journey with CarePay’s cutting-edge <br/>financial solutions for healthcare.</p>
+                        <p className="text-content" style={{textAlign:"center"}}>Empower your journey with CarePay’s cutting-edge <br/>financial solutions for healthcare.</p>
                         <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' vanishOnCollapse callback={handleContactScroll} />
                         <FloatingButton content={"Partner up"} to={"javascript:void(0)"} callback={handleContactScroll} />
                     </div>
@@ -309,7 +309,7 @@ function Branding(){
                 <div className="container">
                     <h2>Don't delay, just <span className='clr-purple'>carepay !</span></h2>
                     <p className="text-content">The sooner you join, the more patients you'll convert. So, say goodbye to payment delays and seize the opportunity to supercharge your revenue growth. Join CarePay today!</p>
-                    <PrimaryButton content={"Partner up with us"} to={"/"} variant='dark'/>
+                    <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' callback={handleContactScroll} />
                 </div>
             </section>
         </>
