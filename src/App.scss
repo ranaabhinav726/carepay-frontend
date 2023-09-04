@@ -514,8 +514,8 @@ a {
 
 :root{
   --h1-xsm-font-size: 54px;
-  --h1-sm-font-size: 40px;
-  --h1-md-font-size: 54px;
+  --h1-sm-font-size: 44px;
+  --h1-md-font-size: 58px;
   --h1-l-font-size: 62px;
   --h1-xl-font-size: 66px;
   --h1-xxl-font-size: 72px;
@@ -612,7 +612,7 @@ div.website-container{
 
         /* Desktop H3 */
         font-family: "DM Sans";
-        font-size: calc(0.7 * var(--h1-xsm-font-size));
+        font-size: calc(0.8 * var(--h1-xsm-font-size));
         font-style: normal;
         font-weight: 500;
         line-height: 112.5%; /* 112.5% */
@@ -620,7 +620,7 @@ div.website-container{
 
       p.text-content{
         color: rgba(0, 0, 0, 0.80);
-        text-align: center;
+        // text-align: center;
 
         /* Mobile B1 regular */
         font-family: 'DM Sans', sans-serif;
@@ -684,7 +684,7 @@ div.website-container{
 
         /* Mobile B1 regular */
         font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: 22px; /* 157.143% */
