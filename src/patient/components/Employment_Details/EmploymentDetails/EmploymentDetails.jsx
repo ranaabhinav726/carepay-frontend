@@ -102,7 +102,7 @@ const EmploymentDetails = () =>{
                         setSalary(data.nettakehomesalary);
                         setSalaryDate(data.salaryDay);
                         setFamilyIncome(data.monthlyFamilyIncome ?? "0");
-                        setCompanyName(data.organizationName);
+                        handleCompanyName(data.organizationName);
                         setCompanyAddL1(data.workplaceAddress1);
                         setCompanyAddL2(data.workplaceAddress2);
                         handlePincode(data.workplacePincode);
@@ -123,6 +123,11 @@ const EmploymentDetails = () =>{
             })
         }
     },[])
+
+    function handleCompanyName(companyName){
+        let filteredCompanyName = companyName.replaceAll("&", "and");
+        setCompanyName(filteredCompanyName);
+    }
 
     function handlePincode(val){
         if(val.length < 6){
@@ -385,7 +390,7 @@ const EmploymentDetails = () =>{
                 id="companyName"
                 type="text" 
                 value={companyName ?? ""}
-                onChange={(e)=>setCompanyName(e.target.value)}
+                onChange={(e)=>handleCompanyName(e.target.value)}
                 placeholder="Enter your current company name" 
             />
             <span className="fieldError">This field can't be empty.</span>
