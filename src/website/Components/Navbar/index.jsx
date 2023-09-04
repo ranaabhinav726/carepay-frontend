@@ -49,7 +49,7 @@ function CustomNavbar(){
                         {/* <NavLink className='navItem' onClick={handleClose} to={"/blogs"}>Blogs</NavLink> */}
                         <NavLink className='navItem' onClick={()=>{handleClose(); handleFooterScroll()}} to={""}>Contact Us</NavLink>
                     </div>
-                    <PrimaryButton content='Partner Up' to={"javascript:void(0)"} variant='dark' callback={handleContactScroll} />
+                    <PrimaryButton content='Partner Up' to={"javascript:void(0)"} variant='dark' callback={()=>{handleContactScroll(); handleClose();}} />
                 </div>
             </div>
         </nav>
