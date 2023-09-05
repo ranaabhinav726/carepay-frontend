@@ -121,7 +121,7 @@ const PersonalDetails = () =>{
     let month = today.getMonth() + 1;
     month = (month<10? "0"+month : month);
     let year = today.getFullYear();
-    year = year-21; // to restrict the minimum age of user to 21 years.
+    year = year-18; // to restrict the minimum age of user to 18 years.
 
     let maxDateForDob = `${year}-${month}-${day}`; // 'yyyy-mm-dd' - format compulsion
     ////////////////////////// DOB restriction code ended //////////////////////////////////
