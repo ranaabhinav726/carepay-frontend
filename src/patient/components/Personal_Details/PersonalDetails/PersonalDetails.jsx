@@ -439,14 +439,14 @@ const PersonalDetails = () =>{
         <h3>Reference details</h3>
 
         <div className="referenceNumber">
-            <p>Reference Number</p>
+            <p>Reference contact number</p>
             <input 
                 id="refNumber"
                 type="number" 
                 inputMode="numeric" 
                 onChange={(e)=> numberChange(e, "referenceNumber")} 
                 value={refNumber ?? ""} 
-                placeholder="Enter reference number" 
+                placeholder="Enter reference contact number" 
              />
         </div>
 
