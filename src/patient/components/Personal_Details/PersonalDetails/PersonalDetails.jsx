@@ -468,7 +468,7 @@ const PersonalDetails = () =>{
                 id="refRelation"
                 value={refRelation ?? ""} 
                 onChange={(e)=> setRefRelation(e.target.value)} 
-                placeholder="Enter relation to owner of number" 
+                placeholder="Enter relation to owner of the number" 
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
