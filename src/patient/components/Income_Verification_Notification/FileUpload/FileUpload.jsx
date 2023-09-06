@@ -141,31 +141,31 @@ const FileUpload = () =>{
 
     function checkAssignedNbfcAndNavigate(){
         //call initateFlow -> customer , if success, below code else same screen...
-        axios
-            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
-            .then(response =>{
-                console.log(response)
-                if(response.data.message === "success"){
+        // axios
+        //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
+        //     .then(response =>{
+        //         console.log(response)
+                // if(response.data.message === "success"){
                     axios
                         .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
                         .then((response) => {
                             if(response.data.message === "success"){
                                 let nbfc = response?.data?.data?.nbfcAssigned;
-                                if(nbfc === "CREDIT FAIR"){
-                                    navigate("/patient/CreditFairOffers");
-                                }else if(nbfc === "PAYME"){
+                                if(nbfc === "PAYME"){
                                     navigate("/patient/LoanDetails");
+                                }else{
+                                    navigate("/patient/CreditFairOffers");
                                 }
                             }
                         }).catch(error => {
                             console.log(error);
                             // navigate(-1)
                         });
-                }
-            }).catch(error =>{
-                console.log(error)
-                // navigate(-1);
-            })
+                // }
+            // }).catch(error =>{
+            //     console.log(error)
+            //     // navigate(-1);
+            // })
     }
 
     async function uploadFiles(){
