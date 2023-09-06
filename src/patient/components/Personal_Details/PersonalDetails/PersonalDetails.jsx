@@ -37,6 +37,7 @@ const PersonalDetails = () =>{
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
     const [fullName, setFullName] = useState("")
+    const [fatherName, setFatherName] = useState("")
     const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
     const [gender, setGender] = useState("")
@@ -64,7 +65,8 @@ const PersonalDetails = () =>{
                 if(response.data.message === "success"){
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
-                    setFullName(data?.firstName)
+                    setFullName(data?.firstName);
+                    setFatherName(data?.fatherName);
                     setNameOnPan(data?.panCardName)
                     setNumber(data?.mobileNumber)
                     setGender(data?.gender);
@@ -189,6 +191,13 @@ const PersonalDetails = () =>{
             if(elem1) showErrorOnUI(elem1);
             return;
         }
+
+        //fatherName
+        if(! fatherName){
+            let elem = document.getElementById('fatherName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }        
 
         localStorage.setItem("email", email);
 
@@ -360,6 +369,18 @@ const PersonalDetails = () =>{
                 max ={maxDateForDob}
             />
             <span className="fieldError">Please enter correct DOB.</span>
+        </div>
+
+        <div className="fatherName">
+            <p>Father's name</p>
+            <input type="text" 
+                id="fatherName"
+                value={fatherName ?? ""} 
+                onChange={(e)=> setFatherName(e.target.value)} 
+                placeholder="Enter your father's name" 
+                required 
+            />
+            <span className="fieldError">This field can't be empty.</span>
         </div>
 
         <div className="marital-status">
