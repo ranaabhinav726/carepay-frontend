@@ -344,10 +344,10 @@ const EmploymentDetails = () =>{
                 name="empType" 
                 id="selectEmployementType"
             >
-                <option value="salaried">Salaried</option>
-                {/* <option value="self_employed">Self employed</option>
-                <option value="unemployed">Unemployed</option>
-                <option value="student">Student</option> */}
+                <option value="SALARIED">Salaried</option>
+                <option value="SELF_EMPLOYED">Self employed</option>
+                <option value="UNEMPLOYED">Unemployed</option>
+                <option value="STUDENT">Student</option>
             </select>
         </div>
 

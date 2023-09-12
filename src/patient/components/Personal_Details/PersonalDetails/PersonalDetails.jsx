@@ -37,6 +37,7 @@ const PersonalDetails = () =>{
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
     const [fullName, setFullName] = useState("")
+    const [fatherName, setFatherName] = useState("")
     const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
     const [gender, setGender] = useState("")
@@ -45,6 +46,11 @@ const PersonalDetails = () =>{
     const [maritalStatus, setMaritalStatus] = useState("Unmarried")
     
     const [altNumber, setAltNumber] = useState("")
+
+    const [refName, setRefName] = useState("");
+    const [refNumber, setRefNumber] = useState("");
+    const [refRelation, setRefRelation] = useState("");
+
     
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
@@ -64,7 +70,8 @@ const PersonalDetails = () =>{
                 if(response.data.message === "success"){
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
-                    setFullName(data?.firstName)
+                    setFullName(data?.firstName);
+                    setFatherName(data?.fatherName);
                     setNameOnPan(data?.panCardName)
                     setNumber(data?.mobileNumber)
                     setGender(data?.gender);
@@ -73,7 +80,10 @@ const PersonalDetails = () =>{
                     setDob(data?.dateOfBirth)
                     setEmail(data?.emailId)
                     setMaritalStatus(data.maritalStatus ?? "Unmarried");
-                    setAltNumber(data?.alternateNumber ?? "")
+                    setAltNumber(data?.alternateNumber ?? "");
+                    setRefName(data?.referenceName ?? "");
+                    setRefNumber(data?.referenceNumber ?? "");
+                    setRefRelation(data?.referenceRelation ?? "");
                     if(response.data.data.panNo === null){
                         getDataFromDecentro();
                     }
@@ -121,7 +131,7 @@ const PersonalDetails = () =>{
     let month = today.getMonth() + 1;
     month = (month<10? "0"+month : month);
     let year = today.getFullYear();
-    year = year-21; // to restrict the minimum age of user to 21 years.
+    year = year-18; // to restrict the minimum age of user to 18 years.
 
     let maxDateForDob = `${year}-${month}-${day}`; // 'yyyy-mm-dd' - format compulsion
     ////////////////////////// DOB restriction code ended //////////////////////////////////
@@ -190,6 +200,32 @@ const PersonalDetails = () =>{
             return;
         }
 
+        //fatherName
+        if(! fatherName){
+            let elem = document.getElementById('fatherName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }     
+
+        if(! refName){
+            let elem = document.getElementById('refName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(! refNumber){
+            let elem = document.getElementById('refNumber');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(! refRelation){
+            let elem = document.getElementById('refRelation');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+
         localStorage.setItem("email", email);
 
         if(! canSubmit){
@@ -210,6 +246,9 @@ const PersonalDetails = () =>{
             "mobileNumber": number,
             "maritalStatus": maritalStatus,
             "alternateNumber":altNumber,
+            "referenceName": refName,
+            "referenceNumber": refNumber,
+            "referenceRelation": refRelation,
             "userId" : localStorage.getItem('userId'),
             "formStatus": ""
         };
@@ -279,10 +318,14 @@ const PersonalDetails = () =>{
         setPanNumber(val);
     }
 
-    function numberChange(e){
+    function numberChange(e, name){
         let val = e.target.value;
-        if(val.length > 10) return
-        setAltNumber(val);
+        if(val.length > 10) return;
+        if(name === "altNumber"){
+            setAltNumber(val);
+        }else{
+            setRefNumber(val);
+        }
     }
 
     
@@ -362,6 +405,18 @@ const PersonalDetails = () =>{
             <span className="fieldError">Please enter correct DOB.</span>
         </div>
 
+        <div className="fatherName">
+            <p>Father's name</p>
+            <input type="text" 
+                id="fatherName"
+                value={fatherName ?? ""} 
+                onChange={(e)=> setFatherName(e.target.value)} 
+                placeholder="Enter your father's name" 
+                required 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+
         <div className="marital-status">
             <p>Marital status</p>
             <select name="marital-status" value={maritalStatus} onChange={(e)=>setMaritalStatus(e.target.value)}>
@@ -375,10 +430,48 @@ const PersonalDetails = () =>{
             <input 
                 type="number" 
                 inputMode="numeric" 
-                onChange={(e)=> numberChange(e)} 
+                onChange={(e)=> numberChange(e, "altNumber")} 
                 value={altNumber ?? ""} 
                 placeholder="Enter your alternate mobile number" 
              />
+        </div>
+        
+        <h3>Reference details</h3>
+
+        <div className="referenceNumber">
+            <p>Reference contact number</p>
+            <input 
+                id="refNumber"
+                type="number" 
+                inputMode="numeric" 
+                onChange={(e)=> numberChange(e, "referenceNumber")} 
+                value={refNumber ?? ""} 
+                placeholder="Enter reference contact number" 
+             />
+        </div>
+
+        <div className="referenceName">
+            <p>Name of owner of number</p>
+            <input type="text" 
+                id="refName"
+                value={refName ?? ""} 
+                onChange={(e)=> setRefName(e.target.value)} 
+                placeholder="Enter name of owner of the number" 
+                required 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+
+        <div className="referenceRelation">
+            <p>Relation to owner of number</p>
+            <input type="text" 
+                id="refRelation"
+                value={refRelation ?? ""} 
+                onChange={(e)=> setRefRelation(e.target.value)} 
+                placeholder="Enter relation to owner of the number" 
+                required 
+            />
+            <span className="fieldError">This field can't be empty.</span>
         </div>
 
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
