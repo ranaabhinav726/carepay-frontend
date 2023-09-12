@@ -76,9 +76,9 @@ const BankDetails = () =>{
                 let bankName = response.data.BANK;
                 setBankName(bankName);
                 let branchName = response.data.BRANCH;
-                setBranchName(branchName)
+                setBranchName(branchName);
                 let branchAddress = response.data.ADDRESS;
-                setBranchAddress(branchAddress)
+                setBranchAddress(branchAddress);
                 setIsIFSCValid(true);
 
             }).catch(error => {
@@ -162,7 +162,7 @@ const BankDetails = () =>{
                     "accountNumber": accountNumber,
                     // "account_type": "SA",
                     // "bank_address": branchAddress,
-                    // "branch_name": branchName,
+                    "bankBranch": branchName,
                     "bankName": bankName,
                     "ifscCode": IFSC,
                     "formStatus": ""
