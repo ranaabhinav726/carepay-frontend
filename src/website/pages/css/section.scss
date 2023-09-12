@@ -295,8 +295,8 @@ section.homepage-FAQs{
 
                 div.circle{
                     display: inline-block;
-                    height: 13px;
-                    width: 13px;
+                    min-height: 13px;
+                    min-width: 13px;
                     border: 2px solid #514C9F;
                     background-color: transparent;
                     border-radius: 50%;

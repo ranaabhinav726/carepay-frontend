@@ -99,6 +99,8 @@ import WaitingForApproval from './patient/components/Loan_Details/WaitingForAppr
 
 import WebHomepage from "./website/pages/Homepage"
 import About from './website/pages/About';
+import PrivacyPolicy from './website/pages/PrivacyPolicy';
+
 import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
 
 
@@ -109,8 +111,8 @@ function App() {
       <Routes>
         <Route index element={<WebHomepage />} ></Route>
         <Route path='/about' element={<About />} ></Route>
-        {/* <Route path='/contactUs' element={<ContactUs />} ></Route>
-        <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route> */}
+        {/* <Route path='/contactUs' element={<ContactUs />} ></Route> */}
+        <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route>
 
         <Route path='/patient' element={<Homepage />}></Route>
         <Route path='/patient/MobileNumberVerification' element={<MobileNumberVerification />} />
