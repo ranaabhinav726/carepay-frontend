@@ -68,7 +68,7 @@ function Hero(){
                     <div className="section-content hero-container-content">
                         {/* <h1>Increase your <br />Revenue <br/>by 50 <div className="percent-wrapper" style={{font:"inherit", fontSize:"0.6em"}}>%</div></h1> */}
                         <h1>Increase your <br />Revenue <br/>by 50 <sup style={{font:"inherit", fontSize:"0.5em", marginLeft:"-5px"}}>%</sup></h1>
-                        <p className="text-content" style={{textAlign:"center"}}>Empower your journey with CarePay’s cutting-edge <br/>financial solutions for healthcare.</p>
+                        <p className="text-content">Empower your journey with CarePay’s cutting-edge <br/>financial solutions for healthcare.</p>
                         <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' vanishOnCollapse callback={handleContactScroll} />
                         <FloatingButton content={"Partner up"} to={"javascript:void(0)"} callback={handleContactScroll} />
                     </div>
@@ -390,13 +390,20 @@ export function Contact(){
         })
     }
 
+    function handleNumber(val){
+        if(val.length > 10){
+            return;
+        }
+        setNumber(val);
+    }
+
     return(
         <>
             <section className="contact" id='contact'>
                 <div className="container">
                     <div className="flex-content-wrapper">
                         <div className="contact-container-heading">
-                            <h3>Let's Take Your Practice to the Next Level</h3>
+                            <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's Take Your Practice to the Next Level</h3>
                             <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services</p>
                         </div>
                         <div className="contact-container-form">
@@ -428,7 +435,7 @@ export function Contact(){
                                 type='number' 
                                 placeholder='Contact number'
                                 value={number}
-                                onChange={(e)=>setNumber(e.target.value)} />
+                                onChange={(e)=>handleNumber(e.target.value)} />
 
                             <label htmlFor="query">
                                 Query

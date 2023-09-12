@@ -461,14 +461,14 @@ a {
 //   src: url('../src/assets/Fonts/Fontspring-DEMO-sigmundpro-semibold.otf');
 // }
 
-@font-face {
-  font-family: 'sigmundpro-semibold';
-  src: url('../src/website/assets/Fonts/sigmundpro-semibold-webfont.woff2') format('woff2'),
-       url('../src/website/assets/Fonts/sigmundpro-semibold-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+// @font-face {
+//   font-family: 'sigmundpro-semibold';
+//   src: url('../src/website/assets/Fonts/sigmundpro-semibold-webfont.woff2') format('woff2'),
+//        url('../src/website/assets/Fonts/sigmundpro-semibold-webfont.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
 
-}
+// }
 div.website-container{
     span{
       font: inherit;
@@ -479,7 +479,7 @@ div.website-container{
 
     section{
       width: 100%;
-      padding: 10vw 0;
+      padding: 5vw 0;
     }
     div.container{
       margin: auto;

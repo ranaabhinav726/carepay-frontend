@@ -274,7 +274,6 @@ section.homepage-FAQs{
             button.accordion{
                 color: rgba(0, 0, 0, 0.80);
                 font-family: DM Sans;
-                font-size: 20px;
                 font-style: normal;
                 font-weight: 700;
                 line-height: 130%; /* 145.455% */
@@ -286,7 +285,7 @@ section.homepage-FAQs{
                 border: none;
                 text-align: left;
                 outline: none;
-                font-size: 15px;
+                font-size: 16px;
                 transition: 0.4s;
                 display: flex;
                 flex-direction: row;
@@ -318,6 +317,7 @@ section.homepage-FAQs{
 
                 p.answer{
                     margin: 10px 0;
+                    font-size: 16px;
                 }
             }
         }
@@ -333,11 +333,12 @@ section.contact{
 
 
             div.contact-container-heading{
-                width: 50%;
+                width: 40%;
                 min-height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                font-family: 'sigmundpro-semibold' !important;
 
                 h3{
                     font-weight: 700;
@@ -345,11 +346,13 @@ section.contact{
             }
             div.contact-container-form{
                 width: max-content;
+                width: 50%;
                 border-left: 1px solid #E5E5E5;
                 padding: 12px;
 
                 label, input{
                     display: block;
+                    width: 100%;
                 }
                 label{
                     color: rgba(0, 0, 0, 0.80);
@@ -548,6 +551,9 @@ div.tabs-bar{
                 img{
                     margin: 1rem auto;
                 }
+                p.text-content{
+                    text-align: center;
+                }
             }
         }
     }
@@ -676,7 +682,8 @@ div.tabs-bar{
 
                 div.contact-container-heading{
                     width: 100%;
-
+                    font-family: 'sigmundpro-semibold' !important;
+                    
                     h3, p{
                         text-align: left;
                     }
