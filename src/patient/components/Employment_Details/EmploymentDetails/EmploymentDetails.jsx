@@ -58,6 +58,11 @@ const EmploymentDetails = () =>{
 
     let ref = useRef(0);
 
+    const [errorMsg, setErrorMsg] = useState("This field can't be empty.")
+
+    let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
+
+
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         if(!! userId){
@@ -69,6 +74,8 @@ const EmploymentDetails = () =>{
                         setLoanAmount(data.loanAmount);
                     }
                 }
+            }).catch(()=>{
+                console.log("Error fetching data");
             })
         }
 
@@ -120,6 +127,8 @@ const EmploymentDetails = () =>{
                         setJobExpYear(data.currentJobExpInYears)
                     }
                 }
+            }).catch(()=>{
+                console.log("Error fetching data");
             })
         }
     },[])
@@ -139,6 +148,8 @@ const EmploymentDetails = () =>{
                 console.log(response)
                 let city = response?.data?.city;
                 setCityName(city);
+            }).catch(()=>{
+                setCityName("Error fetching city name");
             })
         }
     }
@@ -197,8 +208,26 @@ const EmploymentDetails = () =>{
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(specialChars.test(companyAddL1)){
+            let elem = document.getElementById('companyAddL1');
+            setErrorMsg("Special characters are not allowed.");
+            setTimeout(() => {
+                setErrorMsg("This field can't be empty.");
+            }, 3000);
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
         if(!companyAddL2){ 
             let elem = document.getElementById('companyAddL2');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+        if(specialChars.test(companyAddL2)){
+            let elem = document.getElementById('companyAddL2');
+            setErrorMsg("Special characters are not allowed.");
+            setTimeout(() => {
+                setErrorMsg("This field can't be empty.");
+            }, 3000);
             if(elem) showErrorOnUI(elem);
             return;
         }
@@ -404,7 +433,7 @@ const EmploymentDetails = () =>{
                 onChange={(e)=>setCompanyAddL1(e.target.value)}
                 placeholder="Enter here" 
             />
-            <span className="fieldError">This field can't be empty.</span>
+            <span className="fieldError">{errorMsg}</span>
         </div>
         <div className="companyAddress-line2">
             <p>Current workplace address (line 2)</p>
@@ -415,6 +444,7 @@ const EmploymentDetails = () =>{
                 onChange={(e)=>setCompanyAddL2(e.target.value)}
                 placeholder="Enter here" 
             />
+            <span className="fieldError">{errorMsg}</span>
         </div>
         <div className="companyPincode">
             <p>Current workplace Pincode</p>
