@@ -49,17 +49,23 @@ const CreditFairOffers = () =>{
         }).catch(error =>{
             console.log(error);
         })
+    }, [])
 
-        axios.get(env.api_Url + "getCreditFairOffers")
+    useEffect(()=>{
+        axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
         .then(response =>{
             console.log(response)
             if(response.data.message === "success"){
-                setOffers(response?.data?.data)
+                if(response?.data?.data === "No Offers Found"){
+                    setOffers([]);
+                }else{
+                    setOffers(response?.data?.data)
+                }
             }
         }).catch(error =>{
             console.log(error);
         })
-    }, [])
+    }, [doctorId])
  
 
     ////// To set default productId and tenure to first first offer, 
@@ -243,7 +249,12 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
 
     let months = offerDetails.totalEmi ?? "0";
     let amount = parseInt(loanAmount/months);
-    let pf = offerDetails.processingFesIncludingGSTINR ?? "0";
+    let pf = "0";
+    if(!! offerDetails.processingFesIncludingGSTINR){
+        pf = "Rs. " + offerDetails.processingFesIncludingGSTINR;
+    }else if(!! offerDetails.processingFesIncludingGSTRate){
+        pf = offerDetails.processingFesIncludingGSTRate + " %";
+    }
     let interest = offerDetails.interest ?? "0";
     let advEmi = offerDetails.advanceEmi ?? "0";
 
@@ -274,10 +285,11 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                 <div className="offerContentRight">
                     <span className='offerCardSpan'>{months} month{months>1 && "s"}</span>
                     <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
-                    <span className='offerCardSpan'><BiRupee style={{margin:"0 -4px -2px -2px"}} /> {pf}</span>
-                    <span className='offerCardSpan'>{interest}</span>
+                    <span className='offerCardSpan'>{pf}</span>
+                    <span className='offerCardSpan'>{interest} %</span>
                     <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
                 </div>
+                {/* <BiRupee style={{margin:"0 -4px -2px -2px"}} />  */}
             </div>
         </div>
     )
