@@ -55,6 +55,7 @@ const PersonalDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
+    const [refErrorMsg, setRefErrorMsg] = useState("This field can't be empty.");
     
     let ref = useRef(0);
     let userId = localStorage.getItem('userId');
@@ -205,16 +206,31 @@ const PersonalDetails = () =>{
             let elem = document.getElementById('fatherName');
             if(elem) showErrorOnUI(elem);
             return;
-        }     
+        }
 
-        if(! refName){
-            let elem = document.getElementById('refName');
+        // if(altNumber && )
+
+        if(! refNumber){
+            let elem = document.getElementById('refNumber');
             if(elem) showErrorOnUI(elem);
             return;
         }
 
-        if(! refNumber){
-            let elem = document.getElementById('refNumber');
+        if(refNumber === number || refNumber === altNumber){
+            let elem = document.getElementById("refNumber");
+            if(elem){
+                setRefErrorMsg("This can't be same as your number.");
+                setTimeout(()=>{
+                    setRefErrorMsg("This field can't be empty.");
+                }, 3000)
+                showErrorOnUI(elem);  
+            }
+
+            return;
+        }
+
+        if(! refName){
+            let elem = document.getElementById('refName');
             if(elem) showErrorOnUI(elem);
             return;
         }
@@ -327,7 +343,6 @@ const PersonalDetails = () =>{
             setRefNumber(val);
         }
     }
-
     
 
    return(
@@ -448,6 +463,7 @@ const PersonalDetails = () =>{
                 value={refNumber ?? ""} 
                 placeholder="Enter reference contact number" 
              />
+             <span className="fieldError">{refErrorMsg}</span>
         </div>
 
         <div className="referenceName">
