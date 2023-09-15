@@ -262,6 +262,7 @@ const PersonalDetails = () =>{
             "mobileNumber": number,
             "maritalStatus": maritalStatus,
             "alternateNumber":altNumber,
+            "fatherName": fatherName,
             "referenceName": refName,
             "referenceNumber": refNumber,
             "referenceRelation": refRelation,
