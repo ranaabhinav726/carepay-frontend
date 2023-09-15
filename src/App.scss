@@ -440,7 +440,7 @@ a {
 
 :root{
   --h1-xsm-font-size: 54px;
-  --h1-sm-font-size: 44px;
+  --h1-sm-font-size: 56px;
   --h1-md-font-size: 58px;
   --h1-l-font-size: 62px;
   --h1-xl-font-size: 66px;
@@ -526,7 +526,7 @@ div.website-container{
 
         /* Mobile H2 */
         font-family: var(--h-font-family);
-        font-size: calc(0.7 * var(--h1-xsm-font-size));
+        font-size: calc(0.8 * var(--h1-xsm-font-size));
         font-style: normal;
         font-weight: 500;
         line-height: 110%; /* 110% */
@@ -538,7 +538,7 @@ div.website-container{
 
         /* Desktop H3 */
         font-family: "DM Sans";
-        font-size: calc(0.8 * var(--h1-xsm-font-size));
+        font-size: calc(0.9 * var(--h1-xsm-font-size));
         font-style: normal;
         font-weight: 500;
         line-height: 112.5%; /* 112.5% */
