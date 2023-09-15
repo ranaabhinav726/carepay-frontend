@@ -55,14 +55,13 @@ function WaitingForApproval(){
             <div className="reviewPageContent" style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"1.5rem", marginTop:"2rem"}}>
                 <img src={Waiting} alt="waiting" style={{maxWidth:"30%"}} />
                 <h3 style={{color:"#1C8769", fontWeight:"700"}}>Under Review</h3>
-                <p>Your credit application is being reviewed.</p>
+                <p style={{textAlign:"center"}}>We are assessing your credit application.<br />This might take 15-20 minutes.</p>
                 <div className="msgBox" style={{background:"#FAE1CD", borderRadius:"4px", padding:"16px 32px", textAlign:"center", lineHeight:"150%", letterSpacing:"0.5px", wordSpacing:"0.5px"}}>
-                    You will be notified on your registered contact 
-                    number <strong>+91 {number} </strong>
-                    and email-id <strong>{email}</strong> once the application is reviewed.
+                    You will be notified on your registered contact number <strong>+91 {number} </strong> once the application is reviewed.
                 </div>
             </div>
             <button className="submit" onClick={()=>checkStatus()}>Check Status</button>
+            <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
         </main>
     )
 }
