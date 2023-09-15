@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import { useContext } from "react"
 // import { DataContext } from "../../App"
 
-import { env, showWrapper, hideWrapper } from '../../../environment/environment'
+import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../environment/environment'
 // import { useData } from "../data";
 
 const CreditDetails = () => {
@@ -17,7 +17,11 @@ const CreditDetails = () => {
     const [treatment, setTreatment] = useState("");
 
     const [apiError, setApiError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
     const [canSubmit, setCanSubmit] = useState(true);
+
+    // const [doctorId, setDoctorId] = useState("");
+    // const [doctorName, setDoctorName] = useState("");
 
     const navigate = useNavigate();
     // const data = useData();
@@ -36,6 +40,31 @@ const CreditDetails = () => {
         if(! canSubmit){
             return;
         }
+
+        if(! amount){
+            let elem = document.getElementById('loanAmount');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+        if(! treatment){
+            let elem = document.getElementById('treatment');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+        if(! fullName){
+            let elem = document.getElementById('fullName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+        if(! (doctorId && doctorName && userId)){
+            setErrorMsg("Couldn't find your doctor details, please scan the QR again.");
+            apiErrorHandler();
+            setTimeout(() => {
+                setErrorMsg("Something went wrong, please try again.")
+            }, 3000);
+            return;
+        }
+
         setCanSubmit(false);
         showWrapper(ref.current)
 
@@ -85,7 +114,7 @@ const CreditDetails = () => {
         setApiError(true)
         setTimeout(()=>{
             setApiError(false);
-        }, 1500);
+        }, 3000);
     }
 
 
@@ -98,33 +127,39 @@ const CreditDetails = () => {
         <div className="inputGroup">
             <p>Credit amount</p>
             <input 
+                id="loanAmount"
                 type="text" 
                 value={amount} 
                 placeholder="Enter credit amount"
                 onChange={(e)=>setAmount(e.target.value)}  
             />
+            <span className="fieldError">Please enter your treatment cost</span>
         </div>
 
         <div className="inputGroup">
             <p>Treatment name</p>
             <input 
+                id="treatment"
                 type="text" 
                 value={treatment} 
                 placeholder="Name of treatment"
                 onChange={(e)=>setTreatment(e.target.value)}  
             />
+            <span className="fieldError">Please fill name of your treatment</span>
         </div>
 
         <div className="inputGroup">
             <p>Full name (as per PAN)</p>
             <input 
+                id="fullName"
                 type="text" 
                 value={fullName} 
                 placeholder="Enter your name"
                 onChange={(e)=>setFullName(e.target.value)}  
             />
+            <span className="fieldError">Please enter your full name</span>
         </div>
-
+        <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
         <button onClick={()=> verifyAndNavigate()} className="submit">Submit</button>
     </main>
     </>
