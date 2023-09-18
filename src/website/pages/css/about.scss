@@ -51,10 +51,10 @@ div.cards-grid-wrapper{
 
 @media (max-width: 576px) {
     div.cards-grid-wrapper{
-        grid-template-columns: repeat(auto-fill, 160px);
+        grid-template-columns: repeat(auto-fill, 110px);
     }
     .member-card{
-        width: 160px;
+        width: 110px;
     }
 }
 
