@@ -17,7 +17,7 @@ import Step3Gif from '../assets/GIFs/Step 3.gif'
 import Step4Gif from '../assets/GIFs/Step 4.gif'
 import Step5Gif from '../assets/GIFs/Step 5.gif'
 
-import FutureHealthcare from '../assets/healthcare finance.png'
+import FutureHealthcare from '../assets/healthcare finance.webp'
 import TrustedBy1 from '../assets/trustedBy-1.webp'
 import TrustedBy2 from '../assets/trustedBy-2.webp'
 import TrustedBy3 from '../assets/trustedBy-3.webp'

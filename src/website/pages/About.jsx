@@ -4,10 +4,21 @@ import HeroImg from '../assets/About-hero-banner.webp'
 import { Contact, Footer } from './Homepage'
 import user from '../assets/People/user.webp'
 
-import Gaurav from '../assets/People/Gaurav Gupta.jpg'
-import Nikhil from '../assets/People/Nikhil salkar.jpg'
-import Nupur from '../assets/People/Nupur khandelwal.jpg'
-import Mohit from '../assets/People/Mohit bansal.jpg'
+import Gaurav from '../assets/People/Gaurav.webp'
+import Nikhil from '../assets/People/Nikhil.webp'
+import Nupur from '../assets/People/Nupur.webp'
+import Mohit from '../assets/People/Mohit bansal.webp'
+import Sartaj from '../assets/People/Sartaj.webp'
+import Tanwir from '../assets/People/Tanwir.webp'
+import Sparsh from '../assets/People/Sparsh.webp'
+import Sara from '../assets/People/Sara_.webp'
+import Parishesh from '../assets/People/Parishesh.webp'
+import Kalpataru from '../assets/People/Kalpataru.webp'
+import Lavit from '../assets/People/Lavit.webp'
+import Ashutosh from '../assets/People/Ashutosh.webp'
+import Balbeer from '../assets/People/Balbeer.webp'
+
+
 
 import { useEffect } from 'react'
 import CustomNavbar from '../Components/Navbar'
@@ -67,13 +78,15 @@ function OurTeam(){
                         <MemberCard img={Nikhil} name={"Nikhil Salkar"} designation={"CPO"} />
                         <MemberCard img={Nupur} name={"Nupur Khandelwal"} designation={"CSO"} />
                         <MemberCard img={Mohit} name={"Mohit Bansal"} designation={"CTO"} />
-                        <MemberCard img={user} name={"Sartaj Abbasi"} designation={"Zonal Head"} area='- North India' type='- Super speciality' />
-                        <MemberCard img={user} name={"Md. Tanwir Akhtar"} designation={"Area Business Manager"} />
-                        <MemberCard img={user} name={"Sparsh Vaid"} designation={"Area Business Manager"} />
-                        <MemberCard img={user} name={"Sara Fathima"} designation={"Area Business Manager"} />
-                        <MemberCard img={user} name={"Parishesh Vinod"} designation={"Area Business Manager"} />
-                        <MemberCard img={user} name={"Kalpataru Panda"} designation={"Credit - Ops Manager"} />
-                        <MemberCard img={user} name={"Lavit Modi"} designation={"Finance Manager"} />
+                        <MemberCard img={Ashutosh} name={"Ashutosh Shrivastava"} designation={"VP Sales - Key Accounts"} />
+                        <MemberCard img={Sartaj} name={"Sartaj Abbasi"} designation={"Zonal Head"} area='- North India' type='- Super speciality' />
+                        <MemberCard img={Tanwir} name={"Md. Tanwir Akhtar"} designation={"Area Business Manager"} />
+                        <MemberCard img={Sparsh} name={"Sparsh Vaid"} designation={"Area Business Manager"} />
+                        <MemberCard img={Sara} name={"Sara Fathima"} designation={"Area Business Manager"} />
+                        <MemberCard img={Parishesh} name={"Parishesh Vinod"} designation={"Area Business Manager"} />
+                        <MemberCard img={Kalpataru} name={"Kalpataru Panda"} designation={"Credit - Ops Manager"} />
+                        <MemberCard img={Lavit} name={"Lavit Modi"} designation={"Finance Manager"} />
+                        <MemberCard img={Balbeer} name={"Balbeer Kumar"} designation={"Regional Manager"} />
                         {/* <MemberCard img={user} name={"Deepak Joshi"} designation={"Frontend Developer"} />
                         <MemberCard img={user} name={"Deepanshu Sharma"} designation={"Mobile Developer"} />
                         <MemberCard img={user} name={"Vinay Verma"} designation={"Backend Developer"} />

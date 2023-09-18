@@ -1,5 +1,5 @@
 import './navbar.scss'
-import logo from '../../assets/CarepayLogo.png'
+import logo from '../../assets/CarepayLogo.webp'
 
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
