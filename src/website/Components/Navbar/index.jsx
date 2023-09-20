@@ -1,5 +1,5 @@
 import './navbar.scss'
-import logo from '../../assets/CarepayLogo.webp'
+import logo from '../../assets/CarepayLogo1.webp'
 
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { Link, NavLink } from 'react-router-dom';
 import PrimaryButton from '../PrimaryButton';
 
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { AiOutlineClose } from 'react-icons/ai'
+import { GrClose } from 'react-icons/gr'
 
 import { handleContactScroll, handleFooterScroll } from '../utility';
 
@@ -22,7 +22,7 @@ function CustomNavbar(){
         <nav className="custom-navbar">
             <div className="container">
                 <div className="navbar-logo">
-                    <Link to={"/"}>
+                    <Link className='logo-link' to={"/"}>
                         <img src={logo} alt="" />
                     </Link>
                 </div>
@@ -40,7 +40,7 @@ function CustomNavbar(){
                 <GiHamburgerMenu className='hamIcon' onClick={handleOpen} />
                 <div className={opened ? "sideItems show" : "sideItems"}>
                         <div className="closeIcon">
-                            <AiOutlineClose onClick={handleClose} />
+                            <GrClose onClick={handleClose} style={{color:"#514C9F"}} />
                         </div>
                     <div className="navItems-wrapper">
                         <NavLink className='navItem' onClick={handleClose} to={"/"}>Home</NavLink>
