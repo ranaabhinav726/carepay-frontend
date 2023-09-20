@@ -658,7 +658,7 @@ div.website-container{
 
       h1{
         font-size: var(--h1-l-font-size);
-        line-height: 120%; /* 100% */
+        line-height: 100%; /* 100% */
       }
       h2, h3{
         font-size: calc(0.8 * var(--h1-l-font-size));

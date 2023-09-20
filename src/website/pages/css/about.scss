@@ -7,7 +7,7 @@ section.aboutUs{
 
 div.cards-grid-wrapper{
     display: grid;
-    padding: 0 3rem;
+    // padding: 0 3rem;
     gap: 1rem;
     row-gap: 2rem;
     grid-template-columns: repeat(auto-fill, 220px);
@@ -23,6 +23,7 @@ div.cards-grid-wrapper{
     img.member-card-img{
         aspect-ratio: 1/1;
         width: 100%;
+        border-radius: 8px;
     }
     h5.member-card-name{
         color: rgba(0, 0, 0, 0.80);
@@ -51,10 +52,13 @@ div.cards-grid-wrapper{
 
 @media (max-width: 576px) {
     div.cards-grid-wrapper{
-        grid-template-columns: repeat(auto-fill, 110px);
+        grid-template-columns: 1fr 1fr;
     }
+    // div.cards-grid-wrapper{
+    //     grid-template-columns: repeat(auto-fill, 110px);
+    // }
     .member-card{
-        width: 110px;
+        width: auto;
     }
 }
 

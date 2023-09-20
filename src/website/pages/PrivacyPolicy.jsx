@@ -30,7 +30,7 @@ function PrivacyPolicyContent(){
 
     return(
         <div className="custom-container">
-            <h2>CarePay Privacy Policy</h2>
+            <h2 style={{fontFamily:"DM sans"}}>CarePay Privacy Policy</h2>
             <h5>Updated on: 16th August 2023</h5>
 
             <p>CarePay (Carecoin Technologies Private Limited) (hereinafter referred to as “ Company or We or CarePay”) is a technology company, focused on building and facilitating products and services in the financial domain for our customers (hereinafter referred to as “Customer/You/Your/User”, plurals included).</p>

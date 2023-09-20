@@ -285,7 +285,7 @@ section.homepage-FAQs{
                 border: none;
                 text-align: left;
                 outline: none;
-                font-size: 14px;
+                font-size: 16px;
                 transition: 0.4s;
                 display: flex;
                 flex-direction: row;
@@ -317,7 +317,7 @@ section.homepage-FAQs{
 
                 p.answer{
                     margin: 10px 0;
-                    font-size: 14px;
+                    // font-size: 14px;
                 }
             }
         }
@@ -685,7 +685,8 @@ div.tabs-bar{
                     font-family: 'sigmundpro-semibold' !important;
                     
                     h3{
-                        letter-spacing: 2px;
+                        // letter-spacing: 2px;
+                        font-weight: 400;
                     }
                     h3, p{
                         text-align: left;
