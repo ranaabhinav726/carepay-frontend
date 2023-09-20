@@ -202,6 +202,15 @@ const EmploymentDetails = () =>{
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(specialChars.test(companyName)){
+            let elem = document.getElementById('companyName');
+            setErrorMsg("Special characters are not allowed.");
+            setTimeout(() => {
+                setErrorMsg("This field can't be empty.");
+            }, 3000);
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(!companyAddL1){ 
             let elem = document.getElementById('companyAddL1');
@@ -422,7 +431,7 @@ const EmploymentDetails = () =>{
                 onChange={(e)=>handleCompanyName(e.target.value)}
                 placeholder="Enter your current company name" 
             />
-            <span className="fieldError">This field can't be empty.</span>
+            <span className="fieldError">{errorMsg}</span>
         </div>
         <div className="companyAddress-line1">
             <p>Current workplace address (line 1)</p>
