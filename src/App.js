@@ -102,10 +102,12 @@ import About from './website/pages/About';
 import PrivacyPolicy from './website/pages/PrivacyPolicy';
 
 import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
+import { useEffect } from 'react';
 
 
 
 function App() {
+
   return (
     // <div className="App">
       <Routes>

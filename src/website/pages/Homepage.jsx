@@ -32,12 +32,17 @@ import InstaIcon from '../assets/instaIcon.webp'
 import axios from 'axios'
 import CustomNavbar from '../Components/Navbar'
 
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 function WebHomepage(){
 
     useEffect(()=>{
+        Aos.init({
+            anchorPlacement: "bottom-bottom"
+        });
         window.scrollTo(0, 0);
-    }, [])
+    }, []) 
 
     return(
         <div className='website-container'>
@@ -103,7 +108,7 @@ function PatientFinancing(){
                             <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p>
                         </div>
                     </div>
-                    <div className="section-content financing-container-image">
+                    <div className="section-content financing-container-image" data-aos="zoom-in">
                         <img src={FinanceImg}
                         style={{
                             maxWidth: "90%",
@@ -122,7 +127,7 @@ function BoostRevenue(){
         <section className="boost-revenue">
             <div className="container">
                 <div className="flex-content-wrapper">
-                    <div className="section-content revenue-container-image">
+                    <div className="section-content revenue-container-image" data-aos="zoom-in">
                         <img src={RevenueImg}
                         style={{
                             maxWidth: "90%",
@@ -156,7 +161,7 @@ function Operations(){
                             {/* <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p> */}
                         </div>
                     </div>
-                    <div className="section-content operations-container-image">
+                    <div className="section-content operations-container-image" data-aos="zoom-in">
                         <img src={OperationsImg}
                         style={{
                             maxWidth: "90%",
@@ -238,7 +243,7 @@ function HealthcareFinance(){
                 <h2><span className='clr-purple'>Shaping the Future</span> of Healthcare Finance</h2>
                 <p className="text-content">Revolutionizing the landscape with integrated financial services</p>
 
-                <img src={FutureHealthcare} style={{margin:"2rem auto"}} alt="" />
+                <img src={FutureHealthcare} data-aos="zoom-in" style={{margin:"2rem auto"}} alt="" />
 
                 <p className="text-content">At CarePay, we envisage a future where financial services are seamlessly integrated into healthcare, creating a harmonious ecosystem that benefits both healthcare providers and patients. Our cutting-edge solutions aim at the bigger picture, evolving to serve the ever-growing demands of India’s healthcare sector.</p>
 
@@ -500,6 +505,7 @@ export function Footer(){
                         </div>
                     </div>
                     <p className="text-content">The website is designed to primarily appeal to doctors and clinics, with a focus on their aspirations, growth, and operational efficiency. <br />The transformative impact section subtly addresses potential investors by showcasing the visionary and transformative nature of CarePay’s offerings.</p>
+                    <div className="credits-for-graphics">Illustrations made by <a href='https://storyset.com/bro'>Bro</a> from <a href='https://storyset.com/'>storyset.com</a></div>
                     <div className="copyright">© 2023 by CareCoin Technologies Pvt Ltd</div>
                 </div>
             </section>

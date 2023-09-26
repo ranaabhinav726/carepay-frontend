@@ -48,28 +48,29 @@ const UserDashboard = () =>{
         }).catch(error => {
             console.log(error);
         });
-})
+    })
+
     useEffect(()=>{
-            axios
-            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
-            .then((response) => {
-                if(response.data.status == "200"){
-                    let status = response.data.data[0];
-                    console.log(status)
-                    filterdate(status.tenure_date);
-                    // setUsername(sanitizeName(status.username));
-                    setTotalLoanAmt(status.amount);
-                    nextInstalmentDetails(status.emi_details)
-                    setTotalDueAmount(status.due_amount)
-                    // balanceDue(status.emi_details)
-                    setTenure((status.tenure==="E3") ? 3 : 6)
-                }else{
-                    // navigate(-1)
-                }
-            }).catch(error => {
-                console.log(error);
+        axios
+        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+        .then((response) => {
+            if(response.data.status == "200"){
+                let status = response.data.data[0];
+                console.log(status)
+                filterdate(status.tenure_date);
+                // setUsername(sanitizeName(status.username));
+                setTotalLoanAmt(status.amount);
+                nextInstalmentDetails(status.emi_details)
+                setTotalDueAmount(status.due_amount)
+                // balanceDue(status.emi_details)
+                setTenure((status.tenure==="E3") ? 3 : 6)
+            }else{
                 // navigate(-1)
-            });
+            }
+        }).catch(error => {
+            console.log(error);
+            // navigate(-1)
+        });
     })
 
     // function fetchDashboardDetails(){
@@ -112,6 +113,7 @@ const UserDashboard = () =>{
         date = parts.join("/");
         setDisbursedDate(date + ", " + time);
     }
+    
     function nextInstalmentDetails(emis){
         let paidMonths = 1;
         for(let i=0; i<emis.length; i++){

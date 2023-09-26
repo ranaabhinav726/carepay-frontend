@@ -129,7 +129,9 @@ section.future-healthcare{
         p{
             text-align: center;
         }
-
+        img{
+            max-width: 70%;
+        }
         h4{
             color: rgba(0, 0, 0, 0.80);
             text-align: center;
@@ -489,6 +491,14 @@ section.footer{
             font-weight: 400;
             line-height: normal;
         }
+        div.credits-for-graphics{
+            color: white;
+            margin: 2rem 0 1rem 0;
+            font-size: 14px;
+            a{
+                text-decoration: underline;
+            }
+        }
         div.copyright{
             color: #FFF;
 
@@ -498,7 +508,6 @@ section.footer{
             font-style: normal;
             font-weight: 400;
             line-height: normal;
-            margin-top: 1rem;
         }
     }
 }
@@ -931,7 +940,7 @@ div.tabs-bar{
             }
             div.copyright{
                 font-size: 14px;
-                margin: 4rem 0 1rem 0;
+                margin: 2rem 0 1rem 0;
             }
         }
     }
