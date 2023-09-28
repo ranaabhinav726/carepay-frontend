@@ -117,6 +117,17 @@ const CreditDetails = () => {
         }, 3000);
     }
 
+    function amountHandler(val){
+        // console.log(val)
+        if(val === ""){
+            setAmount("");
+            return;
+        }
+        val = parseInt(val);
+        if(val >= 0 && val <= 1000000){
+            setAmount(val);
+        }
+    }
 
    return(
     <>
@@ -131,8 +142,9 @@ const CreditDetails = () => {
                 type="text" 
                 value={amount} 
                 placeholder="Enter credit amount"
-                onChange={(e)=>setAmount(e.target.value)}  
+                onChange={(e)=>amountHandler(e.target.value)}  
             />
+            <p style={{marginTop:"-8px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p>
             <span className="fieldError">Please enter your treatment cost</span>
         </div>
 
