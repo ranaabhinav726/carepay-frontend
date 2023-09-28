@@ -375,6 +375,7 @@ const PersonalDetails = () =>{
                 placeholder="Enter your full name" 
                 required 
             />
+            <p style={{marginTop:"10px", marginBottom:"20px", fontSize:"14px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
