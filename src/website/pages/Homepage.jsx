@@ -1,6 +1,6 @@
 import './css/section.scss'
 import PrimaryButton from '../Components/PrimaryButton'
-import HeroImg from '../assets/hero-banner.webp'
+import HeroImg from '../assets/Hero animation 2-min.gif'
 import FinanceImg from '../assets/Finance.webp'
 import FloatingButton from '../Components/FloatingButton'
 
@@ -323,16 +323,42 @@ function Branding(){
 
 function HomepageFAQs(){
 
+    // const [activeFaq, setActiveFaq] = useState('');
+
     function clickHandler(e){
-        // console.log(e.target)
+        console.log(e.target)
         let panel = e.target.nextElementSibling;
         if(panel === null) return;
+        
+        if(e?.target?.classList?.contains('active')){
+            e.target.classList.remove('active');
+            panel.style.maxHeight = null;
+            return;
+        }
+        closeAllFaq();
         e.target.classList.toggle('active');
         if (panel.style.maxHeight) {
             panel.style.maxHeight = null;
         } else {
             panel.style.maxHeight = panel.scrollHeight + "px";
         } 
+    }
+
+    function closeAllFaq(){
+        let faqs = document.getElementsByClassName('FAQs-content');
+        // console.log(faqs[0]);
+        for(let i=0; i<faqs.length; i++){
+            let btn = faqs[i].children[0];
+            let panel = faqs[i].children[1];
+
+            if(btn && btn.classList.contains('active')){
+                btn.classList.remove('active');
+            }
+
+            if(panel){
+                panel.style.maxHeight = null;
+            }
+        }
     }
     return(
         <>
