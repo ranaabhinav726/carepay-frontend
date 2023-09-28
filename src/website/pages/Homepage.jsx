@@ -69,7 +69,7 @@ function Hero(){
     return(
         <section className='hero'>
             <div className="container">
-                <div className="flex-content-wrapper">
+                <div className="flex-content-wrapper" style={{margin:"2rem 0"}}>
                     <div className="section-content hero-container-content">
                         {/* <h1>Increase your <br />Revenue <br/>by 50 <div className="percent-wrapper" style={{font:"inherit", fontSize:"0.6em"}}>%</div></h1> */}
                         <h1>Increase your <br />Revenue <br/>by 50 <sup style={{font:"inherit", fontSize:"0.5em", marginLeft:"-5px"}}>%</sup></h1>

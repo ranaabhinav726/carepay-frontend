@@ -130,7 +130,7 @@ section.future-healthcare{
             text-align: center;
         }
         img{
-            max-width: 70%;
+            max-width: 50%;
         }
         h4{
             color: rgba(0, 0, 0, 0.80);
@@ -287,7 +287,7 @@ section.homepage-FAQs{
                 border: none;
                 text-align: left;
                 outline: none;
-                font-size: 16px;
+                font-size: 20px;
                 transition: 0.4s;
                 display: flex;
                 flex-direction: row;
@@ -318,8 +318,8 @@ section.homepage-FAQs{
                 transition: max-height 0.3s ease-out;
 
                 p.answer{
-                    margin: 10px 0;
-                    // font-size: 14px;
+                    margin-bottom: 2rem;
+                    font-size: 20px;
                 }
             }
         }
@@ -358,8 +358,8 @@ section.contact{
                 }
                 label{
                     color: rgba(0, 0, 0, 0.80);
-                    font-family: DM Sans;
-                    font-size: 14px;
+                    font-family: "DM Sans";
+                    font-size: 20px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 112.5%; /* 112.5% */
@@ -371,8 +371,8 @@ section.contact{
                     padding: 10px;
 
                     color: rgba(0, 0, 0, 0.70);
-                    font-family: DM Sans;
-                    font-size: 18px;
+                    font-family: "DM Sans";
+                    font-size: 20px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 88.462%; /* 88.462% */
@@ -1028,7 +1028,15 @@ div.tabs-bar{
     }
 }
 
-
+@media (min-width: 991px) {
+    section.future-healthcare{
+        div.container{
+            p{
+                width: 80%;
+            }
+        }
+    }
+}
 .clr-purple{
     color: #514C9F;
 }
