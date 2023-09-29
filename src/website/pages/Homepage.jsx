@@ -105,7 +105,7 @@ function PatientFinancing(){
                         <div className="section-content-wrapper">
                             <h3>Patient <br/>Financing</h3>
                             <p className="text-content">Partner with CarePay to empower your patients with flexible EMI options and real-time credit approval, enhancing their access to quality healthcare</p>
-                            <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p>
+                            <p className="text-content" style={{fontSize:"90%"}}>Available EMI tenures are of 3 to 18 months.</p>
                         </div>
                     </div>
                     <div className="section-content financing-container-image" data-aos="zoom-in">
@@ -138,7 +138,7 @@ function BoostRevenue(){
                     </div>
                     <div className="section-content revenue-container-content">
                         <div className="section-content-wrapper">
-                            <h3>Boost your <br/>Revenues</h3>
+                            <h3>Boost your <br/>Revenue</h3>
                             <p className="text-content">Convert and retain more patients, <br/>elevate patient satisfaction and maximize your revenue.</p>
                             {/* <p className="text-content">Available EMI tenures are of 3 to 18 months.</p> */}
                         </div>
@@ -157,7 +157,7 @@ function Operations(){
                     <div className="section-content operations-container-content">
                         <div className="section-content-wrapper">
                             <h3>Streamlined <br/>Operations</h3>
-                            <p className="text-content">Maximize your operational efficiency with CarePay’s instantaneous credit approvals and payouts.</p>
+                            <p className="text-content">Maximize your operational efficiency with CarePay’s instant credit approvals and payouts.</p>
                             {/* <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p> */}
                         </div>
                     </div>
@@ -402,8 +402,22 @@ export function Contact(){
     const [number, setNumber] = useState("");
     const [query, setQuery] =   useState("");
 
+    const [isSubmitted, setSubmitted] = useState(false);
+
+    const thankRef = useRef(null);
+
+    function formSubmitted(){
+        setSubmitted(true);
+        if(thankRef.current){
+            thankRef.current.scrollIntoView({ behavior: "smooth", block: "center"});
+        }
+    }
+
     function handleSubmit(){
         // console.log(name, email, number, query);
+        if(! (name && email && number && query)){
+            return;
+        }
         axios.post(process.env.REACT_APP_BACKEND + "saveOrUpdateQuery", {
             "name" : name,
             "emailId" : email,
@@ -411,6 +425,7 @@ export function Contact(){
             "query" : query
         }).then(response => {
             if(response.data.message === "success"){
+                formSubmitted();
                 setName("");
                 setEmail("");
                 setNumber("");
@@ -484,6 +499,10 @@ export function Contact(){
                         </div>
                     </div>
                 </div>
+            <div ref={thankRef} className={"thankYouFormSubmission container" + (isSubmitted?" show":"")}>
+                <h2 style={{fontSize:"40px", lineHeight:"44px", fontFamily:"sigmundpro-semibold"}}>Thank you</h2>
+                <p className='text-content'>We will contact you soon on your given mobile number and mail ID</p>
+            </div>
             </section>
         </>
     )

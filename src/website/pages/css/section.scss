@@ -394,6 +394,21 @@ section.contact{
             }
         }
     }
+    div.thankYouFormSubmission{
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 2s cubic-bezier(.78,.01,.47,.99);
+        
+    }
+    div.thankYouFormSubmission.show{
+        height: max-content;
+        opacity: 1;
+        margin-top: 2.5rem;
+        h2, p{
+            text-align: center;
+        }
+    }
 }
 
 section.footer{
@@ -712,6 +727,11 @@ div.tabs-bar{
                     }
                 }
 
+            }
+        }
+        div.thankYouFormSubmission{
+            h2, p{
+                text-align: left;
             }
         }
     }
