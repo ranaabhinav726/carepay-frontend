@@ -37,7 +37,7 @@ function CustomNavbar(){
                     </div>
                     <PrimaryButton content='Partner Up' to={"javascript:void(0)"} variant='dark' callback={handleContactScroll} />
                 </div>
-                <GiHamburgerMenu className='hamIcon' onClick={handleOpen} />
+                <GiHamburgerMenu className='hamIcon' onClick={handleOpen} style={{marginRight:"10px"}} />
                 <div className={opened ? "sideItems show" : "sideItems"}>
                         <div className="closeIcon">
                             <GrClose onClick={handleClose} style={{color:"#514C9F"}} />
