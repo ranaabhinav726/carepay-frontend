@@ -35,6 +35,23 @@ const CreditDetails = () => {
     let doctorId = localStorage.getItem("doctorId")
     let doctorName = localStorage.getItem("doctorName")
     let userId = localStorage.getItem("userId");
+
+    useEffect(()=>{
+        if(!! userId){
+            axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+            .then(response =>{
+                if(response.data.status === 200){
+                    let data = response.data.data;
+                    if(!! data){
+                        setAmount(data.loanAmount);
+                        setTreatment(data.loanReason);
+                    }
+                }
+            }).catch(()=>{
+
+            });
+        }
+    }, [])
     
     async function verifyAndNavigate(){
         if(! canSubmit){
