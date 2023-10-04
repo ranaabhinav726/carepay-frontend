@@ -326,7 +326,7 @@ function HomepageFAQs(){
     // const [activeFaq, setActiveFaq] = useState('');
 
     function clickHandler(e){
-        console.log(e.target)
+        // console.log(e.target)
         let panel = e.target.nextElementSibling;
         if(panel === null) return;
         
@@ -403,18 +403,23 @@ export function Contact(){
     const [query, setQuery] =   useState("");
 
     const [isSubmitted, setSubmitted] = useState(false);
+    const [switchComp, setSwitchComp] = useState(false)
 
-    const thankRef = useRef(null);
+    const containerRef = useRef(null);
 
     function formSubmitted(){
-        setSubmitted(true);
-        if(thankRef.current){
-            thankRef.current.scrollIntoView({ behavior: "smooth", block: "center"});
-        }
+        setSwitchComp(true)
+        setTimeout(() => {
+            setSubmitted(true);
+            if(containerRef.current){
+                containerRef.current.scrollIntoView({ behavior: "smooth", block: "start"});
+            }
+        }, 1000);
     }
 
     function handleSubmit(){
         // console.log(name, email, number, query);
+        // formSubmitted(); return;
         if(! (name && email && number && query)){
             return;
         }
@@ -446,63 +451,66 @@ export function Contact(){
     return(
         <>
             <section className="contact" id='contact'>
-                <div className="container">
-                    <div className="flex-content-wrapper">
-                        <div className="contact-container-heading">
-                            <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's Take Your Practice to the Next Level</h3>
-                            <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services</p>
-                        </div>
-                        <div className="contact-container-form">
-                            <label htmlFor="name">
-                                Your name
-                            </label>
-                            <input 
-                                id='name' 
-                                type='text' 
-                                placeholder='Enter your name here'
-                                value={name}
-                                onChange={(e)=>setName(e.target.value)} />
+                <div ref={containerRef} className="container">
+                    {!isSubmitted ? 
+                        <div className={"flex-content-wrapper"+ (switchComp?" hide":"")}>
+                            <div className="contact-container-heading">
+                                <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's Take Your Practice to the Next Level</h3>
+                                <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services</p>
+                            </div>
+                            <div className="contact-container-form">
+                                <label htmlFor="name">
+                                    Your name
+                                </label>
+                                <input 
+                                    id='name' 
+                                    type='text' 
+                                    placeholder='Enter your name here'
+                                    value={name}
+                                    onChange={(e)=>setName(e.target.value)} />
 
-                            <label htmlFor="email">
-                                E-mail ID
-                            </label>
-                            <input 
-                                id='email' 
-                                type='email' 
-                                placeholder='E-mail ID'
-                                value={email}
-                                onChange={(e)=>setEmail(e.target.value)} />
+                                <label htmlFor="email">
+                                    E-mail ID
+                                </label>
+                                <input 
+                                    id='email' 
+                                    type='email' 
+                                    placeholder='E-mail ID'
+                                    value={email}
+                                    onChange={(e)=>setEmail(e.target.value)} />
 
-                            <label htmlFor="number">
-                                Contact number
-                            </label>
-                            <input 
-                                id='number' 
-                                type='number' 
-                                placeholder='Contact number'
-                                value={number}
-                                onChange={(e)=>handleNumber(e.target.value)} />
+                                <label htmlFor="number">
+                                    Contact number
+                                </label>
+                                <input 
+                                    id='number' 
+                                    type='number' 
+                                    placeholder='Contact number'
+                                    value={number}
+                                    onChange={(e)=>handleNumber(e.target.value)} />
 
-                            <label htmlFor="query">
-                                Query
-                            </label>
-                            <input 
-                                id='query' 
-                                type='text' 
-                                placeholder='Your query'
-                                value={query}
-                                onChange={(e)=>setQuery(e.target.value)} />
+                                <label htmlFor="query">
+                                    Query
+                                </label>
+                                <input 
+                                    id='query' 
+                                    type='text' 
+                                    placeholder='Your query'
+                                    value={query}
+                                    onChange={(e)=>setQuery(e.target.value)} />
 
-                            <div className="submit-button-wrapper" onClick={()=>handleSubmit()}>
-                                <PrimaryButton content={"Request a callback"} variant='dark' />
+                                <div className="submit-button-wrapper" onClick={()=>handleSubmit()}>
+                                    <PrimaryButton content={"Request a callback"} variant='dark' />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    :
+                        <div className={"thankYouFormSubmission container" + (isSubmitted?" show":"")}>
+                            <h2 style={{fontSize:"40px", lineHeight:"44px", fontFamily:"sigmundpro-semibold"}}>Thank you</h2>
+                            <p className='text-content'>We will contact you soon on your given mobile number and mail ID</p>
+                        </div>
+                    }
                 </div>
-            <div ref={thankRef} className={"thankYouFormSubmission container" + (isSubmitted?" show":"")}>
-                <h2 style={{fontSize:"40px", lineHeight:"44px", fontFamily:"sigmundpro-semibold"}}>Thank you</h2>
-                <p className='text-content'>We will contact you soon on your given mobile number and mail ID</p>
-            </div>
             </section>
         </>
     )

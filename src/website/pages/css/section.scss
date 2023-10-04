@@ -332,6 +332,7 @@ section.contact{
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+            transition: all 0.3s ease-in-out;
 
 
             div.contact-container-heading{
@@ -392,21 +393,21 @@ section.contact{
                 }
                 
             }
+
         }
-    }
-    div.thankYouFormSubmission{
-        height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: all 2s cubic-bezier(.78,.01,.47,.99);
-        
-    }
-    div.thankYouFormSubmission.show{
-        height: max-content;
-        opacity: 1;
-        margin-top: 2.5rem;
-        h2, p{
-            text-align: center;
+        div.flex-content-wrapper.hide{
+            opacity: 0;
+        }
+        div.thankYouFormSubmission{
+            opacity: 0;
+            transition: all 1.5s cubic-bezier(.78,.01,.47,.99);
+            h2, p{
+                text-align: center;
+            }
+        }
+        div.thankYouFormSubmission.show{
+            opacity: 1;
+            margin-top: 1rem;
         }
     }
 }
@@ -695,6 +696,19 @@ div.tabs-bar{
         padding: 0  0 5vw 0;
         div.container{
             width: 90%;
+
+            div.FAQs-content{
+    
+                button.accordion{
+                    font-size: 16px;
+                }
+                div.panel{
+                    p.answer{
+                        margin-bottom: 2rem;
+                        font-size: 16px;
+                    }
+                }
+            }
         }
     }
 
@@ -728,10 +742,10 @@ div.tabs-bar{
                 }
 
             }
-        }
-        div.thankYouFormSubmission{
-            h2, p{
-                text-align: left;
+            div.thankYouFormSubmission{
+                h2, p{
+                    text-align: left;
+                }
             }
         }
     }
@@ -1057,6 +1071,25 @@ div.tabs-bar{
         }
     }
 }
+// @media
+// only screen and (-webkit-min-device-pixel-ratio: 3),
+// only screen and (   min--moz-device-pixel-ratio: 3),
+// only screen and (     -o-min-device-pixel-ratio: 3/1),
+// only screen and (        min-device-pixel-ratio: 3)
+// // only screen and (                min-resolution: 192dpi)
+// // only screen and (                min-resolution: 2dppx) 
+// { 
+//   /* Retina-specific stuff here */
+//   section.hero{
+//     p, h1, h2{
+//         color: rgba(0, 0, 0, 0.178);
+//     }
+//   }
+
+
+// }
+
+
 .clr-purple{
     color: #514C9F;
 }
