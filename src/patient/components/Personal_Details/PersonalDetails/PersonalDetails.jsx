@@ -216,7 +216,7 @@ const PersonalDetails = () =>{
             return;
         }
 
-        if(refNumber === number || refNumber === altNumber){
+        if(refNumber == number || refNumber == altNumber){
             let elem = document.getElementById("refNumber");
             if(elem){
                 setRefErrorMsg("This can't be same as your number.");
