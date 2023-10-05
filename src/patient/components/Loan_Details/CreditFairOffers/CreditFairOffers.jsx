@@ -76,7 +76,8 @@ const CreditFairOffers = () =>{
         setSelected({
             "cardName" : "card-1",
             "productId": offers[0].productId,
-            "tenure"   : offers[0].totalEmi
+            "tenure"   : offers[0].totalEmi,
+            "internalProductId" : offers[0].internalProductId
         })
         // console.log(offers[0].productId)
     }, [offers])
@@ -104,7 +105,8 @@ const CreditFairOffers = () =>{
             "loanAmount": loanAmt,
             "loanReason": loanPurpose,
             "loanEMI": selected.tenure,
-            "productId": selected.productId
+            "productId": selected.productId,
+            "internalProductId" : selected.internalProductId
         }
 
         if(!(submitObj.loanEMI && submitObj.productId)){
@@ -262,7 +264,8 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
         let obj = {
             "cardName" : cardName,
             "productId": offerDetails.productId,
-            "tenure"   : months
+            "tenure"   : months,
+            "internalProductId" : offerDetails.internalProductId
         }
         setSelected(obj)
     }
