@@ -52,19 +52,21 @@ const CreditFairOffers = () =>{
     }, [])
 
     useEffect(()=>{
-        axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
-        .then(response =>{
-            console.log(response)
-            if(response.data.message === "success"){
-                if(response?.data?.data === "No Offers Found"){
-                    setOffers([]);
-                }else{
-                    setOffers(response?.data?.data)
+        if(!! doctorId){
+            axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
+            .then(response =>{
+                console.log(response)
+                if(response.data.message === "success"){
+                    if(response?.data?.data === "No Offers Found"){
+                        setOffers([]);
+                    }else{
+                        setOffers(response?.data?.data)
+                    }
                 }
-            }
-        }).catch(error =>{
-            console.log(error);
-        })
+            }).catch(error =>{
+                console.log(error);
+            })
+        }
     }, [doctorId])
  
 
