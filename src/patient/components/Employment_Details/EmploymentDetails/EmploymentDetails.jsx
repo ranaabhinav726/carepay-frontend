@@ -32,23 +32,23 @@ const EmploymentDetails = () =>{
 
     const [empType, setEmpType] = useState('salaried');
     const [salary, setSalary] = useState('');
-    const [salaryDate, setSalaryDate] = useState('1');
+    // const [salaryDate, setSalaryDate] = useState('1');
     const [familyIncome, setFamilyIncome] = useState("0");
     const [companyName, setCompanyName] = useState('');
-    const [companyAddL1, setCompanyAddL1] = useState('');
-    const [companyAddL2, setCompanyAddL2] = useState('');
-    const [pincode, setPincode] = useState('');
-    const [IndustryType, setIndustryType] = useState('Ecommerce');
-    const [IndustryTypeOther, setIndustryTypeOther] = useState('');
+    // const [companyAddL1, setCompanyAddL1] = useState('');
+    // const [companyAddL2, setCompanyAddL2] = useState('');
+    // const [pincode, setPincode] = useState('');
+    // const [IndustryType, setIndustryType] = useState('Ecommerce');
+    // const [IndustryTypeOther, setIndustryTypeOther] = useState('');
 
-    const [totalExpYear, setTotalExpYear] = useState(0);
-    const [totalExpMonth, setTotalExpMonth] = useState(0);
-    const [jobExpYear, setJobExpYear] = useState(0);
-    const [jobExpMonth, setJobExpMonth] = useState(0);
+    // const [totalExpYear, setTotalExpYear] = useState(0);
+    // const [totalExpMonth, setTotalExpMonth] = useState(0);
+    // const [jobExpYear, setJobExpYear] = useState(0);
+    // const [jobExpMonth, setJobExpMonth] = useState(0);
 
     const [loanAmt, setLoanAmount] = useState('0');
 
-    const [cityName, setCityName] = useState("");
+    // const [cityName, setCityName] = useState("");
     // const [consent, setConsent] = useState(false);
     
     const [apiError, setApiError] = useState(false);
@@ -81,20 +81,20 @@ const EmploymentDetails = () =>{
 
     },[])
 
-    const list = ["Ecommerce","FMCG","Healthcare & Diagnostics","IT & ITeS",
-                    "Oil and Gas","Railways","Telecommunications","Cement","Consumer Durables",
-                    "Education and Training","Engineering & Infrastructure","Capital Goods",
-                    "Auto Components","Automobiles","Gems and Jewellery","Aviation","Manufacturing",
-                    "Media and Entertainment","Metals And Mining","Power","Real Estate","Retail",
-                    "Textiles","Insurance (Life and health)","Pharmaceuticals","Dairy Products",
-                    "Fertilisers & Seeds","Food & Food Products","Sugar, Tea, Coffee",
-                    "Hotel, Restaurants & Tourism","Microfinance Institutions","Shipping",
-                    "Ports & Port Services","Banking and Finance","Agriculture and Allied", "Other"
-                ];
+    // const list = ["Ecommerce","FMCG","Healthcare & Diagnostics","IT & ITeS",
+    //                 "Oil and Gas","Railways","Telecommunications","Cement","Consumer Durables",
+    //                 "Education and Training","Engineering & Infrastructure","Capital Goods",
+    //                 "Auto Components","Automobiles","Gems and Jewellery","Aviation","Manufacturing",
+    //                 "Media and Entertainment","Metals And Mining","Power","Real Estate","Retail",
+    //                 "Textiles","Insurance (Life and health)","Pharmaceuticals","Dairy Products",
+    //                 "Fertilisers & Seeds","Food & Food Products","Sugar, Tea, Coffee",
+    //                 "Hotel, Restaurants & Tourism","Microfinance Institutions","Shipping",
+    //                 "Ports & Port Services","Banking and Finance","Agriculture and Allied", "Other"
+    //             ];
 
-    let options = list.map((item, idx)=>{
-        return <option value={item} key={idx}>{item}</option>
-    })
+    // let options = list.map((item, idx)=>{
+    //     return <option value={item} key={idx}>{item}</option>
+    // })
             
 
     useEffect(()=>{
@@ -107,24 +107,24 @@ const EmploymentDetails = () =>{
                     let data = response.data.data;
                     if(!! data){
                         setSalary(data.nettakehomesalary);
-                        setSalaryDate(data.salaryDay);
+                        // setSalaryDate(data.salaryDay);
                         setFamilyIncome(data.monthlyFamilyIncome ?? "0");
                         handleCompanyName(data.organizationName);
-                        setCompanyAddL1(data.workplaceAddress1);
-                        setCompanyAddL2(data.workplaceAddress2);
-                        handlePincode(data.workplacePincode);
-                        let industry = data.industry;
-                        if(list.includes(industry)){
-                            setIndustryType(industry);
-                            // console.log(industry)
-                        }else{
-                            setIndustryType("Other");
-                            setIndustryTypeOther(industry);
-                        }
-                        setTotalExpYear(data.totalJobExpInYears);
-                        setTotalExpMonth(data.totalJobExpInMonth);
-                        setJobExpMonth(data.currentJobExpInMonth);
-                        setJobExpYear(data.currentJobExpInYears)
+                        // setCompanyAddL1(data.workplaceAddress1);
+                        // setCompanyAddL2(data.workplaceAddress2);
+                        // handlePincode(data.workplacePincode);
+                        // let industry = data.industry;
+                        // if(list.includes(industry)){
+                        //     setIndustryType(industry);
+                        //     // console.log(industry)
+                        // }else{
+                        //     setIndustryType("Other");
+                        //     setIndustryTypeOther(industry);
+                        // }
+                        // setTotalExpYear(data.totalJobExpInYears);
+                        // setTotalExpMonth(data.totalJobExpInMonth);
+                        // setJobExpMonth(data.currentJobExpInMonth);
+                        // setJobExpYear(data.currentJobExpInYears)
                     }
                 }
             }).catch(()=>{
@@ -138,21 +138,21 @@ const EmploymentDetails = () =>{
         setCompanyName(filteredCompanyName);
     }
 
-    function handlePincode(val){
-        if(val.length < 6){
-            setPincode(val);
-        }else if(val.length == 6){
-            setPincode(val);
-            axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
-            .then(response =>{
-                console.log(response)
-                let city = response?.data?.city;
-                setCityName(city);
-            }).catch(()=>{
-                setCityName("Error fetching city name");
-            })
-        }
-    }
+    // function handlePincode(val){
+    //     if(val.length < 6){
+    //         setPincode(val);
+    //     }else if(val.length == 6){
+    //         setPincode(val);
+    //         axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
+    //         .then(response =>{
+    //             console.log(response)
+    //             let city = response?.data?.city;
+    //             setCityName(city);
+    //         }).catch(()=>{
+    //             setCityName("Error fetching city name");
+    //         })
+    //     }
+    // }
 
     // const today = new Date();
     // let year = today.getFullYear();
@@ -178,17 +178,9 @@ const EmploymentDetails = () =>{
     async function handleSubmit(){
         // && totalExpYear && totalExpMonth && jobExpYear && jobExpMonth
 
-        if(!(empType && salary && salaryDate 
-            && companyName && companyAddL1 
-            && pincode && IndustryType)){
-
-                console.log(empType, salary, salaryDate, familyIncome 
-                , companyName, companyAddL1, companyAddL2 
-                , pincode, IndustryType, totalExpYear, 
-                    totalExpMonth, jobExpYear, jobExpMonth)
-
-                    
-                // return;
+        if(!(empType && salary && companyName)){
+            console.log(empType, salary, familyIncome, companyName)
+            // return;
         }
 
         if(!salary){ 
@@ -212,54 +204,54 @@ const EmploymentDetails = () =>{
             return;
         }
 
-        if(!companyAddL1){ 
-            let elem = document.getElementById('companyAddL1');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
-        if(specialChars.test(companyAddL1)){
-            let elem = document.getElementById('companyAddL1');
-            setErrorMsg("Special characters are not allowed.");
-            setTimeout(() => {
-                setErrorMsg("This field can't be empty.");
-            }, 3000);
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
-        if(!companyAddL2){ 
-            let elem = document.getElementById('companyAddL2');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
-        if(specialChars.test(companyAddL2)){
-            let elem = document.getElementById('companyAddL2');
-            setErrorMsg("Special characters are not allowed.");
-            setTimeout(() => {
-                setErrorMsg("This field can't be empty.");
-            }, 3000);
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(!companyAddL1){ 
+        //     let elem = document.getElementById('companyAddL1');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
+        // if(specialChars.test(companyAddL1)){
+        //     let elem = document.getElementById('companyAddL1');
+        //     setErrorMsg("Special characters are not allowed.");
+        //     setTimeout(() => {
+        //         setErrorMsg("This field can't be empty.");
+        //     }, 3000);
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
+        // if(!companyAddL2){ 
+        //     let elem = document.getElementById('companyAddL2');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
+        // if(specialChars.test(companyAddL2)){
+        //     let elem = document.getElementById('companyAddL2');
+        //     setErrorMsg("Special characters are not allowed.");
+        //     setTimeout(() => {
+        //         setErrorMsg("This field can't be empty.");
+        //     }, 3000);
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
-        if(!pincode){
-            let elem = document.getElementById('pincode');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(!pincode){
+        //     let elem = document.getElementById('pincode');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
-        if(IndustryType==="Other" && (! IndustryTypeOther)){
-            let elem = document.getElementById('IndustryTypeOther');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(IndustryType==="Other" && (! IndustryTypeOther)){
+        //     let elem = document.getElementById('IndustryTypeOther');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
-        if(totalExpYear < jobExpYear){
-            expError();
-            return;
-        }else if(totalExpYear === jobExpYear && totalExpMonth < jobExpMonth){
-            expError();
-            return;
-        }
+        // if(totalExpYear < jobExpYear){
+        //     expError();
+        //     return;
+        // }else if(totalExpYear === jobExpYear && totalExpMonth < jobExpMonth){
+        //     expError();
+        //     return;
+        // }
 
         // if(!consent){
         //     let elem = document.getElementById('consent');
@@ -277,24 +269,24 @@ const EmploymentDetails = () =>{
             "userId" : userId,
             "employmentType": empType,
             "netTakeHomeSalary": salary,
-            "salaryDay": salaryDate,
+            // "salaryDay": salaryDate,
             "organizationName": companyName,
-            "workplaceAddress1": companyAddL1,
-            "workplaceAddress2":companyAddL2,
-            "workplacePincode": pincode,
-            "totalJobExpInYears": parseInt(totalExpYear),
-            "totalJobExpInMonth": parseInt(totalExpMonth),
-            "currentJobExpInYears": parseInt(jobExpYear),
-            "currentJobExpInMonth": parseInt(jobExpMonth),
+            // "workplaceAddress1": companyAddL1,
+            // "workplaceAddress2":companyAddL2,
+            // "workplacePincode": pincode,
+            // "totalJobExpInYears": parseInt(totalExpYear),
+            // "totalJobExpInMonth": parseInt(totalExpMonth),
+            // "currentJobExpInYears": parseInt(jobExpYear),
+            // "currentJobExpInMonth": parseInt(jobExpMonth),
             "monthlyFamilyIncome": (familyIncome?familyIncome:0),
             "formStatus": ""
           };
 
-        if(IndustryType === "Other"){
-            submitObj.industry = IndustryTypeOther;
-        }else{
-            submitObj.industry = IndustryType;
-        }
+        // if(IndustryType === "Other"){
+        //     submitObj.industry = IndustryTypeOther;
+        // }else{
+        //     submitObj.industry = IndustryType;
+        // }
 
         //   if(!!familyIncome){
         //     submitObj.monthlyFamilyIncome = familyIncome;
@@ -401,7 +393,7 @@ const EmploymentDetails = () =>{
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
-        <div className="salaryDate">
+        {/* <div className="salaryDate">
             <p>Salary credit date</p>
             <select 
                 onChange={(e)=>setSalaryDate(e.target.value)}
@@ -410,7 +402,7 @@ const EmploymentDetails = () =>{
             >
                 {dates}
             </select>
-        </div>
+        </div> */}
 
         <div className="familyIncome">
             <p>Monthly family income (optional)</p>
@@ -433,7 +425,7 @@ const EmploymentDetails = () =>{
             />
             <span className="fieldError">{errorMsg}</span>
         </div>
-        <div className="companyAddress-line1">
+        {/* <div className="companyAddress-line1">
             <p>Current workplace address (line 1)</p>
             <input 
                 id="companyAddL1"
@@ -443,8 +435,8 @@ const EmploymentDetails = () =>{
                 placeholder="Enter here" 
             />
             <span className="fieldError">{errorMsg}</span>
-        </div>
-        <div className="companyAddress-line2">
+        </div> */}
+        {/* <div className="companyAddress-line2">
             <p>Current workplace address (line 2)</p>
             <input 
                 id="companyAddL2"
@@ -454,8 +446,8 @@ const EmploymentDetails = () =>{
                 placeholder="Enter here" 
             />
             <span className="fieldError">{errorMsg}</span>
-        </div>
-        <div className="companyPincode">
+        </div> */}
+        {/* <div className="companyPincode">
             <p>Current workplace Pincode</p>
             <input 
                 id="pincode"
@@ -467,9 +459,9 @@ const EmploymentDetails = () =>{
             />
             <span className="fieldError">This field can't be empty.</span>
         </div>
-        <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p>
+        <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
 
-        <div className="IndustryType">
+        {/* <div className="IndustryType">
             <p>Industry</p>
             <select 
                 id="selectIndustryType"
@@ -491,9 +483,9 @@ const EmploymentDetails = () =>{
                     onChange={(e)=>setIndustryTypeOther(e.target.value)}
                     placeholder="Please enter your working Industry" 
                 />
-            </div>}
+            </div>} */}
 
-        <div className="timeInJob">
+        {/* <div className="timeInJob">
             <p>Time in this job</p>
             <div className="inputGroup">
                 <select name=""
@@ -503,17 +495,7 @@ const EmploymentDetails = () =>{
                 >
                     {expYears}
                 </select>
-                {/* <input 
-                    type="number" 
-                    value={jobExpYear ?? 0}
-                    onChange={(e)=>setJobExpYear(parseInt(e.target.value))}
-                    placeholder="-" /> */}
                 <p>Years</p>
-                {/* <input 
-                    type="number" 
-                    value={jobExpMonth ?? 0}
-                    onChange={(e)=>setJobExpMonth(parseInt(e.target.value))}
-                    placeholder="-" /> */}
                 <select name=""
                     id=""
                     value={jobExpMonth ?? 0}
@@ -523,9 +505,9 @@ const EmploymentDetails = () =>{
                 </select>
                 <p>Months</p>
             </div>
-        </div>
+        </div> */}
 
-        <div className="totalExp">
+        {/* <div className="totalExp">
             <p>Total professional work experience</p>
             <div className="inputGroup">
                 <select name=""
@@ -535,17 +517,7 @@ const EmploymentDetails = () =>{
                 >
                     {expYears}
                 </select>
-                {/* <input 
-                    type="number" 
-                    value={totalExpYear ?? 0}
-                    onChange={(e)=>setTotalExpYear(parseInt(e.target.value))} 
-                    placeholder="-" /> */}
                 <p>Years</p>
-                {/* <input 
-                    type="number" 
-                    value={totalExpMonth ?? 0}
-                    onChange={(e)=>setTotalExpMonth(parseInt(e.target.value))}
-                    placeholder="-" /> */}
                 <select name=""
                     id=""
                     value={totalExpMonth ?? 0}
@@ -556,7 +528,7 @@ const EmploymentDetails = () =>{
                 <p>Months</p>
             </div>
             <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
-        </div>
+        </div> */}
         
         {/* <div id="consent" className="consentBox">
             <input

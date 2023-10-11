@@ -35,10 +35,10 @@ const AddressDetails = () => {
     //     });
     // }, [])
 
-    const [addressType, setAddressType] = useState("current");
+    // const [addressType, setAddressType] = useState("current");
     const [firstLine, setFirstLine] = useState("");
-    const [locality, setLocality] = useState("");
-    const [landmark, setLandmark] = useState("");
+    // const [locality, setLocality] = useState("");
+    // const [landmark, setLandmark] = useState("");
     const [pincode, setPincode] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -58,10 +58,10 @@ const AddressDetails = () => {
                 if(response.data.status === 200){
                     let data = response.data.data;
                     if(!! data){
-                        setAddressType(data.addressType);
+                        // setAddressType(data.addressType);
                         setFirstLine(data.address);
-                        setLocality(data.locality);
-                        setLandmark(data.landmark);
+                        // setLocality(data.locality);
+                        // setLandmark(data.landmark);
                         setPincode(data.pincode);
                         setState(data.state);
                         setCity(data.city);
@@ -96,7 +96,7 @@ const AddressDetails = () => {
     let addressOptions = addresses.map((address, idx)=>{
         return <option key={idx+1} value={idx+1}>{address.address}</option>
     })
-    addressOptions.splice(0,0, <option key={0} value={0}>Select address …</option>)
+    addressOptions.splice(0,0, <option key={0} value={0} disabled>Select address …</option>)
     addressOptions.splice(addressOptions.length,0, <option key={addressOptions.length} value={0}>Address not found, Enter new</option>)
 
     function selectAddress(idx){
@@ -165,9 +165,9 @@ const AddressDetails = () => {
     // }
 
     async function handleForm(){
-        if(!(addressType && firstLine && locality && pincode && city && state)){ 
+        if(!(firstLine && pincode && city && state)){ 
             // All feilds must have something, if not, console log
-            console.log(addressType, firstLine, locality, landmark, pincode, city, state)
+            console.log(firstLine, pincode, city, state)
         }
         let addressWordLength = firstLine.split(" ").length;
 
@@ -177,17 +177,17 @@ const AddressDetails = () => {
             return;
         }
 
-        if(!locality){
-            let elem = document.getElementById('locality');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(!locality){
+        //     let elem = document.getElementById('locality');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
-        if(!landmark){
-            let elem = document.getElementById('landmark');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        // if(!landmark){
+        //     let elem = document.getElementById('landmark');
+        //     if(elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
         if(!pincode){
             let elem = document.getElementById('pincode');
@@ -215,10 +215,10 @@ const AddressDetails = () => {
         let userId = localStorage.getItem("userId");
         let submitObj = {
             "userId": userId,
-            "addressType": addressType,
+            // "addressType": addressType,
             "address": firstLine,
-            "locality" : locality,
-            "landmark" : landmark,
+            // "locality" : locality,
+            // "landmark" : landmark,
             "pincode": pincode,
             "state": state,
             "city": city,
@@ -267,18 +267,18 @@ const AddressDetails = () => {
             </select>
         </div>
         
-        <div className="addressType">
+        {/* <div className="addressType">
             <p>Address type</p>
             <select name="addType" id="selectAddressType" onChange={(e) => setAddressType(e.target.value)} required>
                 <option value="current">Current</option>
                 <option value="permanent">Permanent</option>
-                {/* <option value="Owned by self">Owned by self</option>
+                <option value="Owned by self">Owned by self</option>
                 <option value="Owned by parents">Owned by parents</option>
                 <option value="Rented by self">Rented by self</option>
                 <option value="Rented by parents">Rented by parents</option>
-                <option value="Rented with friends">Rented with friends</option> */}
+                <option value="Rented with friends">Rented with friends</option>
             </select>
-        </div>
+        </div> */}
 
         <div className="firstLine">
             <p>First line</p>
@@ -292,7 +292,7 @@ const AddressDetails = () => {
             <span className="fieldError">Please enter your complete address</span>
         </div>
 
-        <div className="locality">
+        {/* <div className="locality">
             <p>Locality</p>
             <input type="text" 
                 id="locality"
@@ -302,9 +302,9 @@ const AddressDetails = () => {
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
-        </div>
+        </div> */}
 
-        <div className="landmark">
+        {/* <div className="landmark">
             <p>Landmark</p>
             <input type="text" 
                 id="landmark"
@@ -313,7 +313,7 @@ const AddressDetails = () => {
                 placeholder="Enter landmark here" 
                 required 
             />
-        </div>
+        </div> */}
 
         <div className="pincode">
             <p>Pincode</p>
