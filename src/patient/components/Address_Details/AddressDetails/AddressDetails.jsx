@@ -35,7 +35,7 @@ const AddressDetails = () => {
     //     });
     // }, [])
 
-    // const [addressType, setAddressType] = useState("current");
+    const [addressType, setAddressType] = useState("current");
     const [firstLine, setFirstLine] = useState("");
     // const [locality, setLocality] = useState("");
     // const [landmark, setLandmark] = useState("");
@@ -58,7 +58,7 @@ const AddressDetails = () => {
                 if(response.data.status === 200){
                     let data = response.data.data;
                     if(!! data){
-                        // setAddressType(data.addressType);
+                        setAddressType(data.addressType);
                         setFirstLine(data.address);
                         // setLocality(data.locality);
                         // setLandmark(data.landmark);
@@ -215,7 +215,7 @@ const AddressDetails = () => {
         let userId = localStorage.getItem("userId");
         let submitObj = {
             "userId": userId,
-            // "addressType": addressType,
+            "addressType": addressType,
             "address": firstLine,
             // "locality" : locality,
             // "landmark" : landmark,
@@ -267,18 +267,18 @@ const AddressDetails = () => {
             </select>
         </div>
         
-        {/* <div className="addressType">
+        <div className="addressType">
             <p>Address type</p>
             <select name="addType" id="selectAddressType" onChange={(e) => setAddressType(e.target.value)} required>
                 <option value="current">Current</option>
                 <option value="permanent">Permanent</option>
-                <option value="Owned by self">Owned by self</option>
+                {/* <option value="Owned by self">Owned by self</option>
                 <option value="Owned by parents">Owned by parents</option>
                 <option value="Rented by self">Rented by self</option>
                 <option value="Rented by parents">Rented by parents</option>
-                <option value="Rented with friends">Rented with friends</option>
+                <option value="Rented with friends">Rented with friends</option> */}
             </select>
-        </div> */}
+        </div>
 
         <div className="firstLine">
             <p>First line</p>
