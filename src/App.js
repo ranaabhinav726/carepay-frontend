@@ -103,6 +103,7 @@ import PrivacyPolicy from './website/pages/PrivacyPolicy';
 
 import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
 import { useEffect } from 'react';
+import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
 
 
 
@@ -202,6 +203,8 @@ function App() {
         <Route path='/doctor/dashboard/AllTransactions' element={<AllTransactions />} />
         <Route path='/doctor/dashboard/addPatient' element={<AddPatient />} />
         <Route path='/doctor/dashboard/UnderReview' element={<UnderReview />} />
+        <Route path='/doctor/:doctorId' element={<LoginFromURL />} /> 
+        {/* Waiting screen.. to verify doctor ID and save it to localStorage and redirect to dashboard */}
 
         <Route path='/qrData/:doctorId' element={<QrPdfMaker />}></Route>
 
