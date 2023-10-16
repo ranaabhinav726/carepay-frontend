@@ -18,7 +18,7 @@ const CreditDetails = () => {
     const [amount, setAmount] = useState("");
     const [treatment, setTreatment] = useState("");
 
-    const [isPatient, setIsPatient] = useState(true);
+    const [isPatient, setIsPatient] = useState(false);
     const [patientName, setPatientName] = useState("");
     const [relation, setRelation] = useState("");
 
@@ -188,7 +188,7 @@ const CreditDetails = () => {
                     onChange={(e)=>amountHandler(e.target.value)}  
                 />
             </div>
-            <p style={{marginTop:"-8px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p>
+            <p style={{marginTop:"-5px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p>
             <span className="fieldError">Please enter your treatment cost</span>
         </div>
 
@@ -204,7 +204,7 @@ const CreditDetails = () => {
             <span className="fieldError">Please fill name of your treatment</span>
         </div>
 
-        <div style={{marginBottom: "16px"}}>
+        <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
             <input 
                 id="isPatient"
                 type="checkbox" 
@@ -250,9 +250,10 @@ const CreditDetails = () => {
                 value={fullName} 
                 placeholder="Enter your name"
                 onChange={(e)=>setFullName(e.target.value)}  
+                style={{marginBottom:"10px"}}
             />
             <span className="fieldError">Please enter your full name</span>
-            <p style={{fontSize:"12.5px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
+            <p style={{fontSize:"14px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
         </div>
         <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
         <button onClick={()=> verifyAndNavigate()} className="submit">Submit</button>
