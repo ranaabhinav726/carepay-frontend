@@ -1,10 +1,17 @@
 import Header from "../Header/Header"
 import "./homepage.scss"
 
-import homeImage from '../../assets/homeImage.png'
+import homeImage from '../../assets/homePageHero.svg'
 import { useNavigate } from "react-router-dom"
 // import { useContext } from "react"
 // import { DataContext } from "../../App"
+
+import Justdial from '../../assets/justdial.png'
+import Google from '../../assets/Google-my-business.png'
+import Stars from '../../assets/stars.png'
+import { Link } from "react-router-dom"
+
+
 
 const Homepage = () =>{
 
@@ -19,7 +26,8 @@ const Homepage = () =>{
     if(!!clinicName) localStorage.setItem("clinicName", clinicName);
     if(!!doctorName) localStorage.setItem("doctorName", doctorName);
     if(!!doctorId) localStorage.setItem("doctorId", doctorId);
-    console.log("Last update - 8/30/2023 12:45PM");
+
+    console.log("Last update - 16/10/2023 7:39 PM");
 
     // const data = useContext(DataContext);
 
@@ -54,7 +62,9 @@ const Homepage = () =>{
         <main>
         <Header progressbarDisplay="none" />
 
-        <div className="upper-section">
+        <ReviewCard clinicName={"Ryan Hair Transplant clinic"} platform={"google"} link={"#"} />
+
+        {/* <div className="upper-section">
             <h1 className="heading">Don't Postpone<br /> your Treatment</h1>
             <p className="subheading">Instant finance in just 4 easy steps!</p>
         </div>
@@ -68,10 +78,23 @@ const Homepage = () =>{
             <div className="line line2">Starting from 0% Interest</div>
             <div className="line line3">Flexible EMI options</div>
 
-            {/* <Link to='/MobileNumberVerification'> */}
-                <button onClick={navigateToNext} className="submit">Apply for credit</button>
-            {/* </Link> */}
+            <button onClick={navigateToNext} className="submit">Apply for credit</button>
+        </div> */}
+
+        <div style={{padding:"10px", background:"#ECEBFF"}}>
+            <h1 style={{fontSize:"24px", color:"#514C9F", marginBottom:"6px"}}>Instant medical finance</h1>
+            <h2 style={{fontWeight:"400", fontSize:"14px", marginBottom:"10px"}}>Get credit in just 5 easy steps!</h2>
+            <div style={{display:"flex", justifyContent:"center", padding:"10px", marginBottom:"16px"}}>
+                <img src={homeImage} alt="hero banner" style={{borderBottom:"1px solid black"}} />
+            </div>
+            <div style={{display:"flex", alignItems:"center", justifyContent:"center", gap:"12px", color:"#514C9F", fontWeight:"700", fontSize:"13px"}}>
+                <p>0% Interest</p>
+                <div style={{height:"4px", width:"16px", borderRadius:"3px", background:"#514C9F"}}></div>
+                <p>Flexible EMIs</p>
+            </div>
+            <button onClick={()=>navigateToNext()} className="submit" style={{marginTop:"12px"}}>Apply for credit</button>
         </div>
+
         </main>
         </>
     )
@@ -79,3 +102,48 @@ const Homepage = () =>{
 // onClick={()=> data.setData({...data.data, screen:1})}
 
 export default Homepage
+
+function ReviewCard({clinicName, platform, link}){
+
+    let nameArr = clinicName.split(' ');
+    let minLength = Math.min(2, nameArr.length);
+    let initials = "";
+    for(let i=0; i<minLength; i++){
+        initials += nameArr[i].charAt(0);
+    }
+    initials = initials.toUpperCase();
+    return(
+        <>
+            <div style={{display:"flex", gap:"10px"}}>
+                <div style={{color:"white", 
+                    height: "max-content",
+                    padding:"10px", 
+                    fontSize:"50px", 
+                    fontWeight:"700", 
+                    borderRadius:"4px",
+                    background:"#ECEBFF",
+                }}>
+                    {initials}
+                </div>
+                <div>
+                    <h3 style={{fontSize:"14px", marginBottom:"4px"}}>Welcome to</h3>
+                    <p style={{fontSize:"20px", maxWidth:"70%"}}>{clinicName}</p>
+                </div>
+            </div>
+            <div style={{display:"flex", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
+                <div style={{width:"", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+                    <img src={Stars} alt="review us" style={{width:"60%", marginBottom:"10px"}} />
+                    <p>Review us on</p>
+                </div>
+                <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                    <img 
+                        src={platform==="google"? Google : Justdial} 
+                        alt={platform==="google"?"google my business logo":"justdial logo"} 
+                        style={{width:"70%"}}
+                    />
+                    <Link to={link} style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                </div>
+            </div>
+        </>
+    )
+}
