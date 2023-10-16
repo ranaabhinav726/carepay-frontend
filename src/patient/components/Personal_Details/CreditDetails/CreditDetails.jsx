@@ -3,6 +3,8 @@ import axios from "axios";
 import Header from "../../Header/Header"
 import "../../MobileNumberVerification/mobileNumberVerification.scss"
 
+import rupeeIcon from '../../../assets/rupee.svg'
+
 import { useNavigate } from "react-router-dom";
 // import { useContext } from "react"
 // import { DataContext } from "../../App"
@@ -15,6 +17,10 @@ const CreditDetails = () => {
     const [fullName, setFullName] = useState("");
     const [amount, setAmount] = useState("");
     const [treatment, setTreatment] = useState("");
+
+    const [isPatient, setIsPatient] = useState(true);
+    const [patientName, setPatientName] = useState("");
+    const [relation, setRelation] = useState("");
 
     const [apiError, setApiError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
@@ -68,6 +74,18 @@ const CreditDetails = () => {
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(! isPatient){
+            if(! patientName){
+                let elem = document.getElementById('patientName');
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+            if(! relation){
+                let elem = document.getElementById('relation');
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+        }
         if(! fullName){
             let elem = document.getElementById('fullName');
             if(elem) showErrorOnUI(elem);
@@ -94,6 +112,11 @@ const CreditDetails = () => {
             "formStatus": ""
         };
 
+        if(! isPatient){
+            submitObj.patientName = patientName;
+            submitObj.relationshipWithPatient = relation;
+        }
+
         await axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(async(response) => {
@@ -103,6 +126,7 @@ const CreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     navigate('/patient/PersonalDetails');
                 }else{
+                    // setErrorMsg()
                     apiErrorHandler();
                 }
             }).catch(error => {
@@ -154,13 +178,16 @@ const CreditDetails = () => {
         
         <div className="inputGroup">
             <p>Credit amount</p>
-            <input 
-                id="loanAmount"
-                type="text" 
-                value={amount} 
-                placeholder="Enter credit amount"
-                onChange={(e)=>amountHandler(e.target.value)}  
-            />
+            <div className="inputBoxWithSymbol" style={{display:"flex", alignItems:"baseline"}}>
+                <div className="rupeeSymbol" style={{padding: "0 16px"}}><img src={rupeeIcon} alt="" /></div>
+                <input 
+                    id="loanAmount"
+                    type="text" 
+                    value={amount} 
+                    placeholder="Enter credit amount"
+                    onChange={(e)=>amountHandler(e.target.value)}  
+                />
+            </div>
             <p style={{marginTop:"-8px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p>
             <span className="fieldError">Please enter your treatment cost</span>
         </div>
@@ -177,6 +204,44 @@ const CreditDetails = () => {
             <span className="fieldError">Please fill name of your treatment</span>
         </div>
 
+        <div style={{marginBottom: "16px"}}>
+            <input 
+                id="isPatient"
+                type="checkbox" 
+                checked={isPatient} 
+                placeholder="Name of treatment"
+                onChange={(e)=>setIsPatient(! isPatient)}
+            />
+            <label htmlFor="isPatient" style={{paddingLeft:"10px", fontSize:"inherit"}}>I am the patient</label>
+        </div>
+
+        {! isPatient && 
+        <>
+            <div className="inputGroup">
+                <p>Name of the patient</p>
+                <input 
+                    id="patientName"
+                    type="text" 
+                    value={patientName} 
+                    placeholder="Enter name of the patient here"
+                    onChange={(e)=>setPatientName(e.target.value)}  
+                />
+                <span className="fieldError">Please fill name of the patient</span>
+            </div>
+            <div className="inputGroup">
+                <p>Your relationship to the patient</p>
+                <input 
+                    id="relation"
+                    type="text" 
+                    value={relation} 
+                    placeholder="Enter your relation here"
+                    onChange={(e)=>setRelation(e.target.value)}  
+                />
+                <span className="fieldError">Please tell your relation to the patient</span>
+            </div>
+        </>
+    }
+
         <div className="inputGroup">
             <p>Full name (as per PAN)</p>
             <input 
@@ -187,6 +252,7 @@ const CreditDetails = () => {
                 onChange={(e)=>setFullName(e.target.value)}  
             />
             <span className="fieldError">Please enter your full name</span>
+            <p style={{fontSize:"12.5px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
         </div>
         <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
         <button onClick={()=> verifyAndNavigate()} className="submit">Submit</button>
