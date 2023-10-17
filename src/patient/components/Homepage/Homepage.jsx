@@ -10,7 +10,9 @@ import Justdial from '../../assets/justdial.png'
 import Google from '../../assets/Google-my-business.png'
 import Stars from '../../assets/stars.png'
 import { Link } from "react-router-dom"
-
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { env } from "../../../doctor/environment"
 
 
 const Homepage = () =>{
@@ -27,7 +29,23 @@ const Homepage = () =>{
     if(!!doctorName) localStorage.setItem("doctorName", doctorName);
     if(!!doctorId) localStorage.setItem("doctorId", doctorId);
 
+    if(!! clinicName) clinicName = clinicName.split("_").join(" ");
+  
+    const [googleReviewLink, setGoogleReviewLink] = useState("");
+    const [justdialReviewLink, setJustdialReviewLink] = useState("");
+
     console.log("Last update - 16/10/2023 7:39 PM");
+
+    useEffect(()=>{
+        axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
+        .then((response)=>{
+            console.log(response)
+            setGoogleReviewLink(response?.data?.googleReviewLink)
+            setJustdialReviewLink(response?.data?.justdialReviewLink)
+        }).catch(()=>{
+
+        })
+    } ,[doctorId])
 
     // const data = useContext(DataContext);
 
@@ -62,7 +80,7 @@ const Homepage = () =>{
         <main>
         <Header progressbarDisplay="none" />
 
-        <ReviewCard clinicName={"Ryan Hair Transplant clinic"} platform={"google"} link={"#"} />
+        <ReviewCard clinicName={clinicName} link1={googleReviewLink} link2={justdialReviewLink} link={"#"} />
 
         {/* <div className="upper-section">
             <h1 className="heading">Don't Postpone<br /> your Treatment</h1>
@@ -81,7 +99,7 @@ const Homepage = () =>{
             <button onClick={navigateToNext} className="submit">Apply for credit</button>
         </div> */}
 
-        <div style={{padding:"10px", background:"#ECEBFF"}}>
+        <div style={{padding:"10px", background:"#ECEBFF", marginTop:"1rem"}}>
             <h1 style={{fontSize:"24px", color:"#514C9F", marginBottom:"6px"}}>Instant medical finance</h1>
             <h2 style={{fontWeight:"400", fontSize:"14px", marginBottom:"10px"}}>Get credit in just 5 easy steps!</h2>
             <div style={{display:"flex", justifyContent:"center", padding:"10px", marginBottom:"16px"}}>
@@ -103,7 +121,7 @@ const Homepage = () =>{
 
 export default Homepage
 
-function ReviewCard({clinicName, platform, link}){
+function ReviewCard({clinicName="", link1="", link2=""}){
 
     let nameArr = clinicName.split(' ');
     let minLength = Math.min(2, nameArr.length);
@@ -130,19 +148,35 @@ function ReviewCard({clinicName, platform, link}){
                     <p style={{fontSize:"20px", maxWidth:"70%"}}>{clinicName}</p>
                 </div>
             </div>
-            <div style={{display:"flex", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
-                <div style={{width:"", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                    <img src={Stars} alt="review us" style={{width:"60%", marginBottom:"10px"}} />
-                    <p>Review us on</p>
-                </div>
-                <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                    <img 
-                        src={platform==="google"? Google : Justdial} 
-                        alt={platform==="google"?"google my business logo":"justdial logo"} 
-                        style={{width:"70%"}}
-                    />
-                    <Link to={link} style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
-                </div>
+            <div className="reviewCardWrapper webkitScrollbar" style={{display:"flex", overflowX:"auto", scrollbarWidth: "thin", scrollbarColor:"#514C9F", scrollbarGutter:"stable"}}>
+                {link1 && <div style={{display:"flex",minWidth:"85%", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
+                    <div style={{width:"", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+                        <img src={Stars} alt="review us" style={{width:"60%", marginBottom:"10px"}} />
+                        <p>Review us on</p>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                        <img 
+                            src={Google} 
+                            alt={"google my business logo"} 
+                            style={{width:"70%"}}
+                        />
+                        <Link to={link1} style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                    </div>
+                </div>}
+                {link2 && <div style={{display:"flex",minWidth:"85%", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
+                    <div style={{width:"", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+                        <img src={Stars} alt="review us" style={{width:"60%", marginBottom:"10px"}} />
+                        <p>Review us on</p>
+                    </div>
+                    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                        <img 
+                            src={Justdial} 
+                            alt={"justdial logo"} 
+                            style={{width:"70%"}}
+                        />
+                        <Link to={link2} style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                    </div>
+                </div>}
             </div>
         </>
     )
