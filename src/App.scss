@@ -789,3 +789,22 @@ div.website-container{
       }
     }
   }
+
+  ::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #ECEBFF; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(82, 76, 159, 0.8); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #514C9F; 
+  }
