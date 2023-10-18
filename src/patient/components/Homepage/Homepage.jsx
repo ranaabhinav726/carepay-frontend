@@ -37,14 +37,16 @@ const Homepage = () =>{
     console.log("Last update - 16/10/2023 7:39 PM");
 
     useEffect(()=>{
-        axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
-        .then((response)=>{
-            console.log(response)
-            setGoogleReviewLink(response?.data?.googleReviewLink)
-            setJustdialReviewLink(response?.data?.justdialReviewLink)
-        }).catch(()=>{
+        if(doctorId){
+            axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
+            .then((response)=>{
+                console.log(response)
+                setGoogleReviewLink(response?.data?.data?.googleReviewLink)
+                setJustdialReviewLink(response?.data?.data?.justdialReviewLink)
+            }).catch(()=>{
 
-        })
+            })
+        }
     } ,[doctorId])
 
     // const data = useContext(DataContext);
@@ -160,7 +162,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                             alt={"google my business logo"} 
                             style={{width:"70%"}}
                         />
-                        <Link to={link1} style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                        <Link to={link1} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                 </div>}
                 {link2 && <div style={{display:"flex",minWidth:"85%", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
@@ -174,7 +176,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                             alt={"justdial logo"} 
                             style={{width:"70%"}}
                         />
-                        <Link to={link2} style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                        <Link to={link2} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                 </div>}
             </div>
