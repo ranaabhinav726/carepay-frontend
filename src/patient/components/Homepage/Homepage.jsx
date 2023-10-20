@@ -1,14 +1,15 @@
 import Header from "../Header/Header"
 import "./homepage.scss"
 
-import homeImage from '../../assets/homePageHero.svg'
+import homeImage from '../../assets/heroMoneyImage.svg'
 import { useNavigate } from "react-router-dom"
 // import { useContext } from "react"
 // import { DataContext } from "../../App"
 
 import Justdial from '../../assets/justdial.png'
 import Google from '../../assets/Google-my-business.png'
-import Stars from '../../assets/stars.png'
+import Stars from '../../assets/stars.svg'
+import HospitalIcon from '../../assets/hospitalIcon.svg'
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -101,18 +102,30 @@ const Homepage = () =>{
             <button onClick={navigateToNext} className="submit">Apply for credit</button>
         </div> */}
 
-        <div style={{padding:"10px", background:"#ECEBFF", marginTop:"1rem"}}>
-            <h1 style={{fontSize:"24px", color:"#514C9F", marginBottom:"6px"}}>Instant medical finance</h1>
-            <h2 style={{fontWeight:"400", fontSize:"14px", marginBottom:"10px"}}>Get credit in just 5 easy steps!</h2>
-            <div style={{display:"flex", justifyContent:"center", padding:"10px", marginBottom:"16px"}}>
-                <img src={homeImage} alt="hero banner" style={{borderBottom:"1px solid black"}} />
+        <div style={{padding:"16px", background:"#ECEBFF", marginTop:"1rem", borderRadius:"4px"}}>
+            <h1 style={{fontSize:"32px", color:"#514C9F"}}>Instant<br /> medical finance</h1>
+            <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"4px"}}>
+                <h2 style={{fontWeight:"400", fontSize:"16px", marginBottom:"10px"}}>Get credit in just<br /> 5 easy steps!</h2>
+                <img src={homeImage} alt="hero banner" style={{width:"50%"}} />
             </div>
-            <div style={{display:"flex", alignItems:"center", justifyContent:"center", gap:"12px", color:"#514C9F", fontWeight:"700", fontSize:"13px"}}>
+            {/* <div style={{display:"flex", alignItems:"center", justifyContent:"center", gap:"12px", color:"#514C9F", fontWeight:"700", fontSize:"13px"}}>
                 <p>0% Interest</p>
                 <div style={{height:"4px", width:"16px", borderRadius:"3px", background:"#514C9F"}}></div>
                 <p>Flexible EMIs</p>
+            </div> */}
+            <div style={{padding:"10px", display:"flex", alignItems:"center", gap:"12px", background:"white", borderRadius:"4px", margin:"10px 0"}}>
+                <div style={{height:"10px", width:"10px", borderRadius:"50%", background:"rgba(81, 76, 159, 0.5)"}}></div>
+                <p>Starting from 0% Interest</p>
             </div>
-            <button onClick={()=>navigateToNext()} className="submit" style={{marginTop:"12px"}}>Apply for credit</button>
+            <div style={{padding:"10px", display:"flex", alignItems:"center", gap:"12px", background:"white", borderRadius:"4px", marginBottom:"10px"}}>
+                <div style={{height:"10px", width:"10px", borderRadius:"50%", background:"rgba(81, 76, 159, 0.5)"}}></div>
+                <p>Flexible EMI options</p>
+            </div>
+            <div style={{padding:"10px", display:"flex", alignItems:"center", gap:"12px", background:"white", borderRadius:"4px", marginBottom:"4px"}}>
+                <div style={{height:"10px", width:"10px", borderRadius:"50%", background:"rgba(81, 76, 159, 0.5)"}}></div>
+                <p>Fully digital process with quick approvals</p>
+            </div>
+            <button onClick={()=>navigateToNext()} className="submit" style={{marginTop:"12px", fontSize:"18px"}}>Apply for credit</button>
         </div>
 
         </main>
@@ -134,49 +147,52 @@ function ReviewCard({clinicName="", link1="", link2=""}){
     initials = initials.toUpperCase();
     return(
         <>
-            <div style={{display:"flex", gap:"10px"}}>
+        {clinicName && 
+            <div style={{display:"flex", gap:"10px", marginBottom:"20px"}}>
                 <div style={{color:"white", 
-                    height: "max-content",
-                    padding:"10px", 
-                    fontSize:"50px", 
-                    fontWeight:"700", 
-                    borderRadius:"4px",
-                    background:"#ECEBFF",
+                    height: "80px",
+                    width: "80px",
+                    // padding: "16px",
+                    borderRadius: "4px",
+                    background: "#ECEBFF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
                 }}>
-                    {initials}
+                    <img src={HospitalIcon} alt="" style={{width:"50%"}} />
                 </div>
                 <div>
-                    <h3 style={{fontSize:"14px", marginBottom:"4px"}}>Welcome to</h3>
-                    <p style={{fontSize:"20px", maxWidth:"70%"}}>{clinicName}</p>
+                    <h3 style={{fontSize:"18px", marginBottom:"4px"}}>Welcome to</h3>
+                    <p style={{fontSize:"24px", maxWidth:"70%"}}>{clinicName}</p>
                 </div>
-            </div>
-            <div className="reviewCardWrapper webkitScrollbar" style={{display:"flex", overflowX:"auto", scrollbarWidth: "thin", scrollbarColor:"#514C9F", scrollbarGutter:"stable"}}>
-                {link1 && <div style={{display:"flex",minWidth:"85%", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
-                    <div style={{width:"", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                        <img src={Stars} alt="review us" style={{width:"60%", marginBottom:"10px"}} />
-                        <p>Review us on</p>
+            </div>}
+            <div className="reviewCardWrapper webkitScrollbar" style={{display:"flex", overflowX:"auto", scrollbarWidth: "thin", scrollbarColor:"#514C9F", scrollbarGutter:"stable", userSelect:"none"}}>
+                {link1 && <div style={{display:"flex", minWidth:"85%", padding:"16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 0"}}>
+                    <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
+                        <p>Your opinion<br /> matters to us.</p>
+                        <img src={Stars} alt="review us" style={{width:"110%"}} />
+                        <Link to={link1} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
-                    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                    <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                         <img 
                             src={Google} 
                             alt={"google my business logo"} 
-                            style={{width:"70%"}}
+                            style={{width:"85%"}}
                         />
-                        <Link to={link1} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                 </div>}
-                {link2 && <div style={{display:"flex",minWidth:"85%", padding:"22px 10px 32px 10px", justifyContent:"space-between"}}>
-                    <div style={{width:"", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                        <img src={Stars} alt="review us" style={{width:"60%", marginBottom:"10px"}} />
-                        <p>Review us on</p>
+                {link2 && <div style={{display:"flex", minWidth:"85%", padding:"16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 5px"}}>
+                    <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
+                        <p>Your opinion<br /> matters to us.</p>
+                        <img src={Stars} alt="review us" style={{width:"110%"}} />
+                        <Link to={link2} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
-                    <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                    <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                         <img 
                             src={Justdial} 
                             alt={"justdial logo"} 
-                            style={{width:"70%"}}
+                            style={{width:"85%"}}
                         />
-                        <Link to={link2} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"#0086F8", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                 </div>}
             </div>
