@@ -167,7 +167,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                 </div>
             </div>}
             <div className="reviewCardWrapper webkitScrollbar" style={{display:"flex", overflowX:"auto", scrollbarWidth: "thin", scrollbarColor:"#514C9F", scrollbarGutter:"stable", userSelect:"none"}}>
-                {link1 && <div style={{display:"flex", minWidth:"85%", padding:"16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 0"}}>
+                {link1 && <div style={{display:"flex", minWidth:"85%", padding:"16px 0 16px 16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 0"}}>
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
                         <img src={Stars} alt="review us" style={{width:"110%"}} />
@@ -177,11 +177,11 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                         <img 
                             src={Google} 
                             alt={"google my business logo"} 
-                            style={{width:"85%"}}
+                            style={{width:"80%"}}
                         />
                     </div>
                 </div>}
-                {link2 && <div style={{display:"flex", minWidth:"85%", padding:"16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 5px"}}>
+                {link2 && <div style={{display:"flex", minWidth:"85%", padding:"16px 0 16px 16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 5px"}}>
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
                         <img src={Stars} alt="review us" style={{width:"110%"}} />
@@ -191,7 +191,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                         <img 
                             src={Justdial} 
                             alt={"justdial logo"} 
-                            style={{width:"85%"}}
+                            style={{width:"70%"}}
                         />
                     </div>
                 </div>}
