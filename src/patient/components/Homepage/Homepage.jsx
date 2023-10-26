@@ -152,6 +152,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                 <div style={{color:"white", 
                     height: "80px",
                     width: "80px",
+                    aspectRatio:"1/1",
                     // padding: "16px",
                     borderRadius: "4px",
                     background: "#ECEBFF",
@@ -171,7 +172,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
                         <img src={Stars} alt="review us" style={{width:"110%"}} />
-                        <Link to={link1} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                        <Link to={link1} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                         <img 
@@ -185,7 +186,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
                         <img src={Stars} alt="review us" style={{width:"110%"}} />
-                        <Link to={link2} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                        <Link to={link2} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                         <img 
