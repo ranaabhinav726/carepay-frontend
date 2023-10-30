@@ -20,7 +20,7 @@ const CreditDetails = () => {
 
     const [isPatient, setIsPatient] = useState(false);
     const [patientName, setPatientName] = useState("");
-    const [relation, setRelation] = useState("");
+    const [relation, setRelation] = useState("father");
 
     const [apiError, setApiError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
@@ -116,6 +116,8 @@ const CreditDetails = () => {
             submitObj.patientName = patientName;
             submitObj.relationshipWithPatient = relation;
         }
+
+        // console.log(submitObj); return
 
         await axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
@@ -230,13 +232,19 @@ const CreditDetails = () => {
             </div>
             <div className="inputGroup">
                 <p>Your relationship to the patient</p>
-                <input 
+                {/* <input 
                     id="relation"
                     type="text" 
                     value={relation} 
                     placeholder="Enter your relation here"
                     onChange={(e)=>setRelation(e.target.value)}  
-                />
+                /> */}
+                <select name="relation" id="relation" value={relation} onChange={(e)=>setRelation(e.target.value)}>
+                    <option value={"father"}>Father</option>
+                    <option value={"mother"}>Mother</option>
+                    <option value={"brother"}>Brother</option>
+                    <option value={"sister"}>Sister</option>
+                </select>
                 <span className="fieldError">Please tell your relation to the patient</span>
             </div>
         </>
