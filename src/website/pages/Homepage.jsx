@@ -312,7 +312,7 @@ function Branding(){
         <>
             <section className="branding">
                 <div className="container">
-                    <h2>Don't delay, just <span className='clr-purple'>carepay !</span></h2>
+                    <h2>don't delay, just <span className='clr-purple'>carepay!</span></h2>
                     <p className="text-content">The sooner you join, the more patients you'll convert. So, say goodbye to payment delays and seize the opportunity to supercharge your revenue growth. Join CarePay today!</p>
                     <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' callback={handleContactScroll} />
                 </div>
@@ -455,7 +455,7 @@ export function Contact(){
                     {!isSubmitted ? 
                         <div className={"flex-content-wrapper"+ (switchComp?" hide":"")}>
                             <div className="contact-container-heading">
-                                <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's Take Your Practice to the Next Level</h3>
+                                <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's take your practice to the next level</h3>
                                 <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services</p>
                             </div>
                             <div className="contact-container-form">
