@@ -47,8 +47,8 @@ function Hero(){
         <section className='hero'>
             <div className="container">
                 <div className="flex-content-wrapper">
-                    <div className="section-content hero-container-content">
-                        <h1>We Are Committed To Your Growth</h1>
+                    <div className="section-content hero-container-content" style={{justifyContent:"center"}}>
+                        <h1>We are committed to your growth</h1>
                         <p className="text-content">Our mission is to streamline healthcare financing, allowing providers like you, to focus on what you do best - delivering exceptional care!</p>
                     </div>
                     <div className="section-content hero-container-image">
@@ -80,10 +80,10 @@ function OurTeam(){
                         <MemberCard img={Mohit} name={"Mohit Bansal"} designation={"CTO"} />
                         <MemberCard img={Ashutosh} name={"Ashutosh Shrivastava"} designation={"VP Sales - Key Accounts"} />
                         <MemberCard img={Sartaj} name={"Sartaj Abbasi"} designation={"Zonal Head"} area='- North India' type='- Super speciality' />
-                        <MemberCard img={Tanwir} name={"Md. Tanwir Akhtar"} designation={"Area Business Manager"} />
-                        <MemberCard img={Sparsh} name={"Sparsh Vaid"} designation={"Area Business Manager"} />
+                        {/* <MemberCard img={Tanwir} name={"Md. Tanwir Akhtar"} designation={"Area Business Manager"} /> */}
+                        {/* <MemberCard img={Sparsh} name={"Sparsh Vaid"} designation={"Area Business Manager"} /> */}
                         <MemberCard img={Sara} name={"Sara Fathima"} designation={"Area Business Manager"} />
-                        <MemberCard img={Parishesh} name={"Parishesh Vinod"} designation={"Area Business Manager"} />
+                        {/* <MemberCard img={Parishesh} name={"Parishesh Vinod"} designation={"Area Business Manager"} /> */}
                         <MemberCard img={Kalpataru} name={"Kalpataru Panda"} designation={"Credit - Ops Manager"} />
                         <MemberCard img={Lavit} name={"Lavit Modi"} designation={"Finance Manager"} />
                         <MemberCard img={Balbeer} name={"Balbeer Kumar"} designation={"Regional Manager"} />
