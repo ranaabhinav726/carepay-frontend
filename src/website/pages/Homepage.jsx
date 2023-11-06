@@ -201,7 +201,7 @@ function HowItWorks(){
                 break;
             case "tab-5":
                 refGif.current.src = Step5Gif;
-                refCaption.current.innerText = "Patient pays the 1st EMI and amount is disbursed directly in your account.";
+                refCaption.current.innerText = "Patient pays the 1st EMI to you and rest amount is disbursed directly in your account.";
                 break;
         }
     }, [active])
