@@ -12,7 +12,8 @@ const DocPersonalDetails = () =>{
     const navigate = useNavigate();
 
     // let phoneNumber = ;
-    const [phoneNumber, setPhoneNumber] = useState(localStorage.getItem('D-phoneNumber'))
+    const [phoneNumber, setPhoneNumber] = useState("");
+    // const phoneNumber = useState(localStorage.getItem('D-phoneNumber'));
 
     const [number, setNumber] = useState('');
     const [isNumValid, setNumValid] = useState(false);
@@ -36,13 +37,17 @@ const DocPersonalDetails = () =>{
     const [canSubmit, setCanSubmit] = useState(true);
     
     const [id, setId] = useState("");
-    const[doctorId, setDoctorId] = useState('');
+    const[doctorId, setDoctorId] = useState(localStorage.getItem("D-doctorId"));
 
     const [scoutList, setScoutList] = useState([]);
 
     let ref = useRef(0);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
+        let num = localStorage.getItem('D-phoneNumber');
+        if(num){
+            setPhoneNumber(num);
+        }
     },[])
 
 
@@ -89,7 +94,15 @@ const DocPersonalDetails = () =>{
             };
             getCall();
         }
-    },[phoneNumber]);
+        if(doctorId){
+            axios.get(env.api_Url + "getDoctorDetailByDoctorId?doctorId=" + doctorId)
+            .then((response)=>{
+                if(response.data.message === "success"){
+                    setPhoneNumber(response?.data?.data?.phone_number)
+                }
+            })
+        }
+    },[phoneNumber, doctorId]);
 
     useEffect(()=>{
         axios.get(env.api_Url + "getAllScoutCodes")
@@ -293,7 +306,7 @@ const DocPersonalDetails = () =>{
                 <p className='group-title'>Phone Number</p>
                 <input
                     className='group-input'
-                    disabled
+                    disabled={phoneNumber==="" ? false : true}
                     id="number"
                     type="number"
                     inputMode="numeric"

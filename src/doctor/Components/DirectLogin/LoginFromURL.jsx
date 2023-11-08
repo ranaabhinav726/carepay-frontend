@@ -4,6 +4,7 @@ import Loader from '../../assets/loader.gif'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { env } from "../../environment";
+// import { apiErrorHandler } from '../../environment'
 
 function LoginFromURL(){
     
@@ -12,16 +13,43 @@ function LoginFromURL(){
     const [doctorId, ] = useState(params?.doctorId);
 
     useEffect(()=>{
-        if(doctorId){
+        if(doctorId){ 
             axios.get(env.api_Url + "getDoctorVerificationStatus?doctorId=" + doctorId)
             .then(response =>{
                 if(response.data.status === 200){
-                    if(response.data.data === "VERIFIED"){
-                        localStorage.setItem("D-doctorId", doctorId);
+                    localStorage.setItem("D-doctorId", doctorId);
+                    let status = response?.data?.data;
+                    if(status === "VERIFIED"){
                         setTimeout(() => {
                             navigate('/doctor/dashboard')
                         }, 4000);
+                    }else if(status === "NOT_VERIFIED"){
+                        navigate('/doctor/welcome')
+                    }else if(!! status){
+                        let path = "/doctor/welcome";
+                        switch(status){
+                            case "PERSONAL":
+                                path = "/doctor/PracticeDetails";
+                                break;
+                            case "PRACTICE":
+                                path = "/doctor/AddressDetails";
+                                break;
+                            case "ADDRESS":
+                                path = "/doctor/BankDetails";
+                                break;
+                            case "BANK":
+                                path = "/doctor/UploadDocuments";
+                                break;
+                            case "DOCUMENTS":
+                                path = "/doctor/ThankYou";
+                                break;
+                        }
+                        navigate(path);
+                    }else{
+                        // apiErrorHandler();
                     }
+                }else{
+                    navigate("/doctor")
                 }
             }).catch((e)=>{
                 console.warn(e);
