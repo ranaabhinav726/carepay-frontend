@@ -32,6 +32,10 @@ import InstaIcon from '../assets/instaIcon.webp'
 import axios from 'axios'
 import CustomNavbar from '../Components/Navbar'
 
+import MidDayLogo from '../assets/Mid day logo.png'
+import FinExpLogo from '../assets/financialexpress logo.png'
+import PharmaBizLogo from '../assets/PharmaBiz logo.png'
+
 import Aos from 'aos';
 import 'aos/dist/aos.css'
 
@@ -41,7 +45,7 @@ function WebHomepage(){
         Aos.init({
             anchorPlacement: "bottom-bottom"
         });
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     }, []) 
 
     return(
@@ -54,6 +58,7 @@ function WebHomepage(){
             <HowItWorks />
             <HealthcareFinance />
             {/* <Reviews /> */}
+            <Articles />
             <Branding />
             <HomepageFAQs />
             <Contact />
@@ -247,7 +252,7 @@ function HealthcareFinance(){
 
                 <p className="text-content">At CarePay, we envisage a future where financial services are seamlessly integrated into healthcare, creating a harmonious ecosystem that benefits both healthcare providers and patients. Our cutting-edge solutions aim at the bigger picture, evolving to serve the ever-growing demands of India’s healthcare sector.</p>
 
-                <h4>Trusted by</h4>
+                <h4 style={{fontSize:"42px", marginTop:"3rem"}}>Trusted by</h4>
                 <div className="trustedBy-wrapper">
                     <div className="trustedBy">
                         <img src={TrustedBy1} alt="" />
@@ -321,6 +326,72 @@ function Branding(){
     )
 }
 
+function Articles(){
+
+    return(
+        <>
+            <section className="articles" style={{background:"#ECEBFF"}}>
+                <div className="container" style={{textAlign:"center"}}>
+                    <h4 style={{fontSize:"42px", padding:"0 12px"}}>Insights & Innovations</h4>
+                    <p className='text-content' style={{textAlign:"center", marginBottom:"1.5rem"}}>Stay updated with the latest trends, insights, <br/>and innovations in healthcare financing</p>
+                </div>
+                <div
+                    className="scrollable-container"
+                    style={{
+                        overflowX: "auto",
+                        scrollbarWidth: "thin",
+                        scrollbarColor: "#514C9F",
+                        scrollbarGutter: "stable",
+                        // userSelect: "none",
+                        minWidth: "100%", // Set a minimum width
+                        padding:"1%"
+                    }}
+                >
+                    <div className="wrapper" style={{
+                        padding: "30px",
+                        display: "flex",
+                        flexDirection: "row",
+                        alignContent: "flex-start",
+                        justifyContent: "space-between",
+                        gap: "3rem",
+                    }}>
+                        <Article 
+                            width={"25%"} 
+                            as="480/320" 
+                            imgWidth='40%' 
+                            logo={MidDayLogo} content={"How CarePay is Changing the Face of Healthcare Financing"} link={"https://www.mid-day.com/brand-media/article/how-carepay-is-changing-the-face-of-healthcare-financing--gaurav-gupta-23317470"}
+                        />
+                        <Article 
+                            width={"30%"} 
+                            as="580/320" 
+                            imgWidth='70%' 
+                            logo={FinExpLogo} content={"The convergence of finance and healthcare: How fintech is bridging the gap"} link={"https://www.financialexpress.com/business/industry-the-convergence-of-finance-and-healthcare-how-fintech-is-bridging-the-gap-3283633/"}
+                        />
+                        <Article 
+                            width={"30%"} 
+                            as="580/320" 
+                            imgWidth='45%' 
+                            logo={PharmaBizLogo} content={"India’s digitally empowered fintech companies working to address optimal financial protection for patients"} link={"http://www.pharmabiz.com/NewsDetails.aspx?aid=163303&sid=1"}
+                        />
+                    </div>
+                </div>
+            </section>
+        </>
+    )
+}
+
+function Article({ logo, content, link, width, imgWidth="50%", as }){
+    return(
+        <>
+            <article style={{width:`${width}`, aspectRatio:`${as}`, minWidth:"30ch", padding:"30px", paddingBottom:"45px", position:"relative", display:"flex", flexDirection:"column", background:"#fff", borderRadius:"8px", border:"2px solid #263238", boxShadow:"-16px 24px 0px 0px #504C9E"}}>
+                <div style={{height:"20%", display:"flex", alignItems:"flex-start"}}><img src={logo} alt="" style={{width:`${imgWidth}`}} /></div>
+                <p className='text-content' style={{fontWeight:"700"}}>{content}</p>
+                <Link to={link} target='_blank' style={{color:"#5149CF", textDecoration:"underline", fontWeight:"700", position:"absolute", bottom:'25px'}}>View article</Link>
+            </article>
+        </>
+    )
+}
+
 function HomepageFAQs(){
 
     // const [activeFaq, setActiveFaq] = useState('');
@@ -364,7 +435,7 @@ function HomepageFAQs(){
         <>
             <section className="homepage-FAQs">
                 <div className="container">
-                    <h3>FAQs</h3>
+                    <h3 style={{fontSize:"42px", fontWeight:"700"}}>FAQs</h3>
                     <div className="faq-wrapper" onClick={(e)=>clickHandler(e)}>
                         <FAQ question={"How much time does it take to get loan processed?"} answer={"It takes less than a minute to get the loan approved. On scanning the QR code and selecting the desired payment option, patients will have to enter their PAN and Aadhar Card no. for verification; post which the loan is approved, subject to credit eligibility and terms and conditions of loan agreement with the financial institution Partner."} />
                         <FAQ question={"What are the steps involved for making this option available at my hospital/clinic?"} answer={"You have to sign an agreement (shared digitally by our team) and fill a simple on-boarding form for getting started. Our team will reach out to you shortly after that for installing the QR code and training your receptionist."} />
@@ -565,4 +636,3 @@ export function Footer(){
         </>
     )
 }
-
