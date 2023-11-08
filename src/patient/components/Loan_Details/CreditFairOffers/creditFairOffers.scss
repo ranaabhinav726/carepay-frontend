@@ -25,7 +25,8 @@ main.creditFairOffers{
         display: flex;
         flex-direction: row;
         border-radius: 4px;
-        background: var(--tertiary-purple, #ECEBFF);
+        // background: var(--tertiary-purple, #ECEBFF);
+        border: 1px solid #ccc;
         margin-top: 10px;
         color: rgba($color: #000000, $alpha: 0.8);
         padding: 10px 0;
@@ -56,19 +57,26 @@ main.creditFairOffers{
             }
         }
 
-        div.offerContent{
-            display: flex;
-            flex-direction: row;
-            // outline: 1px solid red;
+        div.offerContentWrapper{
             width: 100%;
-            // justify-content: space-around;
-
-            div.offerContentLeft, div.offerContentRight{
-                width: 50%;
-                span.offerCardSpan{
-                    display: block;
-                    font-size: 16px;
-                    padding: 4px;
+            padding: 0 12px;
+            div.offerContent{
+                display: flex;
+                flex-direction: row;
+                padding: 5px 0;
+                // outline: 1px solid red;
+                // justify-content: space-around;
+    
+                div.offerContentLeft, div.offerContentRight{
+                    width: 50%;
+                    span.offerCardSpan{
+                        display: block;
+                        font-size: 16px;
+                        padding: 4px;
+                    }
+                    span.offerCardSpan.largeText{
+                        font-size: 18px;
+                    }
                 }
             }
         }

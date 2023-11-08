@@ -224,12 +224,13 @@ const CreditFairOffers = () =>{
 
                 <p style={{margin:"16px 0 10px 0", color:"rgba(0,0,0,0.6)"}}>Credit amount</p>
                 <p style={{margin:"0"}}>Rs. {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}</p>
+                <p style={{color:"rgba(0,0,0,0.4)", marginTop:"10px"}}>Final credit amount will change according to the option you will select.</p>
 
                 <p className="subheading">Select EMI options</p>
                 <div className="msgBox">
                     <h4>Please note:</h4>
-                    <p>An amount will be collected before disbursing your credit as advance EMI payment.</p>
-                    <p>Select options accordingly.</p>
+                    <p>You will have to make payment of the advance to the clinic/doctor/hospital according to the option selected.</p>
+                    {/* <p>Select options accordingly.</p> */}
                 </div>
 
                 {offerCards}
@@ -251,23 +252,23 @@ export default CreditFairOffers
 
 const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) =>{
 
-    let months = offerDetails.totalEmi ?? "0";
+    let months = offerDetails?.totalEmi ?? "0";
     let amount = parseInt(loanAmount/months);
     let pf = "0";
-    if(!! offerDetails.processingFesIncludingGSTINR){
-        pf = "Rs. " + offerDetails.processingFesIncludingGSTINR;
-    }else if(!! offerDetails.processingFesIncludingGSTRate){
-        pf = offerDetails.processingFesIncludingGSTRate + " %";
+    if(!! offerDetails?.processingFesIncludingGSTINR){
+        pf = "Rs. " + offerDetails?.processingFesIncludingGSTINR;
+    }else if(!! offerDetails?.processingFesIncludingGSTRate){
+        pf = offerDetails?.processingFesIncludingGSTRate + " %";
     }
-    let interest = offerDetails.interest ?? "0";
-    let advEmi = offerDetails.advanceEmi ?? "0";
+    let interest = offerDetails?.interest ?? "0";
+    let advEmi = offerDetails?.advanceEmi ?? "0";
 
     function cardSelector(){
         let obj = {
             "cardName" : cardName,
-            "productId": offerDetails.productId,
+            "productId": offerDetails?.productId,
             "tenure"   : months,
-            "internalProductId" : offerDetails.internalProductId
+            "internalProductId" : offerDetails?.internalProductId
         }
         setSelected(obj)
     }
@@ -279,22 +280,32 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                     <div className="innerCirle selected"></div>
                 </div>
             </div>
-            <div className="offerContent">
-                <div className="offerContentLeft">
-                    <span className='offerCardSpan'>Tenure</span>
-                    <span className='offerCardSpan'>EMI amount</span>
-                    <span className='offerCardSpan'>Processing fees</span>
-                    <span className='offerCardSpan'>Interest rate</span>
-                    <span className='offerCardSpan'>Advance EMI(s)</span>
+            <div className='offerContentWrapper'>
+                <div className='offerContent' style={{borderBottom:"1px solid #ccc"}}>
+                    <div className="offerContentLeft">
+                        <span className='offerCardSpan'>Tenure</span>
+                        <span className='offerCardSpan largeText'>{months} month{months>1 && "s"}</span>
+                    </div>
+                    <div className="offerContentRight">
+                        <span className='offerCardSpan'>EMI amount</span>
+                        <span className='offerCardSpan largeText'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                    </div>
                 </div>
-                <div className="offerContentRight">
-                    <span className='offerCardSpan'>{months} month{months>1 && "s"}</span>
-                    <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
-                    <span className='offerCardSpan'>{pf}</span>
-                    <span className='offerCardSpan'>{interest} %</span>
-                    <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                <div className="offerContent">
+                    <div className="offerContentLeft">
+                        <span className='offerCardSpan'>Final credit amount</span>
+                        <span className='offerCardSpan'>Processing fees</span>
+                        <span className='offerCardSpan'>Interest rate</span>
+                        <span className='offerCardSpan'>Advance EMI(s)</span>
+                    </div>
+                    <div className="offerContentRight">
+                        <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {loanAmount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                        <span className='offerCardSpan'>{pf}</span>
+                        <span className='offerCardSpan'>{interest} %</span>
+                        <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                    </div>
+                    {/* <BiRupee style={{margin:"0 -4px -2px -2px"}} />  */}
                 </div>
-                {/* <BiRupee style={{margin:"0 -4px -2px -2px"}} />  */}
             </div>
         </div>
     )
