@@ -167,7 +167,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                     <p style={{fontSize:"24px", maxWidth:"70%"}}>{clinicName}</p>
                 </div>
             </div>}
-            <div className="reviewCardWrapper webkitScrollbar" style={{display:"flex", overflowX:"auto", scrollbarWidth: "thin", scrollbarColor:"#514C9F", scrollbarGutter:"stable", userSelect:"none"}}>
+            <div className="reviewCardWrapper" style={{display:"flex", overflowX:"auto", scrollbarWidth: "thin", scrollbarColor:"#514C9F", scrollbarGutter:"stable", userSelect:"none"}}>
                 {link1 && <div style={{display:"flex", minWidth:"85%", padding:"16px 0 16px 16px", justifyContent:"space-between", background:"#CBFFE1", borderRadius:"4px", margin:"5px 5px 10px 0"}}>
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
