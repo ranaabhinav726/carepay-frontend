@@ -104,6 +104,9 @@ import PrivacyPolicy from './website/pages/PrivacyPolicy';
 import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
 import { useEffect } from 'react';
 import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
+import SearchingOffers from './patient/components/ICICI flow/SearchingOffers';
+import CongratsApprovedICICI from './patient/components/ICICI flow/CongratsApprovedICICI';
+import CongratsPreApprovedICICI from './patient/components/ICICI flow/CongratsPreApprovedICICI';
 
 
 
@@ -134,6 +137,10 @@ function App() {
         <Route path='/patient/LoanDetails' element={<LoanDetails />} />
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
+
+        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
+        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
 
 
         <Route path='/patient/FetchingLoanLimit' element={<FetchingLoanLimit />} />
