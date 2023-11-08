@@ -216,7 +216,7 @@ const AddressDetails = () => {
         let submitObj = {
             "userId": userId,
             "addressType": addressType,
-            "address": firstLine,
+            "address": firstLine.trim(),
             // "locality" : locality,
             // "landmark" : landmark,
             "pincode": pincode,

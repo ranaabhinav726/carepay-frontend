@@ -79,7 +79,7 @@ const PracticeDetails = () =>{
         'Urology',
         'Vascular Surgery',
         'Other'
-      ]
+    ]
 
     useEffect(()=>{
         if(doctorId){
