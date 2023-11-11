@@ -1,0 +1,103 @@
+
+
+  div.stepCard{
+    padding: 10px 10px 15px 15px;
+    width: 100%;
+    // margin-bottom: 1rem;
+    // width: max-content;
+    text-align: left;
+    // display: flex;
+    // justify-content: center;
+
+    background: #FAE1CD;
+    border-radius: 10px;
+
+    p{
+        padding: 8px 0;
+        margin-bottom: 16px;
+
+        // text-align: center;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+
+    }
+    
+    ul{
+        text-align: left;
+        // padding-left: 10px;
+        li{
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 14px;
+            // padding-top: 3px;
+
+            list-style: none;
+
+            div.encircle{
+                display: inline;
+                position: relative;
+                top: -2px;
+                // aspect-ratio: 1/1;
+                padding: 3px 6px;
+                margin-right: 10px;
+                border: 1px solid black;
+                border-radius: 50%;
+
+                font-weight: 400;
+                font-size: 9px;
+                line-height: 10px;
+                // display: flex;
+                // flex-direction: row;
+                // align-items: end;
+
+            }
+            span.v-line{
+                display: inline-block;
+                position: relative;
+                left: -20px;
+                top:22px;
+                height: 18px;
+                width: 1px;
+                border-right: 1px solid #514C9F;
+
+            }
+            div.stepName{
+                display: inline-flex;
+                flex-direction: row;
+                width: 90%;
+                height: max-content;
+                align-items: center;
+                justify-content: space-between;
+                
+                    .boltIcon{
+                        color: goldenrod;
+                        font-size: 16px;
+                        padding-top: 5px;
+                    }
+                }
+        }
+    }
+}
+
+.fadeInUpAnimate{
+    animation-name: fadeInUp;
+    animation-duration: 4s;
+    animation-delay: 0.7s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeInUp {
+    0%{
+        margin-top: 2rem;
+        opacity: 0;
+    }
+    30%{
+        margin-top: 0;
+        opacity: 1;
+    }
+    100%{
+        margin-top: 0;
+        opacity: 1;
+    }
+}

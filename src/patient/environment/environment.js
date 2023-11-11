@@ -15,6 +15,7 @@ export function hideWrapper(elem){
 }
 
 export function showErrorOnUI(elem, errorLineDisplay=true){
+    if(!elem) return;
     elem.scrollIntoView({ behavior: "smooth", block: "center"});
     elem.classList.add('inputBoxError');
     if(errorLineDisplay){
@@ -24,6 +25,6 @@ export function showErrorOnUI(elem, errorLineDisplay=true){
 
     setTimeout(()=>{
         elem.classList.remove('inputBoxError');
-        if(elem.nextSibling) elem.nextSibling.style.display = "none"
+        if(errorLineDisplay && elem.nextSibling) elem.nextSibling.style.display = "none"
     }, 3000)
 }
