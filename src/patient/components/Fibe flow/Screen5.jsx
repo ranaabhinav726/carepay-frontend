@@ -6,7 +6,7 @@ import ScreenTitle from "./Comps/ScreenTitle";
 import { BiRupee } from 'react-icons/bi'
 import NoteText from "./Comps/NoteText";
 import { useNavigate } from "react-router-dom";
-import { showErrorOnUI } from "../../environment/environment";
+import { hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environment/environment";
 import axios from "axios";
 import { env } from "../../environment/environment";
 
@@ -25,8 +25,8 @@ export default function Screen5(){
         if(!! userId){
             axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
             .then(response =>{
-                if(response.data.status === 200){
-                    let data = response.data.data;
+                if(response?.data.status === 200){
+                    let data = response?.data?.data;
                     if(!! data){
                         setCreditAmount(data?.loanAmount);
                         setLoanReason(data?.loanReason);
@@ -51,6 +51,8 @@ export default function Screen5(){
             return;
         }
 
+        showWaitingModal();
+
 
         let submitObj = {
             "userId" : userId,
@@ -71,8 +73,10 @@ export default function Screen5(){
                 }else{
                     // setErrorMsg()
                 }
+                hideWaitingModal();
             }).catch(error => {
                 console.log(error);
+                hideWaitingModal();
             });
     }
 
@@ -105,7 +109,7 @@ export default function Screen5(){
                     border:"0"
                 }}
             />
-            <button onClick={()=>postDetails()} className="submit" style={{marginTop:"8rem"}}>Next</button>
+            <button onClick={()=>postDetails()} className="submit" style={{marginTop:"32px"}}>Next</button>
         </main>
     )
 }

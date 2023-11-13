@@ -1,5 +1,5 @@
 
-export default function RadioInput({name="", options=[], value, setValue, styles}){
+export default function RadioInput({name="", options=[], value, setValue, styles, id}){
 
     const radios = options.map((option, idx)=>{
         return(
@@ -17,7 +17,7 @@ export default function RadioInput({name="", options=[], value, setValue, styles
                         border:"2px solid #5E5E5E",
                         accentColor:"#514C9F"
                     }}
-                />
+                    />
                 <label 
                 htmlFor={option}
                 style={{
@@ -31,12 +31,13 @@ export default function RadioInput({name="", options=[], value, setValue, styles
                 </label>
                 <br/>
             </div>
+            
         )
     })
 
     return(
-        <>
+        <div id={id} style={{borderRadius:"4px"}}>
             {radios}
-        </>
+        </div>
     )
 }

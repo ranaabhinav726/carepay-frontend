@@ -101,3 +101,8 @@
         opacity: 1;
     }
 }
+
+a#disabled{
+    pointer-events: none;
+    filter: grayscale(1) brightness(220%);
+}

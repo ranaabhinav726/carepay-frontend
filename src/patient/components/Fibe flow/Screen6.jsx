@@ -5,7 +5,7 @@ import InputBoxLabel from "./Comps/InputBoxLabel";
 import ScreenTitle from "./Comps/ScreenTitle";
 import RadioInput from "./Comps/RadioInput";
 import axios from "axios";
-import { env } from "../../environment/environment";
+import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
 import { useNavigate } from "react-router-dom";
 import { showErrorOnUI } from "../../environment/environment";
 
@@ -22,7 +22,7 @@ export default function Screen6(){
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
 
-    const [gender, setGender] = useState("male")
+    const [gender, setGender] = useState("")
 
     const [api1Status, setApi1Status] = useState(false);
     const [api2Status, setApi2Status] = useState(false);
@@ -103,6 +103,13 @@ export default function Screen6(){
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(! gender){
+            let elem = document.getElementById('gender');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        showWaitingModal();
 
         let submitObj = {
             "firstName": localStorage.getItem("P_userName"),
@@ -122,18 +129,16 @@ export default function Screen6(){
                 if(response.data.message === "success"){
                     setApi1Status(true);
                 }else{
-                    // apiErrorHandler();
+                    hideWaitingModal();
                 }
             }).catch(error => {
                 console.log(error);
-                // apiErrorHandler();
+                hideWaitingModal();
             });
 
         submitObj = {
             "userId": userId,
-            "pincode": pincode,
-            "city": city,
-            "state": state
+            "pincode": pincode
         };
         axios.post(env.api_Url + "userDetails/addressDetail",
             submitObj)
@@ -142,15 +147,16 @@ export default function Screen6(){
                 if(response.data.message === "success"){
                     setApi2Status(true);
                 }else{
-                    // apiErrorHandler();
+                    hideWaitingModal();
                 }
             }).catch(error => {
                 console.warn(error)
-                // apiErrorHandler();
+                hideWaitingModal();
             });
     }
 
     if(api1Status && api2Status){
+        hideWaitingModal();
         navigate('/patient/screen7');
     }
 
@@ -260,6 +266,7 @@ export default function Screen6(){
 
             <InputBoxLabel label='Gender' styles={{marginTop:"24px"}} />
             <RadioInput
+                id={"gender"}
                 name="gender" 
                 value={gender}
                 setValue={setGender}
@@ -269,7 +276,7 @@ export default function Screen6(){
                 }}
             />
 
-            <button onClick={()=>postDetails()} className="submit">Next</button>
+            <button style={{marginTop:"32px"}} onClick={()=>postDetails()} className="submit">Next</button>
         </main>
     )
 }

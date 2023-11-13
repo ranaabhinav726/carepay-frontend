@@ -8,7 +8,7 @@ import HeroImg from '../../assets/homePageHero.svg'
 import { useNavigate } from "react-router-dom";
 // import ScreenContentWrapper from "./Comps/ScreenContentWrapper";
 
-import { env, showErrorOnUI } from "../../environment/environment";
+import { env, hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environment/environment";
 import axios from "axios";
 
 export function Screen1(){
@@ -23,6 +23,7 @@ export function Screen1(){
             showErrorOnUI(elem, false);
             return;
         }
+        showWaitingModal();
 
         await axios
             .post(env.api_Url + "userDetails/sendOtpToMobile?mobile=" + number, {}, )
@@ -34,9 +35,11 @@ export function Screen1(){
                 }else{
                     // apiErrorHandler();
                 }
+                hideWaitingModal()
             }).catch(error => {
-            // apiErrorHandler();
-            console.log(error);
+                // apiErrorHandler();
+                console.log(error);
+                hideWaitingModal()
         });
     }
 
@@ -64,8 +67,8 @@ export function Screen1(){
                 <div style={{display:"flex", placeContent:"center", alignSelf:"flex-end", marginTop:"64px"}}>
                     <img src={HeroImg} style={{margin:"8px", borderBottom:"1px solid black"}} alt="" />
                 </div>
-                <p style={{fontSize:"16px", lineHeight:"20px", color:"#00000066", fontWeight:"700", textAlign:"center", margin:"4px 0 36px 0"}}>Now you are just 5 steps away from<br /> your treatment!</p>
-                <button onClick={()=>handleNavigation()} className="submit">Send OTP</button>
+                <p style={{fontSize:"16px", lineHeight:"20px", color:"#00000066", fontWeight:"700", textAlign:"center", margin:"4px 0 0 0"}}>Now you are just 5 steps away from<br /> your treatment!</p>
+                <button style={{marginTop:"32px"}} onClick={()=>handleNavigation()} className="submit">Send OTP</button>
             {/* </ScreenContentWrapper> */}
         </main>
     )

@@ -6,7 +6,7 @@ import ScreenTitle from "./Comps/ScreenTitle";
 import { useState } from "react";
 import InputBox from "./Comps/InputBox";
 import axios from "axios";
-import { env } from "../../environment/environment";
+import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
 
 export default function Screen2(){
 
@@ -20,6 +20,8 @@ export default function Screen2(){
 
         if(otp.length < 4) return;
 
+        showWaitingModal();
+
         await axios
             .post(env.api_Url + "userDetails/verifyOtp?mobile=" + number + "&otp=" + otp, {}, )
             .then((response) => {
@@ -31,8 +33,10 @@ export default function Screen2(){
                     }
                     navigate("/patient/screen3");
                 }
+                hideWaitingModal();
             }).catch(error =>{
                 console.log(error)
+                hideWaitingModal();
             })
     }
 
@@ -73,7 +77,7 @@ export default function Screen2(){
                 value={otp} 
                 setValue={setOtp} 
             />
-            <button onClick={()=>login()} className="submit" style={{marginTop:"15rem"}}>Submit OTP</button>
+            <button onClick={()=>login()} className="submit" style={{marginTop:"32px"}}>Submit OTP</button>
         </main>
     )
 }

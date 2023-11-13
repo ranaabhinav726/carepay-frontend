@@ -26,7 +26,7 @@ export default function Screen15(){
                 <p>Now you can proceed with your treatment.</p>
             </div>
             <p style={{fontSize:"16px", color:"#000000CC", fontWeight:"700", marginTop:"2rem"}}>To track your EMIs</p>
-            <button onClick={()=>alert("😝😝 Bas karo bhai 😝😝")} className="submit">Go to Dashboard</button>
+            <button style={{marginTop:"32px"}} onClick={()=>navigate('/patient/UserDashboard')} className="submit">Go to Dashboard</button>
         </main>
     )
 }

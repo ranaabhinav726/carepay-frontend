@@ -8,13 +8,13 @@ import RadioInput from "./Comps/RadioInput";
 import InputBox from "./Comps/InputBox";
 // import { getPincodeDetails } from "./Comps/Utility functions/getPincodeDetails";
 import axios from "axios";
-import { env } from "../../environment/environment";
+import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
 import { showErrorOnUI } from "../../environment/environment";
 
 export default function Screen7(){
 //79 , 86, 90, 93, 95, 97, 
 
-    const [empType, setEmpType] = useState("salaried");
+    const [empType, setEmpType] = useState("");
     const [salary, setSalary] = useState("");
     const [officePincode, setOfficePincode] = useState("");
     const [city, setCity] = useState("");
@@ -35,6 +35,11 @@ export default function Screen7(){
     }
 
     function postDetails(){
+        if(! empType){ 
+            let elem = document.getElementById('empType');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
         if(!salary){ 
             let elem = document.getElementById('salary');
             if(elem) showErrorOnUI(elem);
@@ -45,6 +50,7 @@ export default function Screen7(){
             if(elem) showErrorOnUI(elem);
             return;
         }
+        showWaitingModal();
 
         let submitObj = {
             "userId" : userId,
@@ -63,8 +69,10 @@ export default function Screen7(){
                 }else{
                     // apiErrorHandler();
                 }
+                hideWaitingModal();
             }).catch(error => {
                 console.log(error);
+                hideWaitingModal();
                 // apiErrorHandler();
             });
 }
@@ -75,6 +83,7 @@ export default function Screen7(){
             <ScreenTitle title="Employment details" />
             <InputBoxLabel label='Select employment type' />
             <RadioInput
+                id={"empType"}
                 name="empType" 
                 value={empType}
                 setValue={setEmpType}
@@ -115,9 +124,9 @@ export default function Screen7(){
                     border:"0"
                 }}
             />
-            <InputBoxLabel label={`City: ${city}`} styles={{marginTop:"6px"}} />
+            <InputBoxLabel label={`City: ${city}`} styles={{marginTop:"6px", marginBottom:"0"}} />
 
-            <button onClick={()=>postDetails()} className="submit" style={{marginTop:"3rem"}}>Next</button>
+            <button onClick={()=>postDetails()} className="submit"  style={{marginTop:"32px"}}>Next</button>
         </main>
     )
 }

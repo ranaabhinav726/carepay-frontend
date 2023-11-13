@@ -60,7 +60,11 @@ const Homepage = () =>{
             .then((response)=>{
                 console.log(response);
                 if(response){
-                     setNbfcId(response?.data?.data[0]);
+                    let id = response?.data?.data[0];
+                     if(id){
+                        setNbfcId(id);
+                        localStorage.setItem('nbfcId', id);
+                     }
                 }
             }).catch((error)=>{
                 console.warn(error)

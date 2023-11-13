@@ -14,6 +14,15 @@ export function hideWrapper(elem){
     if(elem) elem.style.display = "none";
 }
 
+let modal = document.getElementById('animation-wrapper');
+
+export function showWaitingModal(){
+    if(modal) modal.style.display = "flex";
+}
+export function hideWaitingModal(){
+    if(modal) modal.style.display = "none";
+}
+
 export function showErrorOnUI(elem, errorLineDisplay=true){
     if(!elem) return;
     elem.scrollIntoView({ behavior: "smooth", block: "center"});

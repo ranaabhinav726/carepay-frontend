@@ -109,6 +109,7 @@ import CongratsApprovedICICI from './patient/components/ICICI flow/CongratsAppro
 import CongratsPreApprovedICICI from './patient/components/ICICI flow/CongratsPreApprovedICICI';
 import { Screen1 } from './patient/components/Fibe flow/Screen1';
 import Screen2 from './patient/components/Fibe flow/Screen2';
+import Screen3 from './patient/components/Fibe flow/Screen3';
 import Screen4 from './patient/components/Fibe flow/Screen4';
 import Screen5 from './patient/components/Fibe flow/Screen5';
 import Screen6 from './patient/components/Fibe flow/Screen6';
@@ -116,9 +117,10 @@ import Screen7 from './patient/components/Fibe flow/Screen7';
 import Screen8 from './patient/components/Fibe flow/Screen8';
 import Screen9 from './patient/components/Fibe flow/Screen9';
 import Screen10 from './patient/components/Fibe flow/Screen10';
-import Screen12 from './patient/components/Fibe flow/Screen12';
 import Screen11 from './patient/components/Fibe flow/Screen11';
-import Screen3 from './patient/components/Fibe flow/Screen3';
+import Screen12 from './patient/components/Fibe flow/Screen12';
+import Screen12sub1 from './patient/components/Fibe flow/Screen12sub1';
+import Screen12sub2 from './patient/components/Fibe flow/Screen12sub2';
 import Screen13 from './patient/components/Fibe flow/Screen13';
 import Screen14 from './patient/components/Fibe flow/Screen14';
 import Screen15 from './patient/components/Fibe flow/Screen15';
@@ -169,8 +171,10 @@ function App() {
         <Route path='/patient/screen10' element={<Screen10 />} />
         <Route path='/patient/screen11' element={<Screen11 />} />
         <Route path='/patient/screen12' element={<Screen12 />} />
+        <Route path='/patient/screen12sub1' element={<Screen12sub1 />} />
+        <Route path='/patient/screen12sub2' element={<Screen12sub2 />} />
         <Route path='/patient/screen13' element={<Screen13 />} />
-        <Route path='/patient/screen14' element={<Screen14 />} />
+        <Route path='/patient/screen14/:userId' element={<Screen14 />} />
         <Route path='/patient/screen15' element={<Screen15 />} />
 
 

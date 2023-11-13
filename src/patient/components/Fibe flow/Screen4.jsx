@@ -6,14 +6,14 @@ import NoteText from "./Comps/NoteText";
 import ScreenTitle from "./Comps/ScreenTitle";
 import RadioInput from "./Comps/RadioInput";
 import { useNavigate } from "react-router-dom";
-import { env, showErrorOnUI } from "../../environment/environment";
+import { env, hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environment/environment";
 import axios from "axios";
 
 export default function Screen4(){
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [borrower, setBorrower] = useState("myself");
+    const [borrower, setBorrower] = useState("");
 
     const [patientName, setPatientName] = useState("")
     const [relationToPatient, setRelationToPatient] = useState("father")
@@ -34,18 +34,30 @@ export default function Screen4(){
             return;
         }
 
+        if(! borrower){
+            let elem = document.getElementById("borrower");
+            showErrorOnUI(elem, false);
+            return;
+        }
+
         if(borrower === "someone else" && (! patientName)){
             let elem = document.getElementById("patientName");
             showErrorOnUI(elem, false);
             return;
         }
 
+        showWaitingModal();
+
         let submitObj = {
             "userId" : userId,
             "doctorName": doctorName,
-            "doctorId": doctorId,
+            "doctorId": doctorId
         };
 
+        let nbfcId = localStorage.getItem('nbfcId');
+        if(!! nbfcId){
+            submitObj.nbfcId = nbfcId;
+        }
         if(borrower === "someone else"){
             submitObj.patientName = patientName;
             submitObj.relationshipWithPatient = relationToPatient;
@@ -62,8 +74,10 @@ export default function Screen4(){
                 }else{
                     // setErrorMsg()
                 }
+                hideWaitingModal();
             }).catch(error => {
                 console.log(error);
+                hideWaitingModal();
             });
     }
 
@@ -93,7 +107,7 @@ export default function Screen4(){
                 }}
                 placeholder="Enter your first and middle name here"
                 value={firstName}
-                setValue={setFirstName}
+                setValue={(val)=>{setFirstName(val.toUpperCase())}}
             />
             <InputBox
                 id="lastName"
@@ -103,7 +117,7 @@ export default function Screen4(){
                 }}
                 placeholder="Enter your last name here"
                 value={lastName}
-                setValue={setLastName}
+                setValue={(val)=>{setLastName(val.toUpperCase())}}
             />
             <NoteText 
                 text="If not sure, please check your PAN and then enter the name accordingly."
@@ -172,7 +186,7 @@ export default function Screen4(){
                     </select>
                 </>
             }
-            <button onClick={()=>postDetails()} className="submit" style={{marginTop:"5rem"}}>Next</button>
+            <button onClick={()=>postDetails()} className="submit" style={{marginTop:"32px"}}>Next</button>
         </main>
     )
 }

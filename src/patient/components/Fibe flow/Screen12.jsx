@@ -1,14 +1,26 @@
 import { Header } from "./Comps/Header";
 import CongratsICICIImg from '../../assets/GIFs/CongratsICICI.png'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineElectricBolt } from 'react-icons/md'
 import './styles.scss'
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Confetti from '../../assets/GIFs/confetti.gif'
 export default function Screen12(){
 
+
+    const location = useLocation();
+    // console.log(location?.state?.data?.bitlyUrl);
+    let bitlyUrl = location?.state?.data?.bitlyUrl;
+
+    
     const [amount, setAmount] = useState(55000);
     const navigate = useNavigate();
+    
+    useEffect(()=>{
+        if(location.state){
+            setAmount(location?.state?.data?.sanctionData?.sanctionAmount);
+        }
+    }, [])
 
     return(
         <main className="screenContainer" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
@@ -33,7 +45,7 @@ export default function Screen12(){
                 </ul>
                 <p>No paperwork needed, this is completely a digital process.</p>
             </div>
-            <button onClick={()=>navigate("/patient/screen13")} className="submit">Continue</button>
+            <button style={{marginTop:"32px"}} onClick={()=>navigate("/patient/screen13", {state : {"link" : bitlyUrl}})} className="submit">Continue</button>
         </main>
     )
 }
