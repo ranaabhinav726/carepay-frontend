@@ -5,22 +5,37 @@ import { MdOutlineElectricBolt } from 'react-icons/md'
 import './styles.scss'
 import { useLocation, useNavigate } from "react-router-dom";
 import Confetti from '../../assets/GIFs/confetti.gif'
+import axios from "axios";
 export default function Screen12(){
 
 
     const location = useLocation();
     // console.log(location?.state?.data?.bitlyUrl);
     let bitlyUrl = location?.state?.data?.bitlyUrl;
-
     
-    const [amount, setAmount] = useState(55000);
+    const [amount, setAmount] = useState("0");
     const navigate = useNavigate();
     
     useEffect(()=>{
         if(location.state){
-            setAmount(location?.state?.data?.sanctionData?.sanctionAmount);
+            setAmount(location?.state?.loanAmount);
         }
     }, [])
+
+    // useEffect(()=>{
+    //     if(!! userId){
+    //         axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+    //         .then(response =>{
+    //             if(response?.data.status === 200){
+    //                 let data = response?.data?.data;
+    //                 if(!! data){
+    //                     setAmount(data?.loanAmount);
+    //                 }
+    //             }
+    //         })
+    //     }
+
+    // },[userId])
 
     return(
         <main className="screenContainer" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>

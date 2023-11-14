@@ -23,7 +23,7 @@ export default function Screen11(){
         if(!! userId){
             axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
             .then(response =>{
-                if(response?.data.status === 200){
+                if(response?.data.message === "success"){
                     let data = response?.data?.data;
                     console.log(data)
                     if(!! data){
@@ -42,13 +42,19 @@ export default function Screen11(){
                                         if(Number(creditAmt) > Number(sanctionAmount)){
                                             navigate("/patient/screen12sub2"); // journey ends here
                                         }else{
-                                            navigate("/patient/screen12", { state: {"data" : location.state.data}});     // congrats and show sanction amount
+                                            navigate("/patient/screen12", { state: {"data" : location.state.data, "loanAmount": creditAmt}});     // congrats and show sanction amount
                                         }
+                                    }else{
+                                        navigate(-1)
                                     }
+                                }else{
+                                    navigate(-1)
                                 }
                             }
                         }, 2000);
                     }
+                }else{
+                    navigate(-1)
                 }
             }).catch(error=>{
                 console.warn(error)

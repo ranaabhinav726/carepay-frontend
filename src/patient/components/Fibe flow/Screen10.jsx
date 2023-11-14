@@ -12,6 +12,7 @@ export default function Screen10(){
     const navigate = useNavigate();
 
     let userId = localStorage.getItem('userId');
+    let phoneNumber = localStorage.getItem('phoneNumber');
 
     const [errorMsg, setErrorMsg] = useState("");
     
@@ -43,7 +44,7 @@ export default function Screen10(){
             <NoteText text="We are assessing your credit application." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
             <NoteText text="This might take 15-20 minutes." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
             <div style={{background:"#FAE1CD", textAlign:"center", padding:"16px 12px", fontSize:"16px", lineHeight:"22px", borderRadius:"4px", marginTop:"1rem"}}>
-                You will be notified on your registered contact number <strong style={{whiteSpace:"nowrap"}}>+91 772 182 3857</strong> once the application is reviewed.
+                You will be notified on your registered contact number <strong style={{whiteSpace:"nowrap"}}>+91 {phoneNumber}</strong> once the application is reviewed.
             </div>
             {errorMsg && <p style={{marginTop:"1.7rem", color:"red", textAlign:"center"}}>{errorMsg}</p>}
             <button onClick={()=>checkStatus()} className="submit" style={{margin:"2rem 0 12px 0"}}>Refresh status</button>
