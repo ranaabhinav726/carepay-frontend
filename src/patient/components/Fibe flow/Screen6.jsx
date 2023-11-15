@@ -9,6 +9,10 @@ import { env, hideWaitingModal, showWaitingModal } from "../../environment/envir
 import { useNavigate } from "react-router-dom";
 import { showErrorOnUI } from "../../environment/environment";
 
+import lottie from "lottie-web";
+import animationData from '../../assets/JSON animations/loader simple.json'
+
+
 export default function Screen6(){
     const [pan, setPan] = useState("");
     const [isPanValid, setPanValid] = useState(false);
@@ -27,6 +31,8 @@ export default function Screen6(){
     const [api1Status, setApi1Status] = useState(false);
     const [api2Status, setApi2Status] = useState(false);
 
+    const [waiting, setWaiting] = useState(true);
+
     let userId = localStorage.getItem("userId");
 
     const navigate = useNavigate();
@@ -36,6 +42,14 @@ export default function Screen6(){
     // useEffect(()=>{
     //     getDataFromDecentro()
     // }, []);
+
+    useEffect(() => {
+        lottie.loadAnimation({
+          container: document.querySelector("#searchAnimation"),
+          animationData: animationData,
+        //   renderer: "html"
+        });
+      }, []);
 
     useEffect(()=>{
         if(!!userId){
@@ -58,29 +72,61 @@ export default function Screen6(){
                 getDataFromDecentro();
                 console.log(error)
             })
+
+            axios.get(env.api_Url + "userDetails/getUserAddressByUserId?userId=" + userId)
+            .then(response =>{
+                if(response.data.message === "success"){
+                    let data = response?.data?.data;
+                    if(data){
+                        setPincode(data.pincode);
+                    }
+                }
+            }).catch(error =>{
+                console.log(error)
+            })
         }
     },[userId])
 
     function getDataFromDecentro(){
-        axios.get(env.api_Url+"getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + name)
-        .then(response=>{
-            console.log(response);
-            if(response.data.message === "success"){
-                const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
-                let panCardData = idandContactInfo?.identityInfo?.panid[0]?.idNumber;
-                handlePan(panCardData);
-                let emailData = "";
-                if(idandContactInfo?.emailAddressInfo){
-                    emailData = idandContactInfo.emailAddressInfo[0]?.emailAddress
+            axios.get(env.api_Url+"getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + name)
+            .then(response=>{
+                setWaiting(false);
+                console.log(response);
+                if(response.data.message === "success"){
+                    const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
+                    let panCardData = idandContactInfo?.identityInfo?.panid[0]?.idNumber;
+                    handlePan(panCardData);
+                    let emailData = "";
+                    if(idandContactInfo?.emailAddressInfo){
+                        emailData = idandContactInfo.emailAddressInfo[0]?.emailAddress
+                    }
+                    handleEmail(emailData);
+                    let dobData = idandContactInfo?.personalInfo?.dateOfBirth;
+                    setDob(dobData);
+                    let genderData = idandContactInfo?.personalInfo?.gender;
+                    setGender(genderData);
                 }
-                handleEmail(emailData);
-                let dobData = idandContactInfo?.personalInfo?.dateOfBirth;
-                setDob(dobData);
-                let genderData = idandContactInfo?.personalInfo?.gender;
-                setGender(genderData);
-            }
-        })
+            })
     }
+
+    setTimeout(() => {
+        setWaiting(false);
+    }, 3000);
+
+    //////////////////////////////// DOB restriction ///////////////////////////////////////
+    ////// Below code is to calculate the maximum date the user can input as DOB.///////////
+    const today = new Date();
+    let day = today.getDate();
+    day = (day<10? "0"+day : day);
+    let month = today.getMonth() + 1;
+    month = (month<10? "0"+month : month);
+    let year = today.getFullYear();
+    let maxYear = year-20; // to restrict the minimum age of user to 18 years.
+    let minYear = year-60; // to restrict the minimum age of user to 18 years.
+
+    let maxDateForDob = `${maxYear}-${month}-${day}`; // 'yyyy-mm-dd' - format compulsion
+    let minDateForDob = `${minYear}-${month}-${day}`; // 'yyyy-mm-dd' - format compulsion
+    ////////////////////////// DOB restriction code ended //////////////////////////////////
 
     function postDetails(){
         if(! isPanValid){
@@ -240,6 +286,8 @@ export default function Screen6(){
             <InputBox
                 id="dob"
                 type="date"
+                min={minDateForDob}
+                max={maxDateForDob}
                 placeholder="Select DOB"
                 value={dob}
                 setValue={setDob}
@@ -277,6 +325,13 @@ export default function Screen6(){
             />
 
             <button style={{marginTop:"32px"}} onClick={()=>postDetails()} className="submit">Next</button>
+            
+            {waiting && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
+                <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
+                    <div id="searchAnimation"></div>
+                    <p style={{textAlign:"center"}}>Fetching your details...</p>
+                </div>
+            </div>}
         </main>
     )
 }

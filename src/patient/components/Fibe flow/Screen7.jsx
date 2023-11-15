@@ -104,6 +104,7 @@ export default function Screen7(){
             <InputBoxLabel label='Monthly salary/income' styles={{marginTop:"24px"}} />
             <InputBox
                 id="salary"
+                type="number"
                 placeholder="How much do you earn monthly?"
                 value={salary}
                 setValue={setSalary}
@@ -116,6 +117,8 @@ export default function Screen7(){
             <InputBoxLabel label='Workplace pincode' styles={{marginTop:"24px"}} />
             <InputBox
                 id="officePincode"
+                type="number"
+                length={6}
                 placeholder="Pincode of your work place"
                 value={officePincode}
                 setValue={handlePincode}

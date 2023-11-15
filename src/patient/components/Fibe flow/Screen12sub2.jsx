@@ -1,8 +1,22 @@
 import { Header } from "./Comps/Header";
 import ErrorOops from '../../assets/RejectedOops.png'
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { env } from "../../environment/environment";
 
 export default function Screen12sub2(){
+
+    let loanId = ""
+
+    useEffect(()=>{
+        axios.get(env.api_Url + "changeLoanStatus?loanId=" + loanId + "&loanStatus=110&changeBy=user&comment=rejected from user journey", {})
+        .then(response =>{
+            
+        }).catch(error =>{
+            console.warn(error);
+        })
+    }, [])
 
     return(
         <main>

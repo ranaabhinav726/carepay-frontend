@@ -3,7 +3,7 @@ import { Header } from "./Comps/Header";
 
 import { IoIosArrowBack } from 'react-icons/io'
 import ScreenTitle from "./Comps/ScreenTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputBox from "./Comps/InputBox";
 import axios from "axios";
 import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
@@ -13,8 +13,42 @@ export default function Screen2(){
     const [number, ] = useState(localStorage.getItem("phoneNumber"));
     const [otp, setOtp] = useState();
 
+    const [resendTime, setResendTime] = useState(10);
+    let min = Math.floor(resendTime/60);
+    let sec = resendTime%60;
+
+    function reduceTime(){
+        setResendTime((resendTime)=>resendTime-1);
+    }
+
+    useEffect(()=>{
+        if(resendTime === 0){
+            return;
+        }
+        const interval = setInterval(() => reduceTime(), 1000);
+        return () => clearInterval(interval);
+    }, [resendTime])
+
     const navigate = useNavigate();
 
+
+    async function resendOtp(){
+        if(! number){
+            return;
+        }
+        showWaitingModal();
+
+        await axios
+            .post(env.api_Url + "userDetails/sendOtpToMobile?mobile=" + number, {}, )
+            .then((response) => {
+                // console.log(response)
+                hideWaitingModal()
+            }).catch(error => {
+                // apiErrorHandler();
+                console.warn(error);
+                hideWaitingModal()
+        });
+    }
 
     async function login(){
 
@@ -52,7 +86,7 @@ export default function Screen2(){
                 color:"#514C9F", 
                 textDecoration:"underline"
             }}>
-                <IoIosArrowBack /> 
+                <IoIosArrowBack style={{margin:"0 5px -3px 0"}} /> 
                 Change number
             </Link>
 
@@ -77,6 +111,13 @@ export default function Screen2(){
                 value={otp} 
                 setValue={setOtp} 
             />
+            <div style={{display:"flex", justifyContent:"flex-end"}}>
+                {resendTime === 0 ?
+                    <p onClick={()=>resendOtp()} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline", marginTop:"1rem"}}>Resend OTP</p>
+                :
+                    <p style={{marginTop:"1rem"}}><span style={{color:"rgba(0,0,0,0.4"}}>Resend in </span>{`  ${min} : ${sec}`}</p>
+                }
+            </div>
             <button onClick={()=>login()} className="submit" style={{marginTop:"32px"}}>Submit OTP</button>
         </main>
     )

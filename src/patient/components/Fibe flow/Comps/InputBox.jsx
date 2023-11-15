@@ -1,5 +1,5 @@
 
-export default function InputBox({type="text", length=10, id, styles, placeholder="Enter here", value, setValue, variant="filled", Prefix}){
+export default function InputBox({type="text", length=10, id, styles, placeholder="Enter here", value, setValue, variant="filled", Prefix, min, max}){
     // console.log(typeof(Prefix))
     function processData(val){
         if(type === "number"){
@@ -23,6 +23,8 @@ export default function InputBox({type="text", length=10, id, styles, placeholde
             <input 
                 type={type} 
                 id={id}
+                min={min}
+                max={max}
                 style={{
                     width:"100%",
                     height:"inherit",

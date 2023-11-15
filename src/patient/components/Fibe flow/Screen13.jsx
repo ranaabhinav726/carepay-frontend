@@ -24,16 +24,34 @@ export default function Screen13(){
           animationData: animationData,
         //   renderer: "html"
         });
+        let timerId1 = setTimeout(() => {
+            if(! redirectionLink){
+                navigate(-1);
+            }
+        }, 1000);
+        let timerId2 = setTimeout(()=>{
+            let extLink = document.getElementById("extLink");
+            if(extLink) extLink.click();
+        }, 40000)
+
+        return ()=> {
+            clearTimeout(timerId1);
+            clearTimeout(timerId2);
+        }
       }, []);
 
     return(
         <main className="screenContainer">
             <Header progressBar="hidden" />
-            <div style={{marginTop:"20%"}} id="searchAnimation"></div>
-            <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+            <div style={{marginTop:"5%"}} id="searchAnimation"></div>
+            <div style={{display:"flex", alignItems:"center", justifyContent:"center", marginBottom:"5rem"}}>
                 <span style={{fontSize:"16px", lineHeight:"24px"}}>Redirecting to partner platform</span>
             </div>
-            <a href={redirectionLink} id={!redirectionLink ? "disabled" : ""}><button className="submit">Continue</button></a>
+            
+            {redirectionLink && 
+                <p style={{textAlign:"center"}}>
+                    If you are not redirected automatically <br />in 15 seconds, <a href={redirectionLink} id="extLink" style={{color:"514C9F", fontWeight:"700", textDecoration:"underline"}}>click here</a>
+                </p>}
         </main>
     )
 }

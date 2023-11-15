@@ -33,7 +33,7 @@ export default function Screen11(){
                                 if(!! leadStatus){
                                     if(leadStatus === "REJECTED"){
                                         navigate("/patient/screen12sub2"); // journey ends here
-                                    }else if(leadStatus === "PENDING"){
+                                    }else if(leadStatus === "PENDING" || leadStatus === "IN_PROGRESS"){
                                         navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}}); // prompt user that bank statement will be collected in futher process
                                     }else if(leadStatus === "CREATED"){
                                         navigate("/patient/screen13", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
