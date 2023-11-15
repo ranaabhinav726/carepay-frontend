@@ -32,10 +32,12 @@ export default function Screen11(){
                             if(!! creditAmt){
                                 if(!! leadStatus){
                                     if(leadStatus === "REJECTED"){
-                                        navigate("/patient/screen12sub2"); // journey ends here
-                                    }else if(leadStatus === "PENDING" || leadStatus === "IN_PROGRESS"){
-                                        navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}}); // prompt user that bank statement will be collected in futher process
-                                    }else if(leadStatus === "CREATED"){
+                                        navigate("/patient/screen12sub2", {state : {"data" : data}}); // journey ends here
+                                    }
+                                    // else if(leadStatus === "PENDING" || leadStatus === "IN_PROGRESS"){
+                                    //     navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}}); // prompt user that bank statement will be collected in futher process
+                                    // }
+                                    else if(leadStatus === "CREATED"){
                                         navigate("/patient/screen13", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
                                     }else if(leadStatus === "APPROVED"){
                                         console.log(sanctionAmount, creditAmt)
@@ -45,6 +47,9 @@ export default function Screen11(){
                                             navigate("/patient/screen12", { state: {"data" : location.state.data, "loanAmount": creditAmt}});     // congrats and show sanction amount
                                         }
                                     }else{
+                                        if(!! bitlyUrl){
+                                            navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}});
+                                        }
                                         navigate(-1)
                                     }
                                 }else{

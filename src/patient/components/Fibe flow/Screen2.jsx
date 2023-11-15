@@ -13,7 +13,7 @@ export default function Screen2(){
     const [number, ] = useState(localStorage.getItem("phoneNumber"));
     const [otp, setOtp] = useState();
 
-    const [resendTime, setResendTime] = useState(10);
+    const [resendTime, setResendTime] = useState(120);
     let min = Math.floor(resendTime/60);
     let sec = resendTime%60;
 

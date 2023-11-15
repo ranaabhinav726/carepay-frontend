@@ -1,11 +1,9 @@
 import { Header } from "./Comps/Header";
-import CongratsICICIImg from '../../assets/GIFs/CongratsICICI.png'
 import { useEffect, useState } from "react";
 import { MdOutlineElectricBolt } from 'react-icons/md'
 import './styles.scss'
 import { useLocation, useNavigate } from "react-router-dom";
 import Confetti from '../../assets/GIFs/confetti.gif'
-import axios from "axios";
 export default function Screen12(){
 
 
