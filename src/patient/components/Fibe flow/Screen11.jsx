@@ -2,68 +2,94 @@ import { Header } from "./Comps/Header";
 import SearchingDoc from '../../assets/GIFs/Document in process.gif'
 import NoteText from "./Comps/NoteText";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { env } from "../../environment/environment";
 
 export default function Screen11(){
 
     const navigate = useNavigate();
-    const location = useLocation();
-    console.log(location.state);
-    let leadStatus = location?.state?.data?.leadStatus;
-    let sanctionAmount = location?.state?.data?.sanctionData?.sanctionMaxLimit || 0;
-    let bitlyUrl = location?.state?.data?.bitlyUrl;
+    // const location = useLocation();
+    // console.log(location.state);
+    // let leadStatus = location?.state?.data?.leadStatus;
+    // let sanctionAmount = location?.state?.data?.sanctionData?.sanctionMaxLimit || 0;
+    // let bitlyUrl = location?.state?.data?.bitlyUrl;
 
     let timerId;
 
     let userId = localStorage.getItem("userId");
 
+    
+
     useEffect(()=>{
         if(!! userId){
-            axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
-            .then(response =>{
-                if(response?.data.message === "success"){
-                    let data = response?.data?.data;
-                    console.log(data)
-                    if(!! data){
-                        let creditAmt = data?.loanAmount;
-                        timerId = setTimeout(() => {
-                            if(!! creditAmt){
-                                if(!! leadStatus){
-                                    if(leadStatus === "REJECTED"){
-                                        navigate("/patient/screen12sub2", {state : {"data" : data}}); // journey ends here
-                                    }
-                                    // else if(leadStatus === "PENDING" || leadStatus === "IN_PROGRESS"){
-                                    //     navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}}); // prompt user that bank statement will be collected in futher process
-                                    // }
-                                    else if(leadStatus === "CREATED"){
-                                        navigate("/patient/screen13", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
-                                    }else if(leadStatus === "APPROVED"){
-                                        console.log(sanctionAmount, creditAmt)
-                                        if(Number(creditAmt) > Number(sanctionAmount)){
-                                            navigate("/patient/screen12sub2"); // journey ends here
+            axios.post(env.api_Url+"testMoneyWideApi?userId=" + userId + "&type=customer")
+        .then(response=>{
+            console.log(response) //'/patient/screen11'
+            if(response?.data?.data){
+                let fibeData = response?.data?.data;
+                let leadStatus = fibeData?.leadStatus;
+                let statusMessage = fibeData?.statusMessage;
+                let sanctionAmount = fibeData?.sanctionData?.sanctionAmount || 0;
+                let bitlyUrl = fibeData?.bitlyUrl;
+
+                // if(response.data.data.leadStatus === "FAILURE"){
+                //     setErrorMsg(response.data.data.statusMessage);
+                // }else{
+                //     navigate('/patient/screen11', { state: {"data":response.data.data}})
+                // }
+                axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+                .then(response =>{
+                    if(response?.data.message === "success"){
+                        let loanData = response?.data?.data;
+                        console.log(loanData)
+                        if(!! loanData){
+                            let creditAmt = loanData?.loanAmount;
+                            timerId = setTimeout(() => {
+                                if(!! creditAmt){
+                                    if(!! leadStatus){
+                                        if(leadStatus === "REJECTED"){
+                                            navigate("/patient/screen12sub2", {state : {"data" : loanData}}); // journey ends here
+                                        }
+                                        // else if(leadStatus === "PENDING" || leadStatus === "IN_PROGRESS"){
+                                        //     navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}}); // prompt user that bank statement will be collected in futher process
+                                        // }
+                                        else if(leadStatus === "CREATED"){
+                                            navigate("/patient/screen13", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
+                                        }else if(leadStatus === "APPROVED"){
+                                            console.log(sanctionAmount, creditAmt)
+                                            if(Number(creditAmt) > Number(sanctionAmount)){
+                                                navigate("/patient/screen12sub2"); // journey ends here
+                                            }else{
+                                                navigate("/patient/screen12", { state: {"data" : fibeData, "loanAmount": creditAmt}});     // congrats and show sanction amount
+                                            }
+                                        }else if(leadStatus === "FAILURE" && statusMessage === "Unable to ingest lead."){
+                                            navigate("/patient/screen10")
                                         }else{
-                                            navigate("/patient/screen12", { state: {"data" : location.state.data, "loanAmount": creditAmt}});     // congrats and show sanction amount
+                                            if(!! bitlyUrl){
+                                                navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}});
+                                            }else{
+                                                navigate(-1)
+                                            }
                                         }
                                     }else{
-                                        if(!! bitlyUrl){
-                                            navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}});
-                                        }
                                         navigate(-1)
                                     }
-                                }else{
-                                    navigate(-1)
                                 }
-                            }
-                        }, 2000);
+                            }, 2000);
+                        }
+                    }else{
+                        navigate(-1)
                     }
-                }else{
-                    navigate(-1)
-                }
-            }).catch(error=>{
-                console.warn(error)
-            })
+                }).catch(error=>{
+                    console.warn(error)
+                })
+            }
+            // hideWaitingModal();
+        }).catch(err=>{
+            console.warn(err);
+            // hideWaitingModal();
+        })
         }
 
         return ()=> clearTimeout(timerId);

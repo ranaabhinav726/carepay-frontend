@@ -10,16 +10,28 @@ import { hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environ
 import axios from "axios";
 import { env } from "../../environment/environment";
 
+import lottie from "lottie-web";
+import animationData from '../../assets/JSON animations/loader simple.json'
+
 export default function Screen5(){
 
     const [creditAmt, setCreditAmount] = useState("");
     const [loanReason, setLoanReason] = useState("");
     const [doctorName, setDoctorName] = useState("");
     const [doctorId, setDoctorId] = useState(localStorage.getItem("doctorId"));
+    const [waiting, setWaiting] = useState(false);
+
     const navigate = useNavigate();
 
     let userId = localStorage.getItem("userId");
 
+    useEffect(() => {
+        lottie.loadAnimation({
+          container: document.querySelector("#searchAnimation"),
+          animationData: animationData,
+        //   renderer: "html"
+        });
+      }, [waiting]);
 
     useEffect(()=>{
         if(!! userId){
@@ -69,7 +81,11 @@ export default function Screen5(){
                 console.log(response)
                 if(response.data.message === "success"){
                     // await handleNavigation();
-                    navigate('/patient/screen6');
+                    setWaiting(true);
+                    setTimeout(() => {
+                        navigate('/patient/screen6');
+                        setWaiting(false);
+                    }, 3000);
                 }else{
                     // setErrorMsg()
                 }
@@ -110,6 +126,12 @@ export default function Screen5(){
                 }}
             />
             <button onClick={()=>postDetails()} className="submit" style={{marginTop:"32px"}}>Next</button>
+            {waiting && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
+                <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
+                    <div id="searchAnimation"></div>
+                    <p style={{textAlign:"center"}}>Fetching your details...</p>
+                </div>
+            </div>}
         </main>
     )
 }

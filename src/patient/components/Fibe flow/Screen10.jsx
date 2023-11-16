@@ -47,8 +47,8 @@ export default function Screen10(){
                 You will be notified on your registered contact number <strong style={{whiteSpace:"nowrap"}}>+91 {phoneNumber}</strong> once the application is reviewed.
             </div>
             {errorMsg && <p style={{marginTop:"1.7rem", color:"red", textAlign:"center"}}>{errorMsg}</p>}
-            <button onClick={()=>checkStatus()} className="submit" style={{margin:"2rem 0 12px 0"}}>Refresh status</button>
-            <NoteText text="For more details and enquiries, reach out to us" styles={{textAlign:"center", color:"#000000C", fontSize:"16px", lineHeight:"20px"}} />
+            {/* <button onClick={()=>checkStatus()} className="submit" style={{margin:"2rem 0 12px 0"}}>Refresh status</button> */}
+            <NoteText text="For more details and enquiries, reach out to us" styles={{textAlign:"center", color:"#000000C", fontSize:"16px", lineHeight:"20px", marginTop:"1.7rem"}} />
             <div style={{textAlign:"center", margin:"1rem 0 2rem 0"}}>
                 <Link to={"tel:+918069489655"} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline", textAlign:"center"}}>Contact Support</Link>
             </div>

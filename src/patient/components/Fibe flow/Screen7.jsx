@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./Comps/Header";
 import NoteText from "./Comps/NoteText";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,9 +22,30 @@ export default function Screen7(){
     const navigate = useNavigate();
     let userId = localStorage.getItem("userId");
 
+    useEffect(()=>{
+        if(!! userId){
+            axios.get(env.api_Url + "userDetails/getUserEmploymentDetailsByUserId?userId=" + userId)
+            .then(response => {
+                if(response.data.status === 200){
+                    console.log(response)
+                    let data = response.data.data;
+                    if(!! data){
+                        setEmpType(data.employmentType)
+                        setSalary(data.nettakehomesalary);
+                        handlePincode(data.workplacePincode);
+                    }
+                }
+            }).catch(()=>{
+                console.log("Error fetching data");
+            })
+        }
+    },[])
+
+
+
     function handlePincode(pincode){
         setOfficePincode(pincode);
-        if(pincode.length === 6){
+        if(pincode.toString().length === 6){
             axios.get(env.api_Url+"userDetails/codeDetail?code=" + pincode +"&type=zip")
             .then(response =>{
                 setCity(response?.data?.city)
@@ -75,7 +96,7 @@ export default function Screen7(){
                 hideWaitingModal();
                 // apiErrorHandler();
             });
-}
+    }
     
     return(
         <main className="screenContainer">

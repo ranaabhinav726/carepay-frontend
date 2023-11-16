@@ -13,14 +13,14 @@ export default function Screen2(){
     const [number, ] = useState(localStorage.getItem("phoneNumber"));
     const [otp, setOtp] = useState();
 
-    const [resendTime, setResendTime] = useState(120);
+
+    const [resendTime, setResendTime] = useState(45);
     let min = Math.floor(resendTime/60);
     let sec = resendTime%60;
 
     function reduceTime(){
         setResendTime((resendTime)=>resendTime-1);
     }
-
     useEffect(()=>{
         if(resendTime === 0){
             return;
@@ -29,8 +29,8 @@ export default function Screen2(){
         return () => clearInterval(interval);
     }, [resendTime])
 
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
 
     async function resendOtp(){
         if(! number){

@@ -9,8 +9,7 @@ import { env, hideWaitingModal, showWaitingModal } from "../../environment/envir
 import { useNavigate } from "react-router-dom";
 import { showErrorOnUI } from "../../environment/environment";
 
-import lottie from "lottie-web";
-import animationData from '../../assets/JSON animations/loader simple.json'
+
 
 
 export default function Screen6(){
@@ -31,8 +30,6 @@ export default function Screen6(){
     const [api1Status, setApi1Status] = useState(false);
     const [api2Status, setApi2Status] = useState(false);
 
-    const [waiting, setWaiting] = useState(true);
-
     let userId = localStorage.getItem("userId");
 
     const navigate = useNavigate();
@@ -43,13 +40,7 @@ export default function Screen6(){
     //     getDataFromDecentro()
     // }, []);
 
-    useEffect(() => {
-        lottie.loadAnimation({
-          container: document.querySelector("#searchAnimation"),
-          animationData: animationData,
-        //   renderer: "html"
-        });
-      }, []);
+    
 
     useEffect(()=>{
         if(!!userId){
@@ -78,7 +69,7 @@ export default function Screen6(){
                 if(response.data.message === "success"){
                     let data = response?.data?.data;
                     if(data){
-                        setPincode(data.pincode);
+                        handlePincode(data.pincode);
                     }
                 }
             }).catch(error =>{
@@ -90,7 +81,6 @@ export default function Screen6(){
     function getDataFromDecentro(){
             axios.get(env.api_Url+"getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + name)
             .then(response=>{
-                setWaiting(false);
                 console.log(response);
                 if(response.data.message === "success"){
                     const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
@@ -108,10 +98,6 @@ export default function Screen6(){
                 }
             })
     }
-
-    setTimeout(() => {
-        setWaiting(false);
-    }, 3000);
 
     //////////////////////////////// DOB restriction ///////////////////////////////////////
     ////// Below code is to calculate the maximum date the user can input as DOB.///////////
@@ -158,7 +144,7 @@ export default function Screen6(){
         showWaitingModal();
 
         let submitObj = {
-            "firstName": localStorage.getItem("P_userName"),
+            "firstName": localStorage.getItem("P_userName").trim(),
             "panCard": pan,
             "emailId": email,
             "dateOfBirth": dob,
@@ -240,7 +226,8 @@ export default function Screen6(){
 
     function handlePincode(pincode){
         setPincode(pincode);
-        if(pincode.length === 6){
+        console.log()
+        if(pincode.toString().length === 6){
             axios.get(env.api_Url+"userDetails/codeDetail?code=" + pincode +"&type=zip")
             .then(response =>{
                 setCity(response?.data?.city)
@@ -326,12 +313,7 @@ export default function Screen6(){
 
             <button style={{marginTop:"32px"}} onClick={()=>postDetails()} className="submit">Next</button>
             
-            {waiting && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
-                <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
-                    <div id="searchAnimation"></div>
-                    <p style={{textAlign:"center"}}>Fetching your details...</p>
-                </div>
-            </div>}
+            
         </main>
     )
 }

@@ -4,19 +4,33 @@ import { Header } from "./Comps/Header";
 
 import lottie from "lottie-web";
 import animationData from '../../assets/JSON animations/loader simple.json'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Screen13(){
 
     const navigate = useNavigate();
     const location = useLocation();
     let redirectionLink = location?.state?.link;
-    console.log(location?.state?.link);
+    // console.log(location?.state);
 
     // setTimeout(() => {
     //     // navigate('/patient/screen14')
     //     navigate(redirectionLink);
     // }, 3000);
+
+    const [resendTime, setResendTime] = useState(15);
+
+    function reduceTime(){
+        setResendTime((resendTime)=>resendTime-1);
+    }
+    useEffect(()=>{
+        if(resendTime === 0){
+            return;
+        }
+        const interval = setInterval(() => reduceTime(), 1000);
+        return () => clearInterval(interval);
+    }, [resendTime])
+
 
     useEffect(() => {
         lottie.loadAnimation({
@@ -32,7 +46,7 @@ export default function Screen13(){
         let timerId2 = setTimeout(()=>{
             let extLink = document.getElementById("extLink");
             if(extLink) extLink.click();
-        }, 40000)
+        }, 4000)
 
         return ()=> {
             clearTimeout(timerId1);
@@ -50,7 +64,7 @@ export default function Screen13(){
             
             {redirectionLink && 
                 <p style={{textAlign:"center"}}>
-                    If you are not redirected automatically <br />in 15 seconds, <a href={redirectionLink} id="extLink" style={{color:"514C9F", fontWeight:"700", textDecoration:"underline"}}>click here</a>
+                    If you are not redirected automatically <br />in {resendTime} seconds, <a href={redirectionLink} id="extLink" style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline"}}>click here</a>
                 </p>}
         </main>
     )

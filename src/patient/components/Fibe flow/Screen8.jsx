@@ -11,7 +11,7 @@ export default function Screen8(){
     const navigate = useNavigate();
 
     setTimeout(() => {
-        navigate('/patient/screen9')
+        navigate('/patient/screen11', {replace:"true"})
     }, 3000);
 
     useEffect(() => {
