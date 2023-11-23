@@ -12,6 +12,7 @@ const PracticeDetails = () =>{
     const [speciality, setSpeciality] = useState("Dentistry")
     const [specialityOther, setSpecialityOther] = useState("")
     const [clinicName, setClinicName] = useState("")
+    const [doe, setDoe] = useState("")
     const [businessName, setBusinessName] = useState("")
     const [entityType, setEntityType] = useState("Private Limited Company")
     const [LLpin, setLLpin] = useState("")
@@ -163,6 +164,12 @@ const PracticeDetails = () =>{
             return;
         }
 
+        if(! doe){
+            let elem = document.getElementById('doe');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
         if(! entityType){
             let elem = document.getElementById('entityType');
             if(elem) showErrorOnUI(elem);
@@ -175,11 +182,15 @@ const PracticeDetails = () =>{
         setCanSubmit(false);
         showWrapper(ref.current)
 
+        let date = doe;
+        date = date.split("-").reverse().join("-");
+
         let submitObj = {
             "id": id,
             "doctorId" : doctorId,
             "licenceNumber": licenseNum,
             "clinicName": clinicName,
+            "incorporationDate": date,
             "businessEntityName": businessName,
             "businessEntityType": entityType,
             "cinLlpin": LLpin,
@@ -283,7 +294,18 @@ const PracticeDetails = () =>{
                     placeholder="Enter full name of business entity" 
                 />
             </div>
-
+            <div className="inputGroup">
+                <p className='group-title'>Date of establishment of clinic/hospital</p>
+                <input 
+                    id="doe"
+                    className="group-input"
+                    type="date" 
+                    value={doe}
+                    onChange={(e) => setDoe(e.target.value)}
+                    placeholder="Select Date"
+                />
+                <span className="fieldError">Please enter date of establishment</span>
+            </div>
             <div className="inputGroup">
                 <p className='group-title'>Type of entity</p>
                 <select 
