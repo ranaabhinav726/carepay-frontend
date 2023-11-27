@@ -33,7 +33,7 @@ const EmploymentDetails = () =>{
     const [empType, setEmpType] = useState('salaried');
     const [salary, setSalary] = useState('');
     // const [salaryDate, setSalaryDate] = useState('1');
-    const [familyIncome, setFamilyIncome] = useState("0");
+    const [familyIncome, setFamilyIncome] = useState("");
     const [companyName, setCompanyName] = useState('');
     // const [companyAddL1, setCompanyAddL1] = useState('');
     // const [companyAddL2, setCompanyAddL2] = useState('');
@@ -46,7 +46,7 @@ const EmploymentDetails = () =>{
     // const [jobExpYear, setJobExpYear] = useState(0);
     // const [jobExpMonth, setJobExpMonth] = useState(0);
 
-    const [loanAmt, setLoanAmount] = useState('0');
+    const [loanAmt, setLoanAmount] = useState('');
 
     // const [cityName, setCityName] = useState("");
     // const [consent, setConsent] = useState(false);
@@ -386,7 +386,7 @@ const EmploymentDetails = () =>{
             <input 
                 id="salary"
                 type="number" 
-                value={salary ?? ""}
+                value={salary || ""}
                 onChange={(e)=>setSalary(e.target.value)}
                 placeholder="Enter your monthly in-hand income" 
             />
@@ -408,7 +408,7 @@ const EmploymentDetails = () =>{
             <p>Monthly family income (optional)</p>
             <input 
                 type="number" 
-                value={familyIncome ?? ""}
+                value={familyIncome || ""}
                 onChange={(e)=>setFamilyIncome(e.target.value)}
                 placeholder="Enter your family's monthly income" 
             />
@@ -419,7 +419,7 @@ const EmploymentDetails = () =>{
             <input 
                 id="companyName"
                 type="text" 
-                value={companyName ?? ""}
+                value={companyName || ""}
                 onChange={(e)=>handleCompanyName(e.target.value)}
                 placeholder="Enter your current company name" 
             />
