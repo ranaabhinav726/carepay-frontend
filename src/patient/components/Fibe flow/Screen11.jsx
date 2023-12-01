@@ -82,8 +82,11 @@ export default function Screen11(){
                         navigate(-1)
                     }
                 }).catch(error=>{
+                    navigate(-1)
                     console.warn(error)
                 })
+            }else{
+                navigate(-1)
             }
             // hideWaitingModal();
         }).catch(err=>{

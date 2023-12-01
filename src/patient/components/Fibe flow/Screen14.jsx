@@ -29,13 +29,29 @@ export default function Screen14(){
     useEffect(()=>{
         axios.get(env.api_Url + "userDetails/getUserDetailsByUserId?userId=" + userId)
         .then((response) => {
-            if(response.data.status == "200"){
-                let data = response.data.data.firstName;
+            console.log("0")
+            if(response.data.message === "success"){
+                console.log("1")
+                getLoanDetails();
             }
         }).catch(error => {
             console.log(error);
         });
     }, [userId])
+
+    function getLoanDetails(){
+        console.log("2")
+        axios.get(env.api_Url + "userDetails/getLoanStatusByUserId?userId=" + userId)
+        .then(response =>{
+            console.log(response)
+            let status = response.data.data;
+            if(status === "Disbursed" || status === "Approved"){ // Pending, Approved , Disbursed, Rejected
+                navigate("/patient/screen15")
+            }
+        }).catch(err=>{
+            console.warn(err)
+        })
+    }
 
     return(
         <main className="screenContainer">
