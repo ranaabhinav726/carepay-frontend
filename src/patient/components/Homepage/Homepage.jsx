@@ -162,7 +162,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                 }}>
                     <img src={HospitalIcon} alt="" style={{width:"50%"}} />
                 </div>
-                <div>
+                <div style={{width:"100%"}}>
                     <h3 style={{fontSize:"18px", marginBottom:"4px"}}>Welcome to</h3>
                     <p style={{fontSize:"24px", maxWidth:"70%"}}>{clinicName}</p>
                 </div>
