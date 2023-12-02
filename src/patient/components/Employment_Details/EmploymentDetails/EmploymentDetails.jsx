@@ -109,7 +109,7 @@ const EmploymentDetails = () =>{
                         setSalary(data.nettakehomesalary);
                         // setSalaryDate(data.salaryDay);
                         setFamilyIncome(data.monthlyFamilyIncome ?? "0");
-                        handleCompanyName(data.organizationName);
+                        setCompanyName(data.organizationName);
                         // setCompanyAddL1(data.workplaceAddress1);
                         // setCompanyAddL2(data.workplaceAddress2);
                         // handlePincode(data.workplacePincode);
@@ -133,10 +133,10 @@ const EmploymentDetails = () =>{
         }
     },[])
 
-    function handleCompanyName(companyName){
-        let filteredCompanyName = companyName.replaceAll("&", "and");
-        setCompanyName(filteredCompanyName);
-    }
+    // function handleCompanyName(companyName){
+    //     let filteredCompanyName = companyName.replaceAll("&", "and");
+    //     setCompanyName(filteredCompanyName);
+    // }
 
     // function handlePincode(val){
     //     if(val.length < 6){
@@ -386,7 +386,7 @@ const EmploymentDetails = () =>{
             <input 
                 id="salary"
                 type="number" 
-                value={salary || ""}
+                value={salary}
                 onChange={(e)=>setSalary(e.target.value)}
                 placeholder="Enter your monthly in-hand income" 
             />
@@ -408,7 +408,7 @@ const EmploymentDetails = () =>{
             <p>Monthly family income (optional)</p>
             <input 
                 type="number" 
-                value={familyIncome || ""}
+                value={familyIncome}
                 onChange={(e)=>setFamilyIncome(e.target.value)}
                 placeholder="Enter your family's monthly income" 
             />
@@ -419,8 +419,8 @@ const EmploymentDetails = () =>{
             <input 
                 id="companyName"
                 type="text" 
-                value={companyName || ""}
-                onChange={(e)=>handleCompanyName(e.target.value)}
+                value={companyName}
+                onChange={(e)=>setCompanyName(e.target.value)}
                 placeholder="Enter your current company name" 
             />
             <span className="fieldError">{errorMsg}</span>
