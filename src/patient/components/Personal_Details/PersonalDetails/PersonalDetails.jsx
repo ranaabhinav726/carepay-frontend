@@ -454,7 +454,7 @@ const PersonalDetails = () =>{
         </div>
         
         <h3>Reference details</h3>
-        <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your blood relation</p>
+        <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your immediate relation</p>
 
         <div className="referenceNumber">
             <p>Reference contact number</p>
