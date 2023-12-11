@@ -23,7 +23,7 @@ export default function Screen11(){
 
     useEffect(()=>{
         if(!! userId){
-            axios.post(env.api_Url+"testMoneyWideApi?userId=" + userId + "&type=customer")
+            axios.post(env.api_Url+"profileIngestionForFibe?userId=" + userId + "&type=customer")
         .then(response=>{
             console.log(response) //'/patient/screen11'
             if(response?.data?.data){
@@ -68,25 +68,30 @@ export default function Screen11(){
                                         if(!! bitlyUrl){
                                             navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}});
                                         }else{
-                                            navigate(-1)
+                                            // navigate(-1)
+                                            navigate("/patient/screen10")
                                         }
                                     }
                                 }else{
-                                    navigate(-1)
+                                    // navigate(-1)
+                                    navigate("/patient/screen10")
                                 }
                             }, 2000);
                         }else{
-                            navigate(-1)
+                            // navigate(-1)
+                            navigate("/patient/screen10")
                         }
                     }else{
-                        navigate(-1)
+                        // navigate(-1)
+                        navigate("/patient/screen10")
                     }
                 }).catch(error=>{
                     navigate(-1)
                     console.warn(error)
                 })
             }else{
-                navigate(-1)
+                // navigate(-1)
+                navigate("/patient/screen10")
             }
             // hideWaitingModal();
         }).catch(err=>{

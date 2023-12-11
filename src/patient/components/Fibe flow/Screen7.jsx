@@ -108,7 +108,7 @@ export default function Screen7(){
                 name="empType" 
                 value={empType}
                 setValue={setEmpType}
-                options={["salaried", "self employed"]}
+                options={["salaried", "self_employed"]}
                 styles={{
                     padding:"12px 0"
                 }}

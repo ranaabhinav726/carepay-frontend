@@ -2,6 +2,12 @@
 export default function RadioInput({name="", options=[], value, setValue, styles, id}){
 
     const radios = options.map((option, idx)=>{
+        let label = option;
+        // if(label.contains("_")) label = label.replace("_", " ");
+        while(label.includes("_")){
+            label = label.replace("_", " ");
+        }
+        label = label.charAt(0).toUpperCase() + label.slice(1);
         return(
             <div style={{display:"flex", padding:"0 12px 12px 12px", gap:"12px", alignItems:"center", ...styles}} key={idx} >
                 <input 
@@ -27,7 +33,7 @@ export default function RadioInput({name="", options=[], value, setValue, styles
 
                 }}
                 >
-                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                    {label}
                 </label>
                 <br/>
             </div>
