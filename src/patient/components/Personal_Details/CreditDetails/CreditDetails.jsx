@@ -244,6 +244,7 @@ const CreditDetails = () => {
                     <option value={"mother"}>Mother</option>
                     <option value={"brother"}>Brother</option>
                     <option value={"sister"}>Sister</option>
+                    <option value={"spouse"}>Spouse</option>
                 </select>
                 <span className="fieldError">Please tell your relation to the patient</span>
             </div>

@@ -382,21 +382,21 @@ const PersonalDetails = () =>{
         <div className="gender" id="gender">
             <p>Gender</p>
             <div className="radioOption">
-                <input type="radio" id="male" name="gender" checked={gender === "Male"} onChange={(e)=> setGender(e.target.value)} value="Male" />
+                <input type="radio" id="male" name="gender" checked={gender.toLowerCase() === "male"} onChange={(e)=> setGender(e.target.value)} value="male" />
                 <label htmlFor="male">Male</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="female" name="gender" checked={gender === "Female"} onChange={(e)=> setGender(e.target.value)} value="Female" />
+                <input type="radio" id="female" name="gender" checked={gender.toLowerCase() === "female"} onChange={(e)=> setGender(e.target.value)} value="female" />
                 <label htmlFor="female">Female</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="other" name="gender" checked={gender === "Other"} onChange={(e)=> setGender(e.target.value)} value="Other" />
+                <input type="radio" id="other" name="gender" checked={gender.toLowerCase() === "other"} onChange={(e)=> setGender(e.target.value)} value="other" />
                 <label htmlFor="other">Other</label><br />
             </div>
-            <div className="radioOption">
+            {/* <div className="radioOption">
                 <input type="radio" id="preferNotToSay" name="gender" checked={gender === "Prefer not to say"} onChange={(e)=> setGender(e.target.value)} value="Prefer not to say" />
                 <label htmlFor="preferNotToSay">Prefer not to say</label>
-            </div>
+            </div> */}
         </div>
         <span className="fieldError">This field can't be empty.</span>
 
@@ -454,7 +454,7 @@ const PersonalDetails = () =>{
         </div>
         
         <h3>Reference details</h3>
-        <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your blood relation</p>
+        <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your immediate relation</p>
 
         <div className="referenceNumber">
             <p>Reference contact number</p>

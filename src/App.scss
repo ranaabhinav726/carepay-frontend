@@ -808,3 +808,7 @@ div.website-container{
   ::-webkit-scrollbar-thumb:hover {
     background: #514C9F;
   }
+
+input.dynamicFetching:disabled {
+  font-style: italic;
+}

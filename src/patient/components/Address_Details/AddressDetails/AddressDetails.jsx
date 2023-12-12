@@ -62,7 +62,7 @@ const AddressDetails = () => {
                         setFirstLine(data.address);
                         // setLocality(data.locality);
                         // setLandmark(data.landmark);
-                        setPincode(data.pincode);
+                        handlePincode(data?.pincode?.toString());
                         setState(data.state);
                         setCity(data.city);
                     }
@@ -143,13 +143,15 @@ const AddressDetails = () => {
         if(val.length < 6){
             setPincode(val);
         }else if(val.length == 6){
+            setCity("fetching...")
+            setState("fetching...")
             setPincode(val);
             axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
             .then(response =>{
                 console.log(response)
-                let city = response?.data?.city;
+                let city = response?.data?.city ?? "";
                 setCity(city);
-                let state = response?.data?.state;
+                let state = response?.data?.state ?? "";
                 setState(state);
             })
         }
@@ -201,11 +203,11 @@ const AddressDetails = () => {
             return;
         }
 
-        // if(!state){
-        //     let elem = document.getElementById('state');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
+        if(!state){
+            let elem = document.getElementById('state');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(! canSubmit){
             return;
@@ -332,7 +334,9 @@ const AddressDetails = () => {
             <p>City</p>
             <input type="text"
                 id="city"
-                value={city ?? ""} 
+                className={city === "fetching..." ? "dynamicFetching" : ""}
+                value={city ?? ""}
+                disabled={state === "fetching..."}
                 onChange={(e)=> setCity(e.target.value)}
                 placeholder="Enter your city here" 
                 required 
@@ -340,17 +344,19 @@ const AddressDetails = () => {
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
-        {/* <div className="state">
+        <div className="state">
             <p>State</p>
             <input type="text" 
                 id="state"
-                value={state ?? ""} 
+                value={state ?? ""}
+                className={state === "fetching..." ? "dynamicFetching" : ""}
+                disabled={state === "fetching..."}
                 onChange={(e)=> setState(e.target.value)}
                 placeholder="Enter your state here" 
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
-        </div> */}
+        </div>
 
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={()=>handleForm()} className="submit">Submit</button>
