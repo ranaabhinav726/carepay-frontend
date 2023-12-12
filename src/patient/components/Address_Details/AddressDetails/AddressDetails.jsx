@@ -203,11 +203,11 @@ const AddressDetails = () => {
             return;
         }
 
-        // if(!state){
-        //     let elem = document.getElementById('state');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
+        if(!state){
+            let elem = document.getElementById('state');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(! canSubmit){
             return;
