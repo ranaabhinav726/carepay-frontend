@@ -174,14 +174,14 @@ const EmploymentDetails = () =>{
     //     }, 1000)
     // }
 
-    function expError(){
-        let elem = document.getElementById('expError');
-        if(elem) elem.style.display = "block";
+    // function expError(){
+    //     let elem = document.getElementById('expError');
+    //     if(elem) elem.style.display = "block";
         
-        setTimeout(()=>{
-            if(elem) elem.style.display = "none";
-        }, 3000)
-    }
+    //     setTimeout(()=>{
+    //         if(elem) elem.style.display = "none";
+    //     }, 3000)
+    // }
 
     async function handleSubmit(){
         // && totalExpYear && totalExpMonth && jobExpYear && jobExpMonth
@@ -191,7 +191,7 @@ const EmploymentDetails = () =>{
             // return;
         }
 
-        if(empType === "SALARIED"){
+        if(empType.toUpperCase() === "SALARIED"){
             if(!companyName){ 
                 let elem = document.getElementById('companyName');
                 if(elem) showErrorOnUI(elem);
@@ -483,13 +483,13 @@ const EmploymentDetails = () =>{
                         value={businessType}
                         placeholder="Enter type of business" 
                     >
-                        <option>Public Limited Company</option>
-                        <option>Private Limited Company</option>
-                        <option>Limited Liability Partners</option>
-                        <option>Limited Liability Company</option>
-                        <option>Partnership Firm</option>
-                        <option>Sole Proprietorship</option>
-                        <option>One-person company</option>
+                        <option value="Public Limited Company">Public Limited Company</option>
+                        <option value="Private Limited Company">Private Limited Company</option>
+                        <option value="Limited Liability Partners">Limited Liability Partners</option>
+                        <option value="Limited Liability Company">Limited Liability Company</option>
+                        <option value="Partnership Firm">Partnership Firm</option>
+                        <option value="Sole Proprietorship">Sole Proprietorship</option>
+                        <option value="One-person company">One-person company</option>
                     </select>
                 </div>
                 <div className="businessName">
