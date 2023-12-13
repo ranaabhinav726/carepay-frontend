@@ -183,6 +183,7 @@ export default function Screen4(){
                         <option value="mother">Mother</option>
                         <option value="brother">Brother</option>
                         <option value="sister">Sister</option>
+                        <option value="spouse">Spouse</option>
                     </select>
                 </>
             }
