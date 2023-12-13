@@ -43,6 +43,8 @@ const AddressDetails = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
 
+    const [fetching, setFetching] = useState(false);
+
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
@@ -143,8 +145,7 @@ const AddressDetails = () => {
         if(val.length < 6){
             setPincode(val);
         }else if(val.length == 6){
-            setCity("fetching...")
-            setState("fetching...")
+            setFetching(true);
             setPincode(val);
             axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
             .then(response =>{
@@ -153,6 +154,9 @@ const AddressDetails = () => {
                 setCity(city);
                 let state = response?.data?.state ?? "";
                 setState(state);
+                setFetching(false);
+            }).catch(()=>{
+                setFetching(false);
             })
         }
     }
@@ -334,11 +338,11 @@ const AddressDetails = () => {
             <p>City</p>
             <input type="text"
                 id="city"
-                className={city === "fetching..." ? "dynamicFetching" : ""}
+                className={fetching === true ? "dynamicFetching" : ""}
                 value={city ?? ""}
-                disabled={state === "fetching..."}
+                disabled={fetching === true}
                 onChange={(e)=> setCity(e.target.value)}
-                placeholder="Enter your city here" 
+                placeholder={fetching ? "fetching..." : "Enter your city here" }
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
@@ -349,10 +353,10 @@ const AddressDetails = () => {
             <input type="text" 
                 id="state"
                 value={state ?? ""}
-                className={state === "fetching..." ? "dynamicFetching" : ""}
-                disabled={state === "fetching..."}
+                className={fetching === true ? "dynamicFetching" : ""}
+                disabled={fetching === true}
                 onChange={(e)=> setState(e.target.value)}
-                placeholder="Enter your state here" 
+                placeholder={fetching ? "fetching..." : "Enter your state here" }
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
