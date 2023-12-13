@@ -809,6 +809,6 @@ div.website-container{
     background: #514C9F;
   }
 
-input.dynamicFetching:disabled {
+input.dynamicFetching:disabled::placeholder {
   font-style: italic;
 }
