@@ -16,6 +16,8 @@ export default function Screen4(){
     const [borrower, setBorrower] = useState("");
 
     const [patientName, setPatientName] = useState("")
+    const [patientEmailId, setPatientEmailId] = useState("")
+    const [patientPhoneNumber, setPatientPhoneNumber] = useState("")
     const [relationToPatient, setRelationToPatient] = useState("father")
 
     let doctorId = localStorage.getItem("doctorId")
@@ -40,10 +42,23 @@ export default function Screen4(){
             return;
         }
 
-        if(borrower === "someone else" && (! patientName)){
-            let elem = document.getElementById("patientName");
-            showErrorOnUI(elem, false);
-            return;
+        if(borrower === "someone else"){
+            if(! patientName){
+                let elem = document.getElementById("patientName");
+                showErrorOnUI(elem, false);
+                return;
+            }
+            if(! patientPhoneNumber){
+                let elem = document.getElementById("patientPhoneNumber");
+                showErrorOnUI(elem, false);
+                return;
+            }
+            if(! patientEmailId){
+                let elem = document.getElementById("patientEmailId");
+                showErrorOnUI(elem, false);
+                return;
+            }
+            
         }
 
         showWaitingModal();
@@ -61,6 +76,8 @@ export default function Screen4(){
         if(borrower === "someone else"){
             submitObj.patientName = patientName;
             submitObj.relationshipWithPatient = relationToPatient;
+            submitObj.patientPhoneNumber = patientPhoneNumber;
+            submitObj.patientEmailId = patientEmailId;
         }
 
         axios
@@ -155,6 +172,40 @@ export default function Screen4(){
                         placeholder="Enter name of the patient here"
                         value={patientName}
                         setValue={setPatientName}
+                    />
+
+                    <InputBoxLabel
+                        label="Patient's phone number"
+                        styles={{
+                            marginTop:"16px"
+                        }}
+                    />
+                    <InputBox
+                        id="patientPhoneNumber"
+                        styles={{
+                            marginTop:"12px", 
+                            border:"0"
+                        }}
+                        placeholder="Enter number of the patient here"
+                        value={patientPhoneNumber}
+                        setValue={setPatientPhoneNumber}
+                    />
+
+                    <InputBoxLabel
+                        label="Patient's email ID"
+                        styles={{
+                            marginTop:"16px"
+                        }}
+                    />
+                    <InputBox
+                        id="patientEmailId"
+                        styles={{
+                            marginTop:"12px", 
+                            border:"0"
+                        }}
+                        placeholder="Enter email of the patient here"
+                        value={patientEmailId}
+                        setValue={setPatientEmailId}
                     />
 
                     <InputBoxLabel
