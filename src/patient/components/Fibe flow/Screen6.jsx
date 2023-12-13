@@ -305,7 +305,7 @@ export default function Screen6(){
                 name="gender" 
                 value={gender}
                 setValue={setGender}
-                options={["male", "female", "other", "prefer not to say"]}
+                options={["male", "female", "other"]}
                 styles={{
                     padding:"12px 12px 12px 0"
                 }}
