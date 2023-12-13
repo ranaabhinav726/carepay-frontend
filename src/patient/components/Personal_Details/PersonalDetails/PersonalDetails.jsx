@@ -382,15 +382,15 @@ const PersonalDetails = () =>{
         <div className="gender" id="gender">
             <p>Gender</p>
             <div className="radioOption">
-                <input type="radio" id="male" name="gender" checked={gender.toLowerCase() === "male"} onChange={(e)=> setGender(e.target.value)} value="male" />
+                <input type="radio" id="male" name="gender" checked={gender?.toLowerCase() === "male"} onChange={(e)=> setGender(e.target.value)} value="male" />
                 <label htmlFor="male">Male</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="female" name="gender" checked={gender.toLowerCase() === "female"} onChange={(e)=> setGender(e.target.value)} value="female" />
+                <input type="radio" id="female" name="gender" checked={gender?.toLowerCase() === "female"} onChange={(e)=> setGender(e.target.value)} value="female" />
                 <label htmlFor="female">Female</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="other" name="gender" checked={gender.toLowerCase() === "other"} onChange={(e)=> setGender(e.target.value)} value="other" />
+                <input type="radio" id="other" name="gender" checked={gender?.toLowerCase() === "other"} onChange={(e)=> setGender(e.target.value)} value="other" />
                 <label htmlFor="other">Other</label><br />
             </div>
             {/* <div className="radioOption">
