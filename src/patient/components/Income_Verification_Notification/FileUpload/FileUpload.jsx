@@ -111,8 +111,8 @@ const FileUpload = () =>{
     }
 
     function passwordHandler(e){
-        let elem2 = document.getElementById('passError');
-        if(elem2) elem2.style.display = "none";
+        // let elem2 = document.getElementById('passError');
+        // if(elem2) elem2.style.display = "none";
 
         setPassword(e.target.value);
     }
@@ -335,7 +335,7 @@ const FileUpload = () =>{
                         <span className='tooltiptext'>This is the password to open your bank statement. Typically a combination of your DOB and phone number. You can find it in your bank's monthly statement email to you.</span>
                     </div>
                 </div>
-                <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank.</p>
+                <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank (If PDF does not have any password,please type ‘0’ in the box below and submit).</p>
                 <input 
                     value={password ?? ""}
                     onChange={(e)=> passwordHandler(e)}
@@ -345,7 +345,7 @@ const FileUpload = () =>{
                     id="password"
                 />
                 <div onClick={()=>handleEyeClick()} className="eye">{showPass? <AiFillEyeInvisible/> : <AiFillEye/>}</div>
-                <p id="passError">Please enter your file password, if files don't have a password then put "0" in the password box.</p>
+                {/* <p id="passError">Please enter your file password, if files don't have a password then put "0" in the password box.</p> */}
                 
                 <span className='safe'>Your data is encrypted and will be safe with us!</span>
             </div>
