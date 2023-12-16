@@ -41,7 +41,8 @@ const AddressDetails = () => {
     // const [landmark, setLandmark] = useState("");
     const [pincode, setPincode] = useState("");
     const [city, setCity] = useState("");
-    const [state, setState] = useState("");
+    const [state, setState] = useState("Select state");
+    const [otherState, setOtherState] = useState("");
 
     const [fetching, setFetching] = useState(false);
 
@@ -49,6 +50,16 @@ const AddressDetails = () => {
     const [canSubmit, setCanSubmit] = useState(true);
 
     const [isDecentroCall, setDecentroCall] = useState(false);
+
+    let states = [
+                    "Select state", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chattisgarh", "Chandigarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep Islands", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Other"
+                ];
+
+    let stateOptions = states.map((state, idx)=>{
+        if(idx > 0) return <option value={state}>{state}</option>;
+
+        return <option disabled value={state}>{state}</option>
+    })
 
     let ref = useRef(0);
     useEffect(()=>{
@@ -65,7 +76,7 @@ const AddressDetails = () => {
                         // setLocality(data.locality);
                         // setLandmark(data.landmark);
                         handlePincode(data?.pincode?.toString());
-                        setState(data.state);
+                        setState(data.state ?? "Select state");
                         setCity(data.city);
                     }
                     if(data.addressType === null){
@@ -152,7 +163,7 @@ const AddressDetails = () => {
                 console.log(response)
                 let city = response?.data?.city ?? "";
                 setCity(city);
-                let state = response?.data?.state ?? "";
+                let state = response?.data?.state ?? "Select state";
                 setState(state);
                 setFetching(false);
             }).catch(()=>{
@@ -207,8 +218,14 @@ const AddressDetails = () => {
             return;
         }
 
-        if(!state){
+        if(state === "Select state"){
             let elem = document.getElementById('state');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(state === "Other" && !otherState){
+            let elem = document.getElementById('otherState');
             if(elem) showErrorOnUI(elem);
             return;
         }
@@ -350,15 +367,20 @@ const AddressDetails = () => {
 
         <div className="state">
             <p>State</p>
-            <input type="text" 
-                id="state"
-                value={state ?? ""}
-                className={fetching === true ? "dynamicFetching" : ""}
-                disabled={fetching === true}
-                onChange={(e)=> setState(e.target.value)}
-                placeholder={fetching ? "fetching..." : "Enter your state here" }
+            <select id="state" value={state} onChange={(e)=> setState(e.target.value)}>
+                {stateOptions}
+            </select>
+            <span className="fieldError">Please select your state</span>
+            {state === "Other" && 
+                <input type="text" 
+                id="otherState"
+                value={otherState ?? ""}
+                onChange={(e)=> setOtherState(e.target.value)}
+                placeholder={"Enter your state here" }
+                style={{marginTop:"12px"}}
                 required 
-            />
+                />    
+            }
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
