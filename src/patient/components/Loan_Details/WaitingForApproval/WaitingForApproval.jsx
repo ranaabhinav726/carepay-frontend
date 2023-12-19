@@ -5,7 +5,7 @@ import Waiting from '../../../assets/waiting.png'
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { showWrapper, hideWrapper } from "../../../environment/environment";
 
 function WaitingForApproval(){
@@ -13,13 +13,30 @@ function WaitingForApproval(){
     let email = localStorage.getItem('email');
     let number = localStorage.getItem('phoneNumber');
 
+    const [uploadedFiles, setUploadedFiles] = useState(null);
+
     let ref = useRef(0);
     useEffect(()=>{
+        chechForUploadedDocuments();
         ref.current = document.getElementById('animation-wrapper');
     },[])
 
     const navigate = useNavigate();
     let userId = localStorage.getItem("userId");
+
+    function chechForUploadedDocuments(){
+        axios.get(env.api_Url + "getDocumentsByUserId?userId=" + userId)
+        .then(response =>{
+            if(response.data.status === 200){
+                console.log(response)
+                let uploadedFiles = response?.data?.data?.multipleBankStatements?.split(',');
+                console.log(uploadedFiles)
+                setUploadedFiles(uploadedFiles);
+            }
+        }).catch(err =>{
+            console.log(err)
+        })
+    }
 
     async function checkStatus(){
         showWrapper(ref.current)
@@ -49,6 +66,10 @@ function WaitingForApproval(){
             })
             hideWrapper(ref.current)
     }
+
+    function navigateBack(){
+        navigate("/patient/BankDetails", {state : {"reVisitToUploadStatement" : true}})
+    }
     return(
         <main className="waitingForApproval">
             <Header />
@@ -60,6 +81,20 @@ function WaitingForApproval(){
                     You will be notified on your registered contact number <strong>+91 {number} </strong> once the application is reviewed.
                 </div>
             </div>
+            {!uploadedFiles && 
+                <div style={{
+                    background:"#ECEBFF",
+                    textAlign:"center",
+                    padding:"10px",
+                    borderRadius:"4px",
+                    color:"#514c9f",
+                    marginTop:"1rem",
+                    whiteSpace:"normal"
+                }}>
+                    {"To share Bank details, Account statement and KYC documents (if required)  "}
+                    <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span>
+                </div>
+            }
             <button className="submit" onClick={()=>checkStatus()}>Check Status</button>
             <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
         </main>

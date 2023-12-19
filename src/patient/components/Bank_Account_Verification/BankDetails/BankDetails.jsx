@@ -5,7 +5,7 @@ import './bankDetails.scss'
 import axios from "axios";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // let bankname = localStorage.getItem('bankName');
 
@@ -15,6 +15,10 @@ const BankDetails = () =>{
     // const config = {
     //     headers: { Authorization: `Bearer ${token}` }
     // };
+    const location = useLocation();
+    let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
+    console.log(isReVisitToUploadStatement)
+
     let userId = localStorage.getItem('userId')
     let ref = useRef(0);
     useEffect(()=>{
@@ -22,7 +26,7 @@ const BankDetails = () =>{
         if(!! userId){
             axios.get(env.api_Url + "userDetails/getAccountInfoByUserId?userId=" + userId)
             .then(response => {
-                if(response.data.status === 200){
+                if(response.data.message === "success"){
                     let data = response.data.data;
                     if(!! data){
                         setBankName(data.bankName);
@@ -31,6 +35,8 @@ const BankDetails = () =>{
                         setConfirmAccountNumber(data.accountNumber);
                     }
                 }
+            }).catch(()=>{
+                console.log("Error fetching data");
             })
         }
     },[])
@@ -171,12 +177,12 @@ const BankDetails = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     localStorage.setItem("bankName", bankName);
-                    navigate('/patient/IncomeVerification');
+                    navigate('/patient/IncomeVerification', {state : {"reVisitToUploadStatement" : isReVisitToUploadStatement}});
                 }
             }).catch(error => {
                 console.log(error);
                 if(error.response.status == 406 && error.response.data.msg.error == "Bank Details already verified"){
-                    navigate('/patient/IncomeVerification');
+                    navigate('/patient/IncomeVerification', {state : {"reVisitToUploadStatement" : isReVisitToUploadStatement}});
                 }
             });
         setCanSubmit(true);
