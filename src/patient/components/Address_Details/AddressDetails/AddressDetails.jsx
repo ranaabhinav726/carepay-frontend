@@ -48,17 +48,20 @@ const AddressDetails = () => {
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
+    const [errorMsg, setErrorMsg] = useState("This field can't be empty.")
 
     const [isDecentroCall, setDecentroCall] = useState(false);
+
+    let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
 
     let states = [
                     "Select state", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chattisgarh", "Chandigarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep Islands", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Other"
                 ];
 
     let stateOptions = states.map((state, idx)=>{
-        if(idx > 0) return <option value={state}>{state}</option>;
+        if(idx > 0) return <option key={idx} value={state}>{state}</option>;
 
-        return <option disabled value={state}>{state}</option>
+        return <option disabled key={idx} value={state}>{state}</option>
     })
 
     let ref = useRef(0);
@@ -217,6 +220,15 @@ const AddressDetails = () => {
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(specialChars.test(city)){
+            let elem = document.getElementById('city');
+            setErrorMsg("Special characters are not allowed.");
+            setTimeout(() => {
+                setErrorMsg("This field can't be empty.");
+            }, 3000);
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(state === "Select state"){
             let elem = document.getElementById('state');
@@ -362,7 +374,7 @@ const AddressDetails = () => {
                 placeholder={fetching ? "fetching..." : "Enter your city here" }
                 required 
             />
-            <span className="fieldError">This field can't be empty.</span>
+            <span className="fieldError">{errorMsg}</span>
         </div>
 
         <div className="state">
