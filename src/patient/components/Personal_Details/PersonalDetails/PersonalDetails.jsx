@@ -210,6 +210,12 @@ const PersonalDetails = () =>{
 
         // if(altNumber && )
 
+        if(! refName){
+            let elem = document.getElementById('refName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
         if(! refNumber){
             let elem = document.getElementById('refNumber');
             if(elem) showErrorOnUI(elem);
@@ -226,12 +232,6 @@ const PersonalDetails = () =>{
                 showErrorOnUI(elem);  
             }
 
-            return;
-        }
-
-        if(! refName){
-            let elem = document.getElementById('refName');
-            if(elem) showErrorOnUI(elem);
             return;
         }
 
@@ -456,6 +456,18 @@ const PersonalDetails = () =>{
         <h3>Reference details</h3>
         <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your immediate relation</p>
 
+        <div className="referenceName">
+            <p>Reference name</p>
+            <input type="text" 
+                id="refName"
+                value={refName ?? ""} 
+                onChange={(e)=> setRefName(e.target.value)} 
+                placeholder="Who should we call if you are unavailable?" 
+                required 
+            />
+            <span className="fieldError">This field can't be empty.</span>
+        </div>
+
         <div className="referenceNumber">
             <p>Reference contact number</p>
             <input 
@@ -464,30 +476,18 @@ const PersonalDetails = () =>{
                 inputMode="numeric" 
                 onChange={(e)=> numberChange(e, "referenceNumber")} 
                 value={refNumber ?? ""} 
-                placeholder="Enter reference contact number" 
+                placeholder="Mobile number" 
              />
              <span className="fieldError">{refErrorMsg}</span>
         </div>
 
-        <div className="referenceName">
-            <p>Name of owner of number</p>
-            <input type="text" 
-                id="refName"
-                value={refName ?? ""} 
-                onChange={(e)=> setRefName(e.target.value)} 
-                placeholder="Enter name of owner of the number" 
-                required 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div>
-
         <div className="referenceRelation">
-            <p>Relation to owner of number</p>
+            <p>Relationship with reference</p>
             <input type="text" 
                 id="refRelation"
                 value={refRelation ?? ""} 
                 onChange={(e)=> setRefRelation(e.target.value)} 
-                placeholder="Enter relation to owner of the number" 
+                placeholder="What is your relationship with them?" 
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
