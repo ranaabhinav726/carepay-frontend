@@ -3,6 +3,7 @@ import './congratulation.scss'
 
 // import CongratsImg from '../../../assets/congrats.png'
 import CongratsGIF from '../../../assets/GIFs/Congratulations.gif'
+import CreditFair from '../../../assets/creditFair.png'
 import { useNavigate } from 'react-router-dom';
 import { showWrapper, hideWrapper } from "../../../environment/environment";
 import { env } from '../../../environment/environment';
@@ -79,11 +80,13 @@ const Congrats = () =>{
                 <BiRupee /> {amount}
             </div>
             <div style={{padding:"10px 16px", lineHeight:"150%", textAlign:"center", background:"#ECEBFF", margin:"2rem 0"}}>
-                Our lending partner CreditFair has sent
-                an SMS and email to your registered 
-                contact number <strong>{number}</strong> and email id <strong>{email}</strong>. 
-                Please check the message to complete 
-                your credit application process.
+                <p>Our lending partner CreditFair</p> 
+                <img src={CreditFair} style={{maxWidth:"40%", margin:"12px 0"}} alt="" />
+                <p>has sent an SMS and email to your registered 
+                contact number <strong>{number}</strong>.
+                </p>
+                <p>Please check the message to complete 
+                your credit application process.</p>
             </div>
             <div className='stepCard' style={{background:"#FAE1CD"}}>
                 <p style={{fontWeight:"700"}}>You are now just 4 quick steps away from your treatment.</p>
