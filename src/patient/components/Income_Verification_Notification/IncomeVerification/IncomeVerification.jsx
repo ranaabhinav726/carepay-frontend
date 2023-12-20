@@ -6,13 +6,15 @@ import './incomeVerification.scss'
 // import { env } from '../../../environment/environment';
 
 import Statement from '../../../assets/statement.png'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 import { BsArrowRight } from 'react-icons/bs'
 
 const IncomeVerification = () =>{
     const navigate = useNavigate();
-
+    const location = useLocation();
+    let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
+    console.log(isReVisitToUploadStatement)
 
     // let token = localStorage.getItem('access_token');
     // const config = {
@@ -55,7 +57,7 @@ const IncomeVerification = () =>{
         
         <div className="lowerSection">
             <img src={Statement} alt="" />
-            <button onClick={()=>navigate('/patient/FileUpload')} className='submit'>Proceed with upload</button>
+            <button onClick={()=>navigate('/patient/FileUpload', {state : {"reVisitToUploadStatement" : isReVisitToUploadStatement}})} className='submit'>Proceed with upload</button>
         </div>
 
         </main>

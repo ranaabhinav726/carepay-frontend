@@ -197,23 +197,30 @@ const EmploymentDetails = () =>{
                 if(elem) showErrorOnUI(elem);
                 return;
             }
+            if(specialChars.test(companyName)){
+                let elem = document.getElementById('companyName');
+                setErrorMsg("Special characters are not allowed.");
+                setTimeout(() => {
+                    setErrorMsg("This field can't be empty.");
+                }, 3000);
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
         }else{
             if(!businessName){ 
                 let elem = document.getElementById('businessName');
                 if(elem) showErrorOnUI(elem);
                 return;
             }
-        }
-
-        
-        if(specialChars.test(companyName)){
-            let elem = document.getElementById('companyName');
-            setErrorMsg("Special characters are not allowed.");
-            setTimeout(() => {
-                setErrorMsg("This field can't be empty.");
-            }, 3000);
-            if(elem) showErrorOnUI(elem);
-            return;
+            if(specialChars.test(businessName)){
+                let elem = document.getElementById('businessName');
+                setErrorMsg("Special characters are not allowed.");
+                setTimeout(() => {
+                    setErrorMsg("This field can't be empty.");
+                }, 3000);
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
         }
 
         if(!salary){ 

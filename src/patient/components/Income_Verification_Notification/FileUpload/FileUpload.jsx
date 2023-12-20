@@ -11,12 +11,15 @@ import axios from "axios";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
 
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const FileUpload = () =>{
 
     const navigate = useNavigate();
-
+    const location = useLocation();
+    let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
+    console.log(isReVisitToUploadStatement)
+    
     let token = localStorage.getItem('access_token');
     const fileConfig = {
         headers: {"Content-Type": "multipart/form-data"}
@@ -132,11 +135,11 @@ const FileUpload = () =>{
     }
 
     // let [objectState, setObjectState] = useState({});
-    let [fileURLs, setFileURLs] = useState([]);
-    let submitObj = {
-        file_path: [...fileURLs],
-        password: password
-    };
+    // let [fileURLs, setFileURLs] = useState([]);
+    // let submitObj = {
+    //     file_path: [...fileURLs],
+    //     password: password
+    // };
     
 
     function checkAssignedNbfcAndNavigate(){
@@ -146,26 +149,36 @@ const FileUpload = () =>{
         //     .then(response =>{
         //         console.log(response)
                 // if(response.data.message === "success"){
-                    axios
-                        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
-                        .then((response) => {
-                            if(response.data.message === "success"){
-                                let nbfc = response?.data?.data?.nbfcAssigned;
-                                if(nbfc === "PAYME"){
-                                    navigate("/patient/LoanDetails");
-                                }else{
-                                    navigate("/patient/CreditFairOffers");
-                                }
-                            }
-                        }).catch(error => {
-                            console.log(error);
-                            // navigate(-1)
-                        });
-                // }
-            // }).catch(error =>{
-            //     console.log(error)
-            //     // navigate(-1);
-            // })
+
+        if(isReVisitToUploadStatement === true){
+            axios.post(env.api_Url + "uploadBankDetailsCF?userId=" + userId)
+            .then(res=>{
+                if(res.data.message === "success"){
+                    navigate("/patient/WaitingForApproval");
+                }
+            }).catch(err=>{
+                console.log(err)
+            })
+        }else{
+            navigate("/patient/CreditFairOffers");
+        }
+        
+        // axios
+        //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+        //     .then((response) => {
+        //         if(response.data.message === "success"){
+        //             let nbfc = response?.data?.data?.nbfcAssigned;
+                    
+        //         }
+        //     }).catch(error => {
+        //         console.log(error);
+        //         // navigate(-1)
+        //     });
+        // }
+        // }).catch(error =>{
+        //     console.log(error)
+        //     // navigate(-1);
+        // })
     }
 
     async function uploadFiles(){

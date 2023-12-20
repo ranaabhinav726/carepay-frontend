@@ -141,10 +141,10 @@ const CreditFairOffers = () =>{
                                                 if(response.data.message === "success"){
                                                     navigate('/patient/WaitingForApproval')
                                                 }else{
-                                                    if(response.data.data === "It seems like it has been less than 3 months since you applied to Credit Fair . We'll be happy to serve you after 3 Month"){
+                                                    if(response?.data?.data === "It seems like it has been less than 3 months since you applied to Credit Fair . We'll be happy to serve you after 3 Month"){
                                                         setErrorMsg("Please apply after 3 months");
                                                     }else{
-                                                        setErrorMsg("An error has occured, please try again.");
+                                                        setErrorMsg(response?.data?.data || "An error has occured, please try again.");
                                                     }
                                                     apiErrorHandler();
                                                 }
