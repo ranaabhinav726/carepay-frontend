@@ -2,6 +2,8 @@ import Header from "../../Header/Header";
 
 import { env } from "../../../environment/environment";
 import Waiting from '../../../assets/waiting.png'
+import Statement from '../../../assets/statement.png' 
+import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -67,8 +69,8 @@ function WaitingForApproval(){
             hideWrapper(ref.current)
     }
 
-    function navigateBack(){
-        navigate("/patient/BankDetails", {state : {"reVisitToUploadStatement" : true}})
+    function navigateBackToFileUpload(){
+        navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
     }
     return(
         <main className="waitingForApproval">
@@ -84,15 +86,24 @@ function WaitingForApproval(){
             {!uploadedFiles && 
                 <div style={{
                     background:"#ECEBFF",
-                    textAlign:"center",
-                    padding:"10px",
+                    padding:"10px 16px",
                     borderRadius:"4px",
                     color:"#514c9f",
                     marginTop:"1rem",
-                    whiteSpace:"normal"
-                }}>
-                    {"To share Bank details, Account statement and KYC documents (if required)  "}
-                    <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span>
+                    display:"flex",
+                    justifyContent:"space-between",
+                    alignItems:"center",
+                    cursor:"pointer"
+                }}
+                onClick={()=>navigateBackToFileUpload()}
+                >
+                    <img src={Statement} alt="" style={{height:"48px"}} />
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        <span>Share Bank Statement</span>
+                        <span>To increase your chance of credit approval</span>
+                    </div>
+                    <MdOutlineKeyboardDoubleArrowRight style={{fontSize:"36px"}} />
+                    {/* <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span> */}
                 </div>
             }
             <button className="submit" onClick={()=>checkStatus()}>Check Status</button>

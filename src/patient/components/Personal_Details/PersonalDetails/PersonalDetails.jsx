@@ -34,9 +34,9 @@ const PersonalDetails = () =>{
     const navigate = useNavigate();
     
     
+    const [fullName, setFullName] = useState("")
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
-    const [fullName, setFullName] = useState("")
     // const [fatherName, setFatherName] = useState("")
     const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
