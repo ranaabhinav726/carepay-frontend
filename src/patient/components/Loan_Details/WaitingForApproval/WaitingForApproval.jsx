@@ -97,7 +97,7 @@ function WaitingForApproval(){
                 }}
                 onClick={()=>navigateBackToFileUpload()}
                 >
-                    <img src={Statement} alt="" style={{height:"48px"}} />
+                    <img src={Statement} alt="" style={{height:"48px", marginRight:"10px"}} />
                     <div style={{display:"flex", flexDirection:"column"}}>
                         <span>Share Bank Statement</span>
                         <span>To increase your chance of credit approval</span>
