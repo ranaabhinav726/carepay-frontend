@@ -207,7 +207,7 @@ const EnterOTP = () =>{
                                         break;
                                     case "Occupation": 
                                     let loanAmount = await getLoanAmount();
-                                    if(loanAmount <= 75000){
+                                    if(loanAmount <= 300001){
                                         path = "CreditFairOffers";
                                     }else{
                                         path = "BankDetails";
@@ -220,7 +220,7 @@ const EnterOTP = () =>{
                                     //                 let data = response?.data?.data;
                                     //                 if(!! data){
                                     //                     let loanAmount = parseInt(data.loanAmount)
-                                    //                     if(loanAmount <= 75000){
+                                    //                     if(loanAmount <= 300001){
                                     //                         path = "CreditFairOffers";
                                     //                     }else{
                                     //                         path = "BankDetails";

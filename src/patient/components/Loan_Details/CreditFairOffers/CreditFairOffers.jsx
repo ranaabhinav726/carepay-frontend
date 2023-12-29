@@ -126,7 +126,7 @@ const CreditFairOffers = () =>{
     }, [offers, selected, renderAllProducts])
 
     function checkLoanAmountAndNavigate(){
-        if(loanAmt <= 75000){
+        if(loanAmt <= 300001){
             navigate('/patient/BankDetails', {state : {"reVisitToUploadStatement" : true}})
         }else{
             navigate('/patient/WaitingForApproval')
@@ -169,7 +169,7 @@ const CreditFairOffers = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     // await handleNavigation();
-                    // if(loanAmt <= 75000){
+                    // if(loanAmt <= 300001){
                         await axios
                             .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
                             .then(response =>{

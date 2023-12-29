@@ -56,7 +56,7 @@ function WaitingForApproval(){
                     }
                     else if(data.loan_status === "110"){            // if loan is rejected
                         let loanAmt = parseInt(data.amount);
-                        if(loanAmt <= 75000){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
+                        if(loanAmt <= 300001){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
                             navigate("/patient/BankDetails");       // Navigate to collect Bank details.
                         }else{                                      // if loan amount is greater than 75k then bank details have already been collected
                             navigate("/patient/LoanDetails");   // Enter Payms's flow

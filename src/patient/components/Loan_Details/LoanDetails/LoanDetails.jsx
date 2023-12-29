@@ -152,7 +152,7 @@ const LoanDetails = () =>{
         //         console.log(response)
         //         if(response.data.message === "success"){
         //             // await handleNavigation();
-        //             if(loanAmt <= 75000){
+        //             if(loanAmt <= 300001){
         //                 await axios
         //                     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
         //                     .then(response =>{

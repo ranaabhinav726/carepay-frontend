@@ -329,7 +329,7 @@ const EmploymentDetails = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
 
-                    if(loanAmt <= 75000){
+                    if(loanAmt <= 300001){
                         navigate('/patient/CreditFairOffers');
                     }else{
                         navigate('/patient/BankDetails');
