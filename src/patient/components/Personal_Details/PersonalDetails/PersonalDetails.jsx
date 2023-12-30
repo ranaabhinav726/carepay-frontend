@@ -33,7 +33,8 @@ const PersonalDetails = () =>{
     // const data = useData();
     const navigate = useNavigate();
     
-    
+    let fullnameInstorage = localStorage.getItem("fullName");
+
     const [fullName, setFullName] = useState("")
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
@@ -63,6 +64,7 @@ const PersonalDetails = () =>{
 
     useEffect(()=>{
         setNumber(localStorage.getItem('phoneNumber'))
+        if(fullnameInstorage) setFullName(fullnameInstorage);
         ref.current = document.getElementById('animation-wrapper');
 
         if(!!userId){
@@ -366,6 +368,7 @@ const PersonalDetails = () =>{
             <span id="panFormat">Please enter correct PAN number</span>
         </div>
 
+        {!fullnameInstorage && 
         <div className="fullName">
             <p>Full name (as per PAN)</p>
             <input type="text" 
@@ -377,7 +380,7 @@ const PersonalDetails = () =>{
             />
             <p style={{marginTop:"10px", marginBottom:"20px", fontSize:"14px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
             <span className="fieldError">This field can't be empty.</span>
-        </div>
+        </div>}
 
         <div className="gender" id="gender">
             <p>Gender</p>
