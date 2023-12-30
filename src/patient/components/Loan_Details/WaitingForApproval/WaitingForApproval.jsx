@@ -40,34 +40,7 @@ function WaitingForApproval(){
         })
     }
 
-    async function checkStatus(){
-        showWrapper(ref.current)
-        await axios
-        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
-            .then(async(response) => {
-                console.log(response)
-                if(response.data.message === "success"){
-                    // console.log(response)
-                    let data = response?.data?.data;
-                    if(data.loan_status === "105"){
-                        navigate('/patient/congrats')
-                    }else if(data.loan_status === "107"){
-                        navigate('/patient/loanAppSuccessful')
-                    }
-                    else if(data.loan_status === "110"){            // if loan is rejected
-                        let loanAmt = parseInt(data.amount);
-                        if(loanAmt <= 300001){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
-                            navigate("/patient/BankDetails");       // Navigate to collect Bank details.
-                        }else{                                      // if loan amount is greater than 75k then bank details have already been collected
-                            navigate("/patient/LoanDetails");   // Enter Payms's flow
-                        }
-                    }
-                }
-            }).catch(error =>{
-                console.log(error)
-            })
-            hideWrapper(ref.current)
-    }
+    
 
     function navigateBackToFileUpload(){
         navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
@@ -106,7 +79,7 @@ function WaitingForApproval(){
                     {/* <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span> */}
                 </div>
             }
-            <button className="submit" onClick={()=>checkStatus()}>Check Status</button>
+            <button className="submit" onClick={()=>navigate('/patient/ChechkingStatus')}>Check Status</button>
             <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
         </main>
     )

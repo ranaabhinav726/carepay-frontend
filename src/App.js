@@ -104,6 +104,7 @@ import PrivacyPolicy from './website/pages/PrivacyPolicy';
 import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
 import { useEffect } from 'react';
 import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
+import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
 
 
 
@@ -134,6 +135,7 @@ function App() {
         <Route path='/patient/LoanDetails' element={<LoanDetails />} />
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
+        <Route path='/patient/ChechkingStatus' element={<ChechkingStatus />} />
 
 
         <Route path='/patient/FetchingLoanLimit' element={<FetchingLoanLimit />} />
