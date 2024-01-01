@@ -24,6 +24,8 @@ const CreditFairOffers = () =>{
     });
 
     const [offers, setOffers] = useState([]);
+    const [offerCards, setOfferCards] = useState([]);
+    const [renderAllProducts, setRenderAllProducts] = useState(false);
 
     const [apiError, setApiError] = useState(false);
     let ref = useRef(0);   
@@ -53,14 +55,19 @@ const CreditFairOffers = () =>{
 
     useEffect(()=>{
         if(!! doctorId){
-            axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
+            // axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
+            axios.get(env.api_Url + "getOffersAssigned" + "?doctorId=" + doctorId)
             .then(response =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     if(response?.data?.data === "No Offers Found"){
                         setOffers([]);
                     }else{
-                        setOffers(response?.data?.data)
+                        let offers = response?.data?.data;
+                        let sortedOffers = offers.sort(function(a, b) {
+                                                return a.totalEmi - b.totalEmi;
+                                            });
+                        setOffers(sortedOffers)
                     }
                 }
             }).catch(error =>{
@@ -78,28 +85,65 @@ const CreditFairOffers = () =>{
         setSelected({
             "cardName" : "card-1",
             "productId": offers[0].productId,
-            "tenure"   : offers[0].totalEmi,
-            "internalProductId" : offers[0].internalProductId
+            "tenure"   : offers[0].totalEmi
         })
         // console.log(offers[0].productId)
     }, [offers])
 
+    let minCount = Math.min(offers?.length, 3);
 
-    let offerCards = offers.map((offer, idx) =>{
-        return (
-                <OfferCard 
-                    cardName={`card-${idx+1}`} 
-                    offerDetails={offer} 
-                    loanAmount={loanAmt} 
-                    selected={selected} 
-                    setSelected={setSelected} 
-                    key={idx} 
-                />
+    useEffect(()=>{
+        let tempOfferCards = [];
+
+        if(renderAllProducts === false){
+            for(let idx = 0; idx<minCount; idx++){
+                tempOfferCards.push(
+                    <OfferCard 
+                        cardName={`card-${idx+1}`} 
+                        offerDetails={offers[idx]} 
+                        loanAmount={loanAmt} 
+                        selected={selected} 
+                        setSelected={setSelected} 
+                        key={idx} 
+                    />
                 )
-    })
+            }
+        }else{
+            tempOfferCards = offers.map((offer, idx) =>{
+                return (
+                        <OfferCard 
+                            cardName={`card-${idx+1}`} 
+                            offerDetails={offer} 
+                            loanAmount={loanAmt} 
+                            selected={selected} 
+                            setSelected={setSelected} 
+                            key={idx} 
+                        />
+                        )
+            })
+        }
+        setOfferCards(tempOfferCards)
+    }, [offers, selected, renderAllProducts])
 
+    function checkLoanAmountAndNavigate(){
+        if(loanAmt <= 300001){
+            navigate('/patient/BankDetails', {state : {"reVisitToUploadStatement" : true}})
+        }else{
+            navigate('/patient/WaitingForApproval')
+        }
+    }
 
     async function submitLoanData(){
+        let creditFairProductId;
+        await axios
+            .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId)
+            .then(async(res)=>{
+                creditFairProductId = await res.data.data;
+                if(creditFairProductId === "Product Not configured"){
+                    creditFairProductId = 11111;
+                }
+                console.log(creditFairProductId)
+            })
 
         let submitObj = {
             "userId": userId,
@@ -107,8 +151,8 @@ const CreditFairOffers = () =>{
             "loanAmount": loanAmt,
             "loanReason": loanPurpose,
             "loanEMI": selected.tenure,
-            "productId": selected.productId,
-            "internalProductId" : selected.internalProductId
+            "productId": creditFairProductId, // 5 digit
+            "internalProductId" : selected.productId // 32chars
         }
 
         if(!(submitObj.loanEMI && submitObj.productId)){
@@ -125,13 +169,13 @@ const CreditFairOffers = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     // await handleNavigation();
-                    // if(loanAmt <= 75000){
+                    // if(loanAmt <= 300001){
                         await axios
                             .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
                             .then(response =>{
                                 console.log(response)
                                 if(response.data.message === "success"){
-                                    navigate('/patient/WaitingForApproval')
+                                    checkLoanAmountAndNavigate();
                                 }else{
                                     setTimeout(async ()=>{
                                         await axios
@@ -139,7 +183,7 @@ const CreditFairOffers = () =>{
                                             .then(response =>{
                                                 console.log(response)
                                                 if(response.data.message === "success"){
-                                                    navigate('/patient/WaitingForApproval')
+                                                    checkLoanAmountAndNavigate();
                                                 }else{
                                                     if(response?.data?.data === "It seems like it has been less than 3 months since you applied to Credit Fair . We'll be happy to serve you after 3 Month"){
                                                         setErrorMsg("Please apply after 3 months");
@@ -151,7 +195,7 @@ const CreditFairOffers = () =>{
                                             }).catch( () =>{
                                                 apiErrorHandler();
                                             })
-                                    }, 500)
+                                    }, 1000)
                                 }
                             }).catch(() =>{
                                 apiErrorHandler();
@@ -238,6 +282,7 @@ const CreditFairOffers = () =>{
                 <OfferCard />
                 <OfferCard /> */}
 
+                {!renderAllProducts && <button className="submit lite" onClick={()=>setRenderAllProducts(true)}>Show more options</button>}
 
                 <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
 
@@ -267,9 +312,9 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
         let obj = {
             "cardName" : cardName,
             "productId": offerDetails?.productId,
-            "tenure"   : months,
-            "internalProductId" : offerDetails?.internalProductId
+            "tenure"   : months
         }
+        console.log(obj)
         setSelected(obj)
     }
 
@@ -293,13 +338,13 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                 </div>
                 <div className="offerContent">
                     <div className="offerContentLeft">
-                        <span className='offerCardSpan'>Final credit amount</span>
+                        {/* <span className='offerCardSpan'>Final credit amount</span> */}
                         <span className='offerCardSpan'>Processing fees</span>
                         <span className='offerCardSpan'>Interest rate</span>
                         <span className='offerCardSpan'>Advance EMI(s)</span>
                     </div>
                     <div className="offerContentRight">
-                        <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {loanAmount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                        {/* <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {loanAmount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span> */}
                         <span className='offerCardSpan'>{pf}</span>
                         <span className='offerCardSpan'>{interest} %</span>
                         <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>

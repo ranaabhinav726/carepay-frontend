@@ -2,6 +2,8 @@ import Header from "../../Header/Header";
 
 import { env } from "../../../environment/environment";
 import Waiting from '../../../assets/waiting.png'
+import Statement from '../../../assets/statement.png' 
+import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -38,37 +40,10 @@ function WaitingForApproval(){
         })
     }
 
-    async function checkStatus(){
-        showWrapper(ref.current)
-        await axios
-        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
-            .then(async(response) => {
-                console.log(response)
-                if(response.data.message === "success"){
-                    // console.log(response)
-                    let data = response?.data?.data;
-                    if(data.loan_status === "105"){
-                        navigate('/patient/congrats')
-                    }else if(data.loan_status === "107"){
-                        navigate('/patient/loanAppSuccessful')
-                    }
-                    else if(data.loan_status === "110"){            // if loan is rejected
-                        let loanAmt = parseInt(data.amount);
-                        if(loanAmt <= 75000){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
-                            navigate("/patient/BankDetails");       // Navigate to collect Bank details.
-                        }else{                                      // if loan amount is greater than 75k then bank details have already been collected
-                            navigate("/patient/LoanDetails");   // Enter Payms's flow
-                        }
-                    }
-                }
-            }).catch(error =>{
-                console.log(error)
-            })
-            hideWrapper(ref.current)
-    }
+    
 
-    function navigateBack(){
-        navigate("/patient/BankDetails", {state : {"reVisitToUploadStatement" : true}})
+    function navigateBackToFileUpload(){
+        navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
     }
     return(
         <main className="waitingForApproval">
@@ -84,18 +59,27 @@ function WaitingForApproval(){
             {!uploadedFiles && 
                 <div style={{
                     background:"#ECEBFF",
-                    textAlign:"center",
-                    padding:"10px",
+                    padding:"10px 16px",
                     borderRadius:"4px",
                     color:"#514c9f",
                     marginTop:"1rem",
-                    whiteSpace:"normal"
-                }}>
-                    {"To share Bank details, Account statement and KYC documents (if required)  "}
-                    <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span>
+                    display:"flex",
+                    justifyContent:"space-between",
+                    alignItems:"center",
+                    cursor:"pointer"
+                }}
+                onClick={()=>navigateBackToFileUpload()}
+                >
+                    <img src={Statement} alt="" style={{height:"48px", marginRight:"10px"}} />
+                    <div style={{display:"flex", flexDirection:"column"}}>
+                        <span>Share Bank Statement</span>
+                        <span>To increase your chance of credit approval</span>
+                    </div>
+                    <MdOutlineKeyboardDoubleArrowRight style={{fontSize:"36px"}} />
+                    {/* <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span> */}
                 </div>
             }
-            <button className="submit" onClick={()=>checkStatus()}>Check Status</button>
+            <button className="submit" onClick={()=>navigate('/patient/ChechkingStatus')}>Check Status</button>
             <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
         </main>
     )

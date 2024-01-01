@@ -2,6 +2,7 @@ import Header from '../../Header/Header';
 import './fileUpload.scss'
 
 import PDFIcon from '../../../assets/PDFIcon.png'
+import animationData from '../../../assets/GIFs/Comp 1.json'
 
 import { AiFillCheckCircle, AiFillEye, AiFillEyeInvisible, AiFillInfoCircle, AiOutlineClose } from 'react-icons/ai'
 
@@ -12,6 +13,7 @@ import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environme
 
 import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import BottomPopOverModal from '../../utility/BottomPopOverModal';
 
 const FileUpload = () =>{
 
@@ -38,6 +40,8 @@ const FileUpload = () =>{
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
+
+    const [showPopOver, setShowPopOver] = useState(false);
 
     let userId = localStorage.getItem("userId");
 
@@ -142,7 +146,7 @@ const FileUpload = () =>{
     // };
     
 
-    function checkAssignedNbfcAndNavigate(){
+    async function checkAssignedNbfcAndNavigate(){
         //call initateFlow -> customer , if success, below code else same screen...
         // axios
         //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
@@ -151,12 +155,15 @@ const FileUpload = () =>{
                 // if(response.data.message === "success"){
 
         if(isReVisitToUploadStatement === true){
-            axios.post(env.api_Url + "uploadBankDetailsCF?userId=" + userId)
+            showWrapper(ref.current)
+            await axios.post(env.api_Url + "uploadDocumentsDetailCF?userId=" + userId)
             .then(res=>{
                 if(res.data.message === "success"){
+                    hideWrapper(ref.current)
                     navigate("/patient/WaitingForApproval");
                 }
             }).catch(err=>{
+                hideWrapper(ref.current)
                 console.log(err)
             })
         }else{
@@ -186,7 +193,7 @@ const FileUpload = () =>{
 
         if(prevFiles.length > 0 && files.length === 0){
             // navigate('/patient/KycVerification');
-            checkAssignedNbfcAndNavigate();
+            setShowPopOver(true);
             return;
         }
         if(!password){
@@ -227,7 +234,7 @@ const FileUpload = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     // navigate('/patient/KycVerification');
-                    checkAssignedNbfcAndNavigate();
+                    setShowPopOver(true);
                 }else{
                     apiErrorHandler();
                 }
@@ -306,7 +313,7 @@ const FileUpload = () =>{
     }
     return(
     <>
-        <main className='fileUpload'>
+        <main className='fileUpload' style={{position:"relative"}}>
         <Header progressbarDisplay="block" progress="91" canGoBack='/patient/IncomeVerification' />
         <h3>Account statement upload</h3>
             
@@ -376,7 +383,7 @@ const FileUpload = () =>{
         }
 
         <input type="file" name="" id="filePicker" accept='.pdf' onChange={(e)=>uploadHandler(e)} />
-
+        <BottomPopOverModal searchAnimation={animationData} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAssignedNbfcAndNavigate} />
         </main>
     </>
     )
