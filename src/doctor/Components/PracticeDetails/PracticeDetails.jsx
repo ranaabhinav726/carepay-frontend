@@ -316,10 +316,12 @@ const PracticeDetails = () =>{
                     value={entityType}
                     placeholder="Enter type of business entity" 
                 >
-                    <option>Private Limited Company</option>
-                    <option>Limited Liability Company (LLP)</option>
-                    <option>Partnership Firm</option>
-                    <option>Sole Proprietorship</option>
+                    <option value="Private Limited Company">Private Limited Company</option>
+                    <option value="Limited Liability Company (LLP)">Limited Liability Company (LLP)</option>
+                    <option value="Partnership Firm">Partnership Firm</option>
+                    <option value="Sole Proprietorship">Sole Proprietorship</option>
+                    <option value="Multispeciality/Charitable Trust">Multispeciality/Charitable Trust</option>
+                    <option value="HUF/ Joint Hindu Undivided Family">HUF/ Joint Hindu Undivided Family</option>
                 </select>
             </div>
 
