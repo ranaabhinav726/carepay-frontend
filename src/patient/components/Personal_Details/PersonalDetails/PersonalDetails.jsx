@@ -73,7 +73,7 @@ const PersonalDetails = () =>{
                 if(response.data.message === "success"){
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
-                    setFullName(data?.firstName);
+                    if(data?.firstName != null)setFullName(data?.firstName);
                     // setFatherName(data?.fatherName);
                     setNameOnPan(data?.panCardName)
                     setNumber(data?.mobileNumber)
