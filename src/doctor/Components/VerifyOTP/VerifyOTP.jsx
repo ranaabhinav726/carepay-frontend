@@ -122,15 +122,15 @@ const VerifyOTP = () =>{
       await axios.get(env.api_Url + "getDoctorDetailsByPhoneNumber?mobileNo=" + phoneNumber)
       .then(async(response)=>{
         let data = await response?.data?.data;
-        if(data != null){
+        if(data !== null){
           let doctorId = response?.data?.data?.doctorId;
           if(doctorId !== null){
             localStorage.setItem("D-doctorId", doctorId);
-          }else{
-            let existingDoctorId = localStorage.getItem("D-doctorId");
-            if(!! existingDoctorId){
-              localStorage.removeItem("D-doctorId");
-            }
+          }
+        }else{
+          let existingDoctorId = localStorage.getItem("D-doctorId");
+          if(!! existingDoctorId){
+            localStorage.removeItem("D-doctorId");
           }
         }
     })
