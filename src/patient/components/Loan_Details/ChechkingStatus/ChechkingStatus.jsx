@@ -36,7 +36,7 @@ export default function ChechkingStatus(){
             }).catch(error =>{
                 console.log(error)
             })
-    }, 10000);
+    }, 8000);
     return(
         <main className="screenContainer">
             <Header progressBar="hidden" />
