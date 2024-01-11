@@ -166,6 +166,14 @@ const PersonalDetails = () =>{
     //     }, 1000)
     // }
 
+    const onlyCharRegex = new RegExp("^[a-zA-Z]*$");
+    function onlyCharacters(val, setter){
+        if(onlyCharRegex.test(val)){
+            setter(val);
+        }
+    }
+
+
     async function handleForm(){
         // if(!(panNumber && fullName && gender && email && dob)){ // All feilds must have something
         //     return;
@@ -333,9 +341,10 @@ const PersonalDetails = () =>{
         if(val.length > 10) return
         setPanNumber(val);
     }
-
+    const numericOnlyRegex = new RegExp('^[0-9]*$');
     function numberChange(e, name){
         let val = e.target.value;
+        if(! numericOnlyRegex.test(val)) return;
         if(val.length > 10) return;
         if(name === "altNumber"){
             setAltNumber(val);
@@ -460,7 +469,7 @@ const PersonalDetails = () =>{
             <input type="text" 
                 id="refName"
                 value={refName ?? ""} 
-                onChange={(e)=> setRefName(e.target.value)} 
+                onChange={(e)=> onlyCharacters(e.target.value, setRefName)} 
                 placeholder="Who should we call if you are unavailable?" 
                 required 
             />
@@ -471,7 +480,7 @@ const PersonalDetails = () =>{
             <p>Reference contact number</p>
             <input 
                 id="refNumber"
-                type="number" 
+                type="text" 
                 inputMode="numeric" 
                 onChange={(e)=> numberChange(e, "referenceNumber")} 
                 value={refNumber ?? ""} 
