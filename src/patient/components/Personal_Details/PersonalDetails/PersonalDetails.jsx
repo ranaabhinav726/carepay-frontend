@@ -379,7 +379,7 @@ const PersonalDetails = () =>{
             <input type="text" 
                 id="fullName"
                 value={fullName ?? ""} 
-                onChange={(e)=> setFullName(e.target.value)} 
+                onChange={(e)=> onlyCharacters(e.target.value, setFullName)}  
                 placeholder="Enter your full name" 
                 required 
             />
