@@ -462,7 +462,7 @@ const PersonalDetails = () =>{
         </div>
         
         <h3>Reference details</h3>
-        <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your immediate relation</p>
+        <p style={{marginBottom:"1.5rem"}}>Note: The reference has to be your immediate relative.</p>
 
         <div className="referenceName">
             <p>Reference name</p>
@@ -490,14 +490,26 @@ const PersonalDetails = () =>{
         </div>
 
         <div className="referenceRelation">
-            <p>Relationship with reference</p>
-            <input type="text" 
+            <p>Relationship with the reference contact</p>
+            {/* <input type="text" 
                 id="refRelation"
                 value={refRelation ?? ""} 
                 onChange={(e)=> setRefRelation(e.target.value)} 
                 placeholder="What is your relationship with them?" 
                 required 
-            />
+            /> */}
+            <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
+                <span style={{minWidth:"max-content"}}>Reference is my:</span>
+                <select name="refRelation" id="refRelation" style={{marginBottom:"0"}} value={refRelation} onChange={(e)=>setRefRelation(e.target.value)}>
+                    <option value={"father"}>Father</option>
+                    <option value={"mother"}>Mother</option>
+                    <option value={"brother"}>Brother</option>
+                    <option value={"sister"}>Sister</option>
+                    <option value={"spouse"}>Spouse</option>
+                    <option value={"son"}>Son</option>
+                    <option value={"daughter"}>Daughter</option>
+                </select>
+            </div>
             <span className="fieldError">This field can't be empty.</span>
         </div>
 

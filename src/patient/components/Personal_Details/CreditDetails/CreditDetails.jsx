@@ -262,7 +262,7 @@ const CreditDetails = () => {
                 <span className="fieldError">Please fill name of the patient</span>
             </div>
             <div className="inputGroup">
-                <p>Your relationship to the patient</p>
+                <p>Relationship with patient</p>
                 {/* <input 
                     id="relation"
                     type="text" 
@@ -270,13 +270,18 @@ const CreditDetails = () => {
                     placeholder="Enter your relation here"
                     onChange={(e)=>setRelation(e.target.value)}  
                 /> */}
-                <select name="relation" id="relation" value={relation} onChange={(e)=>setRelation(e.target.value)}>
-                    <option value={"father"}>Father</option>
-                    <option value={"mother"}>Mother</option>
-                    <option value={"brother"}>Brother</option>
-                    <option value={"sister"}>Sister</option>
-                    <option value={"spouse"}>Spouse</option>
-                </select>
+                <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
+                    <span style={{minWidth:"max-content"}}>Patient is my:</span>
+                    <select name="relation" id="relation" style={{marginBottom:"0"}} value={relation} onChange={(e)=>setRelation(e.target.value)}>
+                        <option value={"father"}>Father</option>
+                        <option value={"mother"}>Mother</option>
+                        <option value={"brother"}>Brother</option>
+                        <option value={"sister"}>Sister</option>
+                        <option value={"spouse"}>Spouse</option>
+                        <option value={"son"}>Son</option>
+                        <option value={"daughter"}>Daughter</option>
+                    </select>
+                </div>
                 <span className="fieldError">Please tell your relation to the patient</span>
             </div>
         </>
