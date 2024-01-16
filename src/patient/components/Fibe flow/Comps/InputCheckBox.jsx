@@ -15,9 +15,10 @@ export default function InputCheckBox({name, id, label, value, setValue}){
                 name={name} 
                 id={id} 
                 style={{
-                    height:"20px", 
-                    width:"20px",
-                    accentColor:"#514C9F"
+                    minHeight:"16px", 
+                    minWidth:"16px",
+                    accentColor:"#514C9F",
+                    borderRadius:"4px"
                 }} 
                 checked={!!value}
                 onChange={(e)=>{setValue(e.target.checked)}}

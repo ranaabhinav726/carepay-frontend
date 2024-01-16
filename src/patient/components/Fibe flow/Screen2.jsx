@@ -12,6 +12,7 @@ export default function Screen2(){
 
     const [number, ] = useState(localStorage.getItem("phoneNumber"));
     const [otp, setOtp] = useState();
+    const [errorMsg, setErrorMsg] = useState("");
 
 
     const [resendTime, setResendTime] = useState(45);
@@ -66,6 +67,11 @@ export default function Screen2(){
                         localStorage.setItem("userId", userId);
                     }
                     navigate("/patient/screen3");
+                }else{
+                    setErrorMsg(response?.data?.data);
+                    setTimeout(() => {
+                        setErrorMsg("");
+                    }, 3000);
                 }
                 hideWaitingModal();
             }).catch(error =>{
@@ -111,6 +117,7 @@ export default function Screen2(){
                 value={otp} 
                 setValue={setOtp} 
             />
+            {errorMsg && <p style={{marginTop:"1.5rem", color:"red"}}>{errorMsg}</p>}
             <div style={{display:"flex", justifyContent:"flex-end"}}>
                 {resendTime === 0 ?
                     <p onClick={()=>resendOtp()} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline", marginTop:"1rem"}}>Resend OTP</p>

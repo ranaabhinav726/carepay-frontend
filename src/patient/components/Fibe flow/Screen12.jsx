@@ -49,7 +49,7 @@ export default function Screen12(){
                 ₹ {amount.toLocaleString('en-IN',{maximumFractionDigits: 2})}
             </div>
             <div className='stepCard' style={{background:"#FAE1CD", marginTop:'2rem'}}>
-                <p style={{fontWeight:"700"}}>You are now just 4 quick steps away from your treatment.</p>
+                <p style={{fontWeight:"700"}}>You are now just 5 quick steps away from your treatment.</p>
                 <ul>
                     <li><div style={{padding: "3px 7px"}} className='encircle'>1</div><span className='v-line'></span><div className="stepName">Personal details <span><MdOutlineElectricBolt className='boltIcon' /> Takes 20 seconds</span></div></li>
                     <li><div className='encircle'>2</div><span className='v-line'></span><div className="stepName">KYC <span><MdOutlineElectricBolt className='boltIcon' /> Takes 30 seconds</span></div></li>
