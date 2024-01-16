@@ -9,7 +9,7 @@ const SearchingOffers = () =>{
     useEffect(() => {
         lottie.loadAnimation({
           container: document.querySelector("#searchAnimation"),
-          animationData: animationData,
+          // animationData: animationData,
           renderer: "canvas"
         });
       }, []);
