@@ -166,7 +166,8 @@ const PersonalDetails = () =>{
     //     }, 1000)
     // }
 
-    const onlyCharRegex = new RegExp("^[a-zA-Z]*$");
+    // const onlyCharRegex = new RegExp("^[a-zA-Z\\s]*$");
+    const onlyCharRegex = /^[a-zA-Z\s]*$/;
     function onlyCharacters(val, setter){
         if(onlyCharRegex.test(val)){
             setter(val);

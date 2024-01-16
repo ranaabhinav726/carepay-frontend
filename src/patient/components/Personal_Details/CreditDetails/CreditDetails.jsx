@@ -61,6 +61,13 @@ const CreditDetails = () => {
         }
     }, [])
     
+    const onlyCharRegex = /^[a-zA-Z\s]*$/;
+    function onlyCharacters(val, setter){
+        if(onlyCharRegex.test(val)){
+            setter(val);
+        }
+    }
+
     async function verifyAndNavigate(){
         if(! canSubmit){
             return;
@@ -215,7 +222,8 @@ const CreditDetails = () => {
                 type="text" 
                 value={fullName} 
                 placeholder="Enter your name"
-                onChange={(e)=>setFullName(e.target.value)}  
+                // onChange={(e)=>setFullName(e.target.value)}  
+                onChange={(e)=> onlyCharacters(e.target.value, setFullName)}  
                 style={{marginBottom:"10px"}}
             />
             <span className="fieldError">Please enter your full name</span>
@@ -257,7 +265,8 @@ const CreditDetails = () => {
                     type="text" 
                     value={patientName} 
                     placeholder="Enter name of the patient here"
-                    onChange={(e)=>setPatientName(e.target.value)}  
+                    // onChange={(e)=>setPatientName(e.target.value)}  
+                    onChange={(e)=> onlyCharacters(e.target.value, setPatientName)}  
                 />
                 <span className="fieldError">Please fill name of the patient</span>
             </div>
