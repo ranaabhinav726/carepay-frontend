@@ -22,7 +22,7 @@ const FileUpload = () =>{
     let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
     console.log(isReVisitToUploadStatement)
     
-    let token = localStorage.getItem('access_token');
+    // let token = localStorage.getItem('access_token');
     const fileConfig = {
         headers: {"Content-Type": "multipart/form-data"}
     };

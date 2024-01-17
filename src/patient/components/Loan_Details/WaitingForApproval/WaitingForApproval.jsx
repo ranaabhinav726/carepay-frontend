@@ -90,7 +90,7 @@ function WaitingForApproval(){
                     >
                         <img src={Statement} alt="" style={{height:"48px", marginRight:"10px"}} />
                         <div style={{display:"flex", flexDirection:"column"}}>
-                            <span>Share Bank Statement</span>
+                            <span style={{fontWeight:"700"}}>Share Bank Statement</span>
                             <span>To increase your chance of credit approval</span>
                         </div>
                         <MdOutlineKeyboardDoubleArrowRight style={{fontSize:"36px"}} />
