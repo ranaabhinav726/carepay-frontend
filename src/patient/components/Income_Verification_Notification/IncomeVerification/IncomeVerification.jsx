@@ -6,15 +6,16 @@ import './incomeVerification.scss'
 // import { env } from '../../../environment/environment';
 
 import Statement from '../../../assets/statement.png'
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import { BsArrowRight } from 'react-icons/bs'
+// import { BsArrowRight } from 'react-icons/bs'
 
 const IncomeVerification = () =>{
     const navigate = useNavigate();
     const location = useLocation();
     let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
-    console.log(isReVisitToUploadStatement)
+    let isNtc = location?.state?.isNtc;
+    console.log(isReVisitToUploadStatement, isNtc);
 
     // let token = localStorage.getItem('access_token');
     // const config = {
@@ -52,7 +53,11 @@ const IncomeVerification = () =>{
         </div> */}
         <br />
         <div className="upperSection">
-            <p className="note">To verify your income, we need to access your bank statement for the latest 3 months. This data sharing is completely secured and encrypted.</p>
+           {isNtc === true ? 
+                <p className="note">Since we could not find your credit history, we need to access your bank statement for the latest 3 months.</p> 
+                :
+                <p className="note">To verify your income, we need to access your bank statement for the latest 3 months. This data sharing is completely secured and encrypted.</p>
+           }
         </div>
         
         <div className="lowerSection">

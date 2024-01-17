@@ -201,10 +201,19 @@ const BankDetails = () =>{
         if(isReVisitToUploadStatement === true){
             showWrapper(ref.current)
             axios.post(env.api_Url + "uploadBankDetailsCF?userId=" + userId)
-            .then(res=>{
+            .then(async res=>{
                 if(res.data.message === "success"){
-                    hideWrapper(ref.current)
-                    navigate("/patient/WaitingForApproval");
+                    await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
+                    .then(res=>{
+                        let ntc = res?.data?.data;
+                        // console.log(ntc)
+                            if(ntc === true){
+                                navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
+                            }else{
+                                navigate("/patient/WaitingForApproval");
+                            }
+                            hideWrapper(ref.current)
+                        })
                 }else{
                     hideWrapper(ref.current)
                 }
