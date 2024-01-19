@@ -1,15 +1,30 @@
 import Header from "../../Header/Header";
 import SearchingDoc from '../../../assets/GIFs/Document in process.gif'
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { env } from "../../../environment/environment";
 
 export default function ChechkingStatus(){
 
     let userId = localStorage.getItem('userId');
+    const location = useLocation();
+    let isFilesUploaded = location?.state?.isFilesUploaded;
+    
 
     const navigate = useNavigate();
     setTimeout(async() => {
+        if(! isFilesUploaded){
+        await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
+            .then(res=>{
+                let ntc = res?.data?.data;
+                // console.log(ntc)
+                    if(ntc === true){
+                        navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
+                    }
+                }).catch(e=>{
+
+                })
+        }
         await axios
         .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
             .then(async(response) => {
