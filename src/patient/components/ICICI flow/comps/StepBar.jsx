@@ -1,9 +1,9 @@
 
-export default function StepBar(){
+export default function StepBar({currStep}){
 
     let stepNames = ["EMI plan selection", "PAN verification", "Final consent"];
     let steps = stepNames.map((stepName, idx)=>{
-        return <Step step={idx+1} stepName={stepName} currStep={3}></Step>
+        return <Step step={idx+1} stepName={stepName} currStep={currStep}></Step>
     })
     return(
         <>
@@ -41,9 +41,9 @@ function Step({step=1, stepName, currStep}){
         <>
             <div style={{display:"flex", flexDirection:"row", gap:"6px", maxWidth:"18%"}}>
                 <div style={{minHeight:"100%", borderRadius:"100px", display:"flex", alignItems:"center", justifyContent:"center", background:`${stepBgColor}`, color:`${stepColor}`, minWidth:"30%", border:`2px solid ${stepBorderColor}`}}>{step}</div>
-                <div style={{color:`${stepTextColor}`}}>{stepName}</div>
+                <div style={{fontSize:"12px", color:`${stepTextColor}`}}>{stepName}</div>
             </div>
-            {step !==3 ? <div style={{width:"16%", background:`${spacerBgColor}`, height:"4px"}}></div> : ""}
+            {step !==3 ? <div style={{width:"16%", background:`${spacerBgColor}`, height:"3px"}}></div> : ""}
         </>
     )
 }

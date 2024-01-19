@@ -12,7 +12,7 @@ const CongratsApprovedICICI = () =>{
     return(
         <main style={{display: "flex", flexDirection:"column", alignItems:"center", gap:"1rem"}}>
             <Header progressbarDisplay='none' />
-            <StepBar />
+            {/* <StepBar /> */}
             <div style={{display:"flex", position:"relative", flexDirection:"row", alignItems:"baseline", justifyContent:"space-around", marginTop:"1rem"}}>
                 <img src={Confetti} style={{transform:"scaleX(-1)", maxWidth:"25%"}} alt="" />
                 <p style={{position:"absolute", fontSize:"24px", lineHeight:"26px", color:"#149540", fontWeight:"700", marginTop:"1rem"}}>Congratulations</p>
