@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
+import { Link } from "react-router-dom";
 
 const EmploymentDetails = () =>{
     // let token = localStorage.getItem('access_token');
@@ -30,11 +31,13 @@ const EmploymentDetails = () =>{
     // const data = useData();
     const navigate = useNavigate();
 
-    const [empType, setEmpType] = useState('salaried');
+    const [empType, setEmpType] = useState('SALARIED');
     const [salary, setSalary] = useState('');
     // const [salaryDate, setSalaryDate] = useState('1');
-    const [familyIncome, setFamilyIncome] = useState("0");
+    const [familyIncome, setFamilyIncome] = useState("");
     const [companyName, setCompanyName] = useState('');
+    const [businessType, setBusinessType] = useState('Public Limited Company');
+    const [businessName, setBusinessName] = useState('');
     // const [companyAddL1, setCompanyAddL1] = useState('');
     // const [companyAddL2, setCompanyAddL2] = useState('');
     // const [pincode, setPincode] = useState('');
@@ -46,7 +49,7 @@ const EmploymentDetails = () =>{
     // const [jobExpYear, setJobExpYear] = useState(0);
     // const [jobExpMonth, setJobExpMonth] = useState(0);
 
-    const [loanAmt, setLoanAmount] = useState('0');
+    const [loanAmt, setLoanAmount] = useState('');
 
     // const [cityName, setCityName] = useState("");
     // const [consent, setConsent] = useState(false);
@@ -100,16 +103,21 @@ const EmploymentDetails = () =>{
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         if(!! userId){
-            axios.get(env.api_Url + "userDetails/getUserEmploymentDetailsByUserId?userId=" + userId)
+            axios.get(env.api_Url + "userDetails/getUserEmploymentByUserId?userId=" + userId)
             .then(response => {
                 if(response.data.status === 200){
                     console.log(response)
                     let data = response.data.data;
                     if(!! data){
-                        setSalary(data.nettakehomesalary);
+                        setSalary(data.monthlyInHandSalary);
                         // setSalaryDate(data.salaryDay);
                         setFamilyIncome(data.monthlyFamilyIncome ?? "0");
-                        handleCompanyName(data.organizationName);
+                        setCompanyName(data.currentCompanyName);
+                        setEmpType(data.employmentType)
+                        
+                        setBusinessName(data.nameOfBusiness)
+                        setBusinessType(data.typeOfBusiness)
+
                         // setCompanyAddL1(data.workplaceAddress1);
                         // setCompanyAddL2(data.workplaceAddress2);
                         // handlePincode(data.workplacePincode);
@@ -133,10 +141,10 @@ const EmploymentDetails = () =>{
         }
     },[])
 
-    function handleCompanyName(companyName){
-        let filteredCompanyName = companyName.replaceAll("&", "and");
-        setCompanyName(filteredCompanyName);
-    }
+    // function handleCompanyName(companyName){
+    //     let filteredCompanyName = companyName.replaceAll("&", "and");
+    //     setCompanyName(filteredCompanyName);
+    // }
 
     // function handlePincode(val){
     //     if(val.length < 6){
@@ -166,40 +174,57 @@ const EmploymentDetails = () =>{
     //     }, 1000)
     // }
 
-    function expError(){
-        let elem = document.getElementById('expError');
-        if(elem) elem.style.display = "block";
+    // function expError(){
+    //     let elem = document.getElementById('expError');
+    //     if(elem) elem.style.display = "block";
         
-        setTimeout(()=>{
-            if(elem) elem.style.display = "none";
-        }, 3000)
-    }
+    //     setTimeout(()=>{
+    //         if(elem) elem.style.display = "none";
+    //     }, 3000)
+    // }
 
     async function handleSubmit(){
         // && totalExpYear && totalExpMonth && jobExpYear && jobExpMonth
 
         if(!(empType && salary && companyName)){
-            console.log(empType, salary, familyIncome, companyName)
+            console.log(empType, businessType, salary, familyIncome, companyName)
             // return;
+        }
+
+        if(empType.toUpperCase() === "SALARIED"){
+            if(!companyName){ 
+                let elem = document.getElementById('companyName');
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+            if(specialChars.test(companyName)){
+                let elem = document.getElementById('companyName');
+                setErrorMsg("Special characters are not allowed.");
+                setTimeout(() => {
+                    setErrorMsg("This field can't be empty.");
+                }, 3000);
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+        }else{
+            if(!businessName){ 
+                let elem = document.getElementById('businessName');
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+            if(specialChars.test(businessName)){
+                let elem = document.getElementById('businessName');
+                setErrorMsg("Special characters are not allowed.");
+                setTimeout(() => {
+                    setErrorMsg("This field can't be empty.");
+                }, 3000);
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
         }
 
         if(!salary){ 
             let elem = document.getElementById('salary');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
-
-        if(!companyName){ 
-            let elem = document.getElementById('companyName');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
-        if(specialChars.test(companyName)){
-            let elem = document.getElementById('companyName');
-            setErrorMsg("Special characters are not allowed.");
-            setTimeout(() => {
-                setErrorMsg("This field can't be empty.");
-            }, 3000);
             if(elem) showErrorOnUI(elem);
             return;
         }
@@ -271,6 +296,8 @@ const EmploymentDetails = () =>{
             "netTakeHomeSalary": salary,
             // "salaryDay": salaryDate,
             "organizationName": companyName,
+            "nameOfBusiness":businessName,
+            "typeOfBusiness":businessType,
             // "workplaceAddress1": companyAddL1,
             // "workplaceAddress2":companyAddL2,
             // "workplacePincode": pincode,
@@ -302,7 +329,7 @@ const EmploymentDetails = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
 
-                    if(loanAmt <= 75000){
+                    if(loanAmt <= 300001){
                         navigate('/patient/CreditFairOffers');
                     }else{
                         navigate('/patient/BankDetails');
@@ -360,6 +387,44 @@ const EmploymentDetails = () =>{
     for(let i=0; i<=11; i++){
         expMonths.push(<option value={i} key={i}>{i}</option>)
     }
+
+
+    const empTypes = ["SALARIED", "SELF_EMPLOYED"];
+    const radios = empTypes.map((option, idx)=>{
+        let label = option.toLowerCase().replace("_", " ");
+        label = label.charAt(0).toUpperCase() + label.slice(1);
+        return(
+            <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} key={idx} >
+                <input 
+                    id={option} 
+                    name={"empType"} 
+                    value={option}
+                    type="radio"
+                    checked={empType === option}
+                    onChange={(e)=>setEmpType(e.target.value)}
+                    style={{
+                        height:"24px", 
+                        width:"max-content",
+                        aspectRatio:"1/1",
+                        border:"2px solid #5E5E5E",
+                        accentColor:"#514C9F"
+                    }}
+                />
+                <label 
+                htmlFor={option}
+                style={{
+                    fontSize:"16px",
+                    lineHeight:"20px"
+                }}
+                >
+                    {label}
+                </label>
+                <br/>
+            </div>
+            
+        )
+    })
+
    return(
 
     <>
@@ -367,7 +432,7 @@ const EmploymentDetails = () =>{
     <Header progressbarDisplay="block" progress="70" canGoBack="/patient/AddressDetails" />
         <h3>Employment Details</h3>
 
-        <div className="employementType">
+        {/* <div className="employementType">
             <p>Employment type</p>
             <select 
                 onChange={(e)=>setEmpType(e.target.value)}
@@ -379,14 +444,81 @@ const EmploymentDetails = () =>{
                 <option value="UNEMPLOYED">Unemployed</option>
                 <option value="STUDENT">Student</option>
             </select>
+        </div> */}
+
+        <div id={"selectEmployementType"} style={{borderRadius:"4px"}}>
+            {radios}
         </div>
+
+        <p 
+        style={{
+            fontSize:"14px", 
+            lineHeight:"18px",
+            color:"#00000066"
+        }}
+        >
+            We currently don’t finance students or unemployed borrowers. In case you are in any of these two categories, you can have your blood relative apply for your credit.
+        </p>
+        <p style={{
+            fontSize:"14px", 
+            lineHeight:"18px",
+            color:"#00000066",
+            marginBottom:"1rem"
+        }}>
+            Need assistance? <Link to={"tel:+918069489655"} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline"}}>Contact Support</Link>
+        </p>
+
+        {empType === "SALARIED" ?
+            <div className="companyName">
+                <p>Current company name</p>
+                <input 
+                    id="companyName"
+                    type="text" 
+                    value={companyName}
+                    onChange={(e)=>setCompanyName(e.target.value)}
+                    placeholder="what is your company name?" 
+                />
+                <span className="fieldError">{errorMsg}</span>
+            </div>
+            :
+            <>
+                <div className="businessType">
+                    <p>Type of business</p>
+                    <select 
+                        id="businessType"
+                        onChange={(e)=>setBusinessType(e.target.value)}
+                        value={businessType}
+                        placeholder="Enter type of business" 
+                    >
+                        <option value="Public Limited Company">Public Limited Company</option>
+                        <option value="Private Limited Company">Private Limited Company</option>
+                        <option value="Limited Liability Partners">Limited Liability Partners</option>
+                        <option value="Limited Liability Company">Limited Liability Company</option>
+                        <option value="Partnership Firm">Partnership Firm</option>
+                        <option value="Sole Proprietorship">Sole Proprietorship</option>
+                        <option value="One-person company">One-person company</option>
+                    </select>
+                </div>
+                <div className="businessName">
+                    <p>Name of business</p>
+                    <input 
+                        id="businessName"
+                        type="text" 
+                        value={businessName}
+                        onChange={(e)=>setBusinessName(e.target.value)}
+                        placeholder="What is the name of your business?" 
+                    />
+                    <span className="fieldError">{errorMsg}</span>
+                </div>
+            </>
+        }
 
         <div className="income">
             <p>Monthly in-hand salary/income</p>
             <input 
                 id="salary"
                 type="number" 
-                value={salary ?? ""}
+                value={salary}
                 onChange={(e)=>setSalary(e.target.value)}
                 placeholder="Enter your monthly in-hand income" 
             />
@@ -408,23 +540,13 @@ const EmploymentDetails = () =>{
             <p>Monthly family income (optional)</p>
             <input 
                 type="number" 
-                value={familyIncome ?? ""}
+                value={familyIncome}
                 onChange={(e)=>setFamilyIncome(e.target.value)}
                 placeholder="Enter your family's monthly income" 
             />
         </div>
 
-        <div className="companyName">
-            <p>Current company name</p>
-            <input 
-                id="companyName"
-                type="text" 
-                value={companyName ?? ""}
-                onChange={(e)=>handleCompanyName(e.target.value)}
-                placeholder="Enter your current company name" 
-            />
-            <span className="fieldError">{errorMsg}</span>
-        </div>
+        
         {/* <div className="companyAddress-line1">
             <p>Current workplace address (line 1)</p>
             <input 

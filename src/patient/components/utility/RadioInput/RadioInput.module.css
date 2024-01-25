@@ -1,0 +1,29 @@
+.radioContainerMain{
+    width : 100%;
+    display : flex;
+    flex-direction: column;
+    justify-content : space-between;
+    border-radius : 4px;
+    margin-bottom : 16px;
+}
+
+.radioContainerMain .radioContainer{
+    display : flex;
+    gap : 12px;
+    align-items : center;
+    padding : 0 12px 12px 12px;
+}
+
+.radioContainerMain .radioContainer .radioInput{
+    display : flex;
+    height : 24px;
+    aspect-ratio : 1/1;
+    accent-color : #514C9F;
+}
+
+.radioContainerMain .radioContainer .radioLabel{
+    font-size : 16px;
+    line-height : 20px;
+    width: 100%;
+    padding: 10px;
+}

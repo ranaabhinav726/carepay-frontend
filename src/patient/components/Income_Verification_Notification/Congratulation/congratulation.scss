@@ -122,10 +122,15 @@ main.congrats{
                 list-style: none;
 
                 .encircle{
-                    display: inline;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 18px;
+                    aspect-ratio: 1/1;
                     position: relative;
+                    
                     top: -2px;
-                    padding: 2px 5px;
+                    // padding: 2px 5px;
                     margin-right: 10px;
                     color: #514C9F;
                     border: 1px solid #514C9F;
@@ -137,10 +142,11 @@ main.congrats{
 
                 }
                 span.v-line{
+                    display: inline-block;
                     position: relative;
                     left: -19px;
-                    top:16px;
-                    height: 16px;
+                    top:18px;
+                    height: 14px;
                     width: 1px;
                     border-right: 1px solid #514C9F;
 

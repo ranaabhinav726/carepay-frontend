@@ -104,13 +104,13 @@ import PrivacyPolicy from './website/pages/PrivacyPolicy';
 import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
 import { useEffect } from 'react';
 import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
+import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
 import SearchingOffers from './patient/components/ICICI flow/SearchingOffers';
 import CongratsApprovedICICI from './patient/components/ICICI flow/CongratsApprovedICICI';
 import CongratsPreApprovedICICI from './patient/components/ICICI flow/CongratsPreApprovedICICI';
 import EmiOptions from './patient/components/ICICI flow/EmiOptions';
 import PanVerificationIcici from './patient/components/ICICI flow/PanVerificationIcici';
 import FinalConsent from './patient/components/ICICI flow/FinalConsent';
-
 
 
 function App() {
@@ -140,6 +140,14 @@ function App() {
         <Route path='/patient/LoanDetails' element={<LoanDetails />} />
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
+        <Route path='/patient/ChechkingStatus' element={<ChechkingStatus />} />
+
+        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
+        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
+        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
+        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
+        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
 
         <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
         <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />

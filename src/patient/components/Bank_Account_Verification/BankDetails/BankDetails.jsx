@@ -5,7 +5,8 @@ import './bankDetails.scss'
 import axios from "axios";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import BottomPopOverModal from "../../utility/BottomPopOverModal";
 
 // let bankname = localStorage.getItem('bankName');
 
@@ -15,14 +16,20 @@ const BankDetails = () =>{
     // const config = {
     //     headers: { Authorization: `Bearer ${token}` }
     // };
+    const location = useLocation();
+    let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
+    
+    // console.log(isReVisitToUploadStatement)
+
     let userId = localStorage.getItem('userId')
     let ref = useRef(0);
+    let timerId = null;
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         if(!! userId){
             axios.get(env.api_Url + "userDetails/getAccountInfoByUserId?userId=" + userId)
             .then(response => {
-                if(response.data.status === 200){
+                if(response.data.message === "success"){
                     let data = response.data.data;
                     if(!! data){
                         setBankName(data.bankName);
@@ -31,7 +38,28 @@ const BankDetails = () =>{
                         setConfirmAccountNumber(data.accountNumber);
                     }
                 }
+            }).catch(()=>{
+                console.log("Error fetching data");
             })
+        }
+
+        if(isReVisitToUploadStatement === true){
+            timerId = setInterval(async()=>{
+            await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
+                .then(res=>{
+                    let ntc = res?.data?.data;
+                    // console.log(ntc)
+                        if(ntc === true){
+                            setNtc(true);
+                        }
+                    }).catch(e=>{
+
+                    })
+            }, 5000)
+        }
+
+        if(!! timerId){
+            return ()=>clearInterval(timerId);
         }
     },[])
 
@@ -47,7 +75,11 @@ const BankDetails = () =>{
     const [canSubmit, setCanSubmit] = useState(true);
 
     const [focus, setFocus] = useState(false);
+    const [showPopOver, setShowPopOver] = useState(false);
 
+    const [ntc, setNtc] = useState(false);
+
+    let popUpMsg = "This account will be used to set up auto repayment of EMIs. Are you sure you want to proceed with this bank account?"
     // useEffect(()=>{
     //     axios.post(env.api_Url + "update_user_stage", {
     //             "onboarding_stage": "BankDetails"
@@ -171,26 +203,56 @@ const BankDetails = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     localStorage.setItem("bankName", bankName);
-                    navigate('/patient/IncomeVerification');
+                    setShowPopOver(true);
+                    // navigate('/patient/IncomeVerification', {state : {"reVisitToUploadStatement" : isReVisitToUploadStatement}});
                 }
             }).catch(error => {
                 console.log(error);
                 if(error.response.status == 406 && error.response.data.msg.error == "Bank Details already verified"){
-                    navigate('/patient/IncomeVerification');
+                    setShowPopOver(true);
+                    // navigate('/patient/IncomeVerification', {state : {"reVisitToUploadStatement" : isReVisitToUploadStatement}});
                 }
             });
         setCanSubmit(true);
         hideWrapper(ref.current);
     }
 
+    async function checkAndNavigate(){
+        // console.log(isReVisitToUploadStatement);
+        // return;
+        if(isReVisitToUploadStatement === true){
+            showWrapper(ref.current)
+            axios.post(env.api_Url + "uploadBankDetailsCF?userId=" + userId)
+            .then(async res=>{
+                if(res.data.message === "success"){
+                    if(ntc === true){
+                        navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
+                    }else{
+                        navigate("/patient/WaitingForApproval");
+                    }
+                    hideWrapper(ref.current)
+                }else{
+                    hideWrapper(ref.current)
+                }
+            }).catch(err=>{
+                hideWrapper(ref.current)
+                console.log(err)
+            })
+        }else{
+            // navigate("/patient/CreditFairOffers");
+            navigate('/patient/IncomeVerification');
+        }
+        setShowPopOver(false)
+    }
+
    return(
     <>
-    <main className="bankDetails">
+    <main className="bankDetails" style={{position:"relative"}}>
     <Header progressbarDisplay="block" progress="80" canGoBack="/patient/EmploymentDetails" />
         <h3>Bank Details</h3>
 
         <div style={{background:"#FAE1CD", padding:"16px", borderRadius:"8px", color:"#514C9F", textAlign:"center", wordSpacing:"1px", letterSpacing:"0.5px"}}>
-            Please enter details of your <strong>salary bank account</strong> only and make sure it has an active debit card or net banking.
+            Please enter details of your bank account where you receive your <strong>income/salary</strong> and make sure it has an active debit card or net banking.
         </div>
 
         {/* <p className="note"><b>NOTE:</b> Please add bank details of the same account as the bank statement submitted.</p> */}
@@ -232,7 +294,7 @@ const BankDetails = () =>{
             />
             <span className="fieldError">Please enter a correct IFSC</span>
         </div>
-        <div className="bankName">
+        {/* <div className="bankName">
             <p>Bank name</p>
             <input disabled
                 id="bankName"
@@ -242,9 +304,14 @@ const BankDetails = () =>{
                 placeholder="Enter your bank name here" 
             />
             <span className="fieldError">This field can't be empty.</span>
-        </div>
+        </div> */}
 
-        <button onClick={()=>onSubmit()} className="submit">Next</button>
+        <span>
+            Bank name : <span style={{opacity:"0.6"}}>{bankName || ""}</span>
+        </span>
+
+        <button onClick={()=>onSubmit()} className="submit">Submit</button>
+        <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} />
     </main>
     </>
    )

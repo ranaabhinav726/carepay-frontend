@@ -118,6 +118,23 @@ const VerifyOTP = () =>{
         document.getElementById('digit-1').focus()
     },[])
 
+    async function getAndSetDoctorId(){
+      await axios.get(env.api_Url + "getDoctorDetailsByPhoneNumber?mobileNo=" + phoneNumber)
+      .then(async(response)=>{
+        let data = await response?.data?.data;
+        if(data !== null){
+          let doctorId = response?.data?.data?.doctorId;
+          if(doctorId !== null){
+            localStorage.setItem("D-doctorId", doctorId);
+          }
+        }else{
+          let existingDoctorId = localStorage.getItem("D-doctorId");
+          if(!! existingDoctorId){
+            localStorage.removeItem("D-doctorId");
+          }
+        }
+    })
+    }
     async function login(){
         let otp = "";
         let digit1 = document.getElementById('digit-1').value;
@@ -151,6 +168,7 @@ const VerifyOTP = () =>{
             if(response.data.status == 200){
                 let status = response.data.data;
                 if(status === "NOT_VERIFIED"){
+                    await getAndSetDoctorId();
                     navigate('/doctor/welcome')
                 }else if(status === "VERIFIED"){
                     //get and save doctorId
@@ -166,6 +184,7 @@ const VerifyOTP = () =>{
                         }
                     })
                 }else if(!! status){
+                    await getAndSetDoctorId();
                     let path = "/doctor/welcome";
                     switch(status){
                         case "PERSONAL":

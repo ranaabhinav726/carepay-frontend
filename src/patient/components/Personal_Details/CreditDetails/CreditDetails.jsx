@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 // import { DataContext } from "../../App"
 
 import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../environment/environment'
+import RadioInput from "../../utility/RadioInput/RadioInput";
 import { preEligibility } from "../../ICICI flow/apis";
 // import { useData } from "../data";
 
@@ -19,7 +20,8 @@ const CreditDetails = () => {
     const [amount, setAmount] = useState("");
     const [treatment, setTreatment] = useState("");
 
-    const [isPatient, setIsPatient] = useState(false);
+    const [borrower, setBorrower] = useState("");
+    let isPatient = true;
     const [patientName, setPatientName] = useState("");
     const [relation, setRelation] = useState("father");
 
@@ -61,6 +63,13 @@ const CreditDetails = () => {
         }
     }, [])
     
+    const onlyCharRegex = /^[a-zA-Z\s]*$/;
+    function onlyCharacters(val, setter){
+        if(onlyCharRegex.test(val)){
+            setter(val);
+        }
+    }
+
     async function verifyAndNavigate(){
         if(! canSubmit){
             return;
@@ -76,7 +85,7 @@ const CreditDetails = () => {
             if(elem) showErrorOnUI(elem);
             return;
         }
-        if(! isPatient){
+        if(borrower === "someone else"){
             if(! patientName){
                 let elem = document.getElementById('patientName');
                 if(elem) showErrorOnUI(elem);
@@ -114,7 +123,7 @@ const CreditDetails = () => {
             "formStatus": ""
         };
 
-        if(! isPatient){
+        if(borrower === "someone else"){
             submitObj.patientName = patientName;
             submitObj.relationshipWithPatient = relation;
         }
@@ -219,7 +228,22 @@ const CreditDetails = () => {
             <span className="fieldError">Please fill name of your treatment</span>
         </div>
 
-        <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
+        <div className="inputGroup">
+            <p>Full name (as per PAN)</p>
+            <input 
+                id="fullName"
+                type="text" 
+                value={fullName} 
+                placeholder="Enter your name"
+                // onChange={(e)=>setFullName(e.target.value)}  
+                onChange={(e)=> onlyCharacters(e.target.value, setFullName)}  
+                style={{marginBottom:"10px"}}
+            />
+            <span className="fieldError">Please enter your full name</span>
+            <p style={{fontSize:"14px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
+        </div>
+
+        {/* <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
             <input 
                 id="isPatient"
                 type="checkbox" 
@@ -228,9 +252,24 @@ const CreditDetails = () => {
                 onChange={(e)=>setIsPatient(! isPatient)}
             />
             <label htmlFor="isPatient" style={{paddingLeft:"10px", fontSize:"inherit"}}>I am the patient</label>
-        </div>
+        </div> */}
 
-        {! isPatient && 
+
+            <p style={{marginTop:"1.5rem"}}>Who are you borrowing for?</p>
+            <RadioInput
+                id="borrower" 
+                name="borrower" 
+                selected={borrower}
+                setSelected={setBorrower}
+                values={["myself", "someone else"]}
+                options={["Myself", "Someone else"]}
+                styles={{
+                    padding:"12px 12px 8px 0",
+                    width:"30%"
+                }}
+            />
+
+        {borrower==="someone else" && 
         <>
             <div className="inputGroup">
                 <p>Name of the patient</p>
@@ -239,12 +278,13 @@ const CreditDetails = () => {
                     type="text" 
                     value={patientName} 
                     placeholder="Enter name of the patient here"
-                    onChange={(e)=>setPatientName(e.target.value)}  
+                    // onChange={(e)=>setPatientName(e.target.value)}  
+                    onChange={(e)=> onlyCharacters(e.target.value, setPatientName)}  
                 />
                 <span className="fieldError">Please fill name of the patient</span>
             </div>
             <div className="inputGroup">
-                <p>Your relationship to the patient</p>
+                <p>Relationship with patient</p>
                 {/* <input 
                     id="relation"
                     type="text" 
@@ -252,30 +292,24 @@ const CreditDetails = () => {
                     placeholder="Enter your relation here"
                     onChange={(e)=>setRelation(e.target.value)}  
                 /> */}
-                <select name="relation" id="relation" value={relation} onChange={(e)=>setRelation(e.target.value)}>
-                    <option value={"father"}>Father</option>
-                    <option value={"mother"}>Mother</option>
-                    <option value={"brother"}>Brother</option>
-                    <option value={"sister"}>Sister</option>
-                </select>
+                <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
+                    <span style={{minWidth:"max-content"}}>Patient is my:</span>
+                    <select name="relation" id="relation" style={{marginBottom:"0"}} value={relation} onChange={(e)=>setRelation(e.target.value)}>
+                        <option value={"father"}>Father</option>
+                        <option value={"mother"}>Mother</option>
+                        <option value={"brother"}>Brother</option>
+                        <option value={"sister"}>Sister</option>
+                        <option value={"spouse"}>Spouse</option>
+                        <option value={"son"}>Son</option>
+                        <option value={"daughter"}>Daughter</option>
+                    </select>
+                </div>
                 <span className="fieldError">Please tell your relation to the patient</span>
             </div>
         </>
     }
 
-        <div className="inputGroup">
-            <p>Full name (as per PAN)</p>
-            <input 
-                id="fullName"
-                type="text" 
-                value={fullName} 
-                placeholder="Enter your name"
-                onChange={(e)=>setFullName(e.target.value)}  
-                style={{marginBottom:"10px"}}
-            />
-            <span className="fieldError">Please enter your full name</span>
-            <p style={{fontSize:"14px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
-        </div>
+        
         <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
         <button onClick={()=> verifyAndNavigate()} className="submit">Submit</button>
     </main>

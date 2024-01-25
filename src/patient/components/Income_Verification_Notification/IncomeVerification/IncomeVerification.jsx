@@ -6,13 +6,16 @@ import './incomeVerification.scss'
 // import { env } from '../../../environment/environment';
 
 import Statement from '../../../assets/statement.png'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import { BsArrowRight } from 'react-icons/bs'
+// import { BsArrowRight } from 'react-icons/bs'
 
 const IncomeVerification = () =>{
     const navigate = useNavigate();
-
+    const location = useLocation();
+    let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
+    let isNtc = location?.state?.isNtc;
+    console.log(isReVisitToUploadStatement, isNtc);
 
     // let token = localStorage.getItem('access_token');
     // const config = {
@@ -50,12 +53,16 @@ const IncomeVerification = () =>{
         </div> */}
         <br />
         <div className="upperSection">
-            <p className="note">To verify your income, we need to access your bank statement for the latest 3 months. This data sharing is completely secured and encrypted.</p>
+           {isNtc === true ? 
+                <p className="note">Since we could not find your credit history, we need to access your bank statement for the latest 3 months.</p> 
+                :
+                <p className="note">To verify your income, we need to access your bank statement for the latest 3 months. This data sharing is completely secured and encrypted.</p>
+           }
         </div>
         
         <div className="lowerSection">
             <img src={Statement} alt="" />
-            <button onClick={()=>navigate('/patient/FileUpload')} className='submit'>Proceed with upload</button>
+            <button onClick={()=>navigate('/patient/FileUpload', {state : {"reVisitToUploadStatement" : isReVisitToUploadStatement}})} className='submit'>Proceed with upload</button>
         </div>
 
         </main>

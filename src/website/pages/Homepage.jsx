@@ -337,24 +337,26 @@ function Articles(){
                 </div>
                 <div
                     className="scrollable-container"
-                    style={{
-                        overflowX: "auto",
-                        scrollbarWidth: "thin",
-                        scrollbarColor: "#514C9F",
-                        scrollbarGutter: "stable",
-                        // userSelect: "none",
-                        minWidth: "100%", // Set a minimum width
-                        padding:"1%"
-                    }}
+                    // style={{
+                    //     overflowX: "auto",
+                    //     scrollbarWidth: "thin",
+                    //     scrollbarColor: "#514C9F",
+                    //     scrollbarGutter: "stable",
+                    //     // userSelect: "none",
+                    //     minWidth: "100%", // Set a minimum width
+                    //     padding:"1%"
+                    // }}
                 >
-                    <div className="wrapper" style={{
-                        padding: "30px",
-                        display: "flex",
-                        flexDirection: "row",
-                        alignContent: "flex-start",
-                        justifyContent: "space-between",
-                        gap: "3rem",
-                    }}>
+                    <div className="wrapper" 
+                        // style={{
+                        //     padding: "30px",
+                        //     display: "flex",
+                        //     flexDirection: "row",
+                        //     alignContent: "flex-start",
+                        //     justifyContent: "space-between",
+                        //     gap: "3rem",
+                        // }}
+                    >
                         <Article 
                             width={"25%"} 
                             as="480/320" 
@@ -373,6 +375,13 @@ function Articles(){
                             imgWidth='45%' 
                             logo={PharmaBizLogo} content={"India’s digitally empowered fintech companies working to address optimal financial protection for patients"} link={"http://www.pharmabiz.com/NewsDetails.aspx?aid=163303&sid=1"}
                         />
+                        <div className="spacer"
+                        style={{
+                            height:"100%",
+                            width:"0.5rem",
+                            opacity:"0",
+                            userSelect:"none"
+                        }}>....</div>
                     </div>
                 </div>
             </section>
@@ -383,7 +392,15 @@ function Articles(){
 function Article({ logo, content, link, width, imgWidth="50%", as }){
     return(
         <>
-            <article style={{width:`${width}`, aspectRatio:`${as}`, minWidth:"30ch", padding:"30px", paddingBottom:"45px", position:"relative", display:"flex", flexDirection:"column", background:"#fff", borderRadius:"8px", border:"2px solid #263238", boxShadow:"-16px 24px 0px 0px #504C9E"}}>
+            <article 
+                style={{width:`${width}`, aspectRatio:`${as}`, 
+                        // minWidth:"30ch", padding:"30px", paddingBottom:"45px", 
+                        // position:"relative", display:"flex", flexDirection:"column", 
+                        // background:"#fff", borderRadius:"8px", border:"2px solid #263238", 
+                        // boxShadow:"-16px 24px 0px 0px #504C9E"
+                    }}
+                className='article-content-container'    
+            >
                 <div style={{height:"20%", display:"flex", alignItems:"flex-start"}}><img src={logo} alt="" style={{width:`${imgWidth}`}} /></div>
                 <p className='text-content' style={{fontWeight:"700"}}>{content}</p>
                 <Link to={link} target='_blank' style={{color:"#5149CF", textDecoration:"underline", fontWeight:"700", position:"absolute", bottom:'25px'}}>View article</Link>

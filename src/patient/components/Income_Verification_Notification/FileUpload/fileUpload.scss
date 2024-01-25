@@ -11,7 +11,7 @@ main.fileUpload{
         font-size: $size-L;
         line-height: 19px;
 
-        margin-bottom: 16px;
+        margin: 16px 0;
     }
 
     div.msg{
@@ -210,7 +210,7 @@ main.fileUpload{
         div.eye{
             display: inline-block;
             position: relative;
-            top: -45px;
+            top: -38px;
             font-size: 25px;
             left: 92%;
             color: #908dc1;

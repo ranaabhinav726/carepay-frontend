@@ -242,6 +242,10 @@ button.submit{
   border: none;
   cursor: pointer;
 }
+button.submit.lite{
+  color: #514C9F;
+  background: #ECEBFF;
+}
 
 p#number-msg{
   margin: 0;
@@ -808,3 +812,26 @@ div.website-container{
   ::-webkit-scrollbar-thumb:hover {
     background: #514C9F;
   }
+
+input.dynamicFetching:disabled::placeholder {
+  font-style: italic;
+}
+
+div.bottomPopOverModal{
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  
+  div.popUpCard-custom{
+    bottom: -100%;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.open{
+    opacity: 1;
+    visibility: visible;
+    div.popUpCard-custom{
+      bottom: 0;
+    }
+  }
+}

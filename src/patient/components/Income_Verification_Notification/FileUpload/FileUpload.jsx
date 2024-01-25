@@ -2,6 +2,7 @@ import Header from '../../Header/Header';
 import './fileUpload.scss'
 
 import PDFIcon from '../../../assets/PDFIcon.png'
+import animationData from '../../../assets/GIFs/Comp 1.json'
 
 import { AiFillCheckCircle, AiFillEye, AiFillEyeInvisible, AiFillInfoCircle, AiOutlineClose } from 'react-icons/ai'
 
@@ -11,13 +12,17 @@ import axios from "axios";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
 
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import BottomPopOverModal from '../../utility/BottomPopOverModal';
 
 const FileUpload = () =>{
 
     const navigate = useNavigate();
-
-    let token = localStorage.getItem('access_token');
+    const location = useLocation();
+    let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
+    console.log(isReVisitToUploadStatement)
+    
+    // let token = localStorage.getItem('access_token');
     const fileConfig = {
         headers: {"Content-Type": "multipart/form-data"}
     };
@@ -35,6 +40,8 @@ const FileUpload = () =>{
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
+
+    const [showPopOver, setShowPopOver] = useState(false);
 
     let userId = localStorage.getItem("userId");
 
@@ -111,8 +118,8 @@ const FileUpload = () =>{
     }
 
     function passwordHandler(e){
-        let elem2 = document.getElementById('passError');
-        if(elem2) elem2.style.display = "none";
+        // let elem2 = document.getElementById('passError');
+        // if(elem2) elem2.style.display = "none";
 
         setPassword(e.target.value);
     }
@@ -132,40 +139,53 @@ const FileUpload = () =>{
     }
 
     // let [objectState, setObjectState] = useState({});
-    let [fileURLs, setFileURLs] = useState([]);
-    let submitObj = {
-        file_path: [...fileURLs],
-        password: password
-    };
+    // let [fileURLs, setFileURLs] = useState([]);
+    // let submitObj = {
+    //     file_path: [...fileURLs],
+    //     password: password
+    // };
     
 
-    function checkAssignedNbfcAndNavigate(){
+    async function checkAssignedNbfcAndNavigate(){
         //call initateFlow -> customer , if success, below code else same screen...
         // axios
         //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
         //     .then(response =>{
         //         console.log(response)
                 // if(response.data.message === "success"){
-                    axios
-                        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
-                        .then((response) => {
-                            if(response.data.message === "success"){
-                                let nbfc = response?.data?.data?.nbfcAssigned;
-                                if(nbfc === "PAYME"){
-                                    navigate("/patient/LoanDetails");
-                                }else{
-                                    navigate("/patient/CreditFairOffers");
-                                }
-                            }
-                        }).catch(error => {
-                            console.log(error);
-                            // navigate(-1)
-                        });
-                // }
-            // }).catch(error =>{
-            //     console.log(error)
-            //     // navigate(-1);
-            // })
+
+        if(isReVisitToUploadStatement === true){
+            showWrapper(ref.current)
+            await axios.post(env.api_Url + "uploadDocumentsDetailCF?userId=" + userId)
+            .then(res=>{
+                if(res.data.message === "success"){
+                    hideWrapper(ref.current)
+                    navigate("/patient/WaitingForApproval");
+                }
+            }).catch(err=>{
+                hideWrapper(ref.current)
+                console.log(err)
+            })
+        }else{
+            navigate("/patient/CreditFairOffers");
+        }
+        
+        // axios
+        //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+        //     .then((response) => {
+        //         if(response.data.message === "success"){
+        //             let nbfc = response?.data?.data?.nbfcAssigned;
+                    
+        //         }
+        //     }).catch(error => {
+        //         console.log(error);
+        //         // navigate(-1)
+        //     });
+        // }
+        // }).catch(error =>{
+        //     console.log(error)
+        //     // navigate(-1);
+        // })
     }
 
     async function uploadFiles(){
@@ -173,7 +193,7 @@ const FileUpload = () =>{
 
         if(prevFiles.length > 0 && files.length === 0){
             // navigate('/patient/KycVerification');
-            checkAssignedNbfcAndNavigate();
+            setShowPopOver(true);
             return;
         }
         if(!password){
@@ -214,7 +234,7 @@ const FileUpload = () =>{
                 console.log(response)
                 if(response.data.message === "success"){
                     // navigate('/patient/KycVerification');
-                    checkAssignedNbfcAndNavigate();
+                    setShowPopOver(true);
                 }else{
                     apiErrorHandler();
                 }
@@ -293,7 +313,7 @@ const FileUpload = () =>{
     }
     return(
     <>
-        <main className='fileUpload'>
+        <main className='fileUpload' style={{position:"relative"}}>
         <Header progressbarDisplay="block" progress="91" canGoBack='/patient/IncomeVerification' />
         <h3>Account statement upload</h3>
             
@@ -335,7 +355,7 @@ const FileUpload = () =>{
                         <span className='tooltiptext'>This is the password to open your bank statement. Typically a combination of your DOB and phone number. You can find it in your bank's monthly statement email to you.</span>
                     </div>
                 </div>
-                <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank.</p>
+                <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank (If PDF does not have any password,please type ‘0’ in the box below and submit).</p>
                 <input 
                     value={password ?? ""}
                     onChange={(e)=> passwordHandler(e)}
@@ -345,7 +365,7 @@ const FileUpload = () =>{
                     id="password"
                 />
                 <div onClick={()=>handleEyeClick()} className="eye">{showPass? <AiFillEyeInvisible/> : <AiFillEye/>}</div>
-                <p id="passError">Please enter your file password, if files don't have a password then put "0" in the password box.</p>
+                {/* <p id="passError">Please enter your file password, if files don't have a password then put "0" in the password box.</p> */}
                 
                 <span className='safe'>Your data is encrypted and will be safe with us!</span>
             </div>
@@ -363,7 +383,7 @@ const FileUpload = () =>{
         }
 
         <input type="file" name="" id="filePicker" accept='.pdf' onChange={(e)=>uploadHandler(e)} />
-
+        <BottomPopOverModal searchAnimation={animationData} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAssignedNbfcAndNavigate} />
         </main>
     </>
     )

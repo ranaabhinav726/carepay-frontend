@@ -33,10 +33,9 @@ const PersonalDetails = () =>{
     // const data = useData();
     const navigate = useNavigate();
     
-    
+    const [fullName, setFullName] = useState("")
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
-    const [fullName, setFullName] = useState("")
     // const [fatherName, setFatherName] = useState("")
     const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
@@ -71,7 +70,7 @@ const PersonalDetails = () =>{
                 if(response.data.message === "success"){
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
-                    setFullName(data?.firstName);
+                    if(data?.firstName != null) setFullName(data?.firstName);
                     // setFatherName(data?.fatherName);
                     setNameOnPan(data?.panCardName)
                     setNumber(data?.mobileNumber)
@@ -167,6 +166,15 @@ const PersonalDetails = () =>{
     //     }, 1000)
     // }
 
+    // const onlyCharRegex = new RegExp("^[a-zA-Z\\s]*$");
+    const onlyCharRegex = /^[a-zA-Z\s]*$/;
+    function onlyCharacters(val, setter){
+        if(onlyCharRegex.test(val)){
+            setter(val);
+        }
+    }
+
+
     async function handleForm(){
         // if(!(panNumber && fullName && gender && email && dob)){ // All feilds must have something
         //     return;
@@ -210,6 +218,12 @@ const PersonalDetails = () =>{
 
         // if(altNumber && )
 
+        if(! refName){
+            let elem = document.getElementById('refName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
         if(! refNumber){
             let elem = document.getElementById('refNumber');
             if(elem) showErrorOnUI(elem);
@@ -226,12 +240,6 @@ const PersonalDetails = () =>{
                 showErrorOnUI(elem);  
             }
 
-            return;
-        }
-
-        if(! refName){
-            let elem = document.getElementById('refName');
-            if(elem) showErrorOnUI(elem);
             return;
         }
 
@@ -334,9 +342,10 @@ const PersonalDetails = () =>{
         if(val.length > 10) return
         setPanNumber(val);
     }
-
+    const numericOnlyRegex = new RegExp('^[0-9]*$');
     function numberChange(e, name){
         let val = e.target.value;
+        if(! numericOnlyRegex.test(val)) return;
         if(val.length > 10) return;
         if(name === "altNumber"){
             setAltNumber(val);
@@ -371,7 +380,7 @@ const PersonalDetails = () =>{
             <input type="text" 
                 id="fullName"
                 value={fullName ?? ""} 
-                onChange={(e)=> setFullName(e.target.value)} 
+                onChange={(e)=> onlyCharacters(e.target.value, setFullName)}  
                 placeholder="Enter your full name" 
                 required 
             />
@@ -382,21 +391,21 @@ const PersonalDetails = () =>{
         <div className="gender" id="gender">
             <p>Gender</p>
             <div className="radioOption">
-                <input type="radio" id="male" name="gender" checked={gender === "Male"} onChange={(e)=> setGender(e.target.value)} value="Male" />
+                <input type="radio" id="male" name="gender" checked={gender?.toLowerCase() === "male"} onChange={(e)=> setGender(e.target.value)} value="male" />
                 <label htmlFor="male">Male</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="female" name="gender" checked={gender === "Female"} onChange={(e)=> setGender(e.target.value)} value="Female" />
+                <input type="radio" id="female" name="gender" checked={gender?.toLowerCase() === "female"} onChange={(e)=> setGender(e.target.value)} value="female" />
                 <label htmlFor="female">Female</label><br />
             </div>
             <div className="radioOption">
-                <input type="radio" id="other" name="gender" checked={gender === "Other"} onChange={(e)=> setGender(e.target.value)} value="Other" />
+                <input type="radio" id="other" name="gender" checked={gender?.toLowerCase() === "other"} onChange={(e)=> setGender(e.target.value)} value="other" />
                 <label htmlFor="other">Other</label><br />
             </div>
-            <div className="radioOption">
+            {/* <div className="radioOption">
                 <input type="radio" id="preferNotToSay" name="gender" checked={gender === "Prefer not to say"} onChange={(e)=> setGender(e.target.value)} value="Prefer not to say" />
                 <label htmlFor="preferNotToSay">Prefer not to say</label>
-            </div>
+            </div> */}
         </div>
         <span className="fieldError">This field can't be empty.</span>
 
@@ -454,42 +463,54 @@ const PersonalDetails = () =>{
         </div>
         
         <h3>Reference details</h3>
-        <p style={{marginBottom:"1.5rem"}}>NOTE: The reference has to be your blood relation</p>
-
-        <div className="referenceNumber">
-            <p>Reference contact number</p>
-            <input 
-                id="refNumber"
-                type="number" 
-                inputMode="numeric" 
-                onChange={(e)=> numberChange(e, "referenceNumber")} 
-                value={refNumber ?? ""} 
-                placeholder="Enter reference contact number" 
-             />
-             <span className="fieldError">{refErrorMsg}</span>
-        </div>
+        <p style={{marginBottom:"1.5rem"}}>Note: The reference has to be your immediate relative.</p>
 
         <div className="referenceName">
-            <p>Name of owner of number</p>
+            <p>Reference name</p>
             <input type="text" 
                 id="refName"
                 value={refName ?? ""} 
-                onChange={(e)=> setRefName(e.target.value)} 
-                placeholder="Enter name of owner of the number" 
+                onChange={(e)=> onlyCharacters(e.target.value, setRefName)} 
+                placeholder="Who should we call if you are unavailable?" 
                 required 
             />
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
+        <div className="referenceNumber">
+            <p>Reference contact number</p>
+            <input 
+                id="refNumber"
+                type="text" 
+                inputMode="numeric" 
+                onChange={(e)=> numberChange(e, "referenceNumber")} 
+                value={refNumber ?? ""} 
+                placeholder="Mobile number" 
+             />
+             <span className="fieldError">{refErrorMsg}</span>
+        </div>
+
         <div className="referenceRelation">
-            <p>Relation to owner of number</p>
-            <input type="text" 
+            <p>Relationship with the reference contact</p>
+            {/* <input type="text" 
                 id="refRelation"
                 value={refRelation ?? ""} 
                 onChange={(e)=> setRefRelation(e.target.value)} 
-                placeholder="Enter relation to owner of the number" 
+                placeholder="What is your relationship with them?" 
                 required 
-            />
+            /> */}
+            <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
+                <span style={{minWidth:"max-content"}}>Reference is my:</span>
+                <select name="refRelation" id="refRelation" style={{marginBottom:"0"}} value={refRelation} onChange={(e)=>setRefRelation(e.target.value)}>
+                    <option value={"father"}>Father</option>
+                    <option value={"mother"}>Mother</option>
+                    <option value={"brother"}>Brother</option>
+                    <option value={"sister"}>Sister</option>
+                    <option value={"spouse"}>Spouse</option>
+                    <option value={"son"}>Son</option>
+                    <option value={"daughter"}>Daughter</option>
+                </select>
+            </div>
             <span className="fieldError">This field can't be empty.</span>
         </div>
 

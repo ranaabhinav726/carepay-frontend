@@ -83,7 +83,7 @@ const Homepage = () =>{
         <main>
         <Header progressbarDisplay="none" />
 
-        <ReviewCard clinicName={clinicName} link1={googleReviewLink} link2={justdialReviewLink} link={"#"} />
+        <ReviewCard clinicName={clinicName} link1={googleReviewLink} link2={justdialReviewLink} link={"#"} doctorId={doctorId} />
 
         {/* <div className="upper-section">
             <h1 className="heading">Don't Postpone<br /> your Treatment</h1>
@@ -136,7 +136,7 @@ const Homepage = () =>{
 
 export default Homepage
 
-function ReviewCard({clinicName="", link1="", link2=""}){
+function ReviewCard({clinicName="", link1="", link2="", doctorId}){
 
     let nameArr = clinicName.split(' ');
     let minLength = Math.min(2, nameArr.length);
@@ -145,6 +145,15 @@ function ReviewCard({clinicName="", link1="", link2=""}){
         initials += nameArr[i].charAt(0);
     }
     initials = initials.toUpperCase();
+
+    function registerClickCount(linkType){
+        axios.get(env.api_Url + "reviewLinkHitsCounter?doctorId=" + doctorId + "&linkType=" + linkType)
+        .then(res =>{
+            console.log(res)
+        }).catch(err =>{
+            console.log(err)
+        })
+    }
     return(
         <>
         {clinicName && 
@@ -162,7 +171,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                 }}>
                     <img src={HospitalIcon} alt="" style={{width:"50%"}} />
                 </div>
-                <div>
+                <div style={{width:"100%"}}>
                     <h3 style={{fontSize:"18px", marginBottom:"4px"}}>Welcome to</h3>
                     <p style={{fontSize:"24px", maxWidth:"70%"}}>{clinicName}</p>
                 </div>
@@ -172,7 +181,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
                         <img src={Stars} alt="review us" style={{width:"110%"}} />
-                        <Link to={link1} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                        <Link to={link1} onClick={()=>registerClickCount("googleReviewLink")} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                         <img 
@@ -186,7 +195,7 @@ function ReviewCard({clinicName="", link1="", link2=""}){
                     <div style={{display:"flex", width:"50%", flexDirection:"column", justifyContent:"center", gap:"12px"}}>
                         <p>Your opinion<br /> matters to us.</p>
                         <img src={Stars} alt="review us" style={{width:"110%"}} />
-                        <Link to={link2} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
+                        <Link to={link2} onClick={()=>registerClickCount("justdialReviewLink")} target="_blank" style={{height:"48px", width:"100%", display:"flex", alignItems:"center", justifyContent:"center", textAlign:"center", background:"linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),linear-gradient(0deg, #4FD889, #4FD889)", color:"white", fontWeight:"700", borderRadius:"4px"}}>Write your review</Link>
                     </div>
                     <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                         <img 

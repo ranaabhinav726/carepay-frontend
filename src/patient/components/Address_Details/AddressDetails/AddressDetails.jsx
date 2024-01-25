@@ -41,12 +41,28 @@ const AddressDetails = () => {
     // const [landmark, setLandmark] = useState("");
     const [pincode, setPincode] = useState("");
     const [city, setCity] = useState("");
-    const [state, setState] = useState("");
+    const [state, setState] = useState("Select state");
+    const [otherState, setOtherState] = useState("");
+
+    const [fetching, setFetching] = useState(false);
 
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
+    const [errorMsg, setErrorMsg] = useState("This field can't be empty.")
 
     const [isDecentroCall, setDecentroCall] = useState(false);
+
+    let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
+
+    let states = [
+                    "Select state", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chattisgarh", "Chandigarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep Islands", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Other"
+                ];
+
+    let stateOptions = states.map((state, idx)=>{
+        if(idx > 0) return <option key={idx} value={state}>{state}</option>;
+
+        return <option disabled key={idx} value={state}>{state}</option>
+    })
 
     let ref = useRef(0);
     useEffect(()=>{
@@ -62,8 +78,8 @@ const AddressDetails = () => {
                         setFirstLine(data.address);
                         // setLocality(data.locality);
                         // setLandmark(data.landmark);
-                        setPincode(data.pincode);
-                        setState(data.state);
+                        handlePincode(data?.pincode?.toString());
+                        setState(data.state ?? "Select state");
                         setCity(data.city);
                     }
                     if(data.addressType === null){
@@ -143,14 +159,18 @@ const AddressDetails = () => {
         if(val.length < 6){
             setPincode(val);
         }else if(val.length == 6){
+            setFetching(true);
             setPincode(val);
             axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
             .then(response =>{
                 console.log(response)
-                let city = response?.data?.city;
+                let city = response?.data?.city ?? "";
                 setCity(city);
-                let state = response?.data?.state;
+                let state = response?.data?.state ?? "Select state";
                 setState(state);
+                setFetching(false);
+            }).catch(()=>{
+                setFetching(false);
             })
         }
     }
@@ -200,12 +220,27 @@ const AddressDetails = () => {
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(specialChars.test(city)){
+            let elem = document.getElementById('city');
+            setErrorMsg("Special characters are not allowed.");
+            setTimeout(() => {
+                setErrorMsg("This field can't be empty.");
+            }, 3000);
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
-        // if(!state){
-        //     let elem = document.getElementById('state');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
+        if(state === "Select state"){
+            let elem = document.getElementById('state');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if(state === "Other" && !otherState){
+            let elem = document.getElementById('otherState');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         if(! canSubmit){
             return;
@@ -332,25 +367,34 @@ const AddressDetails = () => {
             <p>City</p>
             <input type="text"
                 id="city"
-                value={city ?? ""} 
+                className={fetching === true ? "dynamicFetching" : ""}
+                value={city ?? ""}
+                disabled={fetching === true}
                 onChange={(e)=> setCity(e.target.value)}
-                placeholder="Enter your city here" 
+                placeholder={fetching ? "fetching..." : "Enter your city here" }
                 required 
             />
-            <span className="fieldError">This field can't be empty.</span>
+            <span className="fieldError">{errorMsg}</span>
         </div>
 
-        {/* <div className="state">
+        <div className="state">
             <p>State</p>
-            <input type="text" 
-                id="state"
-                value={state ?? ""} 
-                onChange={(e)=> setState(e.target.value)}
-                placeholder="Enter your state here" 
+            <select id="state" value={state} onChange={(e)=> setState(e.target.value)}>
+                {stateOptions}
+            </select>
+            <span className="fieldError">Please select your state</span>
+            {state === "Other" && 
+                <input type="text" 
+                id="otherState"
+                value={otherState ?? ""}
+                onChange={(e)=> setOtherState(e.target.value)}
+                placeholder={"Enter your state here" }
+                style={{marginTop:"12px"}}
                 required 
-            />
+                />    
+            }
             <span className="fieldError">This field can't be empty.</span>
-        </div> */}
+        </div>
 
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={()=>handleForm()} className="submit">Submit</button>

@@ -2,6 +2,7 @@ import Header from "../Header/Header"
 import "./enterOTP.scss"
 
 import axios from "axios";
+import Timer from "./Timer";
 
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState, useTransition } from "react";
@@ -30,6 +31,11 @@ const EnterOTP = () =>{
         setNumber(localStorage.getItem("phoneNumber"));
         ref.current = document.getElementById('animation-wrapper');
     },[])
+
+    const [canResendOtp, setCanResendOtp] = useState(false);
+    function allowOtpResend(){
+        setCanResendOtp(true);
+    }   
 
     // function handleOTP(e){
     //     const {keyCode} = e;
@@ -159,6 +165,20 @@ const EnterOTP = () =>{
         return amount;
     }
 
+    function reSendOtp(){
+        axios
+            .post(env.api_Url + "userDetails/sendOtpToMobile?mobile="+number, {}, )
+            .then((response) => {
+                console.log(response)
+                if(response.data.status == 200){
+                    setCanResendOtp(false)
+                }else{
+                }
+            }).catch(error => {
+            console.log(error);
+        });
+    }
+
     async function login(){
         let otp = "";
         let digit1 = document.getElementById('digit-1').value;
@@ -207,7 +227,7 @@ const EnterOTP = () =>{
                                         break;
                                     case "Occupation": 
                                     let loanAmount = await getLoanAmount();
-                                    if(loanAmount <= 75000){
+                                    if(loanAmount <= 300001){
                                         path = "CreditFairOffers";
                                     }else{
                                         path = "BankDetails";
@@ -220,7 +240,7 @@ const EnterOTP = () =>{
                                     //                 let data = response?.data?.data;
                                     //                 if(!! data){
                                     //                     let loanAmount = parseInt(data.loanAmount)
-                                    //                     if(loanAmount <= 75000){
+                                    //                     if(loanAmount <= 300001){
                                     //                         path = "CreditFairOffers";
                                     //                     }else{
                                     //                         path = "BankDetails";
@@ -420,6 +440,13 @@ const EnterOTP = () =>{
                 <input className="otpDigit" id="digit-4" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
             </div>
             <p id="error">Please enter correct OTP</p>
+            <div style={{width:"100%", display:"flex", justifyContent:"flex-end", margin:"1rem 0"}}>
+                {canResendOtp ? 
+                    <p onClick={()=>{reSendOtp()}} style={{color:"#514C9F", fontWeight:"700", cursor:"pointer"}}>Resend OTP</p>
+                :
+                    <span >Resend OTP in <Timer seconds={45} onTimerEnd={allowOtpResend} /></span>
+                }
+            </div>
         </div>
         
         <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
