@@ -58,7 +58,7 @@ function PanVerificationIcici(){
         let txnId = offer?.TRANSACTION_ID
         eligibility(number, reqAmount, loanTenure, txnId, panNumber, (res)=>{
             console.log(res)
-            if(res?.status === 200){
+            if(res?.data?.data?.status === 1){
                 let resData = res?.data?.data?.data;
 
                 let forwardingData = {

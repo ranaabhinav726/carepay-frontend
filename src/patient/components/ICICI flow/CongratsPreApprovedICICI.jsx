@@ -10,7 +10,7 @@ const CongratsPreApprovedICICI = () =>{
 
     const navigate = useNavigate();
     const [amount, setAmount] = useState("");
-    const [loanAmount, setLoanAmount] = useState();
+    const [loanAmount, setLoanAmount] = useState("");
 
     let location = useLocation();
     console.log(location.state);
