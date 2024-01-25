@@ -142,9 +142,9 @@ function App() {
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
 
         <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
         <Route path='/patient/EmiOptions' element={<EmiOptions />} />
         <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
-        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
         <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
         <Route path='/patient/FinalConsent' element={<FinalConsent />} />
 

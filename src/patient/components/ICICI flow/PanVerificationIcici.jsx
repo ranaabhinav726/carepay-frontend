@@ -2,8 +2,17 @@ import { useState } from "react";
 import Header from "../Header/Header"
 import StepBar from "./comps/StepBar"
 import InputBox from "./comps/InputBox";
+import { useLocation, useNavigate } from "react-router-dom";
+import { eligibility } from "./apis";
 
 function PanVerificationIcici(){
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    let offer = location?.state?.offer;
+    let reqAmount = location?.state?.reqAmount;
+    let loanTenure = location?.state?.loanTenure;
+    console.log(location.state);
 
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
@@ -30,6 +39,43 @@ function PanVerificationIcici(){
         }
         if(val.length > 10) return
         setPanNumber(val);
+    }
+
+    function showError(setError, time){
+        setError(true);
+        setTimeout(() => {
+            setError(false)
+        }, time);
+    }
+
+    function checkEligibilityAndNavigate(){
+        if(! isPanValid){
+            showError(setError, 3000)
+            return;
+        }
+
+        let number = offer?.MOBILE;
+        let txnId = offer?.TRANSACTION_ID
+        eligibility(number, reqAmount, loanTenure, txnId, panNumber, (res)=>{
+            console.log(res)
+            if(res?.status === 200){
+                let resData = res?.data?.data?.data;
+
+                let forwardingData = {
+                    "loanTenure" : loanTenure,
+                    "loanAmount" : reqAmount,
+                    "txnId" : txnId,
+                    "pInstid" : resData?.PINSTID,
+                    "number" : number
+                }
+
+                navigate("/patient/congratsApprovedIcici", {
+                    state : {
+                        "data" : forwardingData
+                    }
+                })
+            }
+        })
     }
     return(
         <main style={{display: "flex", flexDirection:"column", gap:"1rem"}}>
@@ -61,7 +107,7 @@ function PanVerificationIcici(){
             {error && <span style={{color:"red", fontSize:"14px"}}>Please enter correct PAN number</span>}
             </div>
 
-            <button className="submit">Verify</button>
+            <button className="submit" onClick={()=>checkEligibilityAndNavigate()}>Verify</button>
 
         </main>
     )

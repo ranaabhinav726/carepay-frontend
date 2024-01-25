@@ -1,18 +1,35 @@
-import { useEffect } from 'react';
-import SearchImg from '../../assets/GIFs/searching.png'
+import { useEffect, useState } from 'react';
+// import SearchImg from '../../assets/GIFs/searching.png'
 import Header from '../Header/Header'
 import lottie from "lottie-web";
 import animationData from '../../assets/JSON animations/Comp 1.json'
+import { preEligibility } from './apis';
+import { useNavigate } from 'react-router-dom';
 const SearchingOffers = () =>{
 
+    const navigate = useNavigate();
+    const [number, setNumber] = useState(localStorage.getItem("phoneNumber"));
 
     useEffect(() => {
         lottie.loadAnimation({
           container: document.querySelector("#searchAnimation"),
-          // animationData: animationData,
+          animationData: animationData,
           renderer: "canvas"
         });
       }, []);
+
+      useEffect(()=>{
+        if(! number) return;
+
+        preEligibility(number, res=>{
+          if(res?.data?.message === "success"){
+            let data = res?.data?.data?.data;
+            console.log(data);
+
+            navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+          }
+        })
+      }, [number])
     return(
         <main style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
             <Header progressbarDisplay="none" />

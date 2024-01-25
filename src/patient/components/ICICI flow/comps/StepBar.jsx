@@ -3,7 +3,7 @@ export default function StepBar({currStep}){
 
     let stepNames = ["EMI plan selection", "PAN verification", "Final consent"];
     let steps = stepNames.map((stepName, idx)=>{
-        return <Step step={idx+1} stepName={stepName} currStep={currStep}></Step>
+        return <Step step={idx+1} stepName={stepName} currStep={currStep} key={idx}></Step>
     })
     return(
         <>

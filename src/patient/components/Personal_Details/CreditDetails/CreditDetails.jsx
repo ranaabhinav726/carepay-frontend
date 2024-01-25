@@ -10,10 +10,11 @@ import { useNavigate } from "react-router-dom";
 // import { DataContext } from "../../App"
 
 import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../environment/environment'
+import { preEligibility } from "../../ICICI flow/apis";
 // import { useData } from "../data";
 
 const CreditDetails = () => {
-    const [number, setNumber] = useState('')
+    // const [number, setNumber] = useState('')
     const [fullName, setFullName] = useState("");
     const [amount, setAmount] = useState("");
     const [treatment, setTreatment] = useState("");
@@ -25,6 +26,7 @@ const CreditDetails = () => {
     const [apiError, setApiError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
     const [canSubmit, setCanSubmit] = useState(true);
+    const [number, ] = useState(localStorage.getItem("phoneNumber"));
 
     // const [doctorId, setDoctorId] = useState("");
     // const [doctorName, setDoctorName] = useState("");
@@ -126,6 +128,16 @@ const CreditDetails = () => {
                 if(response.data.message === "success"){
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
+                    if(! number) return;
+
+                    preEligibility(number, res=>{
+                    if(res?.data?.message === "success"){
+                        let data = res?.data?.data?.data;
+                        console.log(data);
+
+                        navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+                    }
+                    })
                     navigate('/patient/PersonalDetails');
                 }else{
                     // setErrorMsg()

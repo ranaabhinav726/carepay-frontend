@@ -1,28 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import InputBox from "./comps/InputBox";
 import StepBar from "./comps/StepBar";
 import { BiRupee } from "react-icons/bi";
+import { useLocation, useNavigate } from "react-router-dom";
+import './creditFairOffers.scss'
+import axios from "axios";
+import { env } from "../../environment/environment";
 
 function EmiOptions(){
 
-    let offers = [];
-    let loanAmt = 10000;
+    const navigate = useNavigate();
+    let location = useLocation();
+    // console.log(location.state);
+    let offer = location?.state?.offer;
+    let tenure = offer?.TENURE;
+    let offerAmount = offer?.OFFER_AMOUNT;
+
+    const [offers, setOffers] = useState([]);
+    // let loanAmt = 10000;
     // const [lo]
-    const [maxLoanLimit, setMaxLoanLimit] = useState(100000);
+    const [maxLoanLimit, ] = useState(Number(offerAmount));
     const [reqAmount, setReqAmount] = useState("");
+    const [maxTenure, setMaxTenure] = useState(Number(tenure));
 
     const [selected, setSelected] = useState({
         "cardName" : "card-1",
-        "productId": "",
         "tenure"   : ""
     });
+
+    useEffect(()=>{
+        setMaxTenure(Number(tenure))
+        console.log(tenure)
+    }, [])
+    
+    useEffect(()=>{
+        let temp = [];
+        let limit = maxTenure;
+        if(maxTenure > 12) limit = 12;
+        for(let i=3; i<=limit; i=i+3){
+            let o = {
+                "totalEmi" : i
+            }
+            temp.push(o);
+        }
+        // console.log(temp)
+        setOffers(temp);
+    }, [maxTenure])
 
     let offerCards = offers.map((offer, idx)=>{
         return <OfferCard
             cardName={`card-${idx+1}`} 
             offerDetails={offer} 
-            loanAmount={loanAmt} 
+            loanAmount={Number(reqAmount)} 
             selected={selected} 
             setSelected={setSelected} 
             key={idx} 
@@ -39,6 +69,19 @@ function EmiOptions(){
         if(val >= 0 && val <= maxLoanLimit){
             setReqAmount(val);
         }
+    }
+
+    function handleNavigate(){
+        let chosenTenure = selected.tenure;
+        navigate("/patient/PanVerificationIcici", 
+            {
+                state:{
+                    "offer" : offer, 
+                    "reqAmount" : reqAmount,
+                    "loanTenure" : chosenTenure,
+                }
+            }
+        )
     }
 
     return(
@@ -59,7 +102,7 @@ function EmiOptions(){
             </div>
             <p>Select EMI options</p>
             {offerCards}
-            <button className="submit">Submit</button>
+            <button className="submit" onClick={()=>handleNavigate()}>Submit</button>
         </main>
     )
 }
@@ -69,22 +112,31 @@ export default EmiOptions
 const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) =>{
 
     let months = offerDetails?.totalEmi ?? "0";
-    let amount = parseInt(loanAmount/months);
-    let pf = "0";
-    if(!! offerDetails?.processingFesIncludingGSTINR){
-        pf = "Rs. " + offerDetails?.processingFesIncludingGSTINR;
-    }else if(!! offerDetails?.processingFesIncludingGSTRate){
-        pf = offerDetails?.processingFesIncludingGSTRate + " %";
-    }
-    let interest = offerDetails?.interest ?? "0";
-    let advEmi = offerDetails?.advanceEmi ?? "0";
+    const [emiAmount, setEmiAmount] = useState("");
+    const [pf, ] = useState(0);
+    const [interest, ] = useState(0);
+
+    useEffect(()=>{
+        let headerConfig = {
+            params:{
+                "amount" : loanAmount,
+                "tenure" : months
+            }
+        }
+        axios.get(env.api_Url + "icici/emiData", headerConfig)
+        .then(res=>{
+            console.log(res);
+            let amt = res?.data?.data?.emiAmount;
+            if(amt) setEmiAmount(Number(amt));
+        }).catch(e=>{
+
+        })
+    }, [loanAmount])
 
     function cardSelector(){
         let obj = {
             "cardName" : cardName,
-            "productId": offerDetails?.productId,
-            "tenure"   : months,
-            "internalProductId" : offerDetails?.internalProductId
+            "tenure"   : months
         }
         setSelected(obj)
     }
@@ -104,7 +156,7 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                     </div>
                     <div className="offerContentRight">
                         <span className='offerCardSpan'>EMI amount</span>
-                        <span className='offerCardSpan largeText'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                        <span className='offerCardSpan largeText'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {emiAmount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
                     </div>
                 </div>
                 <div className="offerContent">
@@ -113,7 +165,7 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                         <span className='offerCardSpan'>Interest rate</span>
                     </div>
                     <div className="offerContentRight">
-                        <span className='offerCardSpan'>{pf}</span>
+                        <span className='offerCardSpan'>{`${pf}%`}</span>
                         <span className='offerCardSpan'>{interest} %</span>
                     </div>
                     {/* <BiRupee style={{margin:"0 -4px -2px -2px"}} />  */}

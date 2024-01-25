@@ -5,15 +5,21 @@ import './FinalConsent.scss'
 
 import OTPChars from '../../assets/OTPChars.svg'
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios"
+import { env } from "../../environment/environment"
+import { confirmUser, validateUser } from "./apis"
 
 function FinalConsent(){
 
-    const [otpSent, setOtpSent] = useState(true);
-    const [number, setNumber] = useState("9999999999");
+    const location = useLocation();
+    let data = location?.state?.data;
 
-    const [otpAmt, setOtpAmt] = useState(20000);
-    const [doctor, setDoctor] = useState("Y");
+    const [otpSent, ] = useState(true);
+    const [number, ] = useState(Number(data?.number));
+
+    const [loanAmt, ] = useState(Number(data?.loanAmount));
+    const [doctorName, setDoctorName] = useState("");
 
     const navigate = useNavigate();
     const handleOTP = (e) => {
@@ -42,7 +48,7 @@ function FinalConsent(){
             // Non-empty input box, so clear it and shift focus to the previous one
             e.preventDefault(); // Prevent the default backspace behavior (going back in history)
             e.target.value = '';
-            document.getElementById(prev).focus();
+            // document.getElementById(prev).focus();
           }
         } else if (/^\d$/.test(inputValue) && inputBox < 4) {
           // Valid digit input, and the current input box is not the last one
@@ -80,10 +86,56 @@ function FinalConsent(){
     e.preventDefault();
     };
 
+    let userId = localStorage.getItem("userId");
+
+    useEffect(()=>{
+        if(!! userId){
+            axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+            .then(response =>{
+                if(response.data.status === 200){
+                    let data = response.data.data;
+                    if(!! data){
+                        setDoctorName(data.doctorName);
+                    }
+                }
+            }).catch(()=>{
+
+            });
+        }
+    }, [])
+
     useEffect(()=>{
         document.getElementById('digit-1').focus()
     },[])
 
+    function handleSubmit(){
+        let otp = "";
+        let digit1 = document.getElementById('digit-1').value;
+        let digit2 = document.getElementById('digit-2').value;
+        let digit3 = document.getElementById('digit-3').value;
+        let digit4 = document.getElementById('digit-4').value;
+
+        otp = digit1 + digit2 + digit3 + digit4;
+
+        if(otp.toString().length < 4){
+            
+            return;
+        }
+
+        validateUser(otp, data.txnId, (res)=>{
+            if(res?.data?.data?.status === 1){
+                let loanAmount = data?.loanAmount;
+                let tenure = data?.tenure;
+                let txnId = data?.txnId;
+                confirmUser(loanAmount, tenure, txnId, res=>{
+                    if(res?.data?.data?.status === 1){
+                        navigate("/patient/LoanAppSuccessful")
+                    }
+                })
+            }
+        })
+
+    }
 
     return(
         <main style={{display: "flex", flexDirection:"column", gap:"1rem"}}>
@@ -94,7 +146,7 @@ function FinalConsent(){
                 <>
                     <h3 style={{margin:"1rem 0"}}>Final consent</h3>
                     <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
-                        ICICI will send an OTP on your registered mobile number. This OTP will help us disburse the credit amount to the doctor.
+                        ICICI will send an OTP on your registered mobile number. This OTP will help us disburse the credit amount to the doctorName.
                     </div>
                     <div style={{width:"100%", display:'flex', justifyContent:"center"}}>
                         <img src={OTPChars} alt="" />
@@ -115,10 +167,10 @@ function FinalConsent(){
                     </div>
 
                     <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
-                        Note : By submitting OTP, amount ₹ {otpAmt} will be transferred to doctor {doctor}’s account.
+                        Note : By submitting OTP, amount ₹ {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})} will be transferred to doctor{doctorName? ` ${doctorName}'s` : "'s"} account.
                     </div>
 
-                    <button className="submit">Submit</button>
+                    <button className="submit" onClick={()=>handleSubmit()}>Submit</button>
                 </>   
             }
         </main>
