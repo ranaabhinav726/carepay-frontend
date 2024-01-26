@@ -34,7 +34,7 @@ const CongratsApprovedICICI = () =>{
             <div style={{width:'90%', padding:"22px", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", fontSize:"32px", color:"#149540", fontWeight:"700", border:"1px solid #000", background:"#EBFEED", boxShadow:"-4px 6px 0px 0px #514C9F"}}>
                 ₹ {loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}
             </div>
-            <p style={{textAlign:"center"}}>ICICI has sent an OTP on your registered mobile number. Enter that OTP in the next step as a final consent.</p>
+            <p style={{textAlign:"center", marginTop:"1rem"}}>ICICI has sent an OTP on your registered mobile number. Enter that OTP in the next step as a final consent.</p>
             
             <button className="submit" onClick={()=>handleNavigation()}>Continue with OTP</button>
         </main>

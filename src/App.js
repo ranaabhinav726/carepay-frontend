@@ -111,6 +111,8 @@ import CongratsPreApprovedICICI from './patient/components/ICICI flow/CongratsPr
 import EmiOptions from './patient/components/ICICI flow/EmiOptions';
 import PanVerificationIcici from './patient/components/ICICI flow/PanVerificationIcici';
 import FinalConsent from './patient/components/ICICI flow/FinalConsent';
+import TermsAndConditions from './website/pages/TermsAndConditions';
+import RefundandCancellation from './website/pages/RefundandCancellation';
 
 
 function App() {
@@ -122,6 +124,8 @@ function App() {
         <Route path='/about' element={<About />} ></Route>
         {/* <Route path='/contactUs' element={<ContactUs />} ></Route> */}
         <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route>
+        <Route path='/TermsAndConditions' element={<TermsAndConditions />} ></Route>
+        <Route path='/RefundandCancellation' element={<RefundandCancellation />} ></Route>
 
         <Route path='/patient' element={<Homepage />}></Route>
         <Route path='/patient/MobileNumberVerification' element={<MobileNumberVerification />} />

@@ -65,7 +65,7 @@ function PanVerificationIcici(){
                     "loanTenure" : loanTenure,
                     "loanAmount" : reqAmount,
                     "txnId" : txnId,
-                    "pInstid" : resData?.PINSTID,
+                    "pInstId" : resData?.PINSTID,
                     "number" : number
                 }
 

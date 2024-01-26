@@ -10,11 +10,13 @@ import axios from "axios"
 import { env } from "../../environment/environment"
 import { confirmUser, validateUser } from "./apis"
 import InputBox from "./comps/InputBox"
+import Timer from "../EnterOTP/Timer"
 
 function FinalConsent(){
 
     const location = useLocation();
     let data = location?.state?.data;
+    console.log(data)
 
     const [otpSent, ] = useState(true);
     const [number, ] = useState(Number(data?.number));
@@ -22,6 +24,11 @@ function FinalConsent(){
     const [loanAmt, ] = useState(Number(data?.loanAmount));
     const [otp, setOtp] = useState("");
     const [doctorName, setDoctorName] = useState("");
+
+    const [canResendOtp, setCanResendOtp] = useState(false);
+    function allowOtpResend(){
+        setCanResendOtp(true);
+    }  
 
     const navigate = useNavigate();
     // const handleOTP = (e) => {
@@ -106,6 +113,29 @@ function FinalConsent(){
         }
     }, [])
 
+    function reSendOtp(){
+        let submitObj = {
+            "transactionId": data?.txnId,
+            "mobileNo": data?.number,
+            "processInstanceId": data?.pInstId,
+            "tenure" : "",
+            "panNo" : "",
+            "downPaymentEmi" : "",
+            "requestLoanAmount" : "",
+            "otpValidation" : "",
+            "otpConfirmation" : "",
+        }
+        axios.post(env.api_Url + "icici/resendOtp", submitObj)
+        .then(res=>{
+            if(res.data.message == "success"){
+                console.log("OTP resent");
+                setCanResendOtp(false)
+            }
+        }).catch(e=>{
+
+        })
+    }
+
     // useEffect(()=>{
     //     document.getElementById('digit-1').focus()
     // },[])
@@ -124,19 +154,19 @@ function FinalConsent(){
             return;
         }
 
-        validateUser(otp, data.txnId, (res)=>{
+        let pInstId = data?.pInstId;
+        validateUser(otp, data.txnId, pInstId, (res)=>{
             if(res?.data?.data?.status === 1){
                 let loanAmount = data?.loanAmount;
-                let tenure = data?.tenure;
+                let tenure = data?.loanTenure;
                 let txnId = data?.txnId;
-                confirmUser(loanAmount, tenure, txnId, res=>{
+                confirmUser(loanAmount, tenure, txnId, pInstId, res=>{
                     if(res?.data?.data?.status === 1){
                         navigate("/patient/LoanAppSuccessful")
                     }
                 })
             }
         })
-
     }
 
     return(
@@ -176,6 +206,14 @@ function FinalConsent(){
                             }}
                         />
                         <p id="error">Please enter correct OTP</p>
+                    </div>
+
+                    <div style={{width:"100%", display:"flex", justifyContent:"flex-end", margin:"1rem 0"}}>
+                        {canResendOtp ? 
+                            <p onClick={()=>{reSendOtp()}} style={{color:"#514C9F", fontWeight:"700", cursor:"pointer"}}>Resend OTP</p>
+                        :
+                            <span >Resend OTP in <Timer seconds={45} onTimerEnd={allowOtpResend} /></span>
+                        }
                     </div>
 
                     <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>

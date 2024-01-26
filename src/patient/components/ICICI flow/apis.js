@@ -44,10 +44,10 @@ export function eligibility(number, reqLoanAmt, tenure, txnId, panNo, callback){
 }
 
 export function reSendOtp(){
-    
+
 }
 
-export function validateUser(otp, txnId, callback){
+export function validateUser(otp, txnId, pInstId, callback){
     let data = {
         "mobileNo": "", // only this
         "tenure" : "",
@@ -57,7 +57,7 @@ export function validateUser(otp, txnId, callback){
         "requestLoanAmount" : "",
         "otpValidation" : otp,
         "otpConfirmation" : "",
-        "processInstanceId" : ""
+        "processInstanceId" : pInstId
     
     }
     axios.post(env.api_Url + "icici/validateUser", data)
@@ -68,7 +68,7 @@ export function validateUser(otp, txnId, callback){
     })
 }
 
-export function confirmUser(reqLoanAmt, tenure, txnId, callback){
+export function confirmUser(reqLoanAmt, tenure, txnId, pInstId, callback){
     let data = {
         "mobileNo": "", // only this
         "tenure" : tenure,
@@ -78,9 +78,10 @@ export function confirmUser(reqLoanAmt, tenure, txnId, callback){
         "requestLoanAmount" : reqLoanAmt,
         "otpValidation" : "",
         "otpConfirmation" : "",
-        "processInstanceId" : ""
+        "processInstanceId" : pInstId
     
     }
+    console.log(data)
     axios.post(env.api_Url + "icici/confirmUser", data)
     .then(res=>{
         callback(res);
