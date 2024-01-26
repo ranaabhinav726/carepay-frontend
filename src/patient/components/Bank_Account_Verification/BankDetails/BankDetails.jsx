@@ -23,6 +23,7 @@ const BankDetails = () =>{
 
     let userId = localStorage.getItem('userId')
     let ref = useRef(0);
+    let timerId = null;
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         if(!! userId){
@@ -41,6 +42,25 @@ const BankDetails = () =>{
                 console.log("Error fetching data");
             })
         }
+
+        if(isReVisitToUploadStatement === true){
+            timerId = setInterval(async()=>{
+            await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
+                .then(res=>{
+                    let ntc = res?.data?.data;
+                    // console.log(ntc)
+                        if(ntc === true){
+                            setNtc(true);
+                        }
+                    }).catch(e=>{
+
+                    })
+            }, 5000)
+        }
+
+        if(!! timerId){
+            return ()=>clearInterval(timerId);
+        }
     },[])
 
     const [bankName, setBankName] = useState('');
@@ -56,6 +76,8 @@ const BankDetails = () =>{
 
     const [focus, setFocus] = useState(false);
     const [showPopOver, setShowPopOver] = useState(false);
+
+    const [ntc, setNtc] = useState(false);
 
     let popUpMsg = "This account will be used to set up auto repayment of EMIs. Are you sure you want to proceed with this bank account?"
     // useEffect(()=>{
@@ -203,17 +225,12 @@ const BankDetails = () =>{
             axios.post(env.api_Url + "uploadBankDetailsCF?userId=" + userId)
             .then(async res=>{
                 if(res.data.message === "success"){
-                    await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
-                    .then(res=>{
-                        let ntc = res?.data?.data;
-                        // console.log(ntc)
-                            if(ntc === true){
-                                navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
-                            }else{
-                                navigate("/patient/WaitingForApproval");
-                            }
-                            hideWrapper(ref.current)
-                        })
+                    if(ntc === true){
+                        navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
+                    }else{
+                        navigate("/patient/WaitingForApproval");
+                    }
+                    hideWrapper(ref.current)
                 }else{
                     hideWrapper(ref.current)
                 }

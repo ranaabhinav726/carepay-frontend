@@ -125,6 +125,8 @@ import Screen12sub2 from './patient/components/Fibe flow/Screen12sub2';
 import Screen13 from './patient/components/Fibe flow/Screen13';
 import Screen14 from './patient/components/Fibe flow/Screen14';
 import Screen15 from './patient/components/Fibe flow/Screen15';
+import TermsAndConditions from './website/pages/TermsAndConditions';
+import RefundandCancellation from './website/pages/RefundandCancellation';
 
 
 
@@ -137,6 +139,8 @@ function App() {
         <Route path='/about' element={<About />} ></Route>
         {/* <Route path='/contactUs' element={<ContactUs />} ></Route> */}
         <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route>
+        <Route path='/TermsAndConditions' element={<TermsAndConditions />} ></Route>
+        <Route path='/RefundandCancellation' element={<RefundandCancellation />} ></Route>
 
         <Route path='/patient' element={<Homepage />}></Route>
         <Route path='/patient/MobileNumberVerification' element={<MobileNumberVerification />} />

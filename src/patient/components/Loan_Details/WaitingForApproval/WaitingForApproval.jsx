@@ -97,7 +97,7 @@ function WaitingForApproval(){
                         {/* <span style={{textDecoration:"underline", fontWeight:"700", cursor:"pointer"}} onClick={()=>navigateBack()}>click here</span> */}
                     </div>
                 }
-                <button className="submit" onClick={()=>navigate('/patient/ChechkingStatus')}>Check Status</button>
+                <button className="submit" onClick={()=>navigate('/patient/ChechkingStatus', {state:{"isFilesUploaded" : Boolean(uploadedFiles)}})}>Check Status</button>
                 <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
             </>
             }
