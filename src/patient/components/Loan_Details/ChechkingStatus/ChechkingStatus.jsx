@@ -25,6 +25,20 @@ export default function ChechkingStatus(){
 
                 })
         }
+        await axios.get(env.api_Url + "checkCFApproval?userId=" + userId)
+        .then(async(res)=>{
+            if(res?.data?.data === true){
+                navigate('/patient/congrats');
+            }else{
+                getLoanStatus();
+            }
+        }).catch(e=>{
+            getLoanStatus();
+        })
+        
+    }, 8000);
+
+    async function getLoanStatus(){
         await axios
         .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
             .then(async(response) => {
@@ -47,11 +61,14 @@ export default function ChechkingStatus(){
                     }else{
                         navigate(-1)
                     }
+                }else{
+                    navigate(-1)
                 }
             }).catch(error =>{
                 console.log(error)
+                navigate(-1)
             })
-    }, 8000);
+    }
     return(
         <main className="screenContainer">
             <Header progressBar="hidden" />
