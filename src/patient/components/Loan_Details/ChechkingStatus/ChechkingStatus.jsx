@@ -20,14 +20,21 @@ export default function ChechkingStatus(){
                 // console.log(ntc)
                     if(ntc === true){
                         navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
+                    }else{
+                        checkCFApproval();
                     }
                 }).catch(e=>{
-
+                    checkCFApproval();
                 })
         }
+        
+        
+    }, 8000);
+
+    async function checkCFApproval(){
         await axios.get(env.api_Url + "checkCFApproval?userId=" + userId)
         .then(async(res)=>{
-            if(res?.data?.data === true){
+            if(res?.data?.message === "success" && res?.data?.data === true){
                 navigate('/patient/congrats');
             }else{
                 getLoanStatus();
@@ -35,8 +42,7 @@ export default function ChechkingStatus(){
         }).catch(e=>{
             getLoanStatus();
         })
-        
-    }, 8000);
+    }
 
     async function getLoanStatus(){
         await axios
