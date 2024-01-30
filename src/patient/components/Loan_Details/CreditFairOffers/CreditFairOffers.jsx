@@ -287,7 +287,8 @@ const CreditFairOffers = () =>{
                 <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
 
                 <button className='submit' onClick={()=>submitLoanData()}>Submit</button>
-
+                <p style={{textAlign:"center", margin:"1rem 0"}}>For more details and enquiries, reach out to us</p>
+                <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
             </main>
         </>
     )

@@ -107,6 +107,7 @@ import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
 import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
+import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
 
 
 
@@ -140,6 +141,7 @@ function App() {
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
         <Route path='/patient/ChechkingStatus' element={<ChechkingStatus />} />
+        <Route path='/patient/RejectedScreen' element={<RejectedScreen />} />
 
 
         <Route path='/patient/FetchingLoanLimit' element={<FetchingLoanLimit />} />
