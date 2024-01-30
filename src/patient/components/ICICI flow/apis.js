@@ -22,7 +22,7 @@ export function preEligibility(number, callback){
     })
 }
 
-export function eligibility(number, reqLoanAmt, tenure, txnId, panNo, callback){
+export function eligibility(number, reqLoanAmt, tenure, txnId, panNo, callback, hideWaitingModal){
     let data = {
         "mobileNo": number, // only this
         "tenure" : tenure,
@@ -37,9 +37,10 @@ export function eligibility(number, reqLoanAmt, tenure, txnId, panNo, callback){
     }
     axios.post(env.api_Url + "icici/eligibility", data)
     .then(res=>{
+        hideWaitingModal()
         callback(res);
     }).catch(e=>{
-
+        hideWaitingModal()
     })
 }
 
@@ -47,7 +48,7 @@ export function reSendOtp(){
 
 }
 
-export function validateUser(otp, txnId, pInstId, callback){
+export function validateUser(otp, txnId, pInstId, callback, hideWaitingModal){
     let data = {
         "mobileNo": "", // only this
         "tenure" : "",
@@ -64,11 +65,11 @@ export function validateUser(otp, txnId, pInstId, callback){
     .then(res=>{
         callback(res);
     }).catch(e=>{
-
+        hideWaitingModal();
     })
 }
 
-export function confirmUser(reqLoanAmt, tenure, txnId, pInstId, callback){
+export function confirmUser(reqLoanAmt, tenure, txnId, pInstId, callback, hideWaitingModal){
     let data = {
         "mobileNo": "", // only this
         "tenure" : tenure,
@@ -85,7 +86,8 @@ export function confirmUser(reqLoanAmt, tenure, txnId, pInstId, callback){
     axios.post(env.api_Url + "icici/confirmUser", data)
     .then(res=>{
         callback(res);
+        hideWaitingModal();
     }).catch(e=>{
-
+        hideWaitingModal();
     })
 }

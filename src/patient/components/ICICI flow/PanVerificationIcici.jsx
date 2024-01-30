@@ -4,6 +4,7 @@ import StepBar from "./comps/StepBar"
 import InputBox from "./comps/InputBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import { eligibility } from "./apis";
+import { showWaitingModal, hideWaitingModal } from "../../environment/environment";
 
 function PanVerificationIcici(){
 
@@ -56,6 +57,7 @@ function PanVerificationIcici(){
 
         let number = offer?.MOBILE;
         let txnId = offer?.TRANSACTION_ID
+        showWaitingModal();
         eligibility(number, reqAmount, loanTenure, txnId, panNumber, (res)=>{
             console.log(res)
             if(res?.data?.data?.status === 1){
@@ -75,7 +77,7 @@ function PanVerificationIcici(){
                     }
                 })
             }
-        })
+        }, hideWaitingModal)
     }
     return(
         <main style={{display: "flex", flexDirection:"column", gap:"1rem"}}>

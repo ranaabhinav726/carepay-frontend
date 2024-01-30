@@ -7,7 +7,7 @@ import OTPChars from '../../assets/OTPChars.svg'
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios"
-import { env } from "../../environment/environment"
+import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment"
 import { confirmUser, validateUser } from "./apis"
 import InputBox from "./comps/InputBox"
 import Timer from "../EnterOTP/Timer"
@@ -155,6 +155,7 @@ function FinalConsent(){
         }
 
         let pInstId = data?.pInstId;
+        showWaitingModal();
         validateUser(otp, data.txnId, pInstId, (res)=>{
             if(res?.data?.data?.status === 1){
                 let loanAmount = data?.loanAmount;
@@ -164,9 +165,9 @@ function FinalConsent(){
                     if(res?.data?.data?.status === 1){
                         navigate("/patient/LoanAppSuccessful")
                     }
-                })
+                }, hideWaitingModal)
             }
-        })
+        }, hideWaitingModal)
     }
 
     return(
