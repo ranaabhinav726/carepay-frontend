@@ -20,11 +20,31 @@ export default function ChechkingStatus(){
                 // console.log(ntc)
                     if(ntc === true){
                         navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
+                    }else{
+                        checkCFApproval();
                     }
                 }).catch(e=>{
-
+                    checkCFApproval();
                 })
         }
+        
+        
+    }, 8000);
+
+    async function checkCFApproval(){
+        await axios.get(env.api_Url + "checkCFApproval?userId=" + userId)
+        .then(async(res)=>{
+            if(res?.data?.message === "success" && res?.data?.data === true){
+                navigate('/patient/congrats');
+            }else{
+                getLoanStatus();
+            }
+        }).catch(e=>{
+            getLoanStatus();
+        })
+    }
+
+    async function getLoanStatus(){
         await axios
         .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
             .then(async(response) => {
@@ -47,11 +67,14 @@ export default function ChechkingStatus(){
                     }else{
                         navigate(-1)
                     }
+                }else{
+                    navigate(-1)
                 }
             }).catch(error =>{
                 console.log(error)
+                navigate(-1)
             })
-    }, 8000);
+    }
     return(
         <main className="screenContainer">
             <Header progressBar="hidden" />
