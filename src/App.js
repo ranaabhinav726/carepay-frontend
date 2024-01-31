@@ -113,6 +113,7 @@ import PanVerificationIcici from './patient/components/ICICI flow/PanVerificatio
 import FinalConsent from './patient/components/ICICI flow/FinalConsent';
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
+import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
 
 
 function App() {
@@ -145,6 +146,7 @@ function App() {
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
         <Route path='/patient/ChechkingStatus' element={<ChechkingStatus />} />
+        <Route path='/patient/RejectedScreen' element={<RejectedScreen />} />
 
         <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
         <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
