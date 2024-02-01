@@ -8,6 +8,9 @@ import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environme
 import { useLocation, useNavigate } from "react-router-dom";
 import BottomPopOverModal from "../../utility/BottomPopOverModal";
 
+import SearchingDoc from '../../../assets/GIFs/Document in process.gif'
+
+
 // let bankname = localStorage.getItem('bankName');
 
 const BankDetails = () =>{
@@ -24,6 +27,7 @@ const BankDetails = () =>{
     let userId = localStorage.getItem('userId')
     let ref = useRef(0);
     let timerId = null;
+
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
         if(!! userId){
@@ -45,16 +49,29 @@ const BankDetails = () =>{
 
         if(isReVisitToUploadStatement === true){
             timerId = setInterval(async()=>{
-            await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
-                .then(res=>{
-                    let ntc = res?.data?.data;
-                    // console.log(ntc)
-                        if(ntc === true){
-                            setNtc(true);
-                        }
-                    }).catch(e=>{
+            
+            await axios.get(env.api_Url + "checkCFApproval?userId=" + userId)
+            .then(async(res)=>{
+                if(res?.data?.message === "success" && res?.data?.data === true){
+                    setCfApproved(true);
+                    if(!! timerId){
+                        clearInterval(timerId);
+                    }
+                }else{
+                    await axios.get(env.api_Url + "/checkNTCUser?userId=" + userId)
+                    .then(res=>{
+                        let ntc = res?.data?.data;
+                        // console.log(ntc)
+                            if(ntc === true){
+                                setNtc(true);
+                                if(!! timerId){
+                                    clearInterval(timerId);
+                                }
+                            }
+                        }).catch(e=>{})
+                }
+            }).catch(e=>{})
 
-                    })
             }, 5000)
         }
 
@@ -78,6 +95,8 @@ const BankDetails = () =>{
     const [showPopOver, setShowPopOver] = useState(false);
 
     const [ntc, setNtc] = useState(false);
+    const [cfApproved, setCfApproved] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     let popUpMsg = "This account will be used to set up auto repayment of EMIs. Are you sure you want to proceed with this bank account?"
     // useEffect(()=>{
@@ -225,11 +244,17 @@ const BankDetails = () =>{
             axios.post(env.api_Url + "uploadBankDetailsCF?userId=" + userId)
             .then(async res=>{
                 if(res.data.message === "success"){
-                    if(ntc === true){
-                        navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
-                    }else{
-                        navigate("/patient/WaitingForApproval");
-                    }
+                    setLoading(true);
+                    setTimeout(() => {
+                        if(cfApproved === true){
+                            navigate('/patient/congrats');
+                        }else if(ntc === true){
+                            navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
+                        }else{
+                            navigate("/patient/WaitingForApproval");
+                        }
+                        setLoading(false);
+                    }, 5000);
                     hideWrapper(ref.current)
                 }else{
                     hideWrapper(ref.current)
@@ -247,72 +272,86 @@ const BankDetails = () =>{
 
    return(
     <>
-    <main className="bankDetails" style={{position:"relative"}}>
-    <Header progressbarDisplay="block" progress="80" canGoBack="/patient/EmploymentDetails" />
-        <h3>Bank Details</h3>
+        <main className="bankDetails" style={{position:"relative"}}>
+        {loading === true ? 
+        <>
+            <Header progressBar="hidden" />
+            <div style={{display:"flex", placeContent:"center", marginTop:"3rem"}}>
+                <img src={SearchingDoc} alt="" style={{width:"50%"}} />
+            </div>
+            <p style={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}}>Sit back and relax!</p>
+            <p style={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}}>while we assess your credit application...</p>
+        </>
+        :
+        <>
+            <Header progressbarDisplay="block" progress="80" canGoBack="/patient/EmploymentDetails" />
+            <h3>Bank Details</h3>
 
-        <div style={{background:"#FAE1CD", padding:"16px", borderRadius:"8px", color:"#514C9F", textAlign:"center", wordSpacing:"1px", letterSpacing:"0.5px"}}>
-            Please enter details of your bank account where you receive your <strong>income/salary</strong> and make sure it has an active debit card or net banking.
-        </div>
+            <div style={{background:"#FAE1CD", padding:"16px", borderRadius:"8px", color:"#514C9F", textAlign:"center", wordSpacing:"1px", letterSpacing:"0.5px"}}>
+                Please enter details of your bank account where you receive your <strong>income/salary</strong> and make sure it has an active debit card or net banking.
+            </div>
 
-        {/* <p className="note"><b>NOTE:</b> Please add bank details of the same account as the bank statement submitted.</p> */}
-        <div className="accountName">
-            <p>Account number</p>
-            <input 
-                type={focus ? "number" : "password"}
-                id="accountNumber"
-                value={accountNumber ?? ""}
-                onChange={(e)=>setAccountNumber(e.target.value)}
-                onFocus={()=>setFocus(true)}
-                placeholder="Enter account number here" 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div>
-        <div className="confirmAccountName">
-            <p>Confirm account number</p>
-            <input 
-                type={focus ? "password" : "number"}
-                id="confirmAccountNumber"
-                value={confirmAccountNumber ?? ""}
-                onChange={(e)=> setConfirmAccountNumber(e.target.value)}
-                onFocus={()=>setFocus(false)}
-                
-                placeholder="Re-enter account number here" 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-            <p id="error" className="apiError hide">Account numbers don't match.</p>
-        </div>
-        <div className="IFScode">
-            <p>IFSC code</p>
-            <input 
-                type="text" 
-                id="IFSC"
-                value={IFSC ?? ""}
-                onChange={(e)=>handleIFSC(e.target.value)}
-                placeholder="Enter IFSC here" 
-                autoCapitalize="characters" 
-            />
-            <span className="fieldError">Please enter a correct IFSC</span>
-        </div>
-        {/* <div className="bankName">
-            <p>Bank name</p>
-            <input disabled
-                id="bankName"
-                defaultValue={bankName ?? ""}
-                onChange={(e)=>setBankName(e.target.value)}
-                type="text"
-                placeholder="Enter your bank name here" 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div> */}
+            {/* <p className="note"><b>NOTE:</b> Please add bank details of the same account as the bank statement submitted.</p> */}
+            <div className="accountName">
+                <p>Account number</p>
+                <input 
+                    type={focus ? "number" : "password"}
+                    id="accountNumber"
+                    value={accountNumber ?? ""}
+                    onChange={(e)=>setAccountNumber(e.target.value)}
+                    onFocus={()=>setFocus(true)}
+                    placeholder="Enter account number here" 
+                />
+                <span className="fieldError">This field can't be empty.</span>
+            </div>
+            <div className="confirmAccountName">
+                <p>Confirm account number</p>
+                <input 
+                    type={focus ? "password" : "number"}
+                    id="confirmAccountNumber"
+                    value={confirmAccountNumber ?? ""}
+                    onChange={(e)=> setConfirmAccountNumber(e.target.value)}
+                    onFocus={()=>setFocus(false)}
+                    
+                    placeholder="Re-enter account number here" 
+                />
+                <span className="fieldError">This field can't be empty.</span>
+                <p id="error" className="apiError hide">Account numbers don't match.</p>
+            </div>
+            <div className="IFScode">
+                <p>IFSC code</p>
+                <input 
+                    type="text" 
+                    id="IFSC"
+                    value={IFSC ?? ""}
+                    onChange={(e)=>handleIFSC(e.target.value)}
+                    placeholder="Enter IFSC here" 
+                    autoCapitalize="characters" 
+                />
+                <span className="fieldError">Please enter a correct IFSC</span>
+            </div>
+            {/* <div className="bankName">
+                <p>Bank name</p>
+                <input disabled
+                    id="bankName"
+                    defaultValue={bankName ?? ""}
+                    onChange={(e)=>setBankName(e.target.value)}
+                    type="text"
+                    placeholder="Enter your bank name here" 
+                />
+                <span className="fieldError">This field can't be empty.</span>
+            </div> */}
 
-        <span>
-            Bank name : <span style={{opacity:"0.6"}}>{bankName || ""}</span>
-        </span>
+            <span>
+                Bank name : <span style={{opacity:"0.6"}}>{bankName || ""}</span>
+            </span>
 
-        <button onClick={()=>onSubmit()} className="submit">Submit</button>
-        <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} />
-    </main>
+            <button onClick={()=>onSubmit()} className="submit">Submit</button>
+            <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} />
+            
+        </>
+        }
+        </main>
     </>
    )
 }

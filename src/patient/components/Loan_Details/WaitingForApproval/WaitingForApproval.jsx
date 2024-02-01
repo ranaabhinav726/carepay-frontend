@@ -4,12 +4,10 @@ import { env } from "../../../environment/environment";
 import Waiting from '../../../assets/waiting.png'
 import Statement from '../../../assets/statement.png' 
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import SearchingDoc from '../../../assets/GIFs/Document in process.gif'
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { showWrapper, hideWrapper } from "../../../environment/environment";
 
 function WaitingForApproval(){
 
@@ -54,16 +52,6 @@ function WaitingForApproval(){
     }
     return(
         <main className="waitingForApproval">
-            {loading === true ?
-            <>
-                <Header progressBar="hidden" />
-                <div style={{display:"flex", placeContent:"center", marginTop:"3rem"}}>
-                    <img src={SearchingDoc} alt="" style={{width:"50%"}} />
-                </div>
-                <p style={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}}>Sit back and relax!</p>
-                <p style={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}}>while we assess your credit application...</p>
-            </>
-            :
             <>
                 <Header />
                 <div className="reviewPageContent" style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"1.5rem", marginTop:"2rem"}}>
@@ -100,7 +88,6 @@ function WaitingForApproval(){
                 <button className="submit" onClick={()=>navigate('/patient/ChechkingStatus', {state:{"isFilesUploaded" : Boolean(uploadedFiles)}})}>Check Status</button>
                 <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
             </>
-            }
         </main>
     )
 }
