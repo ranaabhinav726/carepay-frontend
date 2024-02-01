@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../environment/environment'
 import RadioInput from "../../utility/RadioInput/RadioInput";
 import { preEligibility } from "../../ICICI flow/apis";
+import AutocompleteInput from "../../utility/SuggestionInputBox/SuggestionInputBox";
 // import { useData } from "../data";
 
 const CreditDetails = () => {
@@ -45,6 +46,106 @@ const CreditDetails = () => {
     let doctorId = localStorage.getItem("doctorId")
     let doctorName = localStorage.getItem("doctorName")
     let userId = localStorage.getItem("userId");
+
+    let treatmentList = [
+        "Infertility Treatment (inc IVF and other treatments)",
+        "MTP's",
+        "Diagnostic Laproscopy",
+        "Minor Surgeries like Polyp, Fibroid etc.",
+        "Therapeutic Curettage",
+        "Other small operations of Uterus, Cervix, Fallopian tube, Vagina etc.",
+        "Lithotripsy",
+        "Hydrocele",
+        "Piles / Fistula",
+        "Prostate",
+        "Varicose Veins",
+        "Colonoscopy / Gastroscopy",
+        "Appendectomy",
+        "Cystoscopic removal of stones",
+        "Ultrasound guided aspirations",
+        "Hernia",
+        "Hair transplant",
+        "Stretch mark removal",
+        "Facelift",
+        "Rhinoplasty",
+        "Liposuction",
+        "Tummy tuck",
+        "Breast Augmentation",
+        "Breast Reduction and Breast Lift",
+        "Gynecomastia (Male Breast Reduction)",
+        "Vulvovaginal",
+        "Buttock Augmentation",
+        "Buttock Lift",
+        "Blepharoplasty (Eyelid surgery)",
+        "Rhinoplasty (Nose Surgery)",
+        "Otoplasty (Ear Pinning)",
+        "Brow lift",
+        "Chin Augmentation",
+        "Malar or Cheek Augmentation",
+        "Chemical Peel",
+        "Botulinum toxin or Botox",
+        "Soft Tissue Fillers",
+        "Stem Cell Enriched Fat Graft",
+        "Fat Injection/Fat Grafting",
+        "Cleft Lip and Cleft Palate",
+        "Dental Implants / Crowns & Bridges",
+        "Removable Partial Dentures (Imported)",
+        "Removable Partial Denture (Flexible)",
+        "Upper and Lower Complete Denture (Imported)",
+        "E-Max Metal Free Crown / Veneer – Metal Free",
+        "Ceramil / Azir ( Zirconia Crowns) – Metal Free",
+        "Zoom Advanced Whitening (3 Cycles) – Including Maintenance Kit",
+        "Ant.RCT/ Post.RCT or Re-RCT",
+        "Ceramic Fillings/Inlay (Per Tooth)",
+        "Dental Jewellery (Dental Crystal)",
+        "Composite Bonding",
+        "Componeers",
+        "Night Guard",
+        "Dental Diode Laser",
+        "Diode Laser Frenectomy",
+        "Laser Gum Contouring",
+        "Laser Depigmentation",
+        "Full Mouth Scaling & Polishing",
+        "Deep Scaling (Curretage)",
+        "Gum- Flap Surgery",
+        "Bone Grafting",
+        "Gum Graft",
+        "Extraction",
+        "Impaction / Wisdom Tooth Removal",
+        "Biopsy",
+        "Apicectomy",
+        "Sinuslift",
+        "Braces (Metallic) Full Mouth",
+        "Metallic- Self Ligating (Damon)",
+        "Clear Aligners Invisible Braces (K Line/ Clear Path)",
+        "Braces (Ceramic) Full Mouth",
+        "Invisalign",
+        "Cataract operation",
+        "Removal of foreign body",
+        "Corneal transplant",
+        "Tear duct operations",
+        "Ptosis",
+        "Lasik Surgery",
+        "Glaucoma",
+        "Squint",
+        "Viterectomy",
+        "Retinal Detachment",
+        "Ossiculoplasty",
+        "Functional Endoscopic Sinus Surgery",
+        "Stapedectomy",
+        "Microlaryngeal surgery",
+        "Foreign body removal",
+        "Tympanoplasty",
+        "Glossectomy",
+        "Frenuloplasty",
+        "Reconstruction of the tongue",
+        "Closed reduction of fractures",
+        "Operations of tendons / Tendon sheath",
+        "Arthroscopic Knee Aspiration",
+        "Reduction of dislocations",
+        "Dialysis",
+        "Angiography"
+    ];
 
     useEffect(()=>{
         if(!! userId){
@@ -129,7 +230,7 @@ const CreditDetails = () => {
         }
 
         // console.log(submitObj); return
-
+        // console.log(submitObj); return;
         await axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(async(response) => {
@@ -216,7 +317,7 @@ const CreditDetails = () => {
             <span className="fieldError">Please enter your treatment cost</span>
         </div>
 
-        <div className="inputGroup">
+        {/* <div className="inputGroup">
             <p>Treatment name</p>
             <input 
                 id="treatment"
@@ -224,9 +325,18 @@ const CreditDetails = () => {
                 value={treatment} 
                 placeholder="Name of treatment"
                 onChange={(e)=>setTreatment(e.target.value)}  
+                au
             />
             <span className="fieldError">Please fill name of your treatment</span>
-        </div>
+        </div> */}
+
+        <AutocompleteInput
+            title={"Treatment name"}
+            value={treatment}
+            setValue={setTreatment}
+            placeholder="Name of treatment"
+            list={treatmentList}
+        />
 
         <div className="inputGroup">
             <p>Full name (as per PAN)</p>
