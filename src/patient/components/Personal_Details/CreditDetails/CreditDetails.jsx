@@ -392,13 +392,18 @@ const CreditDetails = () => {
                 <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
                     <span style={{minWidth:"max-content"}}>Patient is my:</span>
                     <select name="relation" id="relation" style={{marginBottom:"0"}} value={relation} onChange={(e)=>setRelation(e.target.value)}>
-                        <option value={"father"}>Father</option>
-                        <option value={"mother"}>Mother</option>
-                        <option value={"brother"}>Brother</option>
-                        <option value={"sister"}>Sister</option>
-                        <option value={"spouse"}>Spouse</option>
-                        <option value={"son"}>Son</option>
-                        <option value={"daughter"}>Daughter</option>
+                        <option value={"MOTHER"}>Mother</option>
+                        <option value={"FATHER"}>Father</option>
+                        <option value={"BROTHER"}>Brother</option>
+                        <option value={"SISTER"}>Sister</option>
+                        <option value={"HUSBAND"}>Husband</option>
+                        <option value={"WIFE"}>Wife</option>
+                        <option value={"SON"}>Son</option>
+                        <option value={"DAUGHTER"}>Daughter</option>
+                        <option value={"GRANDMOTHER"}>Grandmother</option>
+                        <option value={"GRANDFATHER"}>Grandfather</option>
+                        <option value={"GRANDSON"}>Grandson</option>
+                        <option value={"GRANDDAUGHTER"}>Granddaughter</option>
                     </select>
                 </div>
                 <span className="fieldError">Please tell your relation to the patient</span>
