@@ -30,7 +30,7 @@ const CongratsApprovedICICI = () =>{
                 <p style={{position:"absolute", fontSize:"24px", lineHeight:"26px", color:"#149540", fontWeight:"700", marginTop:"1rem"}}>Congratulations</p>
                 <img src={Confetti} style={{maxWidth:"25%"}} alt="" />
             </div>
-            <p>Your credit is <strong style={{color:"#1C8769"}}>approved</strong> of amount</p>
+            <p>Your credit is <strong style={{color:"#1C8769"}}>approved</strong> for amount</p>
             <div style={{width:'90%', padding:"22px", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", fontSize:"32px", color:"#149540", fontWeight:"700", border:"1px solid #000", background:"#EBFEED", boxShadow:"-4px 6px 0px 0px #514C9F"}}>
                 ₹ {loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}
             </div>

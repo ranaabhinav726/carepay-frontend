@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import './creditFairOffers.scss'
 import axios from "axios";
 import { env } from "../../environment/environment";
+import Sparkles from '../../assets/Sparkle.svg'
 
 function EmiOptions(){
 
@@ -98,10 +99,13 @@ function EmiOptions(){
                 setValue={amountHandler}
             />
             <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
-                Please keep the required credit amount <br/>under your <b>approved limit of ₹ {maxLoanLimit.toLocaleString('en-IN',{maximumFractionDigits: 2})}</b> only
+                Please keep the required credit amount <br/>under your <b>approved limit of ₹ {maxLoanLimit.toLocaleString('en-IN',{maximumFractionDigits: 2})}</b> only.
             </div>
             <p>Select EMI options</p>
             {offerCards}
+            <p style={{fontWeight:"700", color:"#149540"}}>
+                <img style={{filter:"brightness(110%)", marginBottom:"-2px"}} src={Sparkles} alt="" /> No interest or processing fees.
+            </p>
             <button className="submit" onClick={()=>handleNavigate()}>Submit</button>
         </main>
     )
@@ -113,8 +117,8 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
 
     let months = offerDetails?.totalEmi ?? "0";
     const [emiAmount, setEmiAmount] = useState("");
-    const [pf, ] = useState(0);
-    const [interest, ] = useState(0);
+    // const [pf, ] = useState(0);
+    // const [interest, ] = useState(0);
 
     useEffect(()=>{
         let headerConfig = {
@@ -149,7 +153,7 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                 </div>
             </div>
             <div className='offerContentWrapper'>
-                <div className='offerContent' style={{borderBottom:"1px solid #ccc"}}>
+                <div className='offerContent'>
                     <div className="offerContentLeft">
                         <span className='offerCardSpan'>Tenure</span>
                         <span className='offerCardSpan largeText'>{months} month{months>1 && "s"}</span>
@@ -159,7 +163,7 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                         <span className='offerCardSpan largeText'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {emiAmount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
                     </div>
                 </div>
-                <div className="offerContent">
+                {/* <div className="offerContent">
                     <div className="offerContentLeft">
                         <span className='offerCardSpan'>Processing fees</span>
                         <span className='offerCardSpan'>Interest rate</span>
@@ -168,8 +172,8 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                         <span className='offerCardSpan'>{`${pf}%`}</span>
                         <span className='offerCardSpan'>{interest} %</span>
                     </div>
-                    {/* <BiRupee style={{margin:"0 -4px -2px -2px"}} />  */}
-                </div>
+                    <BiRupee style={{margin:"0 -4px -2px -2px"}} /> 
+                </div> */}
             </div>
         </div>
     )

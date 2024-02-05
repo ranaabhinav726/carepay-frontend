@@ -61,7 +61,7 @@ const CongratsPreApprovedICICI = () =>{
                 <>
                 <div style={{width:'100%',display:"flex", alignItems:"row", justifyContent:"center", gap:"1rem", padding:"10px", borderRadius:"8px", background:"#ECEBFF", color:"#514C9F"}}>
                     <FiCheckCircle style={{fontSize:"30px", margin:"auto"}} />
-                    <p>Your required credit amount <strong>₹{loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</strong> is in the approved limit</p>
+                    <p>Your required credit amount <strong>₹{loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</strong> is in the approved limit.</p>
                 </div>
                 <button className="submit" onClick={()=>handleNavigate()}>Continue with ICICI bank</button>
                 </>
