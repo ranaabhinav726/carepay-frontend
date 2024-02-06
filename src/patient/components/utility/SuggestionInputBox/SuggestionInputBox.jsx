@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './SuggestionInputBox.module.css'
 
-export const AutocompleteInput = ({title, value, setValue, placeholder, list}) => {
+export const AutocompleteInput = ({id, title, value, setValue, placeholder, list, fieldError}) => {
 
   const [inputValue, setInputValue] = useState(value);
+  useEffect(()=>{
+    setInputValue(value)
+  }, [value])
   function setValueBoth(val){
     setValue(val);
     setInputValue(val);
@@ -32,7 +35,7 @@ export const AutocompleteInput = ({title, value, setValue, placeholder, list}) =
   return (
     <>
     <label className={styles.suggestionInputLabel} htmlFor="autocompleteInput">{title}</label>
-    <div className={styles.suggestionInputWrapper}>
+    <div className={styles.suggestionInputWrapper} id={id}>
         <input
             type="text"
             id="autocompleteInput"
@@ -59,6 +62,7 @@ export const AutocompleteInput = ({title, value, setValue, placeholder, list}) =
             </ul>
         </div>
     </div>
+    <span className="fieldError">{fieldError}</span>
     </>
   );
 };
