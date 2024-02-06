@@ -35,6 +35,10 @@ const Homepage = () =>{
     const [googleReviewLink, setGoogleReviewLink] = useState("");
     const [justdialReviewLink, setJustdialReviewLink] = useState("");
 
+    const [nbfcId, setNbfcId] = useState("");
+
+    const fibeNbfcId = "lYsPxk42bDzRgJVmHoNNcegqyC9ww1XK";
+
     console.log("Last update - 16/10/2023 7:39 PM");
 
     useEffect(()=>{
@@ -44,12 +48,29 @@ const Homepage = () =>{
                 console.log(response)
                 setGoogleReviewLink(response?.data?.data?.googleReviewLink)
                 setJustdialReviewLink(response?.data?.data?.justdialReviewLink)
-            }).catch(()=>{
-
+            }).catch((error)=>{
+                console.warn(error)
             })
         }
     } ,[doctorId])
 
+    useEffect(()=>{
+        if(doctorId){
+            axios.get(env.api_Url+"/userDetails/getNbfcStatusForDoctor?doctorId=" + doctorId)
+            .then((response)=>{
+                console.log(response);
+                if(response){
+                    let id = response?.data?.data[0];
+                     if(id){
+                        setNbfcId(id);
+                        localStorage.setItem('nbfcId', id);
+                     }
+                }
+            }).catch((error)=>{
+                console.warn(error)
+            })
+        }
+    } ,[doctorId])
     // const data = useContext(DataContext);
 
     // An API call from homepage to check the stage of current user,
@@ -59,7 +80,11 @@ const Homepage = () =>{
 
     function navigateToNext(){
         // animateScreen();
-        navigate('/patient/MobileNumberVerification')
+        if(nbfcId === fibeNbfcId){
+            navigate('/patient/screen1')
+        }else{
+            navigate('/patient/MobileNumberVerification')
+        }
     }
 
     // function animateScreen(){

@@ -105,15 +105,34 @@ import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers
 import { useEffect } from 'react';
 import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
 import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
+import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
 import SearchingOffers from './patient/components/ICICI flow/SearchingOffers';
 import CongratsApprovedICICI from './patient/components/ICICI flow/CongratsApprovedICICI';
 import CongratsPreApprovedICICI from './patient/components/ICICI flow/CongratsPreApprovedICICI';
+import { Screen1 } from './patient/components/Fibe flow/Screen1';
+import Screen2 from './patient/components/Fibe flow/Screen2';
+import Screen3 from './patient/components/Fibe flow/Screen3';
+import Screen4 from './patient/components/Fibe flow/Screen4';
+import Screen5 from './patient/components/Fibe flow/Screen5';
+import Screen6 from './patient/components/Fibe flow/Screen6';
+import Screen7 from './patient/components/Fibe flow/Screen7';
+import Screen8 from './patient/components/Fibe flow/Screen8';
+import Screen9 from './patient/components/Fibe flow/Screen9';
+import Screen10 from './patient/components/Fibe flow/Screen10';
+import Screen11 from './patient/components/Fibe flow/Screen11';
+import Screen12 from './patient/components/Fibe flow/Screen12';
+import Screen12sub1 from './patient/components/Fibe flow/Screen12sub1';
+import Screen12sub2 from './patient/components/Fibe flow/Screen12sub2';
+import Screen13 from './patient/components/Fibe flow/Screen13';
+import Screen14 from './patient/components/Fibe flow/Screen14';
+import Screen15 from './patient/components/Fibe flow/Screen15';
 import EmiOptions from './patient/components/ICICI flow/EmiOptions';
 import PanVerificationIcici from './patient/components/ICICI flow/PanVerificationIcici';
 import FinalConsent from './patient/components/ICICI flow/FinalConsent';
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
 import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
+
 
 
 function App() {
@@ -145,6 +164,7 @@ function App() {
         <Route path='/patient/LoanDetails' element={<LoanDetails />} />
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
+        
         <Route path='/patient/ChechkingStatus' element={<ChechkingStatus />} />
         <Route path='/patient/RejectedScreen' element={<RejectedScreen />} />
 
@@ -161,6 +181,56 @@ function App() {
         <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
         <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
         <Route path='/patient/FinalConsent' element={<FinalConsent />} />
+
+        <Route path='/patient/screen1' element={<Screen1 />} />
+        <Route path='/patient/screen2' element={<Screen2 />} />
+        <Route path='/patient/screen3' element={<Screen3 />} />
+        <Route path='/patient/screen4' element={<Screen4 />} />
+        <Route path='/patient/screen5' element={<Screen5 />} />
+        <Route path='/patient/screen6' element={<Screen6 />} />
+        <Route path='/patient/screen7' element={<Screen7 />} />
+        <Route path='/patient/screen8' element={<Screen8 />} />
+        <Route path='/patient/screen9' element={<Screen9 />} />
+        <Route path='/patient/screen10' element={<Screen10 />} />
+        <Route path='/patient/screen11' element={<Screen11 />} />
+        <Route path='/patient/screen12' element={<Screen12 />} />
+        <Route path='/patient/screen12sub1' element={<Screen12sub1 />} />
+        <Route path='/patient/screen12sub2' element={<Screen12sub2 />} />
+        <Route path='/patient/screen13' element={<Screen13 />} />
+        <Route path='/patient/screen14/:userId' element={<Screen14 />} />
+        <Route path='/patient/screen15' element={<Screen15 />} />
+
+        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
+        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
+        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
+        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
+        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
+
+        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
+        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
+        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
+        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
+        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
+
+        <Route path='/patient/screen1' element={<Screen1 />} />
+        <Route path='/patient/screen2' element={<Screen2 />} />
+        <Route path='/patient/screen3' element={<Screen3 />} />
+        <Route path='/patient/screen4' element={<Screen4 />} />
+        <Route path='/patient/screen5' element={<Screen5 />} />
+        <Route path='/patient/screen6' element={<Screen6 />} />
+        <Route path='/patient/screen7' element={<Screen7 />} />
+        <Route path='/patient/screen8' element={<Screen8 />} />
+        <Route path='/patient/screen9' element={<Screen9 />} />
+        <Route path='/patient/screen10' element={<Screen10 />} />
+        <Route path='/patient/screen11' element={<Screen11 />} />
+        <Route path='/patient/screen12' element={<Screen12 />} />
+        <Route path='/patient/screen12sub1' element={<Screen12sub1 />} />
+        <Route path='/patient/screen12sub2' element={<Screen12sub2 />} />
+        <Route path='/patient/screen13' element={<Screen13 />} />
+        <Route path='/patient/screen14/:userId' element={<Screen14 />} />
+        <Route path='/patient/screen15' element={<Screen15 />} />
 
 
         <Route path='/patient/FetchingLoanLimit' element={<FetchingLoanLimit />} />

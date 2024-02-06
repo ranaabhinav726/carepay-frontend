@@ -18,7 +18,6 @@ let modal = document.getElementById('animation-wrapper');
 
 export function showWaitingModal(){
     if(modal) modal.style.display = "flex";
-    console.log(modal)
 }
 export function hideWaitingModal(){
     if(modal) modal.style.display = "none";
