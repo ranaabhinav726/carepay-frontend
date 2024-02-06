@@ -63,6 +63,14 @@ import LoanVerifying from './patient/components/PG_Notification/LoanVerifying/Lo
 import LoanAppSuccessful from './patient/components/PG_Notification/LoanAppSuccessful/LoanAppSuccessful'
 import LoanAppOnHold from './patient/components/PG_Notification/LoanAppOnHold/LoanAppOnHold'
 
+import CreditDetails from './patient/components/Personal_Details/CreditDetails/CreditDetails';
+import WaitingForApproval from './patient/components/Loan_Details/WaitingForApproval/WaitingForApproval';
+import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
+import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
+import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
+import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
+
+
 // import PayFirstInstallment from './patient/components/PG_Notification/PayFirstInstallment/PayFirstInstallment'
 
 import UserDashboard from './patient/components/Dashboard/UserDashboard/UserDashboard'
@@ -90,8 +98,6 @@ import QrPdfMaker from './qrData/QRPDF';
 // import { lazy } from "react";
 // import Loadable from "./website/compponents/Loadable";
 // import PrivacyPolicy from './website/pages/PrivacyPolicy';
-import CreditDetails from './patient/components/Personal_Details/CreditDetails/CreditDetails';
-import WaitingForApproval from './patient/components/Loan_Details/WaitingForApproval/WaitingForApproval';
 
 // const Home = Loadable(lazy(() => import("./website/pages/Home")));
 // const About = Loadable(lazy(() => import("./website/pages/About")));
@@ -101,14 +107,14 @@ import WebHomepage from "./website/pages/Homepage"
 import About from './website/pages/About';
 import PrivacyPolicy from './website/pages/PrivacyPolicy';
 
-import CreditFairOffers from './patient/components/Loan_Details/CreditFairOffers/CreditFairOffers';
-import { useEffect } from 'react';
-import LoginFromURL from './doctor/Components/DirectLogin/LoginFromURL';
-import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
-import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/ChechkingStatus';
+
 import SearchingOffers from './patient/components/ICICI flow/SearchingOffers';
 import CongratsApprovedICICI from './patient/components/ICICI flow/CongratsApprovedICICI';
 import CongratsPreApprovedICICI from './patient/components/ICICI flow/CongratsPreApprovedICICI';
+import EmiOptions from './patient/components/ICICI flow/EmiOptions';
+import PanVerificationIcici from './patient/components/ICICI flow/PanVerificationIcici';
+import FinalConsent from './patient/components/ICICI flow/FinalConsent';
+
 import { Screen1 } from './patient/components/Fibe flow/Screen1';
 import Screen2 from './patient/components/Fibe flow/Screen2';
 import Screen3 from './patient/components/Fibe flow/Screen3';
@@ -126,12 +132,9 @@ import Screen12sub2 from './patient/components/Fibe flow/Screen12sub2';
 import Screen13 from './patient/components/Fibe flow/Screen13';
 import Screen14 from './patient/components/Fibe flow/Screen14';
 import Screen15 from './patient/components/Fibe flow/Screen15';
-import EmiOptions from './patient/components/ICICI flow/EmiOptions';
-import PanVerificationIcici from './patient/components/ICICI flow/PanVerificationIcici';
-import FinalConsent from './patient/components/ICICI flow/FinalConsent';
+
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
-import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
 
 
 
