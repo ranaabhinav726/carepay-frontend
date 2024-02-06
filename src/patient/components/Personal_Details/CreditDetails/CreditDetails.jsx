@@ -19,6 +19,7 @@ const CreditDetails = () => {
     const [fullName, setFullName] = useState("");
     const [amount, setAmount] = useState("");
     const [treatment, setTreatment] = useState("");
+    const [otherTreatment, setOtherTreatment] = useState("");
 
     const [borrower, setBorrower] = useState("");
     let isPatient = true;
@@ -37,6 +38,7 @@ const CreditDetails = () => {
     // const data = useContext(DataContext);
     
     let ref = useRef(0);
+    const otherTreatmentRef = useRef(null);
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
@@ -184,6 +186,19 @@ const CreditDetails = () => {
             if(elem) showErrorOnUI(elem);
             return;
         }
+        if(treatment === "Other"){
+            if(! otherTreatment){
+                let elem = document.getElementById('otherTreatment');
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+        }else{
+            if(!treatmentList.includes(treatment)){
+                let elem = document.getElementById('treatment');
+                if(elem) showErrorOnUI(elem, false);
+                return;
+            }
+        }
         if(borrower === "someone else"){
             if(! patientName){
                 let elem = document.getElementById('patientName');
@@ -217,10 +232,15 @@ const CreditDetails = () => {
             "userId" : userId,
             "doctorName": doctorName,
             "doctorId": doctorId,
-            "loanReason": treatment,
             "loanAmount": amount,
             "formStatus": ""
         };
+
+        if(treatment === "Other"){
+            submitObj.loanReason = otherTreatment;
+        }else{
+            submitObj.loanReason = treatment;
+        }
 
         if(borrower === "someone else"){
             submitObj.patientName = patientName;
@@ -282,6 +302,16 @@ const CreditDetails = () => {
         }
     }
 
+    function otherTreatmentNameAndFocusSetter(otherTreatmentName){
+        setOtherTreatment(otherTreatmentName);
+    }
+    
+    useEffect(()=>{
+        // console.log(otherTreatmentRef.current);
+        if(otherTreatmentRef.current !== null){
+            otherTreatmentRef.current.focus();
+        }
+    }, [treatment])
    return(
     <>
     <main className="mobileNumberVerification">
@@ -325,9 +355,25 @@ const CreditDetails = () => {
             placeholder="Name of treatment"
             list={treatmentList}
             fieldError="Please enter your treatment name"
+            otherValueSettter={otherTreatmentNameAndFocusSetter}
         />
-
+        {treatment === "Other" &&
         <div className="inputGroup">
+            <input 
+                id="otherTreatment"
+                type="text" 
+                value={otherTreatment} 
+                placeholder="Enter your treatment name"
+                // onChange={(e)=>setOtherTreatment(e.target.value)}  
+                onChange={(e)=> onlyCharacters(e.target.value, setOtherTreatment)}  
+                style={{marginBottom:"10px"}}
+                ref={otherTreatmentRef}
+            />
+            <span className="fieldError">Please enter your treatment name</span>
+        </div>
+        }
+
+        <div className="inputGroup" style={{marginTop:"1.5rem"}}>
             <p>Full name (as per PAN)</p>
             <input 
                 id="fullName"
@@ -354,19 +400,19 @@ const CreditDetails = () => {
         </div> */}
 
 
-            <p style={{marginTop:"1.5rem"}}>Who are you borrowing for?</p>
-            <RadioInput
-                id="borrower" 
-                name="borrower" 
-                selected={borrower}
-                setSelected={setBorrower}
-                values={["myself", "someone else"]}
-                options={["Myself", "Someone else"]}
-                styles={{
-                    padding:"12px 12px 8px 0",
-                    width:"30%"
-                }}
-            />
+        <p style={{marginTop:"1.5rem"}}>Who are you borrowing for?</p>
+        <RadioInput
+            id="borrower" 
+            name="borrower" 
+            selected={borrower}
+            setSelected={setBorrower}
+            values={["myself", "someone else"]}
+            options={["Myself", "Someone else"]}
+            styles={{
+                padding:"12px 12px 8px 0",
+                width:"30%"
+            }}
+        />
 
         {borrower==="someone else" && 
         <>
