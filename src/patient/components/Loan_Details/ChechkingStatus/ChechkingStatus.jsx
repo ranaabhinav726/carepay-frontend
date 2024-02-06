@@ -20,11 +20,31 @@ export default function ChechkingStatus(){
                 // console.log(ntc)
                     if(ntc === true){
                         navigate("/patient/FileUpload", {state : {"reVisitToUploadStatement" : true}})
+                    }else{
+                        checkCFApproval();
                     }
                 }).catch(e=>{
-
+                    checkCFApproval();
                 })
         }
+        
+        
+    }, 8000);
+
+    async function checkCFApproval(){
+        await axios.get(env.api_Url + "checkCFApproval?userId=" + userId)
+        .then(async(res)=>{
+            if(res?.data?.message === "success" && res?.data?.data === true){
+                navigate('/patient/congrats');
+            }else{
+                getLoanStatus();
+            }
+        }).catch(e=>{
+            getLoanStatus();
+        })
+    }
+
+    async function getLoanStatus(){
         await axios
         .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
             .then(async(response) => {
@@ -38,20 +58,24 @@ export default function ChechkingStatus(){
                         navigate('/patient/loanAppSuccessful')
                     }
                     else if(data.loan_status === "110"){            // if loan is rejected
-                        let loanAmt = parseInt(data.amount);
-                        if(loanAmt <= 300001){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
-                            navigate("/patient/BankDetails");       // Navigate to collect Bank details.
-                        }else{                                      // if loan amount is greater than 75k then bank details have already been collected
-                            navigate("/patient/LoanDetails");   // Enter Payms's flow
-                        }
+                        // let loanAmt = parseInt(data.amount);
+                        // if(loanAmt <= 300001){                       // if amount is less than 75k, then it means Bank details have not been collected yet.
+                        //     navigate("/patient/BankDetails");       // Navigate to collect Bank details.
+                        // }else{                                      // if loan amount is greater than 75k then bank details have already been collected
+                        //     navigate("/patient/LoanDetails");   // Enter Payms's flow
+                        // }
+                        navigate('/patient/RejectedScreen')
                     }else{
                         navigate(-1)
                     }
+                }else{
+                    navigate(-1)
                 }
             }).catch(error =>{
                 console.log(error)
+                navigate(-1)
             })
-    }, 8000);
+    }
     return(
         <main className="screenContainer">
             <Header progressBar="hidden" />

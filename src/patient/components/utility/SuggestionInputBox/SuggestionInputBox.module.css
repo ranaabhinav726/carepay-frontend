@@ -1,0 +1,82 @@
+.suggestionInputLabel{
+    margin-bottom: 10px;
+    font-size: 15.75px;
+    line-height: 17px;
+}
+
+.suggestionInputWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.suggestionInput{
+    width: 100%;
+    padding: 10px;
+
+    width: 100%;
+    height: 48px;
+    
+    background: #ECEBFF;
+    border-radius: 4px 4px 0 0;
+    border: none;
+    outline: none;
+    /* margin-bottom: 8px; */
+}
+
+.notFromListError{
+    color: red;
+    font-size: 14px;
+}
+
+.suggestionListWrapper{
+    border-radius: 4px;
+    position: relative;
+}
+.suggestionListItemWrapper{
+    position: absolute;
+    /* display: none; */
+    width: 100%;
+    background-color: #ECEBFF;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0px 4px 4px 0px #00000026;
+}
+.suggestionItem{
+    list-style: none;
+    padding: 14px 10px;
+    cursor: pointer;
+}
+
+li.suggestionItem{
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+/* .suggestionListItemWrapper:focus-within + .suggestionListWrapper>.suggestionListItemWrapper, .suggestionListWrapper:focus-within{
+    display: block;
+} */
+/* input.suggestionInput:focus + .suggestionListWrapper>.suggestionListItemWrapper, .suggestionListWrapper:focus-within{
+    display: block;
+}
+
+.suggestionInput:focus + .suggestionListWrapper,
+.suggestionListWrapper:focus-within {
+    display: block;
+}
+
+.suggestionListWrapper {
+    border-radius: 4px;
+    position: relative;
+    display: none; 
+}
+
+.suggestionListWrapper:focus-within,
+.suggestionListItemWrapper {
+    position: absolute;
+    width: 100%;
+    background-color: #ECEBFF;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0px 4px 4px 0px #00000026;
+    display: block; 
+} */
