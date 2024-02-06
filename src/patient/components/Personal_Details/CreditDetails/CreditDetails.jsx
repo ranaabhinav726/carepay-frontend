@@ -318,11 +318,13 @@ const CreditDetails = () => {
         </div> */}
 
         <AutocompleteInput
-            title={"Treatment name"}
+            id="treatment"
+            title="Treatment name"
             value={treatment}
             setValue={setTreatment}
             placeholder="Name of treatment"
             list={treatmentList}
+            fieldError="Please enter your treatment name"
         />
 
         <div className="inputGroup">
