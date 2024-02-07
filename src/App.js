@@ -135,7 +135,6 @@ import Screen15 from './patient/components/Fibe flow/Screen15';
 
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
-import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
 import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
 import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
 
