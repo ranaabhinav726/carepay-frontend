@@ -108,6 +108,8 @@ import ChechkingStatus from './patient/components/Loan_Details/ChechkingStatus/C
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
 import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/RejectedScreen';
+import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
+import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
 
 
 
@@ -134,6 +136,7 @@ function App() {
         <Route path='/patient/CreditDetails' element={<CreditDetails />} />
 
         <Route path='/patient/AddressDetails' element={<AddressDetails />} />
+        <Route path='/patient/AddressNotServiceable' element={<AddressNotServiceable />} />
 
         <Route path='/patient/EmploymentDetails' element={<EmploymentDetails />} />
 
@@ -141,6 +144,7 @@ function App() {
         <Route path='/patient/CreditFairOffers' element={<CreditFairOffers />} />
         <Route path='/patient/WaitingForApproval' element={<WaitingForApproval />} />
         <Route path='/patient/ChechkingStatus' element={<ChechkingStatus />} />
+        <Route path='/patient/CfApproved' element={<CfApproved />} />
         <Route path='/patient/RejectedScreen' element={<RejectedScreen />} />
 
 
