@@ -2,6 +2,7 @@ import Header from "../Header/Header"
 import "./homepage.scss"
 
 import homeImage from '../../assets/heroMoneyImage.svg'
+import CarepayLogo from '../../assets/Logo-carepay.svg'
 import { useNavigate } from "react-router-dom"
 // import { useContext } from "react"
 // import { DataContext } from "../../App"
@@ -106,7 +107,9 @@ const Homepage = () =>{
     return(
         <>
         <main>
-        <Header progressbarDisplay="none" />
+        <header style={{padding:"10px 0"}}>
+            <img style={{marginTop:"10px"}} src={CarepayLogo} alt="" />
+        </header>
 
         <ReviewCard clinicName={clinicName} link1={googleReviewLink} link2={justdialReviewLink} link={"#"} doctorId={doctorId} />
 

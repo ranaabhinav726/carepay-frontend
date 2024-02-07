@@ -2,9 +2,8 @@ import Header from '../../Header/Header';
 import './congratulation.scss'
 import CreditFairLogo from '../../../assets/creditFair.png'
 // import CongratsImg from '../../../assets/congrats.png'
-import CongratsGIF from '../../../assets/GIFs/Congratulations.gif'
+import Confetti from '../../../assets/GIFs/confetti.gif'
 import { useNavigate } from 'react-router-dom';
-import { showWrapper, hideWrapper } from "../../../environment/environment";
 import { env } from '../../../environment/environment';
 import { BiRupee } from 'react-icons/bi';
 // import { MdOutlineElectricBolt } from 'react-icons/md'
@@ -67,15 +66,13 @@ const Congrats = () =>{
     <>
         <main className='congrats'>
         <Header progressbarDisplay="none"/>
-            <p className='title'>Congratulations!</p>
-            <img src={CongratsGIF} alt="" />
-            {/* <div className="card">
-                    <p className="referenceID">Reference ID : {refID}</p>
-                    <p className="congrats">Congratulations!<br />Your approved credit limit* is</p>
-                    <div className="amount"><BiRupee />{amount}</div>
-            </div> */}
-            <p className='subtitle'>Your credit application is <span style={{color:"#149540"}}>approved</span> for</p>
-            <div style={{width:"90%", color: "#149540", height:"max-content", padding:"10px 16px", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"24px", fontWeight:"700", borderRadius:"4px", border:"1px solid #000", background:"#EBFEED", boxShadow:"-4px 6px 0px 0px #514C9F"}}>
+        <div style={{display:"flex", position:"relative", flexDirection:"row", alignItems:"baseline", justifyContent:"space-around", marginTop:"1rem"}}>
+                <img src={Confetti} style={{transform:"scaleX(-1)", maxWidth:"25%"}} alt="" />
+                <p style={{position:"absolute", fontSize:"24px", lineHeight:"26px", color:"#149540", fontWeight:"700", marginTop:"1rem"}}>Congratulations</p>
+                <img src={Confetti} style={{maxWidth:"25%"}} alt="" />
+            </div>
+            <p className='subtitle'>Your credit application is <span style={{color:"#149540", fontWeight:"700"}}>approved</span> for</p>
+            <div style={{width:"90%", color: "#149540", height:"max-content", padding:"10px 16px", marginTop:"1rem", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"24px", fontWeight:"700", borderRadius:"4px", border:"1px solid #000", background:"#EBFEED", boxShadow:"-4px 6px 0px 0px #514C9F"}}>
                 <BiRupee /> {amount}
             </div>
             <div style={{margin:"1rem 0", padding:"1rem 2rem", textAlign:"center"}}>

@@ -35,7 +35,7 @@ export default function ChechkingStatus(){
         await axios.get(env.api_Url + "checkCFApproval?userId=" + userId)
         .then(async(res)=>{
             if(res?.data?.message === "success" && res?.data?.data === true){
-                navigate('/patient/congrats');
+                navigate('/patient/CfApproved');
             }else{
                 getLoanStatus();
             }
