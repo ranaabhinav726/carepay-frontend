@@ -247,7 +247,7 @@ const BankDetails = () =>{
                     setLoading(true);
                     setTimeout(() => {
                         if(cfApproved === true){
-                            navigate('/patient/congrats');
+                            navigate('/patient/CfApproved');
                         }else if(ntc === true){
                             navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})
                         }else{
