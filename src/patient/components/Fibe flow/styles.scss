@@ -106,3 +106,24 @@ a#disabled{
     pointer-events: none;
     filter: grayscale(1) brightness(220%);
 }
+
+div.inputGroup{
+    p{
+        font-weight: 400;
+        font-size: 15.75px;
+        line-height: 17px;
+        // margin-top: 20px;
+        padding-bottom: 0px;
+    }
+    input, select{
+        padding: 10px;
+        margin-bottom: 20px;
+
+        width: 100%;
+        height: 48px;
+        
+        background: #ECEBFF;
+        border-radius: 4px;
+        border: none;
+    }
+}

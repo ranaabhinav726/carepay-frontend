@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "./Comps/Header";
 import InputBox from "./Comps/InputBox";
 import InputBoxLabel from "./Comps/InputBoxLabel";
@@ -12,19 +12,121 @@ import { env } from "../../environment/environment";
 
 import lottie from "lottie-web";
 import animationData from '../../assets/JSON animations/loader simple.json'
+import AutocompleteInput from "../utility/SuggestionInputBox/SuggestionInputBox";
+import './styles.scss'
 
 export default function Screen5(){
 
     const [creditAmt, setCreditAmount] = useState("");
     const [loanReason, setLoanReason] = useState("");
+    const [otherTreatment, setOtherTreatment] = useState("");
     const [doctorName, setDoctorName] = useState("");
     const [doctorId, setDoctorId] = useState(localStorage.getItem("doctorId"));
     const [waiting, setWaiting] = useState(false);
+    const otherTreatmentRef = useRef(null);
 
     const navigate = useNavigate();
 
     let userId = localStorage.getItem("userId");
-
+    let treatmentList = [
+        "Infertility Treatment (inc IVF and other treatments)",
+        "MTP's",
+        "Diagnostic Laproscopy",
+        "Minor Surgeries like Polyp, Fibroid etc.",
+        "Therapeutic Curettage",
+        "Other small operations of Uterus, Cervix, Fallopian tube, Vagina etc.",
+        "Lithotripsy",
+        "Hydrocele",
+        "Piles / Fistula",
+        "Prostate",
+        "Varicose Veins",
+        "Colonoscopy / Gastroscopy",
+        "Appendectomy",
+        "Cystoscopic removal of stones",
+        "Ultrasound guided aspirations",
+        "Hernia",
+        "Hair transplant",
+        "Stretch mark removal",
+        "Facelift",
+        "Rhinoplasty",
+        "Liposuction",
+        "Tummy tuck",
+        "Breast Augmentation",
+        "Breast Reduction and Breast Lift",
+        "Gynecomastia (Male Breast Reduction)",
+        "Vulvovaginal",
+        "Buttock Augmentation",
+        "Buttock Lift",
+        "Blepharoplasty (Eyelid surgery)",
+        "Rhinoplasty (Nose Surgery)",
+        "Otoplasty (Ear Pinning)",
+        "Brow lift",
+        "Chin Augmentation",
+        "Malar or Cheek Augmentation",
+        "Chemical Peel",
+        "Botulinum toxin or Botox",
+        "Soft Tissue Fillers",
+        "Stem Cell Enriched Fat Graft",
+        "Fat Injection/Fat Grafting",
+        "Cleft Lip and Cleft Palate",
+        "Dental Implants / Crowns & Bridges",
+        "Removable Partial Dentures (Imported)",
+        "Removable Partial Denture (Flexible)",
+        "Upper and Lower Complete Denture (Imported)",
+        "E-Max Metal Free Crown / Veneer – Metal Free",
+        "Ceramil / Azir ( Zirconia Crowns) – Metal Free",
+        "Zoom Advanced Whitening (3 Cycles) – Including Maintenance Kit",
+        "Ant.RCT/ Post.RCT or Re-RCT",
+        "Ceramic Fillings/Inlay (Per Tooth)",
+        "Dental Jewellery (Dental Crystal)",
+        "Composite Bonding",
+        "Componeers",
+        "Night Guard",
+        "Dental Diode Laser",
+        "Diode Laser Frenectomy",
+        "Laser Gum Contouring",
+        "Laser Depigmentation",
+        "Full Mouth Scaling & Polishing",
+        "Deep Scaling (Curretage)",
+        "Gum- Flap Surgery",
+        "Bone Grafting",
+        "Gum Graft",
+        "Extraction",
+        "Impaction / Wisdom Tooth Removal",
+        "Biopsy",
+        "Apicectomy",
+        "Sinuslift",
+        "Braces (Metallic) Full Mouth",
+        "Metallic- Self Ligating (Damon)",
+        "Clear Aligners Invisible Braces (K Line/ Clear Path)",
+        "Braces (Ceramic) Full Mouth",
+        "Invisalign",
+        "Cataract operation",
+        "Removal of foreign body",
+        "Corneal transplant",
+        "Tear duct operations",
+        "Ptosis",
+        "Lasik Surgery",
+        "Glaucoma",
+        "Squint",
+        "Viterectomy",
+        "Retinal Detachment",
+        "Ossiculoplasty",
+        "Functional Endoscopic Sinus Surgery",
+        "Stapedectomy",
+        "Microlaryngeal surgery",
+        "Foreign body removal",
+        "Tympanoplasty",
+        "Glossectomy",
+        "Frenuloplasty",
+        "Reconstruction of the tongue",
+        "Closed reduction of fractures",
+        "Operations of tendons / Tendon sheath",
+        "Arthroscopic Knee Aspiration",
+        "Reduction of dislocations",
+        "Dialysis",
+        "Angiography"
+    ];
     useEffect(() => {
         lottie.loadAnimation({
           container: document.querySelector("#searchAnimation"),
@@ -57,10 +159,23 @@ export default function Screen5(){
             showErrorOnUI(elem, false);
             return;
         }
-        if(! loanReason){
-            let elem = document.getElementById("loanReason");
-            showErrorOnUI(elem, false);
-            return;
+        // if(! loanReason){
+        //     let elem = document.getElementById("loanReason");
+        //     showErrorOnUI(elem, false);
+        //     return;
+        // }
+        if(loanReason === "Other"){
+            if(! otherTreatment){
+                let elem = document.getElementById('otherTreatment');
+                if(elem) showErrorOnUI(elem);
+                return;
+            }
+        }else{
+            if(!treatmentList.includes(loanReason)){
+                let elem = document.getElementById('treatment');
+                if(elem) showErrorOnUI(elem, false);
+                return;
+            }
         }
 
         showWaitingModal();
@@ -74,7 +189,13 @@ export default function Screen5(){
             "doctorName": doctorName
         };
 
+        if(loanReason === "Other"){
+            submitObj.loanReason = otherTreatment;
+        }else{
+            submitObj.loanReason = loanReason;
+        }
 
+        // console.log(submitObj); return;
         axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(response => {
@@ -96,6 +217,24 @@ export default function Screen5(){
             });
     }
 
+    const onlyCharRegex = /^[a-zA-Z\s]*$/;
+    function onlyCharacters(val, setter){
+        if(onlyCharRegex.test(val)){
+            setter(val);
+        }
+    }
+
+    function otherTreatmentNameAndFocusSetter(otherTreatmentName){
+        setOtherTreatment(otherTreatmentName);
+    }
+    
+    useEffect(()=>{
+        // console.log(otherTreatmentRef.current);
+        if(otherTreatmentRef.current !== null){
+            otherTreatmentRef.current.focus();
+        }
+    }, [loanReason])
+
     return(
         <main className="screenContainer">
             <Header progress={55} />
@@ -114,7 +253,7 @@ export default function Screen5(){
             />
             <NoteText text="Please keep the credit amount under Rs. 10,00,000 only." styles={{margin:"12px 0 24px 0"}} />
 
-            <InputBoxLabel label='Treatment name' />
+            {/* <InputBoxLabel label='Treatment name' />
             <InputBox 
                 id="loanReason"
                 placeholder="What is the reason of your credit?" 
@@ -124,7 +263,32 @@ export default function Screen5(){
                     marginTop:"12px", 
                     border:"0"
                 }}
+            /> */}
+            <AutocompleteInput
+                id="treatment"
+                title="Treatment name"
+                value={loanReason}
+                setValue={setLoanReason}
+                placeholder="Name of treatment"
+                list={treatmentList}
+                fieldError="Please enter your treatment name"
+                otherValueSettter={otherTreatmentNameAndFocusSetter}
             />
+            {loanReason === "Other" &&
+            <div className="inputGroup">
+                <input 
+                    id="otherTreatment"
+                    type="text" 
+                    value={otherTreatment} 
+                    placeholder="Enter your treatment name"
+                    // onChange={(e)=>setOtherTreatment(e.target.value)}  
+                    onChange={(e)=> onlyCharacters(e.target.value, setOtherTreatment)}  
+                    style={{marginBottom:"10px"}}
+                    ref={otherTreatmentRef}
+                />
+                <span className="fieldError">Please enter your treatment name</span>
+            </div>
+            }
             <button onClick={()=>postDetails()} className="submit" style={{marginTop:"32px"}}>Next</button>
             {waiting && <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
                 <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
