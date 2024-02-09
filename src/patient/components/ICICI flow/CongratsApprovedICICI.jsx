@@ -14,7 +14,7 @@ const CongratsApprovedICICI = () =>{
     // const [amount, setAmount] = useState(54000);
     const [loanAmount, ] = useState(Number(amount));
 
-    function handleNavigation(){
+    function handleNavigation(){ // download and save KFS then navigate
         navigate("/patient/FinalConsent", {
             state:{
                 "data" : data,
@@ -34,9 +34,15 @@ const CongratsApprovedICICI = () =>{
             <div style={{width:'90%', padding:"22px", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", fontSize:"32px", color:"#149540", fontWeight:"700", border:"1px solid #000", background:"#EBFEED", boxShadow:"-4px 6px 0px 0px #514C9F"}}>
                 ₹ {loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}
             </div>
-            <p style={{textAlign:"center", marginTop:"1rem"}}>ICICI has sent an OTP on your registered mobile number. Enter that OTP in the next step as a final consent.</p>
+            {/* <p style={{textAlign:"center", marginTop:"1rem"}}>ICICI has sent an OTP on your registered mobile number. Enter that OTP in the next step as a final consent.</p> */}
+            <p style={{textAlign:"center", marginTop:"1rem"}}>Please click on the button below to download the <strong>Key Fact Statement</strong> and proceed.</p>
             
-            <button className="submit" onClick={()=>handleNavigation()}>Continue with OTP</button>
+            {/* <button className="submit" onClick={()=>handleNavigation()}>Continue with OTP</button> */}
+            <a href="../../assets/Key Fact Statement ICICI_CarePay.pdf" download={""}>
+                <button className="submit" onClick={()=>handleNavigation()}>
+                    Download Key Fact Statement
+                </button>
+            </a>
         </main>
     )
 }

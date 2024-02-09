@@ -246,6 +246,10 @@ button.submit.lite{
   color: #514C9F;
   background: #ECEBFF;
 }
+button.disabled{
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 p#number-msg{
   margin: 0;

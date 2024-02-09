@@ -24,6 +24,7 @@ function FinalConsent(){
     const [loanAmt, ] = useState(Number(data?.loanAmount));
     const [otp, setOtp] = useState("");
     const [doctorName, setDoctorName] = useState("");
+    const [consent, setConsent] = useState(false);
 
     const [canResendOtp, setCanResendOtp] = useState(false);
     function allowOtpResend(){
@@ -216,13 +217,17 @@ function FinalConsent(){
                             <span >Resend OTP in <Timer seconds={45} onTimerEnd={allowOtpResend} /></span>
                         }
                     </div>
-
-                    <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
+                    
+                    <div style={{background:"#FAE1CD", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
                         Note : By submitting OTP, amount ₹ {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})} will be transferred to doctor{doctorName? ` ${doctorName}'s` : "'s"} account.
                     </div>
 
-                    <button className="submit" onClick={()=>handleSubmit()}>Submit</button>
-                </>   
+                    <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
+                        <input value={consent} onClick={()=>setConsent(!consent)} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
+                        <label htmlFor="kfsConsentCheckbox" style={{userSelect:"none"}}>I agree to the <a href="../../assets/Key Fact Statement ICICI_CarePay.pdf" download={""} style={{color:"#000000", fontWeight:"600", textDecoration:"underline"}}>Key fact Statement</a></label>
+                    </div>
+                    <button className={"submit" + (!consent?" disabled" : "")} onClick={()=>handleSubmit()}>Submit OTP</button>
+                </>
             }
         </main>
     )
