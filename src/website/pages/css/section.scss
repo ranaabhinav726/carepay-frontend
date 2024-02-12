@@ -522,6 +522,20 @@ section.footer{
                         color: white;
                     }
                 }
+                .contact.address .addresses{
+                    p.addressHeading{
+                        width: 100%;
+                        font-weight: 700;
+                    }
+                    hr{
+                        color: #908DC1;
+                        height: 1px;
+                        margin: 4px 0 8px 0;
+                    }
+                    .addressLine{
+                        margin-bottom: 1rem;
+                    }
+                }
                 div.socials{
                     margin-top: 2rem;
                     display: flex;
