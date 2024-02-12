@@ -11,7 +11,7 @@ export function ContactSupport(){
                     <FaPhoneAlt style={{fontSize:"20px"}} />
                     <span style={{fontWeight:"700"}}>Call</span>
                 </a>
-                <a href="https://wa.me/918069489655" target="_blank" style={{width:"48%", padding:"1rem 0", display:"flex", alignItems:"center", justifyContent:"center", gap:"12px", color:"#149540", background:"#EBFEED", borderRadius:"4px"}}>
+                <a href="https://wa.me/918810625857" target="_blank" style={{width:"48%", padding:"1rem 0", display:"flex", alignItems:"center", justifyContent:"center", gap:"12px", color:"#149540", background:"#EBFEED", borderRadius:"4px"}}>
                     <FaWhatsapp style={{fontSize:"24px"}} />
                     <span style={{fontWeight:"700"}}>Whatsapp</span>
                 </a>

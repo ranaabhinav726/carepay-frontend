@@ -137,7 +137,7 @@ import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
 import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
 import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
-import { NotServiceable } from './patient/components/Personal_Details/NotServiceable/NotServiceable';
+import { NotServiceable } from './patient/components/Fibe flow/NotServiceable';
 
 
 

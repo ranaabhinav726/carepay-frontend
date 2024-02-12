@@ -1,7 +1,7 @@
-import Header from "../../Header/Header";
-import SadFace from "../../../assets/SadFace.svg"
+import Header from "../Header/Header";
+import SadFace from "../../assets/SadFace.svg"
 
-import { ContactSupport } from "../../utility/ContactSupport/ContactSupport";
+import { ContactSupport } from "../utility/ContactSupport/ContactSupport";
 
 export function NotServiceable(){
  
