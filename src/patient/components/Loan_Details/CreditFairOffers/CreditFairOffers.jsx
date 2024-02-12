@@ -262,7 +262,7 @@ const CreditFairOffers = () =>{
     return(
         <>
             <main className="creditFairOffers">
-                <Header />
+                <Header progressbarDisplay='block' canGoBack={-1} />
 
                 <h3>EMI Details</h3>
 
