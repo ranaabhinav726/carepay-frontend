@@ -164,9 +164,9 @@ const AddressDetails = () => {
             axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
             .then(response =>{
                 console.log(response)
-                let city = response?.data?.city ?? "";
+                let city = response?.data?.city || "";
                 setCity(city);
-                let state = response?.data?.state ?? "Select state";
+                let state = response?.data?.state || "Select state";
                 setState(state);
                 setFetching(false);
             }).catch(()=>{
