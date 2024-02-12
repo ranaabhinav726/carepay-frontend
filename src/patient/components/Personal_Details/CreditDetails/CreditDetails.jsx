@@ -49,7 +49,7 @@ const CreditDetails = () => {
     let doctorName = localStorage.getItem("doctorName")
     let userId = localStorage.getItem("userId");
 
-    let treatmentList = [
+    let serviceableTreatmentList = [
         "Infertility Treatment (inc IVF and other treatments)",
         "MTP's",
         "Diagnostic Laproscopy",
@@ -149,6 +149,44 @@ const CreditDetails = () => {
         "Angiography"
     ];
 
+    let nonServiceableTreatments = ["Heart Attack ",
+        "Stroke",
+        "Kidney Failure ",
+        "Multiple Sclerosis ",
+        "Parkinson Dieses ",
+        "Alzheimer’s Disease ",
+        "Paralysis ",
+        "Muscular Dystrophy",
+        "Cardiomyopathy ",
+        "Loss of Speech",
+        "Chronic Aplastic Anemia ",
+        "Organ Transplants(All Types)",
+        "Hepatitis",
+        "Coronary Artery, By-Pass Surgery Disease ",
+        "Head Trauma ",
+        "Angioplasty ",
+        "BMT ",
+        "Operable Cancers",
+        "Early-Stage Cancers ",
+        "Heart Valve Surgery",
+        "Pediatric Cancers ",
+        "Neurosurgeries ",
+        "RTA ",
+        "Brain Surgery",
+        "Bacterial Meningitis ",
+        "End Stage Renal Disease",
+        "End Stage Liver Disease",
+        "Sepsis ",
+        "HIV ",
+        "COMA ",
+        "End Stage Lung and Liver Cancer ",
+        "Blood Cancers Adults  ",
+        "Third Degree Burns ",
+        "Terminal Illness ",
+        "Enchaphalitis"]
+
+    let allTreatmentList = serviceableTreatmentList.concat(nonServiceableTreatments);
+
     useEffect(()=>{
         if(!! userId){
             axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
@@ -195,7 +233,7 @@ const CreditDetails = () => {
                 return;
             }
         }else{
-            if(!treatmentList.includes(treatment)){
+            if(!allTreatmentList.includes(treatment)){
                 let elem = document.getElementById('treatment');
                 if(elem) showErrorOnUI(elem, false);
                 return;
@@ -224,6 +262,11 @@ const CreditDetails = () => {
             setTimeout(() => {
                 setErrorMsg("Something went wrong, please try again.")
             }, 3000);
+            return;
+        }
+
+        if(nonServiceableTreatments.includes(treatment)){
+            navigate("/patient/NotServiceable");
             return;
         }
 
@@ -366,7 +409,7 @@ const CreditDetails = () => {
             value={treatment}
             setValue={setTreatment}
             placeholder="Name of treatment"
-            list={treatmentList}
+            list={allTreatmentList}
             fieldError="Please enter your treatment name"
             otherValueSettter={otherTreatmentNameAndFocusSetter}
         />

@@ -137,6 +137,7 @@ import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
 import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
 import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
+import { NotServiceable } from './patient/components/Personal_Details/NotServiceable/NotServiceable';
 
 
 
@@ -161,6 +162,7 @@ function App() {
 
         <Route path='/patient/PersonalDetails' element={<PersonalDetails />} />
         <Route path='/patient/CreditDetails' element={<CreditDetails />} />
+        <Route path='/patient/NotServiceable' element={<NotServiceable />} />
 
         <Route path='/patient/AddressDetails' element={<AddressDetails />} />
         <Route path='/patient/AddressNotServiceable' element={<AddressNotServiceable />} />
