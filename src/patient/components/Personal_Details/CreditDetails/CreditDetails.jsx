@@ -260,16 +260,17 @@ const CreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     if(! number) return;
 
-                    preEligibility(number, res=>{
-                    if(res?.data?.data?.status === 1){
-                        let data = res?.data?.data?.data;
-                        console.log(data);
+                    navigate('/patient/PersonalDetails');
+                    // preEligibility(number, res=>{
+                    // if(res?.data?.data?.status === 1){
+                    //     let data = res?.data?.data?.data;
+                    //     console.log(data);
 
-                        navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
-                    }else{
-                        navigate('/patient/PersonalDetails');
-                    }
-                    })
+                    //     navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+                    // }else{
+                    //     navigate('/patient/PersonalDetails');
+                    // }
+                    // })
                 }else{
                     // setErrorMsg()
                     apiErrorHandler();
