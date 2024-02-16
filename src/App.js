@@ -113,6 +113,7 @@ import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved'
 import PrescriptionUpload from './patient/components/Arthmate/Modules/Prescription/PrescriptionUpload';
 import ArthPersonalDetails from './patient/components/Arthmate/Modules/BasicInfo/PersonalDetails';
 import ArthAddressDetails from './patient/components/Arthmate/Modules/BasicInfo/AddressDetails';
+import ArthEmploymentDetails from './patient/components/Arthmate/Modules/BasicInfo/EmploymentDetails';
 
 
 
@@ -226,6 +227,7 @@ function App() {
         <Route path='/patient/arthPresciptionUpload' element={<PrescriptionUpload />}></Route>
         <Route path='/patient/ArthPersonalDetails' element={<ArthPersonalDetails />}></Route>
         <Route path='/patient/ArthAddressDetails' element={<ArthAddressDetails />}></Route>
+        <Route path='/patient/ArthEmploymentDetails' element={<ArthEmploymentDetails />}></Route>
 
       </Routes>
     // {/* </div> */}
