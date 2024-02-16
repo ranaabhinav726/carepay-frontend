@@ -637,7 +637,14 @@ export function Footer(){
                             </div>
                             <div className="contact address">
                                 <img src={LocationIcon} alt="" />
-                                <p className="address">CareCoin Technologies Pvt Ltd <br />5th Floor, DLF Two Horizon Centre, <br />DLF Phase 5, Gurugram, <br/>Haryana, 122002</p>
+                                <div className='addresses'>
+                                    <p className='addressHeading'>Gurugram Address</p>
+                                    <hr />
+                                    <p className="addressLine">5th Floor, DLF Two Horizon Centre, <br />DLF Phase 5, Gurugram, <br/>Haryana, 122002</p>
+                                    <p className='addressHeading'>Registered Address</p>
+                                    <hr/>
+                                    <p className="addressLine">BNP Paribas Bank, FLAT NO. 408,<br/> 27, New Delhi House, Barakhamba<br/> Road, Connaught Lane, Connaught<br/> Place, New Delhi, Delhi, 110001</p>
+                                </div>
                             </div>
                             <div className="socials">
                                 <Link to={"https://www.instagram.com/care_pay/"} target='_blank'><img src={InstaIcon} alt="" /></Link>
