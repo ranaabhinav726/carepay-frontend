@@ -30,7 +30,7 @@ export default function Screen11(){
                 let fibeData = response?.data?.data;
                 let leadStatus = fibeData?.leadStatus;
                 let statusMessage = fibeData?.statusMessage;
-                let sanctionAmount = fibeData?.sanctionData?.sanctionAmount || 0;
+                let sanctionMaxLimit = fibeData?.sanctionData?.sanctionMaxLimit || 0;
                 let bitlyUrl = fibeData?.bitlyUrl;
 
                 // if(response.data.data.leadStatus === "FAILURE"){
@@ -56,8 +56,8 @@ export default function Screen11(){
                                     else if(leadStatus === "CREATED"){
                                         navigate("/patient/screen13", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
                                     }else if(leadStatus === "APPROVED"){
-                                        console.log(sanctionAmount, creditAmt)
-                                        if(Number(creditAmt) > Number(sanctionAmount)){
+                                        // console.log(sanctionMaxLimit, creditAmt)
+                                        if(Number(creditAmt) > Number(sanctionMaxLimit)){
                                             navigate("/patient/screen12sub2"); // journey ends here
                                         }else{
                                             navigate("/patient/screen12", { state: {"data" : fibeData, "loanAmount": creditAmt}});     // congrats and show sanction amount
