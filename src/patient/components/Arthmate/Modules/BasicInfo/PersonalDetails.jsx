@@ -1,5 +1,5 @@
 //PersonalDetails
-import './personalDetails.scss'
+import './styles/personalDetails.scss'
 
 import axios from "axios";
 
@@ -397,7 +397,7 @@ const ArthPersonalDetails = () =>{
 
         
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
-            <button onClick={()=>handleForm()} className="submit">Submit</button>
+            <button onClick={()=>handleForm()} className="submit">Confirm</button>
         </>
         }
     </main>

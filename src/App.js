@@ -114,6 +114,9 @@ import PrescriptionUpload from './patient/components/Arthmate/Modules/Prescripti
 import ArthPersonalDetails from './patient/components/Arthmate/Modules/BasicInfo/PersonalDetails';
 import ArthAddressDetails from './patient/components/Arthmate/Modules/BasicInfo/AddressDetails';
 import ArthEmploymentDetails from './patient/components/Arthmate/Modules/BasicInfo/EmploymentDetails';
+import ArthCurrentEMIExpenses from './patient/components/Arthmate/Modules/BasicInfo/CurrentEMIExpenses';
+import ArthmateOffers from './patient/components/Arthmate/Modules/BasicInfo/ArthmateOffers';
+import ArthIncomeVerification from './patient/components/Arthmate/Modules/FinancialDataCapture/IncomeVerification';
 
 
 
@@ -228,6 +231,9 @@ function App() {
         <Route path='/patient/ArthPersonalDetails' element={<ArthPersonalDetails />}></Route>
         <Route path='/patient/ArthAddressDetails' element={<ArthAddressDetails />}></Route>
         <Route path='/patient/ArthEmploymentDetails' element={<ArthEmploymentDetails />}></Route>
+        <Route path='/patient/ArthCurrentEMIExpenses' element={<ArthCurrentEMIExpenses />}></Route>
+        <Route path='/patient/ArthmateOffers' element={<ArthmateOffers />}></Route>
+        <Route path='/patient/ArthIncomeVerification' element={<ArthIncomeVerification />}></Route>
 
       </Routes>
     // {/* </div> */}

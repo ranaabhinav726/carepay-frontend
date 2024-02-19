@@ -1,5 +1,5 @@
 import { Header } from '../../comps/Header';
-import './employmentDetails.scss'
+import './styles/employmentDetails.scss'
 
 import axios from "axios";
 
@@ -44,8 +44,8 @@ const ArthEmploymentDetails = () =>{
     // const [IndustryType, setIndustryType] = useState('Ecommerce');
     // const [IndustryTypeOther, setIndustryTypeOther] = useState('');
 
-    // const [totalExpYear, setTotalExpYear] = useState(0);
-    // const [totalExpMonth, setTotalExpMonth] = useState(0);
+    const [totalExpYear, setTotalExpYear] = useState(0);
+    const [totalExpMonth, setTotalExpMonth] = useState(0);
     // const [jobExpYear, setJobExpYear] = useState(0);
     // const [jobExpMonth, setJobExpMonth] = useState(0);
 
@@ -192,7 +192,7 @@ const ArthEmploymentDetails = () =>{
         }
 
         if(empType.toUpperCase() === "SALARIED"){
-            if(!companyName){ 
+            if(!companyName){
                 let elem = document.getElementById('companyName');
                 if(elem) showErrorOnUI(elem);
                 return;
@@ -207,7 +207,7 @@ const ArthEmploymentDetails = () =>{
                 return;
             }
         }else{
-            if(!businessName){ 
+            if(!businessName){
                 let elem = document.getElementById('businessName');
                 if(elem) showErrorOnUI(elem);
                 return;
@@ -223,7 +223,7 @@ const ArthEmploymentDetails = () =>{
             }
         }
 
-        if(!salary){ 
+        if(!salary){
             let elem = document.getElementById('salary');
             if(elem) showErrorOnUI(elem);
             return;
@@ -536,7 +536,7 @@ const ArthEmploymentDetails = () =>{
             </select>
         </div> */}
 
-        <div className="familyIncome">
+        {/* <div className="familyIncome">
             <p>Monthly family income (optional)</p>
             <input 
                 type="number" 
@@ -544,7 +544,7 @@ const ArthEmploymentDetails = () =>{
                 onChange={(e)=>setFamilyIncome(e.target.value)}
                 placeholder="Enter your family's monthly income" 
             />
-        </div>
+        </div> */}
 
         
         {/* <div className="companyAddress-line1">
@@ -629,7 +629,7 @@ const ArthEmploymentDetails = () =>{
             </div>
         </div> */}
 
-        {/* <div className="totalExp">
+        <div className="totalExp">
             <p>Total professional work experience</p>
             <div className="inputGroup">
                 <select name=""
@@ -650,7 +650,7 @@ const ArthEmploymentDetails = () =>{
                 <p>Months</p>
             </div>
             <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
-        </div> */}
+        </div> 
         
         {/* <div id="consent" className="consentBox">
             <input
@@ -659,7 +659,7 @@ const ArthEmploymentDetails = () =>{
         </div> */}
         
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
-        <button onClick={handleSubmit} className="submit">Submit</button>
+        <button onClick={handleSubmit} className="submit">Next</button>
     </main>
     </>
    )

@@ -1,6 +1,6 @@
 import { Header } from '../../comps/Header';
 
-import './addressDetails.scss'
+import './styles/addressDetails.scss'
 
 import axios from "axios";
 
@@ -465,7 +465,7 @@ const ArthAddressDetails = () => {
         </>
         }
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
-        <button onClick={()=>handleForm()} className="submit">Submit</button>
+        <button onClick={()=>handleForm()} className="submit">Confirm</button>
     </main>
     </>
    )
