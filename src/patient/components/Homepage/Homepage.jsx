@@ -57,7 +57,7 @@ const Homepage = () =>{
 
     useEffect(()=>{
         if(doctorId){
-            axios.get(env.api_Url+"/userDetails/getNbfcStatusForDoctor?doctorId=" + doctorId)
+            axios.get(env.api_Url+"userDetails/getNbfcStatusForDoctor?doctorId=" + doctorId)
             .then((response)=>{
                 console.log(response);
                 if(response){
