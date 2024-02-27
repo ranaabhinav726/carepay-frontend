@@ -117,6 +117,14 @@ import ArthEmploymentDetails from './patient/components/Arthmate/Modules/BasicIn
 import ArthCurrentEMIExpenses from './patient/components/Arthmate/Modules/BasicInfo/CurrentEMIExpenses';
 import ArthmateOffers from './patient/components/Arthmate/Modules/BasicInfo/ArthmateOffers';
 import ArthIncomeVerification from './patient/components/Arthmate/Modules/FinancialDataCapture/IncomeVerification';
+import ArthBankSelection from './patient/components/Arthmate/Modules/FinancialDataCapture/BankSelection';
+import ArthFileUpload from './patient/components/Arthmate/Modules/FinancialDataCapture/FileUpload';
+import ArthMethodSelection from './patient/components/Arthmate/Modules/FinancialDataCapture/MethodSelection';
+import ArthCreditAgreement from './patient/components/Arthmate/Modules/Esigning/CreditAgreement';
+import ArthAgreementStatus from './patient/components/Arthmate/Modules/Esigning/AgreementStatus';
+import ArthAutoRepayment from './patient/components/Arthmate/Modules/AutoRepayment/AutoRepayment';
+import ArthAadhaarVerification from './patient/components/Arthmate/Modules/KYC/AadhaarVerification';
+import ArthPANPhoto from './patient/components/Arthmate/Modules/KYC/PANPhoto';
 
 
 
@@ -234,6 +242,14 @@ function App() {
         <Route path='/patient/ArthCurrentEMIExpenses' element={<ArthCurrentEMIExpenses />}></Route>
         <Route path='/patient/ArthmateOffers' element={<ArthmateOffers />}></Route>
         <Route path='/patient/ArthIncomeVerification' element={<ArthIncomeVerification />}></Route>
+        <Route path='/patient/ArthBankSelection' element={<ArthBankSelection />}></Route>
+        <Route path='/patient/ArthFileUpload' element={<ArthFileUpload />}></Route>
+        <Route path='/patient/ArthMethodSelection' element={<ArthMethodSelection />}></Route>
+        <Route path='/patient/ArthCreditAgreement' element={<ArthCreditAgreement />}></Route>
+        <Route path='/patient/ArthAgreementStatus' element={<ArthAgreementStatus />}></Route>
+        <Route path='/patient/ArthAutoRepayment' element={<ArthAutoRepayment />}></Route>
+        <Route path='/patient/ArthAadhaarVerification' element={<ArthAadhaarVerification />}></Route>
+        <Route path='/patient/ArthPANPhoto' element={<ArthPANPhoto />}></Route>
 
       </Routes>
     // {/* </div> */}

@@ -40,7 +40,7 @@ export default function PrescriptionUpload(){
         return <UploadedPrescripton file={file} key={idx} idx={idx} showFileModal={showFileModal} removeFile={removeFileFromList} />
     })
 
-    const [screeState, setScreenState] = useState("Submitted"); // NoFileSelected, FileInBuffer, Submitted
+    const [screenState, setScreenState] = useState("Submitted"); // NoFileSelected, FileInBuffer, Submitted
 
     useEffect(() => {
         lottie.loadAnimation({
@@ -61,7 +61,7 @@ export default function PrescriptionUpload(){
 
     return(
         <main style={{position:"relative"}}>
-            {screeState === "NoFileSelected" &&
+            {screenState === "NoFileSelected" &&
             <>
                 <Header />
                 <ScreenTitle title="Prescription upload" />
@@ -80,7 +80,7 @@ export default function PrescriptionUpload(){
             </>
             }
 
-            {screeState === "FileInBuffer" &&
+            {screenState === "FileInBuffer" &&
             <>
                 <Header />
                 <ScreenTitle title="Prescription upload" />
@@ -96,7 +96,7 @@ export default function PrescriptionUpload(){
                 </div>
             </>
             }
-            {screeState === "Submitted" &&
+            {screenState === "Submitted" &&
             <>
                 <Header progressBar="hidden" />
                 <div style={{marginTop:"15%"}} id="searchAnimation"></div>

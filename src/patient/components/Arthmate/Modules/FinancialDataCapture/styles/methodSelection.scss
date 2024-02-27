@@ -1,0 +1,67 @@
+$size-XL : 24.75px;
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+main.methodSelection{
+    padding: 10px;
+
+    h3{
+        font-weight: 700;
+        font-size: $size-L;
+        line-height: 19px;
+
+        margin: 1.5rem 0;
+    }
+    p{
+        margin: 1rem 0 1.5rem 0;
+    }
+
+    div.method{
+        width: 100%;
+        background: #ECEBFF;
+        border-radius: 4px;
+        padding: 12px;
+        margin-top: 1.5rem;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: #514C9F;
+
+        cursor: pointer;
+        
+        .details{
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            .methodName{
+                font-weight: 700;
+                font-size: 18px;
+                margin: 10px 0 8px 0;
+            }
+            .methodDetail{
+                font-size: 15px;
+                color: rgba(0, 0, 0, 0.4);
+            }
+        }
+        .goRightIcon{
+            font-size: 32px;
+        }
+    }
+    .methodSpeed{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+        font-style: italic;
+        color: #149540;
+        margin-top: 4px;
+    }
+    .docPlaceHolderImg{
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+    }
+}
