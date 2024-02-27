@@ -136,7 +136,7 @@ const CreditFairOffers = () =>{
     async function submitLoanData(){
         let creditFairProductId;
         await axios
-            .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId + "?doctorId=" + doctorId)
+            .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId + "&doctorId=" + doctorId)
             .then(async(res)=>{
                 creditFairProductId = await res.data.data;
                 if(creditFairProductId === "Product Not configured"){
