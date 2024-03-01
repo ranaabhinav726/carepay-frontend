@@ -8,6 +8,8 @@ import { useEffect, useRef, useState } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../../environment/environment"
 import { Header } from '../../comps/Header';
+import { onlyNumbers } from '../../servicesAndUtility/utilityFunctions';
+import { saveBasicDetails } from '../../servicesAndUtility/api';
 
 const ArthPersonalDetails = () =>{
 
@@ -33,22 +35,22 @@ const ArthPersonalDetails = () =>{
     // const data = useData();
     const navigate = useNavigate();
     
-    const [aadhaarNumber, setAadhaarNumber] = useState("")
+    const [aadhaarNo, setAadhaarNo] = useState("")
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
     const [fatherName, setFatherName] = useState("")
-    const [nameOnPan, setNameOnPan] = useState("")
+    // const [nameOnPan, setNameOnPan] = useState("")
     const [number, setNumber] = useState("")
     const [gender, setGender] = useState("")
     const [email, setEmail] = useState("")
     const [dob, setDob] = useState("")
-    const [maritalStatus, setMaritalStatus] = useState("Unmarried")
+    // const [maritalStatus, setMaritalStatus] = useState("Unmarried")
     
-    const [altNumber, setAltNumber] = useState("")
+    // const [altNumber, setAltNumber] = useState("")
 
-    const [refName, setRefName] = useState("");
-    const [refNumber, setRefNumber] = useState("");
-    const [refRelation, setRefRelation] = useState("");
+    // const [refName, setRefName] = useState("");
+    // const [refNumber, setRefNumber] = useState("");
+    // const [refRelation, setRefRelation] = useState("");
 
     
     const [apiError, setApiError] = useState(false);
@@ -69,20 +71,21 @@ const ArthPersonalDetails = () =>{
                 if(response.data.message === "success"){
                     let data = response?.data?.data;
                     handlePan(data?.panNo);
-                    if(data?.firstName != null) setAadhaarNumber(data?.firstName);
+                    if(data?.aadhaarNo != null) setAadhaarNo(data?.aadhaarNo);
                     // setFatherName(data?.fatherName);
-                    setNameOnPan(data?.panCardName)
+                    // setNameOnPan(data?.panCardName)
                     setNumber(data?.mobileNumber)
                     setGender(data?.gender);
                     // let date = data?.dateOfBirth.split('-').reverse().join('-');
                     // console.log(data?.dateOfBirth)
                     setDob(data?.dateOfBirth)
                     setEmail(data?.emailId)
-                    setMaritalStatus(data.maritalStatus ?? "Unmarried");
-                    setAltNumber(data?.alternateNumber ?? "");
-                    setRefName(data?.referenceName ?? "");
-                    setRefNumber(data?.referenceNumber ?? "");
-                    setRefRelation(data?.referenceRelation ?? "");
+                    setFatherName(data?.fatherName)
+                    // setMaritalStatus(data.maritalStatus ?? "Unmarried");
+                    // setAltNumber(data?.alternateNumber ?? "");
+                    // setRefName(data?.referenceName ?? "");
+                    // setRefNumber(data?.referenceNumber ?? "");
+                    // setRefRelation(data?.referenceRelation ?? "");
                     if(response.data.data.panNo === null){
                         getDataFromDecentro();
                     }
@@ -114,8 +117,8 @@ const ArthPersonalDetails = () =>{
                 setDob(dobData);
                 let genderData = idandContactInfo?.personalInfo?.gender;
                 setGender(genderData);
-                let fullNameData = idandContactInfo?.personalInfo?.name?.fullName;
-                setAadhaarNumber(fullNameData);
+                // let fullNameData = idandContactInfo?.personalInfo?.name?.fullName;
+                // setAadhaarNo(fullNameData);
             }
         })
     }
@@ -185,7 +188,7 @@ const ArthPersonalDetails = () =>{
             return;
         }
 
-        if(!aadhaarNumber || aadhaarNumber.length<12){
+        if(!aadhaarNo || aadhaarNo.length<12){
             let elem = document.getElementById('aadhaarNumber');
             if(elem) showErrorOnUI(elem);
             return;
@@ -222,36 +225,46 @@ const ArthPersonalDetails = () =>{
 
         let submitObj = {
             "panCard": panNumber,
-            "panCardName": nameOnPan,
-            "gender": gender,
+            // "panCardName": nameOnPan,
+            "aadhaarNo": aadhaarNo,
             "emailId": email,
+            "fatherName": fatherName,
             "dateOfBirth": dob,
+            "gender": gender,
             "mobileNumber": number,
-            "maritalStatus": maritalStatus,
-            "alternateNumber":altNumber,
-            // "fatherName": fatherName,
-            "referenceName": refName,
-            "referenceNumber": refNumber,
-            "referenceRelation": refRelation,
+            // "maritalStatus": maritalStatus,
+            // "alternateNumber":altNumber,
+            // "referenceName": refName,
+            // "referenceNumber": refNumber,
+            // "referenceRelation": refRelation,
             "userId" : localStorage.getItem('userId'),
             "formStatus": ""
         };
 
-        await axios.post(env.api_Url + "userDetails/basicDetail",
-            submitObj)
-            .then((response) => {
-                console.log(response)
-                if(response.data.message === "success"){
-                    let id = response.data.data.userId;
-                    localStorage.setItem("userId", id);
-                    navigate('/patient/AddressDetails');
-                }else{
-                    apiErrorHandler();
-                }
-            }).catch(error => {
-                console.log(error);
-                apiErrorHandler();
-            });
+        saveBasicDetails(submitObj, res=>{
+            console.log(res);
+            if(res.data.message === "success"){
+                let id = res.data.data.userId;
+                localStorage.setItem("userId", id);
+                navigate('/patient/ArthAddressDetails');
+            }
+        })
+
+        // await axios.post(env.api_Url + "userDetails/basicDetail",
+        //     submitObj)
+        //     .then((response) => {
+        //         console.log(response)
+        //         if(response.data.message === "success"){
+        //             let id = response.data.data.userId;
+        //             localStorage.setItem("userId", id);
+        //             navigate('/patient/AddressDetails');
+        //         }else{
+        //             apiErrorHandler();
+        //         }
+        //     }).catch(error => {
+        //         console.log(error);
+        //         apiErrorHandler();
+        //     });
             setCanSubmit(true);
             hideWrapper(ref.current)
     }
@@ -300,11 +313,11 @@ const ArthPersonalDetails = () =>{
         if(val.length > 10) return
         setPanNumber(val);
     }
-    const numericOnlyRegex = new RegExp('^[0-9]*$');
+
     function numberChange(val){
-        if(! numericOnlyRegex.test(val)) return;
+        if(! onlyNumbers(val)) return;
         if(val.length > 12) return;
-        setAadhaarNumber(val)
+        setAadhaarNo(val)
     }
     
 
@@ -336,7 +349,7 @@ const ArthPersonalDetails = () =>{
                 <p>Aadhaar number</p>
                 <input type="text" 
                     id="aadhaarNumber"
-                    value={aadhaarNumber ?? ""} 
+                    value={aadhaarNo ?? ""} 
                     onChange={(e)=> numberChange(e.target.value)}  
                     placeholder="What is your aadhaar number?" 
                     required 

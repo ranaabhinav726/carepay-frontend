@@ -9,10 +9,14 @@ import { useEffect } from "react";
 import lottie from "lottie-web";
 import loaderAnimData from '../../assets/loader simple.json'
 import doneAnimData from '../../assets/Comp 1.json'
+import { sendAadharOtp } from "../../servicesAndUtility/api";
+import { useNavigate } from "react-router-dom";
 
 export default function ArthAadhaarVerification(){
 
+    const navigate = useNavigate();
     const[aadhaar, setAadhaar] = useState("XXXX XXXX 1234");
+    const[userId, ] = useState(localStorage.getItem("userId"));
     const[otp, setOtp] = useState("");
 
     const [canResendOtp, setCanResendOtp] = useState(false);
@@ -40,14 +44,22 @@ export default function ArthAadhaarVerification(){
           renderer: "canvas"
         });
 
-        // return ()=>{
-        //     clearTimeout(timerId)
-        // }
+        if(!userId) return;
+        let timer1 = setTimeout(sendAadharOtp(userId, res=>{
+            console.log(res);
+            if(res.data.message === "success"){
+                setScreenState("otpSent")
+            }
+        }), 3000)
+        
+        return ()=>{
+            clearTimeout(timer1)
+        }
         
     }, []);
 
 
-    const[screenState, setScreenState] = useState("verified"); // sendingOtp, otpSent, verifyingOtp, verified
+    const[screenState, setScreenState] = useState("sendingOtp"); // sendingOtp, otpSent, verifyingOtp, verified
 
     return(
         <main>

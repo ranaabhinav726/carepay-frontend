@@ -125,6 +125,8 @@ import ArthAgreementStatus from './patient/components/Arthmate/Modules/Esigning/
 import ArthAutoRepayment from './patient/components/Arthmate/Modules/AutoRepayment/AutoRepayment';
 import ArthAadhaarVerification from './patient/components/Arthmate/Modules/KYC/AadhaarVerification';
 import ArthPANPhoto from './patient/components/Arthmate/Modules/KYC/PANPhoto';
+import ArthKyc from './patient/components/Arthmate/Modules/KYC/KYC';
+import ArthAadhaarPhoto from './patient/components/Arthmate/Modules/KYC/AadhaarPhoto';
 
 
 
@@ -248,7 +250,9 @@ function App() {
         <Route path='/patient/ArthCreditAgreement' element={<ArthCreditAgreement />}></Route>
         <Route path='/patient/ArthAgreementStatus' element={<ArthAgreementStatus />}></Route>
         <Route path='/patient/ArthAutoRepayment' element={<ArthAutoRepayment />}></Route>
+        <Route path='/patient/ArthKyc' element={<ArthKyc />}></Route>
         <Route path='/patient/ArthAadhaarVerification' element={<ArthAadhaarVerification />}></Route>
+        <Route path='/patient/ArthAadhaarPhoto' element={<ArthAadhaarPhoto />}></Route>
         <Route path='/patient/ArthPANPhoto' element={<ArthPANPhoto />}></Route>
 
       </Routes>

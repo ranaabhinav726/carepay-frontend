@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../../environment/environment"
 import { Link } from "react-router-dom";
+import { saveEmploymentDetails } from '../../servicesAndUtility/api';
 
 const ArthEmploymentDetails = () =>{
     // let token = localStorage.getItem('access_token');
@@ -301,8 +302,8 @@ const ArthEmploymentDetails = () =>{
             // "workplaceAddress1": companyAddL1,
             // "workplaceAddress2":companyAddL2,
             // "workplacePincode": pincode,
-            // "totalJobExpInYears": parseInt(totalExpYear),
-            // "totalJobExpInMonth": parseInt(totalExpMonth),
+            "totalJobExpInYears": parseInt(totalExpYear),
+            "totalJobExpInMonth": parseInt(totalExpMonth),
             // "currentJobExpInYears": parseInt(jobExpYear),
             // "currentJobExpInMonth": parseInt(jobExpMonth),
             "monthlyFamilyIncome": (familyIncome?familyIncome:0),
@@ -323,25 +324,30 @@ const ArthEmploymentDetails = () =>{
         //     submitObj.workplaceAddress2 = companyAddL2;
         //   }
 
-        await axios.post(env.api_Url + "userDetails/employmentDetail", 
-            submitObj)
-            .then((response) => {
-                console.log(response)
-                if(response.data.message === "success"){
+        saveEmploymentDetails(submitObj, res=>{
+            if(res.data.message === "success"){
+                navigate("/patient/ArthCurrentEMIExpenses");
+            }
+        })
+        // await axios.post(env.api_Url + "userDetails/employmentDetail", 
+        //     submitObj)
+        //     .then((response) => {
+        //         console.log(response)
+        //         if(response.data.message === "success"){
 
-                    if(loanAmt <= 300001){
-                        navigate('/patient/CreditFairOffers');
-                    }else{
-                        navigate('/patient/BankDetails');
-                    }
-                    // navigate('/patient/LoanDetails');
-                }else{
-                    apiErrorHandler();
-                }
-            }).catch(error => {
-                console.log(error);
-                apiErrorHandler();
-              });
+        //             if(loanAmt <= 300001){
+        //                 navigate('/patient/CreditFairOffers');
+        //             }else{
+        //                 navigate('/patient/BankDetails');
+        //             }
+        //             // navigate('/patient/LoanDetails');
+        //         }else{
+        //             apiErrorHandler();
+        //         }
+        //     }).catch(error => {
+        //         console.log(error);
+        //         apiErrorHandler();
+        //       });
     setCanSubmit(true);
     hideWrapper(ref.current)
     }

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../../environment/environment"
+import { saveAddressDetails } from '../../servicesAndUtility/api';
 
 
 const ArthAddressDetails = () => {
@@ -275,18 +276,25 @@ const ArthAddressDetails = () => {
         //     submitObj.landmark = landmark;
         // }
 
-        await axios.post(env.api_Url + "userDetails/addressDetail",
-            submitObj)
-            .then((response) => {
-                console.log(response)
-                if(response.data.message === "success"){
-                    navigate('/patient/EmploymentDetails');
-                }else{
-                    apiErrorHandler();
-                }
-            }).catch(error => {
+        saveAddressDetails(submitObj, res=>{
+            if(res.data.message === "success"){
+                navigate('/patient/ArthEmploymentDetails');
+            }else{
                 apiErrorHandler();
-            }); 
+            }
+        })
+        // await axios.post(env.api_Url + "userDetails/addressDetail",
+        //     submitObj)
+        //     .then((response) => {
+        //         console.log(response)
+        //         if(response.data.message === "success"){
+        //             navigate('/patient/EmploymentDetails');
+        //         }else{
+        //             apiErrorHandler();
+        //         }
+        //     }).catch(error => {
+        //         apiErrorHandler();
+        //     }); 
         setCanSubmit(true);
         hideWrapper(ref.current);
     }

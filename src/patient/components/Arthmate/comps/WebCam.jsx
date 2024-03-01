@@ -4,19 +4,19 @@ import Webcam from "react-webcam";
 const WebcamCapture = forwardRef(function(props, ref){
     
     const videoConstraints = {
-        // width: 300,
-        // height: 460,
-        facingMode: "user",
+        width: props.width || 460,
+        height: props.height || 300,
+        facingMode: props.mode || "user",
         screenshotQuality: 1
     };
-
+    console.log(props)
     return (
       <>
         <Webcam
           audio={false}
           ref={ref}
-        //   width={615}
-          height={props.height || 400}
+          width={props.width || 460}
+          height={props.height || 300}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
         />
