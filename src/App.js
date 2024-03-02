@@ -138,6 +138,7 @@ import RefundandCancellation from './website/pages/RefundandCancellation';
 import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
 import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
 import { NotServiceable } from './patient/components/Fibe flow/NotServiceable';
+import ICICITermsAndConditions from './website/pages/ICICITermsAndConditions';
 
 
 
@@ -152,6 +153,7 @@ function App() {
         <Route path='/PrivacyPolicy' element={<PrivacyPolicy />} ></Route>
         <Route path='/TermsAndConditions' element={<TermsAndConditions />} ></Route>
         <Route path='/RefundandCancellation' element={<RefundandCancellation />} ></Route>
+        <Route path='/ICICITermsAndConditions' element={<ICICITermsAndConditions />} ></Route>
 
         <Route path='/patient' element={<Homepage />}></Route>
         <Route path='/patient/MobileNumberVerification' element={<MobileNumberVerification />} />
