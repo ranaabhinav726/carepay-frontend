@@ -7,7 +7,7 @@ export default function DoctorNotAvailable() {
     <main>
       <Header />
       <div style={{display:"flex", gap:"12px", marginTop:"4rem", padding:"10px"}}>
-        <img style={{maxWidth:"30%"}} src={NotFound} alt="" />
+        <img style={{maxWidth:"30%", aspectRatio:"1/1", objectFit:"contain"}} src={NotFound} alt="" />
         <div>
             <p style={{fontSize:"30px", color:"#B9B7D9", fontWeight:"700",}}>404</p>
             <p style={{color:"#514C9F", fontWeight:"700", margin:"6px 0"}}>Page not found!</p>
