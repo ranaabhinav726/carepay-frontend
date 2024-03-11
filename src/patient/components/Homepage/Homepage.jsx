@@ -15,6 +15,7 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { env } from "../../../doctor/environment"
+import { checkDoctorStatus } from "../../services"
 
 
 const Homepage = () =>{
@@ -40,13 +41,18 @@ const Homepage = () =>{
 
     const fibeNbfcId = "lYsPxk42bDzRgJVmHoNNcegqyC9ww1XK";
 
-    console.log("Last update - 16/10/2023 7:39 PM");
+    // console.log("Last update - 16/10/2023 7:39 PM");
 
     useEffect(()=>{
         if(doctorId){
+            checkDoctorStatus(doctorId, res=>{
+                if(res.message === "success" && res.data === "HOLD"){
+                    navigate("/patient/DoctorNotAvailable");
+                }
+            })
             axios.get(env.api_Url+"getDoctorProfDetailsByDoctorId?doctorId=" + doctorId)
             .then((response)=>{
-                console.log(response)
+                // console.log(response)
                 setGoogleReviewLink(response?.data?.data?.googleReviewLink)
                 setJustdialReviewLink(response?.data?.data?.justdialReviewLink)
             }).catch((error)=>{
@@ -59,7 +65,7 @@ const Homepage = () =>{
         if(doctorId){
             axios.get(env.api_Url+"userDetails/getNbfcStatusForDoctor?doctorId=" + doctorId)
             .then((response)=>{
-                console.log(response);
+                // console.log(response);
                 if(response){
                     let id = response?.data?.data[0];
                      if(id){
