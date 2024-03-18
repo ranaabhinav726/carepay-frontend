@@ -11,6 +11,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import BottomPopOverModal from '../../comps/BottomPopOverModal'
+import { getBankList } from '../../servicesAndUtility/api'
 
 
 const ArthBankSelection = () =>{
@@ -31,28 +32,13 @@ const ArthBankSelection = () =>{
 
 
     useEffect(()=>{
-        axios
-            .get(env.login_api_Url + "bank_list", config)
-            .then((response) => {
-                let responseCode = response.status + "";
-                if(responseCode[0] == '2'){
-                    let data = response?.data?.all_bank_name;
-                    setBankList(response?.data?.all_bank_name);
-                    let banks = data.map((item, idx)=>{
-                        return <Bank BankName={item.Bank_name} Icon={BankIcon} isAA={item.bank_aa} key={idx} selectAndProceed={selectAndProceed}/>
-                    })
-                    setBankListComps(banks);
-                    setLoaded(true);
-                }
-            }).catch(error => {
-                console.log(error);
-                });
+        getBankList("statement", res=>{
+            console.log(res);
+        })
     },[]);
 
 
     function selectAndProceed(e){
-        // e.stopPropagation();
-        // console.log(e.target)
 
         let bankName = e.target.innerText;
         let aaStatus = e.target.nextSibling === null;

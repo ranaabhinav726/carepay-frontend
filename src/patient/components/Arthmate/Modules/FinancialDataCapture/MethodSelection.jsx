@@ -9,68 +9,14 @@ import { env } from "../../../../environment/environment"
 import { RiArrowRightSLine } from "react-icons/ri";
 import Redirecting from '../../assets/Redirecting.gif'
 
-
-import axios from 'axios';
-
-
 const ArthMethodSelection = () => {
-
-    let token = localStorage.getItem('access_token');
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
-
-    // let BankName = "ICICI Bank"
-
-    const [Method, setMethod] = useState('');
 
     const navigate = useNavigate();
 
-    // let bankName = localStorage.getItem("bankName") || "";
-    // let aaStatus = localStorage.getItem("isBankAA") || false;
-
-    const [bankName, setBankName] = useState('');
-    const [aaStatus, setAAStatus] = useState(false);
-
-    const [url, setURL] = useState("")
-    const [canClick, setCanClick] = useState(false)
-
     const [screenState, setScreenState] = useState("methodSelection"); // methodSelection, redirecting
 
-    useEffect(()=>{
-        setBankName(localStorage.getItem("bankName") || "");
-        setAAStatus(localStorage.getItem("isBankAA")=="true" || false);
-        console.log(aaStatus)
-    },[])
-
-    // const [url, setUrl] = useState('');
-    
-    useEffect(()=>{
-        if(aaStatus){
-            console.log("chala")
-            axios
-            .post(env.login_api_Url + "bank_list",{}, config)
-            .then((response)=>{
-                let responseCode = response.status + "";
-                if(responseCode[0] == '2'){
-                    console.log(response);
-                    let link_url = response?.data?.data?.url;
-                    setURL(link_url);
-                    setCanClick(true);
-                    console.log(link_url)
-                    // const link = document.createElement('a');
-                    // link.href = URL;
-                    // link.setAttribute("target", "_blank");
-                    // link.click();
-                }
-            }).catch(error => {
-                console.log(error);
-            });
-        }
-    },[aaStatus])
-
-    function handleAAflow(){
-        
+    function goToBankSelection(method){
+        navigate("/patient/ArthBankSelection", {state:{"method": method}})
     }
 
     return (

@@ -42,3 +42,11 @@ export async function sendAadharOtp(userId, callback){
         console.log(err);
     })
 } 
+
+export async function getBankList(method="Statement", callBack){
+
+    axios.get(BASE_URL + "/getDigitapInstituteId?type=" + method)
+    .then(res=>{
+        callBack(res.data);
+    }).catch(err=>console.warn(err));
+}
