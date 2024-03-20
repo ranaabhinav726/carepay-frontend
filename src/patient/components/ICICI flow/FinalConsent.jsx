@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios"
 import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment"
-import { confirmUser, validateUser } from "./apis"
+import { confirmUser, downloadKfs, validateUser } from "./apis"
 import InputBox from "./comps/InputBox"
 import Timer from "../EnterOTP/Timer"
 
@@ -150,14 +150,14 @@ function FinalConsent(){
 
         // otp = digit1 + digit2 + digit3 + digit4;
 
-        if(otp.toString().length < 4){
-            
+        if(otp.toString().length < 6){
             return;
         }
 
         let pInstId = data?.pInstId;
         showWaitingModal();
         validateUser(otp, data.txnId, pInstId, (res)=>{
+            console.log(res?.data?.data?.status)
             if(res?.data?.data?.status === 1){
                 let loanAmount = data?.loanAmount;
                 let tenure = data?.loanTenure;
@@ -165,10 +165,18 @@ function FinalConsent(){
                 confirmUser(loanAmount, tenure, txnId, pInstId, res=>{
                     if(res?.data?.data?.status === 1){
                         navigate("/patient/LoanAppSuccessful")
+                    }else{
+                        hideWaitingModal()
                     }
                 }, hideWaitingModal)
+            }else{
+                hideWaitingModal();
             }
         }, hideWaitingModal)
+    }
+
+    function downloadAndSaveKfs(){
+        downloadKfs(userId, hideWaitingModal, ()=>{})
     }
 
     return(
@@ -224,7 +232,7 @@ function FinalConsent(){
 
                     <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
                         <input value={consent} onClick={()=>setConsent(!consent)} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
-                        <label htmlFor="kfsConsentCheckbox" style={{userSelect:"none"}}>I agree to the <a href="../../assets/Key Fact Statement ICICI_CarePay.pdf" download={""} style={{color:"#000000", fontWeight:"600", textDecoration:"underline"}}>Key fact Statement</a></label>
+                        <label htmlFor="kfsConsentCheckbox" style={{userSelect:"none"}}>I agree to the <span onClick={()=>downloadAndSaveKfs()} style={{color:"#000000", fontWeight:"600", textDecoration:"underline", cursor:"pointer"}}>Key fact Statement</span></label>
                     </div>
                     <button className={"submit" + (!consent?" disabled" : "")} onClick={()=>handleSubmit()}>Submit OTP</button>
                 </>

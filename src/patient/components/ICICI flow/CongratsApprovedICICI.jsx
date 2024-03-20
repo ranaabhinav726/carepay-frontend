@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import Confetti from '../../assets/GIFs/confetti.gif'
-import LogoICICI from '../../assets/GIFs/ICICI_Bank_Logo.png'
-import { FiCheckCircle } from 'react-icons/fi'
+// import LogoICICI from '../../assets/GIFs/ICICI_Bank_Logo.png'
+// import { FiCheckCircle } from 'react-icons/fi'
 import Header from '../Header/Header'
 // import StepBar from './comps/StepBar'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { hideWaitingModal, showWaitingModal } from '../../environment/environment'
+import { downloadKfs } from './apis'
 const CongratsApprovedICICI = () =>{
 
+    let userId = localStorage.getItem('userId');
     const navigate = useNavigate();
     const location = useLocation();
     let data = location?.state?.data;
@@ -14,11 +17,14 @@ const CongratsApprovedICICI = () =>{
     // const [amount, setAmount] = useState(54000);
     const [loanAmount, ] = useState(Number(amount));
 
-    function handleNavigation(){ // download and save KFS then navigate
-        navigate("/patient/FinalConsent", {
-            state:{
-                "data" : data,
-            }
+    function downloadKfsAndHandleNavigation(){ // download and save KFS then navigate
+        showWaitingModal();
+        downloadKfs(userId, hideWaitingModal, ()=>{
+            navigate("/patient/FinalConsent", {
+                state:{
+                    "data" : data,
+                }
+            })
         })
     }
 
@@ -37,12 +43,10 @@ const CongratsApprovedICICI = () =>{
             {/* <p style={{textAlign:"center", marginTop:"1rem"}}>ICICI has sent an OTP on your registered mobile number. Enter that OTP in the next step as a final consent.</p> */}
             <p style={{textAlign:"center", marginTop:"1rem"}}>Please click on the button below to download the <strong>Key Fact Statement</strong> and proceed.</p>
             
-            {/* <button className="submit" onClick={()=>handleNavigation()}>Continue with OTP</button> */}
-            <a href="../../assets/Key Fact Statement ICICI_CarePay.pdf" download={""}>
-                <button className="submit" onClick={()=>handleNavigation()}>
-                    Download Key Fact Statement
-                </button>
-            </a>
+            {/* <button className="submit" onClick={()=>downloadKfsAndHandleNavigation()}>Continue with OTP</button> */}
+            <button className="submit" onClick={()=>downloadKfsAndHandleNavigation()}>
+                Download Key Fact Statement
+            </button>
         </main>
     )
 }

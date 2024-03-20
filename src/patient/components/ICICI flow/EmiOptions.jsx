@@ -9,8 +9,10 @@ import axios from "axios";
 import { env } from "../../environment/environment";
 import Sparkles from '../../assets/Sparkle.svg'
 
+
 function EmiOptions(){
 
+    let userId = localStorage.getItem('userId');
     const navigate = useNavigate();
     let location = useLocation();
     // console.log(location.state);
@@ -24,11 +26,26 @@ function EmiOptions(){
     const [maxLoanLimit, ] = useState(Number(offerAmount));
     const [reqAmount, setReqAmount] = useState("");
     const [maxTenure, setMaxTenure] = useState(Number(tenure));
+    const [loanData, setLoanData] = useState({});
 
     const [selected, setSelected] = useState({
         "cardName" : "card-1",
         "tenure"   : ""
     });
+
+    useEffect(()=>{
+        if(!! userId){
+            axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
+            .then(response =>{
+                if(response.data.status === 200){
+                    let data = response.data.data;
+                    if(data) setLoanData(data);
+                }
+            }).catch(()=>{
+
+            });
+        }
+    }, [])
 
     useEffect(()=>{
         setMaxTenure(Number(tenure))
@@ -72,17 +89,33 @@ function EmiOptions(){
         }
     }
 
-    function handleNavigate(){
+    async function handleNavigate(){
         let chosenTenure = selected.tenure;
-        navigate("/patient/PanVerificationIcici", 
-            {
-                state:{
-                    "offer" : offer, 
-                    "reqAmount" : reqAmount,
-                    "loanTenure" : chosenTenure,
+        let submitObj = {...loanData,
+                            "loanEMI":chosenTenure,
+                            "loanAmount":reqAmount,
+                            "userId":userId
+                        };
+
+        await axios
+            .post(env.api_Url + "userDetails/saveLoanDetails", submitObj)
+            .then(response => {
+                console.log(response)
+                if(response.data.message === "success"){
+                    navigate("/patient/PanVerificationIcici", 
+                        {
+                            state:{
+                                "offer" : offer, 
+                                "reqAmount" : reqAmount,
+                                "loanTenure" : chosenTenure,
+                            }
+                        }
+                    )
                 }
-            }
-        )
+            }).catch(error => {
+                console.log(error);
+            });
+        
     }
 
     return(
