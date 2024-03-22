@@ -140,6 +140,7 @@ import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved'
 import { NotServiceable } from './patient/components/Fibe flow/NotServiceable';
 import ICICITermsAndConditions from './website/pages/ICICITermsAndConditions';
 import DoctorNotAvailable from './patient/components/Homepage/DoctorNotAvailable';
+import PrescriptionUpload from './patient/components/Personal_Details/Prescription/PrescriptionUpload';
 
 
 
@@ -164,8 +165,9 @@ function App() {
 
         <Route path='/patient/PhoneNumberVerified' element={<PhoneNumberVerified />} />
 
-        <Route path='/patient/PersonalDetails' element={<PersonalDetails />} />
         <Route path='/patient/CreditDetails' element={<CreditDetails />} />
+        <Route path='/patient/PrescriptionUpload' element={<PrescriptionUpload />} />
+        <Route path='/patient/PersonalDetails' element={<PersonalDetails />} />
         <Route path='/patient/NotServiceable' element={<NotServiceable />} />
 
         <Route path='/patient/AddressDetails' element={<AddressDetails />} />

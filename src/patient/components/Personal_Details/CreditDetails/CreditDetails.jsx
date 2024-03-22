@@ -260,17 +260,25 @@ const CreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     if(! number) return;
 
-                    // navigate('/patient/PersonalDetails');
-                    preEligibility(number, res=>{
-                    if(res?.data?.data?.status === 1){
-                        let data = res?.data?.data?.data;
-                        console.log(data);
-
-                        navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+                    if(amount > 100000){
+                        navigate('/patient/PrescriptionUpload');
                     }else{
                         navigate('/patient/PersonalDetails');
                     }
-                    })
+                    // preEligibility(number, res=>{
+                    // if(res?.data?.data?.status === 1){
+                    //     let data = res?.data?.data?.data;
+                    //     console.log(data);
+
+                    //     navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+                    // }else{
+                    //     if(amount > 100000){
+                    //         navigate('/patient/PrescriptionUpload');
+                    //     }else{
+                    //         navigate('/patient/PersonalDetails');
+                    //     }
+                    // }
+                    // })
                 }else{
                     // setErrorMsg()
                     apiErrorHandler();
