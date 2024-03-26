@@ -1,17 +1,17 @@
-import Header from "../../Header/Header";
+import {Header} from './Comps/Header'
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import PrescriptionImg from '../../../assets/prescription.svg'
+import PrescriptionImg from '../../assets/prescription.svg'
 import { useEffect, useRef, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import lottie from "lottie-web";
-import animationData from '../../../assets/GIFs/Comp 1.json'
+import animationData from '../../assets/GIFs/Comp 1.json'
 import axios from "axios";
-import { env } from "../../../environment/environment";
+import { env } from "../../environment/environment";
 import { useNavigate } from "react-router-dom";
 
-export default function PrescriptionUpload(){
+export default function FibePrescriptionUpload(){
 
     let userId = localStorage.getItem("userId");
     const navigate = useNavigate();
@@ -78,7 +78,7 @@ export default function PrescriptionUpload(){
             if(res.status === 200){
                 setScreenState("Submitted");
                 setTimeout(()=>{
-                    navigate("/patient/PersonalDetails")
+                    navigate("/patient/screen6");
                 }, 2000)
             }
         }).catch(e=>console.warn(e));
@@ -88,8 +88,8 @@ export default function PrescriptionUpload(){
         <main style={{position:"relative"}}>
             {screenState === "NoFileSelected" &&
             <>
-                <Header />
-                <h3 style={{marginBottom:"1rem"}}>Prescription upload</h3>
+                <Header progress={62} />
+                <h3 style={{margin:"1rem 0"}}>Prescription upload</h3>
                 <p style={{lineHeight:"150%"}}>Click and upload an image of your prescription, for verifying the purpose of your credit.</p>
                 <div style={{width:"100%", display:"flex", justifyContent:"center", margin:"2.5rem 0"}}>
                     <img 
@@ -107,8 +107,8 @@ export default function PrescriptionUpload(){
 
             {screenState === "FileInBuffer" &&
             <>
-                <Header />
-                <h3 style={{marginBottom:"1rem"}}>Prescription upload</h3>
+                <Header progress={62} />
+                <h3 style={{margin:"1rem 0"}}>Prescription upload</h3>
                 {prescriptionList}
                 {/* <button className="submit lite" onClick={()=>uploadClickHandler()}>+ Add more</button> */}
                 <button className="submit" onClick={()=>savePrescripton()}>Submit</button>

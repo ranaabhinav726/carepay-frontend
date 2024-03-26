@@ -9,7 +9,8 @@ import { env, hideWaitingModal, showWaitingModal } from "../../environment/envir
 import { useNavigate } from "react-router-dom";
 import { showErrorOnUI } from "../../environment/environment";
 
-
+import lottie from "lottie-web";
+import animationData from '../../assets/JSON animations/loader simple.json'
 
 
 export default function Screen6(){
@@ -29,6 +30,8 @@ export default function Screen6(){
 
     const [api1Status, setApi1Status] = useState(false);
     const [api2Status, setApi2Status] = useState(false);
+
+    const [waiting, setWaiting] = useState(true);
 
     let userId = localStorage.getItem("userId");
 
@@ -77,6 +80,18 @@ export default function Screen6(){
             })
         }
     },[userId])
+
+
+    useEffect(() => {
+        lottie.loadAnimation({
+            container: document.querySelector("#searchAnimation"),
+            animationData: animationData,
+        //   renderer: "html"
+        });
+        setTimeout(() => {
+            setWaiting(false);
+        }, 3000);
+    }, []);
 
     function getDataFromDecentro(){
             axios.get(env.api_Url+"getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + name)
@@ -312,7 +327,14 @@ export default function Screen6(){
             />
 
             <button style={{marginTop:"32px"}} onClick={()=>postDetails()} className="submit">Next</button>
-            
+            {waiting && 
+                <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
+                    <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
+                        <div id="searchAnimation"></div>
+                        <p style={{textAlign:"center"}}>Fetching your details...</p>
+                    </div>
+                </div>
+            }
             
         </main>
     )

@@ -141,6 +141,7 @@ import { NotServiceable } from './patient/components/Fibe flow/NotServiceable';
 import ICICITermsAndConditions from './website/pages/ICICITermsAndConditions';
 import DoctorNotAvailable from './patient/components/Homepage/DoctorNotAvailable';
 import PrescriptionUpload from './patient/components/Personal_Details/Prescription/PrescriptionUpload';
+import FibePrescriptionUpload from './patient/components/Fibe flow/PrescriptionUpload';
 
 
 
@@ -234,6 +235,7 @@ function App() {
         <Route path='/patient/screen3' element={<Screen3 />} />
         <Route path='/patient/screen4' element={<Screen4 />} />
         <Route path='/patient/screen5' element={<Screen5 />} />
+        <Route path='/patient/fibePrescriptionUpload' element={<FibePrescriptionUpload />} />
         <Route path='/patient/screen6' element={<Screen6 />} />
         <Route path='/patient/screen7' element={<Screen7 />} />
         <Route path='/patient/screen8' element={<Screen8 />} />
