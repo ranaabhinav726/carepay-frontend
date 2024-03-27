@@ -10,6 +10,7 @@ import animationData from '../../../assets/GIFs/Comp 1.json'
 import axios from "axios";
 import { env } from "../../../environment/environment";
 import { useNavigate } from "react-router-dom";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 export default function PrescriptionUpload(){
 
@@ -40,9 +41,9 @@ export default function PrescriptionUpload(){
         setUploadedFiles([...newTempArray]);
     }
 
-    let prescriptionList = uploadedFiles.map((file, idx)=>{
-        return <UploadedPrescripton file={file} key={idx} idx={idx} showFileModal={showFileModal} removeFile={removeFileFromList} />
-    })
+    // let prescriptionList = uploadedFiles.map((file, idx)=>{
+    //     return <UploadedPrescripton file={file} key={idx} idx={idx} showFileModal={showFileModal} removeFile={removeFileFromList} />
+    // })
 
     const [screenState, setScreenState] = useState("NoFileSelected"); // NoFileSelected, FileInBuffer, Submitted
 
@@ -60,8 +61,23 @@ export default function PrescriptionUpload(){
     }, [screenState]);
 
     useEffect(()=>{
-        if(uploadedFiles.length > 0) setScreenState("FileInBuffer")
-        if(uploadedFiles.length === 0) setScreenState("NoFileSelected")
+        if(uploadedFiles.length === 0){
+            setScreenState("NoFileSelected");
+            return;
+        }
+        if(uploadedFiles.length > 0) setScreenState("FileInBuffer");
+
+        let fileName = uploadedFiles[0].name;
+        if(fileName.length > 28){
+            let [name, ext] = fileName.split(".");
+            name = name.substring(0,24);
+            fileName = name + "...." + ext;
+        }
+        let fileData = {
+            "file" : uploadedFiles[0],
+            "fileName" : fileName
+        }
+        showFileModal(fileData)
     },[uploadedFiles])
 
     function savePrescripton(){
@@ -116,24 +132,25 @@ export default function PrescriptionUpload(){
             {screenState === "FileInBuffer" &&
             <>
                 <Header />
-                <h3 style={{marginBottom:"1rem"}}>Prescription upload</h3>
-                {prescriptionList}
+                <h3 style={{margin:"2rem 0 1rem 0"}}>Share prescription</h3>
+                {/* {prescriptionList} */}
+                <FileViewerModal fileData={fileModal} setUploadedFiles={setUploadedFiles} />
                 {/* <button className="submit lite" onClick={()=>uploadClickHandler()}>+ Add more</button> */}
                 <button className="submit" onClick={()=>savePrescripton()}>Submit</button>
 
-                <div style={{width:"100%", display:"flex", justifyContent:"center", margin:"1.5rem 0", opacity:"0.4"}}>
+                {/* <div style={{width:"100%", display:"flex", justifyContent:"center", margin:"1.5rem 0", opacity:"0.4"}}>
                     <img 
                         src={PrescriptionImg} 
                         alt="prescription" 
                     />
-                </div>
+                </div> */}
             </>
             }
             {screenState === "Submitted" &&
             <>
                 <Header progressBar="hidden" />
                 <div style={{marginTop:"15%"}} id="searchAnimation"></div>
-                <p style={{color:"#514C9F", fontWeight:"bold", fontSize:"18px", textAlign:"center"}}>Prescription uploaded!</p>
+                <p style={{color:"#514C9F", fontWeight:"bold", fontSize:"18px", textAlign:"center"}}>Prescription shared successfully!</p>
             </>
             }
             <input 
@@ -146,7 +163,7 @@ export default function PrescriptionUpload(){
                 onChange={(e)=>fileHandler(e)}
                 multiple
             />
-            {fileModal && <FileViewerModal fileData={fileModal} showFileModal={showFileModal} />}
+            {/* {fileModal && <FileViewerModal fileData={fileModal} showFileModal={showFileModal} />} */}
         </main>
     )
 }
@@ -215,7 +232,7 @@ function UploadedPrescripton({file, idx, showFileModal, removeFile}){
     )
 }
 
-function FileViewerModal({fileData, showFileModal}){
+function FileViewerModal({fileData, setUploadedFiles}){
 
     console.log(fileData)
     let type = fileData?.file?.type.split("/")[0];
@@ -223,9 +240,9 @@ function FileViewerModal({fileData, showFileModal}){
 
     let url = URL.createObjectURL(fileData?.file);
     return(
-        <div style={{position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:"5"}}>
-            <div style={{borderRadius:"12px", background:"white", maxWidth:"70%", display:"flex", flexDirection:"column", alignItems:"center"}}>
-                <div style={{width:"100%", padding:"10px", display:"flex", alignItems:"center", justifyContent:"space-between", textAlign:"center", gap:"1rem", borderBottom:"2px solid grey", marginBottom:"8px"}}>
+        // <div style={{position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:"5"}}>
+            <div style={{borderRadius:"12px", background:"white", display:"flex", flexDirection:"column", alignItems:"center"}}>
+                {/* <div style={{width:"100%", padding:"10px", display:"flex", alignItems:"center", justifyContent:"space-between", textAlign:"center", gap:"1rem", borderBottom:"2px solid grey", marginBottom:"8px"}}>
                     <p style={{maxWidth:"80%", overflow:"clip"}}>{fileData?.fileName}</p>
                     <div style={{height:"34px", padding:"5px", background:"#ECEBFF", borderRadius:"4px", maxWidth:"20%", cursor:"pointer"}}>
                         <IoIosClose 
@@ -233,13 +250,16 @@ function FileViewerModal({fileData, showFileModal}){
                                 fontSize:"26px", 
                                 color:"#514C9F"
                             }} 
-                            onClick={()=>{showFileModal(null)}}
+                            onClick={()=>{setUploadedFiles([])}}
                         />
                     </div>
+                </div> */}
+                <div onClick={()=>{setUploadedFiles([])}} style={{position:"absolute", margin:"5px", right:"12px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer"}}>
+                    <RiDeleteBin6Fill style={{fontSize:"20px", color:"#DB4E4E"}} />
                 </div>
-                <div style={{maxWidth:"80%"}}>
+            <div style={{background:"#D9D9D9", borderRadius:"8px", overflow:"clip", padding:"1rem", width:"100%"}}>
                     {fileData && (type==="image" ?
-                        <div style={{border:"2px solid black", height:"95%"}}>
+                        <div style={{display:"flex", justifyContent:"center", height:"95%", borderRadius:"8px", overflow:"clip", padding:"1rem"}}>
                             <img src={url} style={{maxHeight:"100%", maxWidth:"100%"}} alt="API Image" />
                         </div>
                     :
@@ -252,7 +272,7 @@ function FileViewerModal({fileData, showFileModal}){
                     )}
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 
