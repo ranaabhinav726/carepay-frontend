@@ -88,20 +88,28 @@ export default function PrescriptionUpload(){
         <main style={{position:"relative"}}>
             {screenState === "NoFileSelected" &&
             <>
-                <Header />
-                <h3 style={{marginBottom:"1rem"}}>Prescription upload</h3>
-                <p style={{lineHeight:"150%"}}>Click and upload an image of your prescription, for verifying the purpose of your credit.</p>
+                <Header progressbarDisplay="block" progress="22" />
+                <h3 style={{margin:"2rem 0 1rem 0"}}>Share prescription</h3>
+                {/* <p style={{lineHeight:"150%"}}>Click and upload an image of your prescription, for verifying the purpose of your credit.</p> */}
+                <div style={{background:"#FAE1CD", borderRadius:"8px", padding:"12px 10px"}}>
+                    <h4>Important:</h4>
+                    <p style={{color:"rgba(0,0,0,0.8)"}}>Please ensure that the prescription is</p>
+                    <ul style={{paddingLeft:"24px", color:"rgba(0,0,0,0.8)"}}>
+                        <li>On doctor/clinic’s letterhead.</li>
+                        <li>Signed by the doctor.</li>
+                    </ul>
+                </div>
                 <div style={{width:"100%", display:"flex", justifyContent:"center", margin:"2.5rem 0"}}>
                     <img 
                         src={PrescriptionImg} 
                         alt="prescription" 
                     />
                 </div>
-                <h4>Upload file</h4>
-                <p style={{margin:"1rem 0"}}>Allowed formats : PDF, Jpeg, Jpg</p>
+                {/* <h4>Upload file</h4> */}
+                <p style={{marginTop:"1.5rem"}}>Allowed formats : PDF, Jpeg, Jpg</p>
 
                 
-                <button className="submit" onClick={()=>uploadClickHandler()}>Click to upload</button>
+                <button className="submit" onClick={()=>uploadClickHandler()}>Share file</button>
             </>
             }
 
