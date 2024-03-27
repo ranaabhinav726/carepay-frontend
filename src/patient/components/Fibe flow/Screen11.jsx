@@ -111,8 +111,8 @@ export default function Screen11(){
             <div style={{display:"flex", placeContent:"center", marginTop:"3rem"}}>
                 <img src={SearchingDoc} alt="" style={{width:"50%"}} />
             </div>
-            <NoteText text="Sit back and relax!" styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
-            <NoteText text="while we assess your credit application..." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
+            <NoteText text="Checking status..." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
+            {/* <NoteText text="while we assess your credit application..." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} /> */}
         </main>
     )
 }
