@@ -57,8 +57,8 @@ export default function Screen12(){
                     <li><div className='encircle'>4</div><span className='v-line'></span><div className="stepName"><span className="step">Select EMI plan </span><span><MdOutlineElectricBolt className='boltIcon' /> Takes 30 seconds</span></div></li>
                     <li><div className='encircle'>5</div><div className="stepName"><span className="step">Give consent to disburse </span><span><MdOutlineElectricBolt className='boltIcon' /> Takes 10 seconds</span></div></li>
                 </ul>
-                <p>No paperwork needed, this is completely a digital process.</p>
-            <button style={{marginTop:"32px", background:"#00A1A0"}} onClick={()=>navigate("/patient/screen13", {state : {"link" : bitlyUrl}})} className="submit">Continue</button>
+                <p style={{margin:"0"}}>No paperwork needed, this is completely a digital process.</p>
+            <button style={{background:"#00A1A0"}} onClick={()=>navigate("/patient/screen13", {state : {"link" : bitlyUrl}})} className="submit">Continue</button>
             </div>
         </main>
     )
