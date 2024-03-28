@@ -254,10 +254,10 @@ function FileViewerModal({fileData, setUploadedFiles}){
                         />
                     </div>
                 </div> */}
-                <div onClick={()=>{setUploadedFiles([])}} style={{position:"absolute", margin:"10px", right:"8px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer"}}>
+                <div onClick={()=>{setUploadedFiles([])}} style={{position:"absolute", margin:"5px", right:"18px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer"}}>
                     <RiDeleteBin6Fill style={{fontSize:"20px", color:"#DB4E4E"}} />
                 </div>
-            <div style={{background:"#D9D9D9", borderRadius:"8px", overflow:"clip", padding:"1rem", width:"100%"}}>
+            <div style={{background:"#D9D9D9", borderRadius:"8px", overflow:"clip", padding:"0.5rem", width:"100%"}}>
                     {fileData && (type==="image" ?
                         <div style={{display:"flex", justifyContent:"center", height:"95%", borderRadius:"8px", overflow:"clip", padding:"1rem"}}>
                             <img src={url} style={{maxHeight:"100%", maxWidth:"100%"}} alt="API Image" />
