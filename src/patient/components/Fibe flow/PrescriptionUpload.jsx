@@ -101,7 +101,7 @@ export default function FibePrescriptionUpload(){
     }
 
     return(
-        <main style={{position:"relative"}}>
+        <main className='screenContainer' style={{position:"relative"}}>
             {screenState === "NoFileSelected" &&
             <>
                 <Header progress={62} />
