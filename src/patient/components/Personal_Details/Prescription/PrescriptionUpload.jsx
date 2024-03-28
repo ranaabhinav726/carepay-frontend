@@ -104,7 +104,7 @@ export default function PrescriptionUpload(){
         <main style={{position:"relative"}}>
             {screenState === "NoFileSelected" &&
             <>
-                <Header progressbarDisplay="block" progress="22" />
+                <Header progressbarDisplay="block" progress="22" canGoBack="/patient/CreditDetails" />
                 <h3 style={{margin:"2rem 0 1rem 0"}}>Share prescription</h3>
                 {/* <p style={{lineHeight:"150%"}}>Click and upload an image of your prescription, for verifying the purpose of your credit.</p> */}
                 <div style={{background:"#FAE1CD", borderRadius:"8px", padding:"12px 10px"}}>
