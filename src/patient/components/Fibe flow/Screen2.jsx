@@ -66,7 +66,7 @@ export default function Screen2(){
                     if(userId){
                         localStorage.setItem("userId", userId);
                     }
-                    navigate("/patient/screen3");
+                    navigate("/patient/fibeNumberVerified");
                 }else{
                     setErrorMsg(response?.data?.data);
                     setTimeout(() => {

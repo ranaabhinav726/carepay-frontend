@@ -10,7 +10,7 @@ export default function Screen12sub1(){
     console.log(location.state);
 
     function handleNavigation(){
-        navigate("/patient/screen13", {state : {"link" : bitlyUrl}})
+        navigate("/patient/fibeRedirecting", {state : {"link" : bitlyUrl}})
     }
 
     return(

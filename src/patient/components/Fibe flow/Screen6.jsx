@@ -204,7 +204,7 @@ export default function Screen6(){
 
     if(api1Status && api2Status){
         hideWaitingModal();
-        navigate('/patient/screen7');
+        navigate('/patient/fibeEmploymentDetails');
     }
 
     function handlePan(val){

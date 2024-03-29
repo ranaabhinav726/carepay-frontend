@@ -11,7 +11,7 @@ export default function Screen8(){
     const navigate = useNavigate();
 
     setTimeout(() => {
-        navigate('/patient/screen11', {replace:"true"})
+        navigate('/patient/fibeCreateUser', {replace:"true"})
     }, 3000);
 
     useEffect(() => {

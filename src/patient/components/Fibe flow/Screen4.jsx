@@ -87,7 +87,7 @@ export default function Screen4(){
                 if(response.data.message === "success"){
                     // await handleNavigation();
                     localStorage.setItem('P_userName', `${firstName} ${lastName}`)
-                    navigate('/patient/screen5');
+                    navigate('/patient/fibeCreditDetails');
                 }else{
                     // setErrorMsg()
                 }

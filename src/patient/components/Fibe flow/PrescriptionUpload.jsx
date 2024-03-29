@@ -94,7 +94,7 @@ export default function FibePrescriptionUpload(){
             if(res.status === 200){
                 setScreenState("Submitted");
                 setTimeout(()=>{
-                    navigate("/patient/screen6");
+                    navigate("/patient/fibeBasicDetails");
                 }, 2000)
             }
         }).catch(e=>console.warn(e));

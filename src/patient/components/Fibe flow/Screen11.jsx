@@ -48,42 +48,42 @@ export default function Screen11(){
                             timerId = setTimeout(() => {
                                 if(!! (leadStatus && creditAmt)){
                                     if(leadStatus === "REJECTED"){
-                                        navigate("/patient/screen12sub2", {state : {"data" : loanData}}); // journey ends here
+                                        navigate("/patient/fibeLoanRejected", {state : {"data" : loanData}}); // journey ends here
                                     }
                                     // else if(leadStatus === "PENDING" || leadStatus === "IN_PROGRESS"){
                                     //     navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}}); // prompt user that bank statement will be collected in futher process
                                     // }
                                     else if(leadStatus === "CREATED"){
-                                        navigate("/patient/screen13", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
+                                        navigate("/patient/fibeRedirecting", {state : {"link" : bitlyUrl}});     // directly sends to redirecting screen
                                     }else if(leadStatus === "APPROVED"){
                                         // console.log(sanctionMaxLimit, creditAmt)
                                         if(Number(creditAmt) > Number(sanctionMaxLimit)){
-                                            navigate("/patient/screen12sub2"); // journey ends here
+                                            navigate("/patient/fibeLoanRejected"); // journey ends here
                                         }else{
-                                            navigate("/patient/screen12", { state: {"data" : fibeData, "loanAmount": creditAmt}});     // congrats and show sanction amount
+                                            navigate("/patient/fibeLoanApproved", { state: {"data" : fibeData, "loanAmount": creditAmt}});     // congrats and show sanction amount
                                         }
                                     }else if(leadStatus === "FAILURE" && statusMessage === "Unable to ingest lead."){
-                                        navigate("/patient/screen10")
+                                        navigate("/patient/fibeWaitingForApproval")
                                     }else{
                                         if(!! bitlyUrl){
-                                            navigate("/patient/screen12sub1", {state : {"link" : bitlyUrl}});
+                                            navigate("/patient/fibeBankStatementRequired", {state : {"link" : bitlyUrl}});
                                         }else{
                                             // navigate(-1)
-                                            navigate("/patient/screen10")
+                                            navigate("/patient/fibeWaitingForApproval")
                                         }
                                     }
                                 }else{
                                     // navigate(-1)
-                                    navigate("/patient/screen10")
+                                    navigate("/patient/fibeWaitingForApproval")
                                 }
                             }, 2000);
                         }else{
                             // navigate(-1)
-                            navigate("/patient/screen10")
+                            navigate("/patient/fibeWaitingForApproval")
                         }
                     }else{
                         // navigate(-1)
-                        navigate("/patient/screen10")
+                        navigate("/patient/fibeWaitingForApproval")
                     }
                 }).catch(error=>{
                     navigate(-1)
@@ -91,7 +91,7 @@ export default function Screen11(){
                 })
             }else{
                 // navigate(-1)
-                navigate("/patient/screen10")
+                navigate("/patient/fibeWaitingForApproval")
             }
             // hideWaitingModal();
         }).catch(err=>{

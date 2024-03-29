@@ -86,7 +86,7 @@ export default function Screen7(){
             .then((response) => {
                 console.log(response)
                 if(response.data.message === "success"){
-                    navigate('/patient/screen8');
+                    navigate('/patient/fibeGreatJob');
                 }else{
                     // apiErrorHandler();
                 }

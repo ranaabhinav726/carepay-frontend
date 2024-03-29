@@ -198,39 +198,40 @@ function App() {
         <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
         <Route path='/patient/FinalConsent' element={<FinalConsent />} />
 
-        <Route path='/patient/screen1' element={<Screen1 />} />
-        <Route path='/patient/screen2' element={<Screen2 />} />
-        <Route path='/patient/screen3' element={<Screen3 />} />
-        <Route path='/patient/screen4' element={<Screen4 />} />
-        <Route path='/patient/screen5' element={<Screen5 />} />
-        <Route path='/patient/screen6' element={<Screen6 />} />
-        <Route path='/patient/screen7' element={<Screen7 />} />
-        <Route path='/patient/screen8' element={<Screen8 />} />
-        <Route path='/patient/screen9' element={<Screen9 />} />
-        <Route path='/patient/screen10' element={<Screen10 />} />
-        <Route path='/patient/screen11' element={<Screen11 />} />
-        <Route path='/patient/screen12' element={<Screen12 />} />
-        <Route path='/patient/screen12sub1' element={<Screen12sub1 />} />
-        <Route path='/patient/screen12sub2' element={<Screen12sub2 />} />
-        <Route path='/patient/screen13' element={<Screen13 />} />
+        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
+        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
+        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
+        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
+        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
+
+        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
+        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
+        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
+        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
+        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
+        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
+
+        <Route path='/patient/fibeMobileNumberVerification' element={<Screen1 />} />
+        <Route path='/patient/fibeOtpAuthentication' element={<Screen2 />} />
+        <Route path='/patient/fibeNumberVerified' element={<Screen3 />} />
+        <Route path='/patient/fibeWelcome' element={<Screen4 />} />
+        <Route path='/patient/fibeCreditDetails' element={<Screen5 />} />
+        <Route path='/patient/fibePrescriptionUpload' element={<FibePrescriptionUpload />} />
+        <Route path='/patient/fibeBasicDetails' element={<Screen6 />} />
+        <Route path='/patient/fibeEmploymentDetails' element={<Screen7 />} />
+        <Route path='/patient/fibeGreatJob' element={<Screen8 />} />
+        <Route path='/patient/fibeCreateUser' element={<Screen9 />} />
+        <Route path='/patient/fibeWaitingForApproval' element={<Screen10 />} />
+        <Route path='/patient/fibeCheckingStatus' element={<Screen11 />} />
+        <Route path='/patient/fibeLoanApproved' element={<Screen12 />} />
+        <Route path='/patient/fibeBankStatementRequired' element={<Screen12sub1 />} />
+        <Route path='/patient/fibeLoanRejected' element={<Screen12sub2 />} />
+        <Route path='/patient/fibeRedirecting' element={<Screen13 />} />
         <Route path='/patient/screen14/:userId' element={<Screen14 />} />
-        <Route path='/patient/screen15' element={<Screen15 />} />
+        <Route path='/patient/fibeCongratsUser' element={<Screen15 />} />
 
-        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
-        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
-        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
-        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
-        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
-        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
-
-        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
-        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
-        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
-        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
-        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
-        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
-
-        <Route path='/patient/screen1' element={<Screen1 />} />
+        {/* <Route path='/patient/screen1' element={<Screen1 />} />
         <Route path='/patient/screen2' element={<Screen2 />} />
         <Route path='/patient/screen3' element={<Screen3 />} />
         <Route path='/patient/screen4' element={<Screen4 />} />
@@ -248,7 +249,7 @@ function App() {
         <Route path='/patient/screen13' element={<Screen13 />} />
         <Route path='/patient/screen14/:userId' element={<Screen14 />} />
         <Route path='/patient/screen15' element={<Screen15 />} />
-
+ */}
 
         <Route path='/patient/FetchingLoanLimit' element={<FetchingLoanLimit />} />
         <Route path='/patient/ApprovedLoanLimitNeg' element={<ApprovedLoanLimitNeg />} />

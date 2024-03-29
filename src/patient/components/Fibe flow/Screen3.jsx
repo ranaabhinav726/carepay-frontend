@@ -11,7 +11,7 @@ export default function Screen3(){
 
     const navigate = useNavigate();
     let timerId = setTimeout(() => {
-        navigate('/patient/screen4', {replace:"true"})
+        navigate('/patient/fibeWelcome', {replace:"true"})
     }, 2500);
 
     // setTimeout(()=>{

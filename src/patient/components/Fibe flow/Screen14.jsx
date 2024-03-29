@@ -46,7 +46,7 @@ export default function Screen14(){
             console.log(response)
             let status = response.data.data;
             if(status === "Disbursed" || status === "Approved"){ // Pending, Approved , Disbursed, Rejected
-                navigate("/patient/screen15")
+                navigate("/patient/fibeCongratsUser")
             }
         }).catch(err=>{
             console.warn(err)

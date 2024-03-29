@@ -31,7 +31,7 @@ export function Screen1(){
                 console.log(response)
                 if(response.data.message === "success"){
                     localStorage.setItem("phoneNumber", number);
-                    navigate('/patient/screen2');
+                    navigate('/patient/fibeOtpAuthentication');
                 }else{
                     // apiErrorHandler();
                 }

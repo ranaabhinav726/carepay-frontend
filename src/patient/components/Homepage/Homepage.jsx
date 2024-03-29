@@ -88,7 +88,7 @@ const Homepage = () =>{
     function navigateToNext(){
         // animateScreen();
         if(nbfcId === fibeNbfcId){
-            navigate('/patient/screen1')
+            navigate('/patient/fibeMobileNumberVerification')
         }else{
             navigate('/patient/MobileNumberVerification')
         }
