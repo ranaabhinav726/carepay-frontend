@@ -10,7 +10,7 @@ export default function InputBox({type="text", length=10, id, styles, placeholde
         }
     }
     return(
-        <div style={{display:"flex", alignItems:"center", borderRadius:"4px", fontSize:"16px", lineHeight:"20px", border:"1px solid #000000CC", height:"54px", background:variant=="filled"?"#ECEEFF":"transparent", ...styles}}>
+        <div style={{display:"flex", alignItems:"center", borderRadius:"4px", fontSize:"16px", lineHeight:"20px", border:"1px solid #000000CC", height:"54px", background:variant=="filled"?"#ECEBFF":"transparent", ...styles}}>
             {Prefix && 
                 <span style={{
                     padding:"10px", 
