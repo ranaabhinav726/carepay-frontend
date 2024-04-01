@@ -391,7 +391,7 @@ export default function Screen5(){
 
     return(
         <main className="screenContainer">
-            <Header progress={55} />
+            <Header progress={55} canGoBack={-1} />
             <ScreenTitle title="Tell us what you need" />
             <InputBoxLabel label='Credit amount' />
             <InputBox 

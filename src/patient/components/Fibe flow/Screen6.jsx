@@ -256,7 +256,7 @@ export default function Screen6(){
 
     return(
         <main className="screenContainer">
-            <Header progress={69} />
+            <Header progress={69} canGoBack={-1} />
             <ScreenTitle title="Kindly verify your details" />
             <InputBoxLabel label='PAN' />
             <InputBox

@@ -100,7 +100,7 @@ export default function Screen7(){
     
     return(
         <main className="screenContainer">
-            <Header progress={79} />
+            <Header progress={79} canGoBack={-1} />
             <ScreenTitle title="Employment details" />
             <InputBoxLabel label='Select employment type' />
             <RadioInput

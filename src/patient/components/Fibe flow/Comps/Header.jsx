@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../../assets/Logo-carepay.svg'
+import { BiArrowBack } from "react-icons/bi";
 
-export function Header({progressBar="visible", progress=33}){
+export function Header({progressBar="visible", progress=33, canGoBack=false}){
+
+    const navigate = useNavigate();
 
     return(
-        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-            <img src={Logo} alt="carepay logo" style={{height:"30px", aspectRatio:"107/26", margin:"18px auto"}} />
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center", position:"relative"}}>
+            {canGoBack && <BiArrowBack style={{position:"absolute", fontSize:"30px", left:"0", top:"50%", transform:"translateY(-65%)", cursor:"pointer"}} onClick={()=>navigate(canGoBack)} />}
+            <img src={Logo} alt="carepay logo" style={{height:"30px", aspectRatio:"107/26", margin:"20px auto 18px auto"}} />
             <ProgressBar visibility={progressBar} progress={progress} />
         </div>
     )
