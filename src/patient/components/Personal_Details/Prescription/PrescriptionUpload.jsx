@@ -12,6 +12,10 @@ import { env } from "../../../environment/environment";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 
+import { Worker } from "@react-pdf-viewer/core";
+import { Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+
 export default function PrescriptionUpload(){
 
     let userId = localStorage.getItem("userId");
@@ -131,7 +135,7 @@ export default function PrescriptionUpload(){
 
             {screenState === "FileInBuffer" &&
             <>
-                <Header />
+                <Header progressbarDisplay="block" progress="22" canGoBack="/patient/CreditDetails" />
                 <h3 style={{margin:"2rem 0 1rem 0"}}>Share prescription</h3>
                 {/* {prescriptionList} */}
                 <FileViewerModal fileData={fileModal} setUploadedFiles={setUploadedFiles} />
@@ -169,68 +173,68 @@ export default function PrescriptionUpload(){
 }
 
 
-function UploadedPrescripton({file, idx, showFileModal, removeFile}){
+// function UploadedPrescripton({file, idx, showFileModal, removeFile}){
 
-    let fileName = file.name;
-    if(fileName.length > 28){
-        let [name, ext] = fileName.split(".");
-        name = name.substring(0,24);
-        fileName = name + "...." + ext;
-    }
+//     let fileName = file.name;
+//     if(fileName.length > 28){
+//         let [name, ext] = fileName.split(".");
+//         name = name.substring(0,24);
+//         fileName = name + "...." + ext;
+//     }
 
-    function viewClickHandler(){
-        let fileData = {
-            "file" : file,
-            "fileName" : fileName
-        }
-        showFileModal(fileData)
-    }
+//     function viewClickHandler(){
+//         let fileData = {
+//             "file" : file,
+//             "fileName" : fileName
+//         }
+//         showFileModal(fileData)
+//     }
 
-    return(
-        <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", margin:"1.5rem 4px"}}>
-            <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-                <div style={{height:"36px", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", background:"#ECEBFF", aspectRatio:"1/1", color:"#514C9F"}}>
-                    <FaRegFileAlt style={{fontSize:"24px"}} />
-                </div>
-                <p style={{fontWeight:"500"}}>{fileName}</p>
-            </div>
-            <div style={{display:"flex", gap:"1rem"}}>
-                <div 
-                    style={{
-                        height:"40px", 
-                        display:"flex", 
-                        alignItems:"center", 
-                        justifyContent:"center", 
-                        borderRadius:"4px", 
-                        background:"#ECEBFF", 
-                        aspectRatio:"1/1", 
-                        color:"#514C9F",
-                        cursor:"pointer"
-                    }}
-                    onClick={()=>viewClickHandler()}
-                >
-                    <MdRemoveRedEye style={{fontSize:"24px"}} />
-                </div>
-                <div 
-                    style={{
-                        height:"40px", 
-                        display:"flex", 
-                        alignItems:"center", 
-                        justifyContent:"center", 
-                        borderRadius:"4px", 
-                        background:"#FAE1CD", 
-                        aspectRatio:"1/1", 
-                        color:"#DB4E4E",
-                        cursor:"pointer"
-                    }}
-                    onClick={()=>removeFile(idx)}
-                >
-                    <MdDelete style={{fontSize:"24px"}} />
-                </div>
-            </div>
-        </div>
-    )
-}
+//     return(
+//         <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", margin:"1.5rem 4px"}}>
+//             <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
+//                 <div style={{height:"36px", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", background:"#ECEBFF", aspectRatio:"1/1", color:"#514C9F"}}>
+//                     <FaRegFileAlt style={{fontSize:"24px"}} />
+//                 </div>
+//                 <p style={{fontWeight:"500"}}>{fileName}</p>
+//             </div>
+//             <div style={{display:"flex", gap:"1rem"}}>
+//                 <div 
+//                     style={{
+//                         height:"40px", 
+//                         display:"flex", 
+//                         alignItems:"center", 
+//                         justifyContent:"center", 
+//                         borderRadius:"4px", 
+//                         background:"#ECEBFF", 
+//                         aspectRatio:"1/1", 
+//                         color:"#514C9F",
+//                         cursor:"pointer"
+//                     }}
+//                     onClick={()=>viewClickHandler()}
+//                 >
+//                     <MdRemoveRedEye style={{fontSize:"24px"}} />
+//                 </div>
+//                 <div 
+//                     style={{
+//                         height:"40px", 
+//                         display:"flex", 
+//                         alignItems:"center", 
+//                         justifyContent:"center", 
+//                         borderRadius:"4px", 
+//                         background:"#FAE1CD", 
+//                         aspectRatio:"1/1", 
+//                         color:"#DB4E4E",
+//                         cursor:"pointer"
+//                     }}
+//                     onClick={()=>removeFile(idx)}
+//                 >
+//                     <MdDelete style={{fontSize:"24px"}} />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
 
 function FileViewerModal({fileData, setUploadedFiles}){
 
@@ -254,21 +258,24 @@ function FileViewerModal({fileData, setUploadedFiles}){
                         />
                     </div>
                 </div> */}
-                <div onClick={()=>{setUploadedFiles([])}} style={{position:"absolute", margin:"5px", right:"18px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer"}}>
+                <div onClick={()=>{setUploadedFiles([])}} style={{position:"absolute", margin:"5px", right:"18px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer", zIndex:"1"}}>
                     <RiDeleteBin6Fill style={{fontSize:"20px", color:"#DB4E4E"}} />
                 </div>
-            <div style={{background:"#D9D9D9", borderRadius:"8px", overflow:"clip", padding:"0.5rem", width:"100%"}}>
+            <div style={{background:"#D9D9D9", borderRadius:"8px", overflow:"clip", padding:"0.5rem", width:"100%", height:"80vh"}}>
                     {fileData && (type==="image" ?
                         <div style={{display:"flex", justifyContent:"center", height:"95%", borderRadius:"8px", overflow:"clip", padding:"1rem"}}>
                             <img src={url} style={{maxHeight:"100%", maxWidth:"100%"}} alt="API Image" />
                         </div>
                     :
-                        <iframe
-                            src={url}
-                            title="PDF Preview"
-                            width="100%"
-                            height="500px"
-                        />
+                        // <iframe
+                        //     src={url}
+                        //     title="PDF Preview"
+                        //     width="100%"
+                        //     height="500px"
+                        // />
+                        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                           <Viewer fileUrl={url} />
+                        </Worker>
                     )}
                 </div>
             </div>

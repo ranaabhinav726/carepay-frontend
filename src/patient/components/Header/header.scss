@@ -18,7 +18,7 @@ header.patient{
     background: #FFFFFF;
 
     .header--logo{
-        margin: 24px auto;
+        margin: 22px auto;
         height: 32px;
     }
 
@@ -32,6 +32,7 @@ header.patient{
         display: flex;
         width: 100%;
         flex-direction: row;
+        margin-top: -8px;
         // align-items: start;
     }
 
