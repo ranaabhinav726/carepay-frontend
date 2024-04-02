@@ -278,6 +278,6 @@ function FileViewerModal({fileData, setUploadedFiles}){
                         </Worker>
                     )}
                 </div>
-        // </div>
+            </div>
     )
 }
