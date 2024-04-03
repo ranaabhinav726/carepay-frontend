@@ -108,7 +108,7 @@ export default function FibePrescriptionUpload(){
         <main className='screenContainer' style={{position:"relative"}}>
             {screenState === "NoFileSelected" &&
             <>
-                <Header progress={62} />
+                <Header progress={62} canGoBack={-1} />
                 <h3 style={{margin:"2rem 0 1rem 0"}}>Share prescription</h3>
                 {/* <p style={{lineHeight:"150%"}}>Click and upload an image of your prescription, for verifying the purpose of your credit.</p> */}
                 <div style={{background:"#FAE1CD", borderRadius:"8px", padding:"12px 10px"}}>
@@ -135,7 +135,7 @@ export default function FibePrescriptionUpload(){
 
             {screenState === "FileInBuffer" &&
             <>
-                <Header progress={62} />
+                <Header progress={62} canGoBack={-1} />
                 <h3 style={{margin:"2rem 0 1rem 0"}}>Share prescription</h3>
                 {/* {prescriptionList} */}
                 <FileViewerModal fileData={fileModal} setUploadedFiles={setUploadedFiles} />

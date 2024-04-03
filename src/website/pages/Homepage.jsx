@@ -82,12 +82,13 @@ function Hero(){
                         <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' vanishOnCollapse callback={handleContactScroll} />
                         <FloatingButton content={"Partner up"} to={"javascript:void(0)"} callback={handleContactScroll} />
                     </div>
-                    <div className="section-content hero-container-image">
+                    <div className="section-content hero-container-image" style={{position:"relative"}}>
                         <img src={HeroImg}
                         style={{
                             maxWidth: "90%",
                             display: "block",
-                            margin: "unset auto"
+                            position:"absolute",
+                            right:"0"
                         }}
                         alt="" />
                     </div>
@@ -317,7 +318,7 @@ function Branding(){
         <>
             <section className="branding">
                 <div className="container">
-                    <h2>don't delay, just <span className='clr-purple'>carepay!</span></h2>
+                    <h2>Don't delay, just <span className='clr-purple'>carepay!</span></h2>
                     <p className="text-content">The sooner you join, the more patients you'll convert. So, say goodbye to payment delays and seize the opportunity to supercharge your revenue growth. Join CarePay today!</p>
                     <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' callback={handleContactScroll} />
                 </div>
