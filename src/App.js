@@ -136,6 +136,7 @@ import Screen15 from './patient/components/Fibe flow/Screen15';
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
 import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
+
 import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
 import { NotServiceable } from './patient/components/Fibe flow/NotServiceable';
 import ICICITermsAndConditions from './website/pages/ICICITermsAndConditions';
@@ -143,7 +144,7 @@ import DoctorNotAvailable from './patient/components/Homepage/DoctorNotAvailable
 import PrescriptionUpload from './patient/components/Personal_Details/Prescription/PrescriptionUpload';
 import FibePrescriptionUpload from './patient/components/Fibe flow/PrescriptionUpload';
 
-import PrescriptionUpload from './patient/components/Arthmate/Modules/Prescription/PrescriptionUpload';
+import ArthPrescriptionUpload from './patient/components/Arthmate/Modules/Prescription/PrescriptionUpload';
 import ArthPersonalDetails from './patient/components/Arthmate/Modules/BasicInfo/PersonalDetails';
 import ArthAddressDetails from './patient/components/Arthmate/Modules/BasicInfo/AddressDetails';
 import ArthEmploymentDetails from './patient/components/Arthmate/Modules/BasicInfo/EmploymentDetails';
@@ -341,7 +342,7 @@ function App() {
 
         <Route path='/qrData/:doctorId' element={<QrPdfMaker />}></Route>
 
-        <Route path='/patient/arthPresciptionUpload' element={<PrescriptionUpload />}></Route>
+        <Route path='/patient/arthPresciptionUpload' element={<ArthPrescriptionUpload />}></Route>
         <Route path='/patient/ArthPersonalDetails' element={<ArthPersonalDetails />}></Route>
         <Route path='/patient/ArthAddressDetails' element={<ArthAddressDetails />}></Route>
         <Route path='/patient/ArthEmploymentDetails' element={<ArthEmploymentDetails />}></Route>

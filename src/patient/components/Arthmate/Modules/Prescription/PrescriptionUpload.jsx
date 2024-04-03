@@ -9,7 +9,7 @@ import { IoIosClose } from "react-icons/io";
 import lottie from "lottie-web";
 import animationData from '../../../../assets/GIFs/Comp 1.json'
 
-export default function PrescriptionUpload(){
+export default function ArthPrescriptionUpload(){
 
     const inputRef = useRef(null);
     
