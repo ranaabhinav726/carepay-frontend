@@ -3,10 +3,13 @@ import { Header } from "../../comps/Header";
 import './styles/currentEMIExpenses.scss'
 import { showErrorOnUI } from "../../../../environment/environment";
 import { onlyCharacters, onlyNumbers } from "../../servicesAndUtility/utilityFunctions";
+import { saveOrUpdateAdditionalUserData } from "../../servicesAndUtility/api";
+import { useNavigate } from "react-router-dom";
 
 export default function ArthCurrentEMIExpenses(){
 
-
+    let userId = localStorage.getItem("userId");
+    const navigate = useNavigate();
     const [isCurrEMI, setIsCurrEMI] = useState(true);
     const [currEMI, setCurrEMI] = useState("");
 
@@ -20,7 +23,20 @@ export default function ArthCurrentEMIExpenses(){
             if(elem) showErrorOnUI(elem);
             return;
         }
+
+        let data = {
+            "userId" : userId,
+            "monthliEmiExpense" : currEMI
+        }
+
+        saveOrUpdateAdditionalUserData(data, res=>{
+            if(res.data.status === 200){
+                navigate("/patient/ArthmateOffers")
+            }
+        })
     }
+
+    
 
     return(
         <main className="arthCurrentEMIExpenses">

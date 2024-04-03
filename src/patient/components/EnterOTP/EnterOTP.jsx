@@ -387,7 +387,8 @@ const EnterOTP = () =>{
                                         path = "PhoneNumberVerified"
                                 }
 
-                                navigate("/patient/" + path)
+                                // navigate("/patient/" + path)
+                                navigate("/patient/ArthCreditDetails");
                                 // if(stage !== null){
                                 //     navigate("/patient/"+stage)
                                 // }else{

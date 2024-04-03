@@ -33,6 +33,13 @@ export async function saveEmploymentDetails(data, callback){
     }).catch(err=>console.log(err))
 }
 
+export async function saveOrUpdateAdditionalUserData(data, callback){
+    await axios.post(BASE_URL + "userDetails/saveOrUpdateAdditionalUserData", data)
+    .then(res=>{
+        callback(res);
+    }).catch(err=>console.log(err))
+}
+
 export async function sendAadharOtp(userId, callback){
 
     axios.post(BASE_URL + "aadhaarXmlDownloadOtp?userId=" + userId)

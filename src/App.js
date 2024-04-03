@@ -161,6 +161,7 @@ import ArthAadhaarVerification from './patient/components/Arthmate/Modules/KYC/A
 import ArthPANPhoto from './patient/components/Arthmate/Modules/KYC/PANPhoto';
 import ArthKyc from './patient/components/Arthmate/Modules/KYC/KYC';
 import ArthAadhaarPhoto from './patient/components/Arthmate/Modules/KYC/AadhaarPhoto';
+import ArthCreditDetails from './patient/components/Arthmate/Modules/BasicInfo/CreditDetails';
 
 
 
@@ -342,7 +343,8 @@ function App() {
 
         <Route path='/qrData/:doctorId' element={<QrPdfMaker />}></Route>
 
-        <Route path='/patient/arthPresciptionUpload' element={<ArthPrescriptionUpload />}></Route>
+        <Route path='/patient/ArthCreditDetails' element={<ArthCreditDetails />}></Route>
+        <Route path='/patient/ArthPresciptionUpload' element={<ArthPrescriptionUpload />}></Route>
         <Route path='/patient/ArthPersonalDetails' element={<ArthPersonalDetails />}></Route>
         <Route path='/patient/ArthAddressDetails' element={<ArthAddressDetails />}></Route>
         <Route path='/patient/ArthEmploymentDetails' element={<ArthEmploymentDetails />}></Route>

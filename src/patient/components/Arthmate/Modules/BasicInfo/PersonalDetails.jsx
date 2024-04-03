@@ -354,11 +354,11 @@ const ArthPersonalDetails = () =>{
                     placeholder="What is your aadhaar number?" 
                     required 
                     />
-                <span className="fieldError">This field can't be empty.</span>
+                <span className="fieldError">Please enter a valid Aadhaar number.</span>
             </div>
 
             <div className="email">
-                <p>Mail ID</p>
+                <p>E-mail ID</p>
                 <input type="email"
                     value={email ?? ""} 
                     onChange={(e) => setEmail(e.target.value)}
