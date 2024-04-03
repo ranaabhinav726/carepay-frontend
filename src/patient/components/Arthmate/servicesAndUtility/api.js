@@ -41,7 +41,7 @@ export async function sendAadharOtp(userId, callback){
     }).catch(err=>{
         console.log(err);
     })
-} 
+}
 
 export async function getBankList(method="Statement", callBack){
 
@@ -49,4 +49,14 @@ export async function getBankList(method="Statement", callBack){
     .then(res=>{
         callBack(res.data);
     }).catch(err=>console.warn(err));
+}
+
+export async function uploadDoc(userId, data, callBack){
+
+    
+
+    axios.post(BASE_URL + "/uploadDocuments", data)
+    .then(res=>{
+        callBack(res)
+    }).catch(err=>console.warn(err))
 }

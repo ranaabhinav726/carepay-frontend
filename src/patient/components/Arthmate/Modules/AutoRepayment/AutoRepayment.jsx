@@ -13,7 +13,7 @@ import animationData from '../../../../assets/GIFs/Comp 1.json'
 
 export default function ArthAutoRepayment(){
 
-    const[screenState, setScreenState] = useState("upiId"); // landing, methodSelection, summary
+    const[screenState, setScreenState] = useState("summary"); // landing, methodSelection, summary, upiId
     const[isUpiApp, setIsUpiApp] = useState(false);
     const[consent, setConsent] = useState(false);
 

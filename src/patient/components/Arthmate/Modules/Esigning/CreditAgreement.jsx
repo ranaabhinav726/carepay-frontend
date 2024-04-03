@@ -10,7 +10,7 @@ export default function ArthCreditAgreement(){
     const[screenState, setScreenState] = useState("redirecting"); // landing, verifying, redirecting
 
     return(
-        <main >
+        <main>
             {screenState === "landing" &&
                 <> 
                     <Header />

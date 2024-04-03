@@ -3,9 +3,13 @@ import { Header } from "../../comps/Header";
 import { useCallback } from "react";
 import WebcamCapture from "../../comps/WebCam";
 import CameraCapture from "../../comps/CameraCapture";
+import { uploadDoc } from "../../servicesAndUtility/api";
+import { useNavigate } from "react-router-dom";
 
 export default function ArthAadhaarPhoto(){
 
+    let userId = localStorage.getItem("userId");
+    let navigate = useNavigate();
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null)
 
@@ -17,6 +21,21 @@ export default function ArthAadhaarPhoto(){
 
     function reCaptureImage(){
         setImgSrc(null);
+    }
+
+    function uploadAadhaar(){
+        let data = new FormData();
+            data.append("file", []);
+            data.append("type", "pdf");
+            data.append("userId", userId);
+            data.append("type", "pdf");  
+            data.append("fileName", "prescription");
+
+            uploadDoc(userId, data, res=>{
+                if(res.status === 200){
+                    navigate("/patient/")
+                }
+            })
     }
     return(
         <main>
@@ -40,7 +59,7 @@ export default function ArthAadhaarPhoto(){
                             transition:"all 0.3s ease-in-out",
                             overflow:"clip",
                             objectFit:"scale-down",
-                            backgroundImage: " repeating-linear-gradient(0deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px), repeating-linear-gradient(90deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px), repeating-linear-gradient(180deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px), repeating-linear-gradient(270deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px)",
+                            backgroundImage: "repeating-linear-gradient(0deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px), repeating-linear-gradient(90deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px), repeating-linear-gradient(180deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px), repeating-linear-gradient(270deg, #514c9f, #514c9f 74px, transparent 74px, transparent 87px, #514c9f 87px)",
                             backgroundSize: "4px 100%, 100% 4px, 4px 100% , 100% 4px",
                             backgroundPosition: "0 0, 0 0, 100% 0, 0 100%",
                             backgroundRepeat: "no-repeat" 

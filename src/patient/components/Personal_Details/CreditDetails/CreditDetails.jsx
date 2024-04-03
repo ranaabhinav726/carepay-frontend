@@ -24,7 +24,7 @@ const CreditDetails = () => {
     const [borrower, setBorrower] = useState("");
     let isPatient = true;
     const [patientName, setPatientName] = useState("");
-    const [relation, setRelation] = useState("father");
+    const [relation, setRelation] = useState("MOTHER");
 
     const [apiError, setApiError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
@@ -440,6 +440,7 @@ const CreditDetails = () => {
                 <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
                     <span style={{minWidth:"max-content"}}>Patient is my:</span>
                     <select name="relation" id="relation" style={{marginBottom:"0"}} value={relation} onChange={(e)=>setRelation(e.target.value)}>
+                        {/* <option disabled value={""}></option> */}
                         <option value={"MOTHER"}>Mother</option>
                         <option value={"FATHER"}>Father</option>
                         <option value={"BROTHER"}>Brother</option>

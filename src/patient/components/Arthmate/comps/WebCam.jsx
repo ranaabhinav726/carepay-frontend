@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import Webcam from "react-webcam";
 
+
 const WebcamCapture = forwardRef(function(props, ref){
     
     const videoConstraints = {
