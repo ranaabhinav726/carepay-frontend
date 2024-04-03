@@ -25,7 +25,7 @@ const ArthIncomeVerification = () =>{
                 <img style={{margin:"1rem auto"}} src={DocImg} alt="financial docs placeholder image" />
             </div>
             <button 
-                onClick={()=>navigate('/patient/FileUpload')} 
+                onClick={()=>navigate('/patient/ArthBankSelection')} 
                 className='submit'
             >
                 Continue with bank selection

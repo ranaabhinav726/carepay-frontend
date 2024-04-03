@@ -11,13 +11,13 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import BottomPopOverModal from '../../comps/BottomPopOverModal'
-import { getBankList } from '../../servicesAndUtility/api'
+import { getBankList, startUploadURL } from '../../servicesAndUtility/api'
 
 
 const ArthBankSelection = () =>{
 
     const navigate = useNavigate()
-    
+    let userId = localStorage.getItem("userId");
     let token = localStorage.getItem('access_token');
     const config = {
         headers: { Authorization: `Bearer ${token}` }
@@ -27,37 +27,427 @@ const ArthBankSelection = () =>{
 
     const [loaded, setLoaded] = useState(false);
 
-    const [popOver, setShowPopOver] = useState(true);
+    const [popOver, setShowPopOver] = useState(null);
     const [consent, setConsent] = useState(false);
 
 
     useEffect(()=>{
         getBankList("statement", res=>{
             console.log(res);
+            let list = res?.data?.data;
+            if(Array.isArray(list)){
+                setBankList(list);
+            }
         })
+        // setBankList(
+        // [
+        //             {
+        //                 "id": 64,
+        //                 "name": "Abhyudaya Co-Operative Bank Ltd",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 60,
+        //                 "name": "Airtel Payments Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 26,
+        //                 "name": "Allahabad Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 6,
+        //                 "name": "Andhra Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 66,
+        //                 "name": "AP GRAMEENA VIKAS BANK",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 42,
+        //                 "name": "AU Small Finance Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 4,
+        //                 "name": "Axis Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 50,
+        //                 "name": "Bandhan Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 17,
+        //                 "name": "Bank of Baroda",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 15,
+        //                 "name": "Bank of India",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 41,
+        //                 "name": "Bank of Maharashtra",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 8,
+        //                 "name": "Canara Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 10,
+        //                 "name": "Central Bank of India",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 14,
+        //                 "name": "Citibank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 56,
+        //                 "name": "CITY UNION BANK LTD",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 21,
+        //                 "name": "Corporation Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 71,
+        //                 "name": "CSB Bank Ltd.",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 49,
+        //                 "name": "Dbs Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 58,
+        //                 "name": "DCB Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 19,
+        //                 "name": "Dena Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 55,
+        //                 "name": "Equitas Small Finance Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 54,
+        //                 "name": "Esaf Small Finance Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 13,
+        //                 "name": "Federal Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 48,
+        //                 "name": "Fincare Small Finance Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 40,
+        //                 "name": "Fino Payments Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 1,
+        //                 "name": "HDFC Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": true
+        //             },
+        //             {
+        //                 "id": 3,
+        //                 "name": "ICICI Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 7,
+        //                 "name": "IDBI Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 32,
+        //                 "name": "IDFC FIRST Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 57,
+        //                 "name": "India Post Payments Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 12,
+        //                 "name": "Indian Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 33,
+        //                 "name": "Indian Overseas Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 25,
+        //                 "name": "IndusInd Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 65,
+        //                 "name": "Jammu&Kashmir Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 53,
+        //                 "name": "Jana Small Finance Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 31,
+        //                 "name": "Karnataka Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 67,
+        //                 "name": "Karnataka Vikas Grameena Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 35,
+        //                 "name": "Karur Vysya Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 5,
+        //                 "name": "Kotak Mahindra Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 51,
+        //                 "name": "Municipal Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 22,
+        //                 "name": "Oriental Bank of Commerce",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 34,
+        //                 "name": "Paytm Payments Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 68,
+        //                 "name": "Punjab and Sind Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 9,
+        //                 "name": "Punjab National Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 63,
+        //                 "name": "Rajasthan Marudhara Gramin Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 39,
+        //                 "name": "RBL (Ratnakar) Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 59,
+        //                 "name": "Saraswat co-operative Bank Ltd",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 38,
+        //                 "name": "South Indian Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 27,
+        //                 "name": "Standard Chartered Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 2,
+        //                 "name": "State Bank of India",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 24,
+        //                 "name": "Syndicate Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 61,
+        //                 "name": "Tamilnad Mercentile Bank Ltd.",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 69,
+        //                 "name": "Thane Janata Sahakari Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 70,
+        //                 "name": "THE COSMOS CO-OP. BANK LTD",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 37,
+        //                 "name": "UCO Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 36,
+        //                 "name": "Ujjivan Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 16,
+        //                 "name": "Union Bank of India",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 23,
+        //                 "name": "United Bank of India",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 52,
+        //                 "name": "Utkarsh Small Finance Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 20,
+        //                 "name": "Vijaya Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             },
+        //             {
+        //                 "id": 11,
+        //                 "name": "Yes Bank",
+        //                 "inst_type": "Bank",
+        //                 "form26as_enabled": false
+        //             }
+        // ]
+        // )
+        // filterList();
+        setLoaded(true)
     },[]);
 
+    useEffect(()=>{
+        if(popOver === false || popOver === null){
+            setConsent(false);
+        }
+    }, [popOver])
 
-    function selectAndProceed(e){
+    useEffect(()=>{
+        let banks = banklist.map((item, idx)=>{
+            return <Bank bankName={item.name} id={item.id} Icon={BankIcon} key={idx} selectAndProceed={selectAndProceed}/>
+        })
+        console.log(banks)
+        setBankListComps(banks);
+    }, [banklist])
 
-        let bankName = e.target.innerText;
-        let aaStatus = e.target.nextSibling === null;
 
-        console.log(bankName, aaStatus)
-        
-        localStorage.setItem("bankName", bankName)
-        localStorage.setItem("isBankAA", aaStatus)
-        navigate('/MethodSelection');
+    function selectAndProceed(bankName, id){
+
+        let data = {
+            "bankName" : bankName,
+            "id" : id
+        }
+        setShowPopOver(data)
+        // localStorage.setItem("bankName", bankName)
+        // navigate('/MethodSelection');
     }
 
     function filterList(e){
-        let text = e.target.value.toLowerCase();
+        let text = e?.target?.value?.toLowerCase() || "";
         let filtered = banklist.filter( (item) => {
-            return item.Bank_name.toLowerCase().includes(text)
+            return item.name.toLowerCase().includes(text)
         })
         let banks = filtered.map((item, idx)=>{
-            return <Bank BankName={item.Bank_name} Icon={BankIcon} isAA={item.bank_aa} key={idx} selectAndProceed={selectAndProceed}/>
+            return <Bank BankName={item.name} id={item.id} Icon={BankIcon} key={idx} selectAndProceed={selectAndProceed}/>
         })
+        console.log(banks)
         setBankListComps(banks);
     }
 
@@ -73,6 +463,11 @@ const ArthBankSelection = () =>{
 
     let listContainerElem = loaded ? bankListComps : loadingComp;
 
+    function startUpload(id){
+        startUploadURL(userId, id, res=>{
+            console.log(res);
+        })
+    }
     return(
     <>
         <main className='arthBankSelection'>
@@ -102,10 +497,11 @@ const ArthBankSelection = () =>{
                 setShowPopOver={setShowPopOver}
             >
                 <PopOverContent
-                    bankName={"Axis Bank"} 
-                    checkAndNavigate={()=>{}} 
+                    bankName={popOver.bankName} 
+                    checkAndNavigate={startUpload} 
                     consent={consent}
                     setConsent={setConsent}
+                    id={popOver.id}
                 />
             </BottomPopOverModal>
         }
@@ -116,21 +512,20 @@ const ArthBankSelection = () =>{
 
 export default ArthBankSelection
 
-const Bank = ({BankName, Icon, isAA, selectAndProceed}) =>{
+const Bank = ({bankName, id, Icon, selectAndProceed}) =>{
     
     // const data = useData();
     return(
-        <div className="bank">
+        <div className="bank" style={{cursor:"pointer"}}>
             <div className="bankIcon"><img src={Icon} alt="" /></div>
             <div className="bankName">
-                <span onClick={selectAndProceed} className="name">{BankName}</span>
-                {isAA!=="yes"? <span className="nonAA">Non AA bank</span>:""}
+                <span onClick={()=>selectAndProceed(bankName, id)} className="name">{bankName}</span>
             </div>
         </div>
     )
 }
 
-function PopOverContent({bankName, consent, setConsent, checkAndNavigate}){
+function PopOverContent({bankName, id, consent, setConsent, checkAndNavigate}){
 
     return(
         <>
@@ -185,7 +580,7 @@ function PopOverContent({bankName, consent, setConsent, checkAndNavigate}){
             
             <button 
                 className={'submit' + (consent?"":" disabled")}
-                onClick={()=>checkAndNavigate()}
+                onClick={()=>checkAndNavigate(id)}
             >
                 Continue with this bank
             </button>

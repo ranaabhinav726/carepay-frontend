@@ -58,6 +58,15 @@ export async function getBankList(method="Statement", callBack){
     }).catch(err=>console.warn(err));
 }
 
+export async function startUploadURL(userId, id, callBack){
+
+    axios.get(BASE_URL + "/startUploadURL?userId=" + userId + "&institutionId=" + id)
+    .then(res=>{
+        callBack(res.data);
+    }).catch(err=>console.warn(err));
+}
+
+
 export async function uploadDoc(userId, data, callBack){
 
     

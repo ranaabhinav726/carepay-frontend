@@ -167,43 +167,7 @@ const ArthmateOffers = () =>{
             .then(async(response) => {
                 console.log(response)
                 if(response.data.message === "success"){
-                    // await handleNavigation();
-                    // if(loanAmt <= 300001){
-                        await axios
-                            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
-                            .then(response =>{
-                                console.log(response)
-                                if(response.data.message === "success"){
-                                    checkLoanAmountAndNavigate();
-                                }else{
-                                    setTimeout(async ()=>{
-                                        await axios
-                                            .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
-                                            .then(response =>{
-                                                console.log(response)
-                                                if(response.data.message === "success"){
-                                                    checkLoanAmountAndNavigate();
-                                                }else{
-                                                    if(response?.data?.data === "It seems like it has been less than 3 months since you applied to Credit Fair . We'll be happy to serve you after 3 Month"){
-                                                        setErrorMsg("Please apply after 3 months");
-                                                    }else{
-                                                        setErrorMsg(response?.data?.data || "An error has occured, please try again.");
-                                                    }
-                                                    apiErrorHandler();
-                                                }
-                                            }).catch( () =>{
-                                                apiErrorHandler();
-                                            })
-                                    }, 1000)
-                                }
-                            }).catch(() =>{
-                                apiErrorHandler();
-                            })
-                        
-                    // }
-                    // else{
-                    //     navigate('/patient/BankDetails');
-                    // }
+                    navigate("/patient/ArthIncomeVerification")
                 }else{
                     apiErrorHandler();
                 }
