@@ -40,8 +40,8 @@ export const AutocompleteInput = ({id, title, value, setValue, placeholder, list
 
   const [selectedItemError, setSelectedItemError] = useState(false);
   useEffect(()=>{
-    // console.log(inputValue)
-    if(inputValue === "" || inputValue === "Other"){
+    console.log(inputValue)
+    if(inputValue === undefined || inputValue === "" || inputValue === "Other"){
         setSelectedItemError(false);
     }else{
         if(! list.includes(inputValue)){
@@ -90,7 +90,7 @@ export const AutocompleteInput = ({id, title, value, setValue, placeholder, list
         </div>
     </div>
     
-    <p style={{display:selectedItemError?"block":"none"}} className={styles.notFromListError}>Please select one option from the dropdown, select 'Other' if your treatment name is not in the list.</p>
+    <p style={{display:(selectedItemError?"block":"none")}} className={styles.notFromListError}>Please select one option from the dropdown, select 'Other' if your treatment name is not in the list.</p>
     </>
   );
 };

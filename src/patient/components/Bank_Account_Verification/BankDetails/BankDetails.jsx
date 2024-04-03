@@ -67,6 +67,8 @@ const BankDetails = () =>{
                                 if(!! timerId){
                                     clearInterval(timerId);
                                 }
+                            }else{
+                                getLoanStatus();
                             }
                         }).catch(e=>{})
                 }
@@ -79,6 +81,28 @@ const BankDetails = () =>{
             return ()=>clearInterval(timerId);
         }
     },[])
+
+    async function getLoanStatus(){
+        await axios
+        .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
+            .then(async(response) => {
+                console.log(response)
+                if(response.data.message === "success"){
+                    // console.log(response)
+                    let data = response?.data?.data;
+                    if(data.loan_status === "105"){
+                        setNextScreenOnApproved('/patient/congrats')
+                    }else if(data.loan_status === "107"){
+                        setNextScreenOnApproved('/patient/loanAppSuccessful')
+                    }
+                    else if(data.loan_status === "110"){   // if loan is rejected
+                        setNextScreenOnApproved('/patient/RejectedScreen')
+                    }
+                }
+            }).catch(error =>{
+                console.log(error)
+            })
+    }
 
     const [bankName, setBankName] = useState('');
     const [IFSC, setIFSC] = useState('');
@@ -96,6 +120,7 @@ const BankDetails = () =>{
 
     const [ntc, setNtc] = useState(false);
     const [cfApproved, setCfApproved] = useState(false);
+    const [nextScreenOnApproved, setNextScreenOnApproved] = useState("");
     const [loading, setLoading] = useState(false);
 
     let popUpMsg = "This account will be used to set up auto repayment of EMIs. Are you sure you want to proceed with this bank account?"
@@ -246,7 +271,9 @@ const BankDetails = () =>{
                 if(res.data.message === "success"){
                     setLoading(true);
                     setTimeout(() => {
-                        if(cfApproved === true){
+                        if(!! nextScreenOnApproved){
+                            navigate(nextScreenOnApproved);
+                        }else if(cfApproved === true){
                             navigate('/patient/CfApproved');
                         }else if(ntc === true){
                             navigate("/patient/IncomeVerification", {state : {"reVisitToUploadStatement" : true, "isNtc" : true}})

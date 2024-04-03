@@ -2,15 +2,15 @@ import Header from '../../Header/Header';
 import '../../Income_Verification_Notification/Congratulation/congratulation.scss'
 import Confetti from '../../../assets/GIFs/confetti.gif'
 // import CongratsImg from '../../../assets/congrats.png'
-import CongratsGIF from '../../../assets/GIFs/Congratulations.gif'
+// import CongratsGIF from '../../../assets/GIFs/Congratulations.gif'
 import { useNavigate } from 'react-router-dom';
-import { showWrapper, hideWrapper } from "../../../environment/environment";
+// import { showWrapper, hideWrapper } from "../../../environment/environment";
 import { env } from '../../../environment/environment';
 import { BiRupee } from 'react-icons/bi';
 // import { MdOutlineElectricBolt } from 'react-icons/md'
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { IoIosStar } from "react-icons/io";
+// import { IoIosStar } from "react-icons/io";
     // let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
 
 
@@ -45,7 +45,7 @@ const CfApproved = () =>{
     return(
     <>
         <main className='congrats'>
-        <Header progressbarDisplay="none"/>
+            <Header progressbarDisplay="none"/>
             <div style={{display:"flex", position:"relative", flexDirection:"row", alignItems:"baseline", justifyContent:"space-around", marginTop:"1rem"}}>
                 <img src={Confetti} style={{transform:"scaleX(-1)", maxWidth:"25%"}} alt="" />
                 <p style={{position:"absolute", fontSize:"24px", lineHeight:"26px", color:"#149540", fontWeight:"700", marginTop:"1rem"}}>Congratulations</p>

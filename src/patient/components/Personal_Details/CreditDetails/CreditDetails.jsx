@@ -11,11 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../environment/environment'
 import RadioInput from "../../utility/RadioInput/RadioInput";
+import { preEligibility } from "../../ICICI flow/apis";
 import AutocompleteInput from "../../utility/SuggestionInputBox/SuggestionInputBox";
 // import { useData } from "../data";
 
 const CreditDetails = () => {
-    const [number, setNumber] = useState('')
+    // const [number, setNumber] = useState('')
     const [fullName, setFullName] = useState("");
     const [amount, setAmount] = useState("");
     const [treatment, setTreatment] = useState("");
@@ -29,6 +30,7 @@ const CreditDetails = () => {
     const [apiError, setApiError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
     const [canSubmit, setCanSubmit] = useState(true);
+    const [number, ] = useState(localStorage.getItem("phoneNumber"));
 
     // const [doctorId, setDoctorId] = useState("");
     // const [doctorName, setDoctorName] = useState("");
@@ -256,7 +258,27 @@ const CreditDetails = () => {
                 if(response.data.message === "success"){
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
-                    navigate('/patient/PersonalDetails');
+                    if(! number) return;
+
+                    if(amount > 100000){
+                        navigate('/patient/PrescriptionUpload');
+                    }else{
+                        navigate('/patient/PersonalDetails');
+                    }
+                    // preEligibility(number, res=>{
+                    // if(res?.data?.data?.status === 1){
+                    //     let data = res?.data?.data?.data;
+                    //     console.log(data);
+
+                    //     navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+                    // }else{
+                    //     if(amount > 100000){
+                    //         navigate('/patient/PrescriptionUpload');
+                    //     }else{
+                    //         navigate('/patient/PersonalDetails');
+                    //     }
+                    // }
+                    // })
                 }else{
                     // setErrorMsg()
                     apiErrorHandler();

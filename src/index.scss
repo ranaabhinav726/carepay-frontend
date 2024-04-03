@@ -12,6 +12,10 @@ body {
   // font-family: "sigmundpro-semibold";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  main.screenContainer{
+    padding: 0 18px 18px 18px;
+  }
 }
 
 code {

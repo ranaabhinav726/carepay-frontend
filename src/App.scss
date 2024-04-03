@@ -142,7 +142,7 @@ $size-S : 13.5px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "DM Sans";
+    font-family: "DM Sans", sans-serif;
   }
   // <style>
   //   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
@@ -250,6 +250,10 @@ button.submit.lite{
   color: #514C9F;
   background: #ECEBFF;
 }
+button.disabled{
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 p#number-msg{
   margin: 0;
@@ -299,7 +303,7 @@ $primary: #ECEBFF;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "DM Sans";
+  font-family: "DM Sans", sans-serif;
 }
 
 

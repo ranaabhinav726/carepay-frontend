@@ -358,7 +358,7 @@ const PersonalDetails = () =>{
    return(
     <>
     <main className="personalDetails">
-    <Header progressbarDisplay="block" progress="32" />
+    <Header progressbarDisplay="block" progress="32" canGoBack={-1} />
     <SelectAndVerify text={"Please verify your details"} />
         <h3>Personal Details</h3>
 

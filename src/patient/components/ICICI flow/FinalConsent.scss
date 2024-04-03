@@ -1,0 +1,35 @@
+$size-L : 18px;
+$size-M : 15.75px;
+$size-S : 13.5px;
+
+div.number-group{
+    // padding-left: 25px;
+    // padding-right: 25px;
+
+    div.otpInputGroup{
+        display: flex;
+        justify-content: space-between;
+
+        input.otpDigit{
+            padding: 10px;
+            text-align: center;
+
+            appearance: textfield;
+
+            width: 75px;
+            height: 48px;
+
+            background: #ECEBFF;
+            border: none;
+            border-radius: 4px;
+        }
+    }
+    
+    p#error{
+        font-size: $size-S;
+        font-weight: 400;
+        color: red;
+        margin: 10px 0 5px 0;
+        display: none;
+    }
+}
