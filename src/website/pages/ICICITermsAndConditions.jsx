@@ -32,7 +32,7 @@ function ICICITermsAndConditionsContent(){
 
     return(
         <div className="custom-container">
-            <h2 style={{fontFamily:"DM sans"}}>PRIMARY TERMS AND CONDITIONS: CARDLESS EMI</h2>
+            <h2 style={{fontFamily:"DM sans"}}>PRIMARY TERMS AND CONDITIONS: POS Machine</h2>
 
 
             <p>These ‘Primary Terms and Conditions’ shall govern the Facility (as defined below) availed by the Borrower(s) (as defined below) from ICICI Bank Limited (“ICICI Bank”) through a POS Machine (as defined below) available with a Dealer (as defined below) for the purpose of availing the Facility, with the documentation and communication being communicated electronically.</p>
@@ -49,20 +49,20 @@ function ICICITermsAndConditionsContent(){
                         <li id="outline-5"><a href="#policy-5">CANCELLATION AND PREPAYMENT</a></li>
                         <li id="outline-6"><a href="#policy-6">PAYMENT AND REPAYMENT</a></li>
                         <li id="outline-7"><a href="#policy-7">REPRESENTATIONS, WARRANTIES AND COVENANTS</a></li>
-                        <li id="outline-8"><a href="#policy-8">DEFAULT</a></li>
+                        <li id="outline-8"><a href="#policy-8">EVENT OF DEFAULT</a></li>
                         <li id="outline-9"><a href="#policy-9">TERMINATION</a></li>
                         <li id="outline-10"><a href="#policy-10">INDEMNITY</a></li>
                         <li id="outline-11"><a href="#policy-11">EXCLUSION OF LIABILITY</a></li>
                         <li id="outline-12"><a href="#policy-12">RIGHT OF SET-OFF AND LIEN</a></li>
                         <li id="outline-13"><a href="#policy-13">AUTO DEBIT</a></li>
-
                         <li id="outline-14"><a href="#policy-14">CASHBACK PROGRAMS</a></li>
                         <li id="outline-15"><a href="#policy-15">DISCLOSURES</a></li>
                         <li id="outline-16"><a href="#policy-16">GOVERNING LAW AND JURISDICTION</a></li>
-                        <li id="outline-16"><a href="#policy-17">DISPUTE RESOLUTION</a></li>
-                        <li id="outline-16"><a href="#policy-18">NOTICES AND COMMUNICATIONS</a></li>
-                        <li id="outline-16"><a href="#policy-19">DISCLAIMER</a></li>
-                        <li id="outline-16"><a href="#policy-20">MISCELLANEOUS</a></li>
+                        <li id="outline-17"><a href="#policy-17">DISPUTE RESOLUTION</a></li>
+                        <li id="outline-18"><a href="#policy-18">NOTICES AND COMMUNICATIONS</a></li>
+                        <li id="outline-19"><a href="#policy-19">DISCLAIMER</a></li>
+                        <li id="outline-20"><a href="#policy-20">MISCELLANEOUS</a></li>
+                        <li id="outline-21"><a href="#policy-21">ANNEXURE</a></li>
                         
                     </ul>
                 </div>
@@ -88,11 +88,13 @@ function ICICITermsAndConditionsContent(){
                     </li>
                     <li>“Service Provider” means an entity engaged in the business of manufacturing of goods/provision of services and marketing of such goods/services and has an extensive network of dealers engaged in the sale of such goods/services across India.</li>
                     <li>“Dealer” means an individual, and/or a limited liability partnership, and/or a partnership firm, and/or a private limited company, as the case may be, registered with ICICI Bank in connection with selling of Products (as defined below) to the Borrower(s) pursuant to the Facility.</li>
+                    <li>“Material Terms” with respect to the Facilities, means the provisions relating to:-(i) the payment/repayment obligation (including principal, interest, fees, charges) of the Borrower under the Facility; (ii) creation/perfection/furnishing of securities in terms of Transaction Documents; (iii) any credit support (including, without limitation, any guarantee or indemnity) provided / agreed to be provided in relation to the Facility (iv) compliance with financial covenants, security related covenants and information covenants; and (v) end use of the Facility.</li>
                     <li>“NACH” means National Automated Clearing House.</li>
                     <li>“NSDL” means the National Securities Depositary Limited.</li>
                     <li>“Outstanding” means the outstanding amount of the Facility, including all fees, interest, costs, charges, expenses and all other sums whatsoever payable by the Borrower(s) to ICICI Bank in accordance with the Terms and Conditions (as defined below).</li>
                     <li>“OTP” means one-time password.</li>
                     <li>“Payment Due Date” means the date, on which the EMI for servicing the Facility is required to be paid by the Borrower(s), as decided and communicated to the Borrower(s) by ICICI Bank.</li>
+                    <li>“Penal Charges” means an additional charge payable by the Borrower(s) to the Bank in case of breach of any Material Terms</li>
                     <li>“Products” means goods and / or services, being sold by the Dealer, which are purchased and / or availed by the Borrower(s).</li>
                     <li>“POS Machine” shall mean PIN (as defined below) entry devices, i.e. the devices which shall be available with the Dealers.</li>
                     <li>“PAN” means personal account number.</li>
@@ -120,7 +122,7 @@ function ICICITermsAndConditionsContent(){
                 <ul>
                     <li>The Facility shall be provided to the Borrower(s) in the sole discretion of ICICI Bank and shall be subject to the terms mentioned herein and any additional conditions as stipulated by ICICI Bank from time to time.</li>
                     <li>The Borrower(s) agree and acknowledge that the Facility amount shall be disbursed to the Dealer for and on behalf of the Borrower(s).</li>
-                    <li>The Facility shall be deemed to be sanctioned on the transfer of Facility amount from ICICI Bank’s account to the Dealer’s designated account registered with ICICI Bank.</li>
+                    <li>The Facility shall be deemed to be sanctioned and disbursed on the transfer of Facility amount from ICICI Bank’s account to the Dealer’s designated account registered with ICICI Bank.</li>
                     <li>Upon disbursement of the Facility amount, the obligation of the Borrower(s) to ensure timely payment of the principal and interest shall be unconditional and will continue unaffected, notwithstanding that the Product may be lost, stolen, damaged, defective or destroyed due to any reason (including a force majeure event) or due to an act/omission of the Borrower(s) or the Dealer or any third party, while the Product is being delivered or otherwise.</li>
                 </ul>
 
@@ -137,15 +139,15 @@ function ICICITermsAndConditionsContent(){
                         <p>The Borrower(s) agree to: </p>
                         <ol style={{listStyleType: "lower-alpha"}}>
                             <li>repay the Facility amount and applicable interest, charges and other fees in the form of EMIs on or within the Payment Due Date using, debit card, net banking, cheque, auto debit or any other electronic payment mode, in the manner specifically specified herein;</li>
-                            <li>pay additional charges/fees applicable with respect to the repayment of the Facility including the cancellation charges, repayment mode swap charges etc., as specified in the MITC or as may be communicated by ICICI Bank from time to time;</li>
+                            <li>pay Penal Chargesapplicable with respect to the repayment of the Facility including the cancellation charges, repayment mode swap charges etc., as specified in the MITC or as may be communicated by ICICI Bank from time to time;</li>
                             <li>pay EMI bounce charges as specified in the MITC, if the cheque issued by the Borrower(s) for payment/repayment is not honored by a bank or ECS/NACH (electronic clearing services/payment services for facilitating the payment/repayment with the consent of such Borrower(s)) or if such other instrument is returned;</li>
                             <li>pay the increased EMI amount due to increase in the interest, charges, taxes or fees payable in relation to the Facility amount. Such increased EMI amount shall form part of the MITC replacing the previous EMI amount;</li>
                             <li>pay cheque re-presentation charges in every instance where any post-dated cheque is dishonored (under any of the payment modes) and consequently represented OR in each instance where a post-dated cheque is presented when any installment/s is/are not received by ICICI Bank by/upon issue of debit instructions under the ECS method or direct debit method or any other payment method (other than the post-dated cheque method) selected by the Borrower(s).</li>
                         </ol>
                     </li>
                     <li>The Borrower(s) agree that the interest, charges and other fees payable by such Borrower(s) in relation to the Facility amount may be modified at the discretion of ICICI Bank and due notice in this regard shall be provided by ICICI Bank to such Borrower(s).</li>
-                    <li>In the event the EMI is not paid within the Payment Due Date, it shall be construed as a default on part of the Borrower(s) and he/she shall become liable to pay the amount together with default interest as specified in the MITC and late payment charges as specified in the next month’s account statement. Such default interest will be computed from the Payment Due Date, subject to revision by ICICI Bank from time to time.</li>
-                    <li>On receipt of delayed payments by ICICI Bank from the Borrower(s), the amount shall be appropriated first against the outstanding dues and thereafter against the default interest and late payment charges.</li>
+                    <li>In the event the EMI is not paid within the Payment Due Date, it shall be construed as a default on part of the Borrower(s) and he/she shall become liable to pay the amount together with applicable interest and Penal Charges as specified in the MITC and late payment charges as specified in the next month’s account statement. Such Penal Charges shall be computed from the Payment Due Date till the date of actual payment, subject to revision by ICICI Bank from time to time.</li>
+                    <li>On receipt of delayed payments by ICICI Bank from the Borrower(s), the amount shall be appropriated first against the outstanding dues and thereafter against the Penal Interest and late payment charges.</li>
                     <li>The Borrower(s) shall bear goods and services tax and any other statutory levies as may be applicable from time to time.</li>
                     <li>Notwithstanding anything else provided the Terms and Conditions, ICICI Bank has the right to demand repayment of the entire amount outstanding under the Facility (including but not limited the principal amount, interest amounts and any other charges etc.) payable thereon by the Borrower(s), notwithstanding any amount already paid in relation to the Facility or amount payable being reduced for any reason whatsoever.</li>
                 </ul>
@@ -156,8 +158,7 @@ function ICICITermsAndConditionsContent(){
                         <p>The Borrower(s) hereby agree:</p>
                         <ol style={{listStyleType: "lower-alpha"}}>
                             <li>not to default on or delay the payment of EMI;</li>
-                            <li>that he/she has understood the method of calculation of default interest as specified in the MITC and other charges as</li>
-                            <li>levied in cases wherein the EMI has not been paid on or within the Payment Due Date;</li>
+                            <li>that he/she has understood the method of calculation of Penal Charges as specified in the MITC and other charges as levied in cases wherein the EMI has not been paid on or within the Payment Due Date</li>
                             <li>that all information provided to ICICI Bank is true and correct; and</li>
                             <li>that he/she is at least 18 years of age.</li>
                         </ol>
@@ -175,7 +176,7 @@ function ICICITermsAndConditionsContent(){
                     <li>The Borrower(s) agree that this clause (Representations and Warranties) shall remain true and correct during the entire tenure of the Facility.</li>
                 </ul>
 
-                <h5 className="policy-heading" id="policy-8">DEFAULT</h5>
+                <h5 className="policy-heading" id="policy-8">EVENT OF DEFAULT</h5>
                 <ul>
                     <li>
                         <p>The following acts, as set out below, shall constitute an ‘Event of Default’ by the Borrower(s):</p>
@@ -191,12 +192,14 @@ function ICICITermsAndConditionsContent(){
                     <li>
                         <p>Upon the occurrence of an Event of Default as specified above, without prejudice to the other remedies available under law or in equity, ICICI Bank shall be entitled to give notice to the Borrower(s) and to exercise the following rights and remedies. ICICI Bank has the right to:</p>
                         <ol style={{listStyleType: "lower-alpha"}}>
-                            <li>terminate the Facility and call upon the Borrower(s) to pay the outstanding (including principal amount, interest and charges) immediately;</li>
+                            <li>recall the Facility and call upon the Borrower(s) to pay the outstanding (including principal amount, interest and charges) immediately;</li>
                             <li>engage one or more persons to collect dues from the Borrower(s). In this regard, ICICI Bank may furnish to such person(s) any information, facts and figures pertaining to Facility, contact details of such Borrower(s), as necessary;</li>
                             <li>call upon the successors/ legal heirs of the Borrower(s) to pay the outstanding and any other charges in full to ICICI Bank in the event of the death of the Borrower(s). In the event of the death of the Borrower(s), ICICI Bank shall have the same rights against the legal heirs/successors of such Borrower(s) as it had against the Borrower(s); and</li>
                             <li>to initiate legal proceedings against such Borrower(s).</li>
                         </ol>
                     </li>
+                    <li>Without prejudice to the Bank’s rights and remedies under contract and/or law, in the event any amount due under the Facility remains unpaid on the Due Date(s) or Borrower(s) fails to create security and/or commits breach of any of the Material Term(s) of the Facility, the Bank shall have the right to levy and recover Penal Charges, at its sole discretion, at the rate specified in the Key Fact Statement (KFS). Upon levy of such Penal Charges, the Borrower shall pay the said Penal Charges along with applicable Goods and Service Tax (GST), other taxes (of any description whatsoever), charges and penalties which may be payable pursuant to applicable laws, from time to time, in relation to the Facility.</li>
+                    <li>The Borrower acknowledges and agrees that the Penal Charges are reasonable and commensurate to non-compliance of Material Terms of the Transaction Documents</li>
                 </ul>
 
                 <h5 className="policy-heading" id="policy-9">TERMINATION</h5>
@@ -256,7 +259,7 @@ function ICICITermsAndConditionsContent(){
                 <p>The Terms and Conditions shall be governed by the laws of India and the competent courts/tribunals in Mumbai shall have exclusive jurisdiction to deal with any dispute that may arise out of the Terms and Conditions. Notwithstanding anything to the contrary contained herein or under any other transaction documents, the provisions of this clause (Governing Law and Jurisdiction) shall survive the termination of the Facility.</p>
 
                 <h5 className="policy-heading" id="policy-17">DISPUTE RESOLUTION</h5>
-                <p>Any claim or dispute whatsoever (whether in contract, tort or otherwise) arising out of or in connection under the terms of facility, including any question regarding its construction, meaning, existence, validity, breach, recall, recovery or termination, shall be resolved and settled by mediation or conciliation (if the Borrower(s) and ICICI Bank agree to such mediation or conciliation), administered in accordance with the applicable mediation or conciliation rules of an independent online dispute resolution institution listed on ICICI Bank Limited website (“ODR Institutions”). Any party may appoint any listed ODR Institutions to facilitate mediation or conciliation. If one Party appoints an ODR institution before the other, the ODR institution appointed by the first Party shall be binding on other party. If the Borrower(s) and ICICI Bank do not agree to mediation or conciliation , or if the mediation or conciliation fails to resolve the claim or dispute within the period stipulated in such rules or within a period of 21 days from the date of notice of appointment of mediator or conciliator  (whichever is earlier), then the claim or dispute shall be taken forward for adjudication by arbitration in terms of the applicable rules of said ODR Institution, and in accordance with the Arbitration and Conciliation Act, 1996, which shall be conducted (including for recording of evidence or tendering of documents), concluded and administered online by ODR Institution through its website/platform or mobile application. The arbitral tribunal shall consist of an independent sole arbitrator appointed in accordance with the applicable arbitration rules of the ODR Institution. The seat of arbitration proceedings shall be Mumbai. The law governing the arbitration proceedings shall be Indian law.  The procedural law of arbitration shall be rules of ODR Institution</p>
+                <p>Any claim or dispute whatsoever (whether in contract, tort or otherwise) arising out of or in connection under the terms of facility, including any question regarding its construction, meaning, existence, validity, breach, recall, recovery or termination, shall be resolved and settled by mediation or conciliation (if the Borrower(s) and ICICI Bank agree to such mediation or conciliation), administered in accordance with the applicable mediation or conciliation rules of an independent online dispute resolution institution listed on ICICI Bank Limited website(“ODR Institutions”). Any party may appoint any listed ODR Institutions to facilitate mediation or conciliation. If  one Party appoints an ODR institution before the other, the ODR institution appointed by the first Party shall be binding on other party. If the Borrower(s) and ICICI Bank do not agree to mediation or conciliation , or if the mediation or conciliation fails to resolve the claim or dispute within the period stipulated in such rules or within a period of 21 days from the date of notice of appointment of mediator or conciliator (whichever is earlier), then the claim or dispute shall be taken forward for adjudication by arbitration in terms of the applicable rules of said ODR Institution, and in accordance with the Arbitration and Conciliation Act, 1996, which shall be conducted (including for recording of evidence or tendering of documents), concluded and administered online by ODR Institution through its website/platform or mobile application. The arbitral tribunal shall consist of an independent sole arbitrator appointed in accordance with the applicable arbitration rules of the ODR Institution. The seat of arbitration proceedings shall be Mumbai. The law governing the arbitration proceedings shall be Indian law. The procedural law of arbitration shall be rules of ODR Institution.NOTICES AND COMMUNICATIONS</p>
 
                 <h5 className="policy-heading" id="policy-18">NOTICES AND COMMUNICATIONS</h5>
                 <p>All notices, requests, demands, waivers, complaints, queries and other communications required or permitted to be given hereunder in relation to the Facility, shall be submitted to ICICI Bank. Any other communications arising out of any acts or omissions of the Dealers/ Service Providers to whom the payment was made using the Facility, shall be resolved between the Borrower(s) and such Dealer/ Service Provider only and ICICI Bank shall have no responsibility or liability whatsoever in such regard.</p>
@@ -279,7 +282,7 @@ function ICICITermsAndConditionsContent(){
                 </ul>
 
 
-                <h5 className="policy-heading" id="policy-20">ANNEXURE</h5>
+                <h5 className="policy-heading" id="policy-21">ANNEXURE</h5>
                 <p><strong>CLASSIFICATION AS SPECIAL MENTION ACCOUNT (SMA)  AND NON-PERFORMING ASSET (NPA) </strong></p>
                 <p>Lending institution (i.e ICICI Bank) will recognize the incipient stress in loan accounts, immediately on default, by classifying them as SMA.</p>
                 <p> The basis of classification of SMA category shall be as follows: </p>
