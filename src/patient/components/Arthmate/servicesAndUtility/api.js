@@ -60,7 +60,7 @@ export async function getBankList(method="Statement", callBack){
 
 export async function startUploadURL(userId, id, callBack){
 
-    axios.get(BASE_URL + "/startUploadURL?userId=" + userId + "&institutionId=" + id)
+    axios.post(BASE_URL + "/startUploadURL?userId=" + userId + "&institutionId=" + id)
     .then(res=>{
         callBack(res.data);
     }).catch(err=>console.warn(err));
