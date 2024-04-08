@@ -201,6 +201,16 @@ const CreditDetails = () => {
                 return;
             }
         }
+        if(! fullName){
+            let elem = document.getElementById('fullName');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
+        if(! borrower){
+            let elem = document.getElementById('borrower');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
         if(borrower === "someone else"){
             if(! patientName){
                 let elem = document.getElementById('patientName');
@@ -213,11 +223,7 @@ const CreditDetails = () => {
                 return;
             }
         }
-        if(! fullName){
-            let elem = document.getElementById('fullName');
-            if(elem) showErrorOnUI(elem);
-            return;
-        }
+        
         if(! (doctorId && doctorName && userId)){
             setErrorMsg("Couldn't find your doctor details, please scan the QR again.");
             apiErrorHandler();
@@ -462,7 +468,7 @@ const CreditDetails = () => {
                 <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
                     <span style={{minWidth:"max-content"}}>Patient is my:</span>
                     <select name="relation" id="relation" style={{marginBottom:"0"}} value={relation} onChange={(e)=>setRelation(e.target.value)}>
-                        {/* <option disabled value={""}></option> */}
+                        <option value="" disabled style={{opacity:"0.4"}}>Tap to select</option>
                         <option value={"MOTHER"}>Mother</option>
                         <option value={"FATHER"}>Father</option>
                         <option value={"BROTHER"}>Brother</option>

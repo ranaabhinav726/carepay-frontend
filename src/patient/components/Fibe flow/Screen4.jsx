@@ -8,6 +8,7 @@ import RadioInput from "./Comps/RadioInput";
 import { useNavigate } from "react-router-dom";
 import { env, hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environment/environment";
 import axios from "axios";
+import { onlyNumbers, validateEmail } from "./Comps/Utility functions/helper";
 
 export default function Screen4(){
 
@@ -18,7 +19,7 @@ export default function Screen4(){
     const [patientName, setPatientName] = useState("")
     const [patientEmailId, setPatientEmailId] = useState("")
     const [patientPhoneNumber, setPatientPhoneNumber] = useState("")
-    const [relationToPatient, setRelationToPatient] = useState("father")
+    const [relationToPatient, setRelationToPatient] = useState("")
 
     let doctorId = localStorage.getItem("doctorId")
     let doctorName = localStorage.getItem("doctorName")
@@ -55,6 +56,15 @@ export default function Screen4(){
             }
             if(! patientEmailId){
                 let elem = document.getElementById("patientEmailId");
+                showErrorOnUI(elem, false);
+                return;
+            }else if(! validateEmail(patientEmailId)){
+                let elem = document.getElementById("patientEmailId");
+                showErrorOnUI(elem, false);
+                return;
+            }
+            if(! relationToPatient){
+                let elem = document.getElementById("relation");
                 showErrorOnUI(elem, false);
                 return;
             }
@@ -99,6 +109,11 @@ export default function Screen4(){
     }
 
     const navigate = useNavigate();
+
+    function numberChange(val){
+        if(val.length > 10) return;
+        onlyNumbers(val, setPatientPhoneNumber)
+    }
 
     return(
         <main className="screenContainer">
@@ -188,7 +203,7 @@ export default function Screen4(){
                         }}
                         placeholder="Enter number of the patient here"
                         value={patientPhoneNumber}
-                        setValue={setPatientPhoneNumber}
+                        setValue={numberChange}
                     />
 
                     <InputBoxLabel
@@ -214,28 +229,39 @@ export default function Screen4(){
                             marginTop:"24px"
                         }}
                     />
-                    <select 
-                        name="relation" 
-                        id="relation" 
-                        value={relationToPatient} 
-                        onChange={(e)=>setRelationToPatient(e.target.value)}
-                        style={{
-                            width:"100%",
-                            height:"48px",
-                            padding:"14px 10px", 
-                            fontSize:"inherit", 
-                            lineHeight:"inherit",
-                            background:"#ECEEFF",
-                            border:"0",
-                            borderRadius:"4px"
-                        }}
-                    >
-                        <option value="father">Father</option>
-                        <option value="mother">Mother</option>
-                        <option value="brother">Brother</option>
-                        <option value="sister">Sister</option>
-                        <option value="spouse">Spouse</option>
-                    </select>
+                     <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
+                        <span style={{minWidth:"max-content"}}>Patient is my:</span>
+                        <select 
+                            name="relation" 
+                            id="relation" 
+                            style={{
+                                width:"100%",
+                                height:"48px",
+                                padding:"14px 10px", 
+                                fontSize:"inherit", 
+                                lineHeight:"inherit",
+                                background:"#ECEEFF",
+                                border:"0",
+                                borderRadius:"4px"
+                            }}
+                            value={relationToPatient} 
+                            onChange={(e)=>setRelationToPatient(e.target.value)}
+                        >
+                            <option value="" disabled style={{opacity:"0.4"}}>Tap to select</option>
+                            <option value={"MOTHER"}>Mother</option>
+                            <option value={"FATHER"}>Father</option>
+                            <option value={"BROTHER"}>Brother</option>
+                            <option value={"SISTER"}>Sister</option>
+                            <option value={"HUSBAND"}>Husband</option>
+                            <option value={"WIFE"}>Wife</option>
+                            <option value={"SON"}>Son</option>
+                            <option value={"DAUGHTER"}>Daughter</option>
+                            <option value={"GRANDMOTHER"}>Grandmother</option>
+                            <option value={"GRANDFATHER"}>Grandfather</option>
+                            <option value={"GRANDSON"}>Grandson</option>
+                            <option value={"GRANDDAUGHTER"}>Granddaughter</option>
+                        </select>
+                    </div>
                 </>
             }
             <button onClick={()=>postDetails()} className="submit" style={{marginTop:"32px"}}>Next</button>
