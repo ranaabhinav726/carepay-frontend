@@ -14,7 +14,7 @@ const ArthIncomeVerification = () =>{
     <>
         <main className='arthIncomeVerification'>
             <Header />
-            <h3>Income Verification</h3>
+            <h3 style={{marginTop:"1.5rem"}}>Income Verification</h3>
             
             <p>
                 To verify your income, we need to access your 
