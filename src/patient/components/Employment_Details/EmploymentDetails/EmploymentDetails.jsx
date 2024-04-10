@@ -229,7 +229,7 @@ const EmploymentDetails = () =>{
             "typeOfBusiness":businessType,
             "monthlyFamilyIncome": (familyIncome?familyIncome:0),
             "formStatus": ""
-          };
+        };
 
         await axios.post(env.api_Url + "userDetails/employmentDetail", 
             submitObj)

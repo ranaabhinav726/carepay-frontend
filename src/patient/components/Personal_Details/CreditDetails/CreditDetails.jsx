@@ -157,7 +157,14 @@ const CreditDetails = () => {
                     let data = response.data.data;
                     if(!! data){
                         setAmount(data.loanAmount);
-                        setTreatment(data.loanReason);
+                        let treatmentName = data?.loanReason;
+                        if(treatmentList.includes(treatmentName)){
+                            setTreatment(data.loanReason);
+                        }else{
+                            console.log("other treatment")
+                            setTreatment("Other");
+                            setOtherTreatment(treatmentName)
+                        }
                     }
                 }
             }).catch(()=>{
