@@ -209,7 +209,7 @@ const EmploymentDetails = () =>{
             return;
         }
 
-        if(salary > 300000){
+        if(salary >= 300000){
             setShowPopOver(true);
             return;
         }
