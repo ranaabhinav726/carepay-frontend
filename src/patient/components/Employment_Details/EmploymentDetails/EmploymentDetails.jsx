@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 // import { useData } from "../../data";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
 import { Link } from "react-router-dom";
+import BottomPopOverModal from '../../utility/BottomPopOverModal'
 
 const EmploymentDetails = () =>{
     // let token = localStorage.getItem('access_token');
@@ -57,6 +58,8 @@ const EmploymentDetails = () =>{
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
+    const [showPopOver, setShowPopOver] = useState(false);
+
     let userId = localStorage.getItem("userId");
 
     let ref = useRef(0);
@@ -64,6 +67,8 @@ const EmploymentDetails = () =>{
     const [errorMsg, setErrorMsg] = useState("This field can't be empty.")
 
     let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
+
+    let popUpMsg  = <p style={{color:"black"}}>Are you sure <b>{salary}</b> is your <b>monthly</b> in-hand income?</p>;
 
 
     useEffect(()=>{
@@ -110,29 +115,12 @@ const EmploymentDetails = () =>{
                     let data = response.data.data;
                     if(!! data){
                         setSalary(data.monthlyInHandSalary);
-                        // setSalaryDate(data.salaryDay);
                         setFamilyIncome(data.monthlyFamilyIncome ?? "0");
                         setCompanyName(data.currentCompanyName);
                         setEmpType(data.employmentType)
                         
                         setBusinessName(data.nameOfBusiness)
                         setBusinessType(data.typeOfBusiness)
-
-                        // setCompanyAddL1(data.workplaceAddress1);
-                        // setCompanyAddL2(data.workplaceAddress2);
-                        // handlePincode(data.workplacePincode);
-                        // let industry = data.industry;
-                        // if(list.includes(industry)){
-                        //     setIndustryType(industry);
-                        //     // console.log(industry)
-                        // }else{
-                        //     setIndustryType("Other");
-                        //     setIndustryTypeOther(industry);
-                        // }
-                        // setTotalExpYear(data.totalJobExpInYears);
-                        // setTotalExpMonth(data.totalJobExpInMonth);
-                        // setJobExpMonth(data.currentJobExpInMonth);
-                        // setJobExpYear(data.currentJobExpInYears)
                     }
                 }
             }).catch(()=>{
@@ -141,51 +129,47 @@ const EmploymentDetails = () =>{
         }
     },[])
 
-    // function handleCompanyName(companyName){
-    //     let filteredCompanyName = companyName.replaceAll("&", "and");
-    //     setCompanyName(filteredCompanyName);
-    // }
-
-    // function handlePincode(val){
-    //     if(val.length < 6){
-    //         setPincode(val);
-    //     }else if(val.length == 6){
-    //         setPincode(val);
-    //         axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
-    //         .then(response =>{
-    //             console.log(response)
-    //             let city = response?.data?.city;
-    //             setCityName(city);
-    //         }).catch(()=>{
-    //             setCityName("Error fetching city name");
-    //         })
-    //     }
-    // }
-
-    // const today = new Date();
-    // let year = today.getFullYear();
-    // let month = today.getMonth()+1;
-
-    // function showErrorOnUI(elem){
-    //     elem.classList.add('inputBoxError');
-
-    //     setTimeout(()=>{
-    //         elem.classList.remove('inputBoxError');
-    //     }, 1000)
-    // }
-
-    // function expError(){
-    //     let elem = document.getElementById('expError');
-    //     if(elem) elem.style.display = "block";
+    async function checkAndNavigate(){
+        if(! canSubmit){
+            return;
+        }
+        setCanSubmit(false);
+        showWrapper(ref.current);
         
-    //     setTimeout(()=>{
-    //         if(elem) elem.style.display = "none";
-    //     }, 3000)
-    // }
+        let submitObj = {
+            "userId" : userId,
+            "employmentType": empType,
+            "netTakeHomeSalary": salary,
+            "organizationName": companyName,
+            "nameOfBusiness":businessName,
+            "typeOfBusiness":businessType,
+            "monthlyFamilyIncome": (familyIncome?familyIncome:0),
+            "formStatus": ""
+          };
 
+        await axios.post(env.api_Url + "userDetails/employmentDetail", 
+            submitObj)
+            .then((response) => {
+                console.log(response)
+                if(response.data.message === "success"){
+
+                    if(loanAmt <= 300001){
+                        navigate('/patient/CreditFairOffers');
+                    }else{
+                        navigate('/patient/BankDetails');
+                    }
+                }else{
+                    apiErrorHandler();
+                }
+            }).catch(error => {
+                console.log(error);
+                apiErrorHandler();
+              });
+        setCanSubmit(true);
+        hideWrapper(ref.current)
+    }
+    
     async function handleSubmit(){
-        // && totalExpYear && totalExpMonth && jobExpYear && jobExpMonth
-
         if(!(empType && salary && companyName)){
             console.log(empType, businessType, salary, familyIncome, companyName)
             // return;
@@ -223,7 +207,7 @@ const EmploymentDetails = () =>{
             }
         }
 
-        if(!salary){ 
+        if(!salary){
             let elem = document.getElementById('salary');
             if(elem) showErrorOnUI(elem);
             return;
@@ -283,7 +267,11 @@ const EmploymentDetails = () =>{
         //     if(elem) showErrorOnUI(elem, false);
         //     return;
         // }
-
+        if(salary > 300000){
+            setShowPopOver(true);
+            return;
+        }
+        console.log("less than 3 lac")
         if(! canSubmit){
             return;
         }
@@ -428,7 +416,7 @@ const EmploymentDetails = () =>{
    return(
 
     <>
-    <main className="employmentDetails">
+    <main className="employmentDetails" style={{position:"relative"}}>
     <Header progressbarDisplay="block" progress="70" canGoBack="/patient/AddressDetails" />
         <h3>Employment Details</h3>
 
@@ -660,6 +648,7 @@ const EmploymentDetails = () =>{
         
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={handleSubmit} className="submit">Submit</button>
+        <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} yesBtnText={"Yes"} NoBtnText={"No"} />
     </main>
     </>
    )

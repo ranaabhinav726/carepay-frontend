@@ -8,7 +8,7 @@ import lottie from "lottie-web";
 //     "doctorId" : doctorId
 // }
 //setShowPopOver(details)
-export default function BottomPopOverModal({popUpMsg, searchAnimation, showPopOver, setShowPopOver, checkAndNavigate}){
+export default function BottomPopOverModal({popUpMsg, searchAnimation, showPopOver, setShowPopOver, checkAndNavigate, yesBtnText="", NoBtnText=""}){
 
     // const [doctorId, setDoctorId] = useState(showPopOver?.doctorId)
     useEffect(() => {
@@ -64,7 +64,7 @@ export default function BottomPopOverModal({popUpMsg, searchAnimation, showPopOv
                     className='submit'
                     onClick={()=>checkAndNavigate()}
                 >
-                    Yes, proceed
+                    {yesBtnText!=="" ? yesBtnText : "Yes, proceed"}
                 </button>
 
                 {popUpMsg && 
@@ -75,7 +75,7 @@ export default function BottomPopOverModal({popUpMsg, searchAnimation, showPopOv
                             marginTop:"0"
                         }}
                     >
-                        No, I want to change the details
+                        {NoBtnText!=="" ? NoBtnText : "No, I want to change the details"}
                     </button>
                 }
             </div>
