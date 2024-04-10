@@ -129,6 +129,12 @@ const EmploymentDetails = () =>{
         }
     },[])
 
+    function salaryError(){
+        let elem = document.getElementById('salary');
+        if(elem) showErrorOnUI(elem);
+        return;
+    }
+
     async function checkAndNavigate(){
         if(! canSubmit){
             return;
@@ -510,7 +516,7 @@ const EmploymentDetails = () =>{
                 onChange={(e)=>setSalary(e.target.value)}
                 placeholder="Enter your monthly in-hand income" 
             />
-            <span className="fieldError">This field can't be empty.</span>
+            <span className="fieldError">Please enter your monthly in-hand income.</span>
         </div>
 
         {/* <div className="salaryDate">
@@ -648,7 +654,15 @@ const EmploymentDetails = () =>{
         
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={handleSubmit} className="submit">Submit</button>
-        <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} yesBtnText={"Yes"} NoBtnText={"No"} />
+        <BottomPopOverModal 
+            popUpMsg={popUpMsg} 
+            showPopOver={showPopOver} 
+            setShowPopOver={setShowPopOver} 
+            checkAndNavigate={checkAndNavigate} 
+            yesBtnText={"Yes"} 
+            noBtnText={"No"} 
+            noBtnClick={salaryError}
+        />
     </main>
     </>
    )
