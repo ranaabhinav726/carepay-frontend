@@ -219,60 +219,6 @@ const EmploymentDetails = () =>{
             return;
         }
 
-        // if(!companyAddL1){ 
-        //     let elem = document.getElementById('companyAddL1');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-        // if(specialChars.test(companyAddL1)){
-        //     let elem = document.getElementById('companyAddL1');
-        //     setErrorMsg("Special characters are not allowed.");
-        //     setTimeout(() => {
-        //         setErrorMsg("This field can't be empty.");
-        //     }, 3000);
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-        // if(!companyAddL2){ 
-        //     let elem = document.getElementById('companyAddL2');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-        // if(specialChars.test(companyAddL2)){
-        //     let elem = document.getElementById('companyAddL2');
-        //     setErrorMsg("Special characters are not allowed.");
-        //     setTimeout(() => {
-        //         setErrorMsg("This field can't be empty.");
-        //     }, 3000);
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-
-        // if(!pincode){
-        //     let elem = document.getElementById('pincode');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-
-        // if(IndustryType==="Other" && (! IndustryTypeOther)){
-        //     let elem = document.getElementById('IndustryTypeOther');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-
-        // if(totalExpYear < jobExpYear){
-        //     expError();
-        //     return;
-        // }else if(totalExpYear === jobExpYear && totalExpMonth < jobExpMonth){
-        //     expError();
-        //     return;
-        // }
-
-        // if(!consent){
-        //     let elem = document.getElementById('consent');
-        //     if(elem) showErrorOnUI(elem, false);
-        //     return;
-        // }
         if(salary > 300000){
             setShowPopOver(true);
             return;
@@ -288,34 +234,12 @@ const EmploymentDetails = () =>{
             "userId" : userId,
             "employmentType": empType,
             "netTakeHomeSalary": salary,
-            // "salaryDay": salaryDate,
             "organizationName": companyName,
             "nameOfBusiness":businessName,
             "typeOfBusiness":businessType,
-            // "workplaceAddress1": companyAddL1,
-            // "workplaceAddress2":companyAddL2,
-            // "workplacePincode": pincode,
-            // "totalJobExpInYears": parseInt(totalExpYear),
-            // "totalJobExpInMonth": parseInt(totalExpMonth),
-            // "currentJobExpInYears": parseInt(jobExpYear),
-            // "currentJobExpInMonth": parseInt(jobExpMonth),
             "monthlyFamilyIncome": (familyIncome?familyIncome:0),
             "formStatus": ""
           };
-
-        // if(IndustryType === "Other"){
-        //     submitObj.industry = IndustryTypeOther;
-        // }else{
-        //     submitObj.industry = IndustryType;
-        // }
-
-        //   if(!!familyIncome){
-        //     submitObj.monthlyFamilyIncome = familyIncome;
-        //   }
-
-        //   if(!!companyAddL2){
-        //     submitObj.workplaceAddress2 = companyAddL2;
-        //   }
 
         await axios.post(env.api_Url + "userDetails/employmentDetail", 
             submitObj)
@@ -328,7 +252,6 @@ const EmploymentDetails = () =>{
                     }else{
                         navigate('/patient/BankDetails');
                     }
-                    // navigate('/patient/LoanDetails');
                 }else{
                     apiErrorHandler();
                 }
@@ -345,24 +268,6 @@ const EmploymentDetails = () =>{
             setApiError(false);
         }, 1500);
     }
-
-
-
-    
-
-    // useEffect(()=>{
-    //     axios.post(env.login_api_Url + "industry_list", {
-    //             }, config )
-    //         .then((response) => {
-    //             console.log(response)
-    //             if(response.status == '200'){
-    //                 setList(response.data.industry_list);
-    //             }
-    //         }).catch(error => {
-    //             console.log(error);
-    //             });
-    // }, []);
-
 
     let dates =[];
     for(let i=1; i<32; i++){
@@ -425,20 +330,6 @@ const EmploymentDetails = () =>{
     <main className="employmentDetails" style={{position:"relative"}}>
     <Header progressbarDisplay="block" progress="70" canGoBack="/patient/AddressDetails" />
         <h3>Employment Details</h3>
-
-        {/* <div className="employementType">
-            <p>Employment type</p>
-            <select 
-                onChange={(e)=>setEmpType(e.target.value)}
-                name="empType" 
-                id="selectEmployementType"
-            >
-                <option value="SALARIED">Salaried</option>
-                <option value="SELF_EMPLOYED">Self employed</option>
-                <option value="UNEMPLOYED">Unemployed</option>
-                <option value="STUDENT">Student</option>
-            </select>
-        </div> */}
 
         <div id={"selectEmployementType"} style={{borderRadius:"4px"}}>
             {radios}
@@ -519,17 +410,6 @@ const EmploymentDetails = () =>{
             <span className="fieldError">Please enter your monthly in-hand income.</span>
         </div>
 
-        {/* <div className="salaryDate">
-            <p>Salary credit date</p>
-            <select 
-                onChange={(e)=>setSalaryDate(e.target.value)}
-                name="salaryDateSelection" 
-                id="selectSalaryDate"
-            >
-                {dates}
-            </select>
-        </div> */}
-
         <div className="familyIncome">
             <p>Monthly family income (optional)</p>
             <input 
@@ -539,118 +419,6 @@ const EmploymentDetails = () =>{
                 placeholder="Enter your family's monthly income" 
             />
         </div>
-
-        
-        {/* <div className="companyAddress-line1">
-            <p>Current workplace address (line 1)</p>
-            <input 
-                id="companyAddL1"
-                type="text" 
-                value={companyAddL1 ?? ""}
-                onChange={(e)=>setCompanyAddL1(e.target.value)}
-                placeholder="Enter here" 
-            />
-            <span className="fieldError">{errorMsg}</span>
-        </div> */}
-        {/* <div className="companyAddress-line2">
-            <p>Current workplace address (line 2)</p>
-            <input 
-                id="companyAddL2"
-                type="text" 
-                value={companyAddL2 ?? ""}
-                onChange={(e)=>setCompanyAddL2(e.target.value)}
-                placeholder="Enter here" 
-            />
-            <span className="fieldError">{errorMsg}</span>
-        </div> */}
-        {/* <div className="companyPincode">
-            <p>Current workplace Pincode</p>
-            <input 
-                id="pincode"
-                type="number" 
-                value={pincode ?? ""}
-                onChange={(e)=>handlePincode(e.target.value)}
-                placeholder="Enter here" 
-                inputMode="numeric" 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div>
-        <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
-
-        {/* <div className="IndustryType">
-            <p>Industry</p>
-            <select 
-                id="selectIndustryType"
-                onChange={(e)=>setIndustryType(e.target.value)} 
-                name="IndType" 
-                value={IndustryType}
-            >
-            {options}
-            </select>
-        </div>
-
-        {IndustryType==="Other" &&
-            <div className="IndustryTypeOther">
-                <p>Type-In your industry</p>
-                <input 
-                    id="IndustryTypeOther"
-                    type="text" 
-                    value={IndustryTypeOther ?? ""}
-                    onChange={(e)=>setIndustryTypeOther(e.target.value)}
-                    placeholder="Please enter your working Industry" 
-                />
-            </div>} */}
-
-        {/* <div className="timeInJob">
-            <p>Time in this job</p>
-            <div className="inputGroup">
-                <select name=""
-                    id=""
-                    value={jobExpYear ?? 0}
-                    onChange={(e)=>setJobExpYear(parseInt(e.target.value))}
-                >
-                    {expYears}
-                </select>
-                <p>Years</p>
-                <select name=""
-                    id=""
-                    value={jobExpMonth ?? 0}
-                    onChange={(e)=>setJobExpMonth(parseInt(e.target.value))}
-                >
-                    {expMonths}
-                </select>
-                <p>Months</p>
-            </div>
-        </div> */}
-
-        {/* <div className="totalExp">
-            <p>Total professional work experience</p>
-            <div className="inputGroup">
-                <select name=""
-                    id=""
-                    value={totalExpYear ?? 0}
-                    onChange={(e)=>setTotalExpYear(parseInt(e.target.value))}
-                >
-                    {expYears}
-                </select>
-                <p>Years</p>
-                <select name=""
-                    id=""
-                    value={totalExpMonth ?? 0}
-                    onChange={(e)=>setTotalExpMonth(parseInt(e.target.value))}
-                >
-                    {expMonths}
-                </select>
-                <p>Months</p>
-            </div>
-            <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
-        </div> */}
-        
-        {/* <div id="consent" className="consentBox">
-            <input
-            onClick={(e)=>setConsent(e.target.checked)} type="checkbox" />
-            <label htmlFor="consent">I declare the above information is true and correct. I allow CareCoin Technologies Pvt Ltd and its lending partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax.</label><br />
-        </div> */}
         
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={handleSubmit} className="submit">Submit</button>
