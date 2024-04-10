@@ -253,6 +253,11 @@ export default function Screen6(){
         }
     }
 
+    //this function ensures the calender opens when its placeholder is clicked
+    function dateInputClickHandler(){
+        let dateInput = document.getElementById("dob");
+        if(dateInput) dateInput.click();
+    }
 
     return(
         <main className="screenContainer">
@@ -295,9 +300,12 @@ export default function Screen6(){
                 setValue={setDob}
                 styles={{
                     marginTop:"12px", 
-                    border:"0"
+                    border:"0",
+                    position:"relative"
                 }}
             />
+            {!dob && <span onClick={dateInputClickHandler} style={{background:"#ECEBFF", position:"relative", top:"-38px", left:"10px", color:"#8B8B96", userSelect:"none"}}>Tap to select date</span>}
+
 
             <InputBoxLabel label='Address pincode' styles={{marginTop:"24px"}} />
             <InputBox
