@@ -9,6 +9,7 @@ import { useState, useEffect, useRef } from "react";
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../../environment/environment"
 import { Link } from "react-router-dom";
 import BottomPopOverModal from '../../utility/BottomPopOverModal'
+import { BsFillInfoCircleFill } from "react-icons/bs";
 
 const EmploymentDetails = () =>{
     // let token = localStorage.getItem('access_token');
@@ -39,26 +40,15 @@ const EmploymentDetails = () =>{
     const [companyName, setCompanyName] = useState('');
     const [businessType, setBusinessType] = useState('Public Limited Company');
     const [businessName, setBusinessName] = useState('');
-    // const [companyAddL1, setCompanyAddL1] = useState('');
-    // const [companyAddL2, setCompanyAddL2] = useState('');
-    // const [pincode, setPincode] = useState('');
-    // const [IndustryType, setIndustryType] = useState('Ecommerce');
-    // const [IndustryTypeOther, setIndustryTypeOther] = useState('');
-
-    // const [totalExpYear, setTotalExpYear] = useState(0);
-    // const [totalExpMonth, setTotalExpMonth] = useState(0);
-    // const [jobExpYear, setJobExpYear] = useState(0);
-    // const [jobExpMonth, setJobExpMonth] = useState(0);
 
     const [loanAmt, setLoanAmount] = useState('');
-
-    // const [cityName, setCityName] = useState("");
-    // const [consent, setConsent] = useState(false);
     
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
     const [showPopOver, setShowPopOver] = useState(false);
+
+    const [studentMsg, toggleStudentMsg] = useState(false);
 
     let userId = localStorage.getItem("userId");
 
@@ -324,6 +314,7 @@ const EmploymentDetails = () =>{
         )
     })
 
+
    return(
 
     <>
@@ -331,27 +322,69 @@ const EmploymentDetails = () =>{
     <Header progressbarDisplay="block" progress="70" canGoBack="/patient/AddressDetails" />
         <h3>Employment Details</h3>
 
-        <div id={"selectEmployementType"} style={{borderRadius:"4px"}}>
+        <div id={"selectEmployementType"} style={{borderRadius:"4px", marginBottom:"0"}}>
             {radios}
         </div>
-
-        <p 
-        style={{
-            fontSize:"14px", 
-            lineHeight:"18px",
-            color:"#00000066"
-        }}
+        <div 
+            style={{
+                display:"flex", 
+                gap:"12px", 
+                alignItems:"center", 
+                padding:"12px 0", 
+                margin:"0 0 14px 0", 
+                cursor:"pointer", 
+                opacity:"0.4", 
+                position:"relative"
+            }}
+            onClick={()=>toggleStudentMsg(!studentMsg)}
         >
-            We currently don’t finance students or unemployed borrowers. In case you are in any of these two categories, you can have your blood relative apply for your credit.
-        </p>
-        <p style={{
-            fontSize:"14px", 
-            lineHeight:"18px",
-            color:"#00000066",
-            marginBottom:"1rem"
-        }}>
-            Need assistance? <Link to={"tel:+918069489655"} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline"}}>Contact Support</Link>
-        </p>
+            <input 
+                id={"student"} 
+                disabled
+                type="radio"
+                style={{
+                    height:"24px", 
+                    width:"max-content",
+                    aspectRatio:"1/1",
+                    border:"2px solid #5E5E5E",
+                    accentColor:"#514C9F"
+                }}
+            />
+            <label 
+            htmlFor={"student"}
+            style={{
+                fontSize:"16px",
+                lineHeight:"20px",
+                cursor:"pointer",
+                userSelect:"none"
+            }}
+            >
+                Student/Unemployed
+            </label>
+            <BsFillInfoCircleFill style={{position:"absolute", right:"0"}} />
+        </div>
+
+        {studentMsg &&
+            <>
+                <p 
+                style={{
+                    fontSize:"14px", 
+                    lineHeight:"18px",
+                    color:"#00000066",
+                }}
+                >
+                    We currently don’t finance students or unemployed borrowers. In case you are in any of these two categories, you can have your blood relative apply for your credit.
+                </p>
+                <p style={{
+                    fontSize:"14px", 
+                    lineHeight:"18px",
+                    color:"#00000066",
+                    marginBottom:"1rem"
+                }}>
+                    Need assistance? <Link to={"tel:+918069489655"} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline"}}>Contact Support</Link>
+                </p>
+            </>
+        }
 
         {empType === "SALARIED" ?
             <div className="companyName">
