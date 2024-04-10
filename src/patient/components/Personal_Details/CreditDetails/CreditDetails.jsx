@@ -354,7 +354,7 @@ const CreditDetails = () => {
                     id="loanAmount"
                     type="text" 
                     value={amount} 
-                    placeholder="Enter credit amount"
+                    placeholder="How much credit do you need?"
                     onChange={(e)=>amountHandler(e.target.value)}  
                 />
             </div>
@@ -380,7 +380,7 @@ const CreditDetails = () => {
             title="Treatment name"
             value={treatment}
             setValue={setTreatment}
-            placeholder="Name of treatment"
+            placeholder="What is the name of the treatment?"
             list={treatmentList}
             fieldError="Please enter your treatment name"
             otherValueSettter={otherTreatmentNameAndFocusSetter}
@@ -391,7 +391,7 @@ const CreditDetails = () => {
                 id="otherTreatment"
                 type="text" 
                 value={otherTreatment} 
-                placeholder="Enter your treatment name"
+                placeholder="What is the name of the treatment?"
                 // onChange={(e)=>setOtherTreatment(e.target.value)}  
                 onChange={(e)=> onlyCharacters(e.target.value, setOtherTreatment)}  
                 style={{marginBottom:"10px"}}
@@ -407,7 +407,7 @@ const CreditDetails = () => {
                 id="fullName"
                 type="text" 
                 value={fullName} 
-                placeholder="Enter your name"
+                placeholder="What is your name as per your PAN?"
                 // onChange={(e)=>setFullName(e.target.value)}  
                 onChange={(e)=> onlyCharacters(e.target.value, setFullName)}  
                 style={{marginBottom:"10px"}}
