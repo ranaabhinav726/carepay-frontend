@@ -289,9 +289,17 @@ export default function Screen5(){
                     let data = response?.data?.data;
                     if(!! data){
                         setCreditAmount(data?.loanAmount);
-                        setLoanReason(data?.loanReason);
                         setDoctorName(data?.doctorName);
                         if(data?.doctorId) setDoctorId(data?.doctorId);
+
+                        let treatmentName = data?.loanReason;
+                        if(allTreatmentList.includes(treatmentName)){
+                            setLoanReason(data.loanReason);
+                        }else{
+                            console.log("other treatment")
+                            setLoanReason("Other");
+                            setOtherTreatment(treatmentName)
+                        }
                     }
                 }
             })

@@ -354,6 +354,11 @@ const PersonalDetails = () =>{
         }
     }
     
+    //this function ensures the calender opens when its placeholder is clicked
+    function dateInputClickHandler(){
+        let dateInput = document.getElementById("dateInput");
+        if(dateInput) dateInput.click();
+    }
 
    return(
     <>
@@ -420,14 +425,16 @@ const PersonalDetails = () =>{
             <span className="fieldError">This field can't be empty.</span>
         </div>
 
-        <div className="DOB">
+        <div className="DOB" style={{position:"relative"}}>
             <p>Date of birth</p>
             <input type="date" 
+                id="dateInput"
                 value={dob ?? ""}
                 onChange={(e) => setDob(e.target.value)}
                 placeholder="Select Date"
                 max ={maxDateForDob}
             />
+            {!dob && <span onClick={dateInputClickHandler} style={{background:"#ECEBFF", position:"relative", top:"-34px", left:"10px", color:"#8B8B96", userSelect:"none"}}>Tap to select date</span>}
             <span className="fieldError">Please enter correct DOB.</span>
         </div>
 
