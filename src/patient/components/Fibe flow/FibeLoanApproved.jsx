@@ -4,7 +4,7 @@ import { MdOutlineElectricBolt } from 'react-icons/md'
 import './styles.scss'
 import { useLocation, useNavigate } from "react-router-dom";
 import Confetti from '../../assets/GIFs/confetti.gif'
-export default function Screen12(){
+export default function FibeLoanApproved(){
 
 
     const location = useLocation();

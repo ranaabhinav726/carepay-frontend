@@ -10,7 +10,7 @@ import { env, hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../en
 import axios from "axios";
 import { onlyNumbers, validateEmail } from "./Comps/Utility functions/helper";
 
-export default function Screen4(){
+export default function FibeWelcome(){
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");

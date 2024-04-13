@@ -6,7 +6,7 @@ import lottie from "lottie-web";
 import animationData from '../../assets/JSON animations/loader simple.json'
 import { useEffect, useState } from "react";
 
-export default function Screen13(){
+export default function FibeRedirecting(){
 
     const navigate = useNavigate();
     const location = useLocation();

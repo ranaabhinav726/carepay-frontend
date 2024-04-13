@@ -13,7 +13,7 @@ import lottie from "lottie-web";
 import animationData from '../../assets/JSON animations/loader simple.json'
 
 
-export default function Screen6(){
+export default function FibeBasicDetails(){
     const [pan, setPan] = useState("");
     const [isPanValid, setPanValid] = useState(false);
 

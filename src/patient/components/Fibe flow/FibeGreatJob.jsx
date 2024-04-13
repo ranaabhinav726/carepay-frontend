@@ -6,7 +6,7 @@ import animationData from '../../assets/JSON animations/Comp 1.json'
 import { useEffect } from "react";
 import ScreenTitle from "./Comps/ScreenTitle";
 
-export default function Screen8(){
+export default function FibeGreatJob(){
 
     const navigate = useNavigate();
 

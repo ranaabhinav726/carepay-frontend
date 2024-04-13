@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { env, hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environment/environment";
 import axios from "axios";
 
-export function Screen1(){
+export default function FibeMobileNumberVerification(){
 
     const [number, setNumber] = useState(localStorage.getItem('phoneNumber'));
     const [accepted, setAccepted] = useState(true);
