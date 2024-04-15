@@ -7,7 +7,7 @@ import { env } from "../../environment/environment";
 import { useState } from "react";
 import { showWaitingModal, hideWaitingModal } from "../../environment/environment";
 
-export default function Screen10(){
+export default function FibeWaitingForApproval(){
 
     const navigate = useNavigate();
 

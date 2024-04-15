@@ -8,7 +8,7 @@ import InputBox from "./Comps/InputBox";
 import axios from "axios";
 import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
 
-export default function Screen2(){
+export default function FibeOtpAuthentication(){
 
     const [number, ] = useState(localStorage.getItem("phoneNumber"));
     const [otp, setOtp] = useState();

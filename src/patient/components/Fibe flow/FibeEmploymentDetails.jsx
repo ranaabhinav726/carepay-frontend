@@ -11,7 +11,7 @@ import axios from "axios";
 import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
 import { showErrorOnUI } from "../../environment/environment";
 
-export default function Screen7(){
+export default function FibeEmploymentDetails(){
 //79 , 86, 90, 93, 95, 97, 
 
     const [empType, setEmpType] = useState("");

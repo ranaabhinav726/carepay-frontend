@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { env } from "../../environment/environment";
 
-export default function Screen12sub2(){
+export default function FibeLoanRejected(){
 
     const location = useLocation();
     let loanId = location?.state?.data?.loanId;

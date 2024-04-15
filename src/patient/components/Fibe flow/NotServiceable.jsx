@@ -3,7 +3,7 @@ import SadFace from "../../assets/SadFace.svg"
 
 import { ContactSupport } from "../utility/ContactSupport/ContactSupport";
 
-export function NotServiceable(){
+export default function NotServiceable(){
  
     return(
         <main style={{display:"flex", flexDirection:"column", alignItems:"center"}}>

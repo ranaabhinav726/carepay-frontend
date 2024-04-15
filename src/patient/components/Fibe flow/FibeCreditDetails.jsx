@@ -15,7 +15,7 @@ import { env } from "../../environment/environment";
 import AutocompleteInput from "../utility/SuggestionInputBox/SuggestionInputBox";
 import './styles.scss'
 
-export default function Screen5(){
+export default function FibeCreditDetails(){
 
     const [creditAmt, setCreditAmount] = useState("");
     const [loanReason, setLoanReason] = useState("");

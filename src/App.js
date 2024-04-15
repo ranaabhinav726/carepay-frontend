@@ -76,7 +76,7 @@ import RejectedScreen from './patient/components/Loan_Details/RejectedScreen/Rej
 import UserDashboard from './patient/components/Dashboard/UserDashboard/UserDashboard'
 
 /////////Doctor imports//////////////
-import DocHomepage from './doctor/Components/Homepage/Homepage'
+import DocHomepage from './doctor/Components/Homepage/DocHomepage'
 import VerifyOTP from './doctor/Components/VerifyOTP/VerifyOTP'
 import Welcome from './doctor/Components/Welcome/Welcome'
 import DocPersonalDetails from './doctor/Components/PersonalDetails/PersonalDetails'
@@ -103,7 +103,7 @@ import QrPdfMaker from './qrData/QRPDF';
 // const About = Loadable(lazy(() => import("./website/pages/About")));
 // const ContactUs = Loadable(lazy(() => import("./website/pages/Contact")));
 
-import WebHomepage from "./website/pages/Homepage"
+import WebHomepage from "./website/pages/WebHomepage"
 import About from './website/pages/About';
 import PrivacyPolicy from './website/pages/PrivacyPolicy';
 
@@ -115,30 +115,30 @@ import EmiOptions from './patient/components/ICICI flow/EmiOptions';
 import PanVerificationIcici from './patient/components/ICICI flow/PanVerificationIcici';
 import FinalConsent from './patient/components/ICICI flow/FinalConsent';
 
-import { Screen1 } from './patient/components/Fibe flow/Screen1';
-import Screen2 from './patient/components/Fibe flow/Screen2';
-import Screen3 from './patient/components/Fibe flow/Screen3';
-import Screen4 from './patient/components/Fibe flow/Screen4';
-import Screen5 from './patient/components/Fibe flow/Screen5';
-import Screen6 from './patient/components/Fibe flow/Screen6';
-import Screen7 from './patient/components/Fibe flow/Screen7';
-import Screen8 from './patient/components/Fibe flow/Screen8';
-import Screen9 from './patient/components/Fibe flow/Screen9';
-import Screen10 from './patient/components/Fibe flow/Screen10';
-import Screen11 from './patient/components/Fibe flow/Screen11';
-import Screen12 from './patient/components/Fibe flow/Screen12';
-import Screen12sub1 from './patient/components/Fibe flow/Screen12sub1';
-import Screen12sub2 from './patient/components/Fibe flow/Screen12sub2';
-import Screen13 from './patient/components/Fibe flow/Screen13';
-import Screen14 from './patient/components/Fibe flow/Screen14';
-import Screen15 from './patient/components/Fibe flow/Screen15';
+import FibeMobileNumberVerification from './patient/components/Fibe flow/FibeMobileNumberVerification';
+import FibeOtpAuthentication from './patient/components/Fibe flow/FibeOtpAuthentication';
+import FibeNumberVerified from './patient/components/Fibe flow/FibeNumberVerified';
+import FibeWelcome from './patient/components/Fibe flow/FibeWelcome';
+import FibeCreditDetails from './patient/components/Fibe flow/FibeCreditDetails';
+import FibeBasicDetails from './patient/components/Fibe flow/FibeBasicDetails';
+import FibeEmploymentDetails from './patient/components/Fibe flow/FibeEmploymentDetails';
+import FibeGreatJob from './patient/components/Fibe flow/FibeGreatJob';
+import FibeCreateUser from './patient/components/Fibe flow/FibeCreateUser';
+import FibeWaitingForApproval from './patient/components/Fibe flow/FibeWaitingForApproval';
+import FibeCheckingStatus from './patient/components/Fibe flow/FibeCheckingStatus';
+import FibeLoanApproved from './patient/components/Fibe flow/FibeLoanApproved';
+import FibeBankStatementRequired from './patient/components/Fibe flow/FibeBankStatementRequired';
+import FibeLoanRejected from './patient/components/Fibe flow/FibeLoanRejected';
+import FibeRedirecting from './patient/components/Fibe flow/FibeRedirecting';
+import FibeUserFallback from './patient/components/Fibe flow/FibeUserFallback';
+import FibeCongratsUser from './patient/components/Fibe flow/FibeCongratsUser';
 
 import TermsAndConditions from './website/pages/TermsAndConditions';
 import RefundandCancellation from './website/pages/RefundandCancellation';
 import AddressNotServiceable from './patient/components/Address_Details/AddressDetails/AddressNotServiceable';
 
 import CfApproved from './patient/components/Loan_Details/CfApproved/CfApproved';
-import { NotServiceable } from './patient/components/Fibe flow/NotServiceable';
+import NotServiceable from './patient/components/Fibe flow/NotServiceable';
 import ICICITermsAndConditions from './website/pages/ICICITermsAndConditions';
 import DoctorNotAvailable from './patient/components/Homepage/DoctorNotAvailable';
 import PrescriptionUpload from './patient/components/Personal_Details/Prescription/PrescriptionUpload';
@@ -211,45 +211,24 @@ function App() {
         <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
         <Route path='/patient/FinalConsent' element={<FinalConsent />} />
 
-        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
-        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
-        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
-        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
-        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
-        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
-
-        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
-        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
-        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
-        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
-        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
-        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
-
-        <Route path='/patient/SearchingOffers' element={<SearchingOffers />} />
-        <Route path='/patient/congratsPreApprovedIcici' element={<CongratsPreApprovedICICI />} />
-        <Route path='/patient/EmiOptions' element={<EmiOptions />} />
-        <Route path='/patient/PanVerificationIcici' element={<PanVerificationIcici />} />
-        <Route path='/patient/congratsApprovedIcici' element={<CongratsApprovedICICI />} />
-        <Route path='/patient/FinalConsent' element={<FinalConsent />} />
-
-        <Route path='/patient/fibeMobileNumberVerification' element={<Screen1 />} />
-        <Route path='/patient/fibeOtpAuthentication' element={<Screen2 />} />
-        <Route path='/patient/fibeNumberVerified' element={<Screen3 />} />
-        <Route path='/patient/fibeWelcome' element={<Screen4 />} />
-        <Route path='/patient/fibeCreditDetails' element={<Screen5 />} />
+        <Route path='/patient/fibeMobileNumberVerification' element={<FibeMobileNumberVerification />} />
+        <Route path='/patient/fibeOtpAuthentication' element={<FibeOtpAuthentication />} />
+        <Route path='/patient/fibeNumberVerified' element={<FibeNumberVerified />} />
+        <Route path='/patient/fibeWelcome' element={<FibeWelcome />} />
+        <Route path='/patient/fibeCreditDetails' element={<FibeCreditDetails />} />
         <Route path='/patient/fibePrescriptionUpload' element={<FibePrescriptionUpload />} />
-        <Route path='/patient/fibeBasicDetails' element={<Screen6 />} />
-        <Route path='/patient/fibeEmploymentDetails' element={<Screen7 />} />
-        <Route path='/patient/fibeGreatJob' element={<Screen8 />} />
-        <Route path='/patient/fibeCreateUser' element={<Screen9 />} />
-        <Route path='/patient/fibeWaitingForApproval' element={<Screen10 />} />
-        <Route path='/patient/fibeCheckingStatus' element={<Screen11 />} />
-        <Route path='/patient/fibeLoanApproved' element={<Screen12 />} />
-        <Route path='/patient/fibeBankStatementRequired' element={<Screen12sub1 />} />
-        <Route path='/patient/fibeLoanRejected' element={<Screen12sub2 />} />
-        <Route path='/patient/fibeRedirecting' element={<Screen13 />} />
-        <Route path='/patient/screen14/:userId' element={<Screen14 />} />
-        <Route path='/patient/fibeCongratsUser' element={<Screen15 />} />
+        <Route path='/patient/fibeBasicDetails' element={<FibeBasicDetails />} />
+        <Route path='/patient/fibeEmploymentDetails' element={<FibeEmploymentDetails />} />
+        <Route path='/patient/fibeGreatJob' element={<FibeGreatJob />} />
+        <Route path='/patient/fibeCreateUser' element={<FibeCreateUser />} />
+        <Route path='/patient/fibeWaitingForApproval' element={<FibeWaitingForApproval />} />
+        <Route path='/patient/fibeCheckingStatus' element={<FibeCheckingStatus />} />
+        <Route path='/patient/fibeLoanApproved' element={<FibeLoanApproved />} />
+        <Route path='/patient/fibeBankStatementRequired' element={<FibeBankStatementRequired />} />
+        <Route path='/patient/fibeLoanRejected' element={<FibeLoanRejected />} />
+        <Route path='/patient/fibeRedirecting' element={<FibeRedirecting />} />
+        <Route path='/patient/screen14/:userId' element={<FibeUserFallback />} />
+        <Route path='/patient/fibeCongratsUser' element={<FibeCongratsUser />} />
 
         {/* <Route path='/patient/screen1' element={<Screen1 />} />
         <Route path='/patient/screen2' element={<Screen2 />} />
