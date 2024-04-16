@@ -104,7 +104,7 @@ export default function FibeWaitingForApproval(){
     // }
 
     function checkStatus(){
-        navigate("/patient/screen11");
+        navigate("/patient/fibeCheckingStatus");
     }
 
     return(
