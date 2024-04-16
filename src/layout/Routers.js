@@ -141,3 +141,9 @@ export const ArthPANPhoto = React.lazy(() => import('../patient/components/Arthm
 export const ArthKyc = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/KYC'));
 export const ArthAadhaarPhoto = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/AadhaarPhoto'));
 export const ArthCreditDetails = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/CreditDetails'));
+export const SCOUTS_MAIN = React.lazy(() => import('../Scouts/mainScreenScouts'));
+export const SCOUTS_LOGIN = React.lazy(() => import('../Scouts/loginscreen'));
+export const SCOUTS_OTP = React.lazy(() => import('../Scouts/otpscreen'));
+export const SCOUTS_ALREADYEXIST = React.lazy(() => import('../Scouts/altreadyexist'));
+export const SCOUTES_WELCOME = React.lazy(() => import('../Scouts/welcome'));
+export const SCOUTES_DASHBOARD = React.lazy(() => import('../Scouts/mainPageDashboard'));
