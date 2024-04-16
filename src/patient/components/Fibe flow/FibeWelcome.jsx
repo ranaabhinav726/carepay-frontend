@@ -125,7 +125,7 @@ export default function FibeWelcome(){
                 }}
             />
             <NoteText 
-                text="Kindly help us with these details"
+                text="Kindly help us with these details."
                 styles={{marginBottom:"32px"}}
             />
             <InputBoxLabel
