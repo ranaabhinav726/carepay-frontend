@@ -158,12 +158,14 @@ const CreditDetails = () => {
                     if(!! data){
                         setAmount(data.loanAmount);
                         let treatmentName = data?.loanReason;
-                        if(treatmentList.includes(treatmentName)){
-                            setTreatment(data.loanReason);
-                        }else{
-                            console.log("other treatment")
-                            setTreatment("Other");
-                            setOtherTreatment(treatmentName)
+                        if(treatmentName){
+                            if(treatmentList.includes(treatmentName)){
+                                setTreatment(data.loanReason);
+                            }else{
+                                console.log("other treatment")
+                                setTreatment("Other");
+                                setOtherTreatment(treatmentName)
+                            }
                         }
                     }
                 }

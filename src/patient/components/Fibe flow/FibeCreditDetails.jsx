@@ -293,12 +293,14 @@ export default function FibeCreditDetails(){
                         if(data?.doctorId) setDoctorId(data?.doctorId);
 
                         let treatmentName = data?.loanReason;
-                        if(allTreatmentList.includes(treatmentName)){
-                            setLoanReason(data.loanReason);
-                        }else{
-                            console.log("other treatment")
-                            setLoanReason("Other");
-                            setOtherTreatment(treatmentName)
+                        if(treatmentName){
+                            if(allTreatmentList.includes(treatmentName)){
+                                setLoanReason(data.loanReason);
+                            }else{
+                                // console.log("other treatment")
+                                setLoanReason("Other");
+                                setOtherTreatment(treatmentName)
+                            }
                         }
                     }
                 }
