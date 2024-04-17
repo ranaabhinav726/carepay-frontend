@@ -40,7 +40,7 @@ export const AutocompleteInput = ({id, title, value, setValue, placeholder, list
 
   const [selectedItemError, setSelectedItemError] = useState(false);
   useEffect(()=>{
-    console.log(inputValue)
+    // console.log(inputValue)
     if(inputValue === undefined || inputValue === "" || inputValue === "Other"){
         setSelectedItemError(false);
     }else{

@@ -10,6 +10,7 @@ import InputBox from "./Comps/InputBox";
 import axios from "axios";
 import { env, hideWaitingModal, showWaitingModal } from "../../environment/environment";
 import { showErrorOnUI } from "../../environment/environment";
+import BottomPopOverModal from "../utility/BottomPopOverModal";
 
 export default function FibeEmploymentDetails(){
 //79 , 86, 90, 93, 95, 97, 
@@ -18,6 +19,10 @@ export default function FibeEmploymentDetails(){
     const [salary, setSalary] = useState("");
     const [officePincode, setOfficePincode] = useState("");
     const [city, setCity] = useState("");
+
+    const [showPopOver, setShowPopOver] = useState(false);
+    let popUpMsg  = <p style={{color:"black"}}>Are you sure <b>{salary}</b> is your <b>monthly</b> in-hand income?</p>;
+
 
     const navigate = useNavigate();
     let userId = localStorage.getItem("userId");
@@ -55,6 +60,46 @@ export default function FibeEmploymentDetails(){
         }
     }
 
+    function salaryError(){
+        let elem = document.getElementById('salary');
+        if(elem) showErrorOnUI(elem);
+        return;
+    }
+    async function checkAndNavigate(){
+        // if(! canSubmit){
+        //     return;
+        // }
+        // setCanSubmit(false);
+        // showWrapper(ref.current);
+        showWaitingModal();
+        
+        let submitObj = {
+            "userId" : userId,
+            "employmentType": empType,
+            "netTakeHomeSalary": salary,
+            "workplacePincode": officePincode,
+        };
+
+
+        axios.post(env.api_Url + "userDetails/employmentDetail", 
+            submitObj)
+            .then((response) => {
+                console.log(response)
+                if(response.data.message === "success"){
+                    navigate('/patient/fibeGreatJob');
+                }else{
+                    // apiErrorHandler();
+                }
+                hideWaitingModal();
+            }).catch(error => {
+                console.log(error);
+                hideWaitingModal();
+                // apiErrorHandler();
+            });
+        // setCanSubmit(true);
+        hideWaitingModal()
+    }
+
     function postDetails(){
         if(! empType){ 
             let elem = document.getElementById('empType');
@@ -69,6 +114,10 @@ export default function FibeEmploymentDetails(){
         if(!officePincode){ 
             let elem = document.getElementById('officePincode');
             if(elem) showErrorOnUI(elem);
+            return;
+        }
+        if(salary >= 300000){
+            setShowPopOver(true);
             return;
         }
         showWaitingModal();
@@ -99,7 +148,7 @@ export default function FibeEmploymentDetails(){
     }
     
     return(
-        <main className="screenContainer">
+        <main className="screenContainer"  style={{position:"relative"}}>
             <Header progress={79} canGoBack={-1} />
             <ScreenTitle title="Employment details" />
             <InputBoxLabel label='Select employment type' />
@@ -151,6 +200,15 @@ export default function FibeEmploymentDetails(){
             <InputBoxLabel label={`City: ${city}`} styles={{marginTop:"6px", marginBottom:"0"}} />
 
             <button onClick={()=>postDetails()} className="submit"  style={{marginTop:"32px"}}>Next</button>
+            <BottomPopOverModal 
+                popUpMsg={popUpMsg} 
+                showPopOver={showPopOver} 
+                setShowPopOver={setShowPopOver} 
+                checkAndNavigate={checkAndNavigate} 
+                yesBtnText={"Yes"} 
+                noBtnText={"No"} 
+                noBtnClick={salaryError}
+            />
         </main>
     )
 }
