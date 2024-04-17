@@ -10,16 +10,19 @@ import Loader from '../doctor/assets/loader.gif'
 const LoginScout = () => {
     const [otp, setOtp] = useState('');
     const [loaderState, setLoaderState] = useState(false);
+    const [errorMsg, seterrorMsg] = useState('');
 
     let navigate = useNavigate()
     const Submit = () => {
         setLoaderState(true)
+        seterrorMsg('')
         verifyOtpApi(window.sessionStorage.getItem('scoutMobile'), otp, callback => {
             console.log(callback)
             if (callback.message === 'success') {
                 setLoaderState(false)
-
                 navigate(routes.SCOUTES_DASHBOARD)
+            } else {
+                seterrorMsg('Invalid OTP !')
             }
         })
     }
@@ -30,7 +33,7 @@ const LoginScout = () => {
         } else {
             getScoutRole(window.sessionStorage.getItem('scoutMobile'), callback => {
                 console.log(callback)
-                if (callback.message === 'success') {
+                if (callback.message === 'success' && callback.data !== 'NOT_FOUND') {
                     if (callback.data.role === 'SCOUT') {
                         window.sessionStorage.setItem('scoutId', callback.data.id)
                         window.sessionStorage.setItem('role', callback.data.role)
@@ -47,6 +50,10 @@ const LoginScout = () => {
                         window.sessionStorage.setItem('parentScoutId', callback.data.id)
                         window.sessionStorage.setItem('role', callback.data.role)
                     }
+
+                } else {
+                    alert('Not Data Found !')
+                    navigate(routes.SCOUTS_MAIN)
 
                 }
             })
@@ -89,6 +96,7 @@ const LoginScout = () => {
                             renderSeparator={<span>-</span>}
                             renderInput={(props) => <input placeholder="-" type="number"  {...props} />}
                         />
+                        <span className="text-danger">{errorMsg}</span>
                         <div>
                             <button onClick={() => Submit()} className={otp.length === 4 ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={otp.length === 4 ? false : true}>Send OTP</button>
                         </div>

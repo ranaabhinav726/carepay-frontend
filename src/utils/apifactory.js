@@ -1,8 +1,6 @@
 const BASE_URL = process.env.REACT_APP_BACKEND
 // const BASE_URL = 'https://backend.carepay.money/'
 
-
-
 const APIS = {
 
     SEND_OTP: BASE_URL + 'generateOtp?phoneNumber=',
