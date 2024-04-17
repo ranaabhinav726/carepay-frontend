@@ -1,3 +1,7 @@
+$filtercolor: rgba(240, 240, 240, 1);
+$filtercolor2: rgba(81, 76, 159, 1);
+$statscolor: rgba(242, 245, 252, 1);
+
 button {
   cursor: pointer;
 }
@@ -1038,6 +1042,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .mobile-menu {
+  z-index: 1;
   width: 100%;
 
 }
@@ -1114,4 +1119,396 @@ input[type="number"]::-webkit-outer-spin-button {
   border: none;
   outline: none;
   width: 100%;
+}
+
+.over-view-component {
+  .screen-width-max {
+    background-color: #fff;
+    box-shadow: 0 0 4px 2px #949494;
+    margin: 0 auto;
+    max-width: 480px;
+    min-height: 100vh;
+    overflow: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bg-grey {
+    background-color: rgb(234, 224, 224) !important;
+  }
+
+  h5,
+  h3,
+  h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .dashboard {
+    position: sticky;
+    top: 0;
+
+    .filters {
+      padding-left: 15px;
+      display: flex;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      overflow-x: auto;
+      background-color: white;
+
+      .box {
+        background-color: $filtercolor;
+        border-radius: 4px;
+        padding: 11px 9px 3px 17px;
+        margin-right: 13px;
+        display: flex;
+        cursor: pointer;
+
+        h5 {
+          margin: 0px;
+          font-size: 12px;
+          font-weight: 400;
+          color: #000;
+          white-space: nowrap;
+        }
+
+        span svg {
+          color: rgba(0, 0, 0, 0.6);
+          width: 17px;
+          height: 17px;
+          margin-top: -10px;
+        }
+
+        &.active {
+          background-color: $filtercolor2 !important;
+
+          h5 {
+            color: #fff !important;
+          }
+
+          span svg {
+            color: #fff !important;
+          }
+        }
+      }
+    }
+  }
+
+  .trends {
+
+    margin-top: 10px;
+    background-color: white;
+
+    .cols {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .columns {
+      display: flex;
+      background-color: rgba(242, 245, 252, 1);
+      border-radius: 4px;
+      padding: 10px;
+      justify-content: space-between;
+
+      .Lefttext {
+        h3 {
+          font-size: 24px;
+          font-weight: 400;
+        }
+
+        h4 {
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+
+      .Righttext {
+        h5 {
+          margin-top: 5px;
+          color: rgba(0, 0, 0, 0.4);
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+
+    }
+
+    .box {
+      background-color: rgba(242, 245, 252, 1);
+      border-radius: 4px;
+
+      .topbox {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+          font-size: 14px;
+          font-weight: 400;
+        }
+
+        h5 {
+          font-size: 24px;
+          font-weight: 400;
+        }
+      }
+
+      .bottombox {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba(81, 76, 159, 1);
+
+        h3 {
+          font-size: 14px;
+          font-weight: 400;
+          color: white;
+        }
+
+        h5 {
+          font-size: 14px;
+          font-weight: 700;
+          color: white;
+        }
+      }
+    }
+
+    .bargraph {
+      margin-top: 15px;
+
+      h5 {
+        span svg {
+          color: rgba(81, 76, 159, 1);
+        }
+
+        font-size: 18px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.8);
+      }
+
+      .tabsrow {
+        display: flex;
+        overflow-y: auto;
+        margin-top: 10px;
+        margin-bottom: 5px;
+
+        .tabs {
+          padding: 10px;
+          cursor: pointer;
+
+          h5 {
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 400;
+          }
+
+          &.showtabs {
+            border-bottom: 2px solid rgba(144, 141, 193, 1);
+
+            h5 {
+              font-size: 12px;
+              font-weight: 700;
+              color: rgba(81, 76, 159, 1);
+            }
+          }
+        }
+      }
+
+      .buttonswitch {
+        .btnswitch {
+          margin-top: 10px;
+          padding: 4px 6px;
+          background-color: rgba(236, 235, 255, 1);
+          display: inline-flex;
+          border-radius: 4px;
+
+          .h5tab {
+            cursor: pointer;
+            // margin-top: 4px;
+            color: rgba(144, 141, 193, 1);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px;
+
+            &.active {
+              border-radius: 4px;
+              background-color: white;
+              font-weight: 400 !important;
+              color: rgba(81, 76, 159, 1) !important;
+
+            }
+          }
+        }
+      }
+
+      .barchart {
+        .text {
+          border-radius: 4px;
+          background-color: rgba(236, 235, 255, 1);
+          padding: 10px;
+          margin-bottom: 30px;
+
+          h5 {
+            font-size: 12px;
+            color: rgba(71, 67, 141, 1);
+            font-weight: 400;
+
+            span {
+              font-weight: 700 !important;
+            }
+          }
+        }
+      }
+
+
+    }
+
+  }
+
+  .filter-dropdown {
+    width: 480px;
+    background-color: #fff;
+    text-align: -webkit-center;
+    left: auto;
+    right: auto;
+    // position: sticky;
+    // top: 100%;
+    position: fixed;
+    // position: absolute;
+    width: -webkit-fill-available;
+    bottom: 0;
+    z-index: 10;
+    max-width: 480px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 15px;
+
+
+    .filterscout {
+      .filterbox {
+        display: flex;
+        justify-content: space-between;
+
+        .closeicon {
+          cursor: pointer;
+        }
+
+        h5 {
+          font-size: 16px;
+          font-weight: 700;
+          color: #000;
+        }
+
+        span svg {
+          color: rgba(0, 0, 0, 0.6);
+          width: 23px;
+          height: 23px;
+        }
+      }
+
+      .checkboxes {
+        padding: 8px;
+        max-height: 300px;
+        overflow-y: auto;
+
+        .checkboxgrp {
+          display: flex;
+          margin-top: 15px;
+
+          .checkboxinput {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+          }
+
+          .checkboxinputlabel {
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 2px;
+          }
+        }
+      }
+
+      .inputsamount {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 5px;
+
+        .inputboxes {
+          border-radius: 6px;
+          // border: 1px solid black;
+          background-color: rgba(236, 235, 255, 1);
+
+          .iconruppee {
+            padding-left: 20px;
+            font-size: 16px;
+          }
+
+          .amount {
+            background-color: rgba(236, 235, 255, 1);
+            padding: 15px;
+            width: 70%;
+            border: none;
+            font-size: 16px;
+
+            &:focus-visible {
+              outline: none !important;
+            }
+          }
+        }
+
+        h5 {
+          margin-bottom: 5px;
+          margin-top: 6px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+
+      .filter-btn {
+        margin-top: 30px;
+
+        .apply-filter {
+          width: 98%;
+          border-radius: 6px;
+          background-color: $filtercolor2;
+          border: none;
+          color: #fff;
+          padding: 15px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 360px) {
+    .trends {
+      .cols {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+.background-blur {
+  position: fixed;
+  background: rgb(0 0 0 / 49%);
+  z-index: 1;
+  top: 0;
+  left: auto;
+  bottom: 0;
+  right: auto;
+  // color: $bluecolor;
+  overflow: auto;
+  text-align: -webkit-center;
+  max-width: 480px;
+  width: 480px;
 }
