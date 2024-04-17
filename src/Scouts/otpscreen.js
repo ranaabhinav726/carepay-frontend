@@ -52,8 +52,8 @@ const LoginScout = () => {
                     }
 
                 } else {
-                    alert('Not Data Found !')
-                    navigate(routes.SCOUTS_MAIN)
+                    // alert('Not Data Found !')
+                    // navigate(routes.SCOUTS_MAIN)
 
                 }
             })
