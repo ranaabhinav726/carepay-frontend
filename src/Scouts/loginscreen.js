@@ -22,15 +22,15 @@ const LoginScout = () => {
     const handleSendOTP = () => {
         if (phoneNumber.length === 10) {
             window.sessionStorage.setItem('scoutMobile', phoneNumber)
-            setLoaderState(true)
-            sendOtpApi(phoneNumber, callback => {
-                console.log(callback)
-                if (callback.message === 'success') {
-                    setLoaderState(false)
+            // setLoaderState(true)
+            // sendOtpApi(phoneNumber, callback => {
+            //     console.log(callback)
+            //     if (callback.message === 'success') {
+            //         setLoaderState(false)
 
                     navigate(routes.SCOUTS_OTP)
-                }
-            })
+            //     }
+            // })
             seterror('')
 
         } else {
