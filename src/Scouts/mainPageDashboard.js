@@ -849,7 +849,7 @@ const MainScout = () => {
             </div>
             {tabType === 'txn' ?
                 <div style={{ marginTop: '20px' }}>
-                    {data.data.length > 0 && data.data && (data.data).map((carddata, i) => {
+                    {objectData.length > 0 && objectData && (objectData).map((carddata, i) => {
                         return (
                             <div className="txn-card">
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
