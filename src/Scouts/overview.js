@@ -211,12 +211,12 @@ export default function Scoutoverview({ filter, setfilter }) {
 
   return (
     <>
-      <div className="over-view-component screen-width-max" style={{ marginTop: '-10px' }}>
+      <div className="over-view-component screen-width-max" style={{ marginTop: '-10px',padding:'10px' }}>
         {console.log(chartData)}
         <div className={'trends'}>
-          <div className="container">
-            <div className="row">
-              <div className="col-6 cols">
+          <div className="">
+          <div className="" style={{display:'flex',width:'100%'}}>
+              <div className='' style={{width:'50%'}}>
                 <div className="columns">
                   <div className="Lefttext">
                     <h3>{loanData.total_applied}</h3>
@@ -227,7 +227,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                 </div>
               </div>
-              <div className="col-6 cols">
+              <div className='' style={{width:'50%'}}>
                 <div className="columns">
                   <div className="Lefttext">
                     <h3>{loanData.disbursed_count}</h3>
@@ -238,7 +238,10 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                 </div>
               </div>
-              <div className="col-6 cols">
+              </div>
+              <div className="" style={{display:'flex',width:'100%'}}>
+
+              <div className='' style={{width:'50%'}}>
                 <div className="box">
                   <div className="topbox">
                     <h3>Potential <br></br> Captured</h3>
@@ -250,7 +253,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                 </div>
               </div>
-              <div className="col-6 cols">
+              <div className='' style={{width:'50%'}}>
                 <div className="box">
                   <div className="topbox">
                     <h3>Monthly leads
