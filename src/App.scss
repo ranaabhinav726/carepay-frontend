@@ -921,6 +921,17 @@ div.bottomPopOverModal {
   min-height: 100vh;
   overflow: clip;
 }
+.share-btn{
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  line-height: 2;
+  margin-top: -16px;
+
+
+
+}
 
 .header-scouts {
   text-align: center;
@@ -1519,6 +1530,9 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: -webkit-center;
   max-width: 480px;
   width: 480px;
+}
+.text-center{
+  text-align: center;
 }
 
 // p {

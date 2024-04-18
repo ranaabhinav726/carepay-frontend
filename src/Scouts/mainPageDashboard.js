@@ -11,7 +11,7 @@ import { getDoctorDataById, getParentDoctorDataById, getParentSCoutDataById, get
 import OverviewUi from './overview'
 import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-
+import WhatsappImage from './imagesscouts/whatsapp.png'
 const MainScout = () => {
 
     const [tabType, settabType] = useState('txn')
@@ -820,7 +820,7 @@ const MainScout = () => {
 
     return (
         <>
-            <div className="over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '55px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
+            <div className=" over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '55px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
                 <div style={{ width: '100%', display: 'flex' }}>
                     <div style={{ width: '40%', fontSize: '20px', marginTop: '5px', marginLeft: '10px' }}>All loans</div>
                     <div className="text-center" style={{ width: '60%', background: '#ECEBFF', borderRadius: '5px', padding: '5px', marginRight: '10px' }}>
@@ -875,8 +875,8 @@ const MainScout = () => {
                                             </div>
                                             <div className="text-center">
                                                 <a target="_blank" href={carddata.onboardingUrl}>
-                                                    <button className="carepay-button-card"><WhatsApp />&nbsp;
-                                                        Share link
+                                                    <button className="carepay-button-card">&nbsp;
+                                                        <div className="share-btn"> <WhatsApp /> Share link</div>
                                                     </button>
                                                 </a>
                                             </div>
@@ -967,8 +967,18 @@ const MainScout = () => {
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 Pending disbursal
                                             </div>
+                                            {/* <div className="text-center">
+                                                <a target="_blank" href={carddata.onboardingUrl}>
+                                                    <button className="carepay-button-card">
+                                                        <div className="share-btn">  <Download />&nbsp;Download D.A.</div>
+                                                    </button></a>
+                                            </div> */}
                                             <div className="text-center">
-                                                <a target="_blank" href={carddata.onboardingUrl}> <button className="carepay-button-card"><Download />&nbsp;Download D.A.</button></a>
+                                                <a target="_blank" href={carddata.onboardingUrl}>
+                                                    <button className="carepay-button-card">&nbsp;
+                                                        <div className="share-btn"> <Download />&nbsp;Download D.A.</div>
+                                                    </button>
+                                                </a>
                                             </div>
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
 
