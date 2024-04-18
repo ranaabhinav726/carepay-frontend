@@ -921,7 +921,8 @@ div.bottomPopOverModal {
   min-height: 100vh;
   overflow: clip;
 }
-.share-btn{
+
+.share-btn {
   display: flex;
   margin-left: auto;
   margin-right: auto;
@@ -1226,7 +1227,7 @@ input[type="number"]::-webkit-outer-spin-button {
       margin-right: auto;
       margin-top: 10px;
 
-  
+
       .Lefttext {
         h3 {
           font-size: 24px;
@@ -1258,6 +1259,7 @@ input[type="number"]::-webkit-outer-spin-button {
       margin-right: auto;
       width: 97%;
       margin-top: 10px;
+
       .topbox {
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
@@ -1531,7 +1533,13 @@ input[type="number"]::-webkit-outer-spin-button {
   max-width: 480px;
   width: 480px;
 }
-.text-center{
+
+.text-center {
   text-align: center;
 }
 
+.text-danger {
+  color: #FF0000;
+  font-size: 12px;
+  margin-top: 10px;
+}
