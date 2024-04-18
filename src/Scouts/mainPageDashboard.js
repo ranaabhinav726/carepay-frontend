@@ -852,44 +852,52 @@ const MainScout = () => {
                     {data.data.length > 0 && data.data && (data.data).map((carddata, i) => {
                         return (
                             <div className="txn-card">
-                                <div className="" style={{ fontSize: '14px' ,display:'flex'}}>
-                                    <img src={Amount} style={{ marginTop:'5px', width: '25px' }} />&nbsp;<div style={{marginTop:'8px'}}>{carddata.loanAmount}</div>
+                                <div className="" style={{ fontSize: '14px', display: 'flex' }}>
+                                    <img src={Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanAmount}</div>
                                 </div>
-                                <div className="" style={{ fontSize: '14px' ,display:'flex'}}>
-                                    <img src={Person} style={{ marginTop:'5px', width: '25px' }} />&nbsp;<div style={{marginTop:'8px'}}>{carddata.patientName}</div>
+                                <div className="" style={{ fontSize: '14px', display: 'flex' }}>
+                                    <img src={Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
                                 </div>
-                                <div className="" style={{ fontSize: '14px' ,display:'flex'}}>
-                                    <img src={Treatment} style={{ marginTop:'5px', width: '25px' }} />&nbsp;<div style={{marginTop:'8px'}}>{carddata.loanReason}</div>
+                                <div className="" style={{ fontSize: '14px', display: 'flex' }}>
+                                    <img src={Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
                                 </div>
-                                <div className="" style={{ fontSize: '14px' ,display:'flex'}}>
-                                    <img src={Doctor} style={{ marginTop:'5px', width: '25px' }} />&nbsp;<div style={{marginTop:'8px'}}>{carddata.clinicName}</div>
+                                <div className="" style={{ fontSize: '14px', display: 'flex' }}>
+                                    <img src={Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
                                 </div>
                                 <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied at&nbsp; {carddata.loanApplyDate}</p>
                                 <div>
 
                                     {carddata.type === 'Approved' ?
                                         <>
-                                            <div style={{ marginTop: '', fontSize: '12px' }}>Status:</div>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 Approved
                                             </div>
                                             <div className="text-center">
-                                                <a target="_blank" href={carddata.onboardingUrl}> <button className="carepay-button-card"><WhatsApp />&nbsp;Share link</button></a>
+                                                <a target="_blank" href={carddata.onboardingUrl}>
+                                                    <button className="carepay-button-card"><WhatsApp />&nbsp;
+                                                        Share link
+                                                    </button>
+                                                </a>
                                             </div>
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
                                         </>
                                         : ""}
                                     {carddata.type === 'Application' ?
-                                        <div className="text-center" style={{ background: '#D6F5FF', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
-                                            Application
-                                        </div>
+                                        <>
+
+                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
+                                            <div className="text-center" style={{ background: '#D6F5FF', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                                Application
+                                            </div>
+                                        </>
                                         : ""}
                                     {carddata.type === 'Under Review' ?
                                         <>
 
                                             <div className="d-flex w-100" style={{ width: '100%', display: 'flex' }}>
                                                 <div style={{ width: '50%' }}>
-                                                    <div style={{ marginTop: '', fontSize: '12px' }}>Status:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
                                                     <div className="text-center" style={{ width: '50%', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                         Under Review
                                                     </div>
@@ -897,7 +905,7 @@ const MainScout = () => {
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '', fontSize: '12px', marginLeft: '10px' }}>Expect decision by:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision by:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                         not in api
                                                     </div>
@@ -921,7 +929,7 @@ const MainScout = () => {
                                             <div style={{ background: '#FFEEE4', borderRadius: '5px', borderLeft: '4px solid #E4900A', fontSize: '12px', padding: '8px' }}>Bank Statement, ITR, Owned House Proof</div>
                                             <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '15px' }}>
                                                 <div style={{ width: '50%' }}>
-                                                    <div style={{ marginTop: '', fontSize: '12px' }}>Status:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
                                                     <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
                                                         Document Required
                                                     </div>
@@ -929,7 +937,7 @@ const MainScout = () => {
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '', fontSize: '12px', marginLeft: '10px' }}>Expect decision by:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision by:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                         not in api
                                                     </div>
@@ -945,7 +953,7 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'eSign & eMandate' ?
                                         <>
-                                            <div style={{ marginTop: '', fontSize: '12px' }}>Status:</div>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 eSign & eMandate
                                             </div>
@@ -955,7 +963,7 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'Pending disbursal' ?
                                         <>
-                                            <div style={{ marginTop: '', fontSize: '12px' }}>Status:</div>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 Pending disbursal
                                             </div>
