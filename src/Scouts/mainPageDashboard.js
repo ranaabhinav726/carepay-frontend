@@ -822,8 +822,8 @@ const MainScout = () => {
         <>
             <div className="over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '55px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
                 <div style={{ width: '100%', display: 'flex' }}>
-                    <div style={{ width: '40%', fontSize: '20px', marginTop: '5px' }}>All loans</div>
-                    <div className="text-center" style={{ width: '60%', background: '#ECEBFF', borderRadius: '5px', padding: '5px' }}>
+                    <div style={{ width: '40%', fontSize: '20px', marginTop: '5px', marginLeft: '10px' }}>All loans</div>
+                    <div className="text-center" style={{ width: '60%', background: '#ECEBFF', borderRadius: '5px', padding: '5px', marginRight: '10px' }}>
                         <div style={{ width: '100%', display: 'flex' }}>
                             <div style={{ width: '50%' }}><button onClick={() => settabType('overview')} style={{ width: '100%', background: tabType === 'overview' ? '#fff' : 'transparent', outline: 'none', padding: '5px 4px', border: 'none', borderRadius: '5px', color: tabType === 'overview' ? '#8f8dbd' : '#000', fontSize: '12px' }} className="">Overview</button></div>
                             <div style={{ width: '50%' }}><button onClick={() => settabType('txn')} style={{ width: '100%', background: tabType === 'txn' ? '#fff' : 'transparent', outline: 'none', padding: '5px 4px', border: 'none', borderRadius: '5px', color: tabType === 'txn' ? '#8f8dbd' : '#000', fontSize: '12px' }} className="">Transaction</button></div>
@@ -887,7 +887,7 @@ const MainScout = () => {
                                     {carddata.type === 'Under Review' ?
                                         <>
 
-                                            <div className="d-flex w-100">
+                                            <div className="d-flex w-100" style={{ width: '100%', display: 'flex' }}>
                                                 <div style={{ width: '50%' }}>
                                                     <div style={{ marginTop: '-10px', fontSize: '12px' }}>Status:</div>
                                                     <div className="text-center" style={{ width: '50%', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
@@ -919,7 +919,7 @@ const MainScout = () => {
                                             Document Required
                                         </div> */}
                                             <div style={{ background: '#FFEEE4', borderRadius: '5px', borderLeft: '4px solid #E4900A', fontSize: '12px', padding: '8px' }}>Bank Statement, ITR, Owned House Proof</div>
-                                            <div className="d-flex w-100 mt-3">
+                                            <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '15px' }}>
                                                 <div style={{ width: '50%' }}>
                                                     <div style={{ marginTop: '-10px', fontSize: '12px' }}>Status:</div>
                                                     <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
@@ -968,17 +968,17 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'Disbursed' ?
                                         <>
-                                        {carddata.utrNo?
-                                            <div className="w-100 d-flex">
-                                                <div style={{ color: '#00000066', fontSize: '12px' }} className="w-50">
-                                                    UTR : {carddata.utrNo}
+                                            {carddata.utrNo ?
+                                                <div className="w-100 d-flex" style={{ width: '100%', display: 'flex' }}>
+                                                    <div style={{ color: '#00000066', fontSize: '12px' }} className="w-50">
+                                                        UTR : {carddata.utrNo}
+                                                    </div>
+
+                                                    <div className="w-50" style={{ color: '#00000066', fontSize: '12px', textAlign: 'right' }}>
+                                                        <CopyAll onClick={() => copyText(carddata.utrNo)} />&nbsp;Copy
+                                                    </div>
                                                 </div>
-                                                
-                                                <div className="w-50" style={{ color: '#00000066', fontSize: '12px', textAlign: 'right' }}>
-                                                    <CopyAll onClick={() => copyText(carddata.utrNo)} />&nbsp;Copy
-                                                </div>
-                                            </div>
-                                            :""}
+                                                : ""}
                                             <div className="approved-div" style={{ background: '#857FC2' }}><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Disbursed at {carddata.disberseDate}</div>
                                         </>
                                         : ""}
@@ -994,60 +994,60 @@ const MainScout = () => {
 
                 </div>
                 : ""}
-            {tabType === 'overview' ?
+            {/* {tabType === 'overview' ?
                 <OverviewUi handlefilters={handlefilters} filter={filter} setfilter={setfilter} />
-                : ""}
-{
-          filter === 'scouts' ?
+                : ""} */}
+            {
+                filter === 'scouts' ?
 
-          <div className="over-view-component background-blur">
-            <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'scouts' ? 'show' : ''}`}>
-              <div className="filterscout">
-                <div className="filterbox">
-                  <h5>Scouts</h5>&nbsp;<span><IoMdClose onClick={() => setfilter('')} className="closeicon" /></span>
-                </div>
-                <div className="checkboxes">
-                  <div class="mb-3 form-check checkboxgrp">
-                    <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
-                    <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
-                  </div>
-                  <div class="mb-3 form-check checkboxgrp">
-                    <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
-                    <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
-                  </div>
-                </div>
-                <div className="row filter-btn">
-                  <button className='apply-filter'>Apply Filter</button>
-                </div>
-              </div>
-            </div>
-            </div>
-            : filter === 'amount' ?
-            <div className="over-view-component background-blur">
+                    <div className="over-view-component background-blur">
+                        <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'scouts' ? 'show' : ''}`}>
+                            <div className="filterscout">
+                                <div className="filterbox">
+                                    <h5>Scouts</h5>&nbsp;<span><IoMdClose onClick={() => setfilter('')} className="closeicon" /></span>
+                                </div>
+                                <div className="checkboxes">
+                                    <div class="mb-3 form-check checkboxgrp">
+                                        <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
+                                        <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
+                                    </div>
+                                    <div class="mb-3 form-check checkboxgrp">
+                                        <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
+                                        <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
+                                    </div>
+                                </div>
+                                <div className="row filter-btn">
+                                    <button className='apply-filter'>Apply Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    : filter === 'amount' ?
+                        <div className="over-view-component background-blur">
 
-              <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'amount' ? 'show' : ''}`}>
-                <div className="filterscout">
-                  <div className="filterbox">
-                    <h5>Amount</h5>&nbsp;<span><IoMdClose onClick={() => setfilter('')} className="closeicon" /></span>
-                  </div>
-                  <div className="inputsamount">
-                    <div className="inputboxes">
-                      <label htmlFor="minamount" className='iconruppee'>₹</label>
-                      <input type="number" name="" className='amount' id='minamount' placeholder='Minimum amount' min='0' />
-                    </div>
-                    <h5>TO</h5>
-                    <div className="inputboxes">
-                      <label htmlFor="maxamount" className='iconruppee'>₹</label>
-                      <input type="number" name="" className='amount' id='maxamount' placeholder='Maximum amount' min='0' />
-                    </div>
-                  </div>
-                  <div className="row filter-btn">
-                    <button className='apply-filter'>Apply Filter</button>
-                  </div>
-                </div>
-              </div>
-              </div>
-              : ''}
+                            <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'amount' ? 'show' : ''}`}>
+                                <div className="filterscout">
+                                    <div className="filterbox">
+                                        <h5>Amount</h5>&nbsp;<span><IoMdClose onClick={() => setfilter('')} className="closeicon" /></span>
+                                    </div>
+                                    <div className="inputsamount">
+                                        <div className="inputboxes">
+                                            <label htmlFor="minamount" className='iconruppee'>₹</label>
+                                            <input type="number" name="" className='amount' id='minamount' placeholder='Minimum amount' min='0' />
+                                        </div>
+                                        <h5>TO</h5>
+                                        <div className="inputboxes">
+                                            <label htmlFor="maxamount" className='iconruppee'>₹</label>
+                                            <input type="number" name="" className='amount' id='maxamount' placeholder='Maximum amount' min='0' />
+                                        </div>
+                                    </div>
+                                    <div className="row filter-btn">
+                                        <button className='apply-filter'>Apply Filter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        : ''}
 
         </>
     )
