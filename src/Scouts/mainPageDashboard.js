@@ -968,14 +968,17 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'Disbursed' ?
                                         <>
+                                        {carddata.utrNo?
                                             <div className="w-100 d-flex">
                                                 <div style={{ color: '#00000066', fontSize: '12px' }} className="w-50">
                                                     UTR : {carddata.utrNo}
                                                 </div>
+                                                
                                                 <div className="w-50" style={{ color: '#00000066', fontSize: '12px', textAlign: 'right' }}>
                                                     <CopyAll onClick={() => copyText(carddata.utrNo)} />&nbsp;Copy
                                                 </div>
                                             </div>
+                                            :""}
                                             <div className="approved-div" style={{ background: '#857FC2' }}><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Disbursed at {carddata.disberseDate}</div>
                                         </>
                                         : ""}

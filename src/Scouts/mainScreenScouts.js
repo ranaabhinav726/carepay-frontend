@@ -47,7 +47,7 @@ const MainScouts = () => {
                     </div>
                 </div>
                 <div className="text-center">
-                    <img src={ImageMain} style={{ width: '70%', marginTop: windowHeight < 768 ? '50%' : '20%' }} />
+                    <img src={ImageMain} style={{ width: '70%', marginTop: windowHeight < 768 ? '20%' : '10%' }} />
                 </div>
             </div>
         </div>
