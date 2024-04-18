@@ -98,7 +98,7 @@ export default function FibePrescriptionUpload(){
             if(res.status === 200){
                 setScreenState("Submitted");
                 setTimeout(()=>{
-                    navigate("/patient/fibeBasicDetails");
+                    navigate("/patient/fibeBasicDetails"); // Prescription module is being removed from the flow, so "credit details" screen will now directly point to "fibeBasicDetails" screen
                 }, 2000)
             }
         }).catch(e=>console.warn(e));
