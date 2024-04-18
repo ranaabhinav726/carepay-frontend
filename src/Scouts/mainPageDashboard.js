@@ -3,7 +3,7 @@ import Amount from './imagesscouts/rupee.png'
 import Person from './imagesscouts/person.png'
 import Treatment from './imagesscouts/treatment.png'
 import Doctor from './imagesscouts/doctor.png'
-import { CopyAll, Download, WhatsApp } from "@mui/icons-material";
+import { CopyAll, Download, WarningAmberRounded, WhatsApp } from "@mui/icons-material";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useNavigate } from "react-router-dom";
 import routes from "../layout/Routes";
@@ -11,7 +11,11 @@ import { getDoctorDataById, getParentDoctorDataById, getParentSCoutDataById, get
 import OverviewUi from './overview'
 import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import WhatsappImage from './imagesscouts/whatsapp.png'
+import Alertimage from './imagesscouts/Vector (31).png'
+import GREY1 from './imagesscouts/rupeegrey.png'
+import GREY2 from './imagesscouts/grey1.png'
+import GREY3 from './imagesscouts/grey2.png'
+import GREY4 from './imagesscouts/grey3.png'
 const MainScout = () => {
 
     const [tabType, settabType] = useState('txn')
@@ -853,16 +857,16 @@ const MainScout = () => {
                         return (
                             <div className="txn-card">
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanAmount}</div>
+                                    <img src={carddata.type == 'Rejected'||carddata.type==='Expired'?GREY1:Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanAmount}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
+                                    <img src={carddata.type == 'Rejected'||carddata.type==='Expired'?GREY2:Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
+                                    <img src={carddata.type == 'Rejected'||carddata.type==='Expired'?GREY3:Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
+                                    <img src={carddata.type == 'Rejected'||carddata.type==='Expired'?GREY4:Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
                                 </div>
                                 <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied at&nbsp; {carddata.loanApplyDate}</p>
                                 <div>
@@ -874,7 +878,8 @@ const MainScout = () => {
                                                 Approved
                                             </div>
                                             <div className="text-center">
-                                                <a target="_blank" href={carddata.onboardingUrl}>
+                                                <a target="_blank" href={carddata.onboardingUrl} 
+                                                >
                                                     <button className="carepay-button-card">&nbsp;
                                                         <div className="share-btn"> <WhatsApp /> Share link</div>
                                                     </button>
@@ -998,6 +1003,16 @@ const MainScout = () => {
                                                 </div>
                                                 : ""}
                                             <div className="approved-div" style={{ background: '#857FC2' }}><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Disbursed at {carddata.disberseDate}</div>
+                                        </>
+                                        : ""}
+                                    {carddata.type == 'Rejected' || carddata.type == 'Rejected' ?
+                                        <>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Rejected </div>
+                                        </>
+                                        : ""}
+                                         {carddata.type == 'Expired' || carddata.type == 'Expired' ?
+                                        <>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Expired </div>
                                         </>
                                         : ""}
 
