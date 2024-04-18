@@ -17,6 +17,7 @@ export default function FibeEmploymentDetails(){
 
     const [empType, setEmpType] = useState("");
     const [salary, setSalary] = useState("");
+    const [salaryErr, setSalaryErr] = useState(false);
     const [officePincode, setOfficePincode] = useState("");
     const [city, setCity] = useState("");
 
@@ -61,6 +62,11 @@ export default function FibeEmploymentDetails(){
     }
 
     function salaryError(){
+        setSalaryErr(true);
+        setTimeout(()=>{
+            setSalaryErr(false);
+        }, 3000)
+
         let elem = document.getElementById('salary');
         if(elem) showErrorOnUI(elem);
         return;
@@ -180,9 +186,12 @@ export default function FibeEmploymentDetails(){
                 setValue={setSalary}
                 styles={{
                     marginTop:"12px", 
-                    border:"0"
+                    border:"0",
+                    marginBottom:"12px"
                 }}
             />
+            
+            {salaryErr && <span id="salaryError" style={{color:"red"}}>Please enter your monthly in-hand income.</span>}
 
             <InputBoxLabel label='Workplace pincode' styles={{marginTop:"24px"}} />
             <InputBox

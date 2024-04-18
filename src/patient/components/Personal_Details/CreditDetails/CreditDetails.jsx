@@ -275,11 +275,15 @@ const CreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     if(! number) return;
 
-                    if(amount > 100000){
-                        navigate('/patient/PrescriptionUpload');
-                    }else{
-                        navigate('/patient/PersonalDetails');
-                    }
+                    navigate('/patient/PersonalDetails');
+
+                    // if(amount > 100000){
+                    //     navigate('/patient/PrescriptionUpload');
+                    // }else{
+                    //     navigate('/patient/PersonalDetails');
+                    // }
+
+                    // Below code belongs to ICICI flow, if below API responds ok, then user enter the ICICI flow.
                     // preEligibility(number, res=>{
                     // if(res?.data?.data?.status === 1){
                     //     let data = res?.data?.data?.data;

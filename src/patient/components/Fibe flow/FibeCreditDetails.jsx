@@ -368,8 +368,12 @@ export default function FibeCreditDetails(){
                     //     navigate('/patient/fibePrescriptionUpload');
                     //     setWaiting(false);
                     // }, 3000);
+// 
 
-                    navigate('/patient/fibePrescriptionUpload');
+                    navigate('/patient/fibeBasicDetails');
+                    // Prescription module is being removed from the flow, so this screen will now directly point to "fibeBasicDetails" screen
+                    // effectively bypassing prescription module
+                    // navigate('/patient/fibePrescriptionUpload');
                     
                     }else{
                     // setErrorMsg()
