@@ -1,15 +1,25 @@
 import { Header } from "./Comps/Header";
 import SearchingDoc from '../../assets/GIFs/Document in process.gif'
 import NoteText from "./Comps/NoteText";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { env } from "../../environment/environment";
-export default function Screen9(){
+
+export default function FibeCheckingStatus(){
 
     const navigate = useNavigate();
+    // const location = useLocation();
+    // console.log(location.state);
+    // let leadStatus = location?.state?.data?.leadStatus;
+    // let sanctionAmount = location?.state?.data?.sanctionData?.sanctionMaxLimit || 0;
+    // let bitlyUrl = location?.state?.data?.bitlyUrl;
+
     let timerId;
+
     let userId = localStorage.getItem("userId");
+
+    
 
     useEffect(()=>{
         if(!! userId){
@@ -76,7 +86,7 @@ export default function Screen9(){
                         navigate("/patient/fibeWaitingForApproval")
                     }
                 }).catch(error=>{
-                    navigate("/patient/fibeWaitingForApproval")
+                    navigate(-1)
                     console.warn(error)
                 })
             }else{
@@ -93,18 +103,16 @@ export default function Screen9(){
         return ()=> clearTimeout(timerId);
     },[userId])
 
-    // const navigate = useNavigate();
-    // setTimeout(() => {
-    //     navigate('/patient/screen10')
-    // }, 3000);
+    
+
     return(
         <main className="screenContainer">
             <Header progressBar="hidden" />
             <div style={{display:"flex", placeContent:"center", marginTop:"3rem"}}>
                 <img src={SearchingDoc} alt="" style={{width:"50%"}} />
             </div>
-            <NoteText text="Sit back and relax!" styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
-            <NoteText text="while we assess your credit application..." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
+            <NoteText text="Checking status..." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} />
+            {/* <NoteText text="while we assess your credit application..." styles={{textAlign:"center", color:"#000000CC", fontSize:"16px", lineHeight:"20px"}} /> */}
         </main>
     )
 }

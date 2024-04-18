@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import ScreenTitle from "./Comps/ScreenTitle";
 
 
-export default function Screen3(){
+export default function FibeNumberVerified(){
 
     const navigate = useNavigate();
     let timerId = setTimeout(() => {

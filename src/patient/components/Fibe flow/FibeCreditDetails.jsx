@@ -15,7 +15,7 @@ import { env } from "../../environment/environment";
 import AutocompleteInput from "../utility/SuggestionInputBox/SuggestionInputBox";
 import './styles.scss'
 
-export default function Screen5(){
+export default function FibeCreditDetails(){
 
     const [creditAmt, setCreditAmount] = useState("");
     const [loanReason, setLoanReason] = useState("");
@@ -293,12 +293,14 @@ export default function Screen5(){
                         if(data?.doctorId) setDoctorId(data?.doctorId);
 
                         let treatmentName = data?.loanReason;
-                        if(allTreatmentList.includes(treatmentName)){
-                            setLoanReason(data.loanReason);
-                        }else{
-                            console.log("other treatment")
-                            setLoanReason("Other");
-                            setOtherTreatment(treatmentName)
+                        if(treatmentName){
+                            if(allTreatmentList.includes(treatmentName)){
+                                setLoanReason(data.loanReason);
+                            }else{
+                                // console.log("other treatment")
+                                setLoanReason("Other");
+                                setOtherTreatment(treatmentName)
+                            }
                         }
                     }
                 }

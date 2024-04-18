@@ -5,7 +5,7 @@ import { MdOutlineElectricBolt } from 'react-icons/md'
 import './styles.scss'
 import { useNavigate } from "react-router-dom";
 import Confetti from '../../assets/GIFs/confetti.gif'
-export default function Screen15(){
+export default function FibeCongratsUser(){
 
     // const [amount, setAmount] = useState(55000);
     // const [creditId, setCreditId] = useState("XXXXXXXXXX")

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { env } from "../../environment/environment";
 
-export default function Screen14(){
+export default function FibeUserFallback(){
 
     const navigate = useNavigate();
     const params = useParams();

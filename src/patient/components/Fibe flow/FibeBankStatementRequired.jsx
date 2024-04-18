@@ -2,7 +2,7 @@ import { Header } from "./Comps/Header";
 import Waiting from '../../assets/fibeWaiting.svg'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function Screen12sub1(){
+export default function FibeBankStatementRequired(){
 
     const navigate = useNavigate();
     const location = useLocation();
