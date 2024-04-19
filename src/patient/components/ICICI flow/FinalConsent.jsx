@@ -3,7 +3,6 @@ import StepBar from "./comps/StepBar"
 
 import './FinalConsent.scss'
 
-import OTPChars from '../../assets/OTPChars.svg'
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios"
@@ -12,89 +11,35 @@ import { confirmUser, downloadKfs, validateUser } from "./apis"
 import InputBox from "./comps/InputBox"
 import Timer from "../EnterOTP/Timer"
 
+import { RiDeleteBin6Fill } from "react-icons/ri";
+
+import { Worker } from "@react-pdf-viewer/core";
+import { Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+
 function FinalConsent(){
 
     const location = useLocation();
     let data = location?.state?.data;
     console.log(data)
 
-    const [otpSent, ] = useState(true);
     const [number, ] = useState(Number(data?.number));
 
     const [loanAmt, ] = useState(Number(data?.loanAmount));
+    const [tenure, ] = useState(Number(data?.loanTenure));
+    let emiAmount = Number(loanAmt/tenure);
     const [otp, setOtp] = useState("");
     const [doctorName, setDoctorName] = useState("");
     const [consent, setConsent] = useState(false);
+
+    const [kfsUrl, setKfsUrl] = useState("ff");
 
     const [canResendOtp, setCanResendOtp] = useState(false);
     function allowOtpResend(){
         setCanResendOtp(true);
     }  
 
-    const navigate = useNavigate();
-    // const handleOTP = (e) => {
-    //     const inputValue = e.target.value;
-    
-    //     if (!/^\d?$/.test(inputValue)) {
-    //       // If input is not empty or not a digit, reset the input value
-    //       e.target.value = '';
-    //       return;
-    //     }
-    
-    //     const inputBox = e.target.id.charAt(6) * 1;
-    //     const prev = 'digit-' + (inputBox - 1);
-    //     const next = 'digit-' + (inputBox + 1);
-    
-    //     if (e.key === 'Backspace') {
-    //       // Backspace is pressed
-    //       if (inputValue === '' && inputBox > 1) {
-    //         // Empty current input box and shift focus to the previous one
-    //         e.preventDefault(); // Prevent the default backspace behavior (going back in history)
-    //         document.getElementById(prev).focus();
-    //       } else if (inputValue === '' && inputBox === 1) {
-    //         // Empty current input box and focus remains on the first box
-    //         e.preventDefault(); // Prevent the default backspace behavior (going back in history)
-    //       } else if (inputBox > 1) {
-    //         // Non-empty input box, so clear it and shift focus to the previous one
-    //         e.preventDefault(); // Prevent the default backspace behavior (going back in history)
-    //         e.target.value = '';
-    //         // document.getElementById(prev).focus();
-    //       }
-    //     } else if (/^\d$/.test(inputValue) && inputBox < 4) {
-    //       // Valid digit input, and the current input box is not the last one
-    //       document.getElementById(next).focus();
-    //     }
-    // };
-
-    // const handlePaste = (e) => {
-    // const pastedData = e.clipboardData?.getData('text/plain');
-    // if (!pastedData) {
-    //     // Fallback: if clipboardData is not available, try getting the pasted content from the event value
-    //     const pastedDataFallback = e.target.value;
-    //     const digits = pastedDataFallback.match(/\d/g);
-    //     if (digits && digits.length === 4) {
-    //     const inputBoxes = document.querySelectorAll('[id^=digit-]');
-    //     for (let i = 0; i < Math.min(digits.length, inputBoxes.length); i++) {
-    //         inputBoxes[i].value = digits[i];
-    //         if (i < inputBoxes.length - 1) {
-    //         inputBoxes[i].dispatchEvent(new Event('input', { bubbles: true }));
-    //         }
-    //     }
-    //     }
-    // } else {
-    //     const digits = pastedData.match(/\d/g);
-    //     if (digits && digits.length === 4) {
-    //     const inputBoxes = document.querySelectorAll('[id^=digit-]');
-    //     for (let i = 0; i < Math.min(digits.length, inputBoxes.length); i++) {
-    //         inputBoxes[i].value = digits[i];
-    //         if (i < inputBoxes.length - 1) {
-    //         inputBoxes[i].dispatchEvent(new Event('input', { bubbles: true }));
-    //         }
-    //     }
-    //     }
-    // }
-    // e.preventDefault();
-    // };
+    const navigate = useNavigate(); 
 
     let userId = localStorage.getItem("userId");
 
@@ -137,27 +82,28 @@ function FinalConsent(){
         })
     }
 
-    // useEffect(()=>{
-    //     document.getElementById('digit-1').focus()
-    // },[])
+    function showOtpEror(){
+        let elem = document.getElementById("error");
+        if(elem) elem.style.display = "block";
+        
+        setTimeout(() => {
+            if(elem) elem.style.display = "none";
+        }, 3000);
+    }
+
 
     function handleSubmit(){
-        // let otp = "";
-        // let digit1 = document.getElementById('digit-1').value;
-        // let digit2 = document.getElementById('digit-2').value;
-        // let digit3 = document.getElementById('digit-3').value;
-        // let digit4 = document.getElementById('digit-4').value;
-
-        // otp = digit1 + digit2 + digit3 + digit4;
 
         if(otp.toString().length < 6){
+            showOtpEror()
             return;
         }
 
         let pInstId = data?.pInstId;
         showWaitingModal();
         validateUser(otp, data.txnId, pInstId, (res)=>{
-            console.log(res?.data?.data?.status)
+            // console.log(res?.data?.data?.errorMessage)
+            if(res?.data?.data?.errorMessage === "Invalid OTP.") showOtpEror();
             if(res?.data?.data?.status === 1){
                 let loanAmount = data?.loanAmount;
                 let tenure = data?.loanTenure;
@@ -176,69 +122,100 @@ function FinalConsent(){
     }
 
     function downloadAndSaveKfs(){
-        downloadKfs(userId, hideWaitingModal, ()=>{})
+        if(consent){
+            setConsent(false);
+            return;
+        }
+
+        downloadKfs(userId, hideWaitingModal, (url)=>{
+            if(url){
+                setKfsUrl(url);
+            }
+        });
     }
 
     return(
-        <main style={{display: "flex", flexDirection:"column", gap:"1rem"}}>
+        <main style={{display: "flex", flexDirection:"column", gap:"1rem", position:"relative"}}>
             <Header progressbarDisplay='none' />
             <StepBar currStep={3} />
 
-            { !otpSent ? 
-                <>
-                    <h3 style={{margin:"1rem 0"}}>Final consent</h3>
-                    <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
-                        ICICI will send an OTP on your registered mobile number. This OTP will help us disburse the credit amount to the doctorName.
-                    </div>
-                    <div style={{width:"100%", display:'flex', justifyContent:"center"}}>
-                        <img src={OTPChars} alt="" />
-                    </div>
-                    <button className="submit">Send OTP</button>
-                </> 
+            <h3 style={{margin:"1rem 0"}}>Accept your credit & tenure</h3>
+
+            <div style={{background:"#EBFEED", borderRadius:"4px", padding:"1rem"}}>
+                <div style={{display:"flex", flexDirection:"column", gap:"8px", marginBottom:"1rem"}}>
+                    <span style={{color:"rgba(0,0,0,0.8)", fontSize:"14px"}}>Loan Amount</span>
+                    <span style={{fontSize:"18px", fontWeight:"700"}}>₹ {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                </div>
+                {/* <div></div> */}
+                <div style={{width:"50%",display:"inline-flex", flexDirection:"column", gap:"8px"}}>
+                    <span style={{color:"rgba(0,0,0,0.8)", fontSize:"14px"}}>Tenure</span>
+                    <span style={{fontSize:"18px", fontWeight:"700"}}>{tenure} months</span>
+                </div>
+                <div style={{width:"50%",display:"inline-flex", flexDirection:"column", gap:"8px"}}>
+                    <span style={{color:"rgba(0,0,0,0.8)", fontSize:"14px"}}>EMI Amount</span>
+                    <span style={{fontSize:"18px", fontWeight:"700"}}>₹ {emiAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                </div>
+            </div>
+
+            <p>
+                ICICI Bank has sent an OTP on your registered mobile number. By submitting the OTP you accept the credit terms with your bank and convert the credit amount into monthly EMIs.  
+            </p>
+
+            <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", fontWeight:"700", marginTop:"1.5rem"}}><span>Enter OTP sent to</span> <span>+91 {number}</span></div>
+            <div className="number-group">
+                <InputBox
+                    type="number"
+                    length={6}
+                    value={otp}
+                    setValue={setOtp}
+                    placeholder="______"
+                    styles={{
+                        letterSpacing : "10px"
+                    }}
+                />
+                <p id="error">Please enter correct OTP</p>
+            </div>
+
+            <div style={{width:"100%", display:"flex", justifyContent:"flex-end", margin:"1rem 0"}}>
+                {canResendOtp ? 
+                    <p onClick={()=>{reSendOtp()}} style={{color:"#514C9F", fontWeight:"700", cursor:"pointer"}}>Resend OTP</p>
                 :
-                <>
-                    <p style={{marginTop:"1.5rem"}}>Enter OTP sent to +91 {number} by ICICI</p>
-                    <div className="number-group">
-                        {/* <div className="otpInputGroup">
-                            <input className="otpDigit" id="digit-1" onInput={handleOTP} onPaste={handlePaste} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
-                            <input className="otpDigit" id="digit-2" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
-                            <input className="otpDigit" id="digit-3" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
-                            <input className="otpDigit" id="digit-4" onInput={handleOTP} onKeyDown={handleOTP} type="text" maxLength={1} inputMode="numeric" placeholder="-" />
-                        </div> */}
-                        <InputBox 
-                            type="number"
-                            length={6}
-                            value={otp}
-                            setValue={setOtp}
-                            placeholder="______"
-                            styles={{
-                                letterSpacing : "10px"
-                            }}
-                        />
-                        <p id="error">Please enter correct OTP</p>
-                    </div>
+                    <span >Resend OTP in <Timer seconds={45} onTimerEnd={allowOtpResend} /></span>
+                }
+            </div>
 
-                    <div style={{width:"100%", display:"flex", justifyContent:"flex-end", margin:"1rem 0"}}>
-                        {canResendOtp ? 
-                            <p onClick={()=>{reSendOtp()}} style={{color:"#514C9F", fontWeight:"700", cursor:"pointer"}}>Resend OTP</p>
-                        :
-                            <span >Resend OTP in <Timer seconds={45} onTimerEnd={allowOtpResend} /></span>
-                        }
-                    </div>
-                    
-                    <div style={{background:"#FAE1CD", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
-                        Note : By submitting OTP, amount ₹ {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})} will be transferred to doctor{doctorName? ` ${doctorName}'s` : "'s"} account.
-                    </div>
-
-                    <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-                        <input value={consent} onClick={()=>setConsent(!consent)} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
-                        <label htmlFor="kfsConsentCheckbox" style={{userSelect:"none"}}>I agree to the <span onClick={()=>downloadAndSaveKfs()} style={{color:"#000000", fontWeight:"600", textDecoration:"underline", cursor:"pointer"}}>Key fact Statement</span></label>
-                    </div>
-                    <button className={"submit" + (!consent?" disabled" : "")} onClick={()=>handleSubmit()}>Submit OTP</button>
-                </>
-            }
+            <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
+                <input checked={consent} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
+                <label htmlFor="kfsConsentCheckbox" onClick={()=>downloadAndSaveKfs()} style={{userSelect:"none"}}>I agree to the <span style={{color:"#000000", fontWeight:"600", textDecoration:"underline", cursor:"pointer"}}>Key fact Statement</span></label>
+            </div>
+            <button className={"submit" + (!consent?" disabled" : "")} onClick={()=>handleSubmit()}>Submit OTP</button>
+            {kfsUrl && <FileViewerModal url={kfsUrl} setUrl={setKfsUrl} setConsent={setConsent} />}
         </main>
     )
 }
 
 export default FinalConsent
+
+function FileViewerModal({url, setUrl, setConsent}){  
+    console.log(url);
+
+    function handleAcceptButtonClick(){
+        setConsent(true);
+        setUrl(null);
+    }
+    return(
+        <div style={{position:"absolute", left:"0", top:"0", width:"100%", height:"100%", background:"rgba(0,0,0,0.4)", zIndex:"10", padding:"1rem 0.5rem"}}>
+            <div style={{borderRadius:"12px", background:"white", padding:"0.5rem", display:"flex", flexDirection:"column", alignItems:"center"}}>
+                <div onClick={()=>{setUrl(null)}} style={{position:"absolute", margin:"5px", right:"18px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer", zIndex:"1"}}>
+                    <RiDeleteBin6Fill style={{fontSize:"20px", color:"#DB4E4E"}} />
+                </div>
+                <div style={{borderRadius:"8px", overflow:"clip", width:"100%", height:"80vh"}}>
+                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                        <Viewer fileUrl={url} />
+                    </Worker>
+                </div>
+                <button onClick={()=>handleAcceptButtonClick()} className="submit">Accept</button>
+            </div>
+        </div>
+    )
+}

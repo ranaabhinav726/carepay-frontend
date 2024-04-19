@@ -275,7 +275,7 @@ const CreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     if(! number) return;
 
-                    navigate('/patient/PersonalDetails');
+                    // navigate('/patient/PersonalDetails');
 
                     // if(amount > 100000){
                     //     navigate('/patient/PrescriptionUpload');
@@ -284,20 +284,20 @@ const CreditDetails = () => {
                     // }
 
                     // Below code belongs to ICICI flow, if below API responds ok, then user enter the ICICI flow.
-                    // preEligibility(number, res=>{
-                    // if(res?.data?.data?.status === 1){
-                    //     let data = res?.data?.data?.data;
-                    //     console.log(data);
+                    preEligibility(number, res=>{
+                    if(res?.data?.data?.status === 1){
+                        let data = res?.data?.data?.data;
+                        console.log(data);
 
-                    //     navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
-                    // }else{
-                    //     if(amount > 100000){
-                    //         navigate('/patient/PrescriptionUpload');
-                    //     }else{
-                    //         navigate('/patient/PersonalDetails');
-                    //     }
-                    // }
-                    // })
+                        navigate("/patient/congratsPreApprovedIcici", {state : {"offer":data}})
+                    }else{
+                        if(amount > 100000){
+                            navigate('/patient/PrescriptionUpload');
+                        }else{
+                            navigate('/patient/PersonalDetails');
+                        }
+                    }
+                    })
                 }else{
                     // setErrorMsg()
                     apiErrorHandler();

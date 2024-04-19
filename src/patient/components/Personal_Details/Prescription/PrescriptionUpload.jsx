@@ -1,10 +1,6 @@
 import Header from "../../Header/Header";
-import { FaRegFileAlt } from "react-icons/fa";
-import { MdRemoveRedEye } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
 import PrescriptionImg from '../../../assets/prescription.svg'
 import { useEffect, useRef, useState } from "react";
-import { IoIosClose } from "react-icons/io";
 import lottie from "lottie-web";
 import animationData from '../../../assets/GIFs/Comp 1.json'
 import axios from "axios";
