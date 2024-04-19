@@ -957,7 +957,7 @@ function ICICITermsAndConditionsContent() {
             {" "}
             The basis of classification of SMA category shall be as follows:{" "}
           </p>
-          <img src={Table1} alt="" />
+          <img src={Table1} alt="" style={{maxWidth:"100%"}} />
           <p>Non-performing Asset- NPA is a loan or an advance where:</p>
           <ol style={{ listStyleType: "lower-alpha" }}>
             <li>
@@ -972,7 +972,7 @@ function ICICITermsAndConditionsContent() {
               upgradation to standard category at day end process:
             </strong>
           </p>
-          <img src={Table2} alt="" />
+          <img src={Table2} alt="" style={{maxWidth:"100%"}} />
         </div>
       </section>
     </div>
