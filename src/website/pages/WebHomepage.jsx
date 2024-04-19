@@ -4,6 +4,10 @@ import HeroImg from '../assets/Hero animation 2-min.gif'
 import FinanceImg from '../assets/Finance.webp'
 import FloatingButton from '../Components/FloatingButton'
 
+import I2ILogo from '../assets/i2i logo.svg'
+import CreditFairLogo from '../assets/Creditfair logo 1.svg'
+import LiquiLoansLogo from '../assets/Liquiloans logo 1.svg'
+
 import { handleContactScroll } from '../Components/utility'
 
 
@@ -57,6 +61,7 @@ function WebHomepage(){
             <Operations />
             <HowItWorks />
             <HealthcareFinance />
+            <LendingPartners />
             {/* <Reviews /> */}
             <Articles />
             <Branding />
@@ -268,6 +273,20 @@ function HealthcareFinance(){
             </div>
         </section>
         </>
+    )
+}
+
+function LendingPartners(){
+
+    return(
+        <section className='lending-partners'>
+            <h4>Our lending partners</h4>
+            <div className="container">
+                <img src={I2ILogo} alt="" />
+                <img src={CreditFairLogo} alt="" />
+                <img src={LiquiLoansLogo} alt="" />
+            </div>
+        </section>
     )
 }
 
@@ -625,6 +644,7 @@ export function Footer(){
                             <Link to={"/privacyPolicy"}>Privacy Policy</Link>
                             <Link to={"/patient"}>For Patients</Link>
                             <Link to={"/doctor"}>For Doctors</Link>
+                            <Link to={"/lendingPartners"}>Our lending partners</Link>
                         </div>
                         <div className="contact-us">
                             <h5>Contact us</h5>
