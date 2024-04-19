@@ -245,11 +245,11 @@ export default function Scoutoverview({ filter, setfilter }) {
                 <div className="box">
                   <div className="topbox">
                     <h3>Potential <br></br> Captured</h3>
-                    <h5>33%</h5>
+                    <h5>NA</h5>
                   </div>
                   <div className="bottombox">
                     <h3>Company <br></br> average</h3>
-                    <h5>66%</h5>
+                    <h5>NA</h5>
                   </div>
                 </div>
               </div>

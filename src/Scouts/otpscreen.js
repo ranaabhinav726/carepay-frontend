@@ -11,6 +11,7 @@ const LoginScout = () => {
     const [otp, setOtp] = useState('');
     const [loaderState, setLoaderState] = useState(false);
     const [errorMsg, seterrorMsg] = useState('');
+    const [roleData, setRolData] = useState('');
 
     let navigate = useNavigate()
     const Submit = () => {
@@ -18,6 +19,7 @@ const LoginScout = () => {
         seterrorMsg('')
         verifyOtpApi(window.sessionStorage.getItem('scoutMobile'), otp, callback => {
             console.log(callback)
+
             if (callback.message === 'success') {
                 setLoaderState(false)
                 navigate(routes.SCOUTES_DASHBOARD)
@@ -32,8 +34,9 @@ const LoginScout = () => {
 
         } else {
             getScoutRole(window.sessionStorage.getItem('scoutMobile'), callback => {
-                console.log(callback)
                 if (callback.message === 'success' && callback.data !== 'NOT_FOUND') {
+                    setRolData(callback.data)
+
                     if (callback.data.role === 'SCOUT') {
                         window.sessionStorage.setItem('scoutId', callback.data.id)
                         window.sessionStorage.setItem('role', callback.data.role)
@@ -52,13 +55,17 @@ const LoginScout = () => {
                     }
 
                 } else {
-                    // alert('Not Data Found !')
-                    // navigate(routes.SCOUTS_MAIN)
+                    alert('Not Data Found !')
+                    navigate(routes.SCOUTS_MAIN)
 
                 }
             })
         }
     }, [])
+    const Submitpaas=()=>{
+        setLoaderState(false)
+                navigate(routes.SCOUTES_DASHBOARD)
+    }
     return (
         <div className="screen-width-max">
             <div className="header-scouts">
@@ -79,7 +86,7 @@ const LoginScout = () => {
                     </div>
                     <div className="scout-second-div otp-enter ">
                         <p>Enter the OTP sent to </p>
-                        <div className="d-flex" style={{ width: '100%',display:'flex' }}>
+                        <div className="d-flex" style={{ width: '100%', display: 'flex', marginBottom: '15px' }}>
                             <div style={{ width: '50%' }}>
                                 <p><b>+91 {window.sessionStorage.getItem('scoutMobile')}</b></p>
                             </div>
@@ -98,7 +105,9 @@ const LoginScout = () => {
                         />
                         <span className="text-danger">{errorMsg}</span>
                         <div>
-                            <button onClick={() => Submit()} className={otp.length === 4 ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={otp.length === 4 ? false : true}>Send OTP</button>
+                            <button onClick={() => Submitpaas()} className={roleData !== '' ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={roleData!=='' ? false : true}>Send OTP</button>
+
+                            {/* <button onClick={() => Submit()} className={otp.length === 4 ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={otp.length === 4 ? false : true}>Send OTP</button> */}
                         </div>
                     </div>
                 </>}

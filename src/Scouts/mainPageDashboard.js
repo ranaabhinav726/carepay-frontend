@@ -3,7 +3,7 @@ import Amount from './imagesscouts/rupee.png'
 import Person from './imagesscouts/person.png'
 import Treatment from './imagesscouts/treatment.png'
 import Doctor from './imagesscouts/doctor.png'
-import { CopyAll, Download, WhatsApp } from "@mui/icons-material";
+import { Call, CopyAll, Download, Share, WarningAmberRounded, WhatsApp } from "@mui/icons-material";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useNavigate } from "react-router-dom";
 import routes from "../layout/Routes";
@@ -11,12 +11,20 @@ import { getDoctorDataById, getParentDoctorDataById, getParentSCoutDataById, get
 import OverviewUi from './overview'
 import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import Alertimage from './imagesscouts/Vector (31).png'
+import GREY1 from './imagesscouts/rupeegrey.png'
+import GREY2 from './imagesscouts/grey1.png'
+import GREY3 from './imagesscouts/grey2.png'
+import GREY4 from './imagesscouts/grey3.png'
+import Dots from './imagesscouts/threedots.png'
 
 const MainScout = () => {
 
     const [tabType, settabType] = useState('txn')
     const [objectData, setOjectData] = useState([])
     const [filter, setfilter] = useState('');
+    const [sharelink, setShareLink] = useState(false);
+    const [userData, setUserData] = useState();
 
     const handlefilters = (type) => {
         setfilter((prevFilter) => (prevFilter === type ? '' : type));
@@ -817,10 +825,27 @@ const MainScout = () => {
             });
     };
 
-
+    const generateWhatsAppLink = (mobileNumber, messageText) => {
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${mobileNumber}&text=${encodeURIComponent(messageText)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+    const shareLinkTab = (data) => {
+        setUserData(data)
+        setShareLink(true)
+    }
+    const sendlink = (type, data) => {
+        if (type === 'call') {
+            const phoneNumber = data;
+            window.open(`tel:${phoneNumber}`);
+        }
+        if(type==='link'){
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${userData.patientPhoneNo}&text=${encodeURIComponent(data)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    }
     return (
         <>
-            <div className="over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '55px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
+            <div className=" over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '55px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
                 <div style={{ width: '100%', display: 'flex' }}>
                     <div style={{ width: '40%', fontSize: '20px', marginTop: '5px', marginLeft: '10px' }}>All loans</div>
                     <div className="text-center" style={{ width: '60%', background: '#ECEBFF', borderRadius: '5px', padding: '5px', marginRight: '10px' }}>
@@ -833,7 +858,7 @@ const MainScout = () => {
 
                 </div>
                 {console.log(filter)}
-                <div className="dashboard">
+                {/* <div className="dashboard">
                     <div className="filters">
                         <div className={`box ${filter === 'scouts' ? 'active' : ''}`} onClick={() => handlefilters('scouts')}>
                             <h5>Scouts (5)</h5> &nbsp;
@@ -844,25 +869,26 @@ const MainScout = () => {
                             <span><FaAngleDown /></span>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
             </div>
             {tabType === 'txn' ?
                 <div style={{ marginTop: '20px' }}>
-                    {data.data.length > 0 && data.data && (data.data).map((carddata, i) => {
+                    {objectData.length > 0 && objectData && (objectData).map((carddata, i) => {
                         return (
                             <div className="txn-card">
+                                <img className="three-dots" src={Dots} onClick={() => shareLinkTab(carddata)} />
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanAmount}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanAmount}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY2 : Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY3 : Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY4 : Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
                                 </div>
                                 <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied at&nbsp; {carddata.loanApplyDate}</p>
                                 <div>
@@ -874,9 +900,10 @@ const MainScout = () => {
                                                 Approved
                                             </div>
                                             <div className="text-center">
-                                                <a target="_blank" href={carddata.onboardingUrl}>
-                                                    <button className="carepay-button-card"><WhatsApp />&nbsp;
-                                                        Share link
+                                                <a target="_blank"
+                                                >
+                                                    <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.onboardingUrl)} className="carepay-button-card">&nbsp;
+                                                        <div className="share-btn"> <WhatsApp /> Share link</div>
                                                     </button>
                                                 </a>
                                             </div>
@@ -926,8 +953,7 @@ const MainScout = () => {
                                         <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
                                             Document Required
                                         </div> */}
-                                            <div style={{ background: '#FFEEE4', borderRadius: '5px', borderLeft: '4px solid #E4900A', fontSize: '12px', padding: '8px' }}>Bank Statement, ITR, Owned House Proof</div>
-                                            <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '15px' }}>
+                                            <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
                                                 <div style={{ width: '50%' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
                                                     <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
@@ -943,6 +969,8 @@ const MainScout = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div style={{ background: '#FFEEE4', borderRadius: '5px', borderLeft: '4px solid #E4900A', fontSize: '12px', padding: '8px', marginTop: '10px' }}>Bank Statement, ITR, Owned House Proof</div>
+
                                             <div className="approved-div" style={{
                                                 background: carddata.chanceOfApproval <= 20 ? '#EE6E6E' :
                                                     (carddata.chanceOfApproval > 20 && carddata.chanceOfApproval <= 50 ? '#E4900A' : '')
@@ -967,8 +995,18 @@ const MainScout = () => {
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 Pending disbursal
                                             </div>
+                                            {/* <div className="text-center">
+                                                <a target="_blank" href={carddata.onboardingUrl}>
+                                                    <button className="carepay-button-card">
+                                                        <div className="share-btn">  <Download />&nbsp;Download D.A.</div>
+                                                    </button></a>
+                                            </div> */}
                                             <div className="text-center">
-                                                <a target="_blank" href={carddata.onboardingUrl}> <button className="carepay-button-card"><Download />&nbsp;Download D.A.</button></a>
+                                                <a target="_blank" href={carddata.onboardingUrl}>
+                                                    <button className="carepay-button-card">&nbsp;
+                                                        <div className="share-btn"> <Download />&nbsp;Download D.A.</div>
+                                                    </button>
+                                                </a>
                                             </div>
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
 
@@ -988,6 +1026,16 @@ const MainScout = () => {
                                                 </div>
                                                 : ""}
                                             <div className="approved-div" style={{ background: '#857FC2' }}><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Disbursed at {carddata.disberseDate}</div>
+                                        </>
+                                        : ""}
+                                    {carddata.type == 'Rejected' || carddata.type == 'Rejected' ?
+                                        <>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Rejected </div>
+                                        </>
+                                        : ""}
+                                    {carddata.type == 'Expired' || carddata.type == 'Expired' ?
+                                        <>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Expired </div>
                                         </>
                                         : ""}
 
@@ -1056,6 +1104,25 @@ const MainScout = () => {
                             </div>
                         </div>
                         : ''}
+            {sharelink ?
+                <div className="over-view-component background-blur">
+
+                    <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'amount' ? 'show' : ''}`}>
+                        <div className="filterscout">
+                            <div className="filterbox">
+                                <h5>Loan Id</h5>&nbsp;<span><IoMdClose onClick={() => setShareLink(false)} className="closeicon" /></span>
+                            </div>
+                            <hr />
+
+                        </div>
+                        <div style={{ marginBottom: '20px', marginTop: '20px' }} >
+                            {userData.patientPhoneNo !== undefined &&userData.patientPhoneNo !== ''? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Call Patient</div></div> : ""}
+                            <div onClick={() => sendlink('link', userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
+
+                        </div>
+                    </div>
+                </div>
+                : ""}
 
         </>
     )
