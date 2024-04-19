@@ -87,7 +87,7 @@ function Hero(){
                         style={{
                             maxWidth: "90%",
                             display: "block",
-                            position:"absolute",
+                            position:"relative",
                             right:"0"
                         }}
                         alt="" />
