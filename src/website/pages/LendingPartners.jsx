@@ -87,7 +87,9 @@ function LendingPartnerCard(
             <div>
                 <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
                     <img src={Globe} style={{padding:"6px", height:"34px", aspectRatio:"1/1", background:"white", borderRadius:"4px"}} alt="" />
-                    <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>{policyLink}</span>
+                    <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>
+                        <a target="_blank" href={policyLink}>{policyLink}</a>
+                    </span>
                 </div>
             </div>
             <p style={{fontSize:"14px", opacity:"0.8", margin:"1.5rem 0 0.3rem 0"}}>{officerTitle}</p>
@@ -95,12 +97,16 @@ function LendingPartnerCard(
 
             <div style={{display:"flex", alignItems:"center", gap:"10px",marginBottom:"12px"}}>
                 <div style={{width:"34px"}}><MdPhone style={{padding:"4px", height:"34px", width:"34px", color:"#514C9F", background:"white", borderRadius:"4px"}} /></div>
-                <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>{phoneNum}</span>
+                <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>
+                    <a href={"tel:"+{phoneNum}}>{phoneNum}</a>
+                </span>
             </div>
 
             <div style={{display:"flex", alignItems:"center", gap:"10px",marginBottom:"12px"}}>
                 <div style={{width:"34px"}}><MdMail style={{padding:"4px", height:"34px", width:"34px", color:"#514C9F", background:"white", borderRadius:"4px"}} /></div>
-                <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>{mailId}</span>
+                <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>
+                    <a href={"mailto:"+{mailId}}>{mailId}</a>
+                </span>
             </div>
 
             <div style={{display:"flex", alignItems:"center", gap:"10px",marginBottom:"12px"}}>
