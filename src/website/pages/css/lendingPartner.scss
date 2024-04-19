@@ -1,0 +1,45 @@
+div.website-container{
+
+    h1{
+        text-align: center;
+        margin: 4rem;
+    }
+
+    div.lendingCardWrapper{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+
+        margin: 2rem 2rem;
+        margin-bottom: 4rem;
+        flex-wrap: wrap;
+        
+
+        div.lenderCard{
+            margin-bottom: 1rem;
+            width: 340px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        h1{
+            text-align: left;
+            margin: 2rem;
+        }
+    
+        div.lendingCardWrapper{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+    
+            margin: 2rem 2rem;
+            flex-wrap: wrap;
+            
+    
+            div.lenderCard{
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+        }
+    }
+}

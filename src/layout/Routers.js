@@ -85,6 +85,7 @@ export const QrPdfMaker = React.lazy(() => import('../qrData/QRPDF'));
 export const WebHomepage = React.lazy(() => import('../website/pages/WebHomepage'));
 export const About = React.lazy(() => import('../website/pages/About'));
 export const PrivacyPolicy = React.lazy(() => import('../website/pages/PrivacyPolicy'));
+export const LendingPartners = React.lazy(() => import('../website/pages/LendingPartners'));
 
 export const SearchingOffers = React.lazy(() => import('../patient/components/ICICI flow/SearchingOffers'));
 export const CongratsApprovedICICI = React.lazy(() => import('../patient/components/ICICI flow/CongratsApprovedICICI'));

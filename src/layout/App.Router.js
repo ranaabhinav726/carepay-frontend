@@ -13,6 +13,7 @@ function AppRouter() {
           <Route path={OurRoutes.PRIVACY_POLICY} element={<Routers.PrivacyPolicy />} />
           <Route path={OurRoutes.REFUND_AND_CANCELLATION} element={<Routers.RefundandCancellation />} />
           <Route path={OurRoutes.ICICI_TERMS_AND_CONDITIONS} element={<Routers.ICICITermsAndConditions />} />
+          <Route path={OurRoutes.LENDING_PARTNERS} element={<Routers.LendingPartners />} />
           {/* Add more website routes here */}
 
           {/* Patient Routes */}
