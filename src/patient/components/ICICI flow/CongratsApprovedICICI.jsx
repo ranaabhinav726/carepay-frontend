@@ -19,13 +19,13 @@ const CongratsApprovedICICI = () =>{
 
     function downloadKfsAndHandleNavigation(){ // download and save KFS then navigate
         showWaitingModal();
-        downloadKfs(userId, hideWaitingModal, ()=>{
-            navigate("/patient/FinalConsent", {
-                state:{
-                    "data" : data,
-                }
-            })
+        navigate("/patient/FinalConsent", {
+            state:{
+                "data" : data,
+            }
         })
+        // downloadKfs(userId, hideWaitingModal, ()=>{
+        // })
     }
 
     return(

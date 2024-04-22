@@ -115,7 +115,7 @@ export function downloadKfs(userId, hideWaitingModal, callBack) {
         let fileBlob = res.data;
         // let file = new File([fileBlob], 'KFS.pdf',{type:"application/pdf"});
         let fileURL = window.URL.createObjectURL(fileBlob);
-        console.log(fileURL);
+        // console.log(fileURL);
         const link = document.createElement("a");
         link.href = fileURL;
         link.style.display = "none";
@@ -123,7 +123,8 @@ export function downloadKfs(userId, hideWaitingModal, callBack) {
         document.body.appendChild(link);
         link.click();
         hideWaitingModal();
-        callBack();
+        callBack(fileURL);
+        // return fileURL;
       }
     })
     .catch((e) => {

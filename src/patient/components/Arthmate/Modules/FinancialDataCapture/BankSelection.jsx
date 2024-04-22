@@ -18,10 +18,10 @@ const ArthBankSelection = () =>{
 
     const navigate = useNavigate()
     let userId = localStorage.getItem("userId");
-    let token = localStorage.getItem('access_token');
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
+    // let token = localStorage.getItem('access_token');
+    // const config = {
+    //     headers: { Authorization: `Bearer ${token}` }
+    // };
     let [banklist, setBankList] = useState([]);
     const [bankListComps, setBankListComps] = useState([]);
 

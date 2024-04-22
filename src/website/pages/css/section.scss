@@ -177,6 +177,34 @@ section.future-healthcare{
     }
 }
 
+section.lending-partners{
+    h4{
+        color: rgba(0, 0, 0, 0.80);
+        text-align: center;
+
+        /* Desktop H4 */
+        font-family: DM Sans;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 133.333%; /* 133.333% */
+        margin: 2rem 0 3rem 0;
+    }
+    div.container{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 12px;
+        img{
+            height: 70px;
+        }
+        img:first-child{
+            height: 60px;
+        }
+    }
+    
+}
+
 section.reviews{
     background: #ECEBFF;
     padding: 6vw 0;
@@ -719,6 +747,16 @@ div.tabs-bar{
         }
     }
 
+    section.lending-partners{
+        div.container{
+            justify-content: space-between;
+
+            img{
+                height: 30px;
+            }
+        }
+    }
+
     section.reviews{
         background: #ECEBFF;
         padding: 6vw 0;
@@ -961,6 +999,16 @@ div.tabs-bar{
                     height: 150px;
                     width: 150px;
                 }
+            }
+        }
+    }
+
+    section.lending-partners{
+        div.container{
+            justify-content: space-between;
+
+            img{
+                height: 40px;
             }
         }
     }
