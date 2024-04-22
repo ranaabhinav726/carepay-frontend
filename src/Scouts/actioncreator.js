@@ -276,3 +276,39 @@ export const getLoanDataByUserId = (userId, callBack) => {
             }
         });
 };
+export const getPotentialByScoutId = (scoutId, callBack) => {
+    axios.get(APIS.GET_POTENTIAL_BY_SCOUT_ID + scoutId )
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('notfound');
+                callBack('notfound');
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack('notfound');
+            } else {
+                console.error('Error:', error.message);
+                callBack('notfound');
+            }
+        });
+};
+export const getPotentialByParentScoutId = (id, callBack) => {
+    axios.get(APIS.GET_POTENTIAL_BY_PARENT_SCOUT_ID + id )
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('notfound');
+                callBack('notfound');
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack('notfound');
+            } else {
+                console.error('Error:', error.message);
+                callBack('notfound');
+            }
+        });
+};

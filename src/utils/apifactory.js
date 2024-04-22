@@ -17,7 +17,10 @@ const APIS = {
     GET_MONTHLY_LEADS_BY_SCOUT_ID: BASE_URL + 'getMonthlyLeadsPerClinic?scoutId=',
     GET_MONTHLY_LEADS_BY_PARENT_SCOUT_ID: BASE_URL + 'getMonthlyLeadsPerClinicParentScout?parentScoutId=',
     GET_TOTAL_LOANS_BY_SCOUT_ID: BASE_URL + 'getLoanAmountAndCountForScout?scoutId=',
-    GET_LOAN_DETAILS_BY_USER_ID: BASE_URL + 'getProductDetailByUserId?userId='
+    GET_LOAN_DETAILS_BY_USER_ID: BASE_URL + 'getProductDetailByUserId?userId=',
+    GET_POTENTIAL_BY_SCOUT_ID: BASE_URL + 'getPotentialCaptureForScout?scoutId=',
+    GET_POTENTIAL_BY_PARENT_SCOUT_ID: BASE_URL + 'getPotentialCaptureForParentScout?parentScoutId='
+
 
 
 
