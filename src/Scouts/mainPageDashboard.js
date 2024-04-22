@@ -73,16 +73,14 @@ const MainScout = () => {
     }, [])
 
     const copyText = (data) => {
-        const textToCopy = data // Change this to the actual text you want to copy
+        const textToCopy = data 
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
                 console.log('Text copied to clipboard');
                 alert('Text copied to clipboard')
-                // Optionally, you can show a success message to the user
             })
             .catch(err => {
                 console.error('Could not copy text: ', err);
-                // Optionally, you can show an error message to the user
             });
     };
 
@@ -126,7 +124,7 @@ const MainScout = () => {
                     <div className="text-center" style={{ width: '60%', background: '#ECEBFF', borderRadius: '5px', padding: '5px', marginRight: '10px' }}>
                         <div style={{ width: '100%', display: 'flex' }}>
                             <div style={{ width: '50%' }}><button onClick={() => settabType('overview')} style={{ width: '100%', background: tabType === 'overview' ? '#fff' : 'transparent', outline: 'none', padding: '5px 4px', border: 'none', borderRadius: '5px', color: tabType === 'overview' ? '#8f8dbd' : '#000', fontSize: '12px' }} className="">Overview</button></div>
-                            <div style={{ width: '50%' }}><button onClick={() => settabType('txn')} style={{ width: '100%', background: tabType === 'txn' ? '#fff' : 'transparent', outline: 'none', padding: '5px 4px', border: 'none', borderRadius: '5px', color: tabType === 'txn' ? '#8f8dbd' : '#000', fontSize: '12px' }} className="">Transaction</button></div>
+                            <div style={{ width: '50%' }}><button onClick={() => settabType('txn')} style={{ width: '100%', background: tabType === 'txn' ? '#fff' : 'transparent', outline: 'none', padding: '5px 4px', border: 'none', borderRadius: '5px', color: tabType === 'txn' ? '#8f8dbd' : '#000', fontSize: '12px' }} className="">Transactions</button></div>
                         </div>
                     </div>
 
@@ -165,7 +163,7 @@ const MainScout = () => {
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
                                     <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY4 : Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
                                 </div>
-                                <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied at&nbsp; {carddata.loanApplyDate}</p>
+                                <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied on&nbsp; {carddata.loanPushedDate?carddata.loanPushedDate:carddata.loanApplyDate}</p>
                                 <div>
 
                                     {carddata.type === 'Approved' ?
@@ -207,7 +205,7 @@ const MainScout = () => {
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision by:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision in:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                         not in api
                                                     </div>
@@ -217,7 +215,7 @@ const MainScout = () => {
                                                 background: carddata.chanceOfApproval <= 20 ? '#EE6E6E' :
                                                     (carddata.chanceOfApproval > 20 && carddata.chanceOfApproval <= 50 ? '#E4900A' : '')
                                             }}>
-                                                {carddata.chanceOfApproval}% Chances of approval
+                                                {carddata.chanceOfApproval}% Chance of approval
                                             </div>
                                         </>
                                         : ""}
@@ -238,7 +236,7 @@ const MainScout = () => {
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision by:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision in:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                         not in api
                                                     </div>
@@ -300,7 +298,7 @@ const MainScout = () => {
                                                     </div>
                                                 </div>
                                                 : ""}
-                                            <div className="approved-div" style={{ background: '#857FC2' }}><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Disbursed at {carddata.disberseDate}</div>
+                                            <div className="approved-div" style={{ background: '#857FC2' }}><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Disbursed on {carddata.disberseDate}</div>
                                         </>
                                         : ""}
                                     {carddata.type == 'Rejected' || carddata.type == 'Rejected' ?
