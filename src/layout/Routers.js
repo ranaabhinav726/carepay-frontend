@@ -148,3 +148,8 @@ export const SCOUTS_OTP = React.lazy(() => import('../Scouts/otpscreen'));
 export const SCOUTS_ALREADYEXIST = React.lazy(() => import('../Scouts/altreadyexist'));
 export const SCOUTES_WELCOME = React.lazy(() => import('../Scouts/welcome'));
 export const SCOUTES_DASHBOARD = React.lazy(() => import('../Scouts/mainPageDashboard'));
+export const SCOUTES_PERSONAL = React.lazy(() => import('../Scouts/Forms/PersonalDetails'));
+export const SCOUTES_ADDRESS = React.lazy(() => import('../Scouts/Forms/AddressDetails'));
+export const SCOUTES_PRACTICE = React.lazy(() => import('../Scouts/Forms/PracticeDetails'));
+export const SCOUTES_BANK = React.lazy(() => import('../Scouts/Forms/BankingDetails'));
+export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVerification'));
