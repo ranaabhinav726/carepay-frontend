@@ -159,9 +159,13 @@ function AppRouter() {
           <Route path={OurRoutes.SCOUTES_WELCOME} element={<Routers.SCOUTES_WELCOME />} />
           <Route element={<ScoutDahboardLayout />}>
           <Route path={OurRoutes.SCOUTES_DASHBOARD} element={<Routers.SCOUTES_DASHBOARD />} />
-          
-
         </Route>
+        <Route path={OurRoutes.SCOUTES_PERSONAL} element={<Routers.SCOUTES_PERSONAL />} />
+        <Route path={OurRoutes.SCOUTES_PRACTICE} element={<Routers.SCOUTES_PRACTICE />} />
+        <Route path={OurRoutes.SCOUTES_BANK} element={<Routers.SCOUTES_BANK />} />
+        <Route path={OurRoutes.SCOUTES_ADDRESS} element={<Routers.SCOUTES_ADDRESS />} />
+        <Route path={OurRoutes.SCOUTES_DOC} element={<Routers.SCOUTES_DOC />} />
+
         </Routes>
       
 
