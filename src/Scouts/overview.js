@@ -3,7 +3,7 @@ import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { PiChartBarFill } from "react-icons/pi";
 import ReactApexChart from "react-apexcharts";
-import { getLeadsPerClinicByDoctorId, getLeadsPerClinicByParentClinicId, getLeadsPerClinicByScoutId, getLeadsPerClinicByparentScoutId, getLoanDataByScoutId, getParentScoutTrendDataApi, getScoutTrendDataApi } from './actioncreator';
+import { getLeadsPerClinicByDoctorId, getLeadsPerClinicByParentClinicId, getLeadsPerClinicByScoutId, getLeadsPerClinicByparentScoutId, getLoanDataByScoutId, getParentScoutTrendDataApi, getPotentialByParentScoutId, getPotentialByScoutId, getScoutTrendDataApi } from './actioncreator';
 export default function Scoutoverview({ filter, setfilter }) {
   // const [filter, setfilter] = useState();
 
@@ -13,6 +13,7 @@ export default function Scoutoverview({ filter, setfilter }) {
   const [graphData, setGraphData] = useState([]);
   const [leadsPerClinic, setLeadsPerClinic] = useState('');
   const [loanData, setLoanData] = useState('');
+  const [potentialData, setPotentialData] = useState('');
 
 
   // const chartData = {
@@ -107,12 +108,15 @@ export default function Scoutoverview({ filter, setfilter }) {
         }
 
       })
+      getPotentialByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
+        setPotentialData(callback.data)
+      })
       getLeadsPerClinicByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
         if (callback.message === 'success') {
           setLeadsPerClinic(callback.data)
         }
       })
-      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'),  callback => {
+      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
         if (callback.message === 'success') {
           setLoanData(callback.data)
         }
@@ -146,6 +150,9 @@ export default function Scoutoverview({ filter, setfilter }) {
           setLeadsPerClinic(callback.data)
         }
       })
+      getPotentialByParentScoutId(window.sessionStorage.getItem('parentScoutId'), callback => {
+        setPotentialData(callback.data)
+      })
 
 
     }
@@ -160,7 +167,7 @@ export default function Scoutoverview({ filter, setfilter }) {
         }
 
       })
-      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'),  callback => {
+      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
         if (callback.message === 'success') {
           setLoanData(callback.data)
         }
@@ -211,12 +218,12 @@ export default function Scoutoverview({ filter, setfilter }) {
 
   return (
     <>
-      <div className="over-view-component screen-width-max" style={{ marginTop: '-10px',padding:'10px' }}>
+      <div className="over-view-component screen-width-max" style={{ marginTop: '-10px', padding: '10px' }}>
         {console.log(chartData)}
         <div className={'trends'}>
           <div className="">
-          <div className="" style={{display:'flex',width:'100%'}}>
-              <div className='' style={{width:'50%'}}>
+            <div className="" style={{ display: 'flex', width: '100%' }}>
+              <div className='' style={{ width: '50%' }}>
                 <div className="columns">
                   <div className="Lefttext">
                     <h3>{loanData.total_applied}</h3>
@@ -227,7 +234,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                 </div>
               </div>
-              <div className='' style={{width:'50%'}}>
+              <div className='' style={{ width: '50%' }}>
                 <div className="columns">
                   <div className="Lefttext">
                     <h3>{loanData.disbursed_count}</h3>
@@ -238,22 +245,22 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                 </div>
               </div>
-              </div>
-              <div className="" style={{display:'flex',width:'100%'}}>
+            </div>
+            <div className="" style={{ display: 'flex', width: '100%' }}>
 
-              <div className='' style={{width:'50%'}}>
+              <div className='' style={{ width: '50%' }}>
                 <div className="box">
                   <div className="topbox">
                     <h3>Potential <br></br> Captured</h3>
-                    <h5>NA</h5>
+                    <h5>{potentialData !== '' && potentialData.potential !== undefined ? potentialData.potential : ''}</h5>
                   </div>
                   <div className="bottombox">
                     <h3>Company <br></br> average</h3>
-                    <h5>NA</h5>
+                    <h5>{potentialData !== '' && potentialData.carepayPotential !== undefined ? potentialData.carepayPotential : ''}</h5>
                   </div>
                 </div>
               </div>
-              <div className='' style={{width:'50%'}}>
+              <div className='' style={{ width: '50%' }}>
                 <div className="box">
                   <div className="topbox">
                     <h3>Monthly leads
@@ -262,7 +269,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                   <div className="bottombox">
                     <h3>Company <br></br> average</h3>
-                    <h5>{leadsPerClinic.companyAvg?leadsPerClinic.companyAvg.toFixed(2):""}%</h5>
+                    <h5>{leadsPerClinic.companyAvg ? leadsPerClinic.companyAvg.toFixed(2) : ""}%</h5>
                   </div>
                 </div>
               </div>
