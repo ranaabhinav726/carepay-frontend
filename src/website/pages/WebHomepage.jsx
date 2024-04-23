@@ -642,8 +642,9 @@ export function Footer(){
                             <h5>Quick links</h5>
                             <Link to={"/about"}>About Us</Link>
                             <Link to={"/privacyPolicy"}>Privacy Policy</Link>
-                            <Link to={"/patient"}>For Patients</Link>
-                            <Link to={"/doctor"}>For Doctors</Link>
+                            <Link to={"/TermsAndConditions"}>Terms and conditions</Link>
+                            {/* <Link to={"/patient"}>For Patients</Link>
+                            <Link to={"/doctor"}>For Doctors</Link> */}
                             <Link to={"/lendingPartners"}>Our lending partners</Link>
                         </div>
                         <div className="contact-us">
