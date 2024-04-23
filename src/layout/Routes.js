@@ -3,7 +3,7 @@ const routes = {
   ABOUT: '/about',
   PRIVACY_POLICY: '/PrivacyPolicy',
   TERMS_AND_CONDITIONS: '/TermsAndConditions',
-  REFUND_AND_CANCELLATION: '/RefundandCancellation',
+  REFUND_AND_CANCELLATION: '/RefundAndCancellation',
   ICICI_TERMS_AND_CONDITIONS: '/ICICITermsAndConditions',
   LENDING_PARTNERS: "/lendingPartners",
 

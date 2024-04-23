@@ -86,6 +86,9 @@ export const WebHomepage = React.lazy(() => import('../website/pages/WebHomepage
 export const About = React.lazy(() => import('../website/pages/About'));
 export const PrivacyPolicy = React.lazy(() => import('../website/pages/PrivacyPolicy'));
 export const LendingPartners = React.lazy(() => import('../website/pages/LendingPartners'));
+export const TermsAndConditions = React.lazy(() => import('../website/pages/TermsAndConditions'));
+export const RefundandCancellation = React.lazy(() => import('../website/pages/RefundandCancellation'));
+export const ICICITermsAndConditions = React.lazy(() => import('../website/pages/ICICITermsAndConditions'));
 
 export const SearchingOffers = React.lazy(() => import('../patient/components/ICICI flow/SearchingOffers'));
 export const CongratsApprovedICICI = React.lazy(() => import('../patient/components/ICICI flow/CongratsApprovedICICI'));
@@ -112,13 +115,10 @@ export const FibeRedirecting = React.lazy(() => import('../patient/components/Fi
 export const FibeUserFallback = React.lazy(() => import('../patient/components/Fibe flow/FibeUserFallback'));
 export const FibeCongratsUser = React.lazy(() => import('../patient/components/Fibe flow/FibeCongratsUser'));
 
-export const TermsAndConditions = React.lazy(() => import('../website/pages/TermsAndConditions'));
-export const RefundandCancellation = React.lazy(() => import('../website/pages/RefundandCancellation'));
 export const AddressNotServiceable = React.lazy(() => import('../patient/components/Address_Details/AddressDetails/AddressNotServiceable'));
 
 export const CfApproved = React.lazy(() => import('../patient/components/Loan_Details/CfApproved/CfApproved'));
 export const NotServiceable = React.lazy(() => import('../patient/components/Fibe flow/NotServiceable'));
-export const ICICITermsAndConditions = React.lazy(() => import('../website/pages/ICICITermsAndConditions'));
 
 export const DoctorNotAvailable = React.lazy(() => import('../patient/components/Homepage/DoctorNotAvailable'));
 export const PrescriptionUpload = React.lazy(() => import('../patient/components/Personal_Details/Prescription/PrescriptionUpload'));
