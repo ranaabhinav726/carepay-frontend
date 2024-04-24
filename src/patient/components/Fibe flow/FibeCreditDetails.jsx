@@ -14,6 +14,7 @@ import { env } from "../../environment/environment";
 // import animationData from '../../assets/JSON animations/loader simple.json'
 import AutocompleteInput from "../utility/SuggestionInputBox/SuggestionInputBox";
 import './styles.scss'
+import BottomPopOverModal from "../utility/BottomPopOverModal";
 
 var convertRupeesIntoWords = require('convert-rupees-into-words');
 
@@ -26,12 +27,30 @@ export default function FibeCreditDetails(){
     const [otherTreatment, setOtherTreatment] = useState("");
     const [doctorName, setDoctorName] = useState("");
     const [doctorId, setDoctorId] = useState(localStorage.getItem("doctorId"));
+
+    const [popUpMsg, setPopUpMsg] = useState("");
+    const [showPopOver, setShowPopOver] = useState("");
+    const [amountError, setAmountError] = useState(false);
+
     // const [waiting, setWaiting] = useState(false);
     const otherTreatmentRef = useRef(null);
 
     const navigate = useNavigate();
 
     let userId = localStorage.getItem("userId");
+
+    useEffect(()=>{
+        let localizedAmount =   <span 
+                                    style={{whiteSpace:"pre"}}
+                                >
+                                    (₹ {creditAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})})
+                                </span>
+        let elem = <p style={{color:"black"}}>
+                        Are you sure you want to apply for a loan of 
+                        <strong> {amountInWords} {localizedAmount}</strong>
+                    </p>
+        setPopUpMsg(elem);
+    }, [showPopOver])
 
     let serviceableTreatmentList = [
         "Infertility Treatment (Other than IVF)",
@@ -313,6 +332,16 @@ export default function FibeCreditDetails(){
 
     },[userId])
 
+    function creditAmountError(){
+        let elem = document.getElementById("creditAmt");
+        showErrorOnUI(elem, false);
+        setAmountError(true);
+        setTimeout(() => {
+            setAmountError(false);
+        }, 3000);
+        return;
+    }
+
     function postDetails(){
         if(! creditAmt){
             let elem = document.getElementById("creditAmt");
@@ -424,7 +453,7 @@ export default function FibeCreditDetails(){
     }
 
     return(
-        <main className="screenContainer">
+        <main className="screenContainer" style={{position:"relative"}}>
             <Header progress={55} canGoBack={-1} />
             <ScreenTitle title="Tell us what you need" />
             <InputBoxLabel label='Credit amount' />
@@ -436,10 +465,12 @@ export default function FibeCreditDetails(){
                 setValue={creditAmountHandler}
                 styles={{
                     marginTop:"12px", 
+                    marginBottom:"14px",
                     border:"0"
                 }}
             />
-            {amountInWords && <p style={{margin:"12px 0 20px 42px", fontSize:"14px"}}>{amountInWords}</p>}
+            {amountError && <p style={{margin:"-8px 0 14px 42px", fontSize:"14px", color:"red"}}>Please enter the correct credit amount.</p>}
+            {amountInWords && <p style={{margin:"-8px 0 14px 42px", fontSize:"14px"}}>{amountInWords}</p>}
             {/* <NoteText text="Please keep the credit amount under Rs. 10,00,000 only." styles={{margin:"12px 0 24px 0"}} /> */}
 
             {/* <InputBoxLabel label='Treatment name' />
@@ -478,7 +509,7 @@ export default function FibeCreditDetails(){
                     <span className="fieldError">Please enter your treatment name</span>
                 </div>
             }
-            <button onClick={()=>postDetails()} className="submit" style={{marginTop:"32px"}}>Next</button>
+            <button onClick={()=>setShowPopOver(true)} className="submit" style={{marginTop:"32px"}}>Next</button>
             {/* {waiting && 
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
                     <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
@@ -487,6 +518,15 @@ export default function FibeCreditDetails(){
                     </div>
                 </div>
             } */}
+            <BottomPopOverModal
+                popUpMsg={popUpMsg} 
+                showPopOver={showPopOver} 
+                setShowPopOver={setShowPopOver} 
+                checkAndNavigate={postDetails} 
+                yesBtnText={"Yes"} 
+                noBtnText={"No"} 
+                noBtnClick={creditAmountError}
+            />
         </main>
     )
 }
