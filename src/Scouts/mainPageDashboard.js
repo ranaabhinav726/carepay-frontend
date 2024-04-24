@@ -172,14 +172,16 @@ const MainScout = () => {
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 Approved
                                             </div>
+                                            {carddata.esignUrl?
                                             <div className="text-center">
                                                 <a target="_blank"
                                                 >
-                                                    <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.onboardingUrl)} className="carepay-button-card">&nbsp;
+                                                    <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.esignUrl)} className="carepay-button-card">&nbsp;
                                                         <div className="share-btn"> <WhatsApp /> Share link</div>
                                                     </button>
                                                 </a>
                                             </div>
+                                            :""}
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
                                         </>
                                         : ""}
@@ -207,7 +209,7 @@ const MainScout = () => {
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision in:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
-                                                        not in api
+                                                        {carddata.estimateTime}&nbsp;minutes
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,7 +240,7 @@ const MainScout = () => {
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision in:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
-                                                        not in api
+                                                        {carddata.estimateTime}&nbsp;minutes
                                                     </div>
                                                 </div>
                                             </div>

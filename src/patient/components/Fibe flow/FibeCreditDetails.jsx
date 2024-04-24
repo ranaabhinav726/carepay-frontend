@@ -15,9 +15,13 @@ import { env } from "../../environment/environment";
 import AutocompleteInput from "../utility/SuggestionInputBox/SuggestionInputBox";
 import './styles.scss'
 
+var convertRupeesIntoWords = require('convert-rupees-into-words');
+
+
 export default function FibeCreditDetails(){
 
     const [creditAmt, setCreditAmount] = useState("");
+    const [amountInWords, setAmountInWords] = useState("");
     const [loanReason, setLoanReason] = useState("");
     const [otherTreatment, setOtherTreatment] = useState("");
     const [doctorName, setDoctorName] = useState("");
@@ -288,7 +292,7 @@ export default function FibeCreditDetails(){
                 if(response?.data.status === 200){
                     let data = response?.data?.data;
                     if(!! data){
-                        setCreditAmount(data?.loanAmount);
+                        creditAmountHandler(data?.loanAmount);
                         setDoctorName(data?.doctorName);
                         if(data?.doctorId) setDoctorId(data?.doctorId);
 
@@ -403,6 +407,22 @@ export default function FibeCreditDetails(){
         }
     }, [loanReason])
 
+    function creditAmountHandler(val){
+        if(val === ""){
+            setCreditAmount("");
+            setAmountInWords("");
+            return;
+        }
+        if(!val) return;
+        val = val.split("").filter(letter=>letter !==",").join("");
+        val = parseInt(val);
+        if(val >= 0 && val <= 1000000){
+            setCreditAmount(val);
+            let amtInWords = convertRupeesIntoWords(val);
+            setAmountInWords(amtInWords);
+        }
+    }
+
     return(
         <main className="screenContainer">
             <Header progress={55} canGoBack={-1} />
@@ -412,14 +432,15 @@ export default function FibeCreditDetails(){
                 id="creditAmt"
                 Prefix={<BiRupee style={{fontSize:"20px", margin:"0 0 -4px 0"}} />} 
                 placeholder="How much credit do you need?" 
-                value={creditAmt}
-                setValue={setCreditAmount}
+                value={creditAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}
+                setValue={creditAmountHandler}
                 styles={{
                     marginTop:"12px", 
                     border:"0"
                 }}
             />
-            <NoteText text="Please keep the credit amount under Rs. 10,00,000 only." styles={{margin:"12px 0 24px 0"}} />
+            {amountInWords && <p style={{margin:"12px 0 20px 42px", fontSize:"14px"}}>{amountInWords}</p>}
+            {/* <NoteText text="Please keep the credit amount under Rs. 10,00,000 only." styles={{margin:"12px 0 24px 0"}} /> */}
 
             {/* <InputBoxLabel label='Treatment name' />
             <InputBox 

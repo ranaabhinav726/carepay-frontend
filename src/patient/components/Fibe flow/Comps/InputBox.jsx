@@ -34,6 +34,7 @@ export default function InputBox({type="text", length=10, id, styles, placeholde
                     border:"0",
                     background:"transparent",
                     appearance:"textfield",
+                    outline:"none",
                     letterSpacing:styles?.letterSpacing
                 }}
                 placeholder={placeholder} 
