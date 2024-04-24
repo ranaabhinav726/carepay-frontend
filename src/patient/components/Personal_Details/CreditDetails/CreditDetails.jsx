@@ -13,6 +13,7 @@ import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../environme
 import RadioInput from "../../utility/RadioInput/RadioInput";
 import { preEligibility } from "../../ICICI flow/apis";
 import AutocompleteInput from "../../utility/SuggestionInputBox/SuggestionInputBox";
+import BottomPopOverModal from "../../utility/BottomPopOverModal";
 // import { useData } from "../data";
 
 var convertRupeesIntoWords = require('convert-rupees-into-words');
@@ -35,6 +36,10 @@ const CreditDetails = () => {
     const [canSubmit, setCanSubmit] = useState(true);
     const [number, ] = useState(localStorage.getItem("phoneNumber"));
 
+    const [popUpMsg, setPopUpMsg] = useState("");
+    const [showPopOver, setShowPopOver] = useState("");
+    const [amountError, setAmountError] = useState(false);
+
     // const [doctorId, setDoctorId] = useState("");
     // const [doctorName, setDoctorName] = useState("");
 
@@ -47,6 +52,19 @@ const CreditDetails = () => {
     useEffect(()=>{
         ref.current = document.getElementById('animation-wrapper');
     },[])
+
+    useEffect(()=>{
+        let localizedAmount =   <span 
+                                    style={{whiteSpace:"pre"}}
+                                >
+                                    (₹ {amount.toLocaleString('en-IN',{maximumFractionDigits: 2})})
+                                </span>
+        let elem = <p style={{color:"black"}}>
+                        Are you sure you want to apply for a loan of 
+                        <strong> {amountInWords} {localizedAmount}</strong>
+                    </p>
+        setPopUpMsg(elem);
+    }, [showPopOver])
 
     let doctorId = localStorage.getItem("doctorId")
     let doctorName = localStorage.getItem("doctorName")
@@ -185,7 +203,18 @@ const CreditDetails = () => {
         }
     }
 
+    function creditAmountError(){
+        let elem = document.getElementById('loanAmount');
+        if(elem) showErrorOnUI(elem);
+        setAmountError(true);
+        setTimeout(() => {
+            setAmountError(false);
+        }, 3000);
+        return;
+    }
+
     async function verifyAndNavigate(){
+        setShowPopOver(null);
         if(! canSubmit){
             return;
         }
@@ -363,7 +392,7 @@ const CreditDetails = () => {
     }, [treatment])
    return(
     <>
-    <main className="mobileNumberVerification">
+    <main className="mobileNumberVerification" style={{position:"relative"}}>
     <Header progressbarDisplay="none" />
         <h3 className="mobileVerificationHeading">Credit Details</h3>
         
@@ -376,12 +405,13 @@ const CreditDetails = () => {
                     type="text" 
                     value={amount.toLocaleString('en-IN',{maximumFractionDigits: 2})} 
                     placeholder="How much credit do you need?"
-                    onChange={(e)=>amountHandler(e.target.value)}  
+                    onChange={(e)=>amountHandler(e.target.value)}
+                    style={{marginBottom:"16px"}}
                 />
             </div>
-            {amountInWords && <p style={{margin:"-5px 0 20px 42px", fontSize:"14px"}}>{amountInWords}</p>}
+            {amountError && <p style={{margin:"-8px 0 14px 42px", fontSize:"14px", color:"red"}}>Please enter the correct credit amount.</p>}
+            {amountInWords && <p style={{margin:"-8px 0 16px 42px", fontSize:"14px"}}>{amountInWords}</p>}
             {/* <p style={{marginTop:"-5px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p> */}
-            <span className="fieldError">Please enter your treatment cost</span>
         </div>
 
         {/* <div className="inputGroup">
@@ -512,7 +542,17 @@ const CreditDetails = () => {
 
         
         <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
-        <button onClick={()=> verifyAndNavigate()} className="submit">Submit</button>
+        <button onClick={()=> setShowPopOver(true)} className="submit">Submit</button>
+
+        <BottomPopOverModal
+            popUpMsg={popUpMsg} 
+            showPopOver={showPopOver} 
+            setShowPopOver={setShowPopOver} 
+            checkAndNavigate={verifyAndNavigate} 
+            yesBtnText={"Yes"} 
+            noBtnText={"No"} 
+            noBtnClick={creditAmountError}
+        />
     </main>
     </>
    )
