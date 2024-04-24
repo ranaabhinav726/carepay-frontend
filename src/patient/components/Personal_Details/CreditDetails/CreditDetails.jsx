@@ -15,10 +15,13 @@ import { preEligibility } from "../../ICICI flow/apis";
 import AutocompleteInput from "../../utility/SuggestionInputBox/SuggestionInputBox";
 // import { useData } from "../data";
 
+var convertRupeesIntoWords = require('convert-rupees-into-words');
+
 const CreditDetails = () => {
     // const [number, setNumber] = useState('')
     const [fullName, setFullName] = useState("");
     const [amount, setAmount] = useState("");
+    const [amountInWords, setAmountInWords] = useState("");
     const [treatment, setTreatment] = useState("");
     const [otherTreatment, setOtherTreatment] = useState("");
 
@@ -156,7 +159,7 @@ const CreditDetails = () => {
                 if(response.data.status === 200){
                     let data = response.data.data;
                     if(!! data){
-                        setAmount(data.loanAmount);
+                        amountHandler(data.loanAmount);
                         let treatmentName = data?.loanReason;
                         if(treatmentName){
                             if(treatmentList.includes(treatmentName)){
@@ -335,11 +338,16 @@ const CreditDetails = () => {
         // console.log(val)
         if(val === ""){
             setAmount("");
+            setAmountInWords("");
             return;
         }
+        if(!val) return;
+        val = val.split("").filter(letter=>letter !==",").join("");
         val = parseInt(val);
         if(val >= 0 && val <= 1000000){
             setAmount(val);
+            let amtInWords = convertRupeesIntoWords(val);
+            setAmountInWords(amtInWords);
         }
     }
 
@@ -366,12 +374,13 @@ const CreditDetails = () => {
                 <input 
                     id="loanAmount"
                     type="text" 
-                    value={amount} 
+                    value={amount.toLocaleString('en-IN',{maximumFractionDigits: 2})} 
                     placeholder="How much credit do you need?"
                     onChange={(e)=>amountHandler(e.target.value)}  
                 />
             </div>
-            <p style={{marginTop:"-5px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p>
+            {amountInWords && <p style={{margin:"-5px 0 20px 42px", fontSize:"14px"}}>{amountInWords}</p>}
+            {/* <p style={{marginTop:"-5px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p> */}
             <span className="fieldError">Please enter your treatment cost</span>
         </div>
 
