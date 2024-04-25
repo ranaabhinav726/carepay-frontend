@@ -24,7 +24,7 @@ export default function Scoutoverview({ filter, setfilter }) {
   //   Dec: 600
   // };
 
-  const chartData = graphData
+  const chartData = graphData.reverse();
 
   const categories = chartData.map(data => `${data.month} ${data.year}`);
   const seriesData = chartData.map(data => data.value);
@@ -40,9 +40,9 @@ export default function Scoutoverview({ filter, setfilter }) {
     plotOptions: {
       bar: {
         borderRadius: '10px',
-        horizontal: true,
+        horizontal: false,
         barHeight: '90%',
-        columnWidth: '100%',
+        columnWidth: '80%',
         borderRadius: 3,
         radius: 2,
         enableShades: true,
