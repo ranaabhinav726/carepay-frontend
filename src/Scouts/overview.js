@@ -35,14 +35,14 @@ export default function Scoutoverview({ filter, setfilter }) {
       height: 250,
       toolbar: {
         show: false
-      }
+      },
     },
     plotOptions: {
       bar: {
         borderRadius: '10px',
-        horizontal: false,
+        horizontal: true,
         barHeight: '90%',
-        columnWidth: '30%',
+        columnWidth: '100%',
         borderRadius: 3,
         radius: 2,
         enableShades: true,
@@ -62,6 +62,7 @@ export default function Scoutoverview({ filter, setfilter }) {
           min: undefined,
           max: undefined
         },
+
       },
     },
     colors: ['#4B49AC'],
@@ -83,21 +84,33 @@ export default function Scoutoverview({ filter, setfilter }) {
       enabled: false
     },
     xaxis: {
+
       categories: categories,
       labels: {
         style: {
-          fontSize: '12px',
-          fontWeight: 400
+          // fontSize: '12px',
+          // fontWeight: 400
         }
-      }
+      },
+
+    },
+    tooltip: {
+      y: {
+        formatter: function (value) {
+          return "Count: " + value;
+        },
+        title: {
+          formatter: function (seriesName) {
+            return ''
+          }
+        }
+      },
+
     },
     legend: {
       show: false
     },
-    series: [{
-      name: 'Value',
-      data: seriesData
-    }]
+
   };
 
   useEffect(() => {
@@ -230,7 +243,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                     <h4>All loans</h4>
                   </div>
                   <div className="Righttext">
-                    <h5>₹ {loanData.total_loan_amount}</h5>
+                    <h5>₹ {Number(loanData.total_loan_amount).toLocaleString()}</h5>
                   </div>
                 </div>
               </div>
@@ -241,7 +254,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                     <h4>Disbursed</h4>
                   </div>
                   <div className="Righttext">
-                    <h5>₹ {loanData.disbursed_amount}</h5>
+                    <h5>₹ {Number(loanData.disbursed_amount).toLocaleString()}</h5>
                   </div>
                 </div>
               </div>
@@ -269,7 +282,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                   </div>
                   <div className="bottombox">
                     <h3>Company <br></br> average</h3>
-                    <h5>{leadsPerClinic.companyAvg ? leadsPerClinic.companyAvg.toFixed(2) : ""}%</h5>
+                    <h5>{leadsPerClinic.companyAvg ? leadsPerClinic.companyAvg.toFixed(2) : ""}</h5>
                   </div>
                 </div>
               </div>
@@ -279,17 +292,18 @@ export default function Scoutoverview({ filter, setfilter }) {
               <h5><span><PiChartBarFill /></span> Trend graphs</h5>
               <div className="tabsrow">
                 <div className={`tabs ${graphfilter === 'Disbursed' ? 'showtabs' : ''}`} onClick={() => graph('Disbursed')}>
-                  <h5>Disbursed (33)</h5>
-                </div>
-                <div className={`tabs ${graphfilter === 'Applied' ? 'showtabs' : ''}`} onClick={() => graph('Applied')}>
-                  <h5>Applied (33)</h5>
-                </div>
-                <div className={`tabs ${graphfilter === 'Dropped' ? 'showtabs' : ''}`} onClick={() => graph('Dropped')}>
-                  <h5>Dropped (33)</h5>
+                  <h5>Disbursed {'(' + loanData.disbursed_count + ')'}</h5>
                 </div>
                 <div className={`tabs ${graphfilter === 'Approved' ? 'showtabs' : ''}`} onClick={() => graph('Approved')}>
-                  <h5>Approved (33)</h5>
+                  <h5>Approved  {'(' + loanData.approved_count + ')'}</h5>
                 </div>
+                <div className={`tabs ${graphfilter === 'pending' ? 'showtabs' : ''}`} onClick={() => graph('pending')}>
+                  <h5>Applied  {'(' + loanData.pending_count + ')'}</h5>
+                </div>
+                <div className={`tabs ${graphfilter === 'rejected' ? 'showtabs' : ''}`} onClick={() => graph('rejected')}>
+                  <h5>Dropped  {'(' + loanData.rejected_count + ')'}</h5>
+                </div>
+
               </div>
 
               <div className="buttonswitch">
@@ -301,7 +315,7 @@ export default function Scoutoverview({ filter, setfilter }) {
 
               <div className="barchart">
                 <div className="chart">
-                  <ReactApexChart options={options} series={[{ data: seriesData }]} type="bar" height={200} width={'100%'} />
+                  <ReactApexChart options={options} series={[{ data: seriesData }]} type="bar" height={250} width={'100%'} />
                 </div>
                 <div className="text">
                   <h5>This graph shows the number of loans <span>disbursed</span> successfully each month.</h5>

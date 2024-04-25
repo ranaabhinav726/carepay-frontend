@@ -152,7 +152,7 @@ const MainScout = () => {
                             <div className="txn-card">
                                 <img className="three-dots" src={Dots} onClick={() => shareLinkTab(carddata)} />
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanAmount}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{Number(carddata.loanAmount).toLocaleString()}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
                                     <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY2 : Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
@@ -217,7 +217,7 @@ const MainScout = () => {
                                                 background: carddata.chanceOfApproval <= 20 ? '#EE6E6E' :
                                                     (carddata.chanceOfApproval > 20 && carddata.chanceOfApproval <= 50 ? '#E4900A' : '')
                                             }}>
-                                                {carddata.chanceOfApproval}% Chance of approval
+                                                {carddata.chanceOfApproval==0||carddata.chanceOfApproval===null?'10':carddata.chanceOfApproval}% Chance of approval
                                             </div>
                                         </>
                                         : ""}

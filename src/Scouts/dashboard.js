@@ -25,7 +25,7 @@ const ChatGPTMobileMenu = () => {
                     <img src={menuOpen ? CrossIcon : BarIcon} style={{ width: '25px' }} />&nbsp;&nbsp;<img src={CarepayLogo} width={'60%'} />
                 </div>
                 <div style={{ width: window.innerWidth + 'px', }} className={`menu-items ${menuOpen ? 'animated slideInLeft open' : 'animated slideOutRight'}`}>
-                    <div className='menu-tab'>On Boarding Leads</div>
+                    <div className='menu-tab'>Onboarding Leads</div>
                     <div className='menu-tab'>Live Clinics</div>
                     <div className='menu-tab'>Loans</div>
                     <div className='menu-tab' style={{ color: '#FF000066', position: 'fixed', bottom: '20%',cursor:'pointer' }} onClick={() => Logout()}>Logout</div>
