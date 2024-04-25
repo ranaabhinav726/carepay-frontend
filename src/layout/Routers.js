@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 
 export const Homepage = React.lazy(() => import('../patient/components/Homepage/Homepage'));
 export const MobileNumberVerification = React.lazy(() => import('../patient/components/MobileNumberVerification/MobileNumberVerification'));
@@ -153,3 +155,54 @@ export const SCOUTES_ADDRESS = React.lazy(() => import('../Scouts/Forms/AddressD
 export const SCOUTES_PRACTICE = React.lazy(() => import('../Scouts/Forms/PracticeDetails'));
 export const SCOUTES_BANK = React.lazy(() => import('../Scouts/Forms/BankingDetails'));
 export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVerification'));
+
+
+
+// Below code is to send authToken to all APIs and refresh the authToken when it expires.
+// Here, axios interceptors are added to global instance, so they will intercept all axios API calls in this project.
+
+
+let baseUrl = process.env.REACT_APP_BACKEND;
+
+// Add a request interceptor
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Add a response interceptor
+axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+  
+      // If the error status is 401 or 403 and there is no originalRequest._retry flag,
+      // it means the token has expired and we need to refresh it
+      if ((error.response.status === 401 || error.response.status === 403) && !originalRequest._retry) {
+        originalRequest._retry = true;
+  
+        try {
+          const refreshToken = localStorage.getItem('refreshToken');
+           // API route for "refresh token" needs to be updated below-
+          const response = await axios.post(baseUrl + '/api/refresh-token', { refreshToken });
+          const { token } = response.data;
+  
+          localStorage.setItem('authToken', token);
+  
+          // Retry the original request with the new token
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return axios(originalRequest);
+        } catch (error) {
+          // Handle refresh token error or redirect to login
+        }
+      }
+  
+      return Promise.reject(error);
+    }
+  );
