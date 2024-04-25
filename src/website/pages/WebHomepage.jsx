@@ -641,10 +641,11 @@ export function Footer(){
                         <div className="quick-links">
                             <h5>Quick links</h5>
                             <Link to={"/about"}>About Us</Link>
-                            <Link to={"/privacyPolicy"}>Privacy Policy</Link>
-                            <Link to={"/patient"}>For Patients</Link>
                             <Link to={"/doctor"}>For Doctors</Link>
-                            <Link to={"/lendingPartners"}>Our lending partners</Link>
+                            <Link to={"/privacyPolicy"}>Privacy Policy</Link>
+                            <Link to={"/TermsAndConditions"}>Terms and Conditions</Link>
+                            {/* <Link to={"/patient"}>For Patients</Link> */}
+                            <Link to={"/lendingPartners"}>Our Lending Partners</Link>
                         </div>
                         <div className="contact-us">
                             <h5>Contact us</h5>

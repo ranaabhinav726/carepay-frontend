@@ -28,17 +28,17 @@ function TermsAndConditionsContent() {
       <h2 style={{ fontFamily: "DM sans" }}>Terms And Conditions</h2>
 
       <p>
-        A. Company is a technology company with the brand name as CarePay
-        whereby it facilitates access to credit in partnership with its Lending
-        Partners (defined below) to Patients (defined below) visiting the MSP’s
-        office premises in need of a Credit Facility (defined below);
+        A. <strong>Company</strong> is a technology company with the brand name as <strong>CarePay</strong> 
+        whereby it facilitates appointment booking with MSP, telemedicine 
+        and access to credit in partnership with its Lending Partners (defined below) 
+        to Patients (defined below) visiting the MSP’s office premises in need of a 
+        Credit Facility (defined below);
       </p>
       <p>
-        B .The Medical Service Provider(MSP) is clinic/ hospital/ healthcare
-        establishment/ pharmacy/ wellness centre which employs professionally
-        qualified medical personnel engaged in the business of offering MSP
-        Product/Services (defined below) at its Office Premises/via the MSP
-        Platform.
+        B. The <strong>Medical Service Provider(MSP)</strong> is a clinic/ hospital/ healthcare 
+        establishment/ pharmacy/ wellness centre which employs professionally 
+        qualified medical personnel engaged in the business of offering MSP 
+        Product/Services (defined below) at its Office Premises/via the MSP Platform.
       </p>
 
       <p>
