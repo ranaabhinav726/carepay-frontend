@@ -61,7 +61,7 @@ const CreditDetails = () => {
                                 </span>
         let elem = <p style={{color:"black"}}>
                         Are you sure you want to apply for a loan of 
-                        <strong> {amountInWords} {localizedAmount}</strong>
+                        <strong> {amountInWords} {localizedAmount}?</strong>
                     </p>
         setPopUpMsg(elem);
     }, [showPopOver])
