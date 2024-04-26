@@ -89,7 +89,7 @@ section.operations{
         div.flex-content-wrapper{
             div.operations-container-image{
                 img{
-                    margin: 2rem auto 0 auto;
+                    margin-top: 2rem;
                 }
             }
             div.operations-container-content{
@@ -726,13 +726,17 @@ div.tabs-bar{
         }
     }
 
-    section.operations-financing{
+    section.operations{
         div.container{
             div.flex-content-wrapper{
                 div.operations-container-image{
+                    order: 2;
                     img{
                         margin-top: 0rem;
                     }
+                }
+                div.operations-container-content{
+                    order: 1;
                 }
             }
         }

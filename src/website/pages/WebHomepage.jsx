@@ -283,7 +283,7 @@ function HealthcareFinance(){
         <section className="future-healthcare">
             <div className="container">
                 <h2><span className='clr-purple'>Shaping the Future</span> of Healthcare Finance</h2>
-                <p className="text-content">Revolutionizing the landscape with integrated financial services</p>
+                <p className="text-content">Revolutionizing the landscape with integrated financial services.</p>
 
                 <img src={FutureHealthcare} data-aos="zoom-in" style={{margin:"2rem auto"}} alt="" />
 
@@ -384,7 +384,7 @@ function Articles(){
             <section className="articles" style={{background:"#ECEBFF"}}>
                 <div className="container" style={{textAlign:"center"}}>
                     <h4 style={{fontSize:"42px", padding:"0 12px"}}>Insights & Innovations</h4>
-                    <p className='text-content' style={{textAlign:"center", marginBottom:"1.5rem"}}>Stay updated with the latest trends, insights, <br/>and innovations in healthcare financing</p>
+                    <p className='text-content' style={{textAlign:"center", marginBottom:"1.5rem"}}>Stay updated with the latest trends, insights, <br/>and innovations in healthcare financing.</p>
                 </div>
                 <div
                     className="scrollable-container"
@@ -412,19 +412,19 @@ function Articles(){
                             width={"25%"} 
                             as="480/320" 
                             imgWidth='40%' 
-                            logo={MidDayLogo} content={"How CarePay is Changing the Face of Healthcare Financing"} link={"https://www.mid-day.com/brand-media/article/how-carepay-is-changing-the-face-of-healthcare-financing--gaurav-gupta-23317470"}
+                            logo={MidDayLogo} content={"How CarePay is Changing the Face of Healthcare Financing."} link={"https://www.mid-day.com/brand-media/article/how-carepay-is-changing-the-face-of-healthcare-financing--gaurav-gupta-23317470"}
                         />
                         <Article 
                             width={"30%"} 
                             as="580/320" 
                             imgWidth='70%' 
-                            logo={FinExpLogo} content={"The convergence of finance and healthcare: How fintech is bridging the gap"} link={"https://www.financialexpress.com/business/industry-the-convergence-of-finance-and-healthcare-how-fintech-is-bridging-the-gap-3283633/"}
+                            logo={FinExpLogo} content={"The convergence of finance and healthcare: How fintech is bridging the gap."} link={"https://www.financialexpress.com/business/industry-the-convergence-of-finance-and-healthcare-how-fintech-is-bridging-the-gap-3283633/"}
                         />
                         <Article 
                             width={"30%"} 
                             as="580/320" 
                             imgWidth='45%' 
-                            logo={PharmaBizLogo} content={"India’s digitally empowered fintech companies working to address optimal financial protection for patients"} link={"http://www.pharmabiz.com/NewsDetails.aspx?aid=163303&sid=1"}
+                            logo={PharmaBizLogo} content={"India’s digitally empowered fintech companies working to address optimal financial protection for patients."} link={"http://www.pharmabiz.com/NewsDetails.aspx?aid=163303&sid=1"}
                         />
                         <div className="spacer"
                         style={{
