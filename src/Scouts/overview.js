@@ -243,7 +243,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                     <h4>All loans</h4>
                   </div>
                   <div className="Righttext">
-                    <h5>₹ {Number(loanData.total_loan_amount).toLocaleString()}</h5>
+                    <h5>₹ {Number(loanData.total_loan_amount).toLocaleString("en-IN")}</h5>
                   </div>
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default function Scoutoverview({ filter, setfilter }) {
                     <h4>Disbursed</h4>
                   </div>
                   <div className="Righttext">
-                    <h5>₹ {Number(loanData.disbursed_amount).toLocaleString()}</h5>
+                    <h5>₹ {Number(loanData.disbursed_amount).toLocaleString("en-IN")}</h5>
                   </div>
                 </div>
               </div>
@@ -317,9 +317,9 @@ export default function Scoutoverview({ filter, setfilter }) {
                 <div className="chart">
                   <ReactApexChart options={options} series={[{ data: seriesData }]} type="bar" height={250} width={'100%'} />
                 </div>
-                <div className="text">
+                {/* <div className="text">
                   <h5>This graph shows the number of loans <span>disbursed</span> successfully each month.</h5>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -152,7 +152,7 @@ const MainScout = () => {
                             <div className="txn-card">
                                 <img className="three-dots" src={Dots} onClick={() => shareLinkTab(carddata)} />
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{Number(carddata.loanAmount).toLocaleString()}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{Number(carddata.loanAmount).toLocaleString("en-IN")}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
                                     <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY2 : Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
@@ -231,9 +231,9 @@ const MainScout = () => {
                                             <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
                                                 <div style={{ width: '50%' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
-                                                    <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
-                                                        Document Required
-                                                    </div>
+                                                        <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
+                                                            Document Required
+                                                        </div>
                                                 </div>
 
                                                 &nbsp;&nbsp;
@@ -244,8 +244,10 @@ const MainScout = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div style={{ background: '#FFEEE4', borderRadius: '5px', borderLeft: '4px solid #E4900A', fontSize: '12px', padding: '8px', marginTop: '10px' }}>Bank Statement, ITR, Owned House Proof</div>
+                                            {carddata.docsRequired !== '' && carddata.docsRequired !== null ?
 
+                                                <div style={{ background: '#FFEEE4', borderRadius: '5px', borderLeft: '4px solid #E4900A', fontSize: '12px', padding: '8px', marginTop: '10px' }}>{carddata.docsRequired}</div>
+                                                : ""}
                                             <div className="approved-div" style={{
                                                 background: carddata.chanceOfApproval <= 20 ? '#EE6E6E' :
                                                     (carddata.chanceOfApproval > 20 && carddata.chanceOfApproval <= 50 ? '#E4900A' : '')
@@ -305,7 +307,7 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type == 'Rejected' || carddata.type == 'Rejected' ?
                                         <>
-                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Rejected {carddata.loanStatusDate}</div>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Rejected on {carddata.loanStatusDate}</div>
                                         </>
                                         : ""}
                                     {carddata.type == 'Expired' || carddata.type == 'Expired' ?
