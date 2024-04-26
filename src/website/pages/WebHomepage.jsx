@@ -13,6 +13,7 @@ import { handleContactScroll } from '../Components/utility'
 
 import RevenueImg from '../assets/revenue.webp'
 import OperationsImg from '../assets/operations.webp'
+import Discoverability from '../assets/discoverability.svg'
 import { useEffect, useRef, useState } from 'react'
 
 import Step1Gif from '../assets/GIFs/Step 1.gif'
@@ -57,6 +58,7 @@ function WebHomepage(){
             <CustomNavbar />
             <Hero />
             <PatientFinancing />
+            <IncreseDiscoverability />
             <BoostRevenue />
             <Operations />
             <HowItWorks />
@@ -133,11 +135,45 @@ function PatientFinancing(){
     )
 }
 
+function IncreseDiscoverability(){
+    return(
+        <section className="increase-discoverability">
+            <div className="container">
+                <div className="flex-content-wrapper">
+                    <div className="section-content discoverability-container-image" data-aos="zoom-in">
+                        <img src={Discoverability}
+                        style={{
+                            maxWidth: "90%",
+                            display: "block",
+                            margin: "auto"
+                        }}
+                        alt="" />
+                    </div>
+                    <div className="section-content discoverability-container-content">
+                        <div className="section-content-wrapper">
+                            <h3>Increase Clinic's <br/> Discoverability</h3>
+                            <p className="text-content">Get more patients to discover your clinic and book appointments and treatments.</p>
+                            {/* <p className="text-content">Available EMI tenures are of 3 to 18 months.</p> */}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
 function BoostRevenue(){
     return(
         <section className="boost-revenue">
             <div className="container">
                 <div className="flex-content-wrapper">
+                    <div className="section-content revenue-container-content">
+                        <div className="section-content-wrapper">
+                            <h3>Boost your <br/>Revenue</h3>
+                            <p className="text-content">Convert and retain more patients, <br/>elevate patient satisfaction and maximize your revenue.</p>
+                            {/* <p className="text-content">Available EMI tenures are of 3 to 18 months.</p> */}
+                        </div>
+                    </div>
                     <div className="section-content revenue-container-image" data-aos="zoom-in">
                         <img src={RevenueImg}
                         style={{
@@ -146,13 +182,6 @@ function BoostRevenue(){
                             margin: "auto"
                         }}
                         alt="" />
-                    </div>
-                    <div className="section-content revenue-container-content">
-                        <div className="section-content-wrapper">
-                            <h3>Boost your <br/>Revenue</h3>
-                            <p className="text-content">Convert and retain more patients, <br/>elevate patient satisfaction and maximize your revenue.</p>
-                            {/* <p className="text-content">Available EMI tenures are of 3 to 18 months.</p> */}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -165,13 +194,6 @@ function Operations(){
         <section className="operations">
             <div className="container">
                 <div className="flex-content-wrapper">
-                    <div className="section-content operations-container-content">
-                        <div className="section-content-wrapper">
-                            <h3>Streamlined <br/>Operations</h3>
-                            <p className="text-content">Maximize your operational efficiency with CarePay’s instant credit approvals and payouts.</p>
-                            {/* <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p> */}
-                        </div>
-                    </div>
                     <div className="section-content operations-container-image" data-aos="zoom-in">
                         <img src={OperationsImg}
                         style={{
@@ -179,6 +201,13 @@ function Operations(){
                             display: "block"
                         }}
                         alt="" />
+                    </div>
+                    <div className="section-content operations-container-content">
+                        <div className="section-content-wrapper">
+                            <h3>Streamlined <br/>Operations</h3>
+                            <p className="text-content">Maximize your operational efficiency with CarePay’s instant credit approvals and payouts.</p>
+                            {/* <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p> */}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -230,8 +259,10 @@ function HowItWorks(){
                                 <div className={active==="tab-4"?"tab active":"tab"} onClick={()=>setActive("tab-4")}>Step 4</div>
                                 <div className={active==="tab-5"?"tab active":"tab"} onClick={()=>setActive("tab-5")}>Step 5</div>
                             </div>
-                            <p ref={refCaption} className="text-content"></p>
-                            {active==="tab-3" && <p style={{marginTop:0, fontSize:"12px"}}>Available EMI tenures are of 3/6/10/12/15/18 months.</p>}
+                            <div className="captionContainer">
+                                <p ref={refCaption} className="text-content"></p>
+                                {active==="tab-3" && <p style={{marginTop:"1.5rem", fontSize:"12px"}}>Available EMI tenures are of 3/6/10/12/15/18 months.</p>}
+                            </div>
                         </div>
                         <div className="section-content how-it-works-image">
                             <div className="gif-wrapper">

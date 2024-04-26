@@ -47,13 +47,16 @@ section.patient-financing{
     }
 }
 
-section.boost-revenue{
+section.increase-discoverability{
+    h2, p{
+        text-align: left;
+    }
     div.container{
         div.section-content{
             justify-content: flex-end;
 
         }
-        div.revenue-container-content{
+        div.discoverability-container-content{
             div.section-content-wrapper{
                 h3, p.text-content{
                     text-align: right;
@@ -63,12 +66,24 @@ section.boost-revenue{
     }
 }
 
-section.operations{
+section.boost-revenue{
     background: #ECEBFF;
+    div.container{
+        div.section-content{
+            justify-content: flex-end;
 
-    h2, p{
-        text-align: left;
+        }
+        div.revenue-container-content{
+            div.section-content-wrapper{
+                h3, p.text-content{
+                    text-align: left;
+                }
+            }
+        }
     }
+}
+
+section.operations{
 
     div.container{
         div.flex-content-wrapper{
@@ -77,12 +92,21 @@ section.operations{
                     margin: 2rem auto 0 auto;
                 }
             }
+            div.operations-container-content{
+                div.section-content-wrapper{
+                    h3, p.text-content{
+                        text-align: right;
+                    }
+                }
+            }
         }
     }
 }
 
 section.how-it-works{
     padding-bottom: 5vw;
+    background: #ECEBFF;
+
     div.container{
         // width: 70%;
         div.flex-content-wrapper{
@@ -673,6 +697,20 @@ div.tabs-bar{
         }
     }
 
+    section.increase-discoverability{
+        div.container{
+            div.flex-content-wrapper{
+                div.discoverability-container-image{
+                    order: 2;
+                    margin-top: 1rem;
+                }
+                div.discoverability-container-content{
+                    order: 1;
+                }
+            }
+        }
+    }
+
     section.boost-revenue{
         div.container{
             div.flex-content-wrapper{
@@ -716,6 +754,11 @@ div.tabs-bar{
                         // margin: 1rem 1rem;
                     }
 
+                    div.captionContainer{
+                        background: white;
+                        padding: 16px 12px;
+                        border-radius: 8px;
+                    }
                 }
                 div.how-it-works-image{
                     margin-top: 2rem;
