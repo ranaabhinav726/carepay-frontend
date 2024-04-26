@@ -278,11 +278,11 @@ export default function Scoutoverview({ filter, setfilter }) {
                   <div className="topbox">
                     <h3>Monthly leads
                       <br></br> per clinic </h3>
-                    <h5>{leadsPerClinic.monthlyLeadForScoutPerClinic}</h5>
+                    <h5>{leadsPerClinic.leadsPerClinic}</h5>
                   </div>
                   <div className="bottombox">
                     <h3>Company <br></br> average</h3>
-                    <h5>{leadsPerClinic.companyAvg ? leadsPerClinic.companyAvg.toFixed(2) : ""}</h5>
+                    <h5>{leadsPerClinic.leadsPerClinicCarepay ? leadsPerClinic.leadsPerClinicCarepay.toFixed(2) : ""}</h5>
                   </div>
                 </div>
               </div>
