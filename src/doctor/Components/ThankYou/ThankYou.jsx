@@ -58,7 +58,7 @@ const ThankYou = () =>{
             <img id='lens' src={Lens} alt="" />
             <h2 className='clr-purple'>Thank you!</h2>
             <p className='line1'>Your application is under review,<br/>we will inform you once verified.</p>
-            <p className='line2'>This typically takes around 30 mins...</p>
+            <p className='line2'>This typically takes around 24-48 hrs...</p>
             <div className="msg">You will be notified on your<br/>registered contact number <strong style={{whiteSpace: "nowrap"}}>+91 {phoneNo}</strong><br/> and email-id <strong style={{whiteSpace: "nowrap"}}>{email}</strong> once your application is verified.</div>
             <button onClick={(e)=>checkVerificationStatus(e)} className="submit">Refresh status</button>
         </main>
