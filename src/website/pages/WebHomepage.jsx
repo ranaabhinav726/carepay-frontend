@@ -117,7 +117,7 @@ function PatientFinancing(){
                     <div className="section-content financing-container-content">
                         <div className="section-content-wrapper">
                             <h3>Patient <br/>Financing</h3>
-                            <p className="text-content">Partner with CarePay to empower your patients with flexible EMI options and real-time credit approval, enhancing their access to quality healthcare</p>
+                            <p className="text-content">Partner with CarePay to empower your patients with flexible EMI options and real-time credit approval, enhancing their access to quality healthcare.</p>
                             <p className="text-content" style={{fontSize:"90%"}}>Available EMI tenures are of 3 to 18 months.</p>
                         </div>
                     </div>
@@ -595,7 +595,7 @@ export function Contact(){
                         <div className={"flex-content-wrapper"+ (switchComp?" hide":"")}>
                             <div className="contact-container-heading">
                                 <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's take your practice to the next level</h3>
-                                <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services</p>
+                                <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services.</p>
                             </div>
                             <div className="contact-container-form">
                                 <label htmlFor="name">
