@@ -24,7 +24,7 @@ export default function Scoutoverview({ filter, setfilter }) {
   //   Dec: 600
   // };
 
-  const chartData = graphData.reverse();
+  const chartData = graphData;
 
   const categories = chartData.map(data => `${data.month} ${data.year}`);
   const seriesData = chartData.map(data => data.value);
@@ -117,7 +117,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     if (window.sessionStorage.getItem('role') === 'SCOUT') {
       getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, graphfilter, callback => {
         if (callback.message === 'success') {
-          setGraphData(callback.data)
+          setGraphData((callback.data).reverse())
         }
 
       })
@@ -154,7 +154,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
       getParentScoutTrendDataApi(window.sessionStorage.getItem('parentScoutId'), graphswitch, graphfilter, callback => {
         if (callback.message === 'success') {
-          setGraphData(callback.data)
+          setGraphData((callback.data).reverse())
         }
 
       })
@@ -176,7 +176,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     if (window.sessionStorage.getItem('role') === 'SCOUT') {
       getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, data, callback => {
         if (callback.message === 'success') {
-          setGraphData(callback.data)
+          setGraphData((callback.data).reverse())
         }
 
       })
@@ -195,7 +195,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
       getParentScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, data, callback => {
         if (callback.message === 'success') {
-          setGraphData(callback.data)
+          setGraphData((callback.data).reverse())
         }
 
       })
@@ -208,7 +208,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     if (window.sessionStorage.getItem('role') === 'SCOUT') {
       getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), data, graphfilter, callback => {
         if (callback.message === 'success') {
-          setgraphfilter(callback.data)
+          setGraphData((callback.data).reverse())
         }
 
       })
@@ -222,7 +222,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
       getParentScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), data, graphfilter, callback => {
         if (callback.message === 'success') {
-          setGraphData(callback.data)
+          setGraphData((callback.data).reverse())
         }
 
       })
