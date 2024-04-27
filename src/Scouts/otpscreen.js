@@ -25,6 +25,7 @@ const LoginScout = () => {
                 navigate(routes.SCOUTES_DASHBOARD)
             } else {
                 seterrorMsg('Invalid OTP !')
+                setLoaderState(false)
             }
         })
     }
@@ -105,9 +106,9 @@ const LoginScout = () => {
                         />
                         <span className="text-danger">{errorMsg}</span>
                         <div>
-                            <button onClick={() => Submitpaas()} className={roleData !== '' ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={roleData!=='' ? false : true}>Submit OTP</button>
+                            {/* <button onClick={() => Submitpaas()} className={roleData !== '' ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={roleData!=='' ? false : true}>Submit OTP</button> */}
 
-                            {/* <button onClick={() => Submit()} className={otp.length === 4 ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={otp.length === 4 ? false : true}>Submit OTP</button> */}
+                            <button onClick={() => Submit()} className={otp.length === 4 ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={otp.length === 4 ? false : true}>Submit OTP</button>
                         </div>
                     </div>
                 </>}

@@ -288,7 +288,7 @@ export default function Scoutoverview({ filter, setfilter }) {
               </div>
             </div>
 
-            <div className="row bargraph">
+            {/* <div className="row bargraph">
               <h5><span><PiChartBarFill /></span> Trend graphs</h5>
               <div className="tabsrow">
                 <div className={`tabs ${graphfilter === 'Disbursed' ? 'showtabs' : ''}`} onClick={() => graph('Disbursed')}>
@@ -317,11 +317,9 @@ export default function Scoutoverview({ filter, setfilter }) {
                 <div className="chart">
                   <ReactApexChart options={options} series={[{ data: seriesData }]} type="bar" height={250} width={'100%'} />
                 </div>
-                {/* <div className="text">
-                  <h5>This graph shows the number of loans <span>disbursed</span> successfully each month.</h5>
-                </div> */}
+                
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         {console.log(filter, 'filter')}
