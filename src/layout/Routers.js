@@ -167,7 +167,7 @@ let baseUrl = process.env.REACT_APP_BACKEND;
 // Add a request interceptor
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -188,12 +188,12 @@ axios.interceptors.response.use(
         originalRequest._retry = true;
   
         try {
-          const refreshToken = localStorage.getItem('refreshToken');
+          const refreshToken = localStorage.getItem('refresh_token');
            // API route for "refresh token" needs to be updated below-
           const response = await axios.post(baseUrl + '/api/refresh-token', { refreshToken });
           const { token } = response.data;
   
-          localStorage.setItem('authToken', token);
+          localStorage.setItem('access_token', token);
   
           // Retry the original request with the new token
           originalRequest.headers.Authorization = `Bearer ${token}`;

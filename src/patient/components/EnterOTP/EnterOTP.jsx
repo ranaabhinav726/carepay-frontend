@@ -209,7 +209,13 @@ const EnterOTP = () =>{
             .then((response) => {
                 console.log(response)
                 if(response.data.message === "success"){
-                    userId = response.data.data;
+                    userId = response.data.data.data;
+                    let accessToken = response.data.data.access_token;
+                    let refreshToken = response.data.data.refresh_token;
+                    if(accessToken && refreshToken){
+                        localStorage.setItem("access_token", accessToken);
+                        localStorage.setItem("refresh_token", refreshToken);
+                    }
                     if(userId){
                         localStorage.setItem("userId", userId);
                         axios.get(env.api_Url + "userDetails/getFormStatusByUserId?userId=" + userId)
