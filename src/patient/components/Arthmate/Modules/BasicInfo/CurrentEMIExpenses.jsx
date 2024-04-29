@@ -3,7 +3,7 @@ import { Header } from "../../comps/Header";
 import './styles/currentEMIExpenses.scss'
 import { showErrorOnUI } from "../../../../environment/environment";
 import { onlyCharacters, onlyNumbers } from "../../servicesAndUtility/utilityFunctions";
-import { saveOrUpdateAdditionalUserData } from "../../servicesAndUtility/api";
+import { getNbfcScoreBre, saveOrUpdateAdditionalUserData } from "../../servicesAndUtility/api";
 import { useNavigate } from "react-router-dom";
 
 export default function ArthCurrentEMIExpenses(){
@@ -31,7 +31,12 @@ export default function ArthCurrentEMIExpenses(){
 
         saveOrUpdateAdditionalUserData(data, res=>{
             if(res.data.status === 200){
-                navigate("/patient/ArthmateOffers")
+                getNbfcScoreBre(userId, res=>{
+                    if(res.data.status === 200){
+                        console.log(res);
+                        navigate("/patient/ArthmateOffers")
+                    }
+                })
             }
         })
     }

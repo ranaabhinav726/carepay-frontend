@@ -73,7 +73,7 @@ const MainScout = () => {
     }, [])
 
     const copyText = (data) => {
-        const textToCopy = data 
+        const textToCopy = data
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
                 console.log('Text copied to clipboard');
@@ -152,18 +152,18 @@ const MainScout = () => {
                             <div className="txn-card">
                                 <img className="three-dots" src={Dots} onClick={() => shareLinkTab(carddata)} />
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{Number(carddata.loanAmount).toLocaleString()}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY1 : Amount} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{Number(carddata.loanAmount).toLocaleString()}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY2 : Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY2 : Person} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.patientName}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY3 : Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY3 : Treatment} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.loanReason}</div>
                                 </div>
                                 <div className="" style={{ fontSize: '14px', display: 'flex' }}>
-                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' ? GREY4 : Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
+                                    <img src={carddata.type == 'Rejected' || carddata.type === 'Expired' || carddata.type === 'Aborted' ? GREY4 : Doctor} style={{ marginTop: '5px', width: '25px' }} />&nbsp;<div style={{ marginTop: '8px' }}>{carddata.clinicName}</div>
                                 </div>
-                                <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied on&nbsp; {carddata.loanPushedDate?carddata.loanPushedDate:carddata.loanApplyDate}</p>
+                                <p style={{ fontSize: '12px', marginTop: '10px' }}>Applied on&nbsp; {carddata.loanPushedDate ? carddata.loanPushedDate : carddata.loanApplyDate}</p>
                                 <div>
 
                                     {carddata.type === 'Approved' ?
@@ -172,16 +172,16 @@ const MainScout = () => {
                                             <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
                                                 Approved
                                             </div>
-                                            {carddata.esignUrl?
-                                            <div className="text-center">
-                                                <a target="_blank"
-                                                >
-                                                    <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.esignUrl)} className="carepay-button-card">&nbsp;
-                                                        <div className="share-btn"> <WhatsApp /> Share link</div>
-                                                    </button>
-                                                </a>
-                                            </div>
-                                            :""}
+                                            {carddata.esignUrl ?
+                                                <div className="text-center">
+                                                    <a target="_blank"
+                                                    >
+                                                        <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.esignUrl)} className="carepay-button-card">&nbsp;
+                                                            <div className="share-btn"> <WhatsApp /> Share link</div>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                : ""}
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
                                         </>
                                         : ""}
@@ -217,7 +217,7 @@ const MainScout = () => {
                                                 background: carddata.chanceOfApproval <= 20 ? '#EE6E6E' :
                                                     (carddata.chanceOfApproval > 20 && carddata.chanceOfApproval <= 50 ? '#E4900A' : '')
                                             }}>
-                                                {carddata.chanceOfApproval==0||carddata.chanceOfApproval===null?'10':carddata.chanceOfApproval}% Chance of approval
+                                                {carddata.chanceOfApproval == 0 || carddata.chanceOfApproval === null ? '10' : carddata.chanceOfApproval}% Chance of approval
                                             </div>
                                         </>
                                         : ""}
@@ -305,12 +305,17 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type == 'Rejected' || carddata.type == 'Rejected' ?
                                         <>
-                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Rejected </div>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Rejected {carddata.loanStatusDate}</div>
                                         </>
                                         : ""}
                                     {carddata.type == 'Expired' || carddata.type == 'Expired' ?
                                         <>
-                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Expired </div>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Expired on {carddata.loanStatusDate} </div>
+                                        </>
+                                        : ""}
+                                    {carddata.type == 'Aborted' || carddata.type == 'Aborted' ?
+                                        <>
+                                            <div className="approved-div" style={{ background: '#a0a0a0' }}><img src={Alertimage} style={{ width: '14px' }} />&nbsp;Aborted on {carddata.loanStatusDate} </div>
                                         </>
                                         : ""}
 
@@ -391,13 +396,13 @@ const MainScout = () => {
 
                         </div>
                         <div style={{ marginBottom: '20px', marginTop: '20px' }} >
-                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex',cursor:'pointer' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Call Patient</div></div> : ""}
-                            {userData.userId !== undefined && userData.userId !== '' ? <div onClick={() => getLoanData(userData.userId)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px',cursor:'pointer' }}><DescriptionRounded style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>View loan details</div></div> : ""}
+                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Call Patient</div></div> : ""}
+                            {userData.userId !== undefined && userData.userId !== '' ? <div onClick={() => getLoanData(userData.userId)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><DescriptionRounded style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>View loan details</div></div> : ""}
 
-                            <div onClick={() => sendlink('link', userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px',cursor:'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
-                            <div onClick={() => copyText(userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px',cursor:'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>
-                            {userData.esignUrl !== '' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px',cursor:'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
-                            <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px',cursor:'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
+                            <div onClick={() => sendlink('link', userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
+                            <div onClick={() => copyText(userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>
+                            {userData.esignUrl !== '' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
+                            <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
                         </div>
                     </div>
                 </div>
