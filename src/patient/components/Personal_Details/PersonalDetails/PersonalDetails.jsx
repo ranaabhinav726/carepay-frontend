@@ -79,11 +79,11 @@ const PersonalDetails = () =>{
                     // console.log(data?.dateOfBirth)
                     setDob(data?.dateOfBirth)
                     setEmail(data?.emailId)
-                    setMaritalStatus(data.maritalStatus ?? "Unmarried");
-                    setAltNumber(data?.alternateNumber ?? "");
-                    setRefName(data?.referenceName ?? "");
-                    setRefNumber(data?.referenceNumber ?? "");
-                    setRefRelation(data?.referenceRelation ?? "");
+                    setMaritalStatus(data.maritalStatus || "Unmarried");
+                    setAltNumber(data?.alternateNumber || "");
+                    setRefName(data?.referenceName || "");
+                    setRefNumber(data?.referenceNumber || "");
+                    setRefRelation(data?.referenceRelation || "");
                     if(response.data.data.panNo === null){
                         getDataFromDecentro();
                     }
