@@ -190,13 +190,13 @@ axios.interceptors.response.use(
         try {
           const refreshToken = localStorage.getItem('refresh_token');
            // API route for "refresh token" needs to be updated below-
-          const response = await axios.post(baseUrl + '/api/refresh-token', { refreshToken });
-          const { token } = response.data;
+          const response = await axios.post(baseUrl + 'auth/refresh?refreshToken=' + refreshToken);
+          const { Authorization } = response.data;
   
-          localStorage.setItem('access_token', token);
+          localStorage.setItem('access_token', Authorization);
   
           // Retry the original request with the new token
-          originalRequest.headers.Authorization = `Bearer ${token}`;
+          originalRequest.headers.Authorization = `Bearer ${Authorization}`;
           return axios(originalRequest);
         } catch (error) {
           // Handle refresh token error or redirect to login
