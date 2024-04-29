@@ -118,9 +118,9 @@ const MainScout = () => {
     }
     return (
         <>
-            <div className=" over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '55px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
+            <div className=" over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '51px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
                 <div style={{ width: '100%', display: 'flex' }}>
-                    <div style={{ width: '40%', fontSize: '20px', marginTop: '5px', marginLeft: '10px' }}>All loans</div>
+                    <div style={{ width: '40%', fontSize: '20px', marginTop: '5px', marginLeft: '18px' }}>All loans</div>
                     <div className="text-center" style={{ width: '60%', background: '#ECEBFF', borderRadius: '5px', padding: '5px', marginRight: '10px' }}>
                         <div style={{ width: '100%', display: 'flex' }}>
                             <div style={{ width: '50%' }}><button onClick={() => settabType('overview')} style={{ width: '100%', background: tabType === 'overview' ? '#fff' : 'transparent', outline: 'none', padding: '5px 4px', border: 'none', borderRadius: '5px', color: tabType === 'overview' ? '#8f8dbd' : '#000', fontSize: '12px' }} className="">Overview</button></div>
@@ -168,8 +168,8 @@ const MainScout = () => {
 
                                     {carddata.type === 'Approved' ?
                                         <>
-                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
-                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
+                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                 Approved
                                             </div>
                                             {carddata.esignUrl ?
@@ -177,19 +177,19 @@ const MainScout = () => {
                                                     <a target="_blank"
                                                     >
                                                         <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.esignUrl)} className="carepay-button-card">&nbsp;
-                                                            <div className="share-btn"> <WhatsApp /> Share link</div>
+                                                            <div className="share-btn"> <WhatsApp />&nbsp;&nbsp;&nbsp; Share link</div>
                                                         </button>
                                                     </a>
                                                 </div>
                                                 : ""}
-                                            <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
+                                            <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved on {carddata.loanStatusDate}</div>
                                         </>
                                         : ""}
                                     {carddata.type === 'Application' ?
                                         <>
 
-                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
-                                            <div className="text-center" style={{ background: '#D6F5FF', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
+                                            <div className="text-center" style={{ background: '#D6F5FF', color: '#217EB2', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                 Application
                                             </div>
                                         </>
@@ -199,16 +199,16 @@ const MainScout = () => {
 
                                             <div className="d-flex w-100" style={{ width: '100%', display: 'flex' }}>
                                                 <div style={{ width: '50%' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
-                                                    <div className="text-center" style={{ width: '50%', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
+                                                    <div className="text-center" style={{ width: '50%', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                         Under Review
                                                     </div>
                                                 </div>
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision in:</div>
-                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px',marginBottom:'4px' }}>Expect decision in:</div>
+                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                         {carddata.estimateTime}&nbsp;minutes
                                                     </div>
                                                 </div>
@@ -230,16 +230,16 @@ const MainScout = () => {
                                         </div> */}
                                             <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
                                                 <div style={{ width: '50%' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
                                                         <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
-                                                            Document Required
+                                                            Documents Required
                                                         </div>
                                                 </div>
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px' }}>Expect decision in:</div>
-                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px',marginBottom:'4px' }}>Expect decision in:</div>
+                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                         {carddata.estimateTime}&nbsp;minutes
                                                     </div>
                                                 </div>
@@ -258,8 +258,8 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'eSign & eMandate' ?
                                         <>
-                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
-                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
+                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                 eSign & eMandate
                                             </div>
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
@@ -268,8 +268,8 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'Pending disbursal' ?
                                         <>
-                                            <div style={{ marginTop: '10px', fontSize: '12px' }}>Status:</div>
-                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
+                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
                                                 Pending disbursal
                                             </div>
                                             {/* <div className="text-center">
@@ -403,7 +403,7 @@ const MainScout = () => {
 
                             <div onClick={() => sendlink('link', userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
                             <div onClick={() => copyText(userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>
-                            {userData.esignUrl !== '' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
+                            {userData.esignUrl !== ''&&userData.type!=='Approved' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
                             <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
                         </div>
                     </div>

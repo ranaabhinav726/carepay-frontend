@@ -86,7 +86,7 @@ const LoginScout = () => {
                         </p>
                     </div>
                     <div className="scout-second-div otp-enter ">
-                        <p>Enter the OTP sent to </p>
+                        <p style={{marginBottom:'10px'}}>Enter the OTP sent to </p>
                         <div className="d-flex" style={{ width: '100%', display: 'flex', marginBottom: '15px' }}>
                             <div style={{ width: '50%' }}>
                                 <p><b>+91 {window.sessionStorage.getItem('scoutMobile')}</b></p>

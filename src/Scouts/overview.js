@@ -264,7 +264,7 @@ export default function Scoutoverview({ filter, setfilter }) {
               <div className='' style={{ width: '50%' }}>
                 <div className="box">
                   <div className="topbox">
-                    <h3>Potential <br></br> Captured</h3>
+                    <h3>Potential <br></br> captured</h3>
                     <h5>{potentialData !== '' && potentialData.potential !== undefined ? potentialData.potential : ''}</h5>
                   </div>
                   <div className="bottombox">

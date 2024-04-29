@@ -999,10 +999,11 @@ div.bottomPopOverModal {
 
   .input-number {
     background-color: #f8f8fe;
-    padding: 10px;
+    padding: 12px;
     border: none;
     outline: none;
     border-radius: 5px;
+    font-size: 14px;
   }
 }
 
@@ -1010,7 +1011,7 @@ div.bottomPopOverModal {
   margin-top: 20px;
   color: #fff;
   background: #514C9F;
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -1034,7 +1035,7 @@ div.bottomPopOverModal {
   margin-top: 20px;
   color: #fff;
   background: #908DC1;
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -1100,7 +1101,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .txn-card {
   border: 1px solid #0000001A;
-  min-height: 200px;
+  min-height: 190px;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -1115,7 +1116,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-left: -10px;
   margin-bottom: -10px;
   margin-right: -10px;
-  margin-top: 16px;
+  margin-top: 10px;
   border-bottom-left-radius: 10px;
   padding: 6px 13px;
   border-bottom-right-radius: 10px;
@@ -1127,7 +1128,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-top: 20px;
   color: #fff;
   background: #514C9F;
-  padding: 5px 10px;
+  padding: 10px;
   border-radius: 5px;
   border: none;
   outline: none;

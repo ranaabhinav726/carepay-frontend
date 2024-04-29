@@ -55,10 +55,10 @@ const LoginScout = () => {
                         <p>Flexible EMI options and real-time <br />loan approval</p>
                     </div>
                     <div className="scout-second-div">
-                        <h4>Log in</h4>
-                        <label>Mobile Number</label>
+                        <h4 style={{marginBottom:'10px'}}>Log in</h4>
+                        <label >Mobile Number</label>
                         <div className="d-flex" style={{ width: '100%', display: 'flex' }}>
-                            <div style={{ width: '10%', marginTop: '12px' }}>+91</div>
+                            <div style={{ width: '10%', marginTop: '15px' }}>+91</div>
                             <div style={{ width: '90%' }}>
                                 <input
                                     className="input-number"
