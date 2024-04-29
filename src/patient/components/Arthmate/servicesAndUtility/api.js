@@ -40,6 +40,13 @@ export async function saveOrUpdateAdditionalUserData(data, callback){
     }).catch(err=>console.log(err))
 }
 
+export async function getNbfcScoreBre(userId, callback){
+    await axios.get(BASE_URL + "getNbfcScoreBre?userId=" + userId)
+    .then(res=>{
+        callback(res)
+    }).catch(err=>console.log(err))
+}
+
 export async function sendAadharOtp(userId, callback){
 
     axios.post(BASE_URL + "aadhaarXmlDownloadOtp?userId=" + userId)
