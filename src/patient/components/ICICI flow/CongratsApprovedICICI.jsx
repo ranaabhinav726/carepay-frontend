@@ -18,7 +18,7 @@ const CongratsApprovedICICI = () =>{
     const [loanAmount, ] = useState(Number(amount));
 
     function downloadKfsAndHandleNavigation(){ // download and save KFS then navigate
-        showWaitingModal();
+        // showWaitingModal();
         navigate("/patient/FinalConsent", {
             state:{
                 "data" : data,

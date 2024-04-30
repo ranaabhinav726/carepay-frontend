@@ -32,7 +32,7 @@ function FinalConsent(){
     const [doctorName, setDoctorName] = useState("");
     const [consent, setConsent] = useState(false);
 
-    const [kfsUrl, setKfsUrl] = useState("ff");
+    const [kfsUrl, setKfsUrl] = useState("");
 
     const [canResendOtp, setCanResendOtp] = useState(false);
     function allowOtpResend(){
@@ -206,9 +206,9 @@ function FileViewerModal({url, setUrl, setConsent}){
     return(
         <div style={{position:"absolute", left:"0", top:"0", width:"100%", height:"100%", background:"rgba(0,0,0,0.4)", zIndex:"10", padding:"1rem 0.5rem"}}>
             <div style={{borderRadius:"12px", background:"white", padding:"0.5rem", display:"flex", flexDirection:"column", alignItems:"center"}}>
-                <div onClick={()=>{setUrl(null)}} style={{position:"absolute", margin:"5px", right:"18px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer", zIndex:"1"}}>
+                {/* <div onClick={()=>{setUrl(null)}} style={{position:"absolute", margin:"5px", right:"18px", height:"48px", aspectRatio:"1/1", background:"#FAE1CD", borderRadius:"8px", display:"flex", alignItems:"center", justifyContent:"center", padding:"5px", cursor:"pointer", zIndex:"1"}}>
                     <RiDeleteBin6Fill style={{fontSize:"20px", color:"#DB4E4E"}} />
-                </div>
+                </div> */}
                 <div style={{borderRadius:"8px", overflow:"clip", width:"100%", height:"80vh"}}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
                         <Viewer fileUrl={url} />
