@@ -425,7 +425,7 @@ const MainScout = () => {
                                     <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px' }}>{Number(loanData.totalEMI) - Number(loanData.advanceEMI)} &nbsp;months</div>
                                 </div>
                                 <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>EMI amount</p>
-                                    <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px', display: 'flex' }}><CurrencyRupeeSharp style={{ height: '18px', width: '18px' }} />&nbsp; <div style={{}}>{loanData.emiAmount}</div></div>
+                                    <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px', display: 'flex' }}><CurrencyRupeeSharp style={{ height: '18px', width: '18px' }} />&nbsp; <div style={{marginTop:'-2px'}}>{loanData.emiAmount}</div></div>
                                 </div>
 
                             </div>
@@ -450,7 +450,7 @@ const MainScout = () => {
 
                                 </div>
                                 <div style={{ width: '50%' }}>
-                                    <div style={{ textAlign: 'left', fontSize: '12px', fontWeight: '700', display: 'flex' }}><CurrencyRupeeSharp style={{ height: '12px', width: '12px' }} />&nbsp; <div style={{}}>{loanData.advancePayment}</div></div>
+                                    <div style={{ textAlign: 'left', fontSize: '12px', fontWeight: '700', display: 'flex' }}><CurrencyRupeeSharp style={{ height: '12px', width: '12px' }} />&nbsp; <div style={{marginTop:'-2px'}}>{loanData.advancePayment}</div></div>
 
                                 </div>
 
