@@ -3,15 +3,17 @@ import CarepayLogo from '../patient/assets/Logo-carepay.svg'
 import LoanImage from './imagesscouts/loanimage.png'
 import OtpInput from 'react-otp-input';
 import routes from "../layout/Routes";
-import { getScoutRole, verifyOtpApi } from "./actioncreator";
+import { getScoutRole, sendOtpApi, verifyOtpApi } from "./actioncreator";
 import { useNavigate } from "react-router-dom";
 import Loader from '../doctor/assets/loader.gif'
+import Timer from "../patient/components/EnterOTP/Timer";
 
 const LoginScout = () => {
     const [otp, setOtp] = useState('');
     const [loaderState, setLoaderState] = useState(false);
     const [errorMsg, seterrorMsg] = useState('');
     const [roleData, setRolData] = useState('');
+    const [canResendOtp, setCanResendOtp] = useState(false);
 
     let navigate = useNavigate()
     const Submit = () => {
@@ -63,9 +65,23 @@ const LoginScout = () => {
             })
         }
     }, [])
-    const Submitpaas=()=>{
+    const Submitpaas = () => {
         setLoaderState(false)
-                navigate(routes.SCOUTES_DASHBOARD)
+        navigate(routes.SCOUTES_DASHBOARD)
+    }
+    const reSendOtp = () => {
+        setLoaderState(true)
+        sendOtpApi(window.sessionStorage.getItem('scoutMobile'), callback => {
+            console.log(callback)
+            if (callback.message === 'success') {
+                setLoaderState(false)
+                setCanResendOtp(false)
+
+            }
+        })
+    }
+    const allowOtpResend = () => {
+        setCanResendOtp(true);
     }
     return (
         <div className="screen-width-max">
@@ -86,7 +102,7 @@ const LoginScout = () => {
                         </p>
                     </div>
                     <div className="scout-second-div otp-enter ">
-                        <p style={{marginBottom:'10px'}}>Enter the OTP sent to </p>
+                        <p style={{ marginBottom: '10px' }}>Enter the OTP sent to </p>
                         <div className="d-flex" style={{ width: '100%', display: 'flex', marginBottom: '15px' }}>
                             <div style={{ width: '50%' }}>
                                 <p><b>+91 {window.sessionStorage.getItem('scoutMobile')}</b></p>
@@ -110,6 +126,11 @@ const LoginScout = () => {
 
                             <button onClick={() => Submit()} className={otp.length === 4 ? "carepay-button-purple" : 'carepay-button-purple-disable'} disabled={otp.length === 4 ? false : true}>Submit OTP</button>
                         </div>
+                        {canResendOtp ?
+                            <div className="text-center" onClick={() => reSendOtp()} style={{ color: "#514C9F", fontWeight: "700", cursor: "pointer", marginTop: '10px' }}>Resend OTP</div>
+                            :
+                            <div className="text-center" style={{ marginTop: '10px' }}><Timer seconds={45} onTimerEnd={allowOtpResend} /></div>
+                        }
                     </div>
                 </>}
         </div>

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
-export default function Timer({seconds=10, onTimerEnd}){
+export default function Timer({ seconds = 10, onTimerEnd }) {
 
     const [resendTime, setResendTime] = useState(seconds);
-    let min = Math.floor(resendTime/60);
-    let sec = resendTime%60;
+    let min = Math.floor(resendTime / 60);
+    let sec = resendTime % 60;
 
-    function reduceTime(){
-        setResendTime((resendTime)=>resendTime-1);
+    function reduceTime() {
+        setResendTime((resendTime) => resendTime - 1);
     }
-    useEffect(()=>{
-        if(resendTime === 0){
+    useEffect(() => {
+        if (resendTime === 0) {
             onTimerEnd();
             return;
         }
@@ -18,7 +18,7 @@ export default function Timer({seconds=10, onTimerEnd}){
         return () => clearInterval(interval);
     }, [resendTime])
 
-    return(
+    return (
         <span>{` ${min} : ${sec}`}</span>
     )
 }
