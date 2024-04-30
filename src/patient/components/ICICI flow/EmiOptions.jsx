@@ -30,7 +30,7 @@ function EmiOptions(){
 
     const [selected, setSelected] = useState({
         "cardName" : "card-1",
-        "tenure"   : ""
+        "tenure"   : "3"
     });
 
     useEffect(()=>{

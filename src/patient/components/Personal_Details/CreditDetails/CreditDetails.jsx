@@ -192,6 +192,9 @@ const CreditDetails = () => {
                 }
             }).catch(()=>{
 
+            }).finally(()=>{
+                let fullName = localStorage.getItem("fullName");
+                if(fullName) setFullName(fullName);
             });
         }
     }, [])
@@ -307,7 +310,7 @@ const CreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     if(! number) return;
 
-                    navigate('/patient/PersonalDetails');
+                    // navigate('/patient/PersonalDetails');
 
                     // if(amount > 100000){
                     //     navigate('/patient/PrescriptionUpload');
@@ -366,12 +369,13 @@ const CreditDetails = () => {
 
     function amountHandler(val){
         // console.log(val)
-        if(val === ""){
+        if(val === "" || val===0){
             setAmount("");
             setAmountInWords("");
             return;
         }
         if(!val) return;
+        val=val.toString();
         val = val.split("").filter(letter=>letter !==",").join("");
         val = parseInt(val);
         if(val >= 0 && val <= 1000000){
