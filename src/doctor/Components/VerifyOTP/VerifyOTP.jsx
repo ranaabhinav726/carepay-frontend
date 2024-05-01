@@ -164,7 +164,6 @@ const VerifyOTP = () => {
 
     await axios.post(env.api_Url + "getOtp", null, { params: { phoneNumber: phoneNumber, otp: otp } })
       .then(async (response) => {
-        console.log(response)
         if (response.data.status == 200) {
           let accessToken = response.data.data.access_token;
           let refreshToken = response.data.data.refresh_token;
@@ -172,7 +171,8 @@ const VerifyOTP = () => {
             localStorage.setItem("access_token", accessToken);
             localStorage.setItem("refresh_token", refreshToken);
           }
-          let status = response.data.data;
+          let status = response.data.data.data;
+          console.log(status,'statusstatus')
           if (status === "NOT_VERIFIED") {
             await getAndSetDoctorId();
             navigate('/doctor/welcome')

@@ -161,7 +161,7 @@ export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVeri
 // Below code is to send authToken to all APIs and refresh the authToken when it expires.
 // Here, axios interceptors are added to global instance, so they will intercept all axios API calls in this project.
 
-
+let reload = false
 let baseUrl = process.env.REACT_APP_BACKEND;
 let isRefreshing = false;
 // Add a request interceptor
@@ -195,7 +195,10 @@ axios.interceptors.response.use(
         const newToken = await refreshAccessToken(refreshToken);
 
         updateAccessToken(newToken);
-        window.location.reload()
+        if (reload) {
+          window.location.reload()
+          reload = false
+        }
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axios(originalRequest);
       } catch (refreshError) {
