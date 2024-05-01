@@ -172,11 +172,11 @@ const VerifyOTP = () => {
             localStorage.setItem("refresh_token", refreshToken);
           }
           let status = response.data.data.data;
-          console.log(status,'statusstatus')
-          if (status === "NOT_VERIFIED") {
+          console.log(response.data.data.data,'statusstatus')
+          if (response.data.data.data === "NOT_VERIFIED") {
             await getAndSetDoctorId();
             navigate('/doctor/welcome')
-          } else if (status === "VERIFIED") {
+          } else if (response.data.data.data === "VERIFIED") {
             //get and save doctorId
             await axios.get(env.api_Url + "getDoctorDetailsByPhoneNumber?mobileNo=" + phoneNumber)
               .then((response) => {
@@ -188,10 +188,10 @@ const VerifyOTP = () => {
                   apiErrorHandler();
                 }
               })
-          } else if (!!status) {
+          } else if (!!response.data.data.data) {
             await getAndSetDoctorId();
             let path = "/doctor/welcome";
-            switch (status) {
+            switch (response.data.data.data) {
               case "PERSONAL":
                 path = "/doctor/PracticeDetails";
                 break;
