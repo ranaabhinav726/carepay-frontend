@@ -80,7 +80,7 @@ const CongratsPreApprovedICICI = () =>{
                     <p>Your required credit amount <strong>₹{loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}</strong> is within the approved limit.</p>
                 </div>
                 <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-                    <input checked={readTerms} onClick={handleCheckBoxClick} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="TermsConsentCheckbox" />
+                    <input autoComplete="off" checked={readTerms} onClick={handleCheckBoxClick} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="TermsConsentCheckbox" />
                     <label htmlFor="TermsConsentCheckbox" style={{userSelect:"none"}}>I accept the financing <span style={{color:"#000000", fontWeight:"600", textDecoration:"underline", cursor:"pointer"}}>Terms & Conditions</span> of ICICI.</label>
                 </div>
                 <button className={"submit" + (!readTerms?" disabled" : "")} onClick={()=>handleNavigate()}>Continue with ICICI bank</button>

@@ -163,7 +163,7 @@ export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVeri
 
 
 let baseUrl = process.env.REACT_APP_BACKEND;
-
+let isRefreshing = false;
 // Add a request interceptor
 axios.interceptors.request.use(
   (config) => {
@@ -176,33 +176,82 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Add a response interceptor
 axios.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalRequest = error.config;
-  
-      // If the error status is 401 or 403 and there is no originalRequest._retry flag,
-      // it means the token has expired and we need to refresh it
-      if ((error.response.status === 401 || error.response.status === 403) && !originalRequest._retry) {
-        originalRequest._retry = true;
-  
-        try {
-          const refreshToken = localStorage.getItem('refresh_token');
-           // API route for "refresh token" needs to be updated below-
-          const response = await axios.post(baseUrl + 'auth/refresh?refreshToken=' + refreshToken);
-          const { Authorization } = response.data;
-  
-          localStorage.setItem('access_token', Authorization);
-  
-          // Retry the original request with the new token
-          originalRequest.headers.Authorization = `Bearer ${Authorization}`;
-          return axios(originalRequest);
-        } catch (error) {
-          // Handle refresh token error or redirect to login
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if ((error.response.status === 401 || error.response.status === 403) && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const refreshToken = localStorage.getItem('refresh_token');
+
+        if (!refreshToken) {
+          redirectToLogin();
+          return Promise.reject(error);
         }
+
+        const newToken = await refreshAccessToken(refreshToken);
+
+        updateAccessToken(newToken);
+        window.location.reload()
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        return axios(originalRequest);
+      } catch (refreshError) {
+        handleRefreshTokenError(refreshError);
       }
-  
-      return Promise.reject(error);
     }
-  );
+
+    return Promise.reject(error);
+  }
+);
+
+function redirectToLogin() {
+  window.localStorage.clear()
+  const userType = window.location.href.includes('patient');
+  if (userType) {
+    window.location.href = '/patient';
+  } else {
+    window.location.href = '/doctor';
+  }
+  isRefreshing = false;
+}
+
+async function refreshAccessToken(refreshToken) {
+  if (isRefreshing) {
+    return;
+  }
+  isRefreshing = true;
+  try {
+    const response = await axios.post(baseUrl + 'auth/refresh?refreshToken=' + refreshToken)
+
+    return response.data.Authorization;
+
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.error === "Invalid or expired refresh token") {
+      throw new Error("Invalid or expired refresh token");
+    } else {
+      throw error;
+    }
+  } finally {
+    isRefreshing = false;
+  }
+}
+
+
+function updateAccessToken(newToken) {
+  localStorage.setItem('access_token', newToken);
+}
+
+function handleRefreshTokenError(refreshError) {
+  console.error('Refresh token error:', refreshError);
+
+  if (refreshError.response && (refreshError.response.status === 401 || refreshError.response.status === 403)) {
+    redirectToLogin();
+  } else {
+    redirectToLogin();
+  }
+}
+
+

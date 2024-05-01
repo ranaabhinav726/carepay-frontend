@@ -42,7 +42,7 @@ export default function ArthKyc(){
                 <img style={{margin:"2rem auto", maxWidth:"25%"}} src={Fingerprint} alt="" />
             </div>
             <div style={{display:"flex", gap:"12px", marginTop:"1.8rem", marginBottom:"1rem"}}>
-                <input 
+                <input autoComplete="off" 
                     value={consent} 
                     onChange={()=>setConsent(!consent)} 
                     type="checkbox" 

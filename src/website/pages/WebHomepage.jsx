@@ -601,7 +601,7 @@ export function Contact(){
                                 <label htmlFor="name">
                                     Your name
                                 </label>
-                                <input 
+                                <input autoComplete="off" 
                                     id='name' 
                                     type='text' 
                                     placeholder='Enter your name here'
@@ -611,7 +611,7 @@ export function Contact(){
                                 <label htmlFor="email">
                                     E-mail ID
                                 </label>
-                                <input 
+                                <input autoComplete="off" 
                                     id='email' 
                                     type='email' 
                                     placeholder='E-mail ID'
@@ -621,7 +621,7 @@ export function Contact(){
                                 <label htmlFor="number">
                                     Contact number
                                 </label>
-                                <input 
+                                <input autoComplete="off" 
                                     id='number' 
                                     type='number' 
                                     placeholder='Contact number'
@@ -631,7 +631,7 @@ export function Contact(){
                                 <label htmlFor="query">
                                     Query
                                 </label>
-                                <input 
+                                <input autoComplete="off" 
                                     id='query' 
                                     type='text' 
                                     placeholder='Your query'

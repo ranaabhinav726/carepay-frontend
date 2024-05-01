@@ -401,7 +401,7 @@ const ArthEmploymentDetails = () =>{
         label = label.charAt(0).toUpperCase() + label.slice(1);
         return(
             <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} key={idx} >
-                <input 
+                <input autoComplete="off" 
                     id={option} 
                     name={"empType"} 
                     value={option}
@@ -477,7 +477,7 @@ const ArthEmploymentDetails = () =>{
         {empType === "SALARIED" ?
             <div className="companyName">
                 <p>Current company name</p>
-                <input 
+                <input autoComplete="off" 
                     id="companyName"
                     type="text" 
                     value={companyName}
@@ -507,7 +507,7 @@ const ArthEmploymentDetails = () =>{
                 </div>
                 <div className="businessName">
                     <p>Name of business</p>
-                    <input 
+                    <input autoComplete="off" 
                         id="businessName"
                         type="text" 
                         value={businessName}
@@ -521,7 +521,7 @@ const ArthEmploymentDetails = () =>{
 
         <div className="income">
             <p>Monthly in-hand salary/income</p>
-            <input 
+            <input autoComplete="off" 
                 id="salary"
                 type="number" 
                 value={salary}
@@ -544,7 +544,7 @@ const ArthEmploymentDetails = () =>{
 
         {/* <div className="familyIncome">
             <p>Monthly family income (optional)</p>
-            <input 
+            <input autoComplete="off" 
                 type="number" 
                 value={familyIncome}
                 onChange={(e)=>setFamilyIncome(e.target.value)}
@@ -555,7 +555,7 @@ const ArthEmploymentDetails = () =>{
         
         {/* <div className="companyAddress-line1">
             <p>Current workplace address (line 1)</p>
-            <input 
+            <input autoComplete="off" 
                 id="companyAddL1"
                 type="text" 
                 value={companyAddL1 ?? ""}
@@ -566,7 +566,7 @@ const ArthEmploymentDetails = () =>{
         </div> */}
         {/* <div className="companyAddress-line2">
             <p>Current workplace address (line 2)</p>
-            <input 
+            <input autoComplete="off" 
                 id="companyAddL2"
                 type="text" 
                 value={companyAddL2 ?? ""}
@@ -577,7 +577,7 @@ const ArthEmploymentDetails = () =>{
         </div> */}
         {/* <div className="companyPincode">
             <p>Current workplace Pincode</p>
-            <input 
+            <input autoComplete="off" 
                 id="pincode"
                 type="number" 
                 value={pincode ?? ""}
@@ -604,7 +604,7 @@ const ArthEmploymentDetails = () =>{
         {IndustryType==="Other" &&
             <div className="IndustryTypeOther">
                 <p>Type-In your industry</p>
-                <input 
+                <input autoComplete="off" 
                     id="IndustryTypeOther"
                     type="text" 
                     value={IndustryTypeOther ?? ""}
@@ -659,7 +659,7 @@ const ArthEmploymentDetails = () =>{
         </div> 
         
         {/* <div id="consent" className="consentBox">
-            <input
+            <input autoComplete="off"
             onClick={(e)=>setConsent(e.target.checked)} type="checkbox" />
             <label htmlFor="consent">I declare the above information is true and correct. I allow CareCoin Technologies Pvt Ltd and its lending partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax.</label><br />
         </div> */}

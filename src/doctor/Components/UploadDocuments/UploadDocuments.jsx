@@ -275,7 +275,7 @@ const UploadDocuments = () =>{
                     {panCard == "" && <MdCloudUpload className="upload-icon" />}
                     {panCard == "" && "Click to " + (Boolean(panCardUrl)?"re-":"") + "upload PAN"}
                     {panCard && panCard.name}
-                    <input id="pan" type="file" onChange={(e)=>panUploadHandler(e)} />
+                    <input autoComplete="off" id="pan" type="file" onChange={(e)=>panUploadHandler(e)} />
                 </label>
                 <p className="fileTypeError">Only .pdf, .png, .jpg and .jpeg files are allowed</p>
             </div>
@@ -287,7 +287,7 @@ const UploadDocuments = () =>{
                     {GSTIN == "" && "Click to " + (Boolean(GSTINUrl)?"re-":"") +"upload GSTIN"}
                     {GSTIN && GSTIN.name}
                     {/* <MdCloudUpload className="upload-icon" />Click to upload document */}
-                    <input id="GSTIN" type="file" onChange={(e)=>GSTINUploadHandler(e)} />
+                    <input autoComplete="off" id="GSTIN" type="file" onChange={(e)=>GSTINUploadHandler(e)} />
                 </label>
                 <p className="fileTypeError">Only .pdf, .png, .jpg and .jpeg files are allowed</p>
             </div>
@@ -299,13 +299,13 @@ const UploadDocuments = () =>{
                     {misc == "" && "Click to " + (Boolean(miscUrl)?"re-":"") + "upload document"}
                     {misc && misc.name}
                     {/* <MdCloudUpload className="upload-icon" />Click to upload document */}
-                    <input id="other" type="file" onChange={(e)=>miscUploadHandler(e)} />
+                    <input autoComplete="off" id="other" type="file" onChange={(e)=>miscUploadHandler(e)} />
                 </label>
                 <p className="fileTypeError">Only .pdf, .png, .jpg and .jpeg files are allowed</p>
             </div>
 
             <div className="termsAndConditions">
-                <input type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
+                <input autoComplete="off" type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
                 <p id="terms">I accept the <a href="https://docs.google.com/document/d/1ahwOUCCj6uWcx96PQ2wBup3MhxbLdf82ONzMnLvwEek/edit?usp=sharing" target="_blank" className="termsAndCond">Terms & Conditions</a></p>
             </div>
 

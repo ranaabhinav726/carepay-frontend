@@ -6,7 +6,7 @@ export default function RadioInput({name="", options=[], values=[], selected, se
 
         return(
             <div className={styles.radioContainer} key={idx} >
-                <input 
+                <input autoComplete="off" 
                     id={option} 
                     className={styles.radioInput}
                     name={name} 

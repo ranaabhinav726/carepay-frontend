@@ -321,7 +321,7 @@ const BankDetails = () =>{
             {/* <p className="note"><b>NOTE:</b> Please add bank details of the same account as the bank statement submitted.</p> */}
             <div className="accountName">
                 <p>Account number</p>
-                <input 
+                <input autoComplete="off" 
                     type={focus ? "number" : "password"}
                     id="accountNumber"
                     value={accountNumber ?? ""}
@@ -333,7 +333,7 @@ const BankDetails = () =>{
             </div>
             <div className="confirmAccountName">
                 <p>Confirm account number</p>
-                <input 
+                <input autoComplete="off" 
                     type={focus ? "password" : "number"}
                     id="confirmAccountNumber"
                     value={confirmAccountNumber ?? ""}
@@ -347,7 +347,7 @@ const BankDetails = () =>{
             </div>
             <div className="IFScode">
                 <p>IFSC code</p>
-                <input 
+                <input autoComplete="off" 
                     type="text" 
                     id="IFSC"
                     value={IFSC ?? ""}
@@ -359,7 +359,7 @@ const BankDetails = () =>{
             </div>
             {/* <div className="bankName">
                 <p>Bank name</p>
-                <input disabled
+                <input autoComplete="off" disabled
                     id="bankName"
                     defaultValue={bankName ?? ""}
                     onChange={(e)=>setBankName(e.target.value)}

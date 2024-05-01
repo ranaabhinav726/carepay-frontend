@@ -194,7 +194,7 @@ const DocBankDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Account Number</p>
-                <input
+                <input autoComplete="off"
                     id="accountNum"
                     type="number"
                     className='group-input'
@@ -207,7 +207,7 @@ const DocBankDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Confirm account Number</p>
-                <input
+                <input autoComplete="off"
                     id="confirmAccountNum"
                     type="number"
                     className='group-input'
@@ -222,7 +222,7 @@ const DocBankDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Account holder’s name</p>
-                <input
+                <input autoComplete="off"
                     id="accountHolderName"
                     className='group-input'
                     onChange={(e)=>setAccountHolderName(e.target.value)}
@@ -233,7 +233,7 @@ const DocBankDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>IFSC Code</p>
-                <input
+                <input autoComplete="off"
                     id="IFSC"
                     className='group-input'
                     onChange={(e)=>handleIFSC(e.target.value)}
@@ -259,7 +259,7 @@ const DocBankDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Bank name</p>
-                <input
+                <input autoComplete="off"
                     disabled
                     className='group-input'
                     value={bankName}
@@ -269,7 +269,7 @@ const DocBankDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Branch name</p>
-                <input
+                <input autoComplete="off"
                     disabled
                     className='group-input'
                     value={branchName}

@@ -121,7 +121,7 @@ const AddPatient = () =>{
             <hr />
             <div className="inputGroup">
                 <p className="group-title">Patient name</p>
-                <input 
+                <input autoComplete="off" 
                     id='patientName'
                     type="text" 
                     className="group-input" 
@@ -133,7 +133,7 @@ const AddPatient = () =>{
             </div>
             <div className="inputGroup">
                 <p className="group-title">Contact number</p>
-                <input 
+                <input autoComplete="off" 
                     id='contactNumber'
                     type="number" 
                     className="group-input" 
@@ -145,7 +145,7 @@ const AddPatient = () =>{
             </div>
             <div className="inputGroup">
                 <p className="group-title">Email ID</p>
-                <input 
+                <input autoComplete="off" 
                     id='email'
                     type="text" 
                     className="group-input" 
@@ -157,7 +157,7 @@ const AddPatient = () =>{
             </div>
             {/* <div className="inputGroup">
                 <p className="group-title">Clinic name</p>
-                <input 
+                <input autoComplete="off" 
                     id='clinicName'
                     type="text" 
                     className="group-input" 
@@ -169,7 +169,7 @@ const AddPatient = () =>{
             </div> */}
             <div className="inputGroup">
                 <p className="group-title">Purpose of loan</p>
-                <input 
+                <input autoComplete="off" 
                     id='purpose'
                     type="text" 
                     className="group-input" 
@@ -181,7 +181,7 @@ const AddPatient = () =>{
             </div>
             <div className="inputGroup">
                 <p className="group-title">Loan amount</p>
-                <input 
+                <input autoComplete="off" 
                     id='loanAmount'
                     type="text" 
                     className="group-input" 

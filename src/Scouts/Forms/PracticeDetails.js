@@ -54,7 +54,7 @@ export default function PracticeDetails() {
                         <div className="inputtags">
                             <div className="inputsgrps">
                                 <label htmlFor="licensenumber" className='input-label'>License number</label>
-                                <input type="number" name="licensenumber" value={Data.licensenumber} className='form-control input-tag' id='licensenumber' placeholder='Enter License Number' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="number" name="licensenumber" value={Data.licensenumber} className='form-control input-tag' id='licensenumber' placeholder='Enter License Number' onChange={(e) => handlechange(e)} />
                                 <div id="licensenumberHelp" className="form-text error-msg">{message.field === 'licensenumber' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
@@ -67,17 +67,17 @@ export default function PracticeDetails() {
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="clinicname" className='input-label'>Clinic Name</label>
-                                <input type="text" name="clinicname" value={Data.clinicname} className='form-control input-tag' id='clinicname' placeholder='Enter Clinic Name' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="clinicname" value={Data.clinicname} className='form-control input-tag' id='clinicname' placeholder='Enter Clinic Name' onChange={(e) => handlechange(e)} />
                                 <div id="clinicnameHelp" className="form-text error-msg">{message.field === 'clinicname' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="DateOfEstablishment" className='input-label'>Date of establishment of clinic/hospital</label>
-                                <input type="date" name="DateOfEstablishment" value={Data.DateOfEstablishment} className='form-control input-tag' id='DateOfEstablishment' placeholder='Select Date' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="date" name="DateOfEstablishment" value={Data.DateOfEstablishment} className='form-control input-tag' id='DateOfEstablishment' placeholder='Select Date' onChange={(e) => handlechange(e)} />
                                 <div id="DateOfEstablishmentHelp" className="form-text error-msg">{message.field === 'DateOfEstablishment' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="nameOfBusinessEntity" className='input-label'>Full name of business entity</label>
-                                <input type="text" name="nameOfBusinessEntity" value={Data.nameOfBusinessEntity} className='form-control input-tag' id='nameOfBusinessEntity' placeholder='Enter full Name of Business Entity' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="nameOfBusinessEntity" value={Data.nameOfBusinessEntity} className='form-control input-tag' id='nameOfBusinessEntity' placeholder='Enter full Name of Business Entity' onChange={(e) => handlechange(e)} />
                                 <div id="nameOfBusinessEntityHelp" className="form-text error-msg">{message.field === 'nameOfBusinessEntity' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
@@ -90,12 +90,12 @@ export default function PracticeDetails() {
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="CINnumber" className='input-label'>CIN/LLPIN</label>
-                                <input type="text" name="CINnumber" value={Data.CINnumber} className='form-control input-tag' id='CINnumber' placeholder='Enter CIN/LLPIN' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="CINnumber" value={Data.CINnumber} className='form-control input-tag' id='CINnumber' placeholder='Enter CIN/LLPIN' onChange={(e) => handlechange(e)} />
                                 <div id="CINnumberHelp" className="form-text error-msg">{message.field === 'CINnumber' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="GSTINnumber" className='input-label'>GSTIN</label>
-                                <input type="text" name="GSTINnumber" value={Data.GSTINnumber} className='form-control input-tag' id='GSTINnumber' placeholder='Enter GSTIN' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="GSTINnumber" value={Data.GSTINnumber} className='form-control input-tag' id='GSTINnumber' placeholder='Enter GSTIN' onChange={(e) => handlechange(e)} />
                                 <div id="GSTINnumberHelp" className="form-text error-msg">{message.field === 'GSTINnumber' ? message.msg : ""}</div>
                             </div>
 

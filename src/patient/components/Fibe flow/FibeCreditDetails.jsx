@@ -456,8 +456,8 @@ export default function FibeCreditDetails(){
         <main className="screenContainer" style={{position:"relative"}}>
             <Header progress={55} canGoBack={-1} />
             <ScreenTitle title="Tell us what you need" />
-            <InputBoxLabel label='Credit amount' />
-            <InputBox 
+            <input autoComplete="off"BoxLabel label='Credit amount' />
+            <input autoComplete="off"Box 
                 id="creditAmt"
                 Prefix={<BiRupee style={{fontSize:"20px", margin:"0 0 -4px 0"}} />} 
                 placeholder="How much credit do you need?" 
@@ -473,8 +473,8 @@ export default function FibeCreditDetails(){
             {amountInWords && <p style={{margin:"-8px 0 14px 42px", fontSize:"14px"}}>{amountInWords}</p>}
             {/* <NoteText text="Please keep the credit amount under Rs. 10,00,000 only." styles={{margin:"12px 0 24px 0"}} /> */}
 
-            {/* <InputBoxLabel label='Treatment name' />
-            <InputBox 
+            {/* <input autoComplete="off"BoxLabel label='Treatment name' />
+            <input autoComplete="off"Box 
                 id="loanReason"
                 placeholder="What is the reason of your credit?" 
                 value={loanReason}
@@ -496,7 +496,7 @@ export default function FibeCreditDetails(){
             />
             {loanReason === "Other" &&
                 <div className="inputGroup">
-                    <input 
+                    <input autoComplete="off" 
                         id="otherTreatment"
                         type="text" 
                         value={otherTreatment} 

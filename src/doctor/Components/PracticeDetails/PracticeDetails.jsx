@@ -233,7 +233,7 @@ const PracticeDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>License number</p>
-                <input
+                <input autoComplete="off"
                     id="license"
                     className='group-input'
                     onChange={(e)=>setLisenceNum(e.target.value)}
@@ -261,7 +261,7 @@ const PracticeDetails = () =>{
             {speciality === "Other" && 
                 <div className="inputGroup">
                     <p className='group-title'>Kindly tell us your speciality</p>
-                    <input
+                    <input autoComplete="off"
                     id="specialityOther"
                         className='group-input'
                         onChange={(e)=>setSpecialityOther(e.target.value)}
@@ -274,7 +274,7 @@ const PracticeDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Clinic name</p>
-                <input
+                <input autoComplete="off"
                     id="clinicName"
                     className='group-input'
                     onChange={(e)=>setClinicName(e.target.value)}
@@ -286,7 +286,7 @@ const PracticeDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Full name of business entity</p>
-                <input
+                <input autoComplete="off"
                     id="businessName"
                     className='group-input'
                     onChange={(e)=>setBusinessName(e.target.value)}
@@ -296,7 +296,7 @@ const PracticeDetails = () =>{
             </div>
             <div className="inputGroup">
                 <p className='group-title'>Date of establishment of clinic/hospital</p>
-                <input 
+                <input autoComplete="off" 
                     id="doe"
                     className="group-input"
                     type="date" 
@@ -327,7 +327,7 @@ const PracticeDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>CIN/LLPIN</p>
-                <input
+                <input autoComplete="off"
                     id="LLpin"
                     className='group-input'
                     onChange={(e)=>setLLpin(e.target.value)}
@@ -338,7 +338,7 @@ const PracticeDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>GSTIN</p>
-                <input
+                <input autoComplete="off"
                     id="GSTIN"
                     className='group-input'
                     onChange={(e)=>setGSTIN(e.target.value)}

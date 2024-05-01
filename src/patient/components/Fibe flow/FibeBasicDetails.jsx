@@ -263,8 +263,8 @@ export default function FibeBasicDetails(){
         <main className="screenContainer">
             <Header progress={69} canGoBack={-1} />
             <ScreenTitle title="Kindly verify your details" />
-            <InputBoxLabel label='PAN' />
-            <InputBox
+            <input autoComplete="off"BoxLabel label='PAN' />
+            <input autoComplete="off"Box
                 id="pan"
                 placeholder="What is your PAN number?" 
                 value={pan}
@@ -274,10 +274,10 @@ export default function FibeBasicDetails(){
                     border:"0"
                 }}
             />
-            {(!isPanValid && pan.length===10) && <InputBoxLabel label={"PAN is incorrect, please check."} styles={{color:"red", marginTop:"6px"}} />}
+            {(!isPanValid && pan.length===10) && <input autoComplete="off"BoxLabel label={"PAN is incorrect, please check."} styles={{color:"red", marginTop:"6px"}} />}
             
-            <InputBoxLabel label='Mail ID' styles={{marginTop:"24px"}} />
-            <InputBox
+            <input autoComplete="off"BoxLabel label='Mail ID' styles={{marginTop:"24px"}} />
+            <input autoComplete="off"Box
                 id="email"
                 placeholder="What is your email ID?"
                 value={email}
@@ -287,10 +287,10 @@ export default function FibeBasicDetails(){
                     border:"0"
                 }}
             />
-            {/* {(!isEmailValid && email.length>0) && <InputBoxLabel label={"Please enter correct a email ID"} styles={{color:"red", marginTop:"6px"}} />} */}
+            {/* {(!isEmailValid && email.length>0) && <input autoComplete="off"BoxLabel label={"Please enter correct a email ID"} styles={{color:"red", marginTop:"6px"}} />} */}
             
-            <InputBoxLabel label='Date of Birth' styles={{marginTop:"24px"}} />
-            <InputBox
+            <input autoComplete="off"BoxLabel label='Date of Birth' styles={{marginTop:"24px"}} />
+            <input autoComplete="off"Box
                 id="dob"
                 type="date"
                 min={minDateForDob}
@@ -307,8 +307,8 @@ export default function FibeBasicDetails(){
             {!dob && <span onClick={dateInputClickHandler} style={{background:"#ECEBFF", position:"relative", top:"-38px", left:"10px", color:"#8B8B96", userSelect:"none"}}>Tap to select date</span>}
 
 
-            <InputBoxLabel label='Address pincode' styles={{marginTop:"24px"}} />
-            <InputBox
+            <input autoComplete="off"BoxLabel label='Address pincode' styles={{marginTop:"24px"}} />
+            <input autoComplete="off"Box
                 id="pincode"
                 type="number"
                 length={6}
@@ -320,9 +320,9 @@ export default function FibeBasicDetails(){
                     border:"0"
                 }}
             />
-            <InputBoxLabel label={`City: ${city}`} styles={{marginTop:"6px", fontSize:"14px"}} />
+            <input autoComplete="off"BoxLabel label={`City: ${city}`} styles={{marginTop:"6px", fontSize:"14px"}} />
 
-            <InputBoxLabel label='Gender' styles={{marginTop:"24px"}} />
+            <input autoComplete="off"BoxLabel label='Gender' styles={{marginTop:"24px"}} />
             <RadioInput
                 id={"gender"}
                 name="gender" 

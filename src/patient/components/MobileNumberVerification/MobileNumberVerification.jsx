@@ -139,24 +139,24 @@ const MobileNumberVerification = () =>{
         <h3 className="mobileVerificationHeading">Basic Details</h3>
         <div className="inputGroup">
             <p>Clinic's name</p>
-            <input type="text" value={clinicName} disabled />
+            <input autoComplete="off" type="text" value={clinicName} disabled />
         </div>
         
         <p className="mobileVerificationSubheading">Enter mobile number (linked to PAN)</p>
         <div className="number-group">
             <div className="number-group--leftHalf">+91</div>
             <div className="number-group--rightHalf">
-                <input type="number" inputMode="numeric" onChange={(e)=>numberChange(e)} value={number??""} placeholder="Enter your mobile number" />
+                <input autoComplete="tel" type="number" inputMode="numeric" onChange={(e)=>numberChange(e)} value={number??""} placeholder="Enter your mobile number" />
                 <p id="number-msg">Please enter correct number</p>
             </div>
         </div>
 
         <div className="termsAndConditions">
-            <input id="declare" type="checkbox" checked={declare} onChange={e => setDeclare(e.target.checked)} />
+            <input autoComplete="off" id="declare" type="checkbox" checked={declare} onChange={e => setDeclare(e.target.checked)} />
             <label htmlFor="declare">I declare the above information is true and correct. I allow CareCoin Technologies Pvt Ltd and its lending partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax.</label>
         </div>
         <div className="termsAndConditions">
-            <input id="terms" type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
+            <input autoComplete="off" id="terms" type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
             <label htmlFor="terms">I accept the <a href="" className="termsAndCond">Terms & Conditions</a></label>
         </div>
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>

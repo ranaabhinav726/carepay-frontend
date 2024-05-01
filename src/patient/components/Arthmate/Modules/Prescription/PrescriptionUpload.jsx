@@ -133,7 +133,7 @@ export default function ArthPrescriptionUpload(){
                 <p style={{color:"#514C9F", fontWeight:"bold", fontSize:"18px", textAlign:"center"}}>Prescription shared successfully!</p>
             </>
             }
-            <input 
+            <input autoComplete="off" 
                 type="file" 
                 id="prescription" 
                 name="prescription" 

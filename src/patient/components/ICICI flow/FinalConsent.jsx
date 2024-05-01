@@ -163,7 +163,7 @@ function FinalConsent(){
 
             <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", fontWeight:"700", marginTop:"1.5rem"}}><span>Enter OTP sent to</span> <span>+91 {number}</span></div>
             <div className="number-group">
-                <InputBox
+                <input autoComplete="off"Box
                     type="number"
                     length={6}
                     value={otp}
@@ -185,7 +185,7 @@ function FinalConsent(){
             </div>
 
             <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-                <input checked={consent} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
+                <input autoComplete="off" checked={consent} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
                 <label htmlFor="kfsConsentCheckbox" onClick={()=>downloadAndSaveKfs()} style={{userSelect:"none"}}>I agree to the <span style={{color:"#000000", fontWeight:"600", textDecoration:"underline", cursor:"pointer"}}>Key fact Statement</span></label>
             </div>
             <button className={"submit" + (!consent?" disabled" : "")} onClick={()=>handleSubmit()}>Submit OTP</button>

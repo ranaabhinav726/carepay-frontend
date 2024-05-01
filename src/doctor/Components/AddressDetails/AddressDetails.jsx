@@ -156,7 +156,7 @@ const DocAddressDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Building</p>
-                <input
+                <input autoComplete="off"
                     id="building"
                     className='group-input'
                     onChange={(e)=>setBuilding(e.target.value)}
@@ -168,7 +168,7 @@ const DocAddressDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Locality</p>
-                <input
+                <input autoComplete="off"
                     id="locality"
                     className='group-input'
                     onChange={(e)=>setLocality(e.target.value)}
@@ -180,7 +180,7 @@ const DocAddressDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Pincode</p>
-                <input
+                <input autoComplete="off"
                     id="pincode"
                     type="number"
                     className='group-input'
@@ -193,7 +193,7 @@ const DocAddressDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>City</p>
-                <input
+                <input autoComplete="off"
                     id="city"
                     className='group-input'
                     onChange={(e)=>setCity(e.target.value)}

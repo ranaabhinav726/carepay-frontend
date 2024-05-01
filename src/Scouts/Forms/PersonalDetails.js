@@ -54,27 +54,27 @@ export default function PersonalDetails() {
                         <div className="inputtags">
                             <div className="inputsgrps">
                                 <label htmlFor="phonenumber" className='input-label'>Phone Number</label>
-                                <input type="number" name="phonenumber" value={Data.phonenumber} className='form-control input-tag' id='phonenumber' placeholder='Enter Phone Number' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="number" name="phonenumber" value={Data.phonenumber} className='form-control input-tag' id='phonenumber' placeholder='Enter Phone Number' onChange={(e) => handlechange(e)} />
                                 <div id="phoneNumberHelp" className="form-text error-msg">{message.field === 'phoneNumber' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="fullname" className='input-label'>Full Name</label>
-                                <input type="text" name="fullname" value={Data.fullname} className='form-control input-tag' id='fullname' placeholder='Enter Full Name' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="fullname" value={Data.fullname} className='form-control input-tag' id='fullname' placeholder='Enter Full Name' onChange={(e) => handlechange(e)} />
                                 <div id="fullnameHelp" className="form-text error-msg">{message.field === 'fullname' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="pan" className='input-label'>PAN</label>
-                                <input type="text" name="pan" value={Data.pan} className='form-control input-tag' id='pan' placeholder='Enter PAN Number' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="pan" value={Data.pan} className='form-control input-tag' id='pan' placeholder='Enter PAN Number' onChange={(e) => handlechange(e)} />
                                 <div id="panHelp" className="form-text error-msg">{message.field === 'pan' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="emailid" className='input-label'>E-mail id</label>
-                                <input type="email" name="emailid" value={Data.emailid} className='form-control input-tag' id='emailid' placeholder='Enter E-mail id' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="email" name="emailid" value={Data.emailid} className='form-control input-tag' id='emailid' placeholder='Enter E-mail id' onChange={(e) => handlechange(e)} />
                                 <div id="emailHelp" className="form-text error-msg">{message.field === 'email' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="dateofbirth" className='input-label'>Date of birth</label>
-                                <input type="date" name="dob" value={Data.dob} className='form-control input-tag' id='dateofbirth' placeholder='Select Date' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="date" name="dob" value={Data.dob} className='form-control input-tag' id='dateofbirth' placeholder='Select Date' onChange={(e) => handlechange(e)} />
                                 <div id="dateofbirthHelp" className="form-text error-msg">{message.field === 'dateofbirth' ? message.msg : ""}</div>
                             </div>
 

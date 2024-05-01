@@ -50,7 +50,7 @@ export default function ArthCurrentEMIExpenses(){
             
             <p>Select your ongoing EMI expenses</p>
             <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} >
-                <input 
+                <input autoComplete="off" 
                     id={"currEMI"} 
                     name={"isCurrEMI"} 
                     value={""}
@@ -81,7 +81,7 @@ export default function ArthCurrentEMIExpenses(){
             {isCurrEMI &&
             <div className="emiExpense">
                 <p>EMI expenses value (approxx.)</p>
-                <input 
+                <input autoComplete="off" 
                     id="emiExpense"
                     type="text" 
                     value={currEMI}
@@ -92,7 +92,7 @@ export default function ArthCurrentEMIExpenses(){
             </div>}
 
             <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} >
-                <input 
+                <input autoComplete="off" 
                     id={"noCurrEMI"} 
                     name={"isCurrEMI"} 
                     value={""}

@@ -345,7 +345,7 @@ const ArthCreditDetails = () => {
             <p>Credit amount</p>
             <div className="inputBoxWithSymbol" style={{display:"flex", alignItems:"baseline"}}>
                 <div className="rupeeSymbol" style={{padding: "0 16px"}}><img src={rupeeIcon} alt="" /></div>
-                <input 
+                <input autoComplete="off" 
                     id="loanAmount"
                     type="text" 
                     value={amount} 
@@ -359,7 +359,7 @@ const ArthCreditDetails = () => {
 
         {/* <div className="inputGroup">
             <p>Treatment name</p>
-            <input 
+            <input autoComplete="off" 
                 id="treatment"
                 type="text" 
                 value={treatment} 
@@ -382,7 +382,7 @@ const ArthCreditDetails = () => {
         />
         {treatment === "Other" &&
         <div className="inputGroup">
-            <input 
+            <input autoComplete="off" 
                 id="otherTreatment"
                 type="text" 
                 value={otherTreatment} 
@@ -398,7 +398,7 @@ const ArthCreditDetails = () => {
 
         <div className="inputGroup" style={{marginTop:"1.5rem"}}>
             <p>Full name (as per PAN)</p>
-            <input 
+            <input autoComplete="off" 
                 id="fullName"
                 type="text" 
                 value={fullName} 
@@ -412,7 +412,7 @@ const ArthCreditDetails = () => {
         </div>
 
         {/* <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
-            <input 
+            <input autoComplete="off" 
                 id="isPatient"
                 type="checkbox" 
                 checked={isPatient} 
@@ -441,7 +441,7 @@ const ArthCreditDetails = () => {
         <>
             <div className="inputGroup">
                 <p>Name of the patient</p>
-                <input 
+                <input autoComplete="off" 
                     id="patientName"
                     type="text" 
                     value={patientName} 
@@ -453,7 +453,7 @@ const ArthCreditDetails = () => {
             </div>
             <div className="inputGroup">
                 <p>Relationship with patient</p>
-                {/* <input 
+                {/* <input autoComplete="off" 
                     id="relation"
                     type="text" 
                     value={relation} 

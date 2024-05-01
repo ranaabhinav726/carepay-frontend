@@ -60,7 +60,7 @@ const LoginScout = () => {
                         <div className="d-flex" style={{ width: '100%',display:'flex' }}>
                             <div style={{ width: '10%', marginTop: '12px' }}>+91</div>
                             <div style={{ width: '90%' }}>
-                                <input
+                                <input autoComplete="off"
                                     className="input-number"
                                     style={{ width: '100%', marginTop: '5px' }}
                                     placeholder="Enter number here"

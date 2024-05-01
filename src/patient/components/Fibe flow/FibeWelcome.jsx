@@ -128,10 +128,10 @@ export default function FibeWelcome(){
                 text="Kindly help us with these details."
                 styles={{marginBottom:"32px"}}
             />
-            <InputBoxLabel
+            <input autoComplete="off"BoxLabel
                 label="Enter your full name (exactly as on your PAN card)"
             />
-            <InputBox
+            <input autoComplete="off"Box
                 id="firstName"
                 styles={{
                     marginTop:"12px", 
@@ -141,7 +141,7 @@ export default function FibeWelcome(){
                 value={firstName}
                 setValue={(val)=>{setFirstName(val.toUpperCase())}}
             />
-            <InputBox
+            <input autoComplete="off"Box
                 id="lastName"
                 styles={{
                     marginTop:"9px", 
@@ -155,7 +155,7 @@ export default function FibeWelcome(){
                 text="If not sure, please check your PAN and then enter the name accordingly."
                 styles={{margin:"12px 0 24px 0"}}
             />
-            <InputBoxLabel
+            <input autoComplete="off"BoxLabel
                 label="Who are you borrowing for?"
             />
             <RadioInput 
@@ -172,13 +172,13 @@ export default function FibeWelcome(){
             {
                 borrower==="someone else" && 
                 <>
-                    <InputBoxLabel
+                    <input autoComplete="off"BoxLabel
                         label="Name of the patient"
                         styles={{
                             marginTop:"16px"
                         }}
                     />
-                    <InputBox
+                    <input autoComplete="off"Box
                         id="patientName"
                         styles={{
                             marginTop:"12px", 
@@ -189,13 +189,13 @@ export default function FibeWelcome(){
                         setValue={setPatientName}
                     />
 
-                    <InputBoxLabel
+                    <input autoComplete="off"BoxLabel
                         label="Patient's phone number"
                         styles={{
                             marginTop:"16px"
                         }}
                     />
-                    <InputBox
+                    <input autoComplete="off"Box
                         id="patientPhoneNumber"
                         styles={{
                             marginTop:"12px", 
@@ -206,13 +206,13 @@ export default function FibeWelcome(){
                         setValue={numberChange}
                     />
 
-                    <InputBoxLabel
+                    <input autoComplete="off"BoxLabel
                         label="Patient's email ID"
                         styles={{
                             marginTop:"16px"
                         }}
                     />
-                    <InputBox
+                    <input autoComplete="off"Box
                         id="patientEmailId"
                         styles={{
                             marginTop:"12px", 
@@ -223,7 +223,7 @@ export default function FibeWelcome(){
                         setValue={setPatientEmailId}
                     />
 
-                    <InputBoxLabel
+                    <input autoComplete="off"BoxLabel
                         label="Your relationship to the patient"
                         styles={{
                             marginTop:"24px"

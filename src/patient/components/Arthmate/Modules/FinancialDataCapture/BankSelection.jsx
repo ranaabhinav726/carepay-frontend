@@ -476,7 +476,7 @@ const ArthBankSelection = () =>{
         <p>Search to select your bank with income account</p>
         <div className="search">
             <FaSearch className='searchIcon' />
-            <input onChange={filterList} id='searchBox' type="text" />
+            <input autoComplete="off" onChange={filterList} id='searchBox' type="text" />
         </div>
         
 
@@ -555,7 +555,7 @@ function PopOverContent({bankName, id, consent, setConsent, checkAndNavigate}){
             </div>
 
             <div style={{display:"flex", gap:"12px"}}>
-                <input 
+                <input autoComplete="off" 
                     value={consent} 
                     onChange={()=>setConsent(!consent)} 
                     type="checkbox" 

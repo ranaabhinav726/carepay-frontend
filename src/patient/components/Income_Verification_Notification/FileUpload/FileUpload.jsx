@@ -356,7 +356,7 @@ const FileUpload = () =>{
                     </div>
                 </div>
                 <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank (If PDF does not have any password,please type ‘0’ in the box below and submit).</p>
-                <input 
+                <input autoComplete="off" 
                     value={password ?? ""}
                     onChange={(e)=> passwordHandler(e)}
                     type="password" 
@@ -382,7 +382,7 @@ const FileUpload = () =>{
             </button>
         }
 
-        <input type="file" name="" id="filePicker" accept='.pdf' onChange={(e)=>uploadHandler(e)} />
+        <input autoComplete="off" type="file" name="" id="filePicker" accept='.pdf' onChange={(e)=>uploadHandler(e)} />
         <BottomPopOverModal searchAnimation={animationData} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAssignedNbfcAndNavigate} />
         </main>
     </>

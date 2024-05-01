@@ -89,7 +89,7 @@ export default function ArthAadhaarVerification(){
 
                 <h3>Enter OTP</h3>
                 <div className="emiExpense">
-                    <InputBox
+                    <input autoComplete="off"Box
                         type="number"
                         value={otp}
                         setValue={(val)=>onlyNumbers(val, setOtp)}

@@ -304,7 +304,7 @@ const DocPersonalDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Phone Number</p>
-                <input
+                <input autoComplete="off"
                     className='group-input'
                     disabled={phoneNumber==="" ? false : true}
                     id="number"
@@ -319,7 +319,7 @@ const DocPersonalDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Full name</p>
-                <input
+                <input autoComplete="off"
                     className='group-input'
                     id="fullname"
                     onChange={(e)=>setFullName(e.target.value)}
@@ -330,7 +330,7 @@ const DocPersonalDetails = () =>{
             </div>
             <div className="inputGroup">
                 <p className='group-title'>PAN</p>
-                <input
+                <input autoComplete="off"
                     id="pan"
                     className='group-input'
                     onChange={(e)=>handlePan(e.target.value)}
@@ -343,7 +343,7 @@ const DocPersonalDetails = () =>{
 
             <div className="inputGroup">
                 <p className='group-title'>Email</p>
-                <input
+                <input autoComplete="off"
                     type="email"
                     className='group-input'
                     onChange={(e)=>setEmail(e.target.value)}
@@ -354,7 +354,7 @@ const DocPersonalDetails = () =>{
             </div>
             <div className="inputGroup">
                 <p className='group-title'>Date of birth</p>
-                <input 
+                <input autoComplete="off" 
                     className="group-input"
                     type="date" 
                     value={dob}

@@ -157,7 +157,7 @@ export default function FibeEmploymentDetails(){
         <main className="screenContainer"  style={{position:"relative"}}>
             <Header progress={79} canGoBack={-1} />
             <ScreenTitle title="Employment details" />
-            <InputBoxLabel label='Select employment type' />
+            <input autoComplete="off"BoxLabel label='Select employment type' />
             <RadioInput
                 id={"empType"}
                 name="empType" 
@@ -177,8 +177,8 @@ export default function FibeEmploymentDetails(){
                 Need assistance? <Link to={"tel:+918069489655"} style={{color:"#514C9F", fontWeight:"700", textDecoration:"underline"}}>Contact Support</Link>
             </p>
 
-            <InputBoxLabel label='Monthly salary/income' styles={{marginTop:"24px"}} />
-            <InputBox
+            <input autoComplete="off"BoxLabel label='Monthly salary/income' styles={{marginTop:"24px"}} />
+            <input autoComplete="off"Box
                 id="salary"
                 type="number"
                 placeholder="How much do you earn monthly?"
@@ -193,8 +193,8 @@ export default function FibeEmploymentDetails(){
             
             {salaryErr && <span id="salaryError" style={{color:"red"}}>Please enter your monthly in-hand income.</span>}
 
-            <InputBoxLabel label='Workplace pincode' styles={{marginTop:"24px"}} />
-            <InputBox
+            <input autoComplete="off"BoxLabel label='Workplace pincode' styles={{marginTop:"24px"}} />
+            <input autoComplete="off"Box
                 id="officePincode"
                 type="number"
                 length={6}
@@ -206,7 +206,7 @@ export default function FibeEmploymentDetails(){
                     border:"0"
                 }}
             />
-            <InputBoxLabel label={`City: ${city}`} styles={{marginTop:"6px", marginBottom:"0"}} />
+            <input autoComplete="off"BoxLabel label={`City: ${city}`} styles={{marginTop:"6px", marginBottom:"0"}} />
 
             <button onClick={()=>postDetails()} className="submit"  style={{marginTop:"32px"}}>Next</button>
             <BottomPopOverModal 

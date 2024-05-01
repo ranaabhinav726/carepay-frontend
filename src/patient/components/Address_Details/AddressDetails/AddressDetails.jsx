@@ -317,7 +317,7 @@ const AddressDetails = () => {
 
         <div className="firstLine">
             <p>First line</p>
-            <input type="text" 
+            <input autoComplete="off" type="text" 
                 id="firstLine"
                 value={firstLine ?? ""} 
                 onChange={(e)=> setFirstLine(e.target.value)} 
@@ -329,7 +329,7 @@ const AddressDetails = () => {
 
         {/* <div className="locality">
             <p>Locality</p>
-            <input type="text" 
+            <input autoComplete="off" type="text" 
                 id="locality"
                 value={locality ?? ""} 
                 onChange={(e)=> setLocality(e.target.value)}
@@ -341,7 +341,7 @@ const AddressDetails = () => {
 
         {/* <div className="landmark">
             <p>Landmark</p>
-            <input type="text" 
+            <input autoComplete="off" type="text" 
                 id="landmark"
                 value={landmark ?? ""} 
                 onChange={(e)=> setLandmark(e.target.value)}
@@ -352,7 +352,7 @@ const AddressDetails = () => {
 
         <div className="pincode">
             <p>Pincode</p>
-            <input type="number" 
+            <input autoComplete="off" type="number" 
                 id="pincode"
                 value={pincode ?? ""} 
                 onChange={(e)=> handlePincode(e.target.value)}
@@ -365,7 +365,7 @@ const AddressDetails = () => {
 
         <div className="city">
             <p>City</p>
-            <input type="text"
+            <input autoComplete="off" type="text"
                 id="city"
                 className={fetching === true ? "dynamicFetching" : ""}
                 value={city ?? ""}
@@ -384,7 +384,7 @@ const AddressDetails = () => {
             </select>
             <span className="fieldError">Please select your state</span>
             {state === "Other" && 
-                <input type="text" 
+                <input autoComplete="off" type="text" 
                 id="otherState"
                 value={otherState ?? ""}
                 onChange={(e)=> setOtherState(e.target.value)}

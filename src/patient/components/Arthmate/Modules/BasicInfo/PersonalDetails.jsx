@@ -334,7 +334,7 @@ const ArthPersonalDetails = () =>{
 
             <div className="PAN">
                 <p>PAN number</p>
-                <input type="text"
+                <input autoComplete="off" type="text"
                     id="pan"
                     value={panNumber ?? ""} 
                     onChange={(e)=> handlePan(e.target.value)}
@@ -347,7 +347,7 @@ const ArthPersonalDetails = () =>{
 
             <div className="aadhaarNumber">
                 <p>Aadhaar number</p>
-                <input type="text" 
+                <input autoComplete="off" type="text" 
                     id="aadhaarNumber"
                     value={aadhaarNo ?? ""} 
                     onChange={(e)=> numberChange(e.target.value)}  
@@ -359,7 +359,7 @@ const ArthPersonalDetails = () =>{
 
             <div className="email">
                 <p>E-mail ID</p>
-                <input type="email"
+                <input autoComplete="off" type="email"
                     value={email ?? ""} 
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter E-mail ID" 
@@ -370,7 +370,7 @@ const ArthPersonalDetails = () =>{
 
             <div className="fatherName">
                 <p>Father's name</p>
-                <input type="text" 
+                <input autoComplete="off" type="text" 
                     id="fatherName"
                     value={fatherName ?? ""} 
                     onChange={(e)=> setFatherName(e.target.value)} 
@@ -382,7 +382,7 @@ const ArthPersonalDetails = () =>{
 
             <div className="DOB">
                 <p>Date of birth</p>
-                <input type="date" 
+                <input autoComplete="off" type="date" 
                     value={dob ?? ""}
                     onChange={(e) => setDob(e.target.value)}
                     placeholder="Select Date"
@@ -394,15 +394,15 @@ const ArthPersonalDetails = () =>{
             <div className="gender" id="gender">
                 <p>Gender</p>
                 <div className="radioOption">
-                    <input type="radio" id="male" name="gender" checked={gender?.toLowerCase() === "male"} onChange={(e)=> setGender(e.target.value)} value="male" />
+                    <input autoComplete="off" type="radio" id="male" name="gender" checked={gender?.toLowerCase() === "male"} onChange={(e)=> setGender(e.target.value)} value="male" />
                     <label htmlFor="male">Male</label><br />
                 </div>
                 <div className="radioOption">
-                    <input type="radio" id="female" name="gender" checked={gender?.toLowerCase() === "female"} onChange={(e)=> setGender(e.target.value)} value="female" />
+                    <input autoComplete="off" type="radio" id="female" name="gender" checked={gender?.toLowerCase() === "female"} onChange={(e)=> setGender(e.target.value)} value="female" />
                     <label htmlFor="female">Female</label><br />
                 </div>
                 <div className="radioOption">
-                    <input type="radio" id="other" name="gender" checked={gender?.toLowerCase() === "other"} onChange={(e)=> setGender(e.target.value)} value="other" />
+                    <input autoComplete="off" type="radio" id="other" name="gender" checked={gender?.toLowerCase() === "other"} onChange={(e)=> setGender(e.target.value)} value="other" />
                     <label htmlFor="other">Other</label><br />
                 </div>
             </div>

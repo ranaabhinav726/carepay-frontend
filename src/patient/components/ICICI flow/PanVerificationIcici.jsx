@@ -90,7 +90,7 @@ function PanVerificationIcici(){
 
             <div className="PAN">
             <p style={{marginBottom:"12px"}}>What is your PAN number?</p>
-            {/* <input type="text"
+            {/* <input autoComplete="off" type="text"
                 id="pan"
                 value={panNumber ?? ""} 
                 onChange={(e)=> handlePan(e.target.value)}
@@ -98,7 +98,7 @@ function PanVerificationIcici(){
                 autoCapitalize="characters"
                 required
             /> */}
-            <InputBox
+            <input autoComplete="off"Box
                 value={panNumber}
                 setValue={handlePan}
                 placeholder="Enter your PAN here"

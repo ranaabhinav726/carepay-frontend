@@ -10,7 +10,7 @@ export default function InputCheckBox({name, id, label, value, setValue}){
             padding:"10px",
             borderRadius:"4px"
         }}>
-            <input 
+            <input autoComplete="off" 
                 type="checkbox" 
                 name={name} 
                 id={id} 

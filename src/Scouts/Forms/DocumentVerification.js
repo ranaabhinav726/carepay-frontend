@@ -53,7 +53,7 @@ export default function DocumentVerification() {
                         <div className="inputtags">
                             <div className="inputsgrps">
                                 <label className='input-label'>PAN</label>
-                                <input type="file" name="pan" className='form-control input-tag' id='pan' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="file" name="pan" className='form-control input-tag' id='pan' onChange={(e) => handlechange(e)} />
                                 <label htmlFor="pan" className='form-control input-tag input-file-label'>
                                     {Data?.pan !== '' ? Data?.pan?.name : (<>                                    <span><MdCloudUpload /></span> Upload file from device
                                 </>)}
@@ -62,7 +62,7 @@ export default function DocumentVerification() {
                             </div>
                             <div className="inputsgrps">
                                 <label className='input-label'>Medical License</label>
-                                <input type="file" name="medicalLicense" className='form-control input-tag' id='medicalLicense' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="file" name="medicalLicense" className='form-control input-tag' id='medicalLicense' onChange={(e) => handlechange(e)} />
                                 <label htmlFor="medicalLicense" className='form-control input-tag input-file-label'>
                                 {Data?.medicalLicense !== '' ? Data?.medicalLicense?.name : (<>                                    <span><MdCloudUpload /></span> Upload file from device
                                 </>)}
@@ -71,7 +71,7 @@ export default function DocumentVerification() {
                             </div>
                             <div className="inputsgrps">
                                 <label className='input-label'>GSTIN Document</label>
-                                <input type="file" name="gstin" className='form-control input-tag' id='gstin' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="file" name="gstin" className='form-control input-tag' id='gstin' onChange={(e) => handlechange(e)} />
                                 <label htmlFor="gstin" className='form-control input-tag input-file-label'>
                                 {Data?.gstin !== '' ? Data?.gstin?.name : (<>                                    <span><MdCloudUpload /></span> Upload file from device
                                 </>)}
@@ -80,8 +80,8 @@ export default function DocumentVerification() {
                             </div>
                             <div className="inputsgrps">
                                 <label className='input-label'>Other Document (optional)</label>
-                                <input type="text" name="documentName" value={Data.documentName} className='form-control input-tag' id='documentName' placeholder='Enter Document Name' onChange={(e) => handlechange(e)} />
-                                <input type="file" name="optionalDocument" className='form-control input-tag' id='optionalDocument' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="documentName" value={Data.documentName} className='form-control input-tag' id='documentName' placeholder='Enter Document Name' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="file" name="optionalDocument" className='form-control input-tag' id='optionalDocument' onChange={(e) => handlechange(e)} />
                                 <label htmlFor="optionalDocument" className='form-control input-tag input-file-label'>
                                 {Data?.optionalDocument !== '' ? Data?.optionalDocument?.name : (<>                                    <span><MdCloudUpload /></span> Upload file from device
                                 </>)}
@@ -91,7 +91,7 @@ export default function DocumentVerification() {
 
                             <div className="inputsgrps">
                                 <div className="checkbox-grp">
-                                    <input type="checkbox" name="termsCondition" checked={Data.termsCondition} className='input-checkbox' id='termsCondition' onChange={(e) => handlechange(e)} />
+                                    <input autoComplete="off" type="checkbox" name="termsCondition" checked={Data.termsCondition} className='input-checkbox' id='termsCondition' onChange={(e) => handlechange(e)} />
                                     <label className='input-label' htmlFor="termsCondition">I accept the <a>Terms & Conditions</a></label>
                                 </div>
 

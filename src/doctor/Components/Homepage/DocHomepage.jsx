@@ -135,7 +135,7 @@ const DocHomepage = () =>{
                 <div className="inputGroup">
                     <p className='group-title'>Mobile Number</p>
                     <span style={{fontSize: "15.5px", padding:"16px"}}>+91</span>
-                    <input
+                    {/* <input 
                     style={{width:"calc(100% - 62px)"}}
                     className='group-input'
                         id='phoneNumber'
@@ -144,7 +144,9 @@ const DocHomepage = () =>{
                         onChange={(e)=>numberChange(e.target.value)}
                         value={number}
                         placeholder="Enter your mobile number" 
-                    />
+                    /> */}
+                                    <input  style={{width:"calc(100% - 62px)"}} autoComplete="tel" type="number" inputMode="numeric" onChange={(e)=>numberChange(e.target.value)} value={number??""} placeholder="Enter your mobile number" />
+
                     <p id="number-msg">Please enter a correct mobile number</p>
                 </div>
                 <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>

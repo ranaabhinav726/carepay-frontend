@@ -105,7 +105,7 @@ export default function FibeOtpAuthentication(){
                 styles={{marginBottom:"26px", marginTop:"0"}} 
             />
 
-            <InputBox 
+            <input autoComplete="off"Box 
                 type="number" 
                 length={4} 
                 placeholder="----" 

@@ -344,11 +344,11 @@ const MainScout = () => {
                                 </div>
                                 <div className="checkboxes">
                                     <div class="mb-3 form-check checkboxgrp">
-                                        <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
+                                        <input autoComplete="off" type="checkbox" class="form-check-input checkboxinput" id="selectall" />
                                         <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
                                     </div>
                                     <div class="mb-3 form-check checkboxgrp">
-                                        <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
+                                        <input autoComplete="off" type="checkbox" class="form-check-input checkboxinput" id="selectall" />
                                         <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
                                     </div>
                                 </div>
@@ -369,12 +369,12 @@ const MainScout = () => {
                                     <div className="inputsamount">
                                         <div className="inputboxes">
                                             <label htmlFor="minamount" className='iconruppee'>₹</label>
-                                            <input type="number" name="" className='amount' id='minamount' placeholder='Minimum amount' min='0' />
+                                            <input autoComplete="off" type="number" name="" className='amount' id='minamount' placeholder='Minimum amount' min='0' />
                                         </div>
                                         <h5>TO</h5>
                                         <div className="inputboxes">
                                             <label htmlFor="maxamount" className='iconruppee'>₹</label>
-                                            <input type="number" name="" className='amount' id='maxamount' placeholder='Maximum amount' min='0' />
+                                            <input autoComplete="off" type="number" name="" className='amount' id='maxamount' placeholder='Maximum amount' min='0' />
                                         </div>
                                     </div>
                                     <div className="row filter-btn">

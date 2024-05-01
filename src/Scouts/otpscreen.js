@@ -101,7 +101,7 @@ const LoginScout = () => {
                             onChange={setOtp}
                             numInputs={4}
                             renderSeparator={<span>-</span>}
-                            renderInput={(props) => <input placeholder="-" type="number"  {...props} />}
+                            renderInput={(props) => <input autoComplete="off" placeholder="-" type="number"  {...props} />}
                         />
                         <span className="text-danger">{errorMsg}</span>
                         <div>

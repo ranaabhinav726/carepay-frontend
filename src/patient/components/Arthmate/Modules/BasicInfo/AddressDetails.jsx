@@ -326,7 +326,7 @@ const ArthAddressDetails = () => {
 
         <div className="firstLine">
             <p>Address line 1</p>
-            <input type="text" 
+            <input autoComplete="off" type="text" 
                 id="firstLine"
                 value={firstLine ?? ""} 
                 onChange={(e)=> setFirstLine(e.target.value)} 
@@ -338,7 +338,7 @@ const ArthAddressDetails = () => {
 
         <div className="pincode">
             <p>Address pincode</p>
-            <input type="number" 
+            <input autoComplete="off" type="number" 
                 id="pincode"
                 value={pincode ?? ""} 
                 onChange={(e)=> handlePincode(e.target.value, "current")}
@@ -352,7 +352,7 @@ const ArthAddressDetails = () => {
         <div style={{display:"flex", justifyContent:"space-between"}}>
             <div className="city" style={{width:"49%"}}>
                 <p>City</p>
-                <input type="text"
+                <input autoComplete="off" type="text"
                     id="city"
                     className={fetching === true ? "dynamicFetching" : ""}
                     value={city ?? ""}
@@ -371,7 +371,7 @@ const ArthAddressDetails = () => {
                 </select>
                 <span className="fieldError">Please select your state</span>
                 {state === "Other" && 
-                    <input type="text" 
+                    <input autoComplete="off" type="text" 
                     id="otherState"
                     value={otherState ?? ""}
                     onChange={(e)=> setOtherState(e.target.value)}
@@ -387,7 +387,7 @@ const ArthAddressDetails = () => {
         
 
         <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-            <input 
+            <input autoComplete="off" 
                 style={{
                     width:"20px", 
                     accentColor:"#514C9F"
@@ -413,7 +413,7 @@ const ArthAddressDetails = () => {
 
         <div className="firstLine">
             <p>Address line 1</p>
-            <input type="text" 
+            <input autoComplete="off" type="text" 
                 id="firstLine"
                 value={firstLineP ?? ""} 
                 onChange={(e)=> setFirstLineP(e.target.value)} 
@@ -425,7 +425,7 @@ const ArthAddressDetails = () => {
 
         <div className="pincode">
             <p>Address pincode</p>
-            <input type="number" 
+            <input autoComplete="off" type="number" 
                 id="pincode"
                 value={pincodeP ?? ""} 
                 onChange={(e)=> handlePincode(e.target.value)}
@@ -439,7 +439,7 @@ const ArthAddressDetails = () => {
         <div style={{display:"flex", justifyContent:"space-between"}}>
             <div className="city" style={{width:"49%"}}>
                 <p>City</p>
-                <input type="text"
+                <input autoComplete="off" type="text"
                     id="city"
                     className={fetching === true ? "dynamicFetching" : ""}
                     value={cityP ?? ""}
@@ -458,7 +458,7 @@ const ArthAddressDetails = () => {
                 </select>
                 <span className="fieldError">Please select your state</span>
                 {stateP === "Other" && 
-                    <input type="text" 
+                    <input autoComplete="off" type="text" 
                     id="otherState"
                     value={otherStateP ?? ""}
                     onChange={(e)=> setOtherStateP(e.target.value)}

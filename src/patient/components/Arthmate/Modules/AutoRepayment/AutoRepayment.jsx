@@ -77,11 +77,11 @@ export default function ArthAutoRepayment(){
                 <p>Do you have these payment apps in your phone?</p>
                 <div style={{padding:"14px 12px", display:"flex", flexDirection:"column", gap:"1rem", margin:"0.6rem 0"}}>
                     <div style={{display:"flex", gap:"14px", alignItems:"center"}}>
-                        <input checked={isUpiApp} onChange={()=>setIsUpiApp(true)} style={{height:"24px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="radio" name="upiApps" id="yesApp" />
+                        <input autoComplete="off" checked={isUpiApp} onChange={()=>setIsUpiApp(true)} style={{height:"24px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="radio" name="upiApps" id="yesApp" />
                         <label htmlFor="yesApp">Yes! I have one of these apps in my phone</label>
                     </div>
                     <div style={{display:"flex", gap:"14px", alignItems:"center"}}>
-                        <input checked={!isUpiApp} onChange={()=>setIsUpiApp(false)} style={{height:"24px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="radio" name="upiApps" id="noApp" />
+                        <input autoComplete="off" checked={!isUpiApp} onChange={()=>setIsUpiApp(false)} style={{height:"24px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="radio" name="upiApps" id="noApp" />
                         <label htmlFor="noApp">No. I don’t have any of these apps in my phone.</label>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ export default function ArthAutoRepayment(){
                 <p style={{opacity:"0.4", margin:"1.5rem 0"}}>Payments will be processed by CASHFREE PAYMENTS INDIA PVT LTD.</p>
 
                 <div style={{display:"flex", gap:"12px", marginTop:"1.8rem", marginBottom:"1rem"}}>
-                    <input 
+                    <input autoComplete="off" 
                         value={consent} 
                         onChange={()=>setConsent(!consent)} 
                         type="checkbox" 
@@ -160,7 +160,7 @@ export default function ArthAutoRepayment(){
                 <h3 style={{margin:"1.5rem 0"}}>Auto-repayment of EMIs</h3>
 
                 <p>Enter your UPI ID</p>
-                <input 
+                <input autoComplete="off" 
                     type="text" 
                     name="" 
                     id=""

@@ -10,7 +10,7 @@ export default function RadioInput({name="", options=[], value, setValue, styles
         label = label.charAt(0).toUpperCase() + label.slice(1);
         return(
             <div style={{display:"flex", padding:"0 12px 12px 12px", gap:"12px", alignItems:"center", ...styles}} key={idx} >
-                <input 
+                <input autoComplete="off" 
                     id={option} 
                     name={name} 
                     value={option}

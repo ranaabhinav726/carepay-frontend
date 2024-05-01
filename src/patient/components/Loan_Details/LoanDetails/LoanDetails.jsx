@@ -242,17 +242,17 @@ const LoanDetails = () =>{
 
         {/* <div className="doctorName">
             <p>Doctor's name</p>
-            <input type="text" value={doctorName} disabled placeholder="Enter name here" />
+            <input autoComplete="off" type="text" value={doctorName} disabled placeholder="Enter name here" />
         </div>
 
         <div className="hospitalName">
             <p>Clinic name (Optional)</p>
-            <input type="text" defaultValue={clinicName} />
+            <input autoComplete="off" type="text" defaultValue={clinicName} />
         </div>
 
         <div className="purposeOfLoan">
             <p>Purpose of credit</p>
-            <input 
+            <input autoComplete="off" 
                 name="loanType" 
                 value={loanPurpose}
                 id="loanPurpose" 
@@ -263,7 +263,7 @@ const LoanDetails = () =>{
 
         <div className="loan">
             <p>Credit amount (in INR)</p>
-            <input 
+            <input autoComplete="off" 
                 id="loanAmt" 
                 value={loanAmt} 
                 type="number" 

@@ -54,22 +54,22 @@ export default function AddressDetails() {
                         <div className="inputtags">
                             <div className="inputsgrps">
                                 <label htmlFor="building" className='input-label'>Building</label>
-                                <input type="text" name="building" value={Data.building} className='form-control input-tag' id='building' placeholder='Enter your Building Name' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="building" value={Data.building} className='form-control input-tag' id='building' placeholder='Enter your Building Name' onChange={(e) => handlechange(e)} />
                                 <div id="buildingHelp" className="form-text error-msg">{message.field === 'building' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="locality" className='input-label'>Locality</label>
-                                <input type="text" name="locality" value={Data.locality} className='form-control input-tag' id='locality' placeholder='Enter Locality Name' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="locality" value={Data.locality} className='form-control input-tag' id='locality' placeholder='Enter Locality Name' onChange={(e) => handlechange(e)} />
                                 <div id="localityHelp" className="form-text error-msg">{message.field === 'locality' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="pincode" className='input-label'>Pincode</label>
-                                <input type="number" name="pincode" value={Data.pincode} className='form-control input-tag' id='pincode' placeholder='Enter Pincode' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="number" name="pincode" value={Data.pincode} className='form-control input-tag' id='pincode' placeholder='Enter Pincode' onChange={(e) => handlechange(e)} />
                                 <div id="pincodeHelp" className="form-text error-msg">{message.field === 'pincode' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">
                                 <label htmlFor="city" className='input-label'>City</label>
-                                <input type="text" name="city" value={Data.city} className='form-control input-tag' id='city' placeholder='Enter City Name' onChange={(e) => handlechange(e)} />
+                                <input autoComplete="off" type="text" name="city" value={Data.city} className='form-control input-tag' id='city' placeholder='Enter City Name' onChange={(e) => handlechange(e)} />
                                 <div id="cityHelp" className="form-text error-msg">{message.field === 'city' ? message.msg : ""}</div>
                             </div>
                             <div className="inputsgrps">

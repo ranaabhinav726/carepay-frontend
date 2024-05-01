@@ -1,9 +1,85 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import OurRoutes from './Routes';
 import * as Routers from './Routers';
 import ScoutDahboardLayout from '../Scouts/dashboard'
+import axios from 'axios';
+import POST_HEADER from '../utils/apiheader';
 function AppRouter() {
+  
+// const [authToken, setAuthToken] = useState(null);
+
+
+
+// let baseUrl = process.env.REACT_APP_BACKEND;
+// let isRefreshing = false;
+
+// const handleTokenRefresh = async () => {
+//   if (isRefreshing) {
+//     return;
+//   }
+//   isRefreshing = true;
+//   try {
+//     const response = await axios.post(baseUrl + 'auth/refresh?refreshToken='+ window.localStorage.getItem('refresh_token'), POST_HEADER);
+//     const newToken = response.data.Authorization;
+//     localStorage.setItem('access_token', newToken);
+//     setAuthToken(newToken);
+//     window.location.reload();
+//     return newToken;
+//   } catch (error) {
+//     console.log(error, 'errorerrorerrorerror');
+//     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+//       // window.location.href = '/admin/login';
+//     }
+//     throw error;
+//   } finally {
+//     isRefreshing = false;
+//   }
+// };
+
+
+// axios.interceptors.request.use(
+//   (config) => {
+//     if (authToken) {
+//       config.headers.Authorization = `Bearer ${authToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     const originalRequest = error.config;
+//     console.log("originalReq", originalRequest);
+//     if ((error.response.status === 401 || error.response.status === 403) && !error.config.__isRetryRequest) {
+//       try {
+//         return handleTokenRefresh().then(response => {
+//           error.config.__isRetryRequest = true;
+//           console.log("newToken", response);
+//           originalRequest.headers.Authorization = `Bearer ${response}`;
+//           console.log("originalReq", originalRequest)
+//           return axios.request(originalRequest);
+//         })
+//         // return response
+//       } catch (refreshError) {
+//         // Handle token refresh failure
+//         console.error('Token refresh failed:', refreshError);
+//         // Redirect or show appropriate message
+//         // Example: <Navigate to="/login" replace />;
+//         // alert('Session Expired !')
+//         // window.location.href('/admin/login')
+//         throw refreshError; // Propagate the error for handling at a higher level
+//       }
+//     }
+//     return Promise.reject(error);
+//   }
+// );
   return (
     <Router>
       <Suspense fallback={<div></div>} >

@@ -61,7 +61,7 @@ export const AutocompleteInput = ({id, title, value, setValue, placeholder, list
     <>
     <label className={styles.suggestionInputLabel} htmlFor={id}>{title}</label>
     <div className={styles.suggestionInputWrapper}>
-        <input
+        <input autoComplete="off"
             type="text"
             id={id}
             list="suggestions"

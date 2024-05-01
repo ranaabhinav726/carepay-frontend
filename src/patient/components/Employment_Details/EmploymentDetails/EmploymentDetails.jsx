@@ -284,7 +284,7 @@ const EmploymentDetails = () =>{
         label = label.charAt(0).toUpperCase() + label.slice(1);
         return(
             <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} key={idx} >
-                <input 
+                <input autoComplete="off" 
                     id={option} 
                     name={"empType"} 
                     value={option}
@@ -338,7 +338,7 @@ const EmploymentDetails = () =>{
             }}
             onClick={()=>toggleStudentMsg(!studentMsg)}
         >
-            <input 
+            <input autoComplete="off" 
                 id={"student"} 
                 disabled
                 type="radio"
@@ -389,7 +389,7 @@ const EmploymentDetails = () =>{
         {empType === "SALARIED" ?
             <div className="companyName">
                 <p>Current company name</p>
-                <input 
+                <input autoComplete="off" 
                     id="companyName"
                     type="text" 
                     value={companyName}
@@ -419,7 +419,7 @@ const EmploymentDetails = () =>{
                 </div>
                 <div className="businessName">
                     <p>Name of business</p>
-                    <input 
+                    <input autoComplete="off" 
                         id="businessName"
                         type="text" 
                         value={businessName}
@@ -433,7 +433,7 @@ const EmploymentDetails = () =>{
 
         <div className="income">
             <p>Monthly in-hand salary/income</p>
-            <input 
+            <input autoComplete="off" 
                 id="salary"
                 type="number" 
                 value={salary}
@@ -445,7 +445,7 @@ const EmploymentDetails = () =>{
 
         <div className="familyIncome">
             <p>Monthly family income (optional)</p>
-            <input 
+            <input autoComplete="off" 
                 type="number" 
                 value={familyIncome}
                 onChange={(e)=>setFamilyIncome(e.target.value)}

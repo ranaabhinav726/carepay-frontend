@@ -20,7 +20,7 @@ export default function InputBox({type="text", length=10, id, styles, placeholde
                 >
                     {Prefix}
                 </span>}
-            <input 
+            <input autoComplete="off" 
                 type="text"
                 id={id}
                 min={min}

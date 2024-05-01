@@ -48,8 +48,8 @@ export default function FibeMobileNumberVerification(){
             {/* <ScreenContentWrapper> */}
                 <Header progressBar={"hidden"} />
                 <ScreenTitle title={"Verify your number to apply"} styles={{marginBottom:"14px"}} />
-                <InputBoxLabel label={"Enter number linked to your PAN or bank account"} />
-                <InputBox 
+                <input autoComplete="off"BoxLabel label={"Enter number linked to your PAN or bank account"} />
+                <input autoComplete="off"Box 
                     type="number" 
                     value={number} 
                     setValue={setNumber} 
@@ -57,7 +57,7 @@ export default function FibeMobileNumberVerification(){
                     styles={{margin:"10px 0", border:"0"}}
                     placeholder="Enter your mobile number" 
                 />
-                <InputCheckBox 
+                <input autoComplete="off"CheckBox 
                     name="consent" 
                     id="consent" 
                     label="I confirm that this number is linked to my Aadhaar, PAN and my income account. I allow CareCoin Technologies Pvt Ltd and its partners to be my authorised representative and fetch my credit information from CIBIL/ Experian/ Equifax, etc." 

@@ -126,7 +126,7 @@ function EmiOptions(){
             <h3 style={{margin:"1rem 0"}}>EMI options</h3>
 
             <p>Confirm credit amount</p>
-            <InputBox 
+            <input autoComplete="off"Box 
                 Prefix={<BiRupee style={{fontSize:"20px"}} />}
                 value={reqAmount}
                 setValue={amountHandler}
