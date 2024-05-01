@@ -19,6 +19,7 @@ import { checkDoctorStatus } from "../../services"
 
 
 const Homepage = () =>{
+    
 
     let URL = window.location.href;
     let URLparts = URL.split('/');
