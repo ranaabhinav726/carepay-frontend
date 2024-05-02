@@ -46,6 +46,8 @@ const PhoneNumberVerified = () => {
             // }).catch((error)=>{
             //     console.warn(error)
             // })
+        }else{
+            navigate("/patient/DoctorNotAvailable");
         }
     }, [])
 

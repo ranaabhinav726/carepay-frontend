@@ -109,6 +109,11 @@ const Homepage = () =>{
     //         wrapper.style.display = "none";
     //     }, 1000)
     // }
+    useEffect(()=>{
+        if(window.localStorage.getItem('doctorId')===null){
+            navigate("/patient/DoctorNotAvailable");
+        }
+    },[])
     
     return(
         <>
