@@ -509,6 +509,7 @@ const PersonalDetails = () =>{
             <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
                 <span style={{minWidth:"max-content"}}>Reference is my:</span>
                 <select name="refRelation" id="refRelation" style={{marginBottom:"0"}} value={refRelation} onChange={(e)=>setRefRelation(e.target.value)}>
+                    <option value={''}>Select Relation</option>
                     <option value={"father"}>Father</option>
                     <option value={"mother"}>Mother</option>
                     <option value={"brother"}>Brother</option>
