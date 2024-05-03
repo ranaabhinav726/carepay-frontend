@@ -312,7 +312,7 @@ function LendingPartners() {
     return (
         <section className='lending-partners'>
             <h4>Our lending partners</h4>
-            <div className="container" style={{textAlign:'center'}}>
+            <div className="container mobile-logo" style={{textAlign:'center'}}>
                 <div style={{padding:'10px',minWidth:'33%'}}> <img src={I2ILogo} alt="" /></div>
                 <div style={{padding:'10px',minWidth:'33%'}}>  <img src={CreditFairLogo} alt="" /></div>
                 <div style={{padding:'10px',minWidth:'33%'}}>  <img src={LiquiLoansLogo} alt="" /></div>
