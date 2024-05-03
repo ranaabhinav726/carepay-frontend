@@ -492,7 +492,7 @@ const MainScout = () => {
 
                         </div>
                         <div style={{ marginBottom: '20px', marginTop: '20px' }} >
-                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer',width:'100%' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Call Patient</div><div style={{marginLeft:'50%',color:'rgb(183, 181, 181)'}}>{userData.patientPhoneNo}</div></div> : ""}
+                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer',width:'100%' }}><div style={{width:'50%',display:'flex'}}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{  }}>Call Patient</div></div><div style={{width:'50%',color:'rgb(183, 181, 181)',textAlign: 'end'}}>{userData.patientPhoneNo}</div></div> : ""}
                             {userData.userId !== undefined && userData.userId !== '' ? <div onClick={() => getLoanData(userData.userId)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><DescriptionRounded style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>View loan details</div></div> : ""}
 
                             <div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
@@ -549,14 +549,14 @@ const MainScout = () => {
                                 </div>
 
                             </div>
-                            <div style={{ display: 'flex', marginTop: '10px' }}>
+                            {/* <div style={{ display: 'flex', marginTop: '10px' }}>
                                 <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Subvention</p>
 
                                 </div>
                                 <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>{loanData.subventionRate}%</p>
                                 </div>
 
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
