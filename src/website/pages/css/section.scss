@@ -217,7 +217,7 @@ section.lending-partners{
     div.container{
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        // justify-content: space-around;
         gap: 12px;
         img{
             height: 70px;
@@ -669,6 +669,10 @@ div.tabs-bar{
             min-width: 100%;
             // border: 1px solid red;
         }
+        div.container{
+            text-align: center;
+            display: contents !important;
+        }
     }
 
     section.hero{
@@ -796,7 +800,7 @@ div.tabs-bar{
 
     section.lending-partners{
         div.container{
-            justify-content: space-between;
+            // justify-content: space-between;
 
             img{
                 height: 30px;
@@ -1052,7 +1056,7 @@ div.tabs-bar{
 
     section.lending-partners{
         div.container{
-            justify-content: space-between;
+            // justify-content: space-between;
 
             img{
                 height: 40px;

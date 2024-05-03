@@ -44,16 +44,16 @@ import PharmaBizLogo from '../assets/PharmaBiz logo.png'
 import Aos from 'aos';
 import 'aos/dist/aos.css'
 
-function WebHomepage(){
+function WebHomepage() {
 
-    useEffect(()=>{
+    useEffect(() => {
         Aos.init({
             anchorPlacement: "bottom-bottom"
         });
         // window.scrollTo(0, 0);
-    }, []) 
+    }, [])
 
-    return(
+    return (
         <div className='website-container'>
             <CustomNavbar />
             <Hero />
@@ -77,57 +77,57 @@ function WebHomepage(){
 export default WebHomepage
 
 
-function Hero(){
-    return(
+function Hero() {
+    return (
         <section className='hero'>
             <div className="container">
-                <div className="flex-content-wrapper" style={{margin:"2rem 0"}}>
+                <div className="flex-content-wrapper" style={{ margin: "2rem 0" }}>
                     <div className="section-content hero-container-content">
                         {/* <h1>Increase your <br />Revenue <br/>by 50 <div className="percent-wrapper" style={{font:"inherit", fontSize:"0.6em"}}>%</div></h1> */}
-                        <h1>Increase your <br />Revenue <br/>by 50 <sup style={{font:"inherit", fontSize:"0.5em", marginLeft:"-5px"}}>%</sup></h1>
-                        <p className="text-content">Empower your journey with CarePay’s cutting-edge <br/>financial solutions for healthcare.</p>
+                        <h1>Increase your <br />Revenue <br />by 50 <sup style={{ font: "inherit", fontSize: "0.5em", marginLeft: "-5px" }}>%</sup></h1>
+                        <p className="text-content">Empower your journey with CarePay’s cutting-edge <br />financial solutions for healthcare.</p>
                         <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='dark' vanishOnCollapse callback={handleContactScroll} />
                         <FloatingButton content={"Partner up"} to={"javascript:void(0)"} callback={handleContactScroll} />
                     </div>
-                    <div className="section-content hero-container-image" style={{position:"relative"}}>
+                    <div className="section-content hero-container-image" style={{ position: "relative" }}>
                         <img src={HeroImg}
-                        style={{
-                            maxWidth: "90%",
-                            display: "block",
-                            position:"relative",
-                            right:"0"
-                        }}
-                        alt="" />
+                            style={{
+                                maxWidth: "90%",
+                                display: "block",
+                                position: "relative",
+                                right: "0"
+                            }}
+                            alt="" />
                     </div>
                 </div>
-                <div className="container" style={{marginTop:"100px"}}>
-                    <h2>Holistic <span className='highlight' style={{font:"inherit"}}>Solutions</span> for Progressive Healthcare</h2>
-                    <p className="text-content" style={{textAlign:"center"}}>Harness the synergy of patient financing and intelligent healthcare solutions.</p>
+                <div className="container" style={{ marginTop: "100px" }}>
+                    <h2>Holistic <span className='highlight' style={{ font: "inherit" }}>Solutions</span> for Progressive Healthcare</h2>
+                    <p className="text-content" style={{ textAlign: "center" }}>Harness the synergy of patient financing and intelligent healthcare solutions.</p>
                 </div>
             </div>
         </section>
     )
 }
 
-function PatientFinancing(){
-    return(
+function PatientFinancing() {
+    return (
         <section className="patient-financing">
             <div className="container">
                 <div className="flex-content-wrapper">
                     <div className="section-content financing-container-content">
                         <div className="section-content-wrapper">
-                            <h3>Patient <br/>Financing</h3>
+                            <h3>Patient <br />Financing</h3>
                             <p className="text-content">Partner with CarePay to empower your patients with flexible EMI options and real-time credit approval, enhancing their access to quality healthcare.</p>
-                            <p className="text-content" style={{fontSize:"90%"}}>Available EMI tenures are of 3 to 18 months.</p>
+                            <p className="text-content" style={{ fontSize: "90%" }}>Available EMI tenures are of 3 to 18 months.</p>
                         </div>
                     </div>
                     <div className="section-content financing-container-image" data-aos="zoom-in">
                         <img src={FinanceImg}
-                        style={{
-                            maxWidth: "90%",
-                            display: "block"
-                        }}
-                        alt="" />
+                            style={{
+                                maxWidth: "90%",
+                                display: "block"
+                            }}
+                            alt="" />
                     </div>
                 </div>
             </div>
@@ -135,23 +135,23 @@ function PatientFinancing(){
     )
 }
 
-function IncreseDiscoverability(){
-    return(
+function IncreseDiscoverability() {
+    return (
         <section className="increase-discoverability">
             <div className="container">
                 <div className="flex-content-wrapper">
                     <div className="section-content discoverability-container-image" data-aos="zoom-in">
                         <img src={Discoverability}
-                        style={{
-                            maxWidth: "90%",
-                            display: "block",
-                            margin: "auto"
-                        }}
-                        alt="" />
+                            style={{
+                                maxWidth: "90%",
+                                display: "block",
+                                margin: "auto"
+                            }}
+                            alt="" />
                     </div>
                     <div className="section-content discoverability-container-content">
                         <div className="section-content-wrapper">
-                            <h3>Increase Clinic's <br/> Discoverability</h3>
+                            <h3>Increase Clinic's <br /> Discoverability</h3>
                             <p className="text-content">Get more patients to discover your clinic and book appointments and treatments.</p>
                             {/* <p className="text-content">Available EMI tenures are of 3 to 18 months.</p> */}
                         </div>
@@ -162,26 +162,26 @@ function IncreseDiscoverability(){
     )
 }
 
-function BoostRevenue(){
-    return(
+function BoostRevenue() {
+    return (
         <section className="boost-revenue">
             <div className="container">
                 <div className="flex-content-wrapper">
                     <div className="section-content revenue-container-content">
                         <div className="section-content-wrapper">
-                            <h3>Boost your <br/>Revenue</h3>
-                            <p className="text-content">Convert and retain more patients, <br/>elevate patient satisfaction and maximize your revenue.</p>
+                            <h3>Boost your <br />Revenue</h3>
+                            <p className="text-content">Convert and retain more patients, <br />elevate patient satisfaction and maximize your revenue.</p>
                             {/* <p className="text-content">Available EMI tenures are of 3 to 18 months.</p> */}
                         </div>
                     </div>
                     <div className="section-content revenue-container-image" data-aos="zoom-in">
                         <img src={RevenueImg}
-                        style={{
-                            maxWidth: "90%",
-                            display: "block",
-                            margin: "auto"
-                        }}
-                        alt="" />
+                            style={{
+                                maxWidth: "90%",
+                                display: "block",
+                                margin: "auto"
+                            }}
+                            alt="" />
                     </div>
                 </div>
             </div>
@@ -189,22 +189,22 @@ function BoostRevenue(){
     )
 }
 
-function Operations(){
-    return(
+function Operations() {
+    return (
         <section className="operations">
             <div className="container">
                 <div className="flex-content-wrapper">
                     <div className="section-content operations-container-image" data-aos="zoom-in">
                         <img src={OperationsImg}
-                        style={{
-                            maxWidth: "90%",
-                            display: "block"
-                        }}
-                        alt="" />
+                            style={{
+                                maxWidth: "90%",
+                                display: "block"
+                            }}
+                            alt="" />
                     </div>
                     <div className="section-content operations-container-content">
                         <div className="section-content-wrapper">
-                            <h3>Streamlined <br/>Operations</h3>
+                            <h3>Streamlined <br />Operations</h3>
                             <p className="text-content">Maximize your operational efficiency with CarePay’s instant credit approvals and payouts.</p>
                             {/* <p className="text-content" style={{fontWeight:600}}>Available EMI tenures are of 3 to 18 months.</p> */}
                         </div>
@@ -215,14 +215,14 @@ function Operations(){
     )
 }
 
-function HowItWorks(){
+function HowItWorks() {
 
     const [active, setActive] = useState("tab-1");
     const refGif = useRef();
     const refCaption = useRef();
-    
-    useEffect(()=>{
-        switch(active){
+
+    useEffect(() => {
+        switch (active) {
             case "tab-1":
                 refGif.current.src = Step1Gif;
                 refCaption.current.innerText = "Patient scans the QR placed at doctor’s clinic and applies for the credit.";
@@ -245,7 +245,7 @@ function HowItWorks(){
                 break;
         }
     }, [active])
-    return(
+    return (
         <>
             <section className="how-it-works">
                 <div className="container">
@@ -253,15 +253,15 @@ function HowItWorks(){
                         <div className="section-content how-it-works-content">
                             <h2>How it works</h2>
                             <div className="tabs-bar">
-                                <div className={active==="tab-1"?"tab active":"tab"} onClick={()=>setActive("tab-1")}>Step 1</div>
-                                <div className={active==="tab-2"?"tab active":"tab"} onClick={()=>setActive("tab-2")}>Step 2</div>
-                                <div className={active==="tab-3"?"tab active":"tab"} onClick={()=>setActive("tab-3")}>Step 3</div>
-                                <div className={active==="tab-4"?"tab active":"tab"} onClick={()=>setActive("tab-4")}>Step 4</div>
-                                <div className={active==="tab-5"?"tab active":"tab"} onClick={()=>setActive("tab-5")}>Step 5</div>
+                                <div className={active === "tab-1" ? "tab active" : "tab"} onClick={() => setActive("tab-1")}>Step 1</div>
+                                <div className={active === "tab-2" ? "tab active" : "tab"} onClick={() => setActive("tab-2")}>Step 2</div>
+                                <div className={active === "tab-3" ? "tab active" : "tab"} onClick={() => setActive("tab-3")}>Step 3</div>
+                                <div className={active === "tab-4" ? "tab active" : "tab"} onClick={() => setActive("tab-4")}>Step 4</div>
+                                <div className={active === "tab-5" ? "tab active" : "tab"} onClick={() => setActive("tab-5")}>Step 5</div>
                             </div>
                             <div className="captionContainer">
                                 <p ref={refCaption} className="text-content"></p>
-                                {active==="tab-3" && <p style={{marginTop:"1.5rem", fontSize:"12px"}}>Available EMI tenures are of 3/6/10/12/15/18 months.</p>}
+                                {active === "tab-3" && <p style={{ marginTop: "1.5rem", fontSize: "12px" }}>Available EMI tenures are of 3/6/10/12/15/18 months.</p>}
                             </div>
                         </div>
                         <div className="section-content how-it-works-image">
@@ -276,54 +276,54 @@ function HowItWorks(){
     )
 }
 
-function HealthcareFinance(){
+function HealthcareFinance() {
 
-    return(
+    return (
         <>
-        <section className="future-healthcare">
-            <div className="container">
-                <h2><span className='clr-purple'>Shaping the Future</span> of Healthcare Finance</h2>
-                <p className="text-content">Revolutionizing the landscape with integrated financial services.</p>
+            <section className="future-healthcare">
+                <div className="container">
+                    <h2><span className='clr-purple'>Shaping the Future</span> of Healthcare Finance</h2>
+                    <p className="text-content">Revolutionizing the landscape with integrated financial services.</p>
 
-                <img src={FutureHealthcare} data-aos="zoom-in" style={{margin:"2rem auto"}} alt="" />
+                    <img src={FutureHealthcare} data-aos="zoom-in" style={{ margin: "2rem auto" }} alt="" />
 
-                <p className="text-content">At CarePay, we envisage a future where financial services are seamlessly integrated into healthcare, creating a harmonious ecosystem that benefits both healthcare providers and patients. Our cutting-edge solutions aim at the bigger picture, evolving to serve the ever-growing demands of India’s healthcare sector.</p>
+                    <p className="text-content">At CarePay, we envisage a future where financial services are seamlessly integrated into healthcare, creating a harmonious ecosystem that benefits both healthcare providers and patients. Our cutting-edge solutions aim at the bigger picture, evolving to serve the ever-growing demands of India’s healthcare sector.</p>
 
-                <h4 style={{fontSize:"42px", marginTop:"3rem"}}>Trusted by</h4>
-                <div className="trustedBy-wrapper">
-                    <div className="trustedBy">
-                        <img src={TrustedBy1} alt="" />
-                    </div>
-                    <div className="trustedBy">
-                        <img src={TrustedBy2} alt="" />
-                    </div>
-                    <div className="trustedBy">
-                        <img src={TrustedBy3} alt="" />
+                    <h4 style={{ fontSize: "42px", marginTop: "3rem" }}>Trusted by</h4>
+                    <div className="trustedBy-wrapper">
+                        <div className="trustedBy">
+                            <img src={TrustedBy1} alt="" />
+                        </div>
+                        <div className="trustedBy">
+                            <img src={TrustedBy2} alt="" />
+                        </div>
+                        <div className="trustedBy">
+                            <img src={TrustedBy3} alt="" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </>
     )
 }
 
-function LendingPartners(){
+function LendingPartners() {
 
-    return(
+    return (
         <section className='lending-partners'>
             <h4>Our lending partners</h4>
-            <div className="container">
-                <img src={I2ILogo} alt="" />
-                <img src={CreditFairLogo} alt="" />
-                <img src={LiquiLoansLogo} alt="" />
+            <div className="container" style={{textAlign:'center'}}>
+                <div style={{padding:'10px',minWidth:'33%'}}> <img src={I2ILogo} alt="" /></div>
+                <div style={{padding:'10px',minWidth:'33%'}}>  <img src={CreditFairLogo} alt="" /></div>
+                <div style={{padding:'10px',minWidth:'33%'}}>  <img src={LiquiLoansLogo} alt="" /></div>
             </div>
         </section>
     )
 }
 
-function Reviews(){
-    
-    return(
+function Reviews() {
+
+    return (
         <>
             <section className="reviews">
                 <div className="container">
@@ -340,21 +340,21 @@ function Reviews(){
     )
 }
 
-function Review({starCount, clinicName, reviewContent, doctorName}){
+function Review({ starCount, clinicName, reviewContent, doctorName }) {
     const star = "★";
     const unstar = "☆";
 
     let stars = "";
-    for(let i=0; i<5; i++){
-        if(i<starCount){
+    for (let i = 0; i < 5; i++) {
+        if (i < starCount) {
             stars += star + " ";
-        }else{
+        } else {
             stars += unstar + " ";
         }
     }
-    return(
+    return (
         <div className="review">
-            <div className="star-rating" style={{color:"gold"}}>{stars}</div>
+            <div className="star-rating" style={{ color: "gold" }}>{stars}</div>
             <h5>{clinicName}</h5>
             <p>{reviewContent}</p>
             <h6>{doctorName}</h6>
@@ -362,9 +362,9 @@ function Review({starCount, clinicName, reviewContent, doctorName}){
     )
 }
 
-function Branding(){
+function Branding() {
 
-    return(
+    return (
         <>
             <section className="branding">
                 <div className="container">
@@ -377,62 +377,62 @@ function Branding(){
     )
 }
 
-function Articles(){
+function Articles() {
 
-    return(
+    return (
         <>
-            <section className="articles" style={{background:"#ECEBFF"}}>
-                <div className="container" style={{textAlign:"center"}}>
-                    <h4 style={{fontSize:"42px", padding:"0 12px"}}>Insights & Innovations</h4>
-                    <p className='text-content' style={{textAlign:"center", marginBottom:"1.5rem"}}>Stay updated with the latest trends, insights, <br/>and innovations in healthcare financing.</p>
+            <section className="articles" style={{ background: "#ECEBFF" }}>
+                <div className="container" style={{ textAlign: "center" }}>
+                    <h4 style={{ fontSize: "42px", padding: "0 12px" }}>Insights & Innovations</h4>
+                    <p className='text-content' style={{ textAlign: "center", marginBottom: "1.5rem" }}>Stay updated with the latest trends, insights, <br />and innovations in healthcare financing.</p>
                 </div>
                 <div
                     className="scrollable-container"
-                    // style={{
-                    //     overflowX: "auto",
-                    //     scrollbarWidth: "thin",
-                    //     scrollbarColor: "#514C9F",
-                    //     scrollbarGutter: "stable",
-                    //     // userSelect: "none",
-                    //     minWidth: "100%", // Set a minimum width
-                    //     padding:"1%"
-                    // }}
+                // style={{
+                //     overflowX: "auto",
+                //     scrollbarWidth: "thin",
+                //     scrollbarColor: "#514C9F",
+                //     scrollbarGutter: "stable",
+                //     // userSelect: "none",
+                //     minWidth: "100%", // Set a minimum width
+                //     padding:"1%"
+                // }}
                 >
-                    <div className="wrapper" 
-                        // style={{
-                        //     padding: "30px",
-                        //     display: "flex",
-                        //     flexDirection: "row",
-                        //     alignContent: "flex-start",
-                        //     justifyContent: "space-between",
-                        //     gap: "3rem",
-                        // }}
+                    <div className="wrapper"
+                    // style={{
+                    //     padding: "30px",
+                    //     display: "flex",
+                    //     flexDirection: "row",
+                    //     alignContent: "flex-start",
+                    //     justifyContent: "space-between",
+                    //     gap: "3rem",
+                    // }}
                     >
-                        <Article 
-                            width={"25%"} 
-                            as="480/320" 
-                            imgWidth='40%' 
+                        <Article
+                            width={"25%"}
+                            as="480/320"
+                            imgWidth='40%'
                             logo={MidDayLogo} content={"How CarePay is Changing the Face of Healthcare Financing."} link={"https://www.mid-day.com/brand-media/article/how-carepay-is-changing-the-face-of-healthcare-financing--gaurav-gupta-23317470"}
                         />
-                        <Article 
-                            width={"30%"} 
-                            as="580/320" 
-                            imgWidth='70%' 
+                        <Article
+                            width={"30%"}
+                            as="580/320"
+                            imgWidth='70%'
                             logo={FinExpLogo} content={"The convergence of finance and healthcare: How fintech is bridging the gap."} link={"https://www.financialexpress.com/business/industry-the-convergence-of-finance-and-healthcare-how-fintech-is-bridging-the-gap-3283633/"}
                         />
-                        <Article 
-                            width={"30%"} 
-                            as="580/320" 
-                            imgWidth='45%' 
+                        <Article
+                            width={"30%"}
+                            as="580/320"
+                            imgWidth='45%'
                             logo={PharmaBizLogo} content={"India’s digitally empowered fintech companies working to address optimal financial protection for patients."} link={"http://www.pharmabiz.com/NewsDetails.aspx?aid=163303&sid=1"}
                         />
                         <div className="spacer"
-                        style={{
-                            height:"100%",
-                            width:"0.5rem",
-                            opacity:"0",
-                            userSelect:"none"
-                        }}>....</div>
+                            style={{
+                                height: "100%",
+                                width: "0.5rem",
+                                opacity: "0",
+                                userSelect: "none"
+                            }}>....</div>
                     </div>
                 </div>
             </section>
@@ -440,36 +440,37 @@ function Articles(){
     )
 }
 
-function Article({ logo, content, link, width, imgWidth="50%", as }){
-    return(
+function Article({ logo, content, link, width, imgWidth = "50%", as }) {
+    return (
         <>
-            <article 
-                style={{width:`${width}`, aspectRatio:`${as}`, 
-                        // minWidth:"30ch", padding:"30px", paddingBottom:"45px", 
-                        // position:"relative", display:"flex", flexDirection:"column", 
-                        // background:"#fff", borderRadius:"8px", border:"2px solid #263238", 
-                        // boxShadow:"-16px 24px 0px 0px #504C9E"
-                    }}
-                className='article-content-container'    
+            <article
+                style={{
+                    width: `${width}`, aspectRatio: `${as}`,
+                    // minWidth:"30ch", padding:"30px", paddingBottom:"45px", 
+                    // position:"relative", display:"flex", flexDirection:"column", 
+                    // background:"#fff", borderRadius:"8px", border:"2px solid #263238", 
+                    // boxShadow:"-16px 24px 0px 0px #504C9E"
+                }}
+                className='article-content-container'
             >
-                <div style={{height:"20%", display:"flex", alignItems:"flex-start"}}><img src={logo} alt="" style={{width:`${imgWidth}`}} /></div>
-                <p className='text-content' style={{fontWeight:"700"}}>{content}</p>
-                <Link to={link} target='_blank' style={{color:"#5149CF", textDecoration:"underline", fontWeight:"700", position:"absolute", bottom:'25px'}}>View article</Link>
+                <div style={{ height: "20%", display: "flex", alignItems: "flex-start" }}><img src={logo} alt="" style={{ width: `${imgWidth}` }} /></div>
+                <p className='text-content' style={{ fontWeight: "700" }}>{content}</p>
+                <Link to={link} target='_blank' style={{ color: "#5149CF", textDecoration: "underline", fontWeight: "700", position: "absolute", bottom: '25px' }}>View article</Link>
             </article>
         </>
     )
 }
 
-function HomepageFAQs(){
+function HomepageFAQs() {
 
     // const [activeFaq, setActiveFaq] = useState('');
 
-    function clickHandler(e){
+    function clickHandler(e) {
         // console.log(e.target)
         let panel = e.target.nextElementSibling;
-        if(panel === null) return;
-        
-        if(e?.target?.classList?.contains('active')){
+        if (panel === null) return;
+
+        if (e?.target?.classList?.contains('active')) {
             e.target.classList.remove('active');
             panel.style.maxHeight = null;
             return;
@@ -480,31 +481,31 @@ function HomepageFAQs(){
             panel.style.maxHeight = null;
         } else {
             panel.style.maxHeight = panel.scrollHeight + "px";
-        } 
+        }
     }
 
-    function closeAllFaq(){
+    function closeAllFaq() {
         let faqs = document.getElementsByClassName('FAQs-content');
         // console.log(faqs[0]);
-        for(let i=0; i<faqs.length; i++){
+        for (let i = 0; i < faqs.length; i++) {
             let btn = faqs[i].children[0];
             let panel = faqs[i].children[1];
 
-            if(btn && btn.classList.contains('active')){
+            if (btn && btn.classList.contains('active')) {
                 btn.classList.remove('active');
             }
 
-            if(panel){
+            if (panel) {
                 panel.style.maxHeight = null;
             }
         }
     }
-    return(
+    return (
         <>
             <section className="homepage-FAQs">
                 <div className="container">
-                    <h3 style={{fontSize:"42px", fontWeight:"700"}}>FAQs</h3>
-                    <div className="faq-wrapper" onClick={(e)=>clickHandler(e)}>
+                    <h3 style={{ fontSize: "42px", fontWeight: "700" }}>FAQs</h3>
+                    <div className="faq-wrapper" onClick={(e) => clickHandler(e)}>
                         <FAQ question={"How much time does it take to get loan processed?"} answer={"It takes less than a minute to get the loan approved. On scanning the QR code and selecting the desired payment option, patients will have to enter their PAN and Aadhar Card no. for verification; post which the loan is approved, subject to credit eligibility and terms and conditions of loan agreement with the financial institution Partner."} />
                         <FAQ question={"What are the steps involved for making this option available at my hospital/clinic?"} answer={"You have to sign an agreement (shared digitally by our team) and fill a simple on-boarding form for getting started. Our team will reach out to you shortly after that for installing the QR code and training your receptionist."} />
                         <FAQ question={"Is the loan sanctioned/offered by CarePay?"} answer={"We work with various financial institutions/NBFCs (that are registered with RBI to offer loans) to be make the credit available to your patients."} />
@@ -520,9 +521,9 @@ function HomepageFAQs(){
     )
 }
 
-function FAQ({question, answer}){
+function FAQ({ question, answer }) {
 
-    return(
+    return (
         <>
             <div className={"FAQs-content"}>
                 <button className="accordion">{question} <div className="circle"></div></button>
@@ -534,118 +535,118 @@ function FAQ({question, answer}){
     )
 }
 
-export function Contact(){
+export function Contact() {
 
-    const [name, setName] =     useState("");
-    const [email, setEmail] =   useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [number, setNumber] = useState("");
-    const [query, setQuery] =   useState("");
+    const [query, setQuery] = useState("");
 
     const [isSubmitted, setSubmitted] = useState(false);
     const [switchComp, setSwitchComp] = useState(false)
 
     const containerRef = useRef(null);
 
-    function formSubmitted(){
+    function formSubmitted() {
         setSwitchComp(true)
         setTimeout(() => {
             setSubmitted(true);
-            if(containerRef.current){
-                containerRef.current.scrollIntoView({ behavior: "smooth", block: "start"});
+            if (containerRef.current) {
+                containerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         }, 1000);
     }
 
-    function handleSubmit(){
+    function handleSubmit() {
         // console.log(name, email, number, query);
         // formSubmitted(); return;
-        if(! (name && email && number && query)){
+        if (!(name && email && number && query)) {
             return;
         }
         axios.post(process.env.REACT_APP_BACKEND + "saveOrUpdateQuery", {
-            "name" : name,
-            "emailId" : email,
-            "mobileNumber" : number,
-            "query" : query
+            "name": name,
+            "emailId": email,
+            "mobileNumber": number,
+            "query": query
         }).then(response => {
-            if(response.data.message === "success"){
+            if (response.data.message === "success") {
                 formSubmitted();
                 setName("");
                 setEmail("");
                 setNumber("");
                 setQuery("");
             }
-        }).catch(error =>{
+        }).catch(error => {
             console.log(error)
         })
     }
 
-    function handleNumber(val){
-        if(val.length > 10){
+    function handleNumber(val) {
+        if (val.length > 10) {
             return;
         }
         setNumber(val);
     }
 
-    return(
+    return (
         <>
             <section className="contact" id='contact'>
                 <div ref={containerRef} className="container">
-                    {!isSubmitted ? 
-                        <div className={"flex-content-wrapper"+ (switchComp?" hide":"")}>
+                    {!isSubmitted ?
+                        <div className={"flex-content-wrapper" + (switchComp ? " hide" : "")}>
                             <div className="contact-container-heading">
-                                <h3 style={{fontFamily: 'sigmundpro-semibold'}}>Let's take your practice to the next level</h3>
+                                <h3 style={{ fontFamily: 'sigmundpro-semibold' }}>Let's take your practice to the next level</h3>
                                 <p className="text-content">Reach out to discover how CarePay can revolutionize your healthcare services.</p>
                             </div>
                             <div className="contact-container-form">
                                 <label htmlFor="name">
                                     Your name
                                 </label>
-                                <input 
-                                    id='name' 
-                                    type='text' 
+                                <input
+                                    id='name'
+                                    type='text'
                                     placeholder='Enter your name here'
                                     value={name}
-                                    onChange={(e)=>setName(e.target.value)} />
+                                    onChange={(e) => setName(e.target.value)} />
 
                                 <label htmlFor="email">
                                     E-mail ID
                                 </label>
-                                <input 
-                                    id='email' 
-                                    type='email' 
+                                <input
+                                    id='email'
+                                    type='email'
                                     placeholder='E-mail ID'
                                     value={email}
-                                    onChange={(e)=>setEmail(e.target.value)} />
+                                    onChange={(e) => setEmail(e.target.value)} />
 
                                 <label htmlFor="number">
                                     Contact number
                                 </label>
-                                <input 
-                                    id='number' 
-                                    type='number' 
+                                <input
+                                    id='number'
+                                    type='number'
                                     placeholder='Contact number'
                                     value={number}
-                                    onChange={(e)=>handleNumber(e.target.value)} />
+                                    onChange={(e) => handleNumber(e.target.value)} />
 
                                 <label htmlFor="query">
                                     Query
                                 </label>
-                                <input 
-                                    id='query' 
-                                    type='text' 
+                                <input
+                                    id='query'
+                                    type='text'
                                     placeholder='Your query'
                                     value={query}
-                                    onChange={(e)=>setQuery(e.target.value)} />
+                                    onChange={(e) => setQuery(e.target.value)} />
 
-                                <div className="submit-button-wrapper" onClick={()=>handleSubmit()}>
+                                <div className="submit-button-wrapper" onClick={() => handleSubmit()}>
                                     <PrimaryButton content={"Request a callback"} variant='dark' />
                                 </div>
                             </div>
                         </div>
-                    :
-                        <div className={"thankYouFormSubmission container" + (isSubmitted?" show":"")}>
-                            <h2 style={{fontSize:"40px", lineHeight:"44px", fontFamily:"sigmundpro-semibold"}}>Thank you</h2>
+                        :
+                        <div className={"thankYouFormSubmission container" + (isSubmitted ? " show" : "")}>
+                            <h2 style={{ fontSize: "40px", lineHeight: "44px", fontFamily: "sigmundpro-semibold" }}>Thank you</h2>
                             <p className='text-content'>We will contact you soon on your given mobile number and mail ID</p>
                         </div>
                     }
@@ -655,9 +656,9 @@ export function Contact(){
     )
 }
 
-export function Footer(){
+export function Footer() {
 
-    return(
+    return (
         <>
             <section className="footer" id='footer'>
                 <div className="container">
@@ -666,7 +667,7 @@ export function Footer(){
                     </div>
                     <div className="footer-flex-wrapper">
                         <div className="partner-up">
-                            <h4>Get CarePay <br/>for your practice!</h4>
+                            <h4>Get CarePay <br />for your practice!</h4>
                             <PrimaryButton content={"Partner up with us"} to={"javascript:void(0)"} variant='light' callback={handleContactScroll} />
                         </div>
                         <div className="quick-links">
@@ -693,10 +694,10 @@ export function Footer(){
                                 <div className='addresses'>
                                     <p className='addressHeading'>Gurugram Address</p>
                                     <hr />
-                                    <p className="addressLine">5th Floor, DLF Two Horizon Centre, <br />DLF Phase 5, Gurugram, <br/>Haryana, 122002</p>
+                                    <p className="addressLine">5th Floor, DLF Two Horizon Centre, <br />DLF Phase 5, Gurugram, <br />Haryana, 122002</p>
                                     <p className='addressHeading'>Registered Address</p>
-                                    <hr/>
-                                    <p className="addressLine">BNP Paribas Bank, FLAT NO. 408,<br/> 27, New Delhi House, Barakhamba<br/> Road, Connaught Lane, Connaught<br/> Place, New Delhi, Delhi, 110001</p>
+                                    <hr />
+                                    <p className="addressLine">BNP Paribas Bank, FLAT NO. 408,<br /> 27, New Delhi House, Barakhamba<br /> Road, Connaught Lane, Connaught<br /> Place, New Delhi, Delhi, 110001</p>
                                 </div>
                             </div>
                             <div className="socials">
