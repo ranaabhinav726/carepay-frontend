@@ -7,7 +7,7 @@ import { Call, CopyAll, CurrencyRupeeSharp, DescriptionRounded, Download, Share,
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useNavigate } from "react-router-dom";
 import routes from "../layout/Routes";
-import { getDoctorDataById, getLoanDataByUserId, getParentDoctorDataById, getParentSCoutDataById, getScoutDataById } from "./actioncreator";
+import { getDoctorDataById, getLoanDataByUserId, getParentDoctorDataById, getParentSCoutDataById, getScoutDataById, getAllClinicName } from "./actioncreator";
 import OverviewUi from './overview'
 import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
@@ -27,6 +27,8 @@ const MainScout = () => {
     const [userData, setUserData] = useState('');
     const [loanData, setLoanData] = useState('');
     const [loanDatastate, setLoanState] = useState(false);
+    const [allClinics, setAllClinic] = useState('');
+    const [clinic, setClinic] = useState('');
 
     const handlefilters = (type) => {
         setfilter((prevFilter) => (prevFilter === type ? '' : type));
@@ -38,35 +40,45 @@ const MainScout = () => {
 
         } else {
             if (window.sessionStorage.getItem('role') === 'SCOUT') {
-                getScoutDataById(window.sessionStorage.getItem('scoutId'), callback => {
+                getScoutDataById(window.sessionStorage.getItem('scoutId'),clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
                     }
+                })
+                getAllClinicName('', window.sessionStorage.getItem('scoutId'), '', callback => {
+                    setAllClinic(callback.data)
                 })
             }
             if (window.sessionStorage.getItem('role') === 'DOCTOR') {
-                getDoctorDataById(window.sessionStorage.getItem('doctorId'), callback => {
+                getDoctorDataById(window.sessionStorage.getItem('doctorId'),clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
                     }
                 })
+
             }
             if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
-                getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), callback => {
+                getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'),clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
                     }
+                })
+                getAllClinicName('', '', window.sessionStorage.getItem('parentDoctorId'), callback => {
+                    setAllClinic(callback.data)
                 })
             }
             if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-                getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), callback => {
+                getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'),clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
                     }
+                })
+                getAllClinicName(window.sessionStorage.getItem('parentScoutId'), '', '', callback => {
+                    setAllClinic(callback.data)
                 })
             }
         }
@@ -116,6 +128,52 @@ const MainScout = () => {
 
         })
     }
+    const clinicHandler = (e) => {
+        
+        setClinic(e.target.value)
+        if(e.target.value===''){
+            applyFilter('')
+        }
+        
+    }
+    const applyFilter=(data)=>{
+        if (window.sessionStorage.getItem('role') === 'SCOUT') {
+            getScoutDataById(window.sessionStorage.getItem('scoutId'),data!==undefined?data:clinic, callback => {
+                console.log(callback)
+                if (callback.message === 'success') {
+                    setOjectData(callback.data)
+                }
+            })
+         
+        }
+        if (window.sessionStorage.getItem('role') === 'DOCTOR') {
+            getDoctorDataById(window.sessionStorage.getItem('doctorId'),data!==undefined?data:clinic, callback => {
+                console.log(callback)
+                if (callback.message === 'success') {
+                    setOjectData(callback.data)
+                }
+            })
+
+        }
+        if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
+            getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'),data!==undefined?data:clinic, callback => {
+                console.log(callback)
+                if (callback.message === 'success') {
+                    setOjectData(callback.data)
+                }
+            })
+          
+        }
+        if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
+            getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'),data!==undefined?data:clinic, callback => {
+                console.log(callback)
+                if (callback.message === 'success') {
+                    setOjectData(callback.data)
+                }
+            })
+          
+        }
+    }
     return (
         <>
             <div className=" over-view-component px-2 " style={{ zIndex: 1, position: 'sticky', top: '51px', width: '100%', background: '#fff', borderBottom: '5px solid #f2f2f2', paddingBottom: '10px' }}>
@@ -131,18 +189,24 @@ const MainScout = () => {
 
                 </div>
                 {console.log(filter)}
-                {/* <div className="dashboard">
+                <div className="dashboard">
                     <div className="filters">
-                        <div className={`box ${filter === 'scouts' ? 'active' : ''}`} onClick={() => handlefilters('scouts')}>
+                        {/* <div className={`box ${filter === 'scouts' ? 'active' : ''}`} onClick={() => handlefilters('scouts')}>
                             <h5>Scouts (5)</h5> &nbsp;
                             <span><FaAngleDown /></span>
-                        </div>
-                        <div className={`box ${filter === 'amount' ? 'active' : ''}`} onClick={() => handlefilters('amount')}>
+                        </div> */}
+                        {/* <div className={`box ${filter === 'amount' ? 'active' : ''}`} onClick={() => handlefilters('amount')}>
                             <h5>Amount</h5> &nbsp;
                             <span><FaAngleDown /></span>
-                        </div>
+                        </div> */}
+                        {allClinics.length > 0 ?
+                            <div className={`box ${filter === 'clinics' ? 'active' : ''}`} onClick={() => handlefilters('clinics')}>
+                                <h5>Clinics</h5> &nbsp;
+                                <span><FaAngleDown /></span>
+                            </div>
+                            : ""}
                     </div>
-                </div> */}
+                </div>
 
             </div>
             {tabType === 'txn' ?
@@ -168,8 +232,8 @@ const MainScout = () => {
 
                                     {carddata.type === 'Approved' ?
                                         <>
-                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
-                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
+                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                 Approved
                                             </div>
                                             {carddata.esignUrl ?
@@ -177,7 +241,7 @@ const MainScout = () => {
                                                     <a target="_blank"
                                                     >
                                                         <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.esignUrl)} className="carepay-button-card">&nbsp;
-                                                            <div className="share-btn"> <WhatsApp />&nbsp;&nbsp;&nbsp; Share link</div>
+                                                            <div className="share-btn" style={{fontSize:'14px'}}> <WhatsApp />&nbsp;&nbsp;&nbsp; Share link</div>
                                                         </button>
                                                     </a>
                                                 </div>
@@ -188,8 +252,8 @@ const MainScout = () => {
                                     {carddata.type === 'Application' ?
                                         <>
 
-                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
-                                            <div className="text-center" style={{ background: '#D6F5FF', color: '#217EB2', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
+                                            <div className="text-center" style={{ background: '#D6F5FF', color: '#217EB2', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                 Application
                                             </div>
                                         </>
@@ -199,16 +263,16 @@ const MainScout = () => {
 
                                             <div className="d-flex w-100" style={{ width: '100%', display: 'flex' }}>
                                                 <div style={{ width: '50%' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
-                                                    <div className="text-center" style={{ width: '50%', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
+                                                    <div className="text-center" style={{ width: '50%', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                         Under Review
                                                     </div>
                                                 </div>
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px',marginBottom:'4px' }}>Expect decision in:</div>
-                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision in:</div>
+                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                         {carddata.estimateTime}&nbsp;minutes
                                                     </div>
                                                 </div>
@@ -230,16 +294,16 @@ const MainScout = () => {
                                         </div> */}
                                             <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
                                                 <div style={{ width: '50%' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
-                                                        <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px' }}>
-                                                            Documents Required
-                                                        </div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
+                                                    <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                                        Documents Required
+                                                    </div>
                                                 </div>
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px',marginBottom:'4px' }}>Expect decision in:</div>
-                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision in:</div>
+                                                    <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                         {carddata.estimateTime}&nbsp;minutes
                                                     </div>
                                                 </div>
@@ -258,8 +322,8 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'eSign & eMandate' ?
                                         <>
-                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
-                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
+                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                 eSign & eMandate
                                             </div>
                                             <div className="approved-div"><DoneAllIcon style={{ fontSize: '14px' }} />&nbsp;Approved</div>
@@ -268,8 +332,8 @@ const MainScout = () => {
                                         : ""}
                                     {carddata.type === 'Pending disbursal' ?
                                         <>
-                                            <div style={{ marginTop: '10px', fontSize: '12px' ,marginBottom:'4px'}}>Status:</div>
-                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                            <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
+                                            <div className="text-center" style={{ background: '#E0FFEB', color: '#13906A', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                 Pending disbursal
                                             </div>
                                             {/* <div className="text-center">
@@ -386,6 +450,36 @@ const MainScout = () => {
                             </div>
                         </div>
                         : ''}
+            {filter === 'clinics' ?
+                <div className="over-view-component background-blur">
+                    <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'clinics' ? 'show' : ''}`}>
+                        <div className="filterscout">
+                            <div className="filterbox">
+                                <h5>Clinics</h5>&nbsp;<span><IoMdClose onClick={() => setfilter('')} className="closeicon" /></span>
+                            </div>
+                            <div className="checkboxes detailsform">
+                                {/* <div class="mb-3 form-check checkboxgrp">
+                                    <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
+                                    <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
+                                </div> */}
+                                <select onChange={(e) => clinicHandler(e)} style={{ background: 'rgb(236, 235, 255)', width: '100%', padding: '10px', borderRadius: '5px', border: 'none' }}>
+
+                                    <option value={''}>Select All</option>
+                                    {allClinics !== '' &&allClinics !== undefined&& allClinics.length > 0 ? allClinics.map((data, i) => {
+                                        return (
+                                            <option value={data}>{data}</option>
+                                        )
+                                    }) : ""}
+                                </select>
+
+                            </div>
+                            <div className="row filter-btn">
+                                <button className='apply-filter' onClick={()=>applyFilter()}>Apply Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                : ""}
             {sharelink ?
                 <div className="over-view-component background-blur">
 
@@ -398,12 +492,12 @@ const MainScout = () => {
 
                         </div>
                         <div style={{ marginBottom: '20px', marginTop: '20px' }} >
-                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Call Patient</div></div> : ""}
+                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer',width:'100%' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Call Patient</div><div style={{marginLeft:'50%',color:'rgb(183, 181, 181)'}}>{userData.patientPhoneNo}</div></div> : ""}
                             {userData.userId !== undefined && userData.userId !== '' ? <div onClick={() => getLoanData(userData.userId)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><DescriptionRounded style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>View loan details</div></div> : ""}
 
-                            <div onClick={() => sendlink('link',userData.type==='Approved'?userData.esignUrl: userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
-                            <div onClick={() => copyText(userData.type==='Approved'?userData.esignUrl:userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>
-                            {userData.esignUrl !== ''&&userData.type!=='Approved' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
+                            <div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
+                            <div onClick={() => copyText(userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>
+                            {userData.esignUrl !== '' && userData.type !== 'Approved' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
                             <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
                         </div>
                     </div>
@@ -425,18 +519,18 @@ const MainScout = () => {
                                     <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px' }}>{Number(loanData.totalEMI) - Number(loanData.advanceEMI)} &nbsp;months</div>
                                 </div>
                                 <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>EMI amount</p>
-                                    <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px', display: 'flex' }}><CurrencyRupeeSharp style={{ height: '18px', width: '18px' }} />&nbsp; <div style={{marginTop:'-2px'}}>{loanData.emiAmount}</div></div>
+                                    <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px', display: 'flex' }}>₹&nbsp; <div style={{  }}>{loanData.emiAmount}</div></div>
                                 </div>
 
                             </div>
-                            {/* <div style={{ display: 'flex', marginTop: '10px' }}>
+                            <div style={{ display: 'flex', marginTop: '10px' }}>
                                 <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Processing fees</p>
 
                                 </div>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>EMI amount</p>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC',fontWeight: '700', }}>{loanData.processingFees}</p>
                                 </div>
 
-                            </div> */}
+                            </div>
                             <div style={{ display: 'flex', marginTop: '10px' }}>
                                 <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Interest rate</p>
 
@@ -450,7 +544,7 @@ const MainScout = () => {
 
                                 </div>
                                 <div style={{ width: '50%' }}>
-                                    <div style={{ textAlign: 'left', fontSize: '12px', fontWeight: '700', display: 'flex' }}><CurrencyRupeeSharp style={{ height: '12px', width: '12px' }} />&nbsp; <div style={{marginTop:'-2px'}}>{loanData.advancePayment}</div></div>
+                                    <div style={{ textAlign: 'left', fontSize: '12px', fontWeight: '700', display: 'flex' }}>₹&nbsp; <div style={{  }}>{loanData.advancePayment}</div></div>
 
                                 </div>
 
@@ -468,7 +562,6 @@ const MainScout = () => {
                     </div>
                 </div>
                 : ""}
-
 
         </>
     )
