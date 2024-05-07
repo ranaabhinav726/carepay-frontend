@@ -6,8 +6,104 @@ import ScoutDahboardLayout from '../Scouts/dashboard'
 
 function AppRouter() {
   useEffect(() => {
-    if (window.location.href.includes('/patient/' || window.localStorage.href.includes('/doctor/'))) {
-      if (localStorage.getItem('access_token') === null) {
+    if (
+      window.location.href.includes(OurRoutes.PHONE_NUMBER_VERIFIED) ||
+      window.location.href.includes(OurRoutes.CREDIT_DETAILS) ||
+      window.location.href.includes(OurRoutes.PRESCRIPTION_UPLOAD) ||
+      window.location.href.includes(OurRoutes.PERSONAL_DETAILS) ||
+      window.location.href.includes(OurRoutes.NOT_SERVICEABLE) ||
+      window.location.href.includes(OurRoutes.ADDRESS_DETAILS) ||
+      window.location.href.includes(OurRoutes.ADDRESS_NOT_SERVICEABLE) ||
+      window.location.href.includes(OurRoutes.EMPLOYMENT_DETAILS) ||
+      window.location.href.includes(OurRoutes.LOAN_DETAILS) ||
+      window.location.href.includes(OurRoutes.CREDIT_FAIR_OFFERS) ||
+      window.location.href.includes(OurRoutes.WAITING_FOR_APPROVAL) ||
+      window.location.href.includes(OurRoutes.CHECKING_STATUS) ||
+      window.location.href.includes(OurRoutes.CF_APPROVED) ||
+      window.location.href.includes(OurRoutes.REJECTED_SCREEN) ||
+      window.location.href.includes(OurRoutes.SEARCHING_OFFERS) ||
+      window.location.href.includes(OurRoutes.CONGRATS_PRE_APPROVED_ICICI)||
+      window.location.href.includes(OurRoutes.EMI_OPTIONS)||
+      window.location.href.includes(OurRoutes.PAN_VERIFICATION_ICICI)||
+      window.location.href.includes(OurRoutes.CONGRATS_APPROVED_ICICI)||
+      window.location.href.includes(OurRoutes.FINAL_CONSENT)||
+      window.location.href.includes(OurRoutes.FIBE_MOBILE_NUMBER_VERIFICATION)||
+      window.location.href.includes(OurRoutes.FIBE_OTP_AUTHENTICATION)||
+      window.location.href.includes(OurRoutes.FIBE_NUMBER_VERIFIED)||
+      window.location.href.includes(OurRoutes.FIBE_WELCOME)||
+      window.location.href.includes(OurRoutes.FIBE_CREDIT_DETAILS)||
+      window.location.href.includes(OurRoutes.FIBE_PRESCRIPTION_UPLOAD)||
+      window.location.href.includes(OurRoutes.FIBE_BASIC_DETAILS)||
+      window.location.href.includes(OurRoutes.FIBE_EMPLOYMENT_DETAILS)||
+      window.location.href.includes(OurRoutes.FIBE_GREAT_JOB)||
+      window.location.href.includes(OurRoutes.FIBE_CREATE_USER)||
+      window.location.href.includes(OurRoutes.FIBE_WAITING_FOR_APPROVAL)||
+      window.location.href.includes(OurRoutes.FIBE_CHECKING_STATUS)||
+      window.location.href.includes(OurRoutes.FIBE_LOAN_APPROVED)||
+      window.location.href.includes(OurRoutes.FIBE_BANK_STATEMENT_REQUIRED)||
+      window.location.href.includes(OurRoutes.FIBE_LOAN_REJECTED)||
+      window.location.href.includes(OurRoutes.FIBE_REDIRECTING)||
+      window.location.href.includes(OurRoutes.FIBE_USER_FALLBACK)||
+      window.location.href.includes(OurRoutes.FIBE_CONGRATS_USER)||
+      window.location.href.includes(OurRoutes.FETCHING_LOAN_LIMIT)||
+      window.location.href.includes(OurRoutes.APPROVED_LOAN_LIMIT_NEG)||
+      window.location.href.includes(OurRoutes.KYC_ALREADY_VERIFIED)||
+      window.location.href.includes(OurRoutes.KYC_VERIFICATION)||
+      window.location.href.includes(OurRoutes.KYC_REDIRECTION)||
+      window.location.href.includes(OurRoutes.KYC_WEBVIEW)||
+      window.location.href.includes(OurRoutes.KYC_VERIFYING)||
+      window.location.href.includes(OurRoutes.KYC_VERIFICATION_SUCCESSFUL)||
+      window.location.href.includes(OurRoutes.INCOME_VERIFICATION)||
+      window.location.href.includes(OurRoutes.FILE_UPLOAD)||
+      window.location.href.includes(OurRoutes.STATEMENT_VERIFICATION_UNDER_PROCESS)||
+      window.location.href.includes(OurRoutes.INCOME_VERIFICATION_STATUS)||
+      window.location.href.includes(OurRoutes.STATEMENT_VERIFICATION_SUCCESSFUL)||
+      window.location.href.includes(OurRoutes.NEW_TENURE_CONFIRMATION)||
+      window.location.href.includes(OurRoutes.END_APPLICATION)||
+      window.location.href.includes(OurRoutes.CONGRATS)||
+      window.location.href.includes(OurRoutes.BANK_DETAILS)||
+      window.location.href.includes(OurRoutes.BANK_DETAILS_UNDER_PROCESS)||
+      window.location.href.includes(OurRoutes.BANK_VERIFYING)||
+      window.location.href.includes(OurRoutes.BANK_DETAILS_VERIFIED)||
+      window.location.href.includes(OurRoutes.LOAN_AGREEMENT)||
+      window.location.href.includes(OurRoutes.LOAN_REDIRECTION)||
+      window.location.href.includes(OurRoutes.LOAN_WEBVIEW)||
+      window.location.href.includes(OurRoutes.VERIFYING_LOAN)||
+      window.location.href.includes(OurRoutes.LOAN_AGREEMENT_UNDER_PROCESS)||
+      window.location.href.includes(OurRoutes.LOAN_VERIFICATION_SUCCESSFUL)||
+      window.location.href.includes(OurRoutes.EMANDATE)||
+      window.location.href.includes(OurRoutes.EMANDATE_REDIRECTION)||
+      window.location.href.includes(OurRoutes.EMANDATE_WEBVIEW)||
+      window.location.href.includes(OurRoutes.VERIFYING_EMANDATE)||
+      window.location.href.includes(OurRoutes.EMANDATE_UNDER_PROCESS)||
+      window.location.href.includes(OurRoutes.EMANDATE_VERIFICATION_SUCCESSFUL)||
+      window.location.href.includes(OurRoutes.FIRST_PAYMENT_SCREEN)||
+      window.location.href.includes(OurRoutes.PG_REDIRECTION)||
+      window.location.href.includes(OurRoutes.PAYMENT_UNDER_PROCESS)||
+      window.location.href.includes(OurRoutes.PG_VERIFYING)||
+      window.location.href.includes(OurRoutes.PG_VERIFICATION_SUCCESSFUL)||
+      window.location.href.includes(OurRoutes.LOAN_APP_UNDER_PROCESS)||
+      window.location.href.includes(OurRoutes.LOAN_VERIFYING)||
+      window.location.href.includes(OurRoutes.LOAN_APP_SUCCESSFUL)||
+      window.location.href.includes(OurRoutes.LOAN_APP_ON_HOLD)||
+      window.location.href.includes(OurRoutes.USER_DASHBOARD)||
+      window.location.href.includes(OurRoutes.DOCTOR_HOMEPAGE)||
+      window.location.href.includes(OurRoutes.DOCTOR_VERIFY_OTP)||
+      window.location.href.includes(OurRoutes.DOCTOR_WELCOME)||
+      window.location.href.includes(OurRoutes.DOCTOR_PERSONAL_DETAILS)||
+      window.location.href.includes(OurRoutes.DOCTOR_PRACTICE_DETAILS)||
+      window.location.href.includes(OurRoutes.DOCTOR_ADDRESS_DETAILS)||
+      window.location.href.includes(OurRoutes.DOCTOR_BANK_DETAILS)||
+      window.location.href.includes(OurRoutes.DOCTOR_UPLOAD_DOCUMENTS)||
+      window.location.href.includes(OurRoutes.DOCTOR_THANK_YOU)||
+      window.location.href.includes(OurRoutes.DOCTOR_DASHBOARD)||
+      window.location.href.includes(OurRoutes.ALL_TRANSACTIONS)||
+      window.location.href.includes(OurRoutes.ADD_PATIENT)||
+      window.location.href.includes(OurRoutes.UNDER_REVIEW)||
+      window.location.href.includes(OurRoutes.LOGIN_FROM_URL)||
+      window.location.href.includes(OurRoutes.QR_DATA)
+    ) {
+      if (localStorage.getItem('access_token') === null||localStorage.getItem('access_token') === '') {
         window.location.href = '/'
       }
     }

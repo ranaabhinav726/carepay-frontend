@@ -1,15 +1,16 @@
+// ProtectedRoute.js
 import React from 'react';
 import { Route, Navigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
-const PrivateRoute = ({ element: Element, ...rest }) => {
-  const accessToken = localStorage.getItem('access_token');
+const ProtectedRoute = ({ children, ...rest }) => {
+  const { token } = useAuth();
 
   return (
-    <Route
-      {...rest}
-      element={accessToken ? <Element /> : <Navigate to="/" replace />}
-    />
+    <Route {...rest}>
+      {token ? children : <Navigate to="/login" />}
+    </Route>
   );
 };
 
-export default PrivateRoute;
+export default ProtectedRoute;
