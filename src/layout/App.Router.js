@@ -87,8 +87,7 @@ function AppRouter() {
       window.location.href.includes(OurRoutes.LOAN_APP_SUCCESSFUL)||
       window.location.href.includes(OurRoutes.LOAN_APP_ON_HOLD)||
       window.location.href.includes(OurRoutes.USER_DASHBOARD)||
-      window.location.href.includes(OurRoutes.DOCTOR_HOMEPAGE)||
-      window.location.href.includes(OurRoutes.DOCTOR_VERIFY_OTP)||
+   
       window.location.href.includes(OurRoutes.DOCTOR_WELCOME)||
       window.location.href.includes(OurRoutes.DOCTOR_PERSONAL_DETAILS)||
       window.location.href.includes(OurRoutes.DOCTOR_PRACTICE_DETAILS)||
