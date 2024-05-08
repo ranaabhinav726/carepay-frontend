@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import CarepayLogo from '../patient/assets/Logo-carepay.svg'
+import CarepayLogo from './imagesscouts/logosvg.svg'
 import Alert from './imagesscouts/Vector (31).png'
 const Welcome = () => {
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);

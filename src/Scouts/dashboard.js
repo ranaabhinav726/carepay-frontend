@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BarIcon from './imagesscouts/bar.png';
 import CrossIcon from './imagesscouts/cross.png';
-import CarepayLogo from '../patient/assets/Logo-carepay.svg';
+import CarepayLogo from './imagesscouts/logosvg.svg'
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import routes from '../layout/Routes';
@@ -22,7 +22,7 @@ const ChatGPTMobileMenu = () => {
         <div className="screen-width-max">
             <div className="mobile-menu" style={{ position: 'sticky', top: 0, background: '#fff' }}>
                 <div style={{display:'flex'}} className={`menu-icon ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-                   <div > <img src={menuOpen ? CrossIcon : BarIcon} style={{ width: menuOpen?'20px':'25px' }} /></div><img src={CarepayLogo} style={{marginLeft:'20px',marginTop:'-4px'}} width={'25%'} />
+                   <div > <img src={menuOpen ? CrossIcon : BarIcon} style={{ width: menuOpen?'20px':'25px' }} /></div><img src={CarepayLogo} style={{marginLeft:'20px',marginTop:'-4px'}} width={'150px'} />
                 </div>
                 <div style={{ width: window.innerWidth + 'px', }} className={`menu-items ${menuOpen ? 'animated slideInLeft open' : 'animated slideOutRight'}`}>
                     <div className='menu-tab'>Onboarding Leads</div>

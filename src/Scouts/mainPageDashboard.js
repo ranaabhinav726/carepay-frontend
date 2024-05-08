@@ -29,6 +29,7 @@ const MainScout = () => {
     const [loanDatastate, setLoanState] = useState(false);
     const [allClinics, setAllClinic] = useState('');
     const [clinic, setClinic] = useState('');
+    const [clinicValue, setClinicValue] = useState('');
 
     const handlefilters = (type) => {
         setfilter((prevFilter) => (prevFilter === type ? '' : type));
@@ -130,7 +131,8 @@ const MainScout = () => {
     }
     const clinicHandler = (e) => {
         
-        setClinic(e.target.value)
+        setClinic(encodeURIComponent(e.target.value))
+        setClinicValue(e.target.value)
         if(e.target.value===''){
             applyFilter('')
         }
@@ -397,7 +399,7 @@ const MainScout = () => {
                 </div>
                 : ""}
             {tabType === 'overview' ?
-                <OverviewUi handlefilters={handlefilters} filter={filter} setfilter={setfilter} />
+                <OverviewUi clinic={clinic} handlefilters={handlefilters} filter={filter} setfilter={setfilter} />
                 : ""}
             {
                 filter === 'scouts' ?
@@ -462,7 +464,7 @@ const MainScout = () => {
                                     <input type="checkbox" class="form-check-input checkboxinput" id="selectall" />
                                     <label class="form-check-label checkboxinputlabel" for="selectall">Select All</label>
                                 </div> */}
-                                <select onChange={(e) => clinicHandler(e)} style={{ background: 'rgb(236, 235, 255)', width: '100%', padding: '10px', borderRadius: '5px', border: 'none' }}>
+                                <select value={clinicValue} onChange={(e) => clinicHandler(e)} style={{ background: 'rgb(236, 235, 255)', width: '100%', padding: '10px', borderRadius: '5px', border: 'none' }}>
 
                                     <option value={''}>Select All</option>
                                     {allClinics !== '' &&allClinics !== undefined&& allClinics.length > 0 ? allClinics.map((data, i) => {
@@ -497,7 +499,7 @@ const MainScout = () => {
 
                             {userData.type !== 'Disbursed'?<div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>:""}
                             {userData.type !== 'Disbursed'?<div onClick={() => copyText(userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>:""}
-                            {userData.esignUrl !== '' && userData.type !== 'Approved'  &&userData.type !== 'Disbursed'? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
+                            {/* {userData.esignUrl !== '' && userData.type !== 'Approved'  &&userData.type !== 'Disbursed'? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""} */}
                             <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
                         </div>
                     </div>

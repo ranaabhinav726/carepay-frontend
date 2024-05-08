@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CarepayLogo from '../patient/assets/Logo-carepay.svg';
-import LoanImage from './imagesscouts/loanimage.png';
+import CarepayLogo from './imagesscouts/logosvg.svg'
+import LoanImage from './imagesscouts/scoutmain.svg';
 import { sendOtpApi } from "./actioncreator";
 import routes from "../layout/Routes";
 import { useNavigate } from "react-router-dom";
@@ -49,13 +49,13 @@ const LoginScout = () => {
                 </div>
                 :
                 <>
-                    <div className="text-center scout-login-body">
+                    {/* <div className="text-center scout-login-body">
                         <h1>Instant Loan<br />to Patients</h1>
                         <img src={LoanImage} style={{ width: '60%', marginTop: '-20px' }} alt="Loan Image" />
                         <p>Flexible EMI options and real-time <br />loan approval</p>
-                    </div>
+                    </div> */}
                     <div className="scout-second-div">
-                        <h4 style={{marginBottom:'10px'}}>Log in</h4>
+                        <h3 style={{marginBottom:'20px',fontWeight:'700',color:'#514C9F'}}>Log in</h3>
                         <label >Mobile Number</label>
                         <div className="d-flex" style={{ width: '100%', display: 'flex' }}>
                             <div style={{ width: '10%', marginTop: '15px' }}>+91</div>
@@ -74,6 +74,7 @@ const LoginScout = () => {
                             <button className="carepay-button-purple" onClick={handleSendOTP}>Send OTP</button>
                         </div>
                     </div>
+                    <img src={LoanImage} style={{ width: '100%', marginTop: '-20px' }} alt="Loan Image" />
                 </>
             }
         </div>

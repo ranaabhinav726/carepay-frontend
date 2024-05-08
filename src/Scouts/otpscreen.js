@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CarepayLogo from '../patient/assets/Logo-carepay.svg'
-import LoanImage from './imagesscouts/loanimage.png'
+import CarepayLogo from './imagesscouts/logosvg.svg'
+import LoanImage from './imagesscouts/scoutmain.svg'
 import OtpInput from 'react-otp-input';
 import routes from "../layout/Routes";
 import { getScoutRole, sendOtpApi, verifyOtpApi } from "./actioncreator";
@@ -94,15 +94,15 @@ const LoginScout = () => {
                 </div>
                 :
                 <>
-                    <div className="text-center scout-login-body">
+                    {/* <div className="text-center scout-login-body">
                         <h1>Instant Loan<br />
                             to Patients</h1>
                         <img src={LoanImage} style={{ width: '60%', marginTop: '-20px' }} />
                         <p>Flexible EMI options and real-time <br />loan approval
                         </p>
-                    </div>
+                    </div> */}
                     <div className="scout-second-div otp-enter ">
-                        <p style={{ marginBottom: '10px' }}>Enter the OTP sent to </p>
+                        <p style={{ marginBottom: '20px' }}>Enter the OTP sent to </p>
                         <div className="d-flex" style={{ width: '100%', display: 'flex', marginBottom: '15px' }}>
                             <div style={{ width: '50%' }}>
                                 <p><b>+91 {window.sessionStorage.getItem('scoutMobile')}</b></p>
@@ -132,6 +132,7 @@ const LoginScout = () => {
                             <div className="text-center" style={{ marginTop: '10px' }}><Timer seconds={45} onTimerEnd={allowOtpResend} /></div>
                         }
                     </div>
+                    <img src={LoanImage} style={{width:'100%'}}/>
                 </>}
         </div>
     )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CarepayLogo from '../patient/assets/Logo-carepay.svg'
-import ImageMain from './imagesscouts/scoutmain.png'
+import CarepayLogo from './imagesscouts/logosvg.svg'
+import ImageMain from './imagesscouts/scoutmain.svg'
 import ICON from './imagesscouts/righticon.png'
 import { useNavigate } from "react-router-dom";
 import routes from "../layout/Routes";
@@ -20,10 +20,10 @@ const MainScouts = () => {
 
     return (
         <div className="screen-width-max">
-            <div className="header-scouts" style={{borderBottom:'none'}}>
+            <div className="header-scouts">
                 <img src={CarepayLogo} />
             </div>
-            <div className="scout-body" style={{marginTop:'40%'}}>
+            <div className="scout-body">
                 <p className="" style={{ fontSize: '14px' }}>Please specify your role to proceed forward</p>
                 <h5><b>I am logging in for</b></h5>
                 <div className="purple-bg-box" onClick={()=>navigate(routes.SCOUTS_LOGIN)}>
@@ -46,9 +46,9 @@ const MainScouts = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div className="text-center">
-                    <img src={ImageMain} style={{ width: '70%', marginTop: windowHeight < 768 ? '20%' : '10%' }} />
-                </div> */}
+                <div className="text-center">
+                    <img src={ImageMain} style={{ width: '100%', marginTop: windowHeight < 768 ? '20%' : '10%' }} />
+                </div>
             </div>
         </div>
     )

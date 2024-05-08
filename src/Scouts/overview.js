@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { PiChartBarFill } from "react-icons/pi";
 import ReactApexChart from "react-apexcharts";
 import { getLeadsPerClinicByDoctorId, getLeadsPerClinicByParentClinicId, getLeadsPerClinicByScoutId, getLeadsPerClinicByparentScoutId, getLoanDataByScoutId, getParentScoutTrendDataApi, getPotentialByParentScoutId, getPotentialByScoutId, getScoutTrendDataApi } from './actioncreator';
-export default function Scoutoverview({ filter, setfilter }) {
+export default function Scoutoverview({ filter, setfilter, clinic }) {
   // const [filter, setfilter] = useState();
 
   const [graphfilter, setgraphfilter] = useState('Disbursed');
@@ -114,29 +114,33 @@ export default function Scoutoverview({ filter, setfilter }) {
   };
 
   useEffect(() => {
+    console.log(clinic, typeof (clinic))
+    getoverview()
+  }, [clinic])
+  const getoverview = () => {
     if (window.sessionStorage.getItem('role') === 'SCOUT') {
-      getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, graphfilter, callback => {
+      getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, graphfilter, clinic, callback => {
         if (callback.message === 'success') {
           setGraphData((callback.data).reverse())
         }
 
       })
-      getPotentialByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
+      getPotentialByScoutId(window.sessionStorage.getItem('scoutId'), clinic, callback => {
         setPotentialData(callback.data)
       })
-      getLeadsPerClinicByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
+      getLeadsPerClinicByScoutId(window.sessionStorage.getItem('scoutId'), clinic, callback => {
         if (callback.message === 'success') {
           setLeadsPerClinic(callback.data)
         }
       })
-      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
+      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'), clinic, callback => {
         if (callback.message === 'success') {
           setLoanData(callback.data)
         }
       })
     }
     if (window.sessionStorage.getItem('role') === 'DOCTOR') {
-      getLeadsPerClinicByDoctorId(window.sessionStorage.getItem('doctorId'), callback => {
+      getLeadsPerClinicByDoctorId(window.sessionStorage.getItem('doctorId'), clinic, callback => {
         if (callback.message === 'success') {
           setLeadsPerClinic(callback.data)
         }
@@ -144,7 +148,7 @@ export default function Scoutoverview({ filter, setfilter }) {
 
     }
     if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
-      getLeadsPerClinicByParentClinicId(window.sessionStorage.getItem('parentDoctorId'), callback => {
+      getLeadsPerClinicByParentClinicId(window.sessionStorage.getItem('parentDoctorId'), clinic, callback => {
         if (callback.message === 'success') {
           setLeadsPerClinic(callback.data)
         }
@@ -152,35 +156,34 @@ export default function Scoutoverview({ filter, setfilter }) {
 
     }
     if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-      getParentScoutTrendDataApi(window.sessionStorage.getItem('parentScoutId'), graphswitch, graphfilter, callback => {
+      getParentScoutTrendDataApi(window.sessionStorage.getItem('parentScoutId'), graphswitch, graphfilter, clinic, callback => {
         if (callback.message === 'success') {
           setGraphData((callback.data).reverse())
         }
 
       })
-      getLeadsPerClinicByparentScoutId(window.sessionStorage.getItem('parentScoutId'), callback => {
+      getLeadsPerClinicByparentScoutId(window.sessionStorage.getItem('parentScoutId'), clinic, callback => {
         if (callback.message === 'success') {
           setLeadsPerClinic(callback.data)
         }
       })
-      getPotentialByParentScoutId(window.sessionStorage.getItem('parentScoutId'), callback => {
+      getPotentialByParentScoutId(window.sessionStorage.getItem('parentScoutId'), clinic, callback => {
         setPotentialData(callback.data)
       })
 
 
     }
-
-  }, [])
+  }
   const graph = (data) => {
     setgraphfilter(data)
     if (window.sessionStorage.getItem('role') === 'SCOUT') {
-      getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, data, callback => {
+      getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, data, clinic, callback => {
         if (callback.message === 'success') {
           setGraphData((callback.data).reverse())
         }
 
       })
-      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'), callback => {
+      getLoanDataByScoutId(window.sessionStorage.getItem('scoutId'), clinic, callback => {
         if (callback.message === 'success') {
           setLoanData(callback.data)
         }
@@ -193,7 +196,7 @@ export default function Scoutoverview({ filter, setfilter }) {
 
     }
     if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-      getParentScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, data, callback => {
+      getParentScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), graphswitch, data, clinic, callback => {
         if (callback.message === 'success') {
           setGraphData((callback.data).reverse())
         }
@@ -206,7 +209,7 @@ export default function Scoutoverview({ filter, setfilter }) {
     setgraphswitch(data)
 
     if (window.sessionStorage.getItem('role') === 'SCOUT') {
-      getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), data, graphfilter, callback => {
+      getScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), data, graphfilter, clinic, callback => {
         if (callback.message === 'success') {
           setGraphData((callback.data).reverse())
         }
@@ -220,7 +223,7 @@ export default function Scoutoverview({ filter, setfilter }) {
 
     }
     if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-      getParentScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), data, graphfilter, callback => {
+      getParentScoutTrendDataApi(window.sessionStorage.getItem('scoutId'), data, graphfilter, clinic, callback => {
         if (callback.message === 'success') {
           setGraphData((callback.data).reverse())
         }
