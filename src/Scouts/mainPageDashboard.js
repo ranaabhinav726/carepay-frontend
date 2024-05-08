@@ -18,6 +18,8 @@ import GREY3 from './imagesscouts/grey2.svg'
 import GREY4 from './imagesscouts/grey3.svg'
 import Dots from './imagesscouts/threedots.png'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import NotFound from '../patient/assets/notFound.png'
+
 const MainScout = () => {
 
     const [tabType, settabType] = useState('txn')
@@ -41,7 +43,7 @@ const MainScout = () => {
 
         } else {
             if (window.sessionStorage.getItem('role') === 'SCOUT') {
-                getScoutDataById(window.sessionStorage.getItem('scoutId'),clinic, callback => {
+                getScoutDataById(window.sessionStorage.getItem('scoutId'), clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -52,7 +54,7 @@ const MainScout = () => {
                 })
             }
             if (window.sessionStorage.getItem('role') === 'DOCTOR') {
-                getDoctorDataById(window.sessionStorage.getItem('doctorId'),clinic, callback => {
+                getDoctorDataById(window.sessionStorage.getItem('doctorId'), clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -61,7 +63,7 @@ const MainScout = () => {
 
             }
             if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
-                getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'),clinic, callback => {
+                getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -72,7 +74,7 @@ const MainScout = () => {
                 })
             }
             if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-                getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'),clinic, callback => {
+                getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), clinic, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -130,26 +132,26 @@ const MainScout = () => {
         })
     }
     const clinicHandler = (e) => {
-        
+
         setClinic(encodeURIComponent(e.target.value))
         setClinicValue(e.target.value)
-        if(e.target.value===''){
+        if (e.target.value === '') {
             applyFilter('')
         }
-        
+
     }
-    const applyFilter=(data)=>{
+    const applyFilter = (data) => {
         if (window.sessionStorage.getItem('role') === 'SCOUT') {
-            getScoutDataById(window.sessionStorage.getItem('scoutId'),data!==undefined?data:clinic, callback => {
+            getScoutDataById(window.sessionStorage.getItem('scoutId'), data !== undefined ? data : clinic, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
                 }
             })
-         
+
         }
         if (window.sessionStorage.getItem('role') === 'DOCTOR') {
-            getDoctorDataById(window.sessionStorage.getItem('doctorId'),data!==undefined?data:clinic, callback => {
+            getDoctorDataById(window.sessionStorage.getItem('doctorId'), data !== undefined ? data : clinic, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
@@ -158,22 +160,22 @@ const MainScout = () => {
 
         }
         if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
-            getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'),data!==undefined?data:clinic, callback => {
+            getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), data !== undefined ? data : clinic, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
                 }
             })
-          
+
         }
         if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-            getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'),data!==undefined?data:clinic, callback => {
+            getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), data !== undefined ? data : clinic, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
                 }
             })
-          
+
         }
     }
     return (
@@ -213,7 +215,7 @@ const MainScout = () => {
             </div>
             {tabType === 'txn' ?
                 <div style={{ marginTop: '20px' }}>
-                    {objectData.length > 0 && objectData && (objectData).map((carddata, i) => {
+                    {objectData !== '' && objectData.length > 0 ? (objectData).map((carddata, i) => {
                         return (
                             <div className="txn-card">
                                 <img className="three-dots" src={Dots} onClick={() => shareLinkTab(carddata)} />
@@ -243,7 +245,7 @@ const MainScout = () => {
                                                     <a target="_blank"
                                                     >
                                                         <button onClick={() => generateWhatsAppLink(carddata.patientPhoneNo, carddata.esignUrl)} className="carepay-button-card">&nbsp;
-                                                            <div className="share-btn" style={{fontSize:'14px'}}> <WhatsApp />&nbsp;&nbsp;&nbsp; Share link</div>
+                                                            <div className="share-btn" style={{ fontSize: '14px' }}> <WhatsApp />&nbsp;&nbsp;&nbsp; Share link</div>
                                                         </button>
                                                     </a>
                                                 </div>
@@ -297,7 +299,7 @@ const MainScout = () => {
                                             <div className="d-flex w-100 mt-3" style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
                                                 <div style={{ width: '50%' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px', marginBottom: '4px' }}>Status:</div>
-                                                    <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px',fontWeight:'700' }}>
+                                                    <div className="text-center" style={{ background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '160px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                         Documents Required
                                                     </div>
                                                 </div>
@@ -393,7 +395,21 @@ const MainScout = () => {
 
                             </div>
                         )
-                    })}
+                    }) :
+
+                        <div style={{ marginTop: "4rem", padding: "10px", textAlign: 'center' }}>
+                            <img style={{ maxWidth: "30%", aspectRatio: "1/1", objectFit: "contain" }} src={NotFound} alt="" />
+                            <div>
+                                <p style={{ fontSize: "30px", color: "#B9B7D9", fontWeight: "700", }}>404</p>
+                                <p style={{ color: "#514C9F", fontWeight: "700", margin: "6px 0" }}>No Data Found!</p>
+                                <p style={{ color: '#999999', width: '50%', marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>You will see data here after
+                                    patients start applying for loan,
+                                    via the CarePay QR code
+                                    given to the clinic.
+                                </p>
+                            </div>
+                        </div>
+                    }
 
 
                 </div>
@@ -467,7 +483,7 @@ const MainScout = () => {
                                 <select value={clinicValue} onChange={(e) => clinicHandler(e)} style={{ background: 'rgb(236, 235, 255)', width: '100%', padding: '10px', borderRadius: '5px', border: 'none' }}>
 
                                     <option value={''}>Select All</option>
-                                    {allClinics !== '' &&allClinics !== undefined&& allClinics.length > 0 ? allClinics.map((data, i) => {
+                                    {allClinics !== '' && allClinics !== undefined && allClinics.length > 0 ? allClinics.map((data, i) => {
                                         return (
                                             <option value={data}>{data}</option>
                                         )
@@ -476,7 +492,7 @@ const MainScout = () => {
 
                             </div>
                             <div className="row filter-btn">
-                                <button className='apply-filter' onClick={()=>applyFilter()}>Apply Filter</button>
+                                <button className='apply-filter' onClick={() => applyFilter()}>Apply Filter</button>
                             </div>
                         </div>
                     </div>
@@ -494,11 +510,11 @@ const MainScout = () => {
 
                         </div>
                         <div style={{ marginBottom: '20px', marginTop: '20px' }} >
-                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer',width:'100%' }}><div style={{width:'50%',display:'flex'}}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{  }}>Call Patient</div></div><div style={{width:'50%',color:'rgb(183, 181, 181)',textAlign: 'end'}}>{userData.patientPhoneNo}</div></div> : ""}
+                            {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer', width: '100%' }}><div style={{ width: '50%', display: 'flex' }}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{}}>Call Patient</div></div><div style={{ width: '50%', color: 'rgb(183, 181, 181)', textAlign: 'end' }}>{userData.patientPhoneNo}</div></div> : ""}
                             {userData.userId !== undefined && userData.userId !== '' ? <div onClick={() => getLoanData(userData.userId)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><DescriptionRounded style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>View loan details</div></div> : ""}
 
-                            {userData.type !== 'Disbursed'?<div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>:""}
-                            {userData.type !== 'Disbursed'?<div onClick={() => copyText(userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>:""}
+                            {userData.type !== 'Disbursed' ? <div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div> : ""}
+                            {userData.type !== 'Disbursed' ? <div onClick={() => copyText(userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div> : ""}
                             {/* {userData.esignUrl !== '' && userData.type !== 'Approved'  &&userData.type !== 'Disbursed'? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""} */}
                             <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
                         </div>
@@ -517,36 +533,36 @@ const MainScout = () => {
                         </div>
                         <div style={{ marginBottom: '20px', marginTop: '20px' }} >
                             <div style={{ display: 'flex', borderBottom: '1px solid #00000033', paddingBottom: '10px' }}>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Effective tenure</p>
-                                    <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px' }}>{Number(loanData.totalEMI) - Number(loanData.advanceEMI)} &nbsp;months</div>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC' }}>Effective tenure</p>
+                                    <div style={{ textAlign: 'left', fontSize: '14px', fontWeight: '700', marginTop: '5px' }}>{Number(loanData.totalEMI) - Number(loanData.advanceEMI)} &nbsp;months</div>
                                 </div>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>EMI amount</p>
-                                    <div style={{ textAlign: 'left', fontSize: '16px', fontWeight: '700', marginTop: '5px', display: 'flex' }}>₹&nbsp; <div style={{  }}>{loanData.emiAmount}</div></div>
-                                </div>
-
-                            </div>
-                            <div style={{ display: 'flex', marginTop: '10px' }}>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Processing fees</p>
-
-                                </div>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC',fontWeight: '700', }}>{loanData.processingFees}</p>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC' }}>EMI amount</p>
+                                    <div style={{ textAlign: 'left', fontSize: '14px', fontWeight: '700', marginTop: '5px', display: 'flex' }}>₹&nbsp; <div style={{}}>{loanData.emiAmount}</div></div>
                                 </div>
 
                             </div>
                             <div style={{ display: 'flex', marginTop: '10px' }}>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Interest rate</p>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC' }}>Processing fees</p>
 
                                 </div>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>{loanData.interest}%</p>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC', fontWeight: '700', }}>{loanData.processingFees}</p>
                                 </div>
 
                             </div>
                             <div style={{ display: 'flex', marginTop: '10px' }}>
-                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '12px', color: '#000000CC' }}>Advance payment</p>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC' }}>Interest rate</p>
+
+                                </div>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC' }}>{loanData.interest}%</p>
+                                </div>
+
+                            </div>
+                            <div style={{ display: 'flex', marginTop: '10px' }}>
+                                <div style={{ width: '50%' }}><p style={{ textAlign: 'left', fontSize: '14px', color: '#000000CC' }}>Advance payment</p>
 
                                 </div>
                                 <div style={{ width: '50%' }}>
-                                    <div style={{ textAlign: 'left', fontSize: '12px', fontWeight: '700', display: 'flex' }}>₹&nbsp; <div style={{  }}>{loanData.advancePayment}</div></div>
+                                    <div style={{ textAlign: 'left', fontSize: '14px', fontWeight: '700', display: 'flex' }}>₹&nbsp; <div style={{}}>{loanData.advancePayment}</div></div>
 
                                 </div>
 

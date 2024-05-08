@@ -268,7 +268,7 @@ export default function Scoutoverview({ filter, setfilter, clinic }) {
                 <div className="box">
                   <div className="topbox">
                     <h3>Potential <br></br> captured</h3>
-                    <h5>{potentialData !== '' && potentialData.potential !== undefined ? potentialData.potential : ''}</h5>
+                    <h5>{potentialData !== '' && potentialData.potential !== undefined ? potentialData.potential : ''} %</h5>
                   </div>
                   <div className="bottombox">
                     <h3>Company <br></br> average</h3>
