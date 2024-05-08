@@ -20,10 +20,10 @@ const MainScouts = () => {
 
     return (
         <div className="screen-width-max">
-            <div className="header-scouts">
+            <div className="header-scouts" style={{borderBottom:'none'}}>
                 <img src={CarepayLogo} />
             </div>
-            <div className="scout-body">
+            <div className="scout-body" style={{marginTop:'40%'}}>
                 <p className="" style={{ fontSize: '14px' }}>Please specify your role to proceed forward</p>
                 <h5><b>I am logging in for</b></h5>
                 <div className="purple-bg-box" onClick={()=>navigate(routes.SCOUTS_LOGIN)}>
@@ -46,9 +46,9 @@ const MainScouts = () => {
                         </div>
                     </div>
                 </div>
-                <div className="text-center">
+                {/* <div className="text-center">
                     <img src={ImageMain} style={{ width: '70%', marginTop: windowHeight < 768 ? '20%' : '10%' }} />
-                </div>
+                </div> */}
             </div>
         </div>
     )

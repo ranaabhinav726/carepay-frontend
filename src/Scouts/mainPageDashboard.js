@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Amount from './imagesscouts/rupee.png'
-import Person from './imagesscouts/person.png'
-import Treatment from './imagesscouts/treatment.png'
-import Doctor from './imagesscouts/doctor.png'
+import Amount from './imagesscouts/rupee.svg'
+import Person from './imagesscouts/person.svg'
+import Treatment from './imagesscouts/treatment.svg'
+import Doctor from './imagesscouts/doctor.svg'
 import { Call, CopyAll, CurrencyRupeeSharp, DescriptionRounded, Download, Share, WarningAmberRounded, WhatsApp } from "@mui/icons-material";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useNavigate } from "react-router-dom";
@@ -12,10 +12,10 @@ import OverviewUi from './overview'
 import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import Alertimage from './imagesscouts/Vector (31).png'
-import GREY1 from './imagesscouts/rupeegrey.png'
-import GREY2 from './imagesscouts/grey1.png'
-import GREY3 from './imagesscouts/grey2.png'
-import GREY4 from './imagesscouts/grey3.png'
+import GREY1 from './imagesscouts/greyrupee.svg'
+import GREY2 from './imagesscouts/grey1.svg'
+import GREY3 from './imagesscouts/grey2.svg'
+import GREY4 from './imagesscouts/grey3.svg'
 import Dots from './imagesscouts/threedots.png'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 const MainScout = () => {
@@ -271,7 +271,7 @@ const MainScout = () => {
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision in:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision by:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                         {carddata.estimateTime}&nbsp;minutes
                                                     </div>
@@ -302,7 +302,7 @@ const MainScout = () => {
 
                                                 &nbsp;&nbsp;
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
-                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision in:</div>
+                                                    <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision by:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
                                                         {carddata.estimateTime}&nbsp;minutes
                                                     </div>
@@ -495,9 +495,9 @@ const MainScout = () => {
                             {userData.patientPhoneNo !== undefined && userData.patientPhoneNo !== '' ? <div onClick={() => sendlink('call', userData.patientPhoneNo)} style={{ textAlign: 'justify', display: 'flex', cursor: 'pointer',width:'100%' }}><div style={{width:'50%',display:'flex'}}><Call style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{  }}>Call Patient</div></div><div style={{width:'50%',color:'rgb(183, 181, 181)',textAlign: 'end'}}>{userData.patientPhoneNo}</div></div> : ""}
                             {userData.userId !== undefined && userData.userId !== '' ? <div onClick={() => getLoanData(userData.userId)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><DescriptionRounded style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>View loan details</div></div> : ""}
 
-                            <div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>
-                            <div onClick={() => copyText(userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>
-                            {userData.esignUrl !== '' && userData.type !== 'Approved' ? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
+                            {userData.type !== 'Disbursed'?<div onClick={() => sendlink('link', userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><Share style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Share link</div></div>:""}
+                            {userData.type !== 'Disbursed'?<div onClick={() => copyText(userData.type === 'Approved' ? userData.esignUrl : userData.onboardingUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Copy Link</div></div>:""}
+                            {userData.esignUrl !== '' && userData.type !== 'Approved'  &&userData.type !== 'Disbursed'? <div onClick={() => copyText(userData.esignUrl)} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><CopyAll style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>E-Sign link</div></div> : ""}
                             <div onClick={() => sendlink('call', ' +918069489655')} style={{ textAlign: 'justify', display: 'flex', marginTop: '10px', cursor: 'pointer' }}><SupportAgentIcon style={{ color: '#504c9a' }} /> &nbsp; &nbsp;<div style={{ marginTop: '0px' }}>Support</div></div>
                         </div>
                     </div>
