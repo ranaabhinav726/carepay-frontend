@@ -5,13 +5,15 @@ import lottie from "lottie-web";
 import animationData from '../../assets/JSON animations/Comp 1.json'
 import { useEffect } from "react";
 import ScreenTitle from "./Comps/ScreenTitle";
+import routes from "../../../layout/Routes";
 
 
 export default function FibeNumberVerified(){
 
     const navigate = useNavigate();
     let timerId = setTimeout(() => {
-        navigate('/patient/fibeWelcome', {replace:"true"})
+        
+        navigate(routes.ARTH_CREDIT_DETAILS, {replace:"true"})
     }, 2500);
 
     // setTimeout(()=>{

@@ -13,6 +13,9 @@ import { env, showErrorOnUI, showWrapper, hideWrapper } from '../../../../enviro
 import RadioInput from "../../../utility/RadioInput/RadioInput";
 import { preEligibility } from "../../../ICICI flow/apis";
 import AutocompleteInput from "../../../utility/SuggestionInputBox/SuggestionInputBox";
+import routes from "../../../../../layout/Routes";
+import { onlyNumbers } from "../../servicesAndUtility/utilityFunctions";
+import { validateEmail } from "../../../Fibe flow/Comps/Utility functions/helper";
 // import { useData } from "../data";
 
 const ArthCreditDetails = () => {
@@ -30,7 +33,9 @@ const ArthCreditDetails = () => {
     const [apiError, setApiError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.");
     const [canSubmit, setCanSubmit] = useState(true);
-    const [number, ] = useState(localStorage.getItem("phoneNumber"));
+    const [number,] = useState(localStorage.getItem("phoneNumber"));
+    const [patientPhoneNumber, setpatientPhoneNumber] = useState("");
+    const [patientEmailId, setpatientEmailId] = useState("");
 
     // const [doctorId, setDoctorId] = useState("");
     // const [doctorName, setDoctorName] = useState("");
@@ -38,12 +43,12 @@ const ArthCreditDetails = () => {
     const navigate = useNavigate();
     // const data = useData();
     // const data = useContext(DataContext);
-    
+
     let ref = useRef(0);
     const otherTreatmentRef = useRef(null);
-    useEffect(()=>{
+    useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
-    },[])
+    }, [])
 
     let doctorId = localStorage.getItem("doctorId")
     let doctorName = localStorage.getItem("doctorName")
@@ -149,76 +154,92 @@ const ArthCreditDetails = () => {
         "Angiography"
     ];
 
-    useEffect(()=>{
-        if(!! userId){
+    useEffect(() => {
+        if (!!userId) {
             axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
-            .then(response =>{
-                if(response.data.status === 200){
-                    let data = response.data.data;
-                    if(!! data){
-                        setAmount(data.loanAmount);
-                        setTreatment(data.loanReason);
+                .then(response => {
+                    if (response.data.status === 200) {
+                        let data = response.data.data;
+                        if (!!data) {
+                            setAmount(data.loanAmount);
+                            setTreatment(data.loanReason);
+                        }
                     }
-                }
-            }).catch(()=>{
+                }).catch(() => {
 
-            });
+                });
         }
     }, [])
-    
+
     const onlyCharRegex = /^[a-zA-Z\s]*$/;
-    function onlyCharacters(val, setter){
-        if(onlyCharRegex.test(val)){
+    function onlyCharacters(val, setter) {
+        if (onlyCharRegex.test(val)) {
             setter(val);
         }
     }
 
-    async function verifyAndNavigate(){
-        if(! canSubmit){
+    async function verifyAndNavigate() {
+        if (!canSubmit) {
             return;
         }
 
-        if(! amount){
+        if (!amount) {
             let elem = document.getElementById('loanAmount');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-        if(! treatment){
+        if (!treatment) {
             let elem = document.getElementById('treatment');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-        if(treatment === "Other"){
-            if(! otherTreatment){
+        if (treatment === "Other") {
+            if (!otherTreatment) {
                 let elem = document.getElementById('otherTreatment');
-                if(elem) showErrorOnUI(elem);
+                if (elem) showErrorOnUI(elem);
                 return;
             }
-        }else{
-            if(!treatmentList.includes(treatment)){
+        } else {
+            if (!treatmentList.includes(treatment)) {
                 let elem = document.getElementById('treatment');
-                if(elem) showErrorOnUI(elem, false);
+                if (elem) showErrorOnUI(elem, false);
                 return;
             }
         }
-        if(borrower === "someone else"){
-            if(! patientName){
+        if (borrower === "someone else") {
+            if (!patientName) {
                 let elem = document.getElementById('patientName');
-                if(elem) showErrorOnUI(elem);
+                if (elem) showErrorOnUI(elem);
                 return;
             }
-            if(! relation){
+           
+            if (!patientPhoneNumber) {
+                let elem = document.getElementById('patientPhoneNumber');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+            if (!patientEmailId) {
+                let elem = document.getElementById('patientEmailId');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }else if (!validateEmail(patientEmailId)) {
+                let elem = document.getElementById('patientEmailId');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+           
+            if (!relation) {
                 let elem = document.getElementById('relation');
-                if(elem) showErrorOnUI(elem);
+                if (elem) showErrorOnUI(elem);
                 return;
             }
         }
-        if(! fullName){
+        if (!fullName) {
             let elem = document.getElementById('fullName');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-        if(! (doctorId && doctorName && userId)){
+        if (!(doctorId && doctorName && userId)) {
             setErrorMsg("Couldn't find your doctor details, please scan the QR again.");
             apiErrorHandler();
             setTimeout(() => {
@@ -231,36 +252,38 @@ const ArthCreditDetails = () => {
         showWrapper(ref.current)
 
         let submitObj = {
-            "userId" : userId,
+            "userId": userId,
             "doctorName": doctorName,
             "doctorId": doctorId,
             "loanAmount": amount,
             "formStatus": ""
         };
 
-        if(treatment === "Other"){
+        if (treatment === "Other") {
             submitObj.loanReason = otherTreatment;
-        }else{
+        } else {
             submitObj.loanReason = treatment;
         }
 
-        if(borrower === "someone else"){
+        if (borrower === "someone else") {
             submitObj.patientName = patientName;
             submitObj.relationshipWithPatient = relation;
+            submitObj.patientPhoneNumber = patientPhoneNumber;
+            submitObj.patientEmailId = patientEmailId;
         }
 
         // console.log(submitObj); return
         // console.log(submitObj); return;
         await axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
-            .then(async(response) => {
+            .then(async (response) => {
                 console.log(response)
-                if(response.data.message === "success"){
+                if (response.data.message === "success") {
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
-                    if(! number) return;
+                    if (!number) return;
 
-                    navigate('/patient/ArthPresciptionUpload');
+                    navigate(routes.ARTH_PERSONAL_DETAILS);
                     // if(amount > 100000){
                     //     navigate('/patient/ArthPresciptionUpload');
                     // }else{
@@ -280,7 +303,7 @@ const ArthCreditDetails = () => {
                     //     }
                     // }
                     // })
-                }else{
+                } else {
                     // setErrorMsg()
                     apiErrorHandler();
                 }
@@ -306,58 +329,62 @@ const ArthCreditDetails = () => {
         hideWrapper(ref.current)
     }
 
-    function apiErrorHandler(){
+    function apiErrorHandler() {
         setApiError(true)
-        setTimeout(()=>{
+        setTimeout(() => {
             setApiError(false);
         }, 3000);
     }
 
-    function amountHandler(val){
+    function amountHandler(val) {
         // console.log(val)
-        if(val === ""){
+        if (val === "") {
             setAmount("");
             return;
         }
         val = parseInt(val);
-        if(val >= 0 && val <= 1000000){
+        if (val >= 0 && val <= 1000000) {
             setAmount(val);
         }
     }
 
-    function otherTreatmentNameAndFocusSetter(otherTreatmentName){
+    function otherTreatmentNameAndFocusSetter(otherTreatmentName) {
         setOtherTreatment(otherTreatmentName);
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         // console.log(otherTreatmentRef.current);
-        if(otherTreatmentRef.current !== null){
+        if (otherTreatmentRef.current !== null) {
             otherTreatmentRef.current.focus();
         }
     }, [treatment])
-   return(
-    <>
-    <main className="mobileNumberVerification">
-    <Header progressBar="hidden" />
-        <h3 className="mobileVerificationHeading">Credit Details</h3>
-        
-        <div className="inputGroup">
-            <p>Credit amount</p>
-            <div className="inputBoxWithSymbol" style={{display:"flex", alignItems:"baseline"}}>
-                <div className="rupeeSymbol" style={{padding: "0 16px"}}><img src={rupeeIcon} alt="" /></div>
-                <input 
-                    id="loanAmount"
-                    type="text" 
-                    value={amount} 
-                    placeholder="Enter credit amount"
-                    onChange={(e)=>amountHandler(e.target.value)}  
-                />
-            </div>
-            <p style={{marginTop:"-5px", marginBottom:"20px", fontSize:"14px"}}>Please keep the credit amount under Rs 10,00,000</p>
-            <span className="fieldError">Please enter your treatment cost</span>
-        </div>
+    function numberChange(val) {
+        if (val.length > 10) return;
+        onlyNumbers(val, setpatientPhoneNumber)
+    }
+    return (
+        <>
+            <main className="mobileNumberVerification">
+                <Header progressBar="hidden" />
+                <h3 className="mobileVerificationHeading">Credit Details</h3>
 
-        {/* <div className="inputGroup">
+                <div className="inputGroup">
+                    <p>Credit amount</p>
+                    <div className="inputBoxWithSymbol" style={{ display: "flex", alignItems: "baseline" }}>
+                        <div className="rupeeSymbol" style={{ padding: "0 16px" }}><img src={rupeeIcon} alt="" /></div>
+                        <input
+                            id="loanAmount"
+                            type="text"
+                            value={amount}
+                            placeholder="Enter credit amount"
+                            onChange={(e) => amountHandler(e.target.value)}
+                        />
+                    </div>
+                    <p style={{ marginTop: "-5px", marginBottom: "20px", fontSize: "14px" }}>Please keep the credit amount under Rs 10,00,000</p>
+                    <span className="fieldError">Please enter your treatment cost</span>
+                </div>
+
+                {/* <div className="inputGroup">
             <p>Treatment name</p>
             <input 
                 id="treatment"
@@ -370,48 +397,48 @@ const ArthCreditDetails = () => {
             <span className="fieldError">Please fill name of your treatment</span>
         </div> */}
 
-        <AutocompleteInput
-            id="treatment"
-            title="Treatment name"
-            value={treatment}
-            setValue={setTreatment}
-            placeholder="Name of treatment"
-            list={treatmentList}
-            fieldError="Please enter your treatment name"
-            otherValueSettter={otherTreatmentNameAndFocusSetter}
-        />
-        {treatment === "Other" &&
-        <div className="inputGroup">
-            <input 
-                id="otherTreatment"
-                type="text" 
-                value={otherTreatment} 
-                placeholder="Enter your treatment name"
-                // onChange={(e)=>setOtherTreatment(e.target.value)}  
-                onChange={(e)=> onlyCharacters(e.target.value, setOtherTreatment)}  
-                style={{marginBottom:"10px"}}
-                ref={otherTreatmentRef}
-            />
-            <span className="fieldError">Please enter your treatment name</span>
-        </div>
-        }
+                <AutocompleteInput
+                    id="treatment"
+                    title="Treatment name"
+                    value={treatment}
+                    setValue={setTreatment}
+                    placeholder="Name of treatment"
+                    list={treatmentList}
+                    fieldError="Please enter your treatment name"
+                    otherValueSettter={otherTreatmentNameAndFocusSetter}
+                />
+                {treatment === "Other" &&
+                    <div className="inputGroup">
+                        <input
+                            id="otherTreatment"
+                            type="text"
+                            value={otherTreatment}
+                            placeholder="Enter your treatment name"
+                            // onChange={(e)=>setOtherTreatment(e.target.value)}  
+                            onChange={(e) => onlyCharacters(e.target.value, setOtherTreatment)}
+                            style={{ marginBottom: "10px" }}
+                            ref={otherTreatmentRef}
+                        />
+                        <span className="fieldError">Please enter your treatment name</span>
+                    </div>
+                }
 
-        <div className="inputGroup" style={{marginTop:"1.5rem"}}>
-            <p>Full name (as per PAN)</p>
-            <input 
-                id="fullName"
-                type="text" 
-                value={fullName} 
-                placeholder="Enter your name"
-                // onChange={(e)=>setFullName(e.target.value)}  
-                onChange={(e)=> onlyCharacters(e.target.value, setFullName)}  
-                style={{marginBottom:"10px"}}
-            />
-            <span className="fieldError">Please enter your full name</span>
-            <p style={{fontSize:"14px"}}>If not sure, please check your PAN and then enter the name accordingly.</p>
-        </div>
+                <div className="inputGroup" style={{ marginTop: "1.5rem" }}>
+                    <p>Full name (as per PAN)</p>
+                    <input
+                        id="fullName"
+                        type="text"
+                        value={fullName}
+                        placeholder="Enter your name"
+                        // onChange={(e)=>setFullName(e.target.value)}  
+                        onChange={(e) => onlyCharacters(e.target.value, setFullName)}
+                        style={{ marginBottom: "10px" }}
+                    />
+                    <span className="fieldError">Please enter your full name</span>
+                    <p style={{ fontSize: "14px" }}>If not sure, please check your PAN and then enter the name accordingly.</p>
+                </div>
 
-        {/* <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
+                {/* <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
             <input 
                 id="isPatient"
                 type="checkbox" 
@@ -423,72 +450,100 @@ const ArthCreditDetails = () => {
         </div> */}
 
 
-        <p style={{marginTop:"1.5rem"}}>Who are you borrowing for?</p>
-        <RadioInput
-            id="borrower" 
-            name="borrower" 
-            selected={borrower}
-            setSelected={setBorrower}
-            values={["myself", "someone else"]}
-            options={["Myself", "Someone else"]}
-            styles={{
-                padding:"12px 12px 8px 0",
-                width:"30%"
-            }}
-        />
-
-        {borrower==="someone else" && 
-        <>
-            <div className="inputGroup">
-                <p>Name of the patient</p>
-                <input 
-                    id="patientName"
-                    type="text" 
-                    value={patientName} 
-                    placeholder="Enter name of the patient here"
-                    // onChange={(e)=>setPatientName(e.target.value)}  
-                    onChange={(e)=> onlyCharacters(e.target.value, setPatientName)}  
+                <p style={{ marginTop: "1.5rem" }}>Who are you borrowing for?</p>
+                <RadioInput
+                    id="borrower"
+                    name="borrower"
+                    selected={borrower}
+                    setSelected={setBorrower}
+                    values={["myself", "someone else"]}
+                    options={["Myself", "Someone else"]}
+                    styles={{
+                        padding: "12px 12px 8px 0",
+                        width: "30%"
+                    }}
                 />
-                <span className="fieldError">Please fill name of the patient</span>
-            </div>
-            <div className="inputGroup">
-                <p>Relationship with patient</p>
-                {/* <input 
+
+                {borrower === "someone else" &&
+                    <>
+                        <div className="inputGroup">
+                            <p>Name of the patient</p>
+                            <input
+                                id="patientName"
+                                type="text"
+                                value={patientName}
+                                placeholder="Enter name of the patient here"
+                                // onChange={(e)=>setPatientName(e.target.value)}  
+                                onChange={(e) => onlyCharacters(e.target.value, setPatientName)}
+                            />
+                            <span className="fieldError">Please fill name of the patient</span>
+                        </div>
+                        <div className="inputGroup">
+                            <p>Patient's Mobile Number</p>
+                            <input
+                                id="patientPhoneNumber"
+                                type="number"
+                                value={patientPhoneNumber}
+                                placeholder="Enter Mobile No. of patient here"
+                                // onChange={(e)=>setPatientName(e.target.value)}  
+                                maxLength={10}
+                                onChange={(e) => numberChange(e.target.value)}
+                            />
+                            <span className="fieldError">Please fill number of the patient</span>
+                        </div>
+
+                        <div className="inputGroup">
+                            <p>Patient's Email-Id </p>
+                            <input
+                                id="patientEmailId"
+                                type="email"
+                                value={patientEmailId}
+                                placeholder="Enter Email-ID of patient here"
+                                // onChange={(e)=>setPatientName(e.target.value)}  
+                                onChange={(e) => setpatientEmailId(e.target.value)}
+                            />
+                            <span className="fieldError">Please fill Email-Id of the patient</span>
+                        </div>
+
+
+                        <div className="inputGroup">
+                            <p>Relationship with patient</p>
+                            {/* <input 
                     id="relation"
                     type="text" 
                     value={relation} 
                     placeholder="Enter your relation here"
                     onChange={(e)=>setRelation(e.target.value)}  
                 /> */}
-                <div style={{display:"flex", gap:"12px", alignItems:"center"}}>
-                    <span style={{minWidth:"max-content"}}>Patient is my:</span>
-                    <select name="relation" id="relation" style={{marginBottom:"0"}} value={relation} onChange={(e)=>setRelation(e.target.value)}>
-                        {/* <option disabled value={""}></option> */}
-                        <option value={"MOTHER"}>Mother</option>
-                        <option value={"FATHER"}>Father</option>
-                        <option value={"BROTHER"}>Brother</option>
-                        <option value={"SISTER"}>Sister</option>
-                        <option value={"HUSBAND"}>Husband</option>
-                        <option value={"WIFE"}>Wife</option>
-                        <option value={"SON"}>Son</option>
-                        <option value={"DAUGHTER"}>Daughter</option>
-                        <option value={"GRANDMOTHER"}>Grandmother</option>
-                        <option value={"GRANDFATHER"}>Grandfather</option>
-                        <option value={"GRANDSON"}>Grandson</option>
-                        <option value={"GRANDDAUGHTER"}>Granddaughter</option>
-                    </select>
-                </div>
-                <span className="fieldError">Please tell your relation to the patient</span>
-            </div>
-        </>
-    }
+                            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+                                <span style={{ minWidth: "max-content" }}>Patient is my:</span>
+                                <select name="relation" id="relation" style={{ marginBottom: "0" }} value={relation} onChange={(e) => setRelation(e.target.value)}>
+                                    {/* <option disabled value={""}></option> */}
+                                    <option value={"MOTHER"}>Mother</option>
+                                    <option value={"FATHER"}>Father</option>
+                                    <option value={"BROTHER"}>Brother</option>
+                                    <option value={"SISTER"}>Sister</option>
+                                    <option value={"HUSBAND"}>Husband</option>
+                                    <option value={"WIFE"}>Wife</option>
+                                    <option value={"SON"}>Son</option>
+                                    <option value={"DAUGHTER"}>Daughter</option>
+                                    <option value={"GRANDMOTHER"}>Grandmother</option>
+                                    <option value={"GRANDFATHER"}>Grandfather</option>
+                                    <option value={"GRANDSON"}>Grandson</option>
+                                    <option value={"GRANDDAUGHTER"}>Granddaughter</option>
+                                </select>
+                            </div>
+                            <span className="fieldError">Please tell your relation to the patient</span>
+                        </div>
+                    </>
+                }
 
-        
-        <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
-        <button onClick={()=> verifyAndNavigate()} className="submit">Submit</button>
-    </main>
-    </>
-   )
+
+                <p className={apiError ? "apiError" : "apiError hide"}>{errorMsg}</p>
+                <button onClick={() => verifyAndNavigate()} className="submit">Submit</button>
+            </main>
+        </>
+    )
 
 }
 

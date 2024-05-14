@@ -386,6 +386,8 @@ const ArthAddressDetails = () => {
         </div>
         
 
+        
+        <p className='sectionHead' style={{marginTop:'20px'}}>Permanent address</p>
         <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
             <input 
                 style={{
@@ -400,10 +402,9 @@ const ArthAddressDetails = () => {
             />
             <label htmlFor='samePermAddr'>My permanent address is same as my current address.</label>
         </div>
-
         {!isPermAddrSame &&
         <>  
-        <p className='sectionHead'>Permanent address</p>
+        
         <div className="addressType">
             <p>Select address</p>
             <select name="selectAddress" id="selectAddress" onChange={(e)=>selectAddress(e.target.value)}>

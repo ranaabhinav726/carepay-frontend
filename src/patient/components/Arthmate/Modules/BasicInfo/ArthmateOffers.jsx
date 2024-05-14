@@ -167,7 +167,8 @@ const ArthmateOffers = () =>{
             .then(async(response) => {
                 console.log(response)
                 if(response.data.message === "success"){
-                    navigate("/patient/ArthIncomeVerification")
+                    // navigate("/patient/ArthIncomeVerification")
+                    navigate()
                 }else{
                     apiErrorHandler();
                 }
