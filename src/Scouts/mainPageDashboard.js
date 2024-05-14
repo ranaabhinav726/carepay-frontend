@@ -277,7 +277,7 @@ const MainScout = () => {
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision by:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
-                                                        {carddata.estimateTime}&nbsp;minutes
+                                                        {carddata.estimateTime}
                                                     </div>
                                                 </div>
                                             </div>
@@ -308,7 +308,7 @@ const MainScout = () => {
                                                 <div style={{ width: '50%', textAlign: 'center' }}>
                                                     <div style={{ marginTop: '10px', fontSize: '12px', marginLeft: '10px', marginBottom: '4px' }}>Expect decision by:</div>
                                                     <div className="text-center" style={{ float: 'right', background: '#FFEEE4', color: '#C44D0E', padding: '5px', width: '150px', borderRadius: '5px', fontSize: '12px', fontWeight: '700' }}>
-                                                        {carddata.estimateTime}&nbsp;minutes
+                                                        {carddata.estimateTime}
                                                     </div>
                                                 </div>
                                             </div>
