@@ -94,7 +94,7 @@ const ArthEmploymentDetails = () => {
                         console.log(response.data.data)
                         let data = response.data.data;
                         if (!!data) {
-                            window.sessionStorage.setItem('flowRedirect', data)
+                            window.localStorage.setItem('flowRedirect', data)
                         }
                     }
                 }).catch(() => {
