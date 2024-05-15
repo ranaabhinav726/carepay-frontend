@@ -3,10 +3,11 @@ import { Header } from "../../comps/Header";
 import './styles/currentEMIExpenses.scss'
 import { showErrorOnUI } from "../../../../environment/environment";
 import { onlyCharacters, onlyNumbers } from "../../servicesAndUtility/utilityFunctions";
-import { saveOrUpdateAdditionalUserData } from "../../servicesAndUtility/api";
+import { saveMonthlyExpensesApi, saveOrUpdateAdditionalUserData } from "../../servicesAndUtility/api";
 import { useNavigate } from "react-router-dom";
+import routes from "../../../../../layout/Routes";
 
-export default function ArthCurrentEMIExpenses(){
+export default function ArthCurrentEMIExpenses() {
 
     let userId = localStorage.getItem("userId");
     const navigate = useNavigate();
@@ -16,106 +17,112 @@ export default function ArthCurrentEMIExpenses(){
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
-    async function handleSubmit(){
+    async function handleSubmit() {
 
-        if(isCurrEMI && (!currEMI)){
+        if (isCurrEMI && (!currEMI)) {
             let elem = document.getElementById('emiExpense');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
 
         let data = {
-            "userId" : userId,
-            "monthliEmiExpense" : currEMI
+            "userId": userId,
+            "monthliEmiExpense": currEMI
         }
 
-        saveOrUpdateAdditionalUserData(data, res=>{
-            if(res.data.status === 200){
-                navigate("/patient/ArthmateOffers")
+        saveMonthlyExpensesApi(data, res => {
+            if (res.data.status === 200) {
+                // navigate("/patient/ArthmateOffers")
+                if (window.sessionStorage.getItem('flowRedirect') === 'CF'&&window.sessionStorage.getItem('flowRedirect') !== null) {
+                    navigate(routes.CREDIT_FAIR_OFFERS)
+                }
+                if (window.sessionStorage.getItem('flowRedirect') === 'FIBE' || window.sessionStorage.getItem('flowRedirect') === null) {
+                    navigate(routes.FIBE_CHECKING_STATUS)
+                }
             }
         })
     }
 
-    
 
-    return(
+
+    return (
         <main className="arthCurrentEMIExpenses">
             <Header />
             <h3>Current EMI expenses</h3>
-            
+
             <p>Select your ongoing EMI expenses</p>
-            <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} >
-                <input 
-                    id={"currEMI"} 
-                    name={"isCurrEMI"} 
+            <div style={{ display: "flex", gap: "12px", alignItems: "center", padding: "12px 0", marginBottom: "0" }} >
+                <input
+                    id={"currEMI"}
+                    name={"isCurrEMI"}
                     value={""}
                     type="radio"
                     checked={isCurrEMI}
-                    onChange={()=>setIsCurrEMI(true)}
+                    onChange={() => setIsCurrEMI(true)}
                     style={{
-                        height:"24px", 
-                        width:"max-content",
-                        aspectRatio:"1/1",
-                        border:"2px solid #5E5E5E",
-                        accentColor:"#514C9F",
-                        marginLeft:"6px"
+                        height: "24px",
+                        width: "max-content",
+                        aspectRatio: "1/1",
+                        border: "2px solid #5E5E5E",
+                        accentColor: "#514C9F",
+                        marginLeft: "6px"
                     }}
                 />
-                <label 
-                htmlFor="currEMI"
-                style={{
-                    fontSize:"16px",
-                    lineHeight:"20px"
-                }}
+                <label
+                    htmlFor="currEMI"
+                    style={{
+                        fontSize: "16px",
+                        lineHeight: "20px"
+                    }}
                 >
                     I have ongoing EMIs
                 </label>
-                <br/>
+                <br />
             </div>
 
             {isCurrEMI &&
-            <div className="emiExpense">
-                <p>EMI expenses value (approxx.)</p>
-                <input 
-                    id="emiExpense"
-                    type="text" 
-                    value={currEMI}
-                    onChange={(e)=>onlyNumbers(e.target.value, setCurrEMI)}
-                    placeholder="Enter your monthly EMI total here" 
-                />
-                <span className="fieldError">This field can't be empty.</span>
-            </div>}
+                <div className="emiExpense">
+                    <p>EMI expenses value (approxx.)</p>
+                    <input
+                        id="emiExpense"
+                        type="text"
+                        value={currEMI}
+                        onChange={(e) => onlyNumbers(e.target.value, setCurrEMI)}
+                        placeholder="Enter your monthly EMI total here"
+                    />
+                    <span className="fieldError">This field can't be empty.</span>
+                </div>}
 
-            <div style={{display:"flex", gap:"12px", alignItems:"center", padding:"12px 0", marginBottom:"0"}} >
-                <input 
-                    id={"noCurrEMI"} 
-                    name={"isCurrEMI"} 
+            <div style={{ display: "flex", gap: "12px", alignItems: "center", padding: "12px 0", marginBottom: "0" }} >
+                <input
+                    id={"noCurrEMI"}
+                    name={"isCurrEMI"}
                     value={""}
                     type="radio"
                     checked={!isCurrEMI}
-                    onChange={()=>setIsCurrEMI(false)}
+                    onChange={() => setIsCurrEMI(false)}
                     style={{
-                        height:"24px", 
-                        width:"max-content",
-                        aspectRatio:"1/1",
-                        border:"2px solid #5E5E5E",
-                        accentColor:"#514C9F",
-                        marginLeft:"6px"
+                        height: "24px",
+                        width: "max-content",
+                        aspectRatio: "1/1",
+                        border: "2px solid #5E5E5E",
+                        accentColor: "#514C9F",
+                        marginLeft: "6px"
                     }}
                 />
-                <label 
-                htmlFor="noCurrEMI"
-                style={{
-                    fontSize:"16px",
-                    lineHeight:"20px"
-                }}
+                <label
+                    htmlFor="noCurrEMI"
+                    style={{
+                        fontSize: "16px",
+                        lineHeight: "20px"
+                    }}
                 >
                     I do not have any current EMI expense
                 </label>
-                <br/>
+                <br />
             </div>
 
-            <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
+            <p className={apiError ? "apiError" : "apiError hide"}>An error has occured, please try again.</p>
             <button onClick={handleSubmit} className="submit">Next</button>
 
         </main>

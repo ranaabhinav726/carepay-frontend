@@ -88,13 +88,13 @@ const ArthEmploymentDetails = () => {
                 })
         }
         if (!!userId) {
-            axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId +'&doctorId='+ doctorId)
+            axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
                 .then(response => {
                     if (response.data.status === 200) {
                         console.log(response.data.data)
                         let data = response.data.data;
                         if (!!data) {
-                           
+                            window.sessionStorage.setItem('flowRedirect', data)
                         }
                     }
                 }).catch(() => {
@@ -450,7 +450,7 @@ const ArthEmploymentDetails = () => {
         //       });
         setCanSubmit(true);
         hideWrapper(ref.current)
-       
+
 
     }
 
@@ -525,17 +525,17 @@ const ArthEmploymentDetails = () => {
 
         )
     })
-    function salaryError(){
+    function salaryError() {
         let elem = document.getElementById('salary');
-        if(elem) showErrorOnUI(elem);
+        if (elem) showErrorOnUI(elem);
         return;
     }
-    let popUpMsg = <p style={{ color: "black" ,lineHeight:'revert'}}>Are you sure <b>{Number(salary).toLocaleString("en-IN")}</b> is your <b>monthly</b> in-hand  income?</p>;
+    let popUpMsg = <p style={{ color: "black", lineHeight: 'revert' }}>Are you sure <b>{Number(salary).toLocaleString("en-IN")}</b> is your <b>monthly</b> in-hand  income?</p>;
 
     return (
 
         <>
-            <main className="employmentDetails" style={{position:"relative"}}>
+            <main className="employmentDetails" style={{ position: "relative" }}>
                 <Header progressbarDisplay="block" progress="70" canGoBack="/patient/AddressDetails" />
                 <h3>Employment Details</h3>
 
@@ -680,7 +680,7 @@ const ArthEmploymentDetails = () => {
                         </div>
                     </>
                 }
-              <div className="income">
+                <div className="income">
                     <p>Monthly in-hand salary/income</p>
                     <input
                         id="salary"
@@ -690,7 +690,7 @@ const ArthEmploymentDetails = () => {
                         onChange={(e) => setSalary(e.target.value)}
                         placeholder="Enter your monthly in-hand income"
                     />
-            <span className="fieldError">Please enter your monthly in-hand income.</span>
+                    <span className="fieldError">Please enter your monthly in-hand income.</span>
                 </div>
 
                 {/* <div className="salaryDate">
@@ -819,7 +819,7 @@ const ArthEmploymentDetails = () => {
                     </div>
                     <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
                 </div>
-           
+
                 {/* <div id="consent" className="consentBox">
             <input
             onClick={(e)=>setConsent(e.target.checked)} type="checkbox" />
@@ -828,8 +828,8 @@ const ArthEmploymentDetails = () => {
 
                 <p className={apiError ? "apiError" : "apiError hide"}>An error has occured, please try again.</p>
                 <button onClick={handleSubmit} className="submit">Next</button>
-          
-            <BottomPopOverModal
+
+                <BottomPopOverModal
                     popUpMsg={popUpMsg}
                     showPopOver={showPopOver}
                     setShowPopOver={setShowPopOver}
@@ -838,7 +838,7 @@ const ArthEmploymentDetails = () => {
                     noBtnText={"No"}
                     noBtnClick={salaryError}
                 />
-                  </main>
+            </main>
         </>
     )
 }
