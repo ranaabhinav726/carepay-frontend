@@ -434,10 +434,10 @@ const ArthPersonalDetails = () => {
 
                         <div className="aadhaarNumber">
                             <p>Aadhaar number</p>
-                            <input type="text"
+                            <input type="number"
                                 id="aadhaarNumber"
                                 value={aadhaarNo ?? ""}
-                                onChange={(e) => numberChange(e.target.value)}
+                                onChange={(e) => setAadhaarNo(e.target.value)}
                                 placeholder="What is your aadhaar number?"
                                 required
                             />

@@ -33,7 +33,7 @@ export default function ArthCurrentEMIExpenses() {
         saveMonthlyExpensesApi(data, res => {
             if (res.data.status === 200) {
                 // navigate("/patient/ArthmateOffers")
-                if (window.localStorage.getItem('flowRedirect') === 'CF'&&window.localStorage.getItem('flowRedirect') !== null) {
+                if (window.localStorage.getItem('flowRedirect') === 'CF' && window.localStorage.getItem('flowRedirect') !== null) {
                     navigate(routes.CREDIT_FAIR_OFFERS)
                 }
                 if (window.localStorage.getItem('flowRedirect') === 'FIBE' || window.localStorage.getItem('flowRedirect') === null) {
