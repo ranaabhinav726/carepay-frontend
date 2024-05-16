@@ -20,7 +20,12 @@ const APIS = {
     GET_LOAN_DETAILS_BY_USER_ID: BASE_URL + 'getProductDetailByUserId?userId=',
     GET_POTENTIAL_BY_SCOUT_ID: BASE_URL + 'getPotentialCaptureForScout?scoutId=',
     GET_POTENTIAL_BY_PARENT_SCOUT_ID: BASE_URL + 'getPotentialCaptureForParentScout?parentScoutId=',
-    GET_ALL_CLINIC_NAMES: BASE_URL + 'getAllClinicNameById?parentScoutId='
+    GET_ALL_CLINIC_NAMES: BASE_URL + 'getAllClinicNameById?parentScoutId=',
+    CREATE_CASHFREE_MANDATE_SUBSCRIPTION: BASE_URL + 'createSeamlessSubscriptionWithPlanInfo?userId=',
+    CREATE_AUTH_REQUEST: BASE_URL + 'createAuthorisationRequest?userId=',
+    GET_AUTH_PAYMENT: BASE_URL + 'getAuthStatusApi?loanId=',
+    GET_NACH_DETAILS: BASE_URL + 'getNachDetails?loanId=',
+    VERIFY_UPI_ID: BASE_URL + 'verifyHandel?userId='
 
 
 

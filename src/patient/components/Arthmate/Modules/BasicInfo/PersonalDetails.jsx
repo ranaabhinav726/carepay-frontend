@@ -275,7 +275,8 @@ const ArthPersonalDetails = () => {
             "referenceNumber": refNumber,
             "referenceRelation": refRelation,
             "userId": localStorage.getItem('userId'),
-            "formStatus": ""
+            "formStatus": "",
+            "firstName":localStorage.getItem('fullName')
         };
 
         saveBasicDetails(submitObj, res => {
