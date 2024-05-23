@@ -580,7 +580,7 @@ function PrivacyPolicyContent() {
                         Grievance Redressal
                     </h5>
                     <p>
-                        Send an email to legal@carepay.in with any grievance, complaint,
+                        Send an email to legal@carepay.money with any grievance, complaint,
                         questions, comments, concerns, or criticism regarding the handling
                         of your information, our privacy and security policy, or any other
                         privacy or security issue.

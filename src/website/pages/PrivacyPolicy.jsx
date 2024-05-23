@@ -50,7 +50,7 @@ function PrivacyPolicyContent() {
         This Privacy and Data Security Policy (hereinafter referred to as
         "Privacy Policy") sets forth in detail how CarePay obtains, stores, and
         manages customer specific information from its users via the use of its
-        website (www.carepay.in), various CarePay mobile applications available
+        website (www.carepay.money), various CarePay mobile applications available
         at Android/iOS platforms, and Social media platforms including but not
         limited to Facebook, Instagram, LinkedIn, Twitter, Pinterest, etc. The
         term "CarePay Platform" will be used to refer to all of the
@@ -573,7 +573,7 @@ function PrivacyPolicyContent() {
             Grievance Redressal
           </h5>
           <p>
-            Send an email to legal@carepay.in with any grievance, complaint,
+            Send an email to legal@carepay.money with any grievance, complaint,
             questions, comments, concerns, or criticism regarding the handling
             of your information, our privacy and security policy, or any other
             privacy or security issue.
