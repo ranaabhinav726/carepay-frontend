@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { env, showWrapper, hideWrapper } from '../../../../environment/environment';
+import routes from '../../../../../layout/Routes';
 
 const ArthmateOffers = () =>{
 
@@ -165,10 +166,12 @@ const ArthmateOffers = () =>{
         await axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(async(response) => {
-                console.log(response)
+                console.log(response,'response')
+
                 if(response.data.message === "success"){
                     // navigate("/patient/ArthIncomeVerification")
-                    navigate()
+                    navigate(routes.ARTH_BANKDETAILS)
+
                 }else{
                     apiErrorHandler();
                 }

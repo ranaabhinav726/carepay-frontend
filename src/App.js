@@ -162,6 +162,7 @@ import ArthPANPhoto from './patient/components/Arthmate/Modules/KYC/PANPhoto';
 import ArthKyc from './patient/components/Arthmate/Modules/KYC/KYC';
 import ArthAadhaarPhoto from './patient/components/Arthmate/Modules/KYC/AadhaarPhoto';
 import ArthCreditDetails from './patient/components/Arthmate/Modules/BasicInfo/CreditDetails';
+import ArthSElfie from './patient/components/Arthmate/Modules/KYC/selfilephoto';
 
 
 
@@ -340,6 +341,8 @@ function App() {
         <Route path='/patient/ArthAadhaarVerification' element={<ArthAadhaarVerification />}></Route>
         <Route path='/patient/ArthAadhaarPhoto' element={<ArthAadhaarPhoto />}></Route>
         <Route path='/patient/ArthPANPhoto' element={<ArthPANPhoto />}></Route>
+        <Route path='/patient/ArthSelfiePhoto' element={<ArthSElfie />}></Route>
+
 
       </Routes>
     // {/* </div> */}

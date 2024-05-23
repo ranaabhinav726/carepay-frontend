@@ -67,18 +67,51 @@ export async function startUploadURL(userId, id, callBack) {
 }
 
 
-export async function uploadDoc(userId, data, callBack) {
+export async function uploadDoc(data, callBack) {
 
 
 
-    axios.post(BASE_URL + "/uploadDocuments", data)
+    axios.post(BASE_URL + "uploadDocuments", data)
         .then(res => {
             callBack(res)
         }).catch(err => console.warn(err))
 }
 export async function saveMonthlyExpensesApi(data, callBack) {
-    axios.put(BASE_URL + "userDetails/saveMonthlyEmiExpense?userId=" + data.userId + '&monthlyEmiExpense='+data.monthliEmiExpense)
+    axios.put(BASE_URL + "userDetails/saveMonthlyEmiExpense?userId=" + data.userId + '&monthlyEmiExpense=' + data.monthliEmiExpense)
         .then(res => {
             callBack(res)
         }).catch(err => console.warn(err))
+}
+export const uploadPdfNew = (
+    file, userId, fileName,
+    callBack
+) => {
+    var self = this
+    return new Promise((resolve, reject) => {
+        var self = this
+        let imageFormData = new FormData()
+        imageFormData.append('file', file)
+        imageFormData.append('userId', userId)
+        imageFormData.append("type", "pdf");
+        imageFormData.append("fileName", fileName);
+        var xhr = new XMLHttpRequest()
+        xhr.open('post', BASE_URL + "uploadDocuments", true)
+        xhr.onload = function () {
+            if (this.status == 200) {
+                resolve(this.response)
+                callBack(this.response)
+            } else {
+                reject(this.statusText)
+                callBack(this.response)
+            }
+        }
+        xhr.send(imageFormData)
+    })
+}
+export  function getKycStatusApi(userId, type, callBack) {
+
+    axios.get(BASE_URL + "checkKycValidation?userId=" + userId + '&type=' + type)
+        .then(res => {
+            callBack(res.data);
+        }).catch(err => console.warn(err));
 }

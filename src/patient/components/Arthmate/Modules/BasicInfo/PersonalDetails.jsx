@@ -36,7 +36,7 @@ const ArthPersonalDetails = () => {
     // const data = useData();
     const navigate = useNavigate();
 
-    const [aadhaarNo, setAadhaarNo] = useState("")
+    const [aadhaarNo, setAadhaarNo] = useState('')
     const [panNumber, setPanNumber] = useState("")
     const [isPanValid, setPanValid] = useState(false)
     const [fatherName, setFatherName] = useState("")
@@ -181,6 +181,7 @@ const ArthPersonalDetails = () => {
 
 
     async function handleForm() {
+      
         // if(!(panNumber && fullName && gender && email && dob)){ // All feilds must have something
         //     return;
         // }
@@ -191,7 +192,7 @@ const ArthPersonalDetails = () => {
             return;
         }
 
-        if (!aadhaarNo || aadhaarNo.length < 12) {
+        if (!aadhaarNo || aadhaarNo.length !== 12) {
             let elem = document.getElementById('aadhaarNumber');
             if (elem) showErrorOnUI(elem);
             return;
@@ -438,7 +439,8 @@ const ArthPersonalDetails = () => {
 
                         <div className="aadhaarNumber">
                             <p>Aadhaar number</p>
-                            <input type="number"
+                            <input
+                             type="number"
                                 id="aadhaarNumber"
                                 value={aadhaarNo ?? ""}
                                 onChange={(e) => setAadhaarNo(e.target.value)}
@@ -545,6 +547,8 @@ const ArthPersonalDetails = () => {
                             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                                 <span style={{ minWidth: "max-content" }}>Reference is my:</span>
                                 <select name="refRelation" id="refRelation" style={{ marginBottom: "0" }} value={refRelation} onChange={(e) => setRefRelation(e.target.value)}>
+                                <option value={""}>Select Option</option>
+
                                     <option value={"father"}>Father</option>
                                     <option value={"mother"}>Mother</option>
                                     <option value={"brother"}>Brother</option>

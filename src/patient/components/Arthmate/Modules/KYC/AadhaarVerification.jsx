@@ -9,124 +9,227 @@ import { useEffect } from "react";
 import lottie from "lottie-web";
 import loaderAnimData from '../../assets/loader simple.json'
 import doneAnimData from '../../assets/Comp 1.json'
-import { sendAadharOtp } from "../../servicesAndUtility/api";
+import { getKycStatusApi, sendAadharOtp } from "../../servicesAndUtility/api";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { env } from "../../../../environment/environment";
+import routes from "../../../../../layout/Routes";
+import Loader from '../../../../../utils/loader/Loading 3.gif'
+import Loadinggif from "../../../../../utils/loader/loadergif";
 
-export default function ArthAadhaarVerification(){
+export default function ArthAadhaarVerification() {
 
     const navigate = useNavigate();
-    const[aadhaar, setAadhaar] = useState("XXXX XXXX 1234");
-    const[userId, ] = useState(localStorage.getItem("userId"));
-    const[otp, setOtp] = useState("");
+    const [aadhaar, setAadhaar] = useState("XXXX XXXX 1234");
+    const [userId,] = useState(localStorage.getItem("userId"));
+    const [otp, setOtp] = useState("");
+    const [errorState, setError] = useState("");
+    const [loaderState, setLoader] = useState(false);
 
     const [canResendOtp, setCanResendOtp] = useState(false);
-    function allowOtpResend(){
+    function allowOtpResend() {
         setCanResendOtp(true);
     }
-    function reSendOtp(){
+
+    function reSendOtp() {
+        let timer1 = setTimeout(() => {
+            sendAadharOtp(userId, res => {
+                console.log(res);
+                if (res.data.message === "success") {
+                    setScreenState("otpSent");
+                }
+            }).catch(error => {
+                alert('Error occurred while sending OTP:",')
+            });
+        }, 3000);
         setCanResendOtp(false);
+        return () => {
+            clearTimeout(timer1)
+        }
     }
+    const maskAadharNumber = () => {
+        let aadhar = localStorage.getItem('aadhaarNo')
+        if (!aadhar || typeof aadhar !== 'string' || aadhar.length < 4) {
+            return 'Invalid Aadhar';
+        }
+
+        // Replace all characters except the last 4 with 'x'
+        const maskedDigits = aadhar.slice(0, -4).replace(/\d/g, 'X');
+
+        // Add hyphen after every 4 'X'
+        const formattedMaskedDigits = maskedDigits.match(/.{1,4}/g).join('-');
+
+        const lastFourDigits = aadhar.substr(-4);
+        return formattedMaskedDigits + '-' + lastFourDigits;
+    }
+
 
     useEffect(() => {
         lottie.loadAnimation({
-          container: document.querySelector("#loadAnim1"),
-          animationData: loaderAnimData,
-          renderer: "canvas"
+            container: document.querySelector("#loadAnim1"),
+            animationData: loaderAnimData,
+            renderer: "canvas"
         });
         lottie.loadAnimation({
-          container: document.querySelector("#loadAnim2"),
-          animationData: loaderAnimData,
-          renderer: "canvas"
+            container: document.querySelector("#loadAnim2"),
+            animationData: loaderAnimData,
+            renderer: "canvas"
         });
         lottie.loadAnimation({
-          container: document.querySelector("#doneAnim"),
-          animationData: doneAnimData,
-          renderer: "canvas"
+            container: document.querySelector("#doneAnim"),
+            animationData: doneAnimData,
+            renderer: "canvas"
         });
 
-        if(!userId) return;
-        let timer1 = setTimeout(sendAadharOtp(userId, res=>{
-            console.log(res);
-            if(res.data.message === "success"){
-                setScreenState("otpSent")
+        if (!userId) return;
+        getKycStatusApi(userId, 'aadhaar', callback => {
+            console.log(callback.data)
+            if (callback.data === true) {
+                navigate(routes.ARTH_PAN_PHOTO)
+            } else {
+                let timer1 = setTimeout(() => {
+                    sendAadharOtp(userId, res => {
+                        console.log(res);
+                        if (res.data.message === "success") {
+                            setScreenState("otpSent");
+                        } else {
+                            navigate(routes.ARTH_AADHAAR_PHOTO)
+                        }
+                    }).catch(error => {
+                        alert('Error occurred while sending OTP:",')
+                    });
+                }, 3000);
+                return () => {
+                    clearTimeout(timer1)
+                }
             }
-        }), 3000)
-        
-        return ()=>{
-            clearTimeout(timer1)
-        }
-        
+        })
+        setAadhaar(maskAadharNumber())
+
+
+
+
     }, []);
+    const submitOtp = () => {
+        if (otp.length === 6) {
+            setScreenState('verifyingOtp')
+            setLoader(true)
+            setError('')
+            axios.post(env.api_Url + "aadhaarXmlDownloadValidateOtp?userId=" + userId + "&otp=" + otp)
+                .then((response) => {
+                    console.log(response)
+
+                    if (response.data.message === "success") {
+
+                        axios.post(env.api_Url + "validateDoc?userId=" + userId + "&type=" + 'aadhaar')
+                            .then((response) => {
+                                console.log(response)
+                                if (response.data.message === "success") {
+                                    lottie.loadAnimation({
+                                        container: document.querySelector("#doneAnim"),
+                                        animationData: doneAnimData,
+                                        renderer: "canvas"
+                                    });
+                                    setLoader(false)
+
+                                    setScreenState('verified')
+                                    setTimeout(() => {
+                                        navigate(routes.ARTH_PAN_PHOTO)
+
+                                    }, 5000);
+
+                                } else {
+                                    navigate(routes.ARTH_AADHAAR_PHOTO)
+                                }
+                            })
 
 
-    const[screenState, setScreenState] = useState("sendingOtp"); // sendingOtp, otpSent, verifyingOtp, verified
+                    } else {
+                        setLoader(false)
 
-    return(
-        <main>
-            {screenState === "sendingOtp" &&
-            <>
-                <Header progressBar="hidden" />
-                <div style={{marginTop:"12%"}} id="loadAnim1"></div>
-                <p style={{textAlign:"center"}}>Triggering OTP on your number...</p>
-            </>
-            }
-            {screenState === "otpSent" &&
-            <>
-                <Header />
-                <h3 style={{margin:"1.5rem 0"}}>Aadhaar Verification</h3>
-
-                <p>A 6 digit OTP has been sent on the phone number linked to your Aadhaar card. Please enter that OTP below.</p>
-
-                <div style={{display:"flex", flexDirection:"row", alignItems:"center", gap:"12px", margin:"2rem 0"}}>
-                    <div style={{height:"40px", aspectRatio:"1/1", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", color:"#514C9F", background:"#FAE1CD"}}>
-                        <HiOutlineFingerPrint style={{fontSize:"24px"}} />
-                    </div>
-                    <span>{aadhaar}</span>
-                    <div style={{marginLeft:"auto", height:"40px", aspectRatio:"1/1", background:"#ECEBFF", color:"#514C9F", display:"flex", alignItems:"center", justifyContent:"center", borderRadius:"4px", cursor:"pointer"}}>
-                        <MdRemoveRedEye style={{fontSize:"24px"}} />
-                    </div>
-                </div>
-
-                <h3>Enter OTP</h3>
-                <div className="emiExpense">
-                    <InputBox
-                        type="number"
-                        value={otp}
-                        setValue={(val)=>onlyNumbers(val, setOtp)}
-                        length={6}
-                        placeholder="______"
-                        styles={{
-                            margin:"1rem 0",
-                            letterSpacing:"12px"
-                        }}
-                    />
-                    <span className="fieldError">This field can't be empty.</span>
-                </div>
-                <div style={{width:"100%", display:"flex", justifyContent:"flex-end", margin:"1.5rem 0"}}>
-                    {canResendOtp ? 
-                        <p onClick={()=>{reSendOtp()}} style={{color:"#514C9F", fontWeight:"700", cursor:"pointer"}}>Resend OTP</p>
-                    :
-                        <span >Resend OTP in <Timer seconds={59} onTimerEnd={allowOtpResend} /></span>
+                        navigate(routes.ARTH_AADHAAR_PHOTO)
                     }
-                </div>
-                <button className="submit" style={{marginTop:"0"}}>Submit OTP</button>
-                <p style={{textAlign:"center", marginTop:"1rem"}}>For any details and enquiries, reach out to us</p>
-                <a href="tel:+918069489655"><button className="submit lite">Contact Support</button></a>
-            </>
+                })
+        } else {
+            setError('Enter Valid 6 digit AAdhaar Number')
+        }
+    }
+
+
+    const [screenState, setScreenState] = useState("sendingOtp"); // sendingOtp, otpSent, verifyingOtp, verified
+
+    return (
+        <main>
+             {loaderState ?
+                <>
+                   <Loadinggif/>
+                </>
+                : ""}
+            {screenState === "sendingOtp" &&
+                <>
+                    <Header progressBar="hidden" />
+                    <div style={{ marginTop: "12%" }} id="loadAnim1"></div>
+                    <p style={{ textAlign: "center" }}>Triggering OTP on your number...</p>
+                </>
             }
-            {screenState === "verifyingOtp" &&
-            <>
-                <Header progressBar="hidden" />
-                <div style={{marginTop:"12%"}} id="loadAnim2"></div>
-                <p style={{textAlign:"center"}}>Fetching your Aadhaar details...</p>
-            </>
+            {loaderState === false && screenState === "otpSent" &&
+                <>
+                    <Header />
+                    <h3 style={{ margin: "1.5rem 0" }}>Aadhaar Verification</h3>
+
+                    <p>A 6 digit OTP has been sent on the phone number linked to your Aadhaar card. Please enter that OTP below.</p>
+
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px", margin: "2rem 0" }}>
+                        <div style={{ height: "40px", aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "4px", color: "#514C9F", background: "#FAE1CD" }}>
+                            <HiOutlineFingerPrint style={{ fontSize: "24px" }} />
+                        </div>
+                        <span>{aadhaar}</span>
+                        <div style={{ marginLeft: "auto", height: "40px", aspectRatio: "1/1", background: "#ECEBFF", color: "#514C9F", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "4px", cursor: "pointer" }}>
+                            <MdRemoveRedEye style={{ fontSize: "24px" }} />
+                        </div>
+                    </div>
+
+                    <h3>Enter OTP</h3>
+                    <div className="emiExpense">
+                        <InputBox
+                            type="number"
+                            // value={otp}
+                            setValue={(val) => onlyNumbers(val, setOtp)}
+                            length={6}
+                            placeholder="______"
+                            styles={{
+                                margin: "1rem 0",
+                                letterSpacing: "12px"
+                            }}
+                        />
+                        <span className="fieldError">This field can't be empty.</span>
+                    </div>
+                    <div style={{ width: "100%", display: "flex", justifyContent: "flex-end", margin: "1.5rem 0" }}>
+                        {canResendOtp ?
+                            <p onClick={() => { reSendOtp() }} style={{ color: "#514C9F", fontWeight: "700", cursor: "pointer" }}>Resend OTP</p>
+                            :
+                            <span >Resend OTP in <Timer seconds={59} onTimerEnd={allowOtpResend} /></span>
+                        }
+                    </div>
+                    <button className="submit" style={{ marginTop: "0" }} onClick={() => submitOtp()}>Submit OTP</button>
+                    <span style={{ color: 'red' }}>{errorState}</span>
+                    <p style={{ textAlign: "center", marginTop: "1rem" }}>For any details and enquiries, reach out to us</p>
+                    <a href="tel:+918069489655"><button className="submit lite">Contact Support</button></a>
+                </>
             }
-            {screenState === "verified" &&
-            <>
-                <Header progressBar="hidden" />
-                <div style={{marginTop:"12%"}} id="doneAnim"></div>
-                <p style={{color:"#514C9F", fontWeight:"bold", fontSize:"18px", textAlign:"center"}}>Aadhaar verified!</p>
-            </>
+            {loaderState === false && screenState === "verifyingOtp" &&
+                <>
+                    <Header progressBar="hidden" />
+                    <div style={{ marginTop: "12%" }} id="loadAnim2"></div>
+                    <p style={{ textAlign: "center" }}>Fetching your Aadhaar details...</p>
+                </>
+            }
+            {loaderState === false && screenState === "verified" &&
+                <>
+                    <Header progressBar="hidden" />
+                    <div style={{ marginTop: "12%" }} id="doneAnim"></div>
+                    <p style={{ color: "#514C9F", fontWeight: "bold", fontSize: "18px", textAlign: "center" }}>Aadhaar verified!</p>
+                </>
             }
         </main>
     )

@@ -140,6 +140,14 @@ const routes = {
   ARTH_AADHAAR_VERIFICATION: '/patient/ArthAadhaarVerification',
   ARTH_AADHAAR_PHOTO: '/patient/ArthAadhaarPhoto',
   ARTH_PAN_PHOTO: '/patient/ArthPANPhoto',
+  ARTH_SELFIE:'/patient/ArthSelfie',
+  ARTH_CONGRATULATIONS:'/patient/ArthCongratulations',
+  ARTH_BANKDETAILS:'/patient/Arthbankdeails',
+  ARTH_KYC_SUCCESS:'/patient/Arthdone',
+  WAIT_ARTH:'/patient/wait',
+  WAIT_LEGALITY:'/patient/legalitywait',
+
+
   ///SCOUTS///
   SCOUTS_MAIN: '/scouts',
   SCOUTS_LOGIN: '/scouts/login',

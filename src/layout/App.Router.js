@@ -152,6 +152,13 @@ function AppRouter() {
           <Route path={OurRoutes.ARTH_AADHAAR_VERIFICATION} element={<Routers.ArthAadhaarVerification />} />
           <Route path={OurRoutes.ARTH_AADHAAR_PHOTO} element={<Routers.ArthAadhaarPhoto />} />
           <Route path={OurRoutes.ARTH_PAN_PHOTO} element={<Routers.ArthPANPhoto />} />
+          <Route path={OurRoutes.ARTH_SELFIE} element={<Routers.ARTH_SELFIE />} />
+          <Route path={OurRoutes.ARTH_CONGRATULATIONS} element={<Routers.ARTH_CONGRATULATIONS />} />
+          <Route path={OurRoutes.ARTH_BANKDETAILS} element={<Routers.ARTH_BANKDETAILS />} />
+          <Route path={OurRoutes.ARTH_KYC_SUCCESS} element={<Routers.ARTH_KYC_SUCCESS />} />
+          <Route path={OurRoutes.WAIT_ARTH} element={<Routers.WAIT_ARTH />} />
+          <Route path={OurRoutes.WAIT_LEGALITY} element={<Routers.WAIT_LEGALITY />} />
+
           {/* scouts */}
           <Route path={OurRoutes.SCOUTS_MAIN} element={<Routers.SCOUTS_MAIN />} />
           <Route path={OurRoutes.SCOUTS_LOGIN} element={<Routers.SCOUTS_LOGIN />} />

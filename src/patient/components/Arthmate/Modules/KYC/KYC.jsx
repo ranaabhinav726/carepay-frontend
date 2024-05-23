@@ -18,6 +18,7 @@ export default function ArthKyc(){
             if(res.data.message === "success"){
                 let data = res?.data?.data;
                 if(data?.aadhaarNo != null) setAadhaarNo(data?.aadhaarNo);
+                window.localStorage.setItem('aadhaarNo',data?.aadhaarNo)
             }
         })
     }, [userId])

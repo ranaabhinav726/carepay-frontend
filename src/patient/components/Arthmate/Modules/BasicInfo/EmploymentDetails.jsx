@@ -88,18 +88,33 @@ const ArthEmploymentDetails = () => {
                 })
         }
         if (!!userId) {
-            axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
-                .then(response => {
-                    if (response.data.status === 200) {
-                        console.log(response.data.data)
-                        let data = response.data.data;
-                        if (!!data) {
-                            window.localStorage.setItem('flowRedirect', data)
-                        }
-                    }
-                }).catch(() => {
-                    console.log("Error fetching data");
-                })
+            // axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
+            //     .then(response => {
+            //         if (response.data.status === 200) {
+            //             console.log(response.data.data)
+            //             let data = response.data.data;
+            //             if (!!data) {
+            //                 window.localStorage.setItem('flowRedirect', data)
+            //             }
+            //         }
+            //     }).catch(() => {
+            //         console.log("Error fetching data");
+            //     })
+            // axios.post(env.api_Url + "leadAPI?userId=" + userId)
+            //     .then((response) => {
+            //         console.log(response)
+            //         if (response.data.data.message === 'success') {
+            //             axios.post(env.api_Url + "requestAScore?userId=" + userId)
+            //                 .then((response) => {
+            //                     console.log(response)
+            //                 }).catch(error => {
+            //                     console.log(error);
+            //                 });
+            //         }
+            //     }).catch(error => {
+            //         console.log(error);
+            //     });
+
         }
 
 

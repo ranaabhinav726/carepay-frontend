@@ -17,6 +17,7 @@ export const KycRedirection = React.lazy(() => import('../patient/components/KYC
 export const KycWebview = React.lazy(() => import('../patient/components/KYC_Notification/KycWebview/KycWebview'));
 export const KycVerifying = React.lazy(() => import('../patient/components/KYC_Notification/KycVerifying/KycVerifying'));
 export const KycVerificationSuccesful = React.lazy(() => import('../patient/components/KYC_Notification/KycVerificationSuccesful/KycVerificationSuccesful'));
+export const ARTH_KYC_SUCCESS = React.lazy(() => import('../patient/components/KYC_Notification/KycVerificationSuccesful/newkycarthmate'));
 
 export const IncomeVerification = React.lazy(() => import('../patient/components/Income_Verification_Notification/IncomeVerification/IncomeVerification'));
 export const FileUpload = React.lazy(() => import('../patient/components/Income_Verification_Notification/FileUpload/FileUpload'));
@@ -153,3 +154,8 @@ export const SCOUTES_ADDRESS = React.lazy(() => import('../Scouts/Forms/AddressD
 export const SCOUTES_PRACTICE = React.lazy(() => import('../Scouts/Forms/PracticeDetails'));
 export const SCOUTES_BANK = React.lazy(() => import('../Scouts/Forms/BankingDetails'));
 export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVerification'));
+export const ARTH_SELFIE = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/selfilephoto'));
+export const ARTH_CONGRATULATIONS = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/congratulations'));
+export const ARTH_BANKDETAILS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/bankDetails'));
+export const WAIT_ARTH = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/waitScreen'));
+export const WAIT_LEGALITY = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/legalitywaitscreen'));

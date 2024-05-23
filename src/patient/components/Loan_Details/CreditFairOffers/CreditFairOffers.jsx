@@ -174,7 +174,7 @@ const CreditFairOffers = () =>{
                             .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
                             .then(response =>{
                                 console.log(response)
-                                if(response.data.message === "success"){
+                                if(response.data.message === "success" ){
                                     checkLoanAmountAndNavigate();
                                 }else{
                                     setTimeout(async ()=>{

@@ -196,108 +196,106 @@ const ArthAddressDetails = () => {
     //     }, 1000)
     // }
 
-    async function handleForm(){
-        if(!(firstLine && pincode && city && state)){ 
-            // All feilds must have something, if not, console log
-            console.log(firstLine, pincode, city, state)
+    async function handleForm() {
+        if (!(firstLine && pincode && city && state)) {
+            console.log(firstLine, pincode, city, state);
+            return;
         }
+    
         let addressWordLength = firstLine.split(" ").length;
-
-        if(!firstLine || addressWordLength<2){
+        if (!firstLine || addressWordLength < 2) {
             let elem = document.getElementById('firstLine');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-
-        // if(!locality){
-        //     let elem = document.getElementById('locality');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-
-        // if(!landmark){
-        //     let elem = document.getElementById('landmark');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
-
-        if(!pincode){
+    
+        if (!pincode) {
             let elem = document.getElementById('pincode');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-
-        if(!city){
+    
+        if (!city) {
             let elem = document.getElementById('city');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-        if(specialChars.test(city)){
+        if (specialChars.test(city)) {
             let elem = document.getElementById('city');
             setErrorMsg("Special characters are not allowed.");
             setTimeout(() => {
                 setErrorMsg("This field can't be empty.");
             }, 3000);
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-
-        if(state === "Select state"){
+    
+        if (state === "Select state") {
             let elem = document.getElementById('state');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-
-        if(state === "Other" && !otherState){
+    
+        if (state === "Other" && !otherState) {
             let elem = document.getElementById('otherState');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
-
-        if(! canSubmit){
+    
+        if (!canSubmit) {
             return;
         }
         setCanSubmit(false);
-        showWrapper(ref.current)
+        showWrapper(ref.current);
+    
         let userId = localStorage.getItem("userId");
         let submitObj = {
             "userId": userId,
-            "addressType": addressType,
             "address": firstLine.trim(),
-            // "locality" : locality,
-            // "landmark" : landmark,
             "pincode": pincode,
             "state": state,
             "city": city,
-            "formStatus":""
+            "formStatus": ""
         };
-
-        // if(!!landmark){
-        //     submitObj.landmark = landmark;
-        // }
-
-        saveAddressDetails(submitObj, res=>{
-            if(res.data.message === "success"){
-                navigate('/patient/ArthEmploymentDetails');
-            }else{
-                apiErrorHandler();
-            }
-        })
-        // await axios.post(env.api_Url + "userDetails/addressDetail",
-        //     submitObj)
-        //     .then((response) => {
-        //         console.log(response)
-        //         if(response.data.message === "success"){
-        //             navigate('/patient/EmploymentDetails');
-        //         }else{
-        //             apiErrorHandler();
-        //         }
-        //     }).catch(error => {
-        //         apiErrorHandler();
-        //     }); 
-        setCanSubmit(true);
-        hideWrapper(ref.current);
+    
+        // If isPermAddrSame is true, call API with both current and permanent address types
+        if (isPermAddrSame) {
+            submitObj.addressType = "current";
+            saveAddressDetails(submitObj, res => {
+                if (res.data.message === "success") {
+                    // Handle success
+                } else {
+                    apiErrorHandler();
+                }
+                setCanSubmit(true);
+                hideWrapper(ref.current);
+            });
+    
+            submitObj.addressType = "permanent";
+            saveAddressDetails(submitObj, res => {
+                if (res.data.message === "success") {
+                    navigate('/patient/ArthEmploymentDetails');
+                } else {
+                    apiErrorHandler();
+                }
+                setCanSubmit(true);
+                hideWrapper(ref.current);
+            });
+        } else {
+            // If isPermAddrSame is false, call API only once with the provided address type
+            submitObj.addressType = addressType;
+            saveAddressDetails(submitObj, res => {
+                if (res.data.message === "success") {
+                    navigate('/patient/ArthEmploymentDetails');
+                } else {
+                    apiErrorHandler();
+                }
+                setCanSubmit(true);
+                hideWrapper(ref.current);
+            });
+        }
     }
+    
     function apiErrorHandler(){
         setApiError(true)
         setTimeout(()=>{

@@ -57,7 +57,7 @@ export const getPaymentStatusApi = (loanId, paymentType, callBack) => {
         });
 };
 export const getNachDetails = (loanId, callBack) => {
-    axios.get(APIS.GET_NACH_DETAILS + loanId)
+    axios.get(APIS.GET_NACH_DETAILS + loanId +'&noOfEmi=1')
         .then(response => {
             callBack(response.data);
         })
@@ -76,6 +76,42 @@ export const getNachDetails = (loanId, callBack) => {
 };
 export const verifyUpiAPi = (userId,handelToCheck, callBack) => {
     axios.get(APIS.VERIFY_UPI_ID + userId + '&handelToCheck=' + handelToCheck)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getBankListByUserId = (userId, callBack) => {
+    axios.get(APIS.GET_BANK_LIST_FOR_USERS + userId )
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getTxnApi = (userId, callBack) => {
+    axios.get(APIS.GET_TXN_SUMMARY + userId )
         .then(response => {
             callBack(response.data);
         })
