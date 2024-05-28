@@ -32,6 +32,8 @@ const ConnectWithLenders = () => {
 
 
                                 //     })
+                            }else{
+                                navigate(routes.ARTH_BANKDETAILS)
                             }
 
                         })
