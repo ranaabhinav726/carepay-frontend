@@ -274,7 +274,7 @@ const ArthEmploymentDetails = () => {
         if (!canSubmit) {
             return;
         }
-        setCanSubmit(false);
+        // setCanSubmit(false);
 
         // if(!companyAddL1){ 
         //     let elem = document.getElementById('companyAddL1');
@@ -305,11 +305,11 @@ const ArthEmploymentDetails = () => {
         //     return;
         // }
 
-        // if(!pincode){
-        //     let elem = document.getElementById('pincode');
-        //     if(elem) showErrorOnUI(elem);
-        //     return;
-        // }
+        if(!pincode){
+            let elem = document.getElementById('pincode');
+            if(elem) showErrorOnUI(elem);
+            return;
+        }
 
         // if(IndustryType==="Other" && (! IndustryTypeOther)){
         //     let elem = document.getElementById('IndustryTypeOther');

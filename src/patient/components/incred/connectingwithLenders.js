@@ -43,16 +43,17 @@ const ConnectWithLenders = () => {
         if (operatingsystem !== 'iOS') {
             axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
                 .then((response) => {
-                    if (response.data.status === 'success') {
+                    console.log(response.data)
+                    if (response.data.message === 'success') {
                         axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
                             .then((response) => {
-                                if (response.data.status === 'success') {
+                                if (response.data.message === 'success') {
                                     axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
                                         .then((response) => {
-                                            if (response.data.status === 'success') {
+                                            if (response.data.message === 'success') {
                                                 axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
                                                     .then((response) => {
-                                                        if (response.data.status === 'success') {
+                                                        if (response.data.message === 'success') {
 
                                                         }
 

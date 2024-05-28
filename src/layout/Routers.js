@@ -85,7 +85,7 @@ export const QrPdfMaker = React.lazy(() => import('../qrData/QRPDF'));
 
 export const WebHomepage = React.lazy(() => import('../website/pages/WebHomepage'));
 export const About = React.lazy(() => import('../website/pages/About'));
-export const PrivacyPolicy = React.lazy(() => import('../website/pages/PrivacyPolicy'));
+export const PrivacyPolicy = React.lazy(() => import('../website/pages/NewprivacyPolicy'));
 export const LendingPartners = React.lazy(() => import('../website/pages/LendingPartners'));
 export const TermsAndConditions = React.lazy(() => import('../website/pages/TermsAndConditions'));
 export const RefundandCancellation = React.lazy(() => import('../website/pages/RefundandCancellation'));
