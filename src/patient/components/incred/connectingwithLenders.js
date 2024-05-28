@@ -68,8 +68,14 @@ const ConnectWithLenders = () => {
 
                 })
         }
+        redirect()
 
     }, [])
+    const redirect =()=>{
+        setTimeout(() => {
+            navigate(routes.ARTHMATE_OFFERS)
+        }, 5000);
+    }
     const detect = () => {
         const { userAgent } = window.navigator;
 
