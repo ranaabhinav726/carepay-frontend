@@ -264,7 +264,7 @@ const BankDetails = () => {
                 //     }).catch(error => {
                 //         console.log(error);
                 //     });
-                    
+
 
                 // }
             }).catch(error => {
@@ -279,7 +279,37 @@ const BankDetails = () => {
     }
 
     async function checkAndNavigate() {
-        navigate(routes.ARTH_CONGRATULATIONS)
+        // navigate(routes.ARTH_CONGRATULATIONS)
+        axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
+            .then(async (response) => {
+                if (response.data.data === 'AM') {
+                    navigate(routes.ARTH_CONGRATULATIONS)
+                }
+                if (response.data.data === 'CF') {
+                    navigate(routes.CONGRATS)
+                }
+                if (response.data.data === 'FIBE') {
+                    axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
+                        .then(async (response) => {
+                            if(response.data.data==='Green'){
+                                navigate(routes.FIBE_LOAN_APPROVED)
+                            }
+                            if(response.data.data==='Amber'){
+                                navigate(routes.FIBE_BANK_STATEMENT_REQUIRED)
+                                
+                            }
+
+                        })
+
+                    // 
+                }
+                if (response.data.data === 'INCRED') {
+                    navigate(routes.APPROVAL_INCRED)
+
+                }
+
+
+            })
         setShowPopOver(false)
     }
 
@@ -355,7 +385,7 @@ const BankDetails = () => {
                         </div>
                         <div className="bankName">
                             <p>Name as on Bank </p>
-                            <input 
+                            <input
                                 id="nameAsBankAccount"
                                 defaultValue={nameAsBankAccount ?? ""}
                                 onChange={(e) => setnameAsBankAccount(e.target.value)}

@@ -159,3 +159,8 @@ export const ARTH_CONGRATULATIONS = React.lazy(() => import('../patient/componen
 export const ARTH_BANKDETAILS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/bankDetails'));
 export const WAIT_ARTH = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/waitScreen'));
 export const WAIT_LEGALITY = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/legalitywaitscreen'));
+export const APPROVAL_INCRED = React.lazy(() => import('../patient/components/incred/approvalCongratulation'));
+export const INCRED_DOWNLOAD = React.lazy(() => import('../patient/components/incred/incredDownload'));
+export const CONNECTING_WITH_LENDERS = React.lazy(() => import('../patient/components/incred/connectingwithLenders'));
+export const PLEASE_WAIT = React.lazy(() => import('../patient/components/incred/pleasewait'));
+export const FINAL_SCREEN_ARTH = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finalscreen'));

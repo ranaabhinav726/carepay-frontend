@@ -158,6 +158,11 @@ function AppRouter() {
           <Route path={OurRoutes.ARTH_KYC_SUCCESS} element={<Routers.ARTH_KYC_SUCCESS />} />
           <Route path={OurRoutes.WAIT_ARTH} element={<Routers.WAIT_ARTH />} />
           <Route path={OurRoutes.WAIT_LEGALITY} element={<Routers.WAIT_LEGALITY />} />
+          <Route path={OurRoutes.APPROVAL_INCRED} element={<Routers.APPROVAL_INCRED />} />
+          <Route path={OurRoutes.INCRED_DOWNLOAD} element={<Routers.INCRED_DOWNLOAD />} />
+          <Route path={OurRoutes.CONNECTING_WITH_LENDERS} element={<Routers.CONNECTING_WITH_LENDERS />} />
+          <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />
+          <Route path={OurRoutes.FINAL_SCREEN_ARTH} element={<Routers.FINAL_SCREEN_ARTH />} />
 
           {/* scouts */}
           <Route path={OurRoutes.SCOUTS_MAIN} element={<Routers.SCOUTS_MAIN />} />

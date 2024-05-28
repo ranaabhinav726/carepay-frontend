@@ -170,7 +170,7 @@ const ArthmateOffers = () =>{
 
                 if(response.data.message === "success"){
                     // navigate("/patient/ArthIncomeVerification")
-                    navigate(routes.ARTH_BANKDETAILS)
+                    navigate(routes.PLEASE_WAIT)
 
                 }else{
                     apiErrorHandler();

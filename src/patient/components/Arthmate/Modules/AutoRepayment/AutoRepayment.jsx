@@ -58,19 +58,21 @@ export default function ArthAutoRepayment() {
 
     let navigate = useNavigate()
     useEffect(() => {
+        
         lottie.loadAnimation({
             container: document.querySelector("#completeAnimation"),
             animationData: completeAnimation,
             renderer: "canvas"
         });
         if (localStorage.getItem('userId') !== null && localStorage.getItem('userId') !== '') {
-
+       
             createCashfreeSubscription(localStorage.getItem('userId'), callback => {
                 console.log(callback)
                 setCashfreeData(callback)
                 if (callback.data.loanId !== undefined) {
                     getNach(callback.data.loanId)
                     checkMandate(callback.data.loanId)
+                    checkMandateisdone(callback.data.loanId)
                 }
                 if (callback.message === 'success') {
                     setProceedButton(false)
@@ -99,6 +101,41 @@ export default function ArthAutoRepayment() {
         // }
 
     }, []);
+    const checkMandateisdone = (loanId) => {
+        getPaymentStatusApi(loanId, 'UPI_QR', callback => {
+            console.log(callback)
+            if (callback.message === 'success') {
+                setScreenState('successScreen')
+                redirect()
+            } else {
+                getPaymentStatusApi(loanId, 'UPI_COLLECT', callback => {
+                    console.log(callback)
+                    if (callback.message === 'success') {
+                        setScreenState('successScreen')
+                        redirect()
+
+                    } else {
+                        getPaymentStatusApi(loanId, 'E_MANDATE', callback => {
+                            console.log(callback)
+                            if (callback.message === 'success') {
+                                setScreenState('successScreen')
+                                redirect()
+
+                            }
+                        })
+                    }
+                })
+            }
+        })
+
+
+
+    }
+    const redirect=()=>{
+        setTimeout(()=>{
+            navigate(routes.FINAL_SCREEN_ARTH)
+        }, 3000)
+    }
     const checkMandate = () => {
         lottie.loadAnimation({
             container: document.querySelector("#doneAnimation"),
@@ -173,6 +210,7 @@ export default function ArthAutoRepayment() {
                         console.log(error);
                     });
                 setScreenState('successScreen')
+                redirect()
             } else {
                 { console.log(paymentType, 'jhgfdfgh') }
                 if (paymentType === 'UPI_QR') {
@@ -207,6 +245,7 @@ export default function ArthAutoRepayment() {
                     renderer: "canvas"
                 });
                 setScreenState('successScreen')
+                redirect()
             } else {
                 { console.log(paymentType, 'jhgfdfgh') }
                 if (paymentType === 'UPI_QR') {
@@ -774,12 +813,12 @@ export default function ArthAutoRepayment() {
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                         <img src={Logo} alt="carepay logo" style={{ height: "30px", aspectRatio: "107/26", margin: "18px auto" }} />
                     </div>
-                    <div className="text-center" style={{marginTop:'50px'}}>Go with Physical Mandate</div>
+                    <div className="text-center" style={{ marginTop: '50px' }}>Go with Physical Mandate</div>
 
                     <p className="text-center" style={{ marginTop: '20px', color: 'grey' }}>Our support executive will contact you on
                         your registered contact number
                         <a style={{ color: '#000' }} >+91 {localStorage.getItem('phoneNumber')}</a> to take this forward</p>
-                        <a style={{ color: '#000' }} href={"tel:+91 806 948 9655"}>  <button className="submit">Contact Support</button></a>
+                    <a style={{ color: '#000' }} href={"tel:+91 806 948 9655"}>  <button className="submit">Contact Support</button></a>
 
                 </>
                 : ""}

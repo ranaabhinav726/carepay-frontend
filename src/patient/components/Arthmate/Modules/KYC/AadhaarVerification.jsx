@@ -16,6 +16,7 @@ import { env } from "../../../../environment/environment";
 import routes from "../../../../../layout/Routes";
 import Loader from '../../../../../utils/loader/Loading 3.gif'
 import Loadinggif from "../../../../../utils/loader/loadergif";
+import CompletedGif from "../../../../../utils/loader/completegif";
 
 export default function ArthAadhaarVerification() {
 
@@ -227,8 +228,9 @@ export default function ArthAadhaarVerification() {
             {loaderState === false && screenState === "verified" &&
                 <>
                     <Header progressBar="hidden" />
-                    <div style={{ marginTop: "12%" }} id="doneAnim"></div>
-                    <p style={{ color: "#514C9F", fontWeight: "bold", fontSize: "18px", textAlign: "center" }}>Aadhaar verified!</p>
+                    {/* <div style={{ marginTop: "12%" }} id="doneAnim"></div> */}
+                    <CompletedGif text={'Aadhaar verified!'}/>
+                    {/* <p style={{ color: "#514C9F", fontWeight: "bold", fontSize: "18px", textAlign: "center" }}>Aadhaar verified!</p> */}
                 </>
             }
         </main>

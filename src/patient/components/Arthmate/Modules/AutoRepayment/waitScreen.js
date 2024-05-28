@@ -124,7 +124,7 @@ const WaitArhmate = () => {
     const getscore = () => {
         axios.post(env.api_Url + 'getAScore?userId=' + userId)
             .then((response) => {
-
+console.log(response.data.message,'getAScore')
                 if (response.data.message === 'success') {
                     setAScore(true)
                 } else {

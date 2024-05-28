@@ -146,6 +146,11 @@ const routes = {
   ARTH_KYC_SUCCESS:'/patient/Arthdone',
   WAIT_ARTH:'/patient/wait',
   WAIT_LEGALITY:'/patient/legalitywait',
+  APPROVAL_INCRED:'/patient/incredapproval',
+  INCRED_DOWNLOAD:'/patient/increddownload',
+  CONNECTING_WITH_LENDERS:'/patient/connecting',
+  PLEASE_WAIT:'/patient/pleasewait',
+  FINAL_SCREEN_ARTH:'/patient/final',
 
 
   ///SCOUTS///

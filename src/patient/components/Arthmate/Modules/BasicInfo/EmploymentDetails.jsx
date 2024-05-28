@@ -61,6 +61,8 @@ const ArthEmploymentDetails = () => {
     const [canSubmit, setCanSubmit] = useState(true);
     const [studentMsg, toggleStudentMsg] = useState(false);
     const [showPopOver, setShowPopOver] = useState(false);
+    const [pincode, setPincode] = useState('');
+
 
     let userId = localStorage.getItem("userId");
     let doctorId = localStorage.getItem("doctorId");
@@ -345,7 +347,7 @@ const ArthEmploymentDetails = () => {
             "typeOfBusiness": businessType,
             // "workplaceAddress1": companyAddL1,
             // "workplaceAddress2":companyAddL2,
-            // "workplacePincode": pincode,
+            "workplacePincode": pincode,
             "totalJobExpInYears": parseInt(totalExpYear),
             "totalJobExpInMonth": parseInt(totalExpMonth),
             // "currentJobExpInYears": parseInt(jobExpYear),
@@ -416,7 +418,7 @@ const ArthEmploymentDetails = () => {
             "typeOfBusiness": businessType,
             // "workplaceAddress1": companyAddL1,
             // "workplaceAddress2":companyAddL2,
-            // "workplacePincode": pincode,
+            "workplacePincode": pincode,
             "totalJobExpInYears": parseInt(totalExpYear),
             "totalJobExpInMonth": parseInt(totalExpMonth),
             // "currentJobExpInYears": parseInt(jobExpYear),
@@ -540,6 +542,22 @@ const ArthEmploymentDetails = () => {
 
         )
     })
+    function handlePincode(val){
+        if(val.length < 6){
+            setPincode(val);
+        }else if(val.length == 6){
+            setPincode(val);
+            // axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
+            // .then(response =>{
+            //     console.log(response)
+            //     let city = response?.data?.city;
+            //     setCity(city);
+            //     let state = response?.data?.state;
+            //     setState(state);
+            //     console.log()
+            // })
+        }
+    }
     function salaryError() {
         let elem = document.getElementById('salary');
         if (elem) showErrorOnUI(elem);
@@ -752,7 +770,7 @@ const ArthEmploymentDetails = () => {
             />
             <span className="fieldError">{errorMsg}</span>
         </div> */}
-                {/* <div className="companyPincode">
+                <div className="companyPincode">
             <p>Current workplace Pincode</p>
             <input 
                 id="pincode"
@@ -764,7 +782,7 @@ const ArthEmploymentDetails = () => {
             />
             <span className="fieldError">This field can't be empty.</span>
         </div>
-        <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
+        {/* <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
 
                 {/* <div className="IndustryType">
             <p>Industry</p>
