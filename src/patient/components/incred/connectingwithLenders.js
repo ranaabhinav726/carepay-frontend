@@ -12,6 +12,8 @@ const ConnectWithLenders = () => {
     let userId = localStorage.getItem('userId')
 
     useEffect(() => {
+        let operatingsystem = detect()
+        console.log(operatingsystem,'operatingsystem')
         axios.post(env.api_Url + "leadAPI?userId=" + userId)
             .then((response) => {
                 if (response.data.message === "success") {
@@ -38,33 +40,51 @@ const ConnectWithLenders = () => {
                         })
                 }
             })
-        axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
-            .then((response) => {
-                if (response.data.status === 'success') {
-                    axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
-                        .then((response) => {
-                            if (response.data.status === 'success') {
-                                axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
-                                    .then((response) => {
-                                        if (response.data.status === 'success') {
-                                            axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
-                                                .then((response) => {
-                                                    if (response.data.status === 'success') {
-                                                       
-                                                    }
+        if (operatingsystem !== 'iOS') {
+            axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
+                .then((response) => {
+                    if (response.data.status === 'success') {
+                        axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
+                            .then((response) => {
+                                if (response.data.status === 'success') {
+                                    axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
+                                        .then((response) => {
+                                            if (response.data.status === 'success') {
+                                                axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
+                                                    .then((response) => {
+                                                        if (response.data.status === 'success') {
 
-                                                })
-                                        }
+                                                        }
 
-                                    })
-                            }
+                                                    })
+                                            }
 
-                        })
-                }
+                                        })
+                                }
 
-            })
+                            })
+                    }
+
+                })
+        }
 
     }, [])
+    const detect = () => {
+        const { userAgent } = window.navigator;
+
+        if (/Windows NT 10.0/.test(userAgent)) return 'Windows 10';
+        if (/Windows NT 6.2/.test(userAgent)) return 'Windows 8';
+        if (/Windows NT 6.1/.test(userAgent)) return 'Windows 7';
+        if (/Windows NT 6.0/.test(userAgent)) return 'Windows Vista';
+        if (/Windows NT 5.1/.test(userAgent)) return 'Windows XP';
+        if (/Mac/.test(userAgent)) return 'MacOS';
+        if (/X11/.test(userAgent)) return 'UNIX';
+        if (/Linux/.test(userAgent)) return 'Linux';
+        if (/Android/.test(userAgent)) return 'Android';
+        if (/iPhone|iPad|iPod/.test(userAgent)) return 'iOS';
+
+        return 'Unknown OS';
+    };
     return (
         <main>
             <Header />

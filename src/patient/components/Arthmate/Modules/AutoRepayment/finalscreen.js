@@ -19,8 +19,8 @@ const Congrats = () => {
     let ref = useRef(0);
     useEffect(() => {
 
-
     }, [])
+    
     const submit = () => {
         if (amount !== '0') {
             navigate(routes.ARTH_KYC)
