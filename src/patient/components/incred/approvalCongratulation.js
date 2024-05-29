@@ -15,6 +15,7 @@ import SearchingDoc from '../../assets/GIFs/Document in process.gif'
 import routes from '../../../layout/Routes';
 import NoteText from '../Fibe flow/Comps/NoteText';
 import Incredlogo from './images/incredlogo.svg'
+import { env } from '../../environment/environment';
 // let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
 
 
@@ -31,19 +32,16 @@ const Congrats = () => {
 
     let ref = useRef(0);
     useEffect(() => {
-        // ref.current = document.getElementById('animation-wrapper');
-        // setLoader(true)
-        // axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
-        //     .then((response) => {
-        //         setLoader(false)
+        axios.get(env.api_Url + "getLoanApprovedDetailForUser?userId=" + userId + '&type=INCRED')
+        .then(response => {
+            console.log(response.data.data)
+            if (response.data.message === "success") {
+                setAmount(response.data.data.loanAmount)
 
-        //         console.log(response.data.status)
-        //         if (response.data.data.status === '105') {
-        //             console.log(response.data.data.status)
-        //             setAmount(response.data.data.loanAmount)
-        //         }
-        //     })
+            }
 
+
+        })
     }, [])
     const submit = () => {
             navigate(routes.INCRED_DOWNLOAD)
