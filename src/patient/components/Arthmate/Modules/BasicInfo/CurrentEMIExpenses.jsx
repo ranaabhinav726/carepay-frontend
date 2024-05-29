@@ -200,9 +200,9 @@ export default function ArthCurrentEMIExpenses() {
                     <p>EMI expenses value (approxx.)</p>
                     <input
                         id="emiExpense"
-                        type="text"
+                        type="number"
                         value={currEMI}
-                        onChange={(e) => onlyNumbers(e.target.value, setCurrEMI)}
+                        onChange={(e) => setCurrEMI(e.target.value)}
                         placeholder="Enter your monthly EMI total here"
                     />
                     <span className="fieldError">This field can't be empty.</span>

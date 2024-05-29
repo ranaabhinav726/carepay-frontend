@@ -49,8 +49,8 @@ const ArthEmploymentDetails = () => {
 
     const [totalExpYear, setTotalExpYear] = useState(0);
     const [totalExpMonth, setTotalExpMonth] = useState(0);
-    // const [jobExpYear, setJobExpYear] = useState(0);
-    // const [jobExpMonth, setJobExpMonth] = useState(0);
+    const [jobExpYear, setJobExpYear] = useState(0);
+    const [jobExpMonth, setJobExpMonth] = useState(0);
 
     const [loanAmt, setLoanAmount] = useState('');
 
@@ -212,14 +212,14 @@ const ArthEmploymentDetails = () => {
     //     }, 1000)
     // }
 
-    // function expError(){
-    //     let elem = document.getElementById('expError');
-    //     if(elem) elem.style.display = "block";
+    function expError() {
+        let elem = document.getElementById('expError');
+        if (elem) elem.style.display = "block";
 
-    //     setTimeout(()=>{
-    //         if(elem) elem.style.display = "none";
-    //     }, 3000)
-    // }
+        setTimeout(() => {
+            if (elem) elem.style.display = "none";
+        }, 3000)
+    }
 
     async function handleSubmit() {
         // && totalExpYear && totalExpMonth && jobExpYear && jobExpMonth
@@ -305,9 +305,9 @@ const ArthEmploymentDetails = () => {
         //     return;
         // }
 
-        if(!pincode){
+        if (!pincode) {
             let elem = document.getElementById('pincode');
-            if(elem) showErrorOnUI(elem);
+            if (elem) showErrorOnUI(elem);
             return;
         }
 
@@ -317,13 +317,19 @@ const ArthEmploymentDetails = () => {
         //     return;
         // }
 
-        // if(totalExpYear < jobExpYear){
+        // if( !totalExpMonth){
         //     expError();
         //     return;
-        // }else if(totalExpYear === jobExpYear && totalExpMonth < jobExpMonth){
+        // }else if(totalExpYear === totalExpMonth && totalExpMonth < totalExpMonth){
         //     expError();
         //     return;
         // }
+        if (totalExpMonth === 0) {
+            if (totalExpYear === 0) {
+                expError();
+                return;
+            }
+        }
 
         // if(!consent){
         //     let elem = document.getElementById('consent');
@@ -542,10 +548,10 @@ const ArthEmploymentDetails = () => {
 
         )
     })
-    function handlePincode(val){
-        if(val.length < 6){
+    function handlePincode(val) {
+        if (val.length < 6) {
             setPincode(val);
-        }else if(val.length == 6){
+        } else if (val.length == 6) {
             setPincode(val);
             // axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
             // .then(response =>{
@@ -563,6 +569,8 @@ const ArthEmploymentDetails = () => {
         if (elem) showErrorOnUI(elem);
         return;
     }
+
+
     let popUpMsg = <p style={{ color: "black", lineHeight: 'revert' }}>Are you sure <b>{Number(salary).toLocaleString("en-IN")}</b> is your <b>monthly</b> in-hand  income?</p>;
 
     return (
@@ -771,18 +779,18 @@ const ArthEmploymentDetails = () => {
             <span className="fieldError">{errorMsg}</span>
         </div> */}
                 <div className="companyPincode">
-            <p>Current workplace Pincode</p>
-            <input 
-                id="pincode"
-                type="number" 
-                value={pincode ?? ""}
-                onChange={(e)=>handlePincode(e.target.value)}
-                placeholder="Enter here" 
-                inputMode="numeric" 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div>
-        {/* <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
+                    <p>Current workplace Pincode</p>
+                    <input
+                        id="pincode"
+                        type="number"
+                        value={pincode ?? ""}
+                        onChange={(e) => handlePincode(e.target.value)}
+                        placeholder="Enter pincode here"
+                        inputMode="numeric"
+                    />
+                    <span className="fieldError">This field can't be empty.</span>
+                </div>
+                {/* <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
 
                 {/* <div className="IndustryType">
             <p>Industry</p>
@@ -850,7 +858,7 @@ const ArthEmploymentDetails = () => {
                         </select>
                         <p>Months</p>
                     </div>
-                    <span id="expError" className="fieldError">Time in current job can't be more than total experience</span>
+                    <span id="expError" className="fieldError">Please enter your experience in current workplace.</span>
                 </div>
 
                 {/* <div id="consent" className="consentBox">

@@ -479,12 +479,12 @@ const ArthCreditDetails = () => {
                             <span className="fieldError">Please fill name of the patient</span>
                         </div>
                         <div className="inputGroup">
-                            <p>Patient's Mobile Number</p>
+                            <p>Patient's mobile number</p>
                             <input
                                 id="patientPhoneNumber"
                                 type="number"
                                 value={patientPhoneNumber}
-                                placeholder="Enter Mobile No. of patient here"
+                                placeholder="Enter mobile no. of patient here"
                                 // onChange={(e)=>setPatientName(e.target.value)}  
                                 maxLength={10}
                                 onChange={(e) => numberChange(e.target.value)}
@@ -493,12 +493,12 @@ const ArthCreditDetails = () => {
                         </div>
 
                         <div className="inputGroup">
-                            <p>Patient's Email-Id </p>
+                            <p>Patient's email-ID </p>
                             <input
                                 id="patientEmailId"
                                 type="email"
                                 value={patientEmailId}
-                                placeholder="Enter Email-ID of patient here"
+                                placeholder="Enter email-ID of patient here"
                                 // onChange={(e)=>setPatientName(e.target.value)}  
                                 onChange={(e) => setpatientEmailId(e.target.value)}
                             />

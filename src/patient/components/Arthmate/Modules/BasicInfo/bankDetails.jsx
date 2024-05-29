@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Header from "../../../Header/Header"
+import { Header } from "../../comps/Header"
 // import './bankDetails.scss'
 
 import axios from "axios";
@@ -291,12 +291,12 @@ const BankDetails = () => {
                 if (response.data.data === 'FIBE') {
                     axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
                         .then(async (response) => {
-                            if(response.data.data==='Green'){
+                            if (response.data.data === 'Green') {
                                 navigate(routes.FIBE_LOAN_APPROVED)
                             }
-                            if(response.data.data==='Amber'){
+                            if (response.data.data === 'Amber') {
                                 navigate(routes.FIBE_BANK_STATEMENT_REQUIRED)
-                                
+
                             }
 
                         })
@@ -305,6 +305,14 @@ const BankDetails = () => {
                 }
                 if (response.data.data === 'INCRED') {
                     navigate(routes.APPROVAL_INCRED)
+
+                }
+                if (response.data.data === 'WAIT') {
+                    navigate(routes.WAIT_FOR_PROCESSING)
+
+                }
+                if (response.data.data === 'LOL') {
+                    navigate(routes.REJECTED_SCREEN)
 
                 }
 

@@ -164,3 +164,5 @@ export const INCRED_DOWNLOAD = React.lazy(() => import('../patient/components/in
 export const CONNECTING_WITH_LENDERS = React.lazy(() => import('../patient/components/incred/connectingwithLenders'));
 export const PLEASE_WAIT = React.lazy(() => import('../patient/components/incred/pleasewait'));
 export const FINAL_SCREEN_ARTH = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finalscreen'));
+export const WAIT_FOR_PROCESSING = React.lazy(() => import('../patient/components/incred/processing'));
+

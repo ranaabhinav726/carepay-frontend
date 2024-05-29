@@ -47,8 +47,12 @@ const ConnectWithLenders = () => {
             <Header />
             <div style={{ marginTop: "12%", textAlign: 'center' }} >
                 <img src={Loader} style={{ width: '30%' }} />
-                <p>Please Wait for a while...</p>
+                <p>Sit back and relax!
+while we assess your credit application...</p>
             </div>
+            <p className="text-center" style={{marginTop:'40px'}}>Need help? Reach out to us.</p>
+            <a style={{ color: '#000' }} href={"tel:+91 806 948 9655"}>  <button style={{color: "#514C9F",background:'#ECEBFF', fontWeight: "700", textDecoration: "underline", textAlign: "center"}} className="submit">Contact Support</button></a>
+
         </main>
     )
 }

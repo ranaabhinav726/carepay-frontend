@@ -163,6 +163,7 @@ function AppRouter() {
           <Route path={OurRoutes.CONNECTING_WITH_LENDERS} element={<Routers.CONNECTING_WITH_LENDERS />} />
           <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />
           <Route path={OurRoutes.FINAL_SCREEN_ARTH} element={<Routers.FINAL_SCREEN_ARTH />} />
+          <Route path={OurRoutes.WAIT_FOR_PROCESSING} element={<Routers.WAIT_FOR_PROCESSING />} />
 
           {/* scouts */}
           <Route path={OurRoutes.SCOUTS_MAIN} element={<Routers.SCOUTS_MAIN />} />
