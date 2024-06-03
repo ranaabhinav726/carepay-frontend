@@ -39,6 +39,11 @@ const ConnectWithLenders = () => {
                             }
                         })
                 }
+                if (operatingsystem === 'ios') {
+                    redirect()
+                } else {
+
+                }
             })
         if (operatingsystem !== 'iOS') {
             initiateProcess()
@@ -47,74 +52,74 @@ const ConnectWithLenders = () => {
 
     }, [])
     function initiateProcess() {
-       
+
         const apiUrl = env.api_Url;
-    
-     
-            // axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
-            // .then((response) => {
-            //     console.log(response.data)
-            //     if (response.data.message === 'success') {
-            //         axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
-            //             .then((response) => {
-            //                 if (response.data.message === 'success') {
-            //                     axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
-            //                         .then((response) => {
-            //                             if (response.data.message === 'success') {
-            //                                 checkOfferStatus()
-            //                                 // axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
-            //                                 //     .then((response) => {
-            //                                 //         if (response.data.message === 'success') {
 
-            //                                 //         }
 
-            //                                 //     })
-            //                             }
+        // axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
+        // .then((response) => {
+        //     console.log(response.data)
+        //     if (response.data.message === 'success') {
+        //         axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
+        //             .then((response) => {
+        //                 if (response.data.message === 'success') {
+        //                     axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
+        //                         .then((response) => {
+        //                             if (response.data.message === 'success') {
+        //                                 checkOfferStatus()
+        //                                 // axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
+        //                                 //     .then((response) => {
+        //                                 //         if (response.data.message === 'success') {
 
-            //                         })
-            //                 }
+        //                                 //         }
 
-            //             })
-            //     }
+        //                                 //     })
+        //                             }
 
-            // })
-            axios.get(`${apiUrl}/checkNbfcEligibilityForUser?userId=${userId}&nbfcName=INCRED`)
-                .then((response) => {
-                    if (response.data.message === 'success') {
-                        axios.get(`${apiUrl}/initiateApplicationForIncred?userId=${userId}`)
-                            .then((response) => {
-                                if (response.data.message === 'success') {
-                                    axios.get(`${apiUrl}/generateOfferInCred?userId=${userId}`)
-                                        .then((response) => {
-                                            if (response.data.message === 'success') {
-                                                intervalId = setInterval(checkOfferStatus, 10000);
-                                            } else {
-                                                console.log('Error generating offer');
-                                            }
-                                        })
-                                        .catch((error) => {
-                                            console.error('Error generating offer:', error);
-                                        });
-                                } else {
-                                    console.log('Error initiating application');
-                                }
-                            })
-                            .catch((error) => {
-                                console.error('Error initiating application:', error);
-                            });
-                    } else {
-                        console.log('Error checking eligibility');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error checking eligibility:', error);
-                });
-        
+        //                         })
+        //                 }
+
+        //             })
+        //     }
+
+        // })
+        axios.get(`${apiUrl}/checkNbfcEligibilityForUser?userId=${userId}&nbfcName=INCRED`)
+            .then((response) => {
+                if (response.data.message === 'success') {
+                    axios.get(`${apiUrl}/initiateApplicationForIncred?userId=${userId}`)
+                        .then((response) => {
+                            if (response.data.message === 'success') {
+                                axios.get(`${apiUrl}/generateOfferInCred?userId=${userId}`)
+                                    .then((response) => {
+                                        if (response.data.message === 'success') {
+                                            intervalId = setInterval(checkOfferStatus, 10000);
+                                        } else {
+                                            console.log('Error generating offer');
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        console.error('Error generating offer:', error);
+                                    });
+                            } else {
+                                console.log('Error initiating application');
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error initiating application:', error);
+                        });
+                } else {
+                    redirect()
+                }
+            })
+            .catch((error) => {
+                console.error('Error checking eligibility:', error);
+            });
+
     }
-    
-   
+
+
     function checkOfferStatus() {
-       
+
         const apiUrl = `${env.api_Url}/offerStatusIncred?userId=${userId}`;
 
         axios.get(apiUrl)
@@ -122,7 +127,7 @@ const ConnectWithLenders = () => {
                 if (response.data.message === 'success') {
                     const status = response.data.data;
                     if (status === 'COMPLETED' || status === 'REJECTED') {
-                        clearInterval(intervalId); 
+                        clearInterval(intervalId);
                         console.log(`Offer status: ${status}`);
                         redirect()
                     } else {
@@ -137,7 +142,7 @@ const ConnectWithLenders = () => {
             });
     }
 
-    
+
 
     const redirect = () => {
         setTimeout(() => {
