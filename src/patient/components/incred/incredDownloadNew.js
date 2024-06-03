@@ -23,7 +23,7 @@ const DownloadIncred = () => {
     return (
         <main className=''>
             <Header progressbarDisplay="none" />
-            <div style={{ background: '#ECEBFF', padding: '10px', width: '100%', borderRadius: '5px' }}>
+            <div style={{ background: '#ECEBFF', padding: '10px', width: '100%', borderRadius: '10px' }}>
 
                 <div style={{ display: 'flex', width: '100%' }}>
                     <div style={{ width: '10%' }}><img src={Star} /></div>
@@ -54,7 +54,7 @@ const DownloadIncred = () => {
             </div>
             {/* <p style={{ marginLeft: '1%', fontSize: '12px' }}>Doctor will not collect the total amount due to the subvention charges borne by them.</p> */}
 
-            <div style={{ background: '#ECEBFF', textAlign: 'center', width: '100%', marginTop: '10px', borderRadius: '5px', padding: '10px', fontSize: '14pxS' }}>
+            <div style={{ background: '#ECEBFF', textAlign: 'center', width: '100%', marginTop: '10px', borderRadius: '10px', padding: '10px', fontSize: '14pxS' }}>
                 <p>
                     Kindly pay Rs.
                     <b>&nbsp;{reportData && reportData.data && reportData.data.amountPaidToClinic ? reportData.data.amountPaidToClinic : ''}</b>
@@ -63,7 +63,7 @@ const DownloadIncred = () => {
                     &nbsp;after the disbursal of your loan. The doctor will also be notified about this final payment amount.
                 </p>            </div>
 
-            <div style={{ background: '#ECEBFF', paddingBottom: '10px', borderRadius: '5px', marginTop: '20px' }} >
+            <div style={{ background: '#ECEBFF', paddingBottom: '10px', borderRadius: '10px', marginTop: '20px' }} >
                 <a target="_blank" style={{ cursor: 'pointer' }} href='https://play.google.com/store/apps/details?id=com.incred.customer' ><img src={Logo2} style={{ width: '100%', }} /></a>
                 <p style={{ fontSize: '12px', textAlign: 'center' }}>A support executive from Incred Finance<br />
                     will reach out to you for completion of<br />
