@@ -278,10 +278,11 @@ const BankDetails = () => {
         hideWrapper(ref.current);
     }
 
-    async function checkAndNavigate() {
+     function checkAndNavigate() {
         // navigate(routes.ARTH_CONGRATULATIONS)
         axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
-            .then(async (response) => {
+            .then( (response) => {
+                console.log(response.data.data)
                 if (response.data.data === 'AM') {
                     navigate(routes.ARTH_CONGRATULATIONS)
                 }
@@ -290,7 +291,7 @@ const BankDetails = () => {
                 }
                 if (response.data.data === 'FIBE') {
                     axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
-                        .then(async (response) => {
+                        .then( (response) => {
                             if (response.data.data === 'Green') {
                                 navigate(routes.FIBE_LOAN_APPROVED)
                             }
@@ -307,11 +308,12 @@ const BankDetails = () => {
 
                   
                     axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
-                    .then(async (response) => {
-                        if (response.data.data === 'Green') {
+                    .then( (response) => {
+                        console.log(response.data.data.status,'response.data.data')
+                        if (response.data.data.status === 'GREEN') {
                             navigate(routes.APPROVAL_INCRED)
                         }
-                        if (response.data.data === 'Amber') {
+                        if (response.data.data.status === 'AMBER') {
                             navigate(routes.INCRED_PREAPPROVED)
 
                         }
