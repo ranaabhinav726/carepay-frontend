@@ -10,7 +10,7 @@ import { env } from "../../environment/environment";
 const DownloadIncred = () => {
     let userId = localStorage.getItem('userId')
     const apiUrl = env.api_Url;
-   
+
     const [reportData, setReportData] = useState('')
     useEffect(() => {
         axios.get(`${apiUrl}getIncredCalculation?userId=${userId}`)
@@ -50,13 +50,18 @@ const DownloadIncred = () => {
                 <p style={{ marginLeft: '1%' }}>
                     Advance cashback
                 </p>
-                <p style={{ alignSelf: "end", whiteSpace: "pre", color: '#149540' }}>    ₹ {reportData !== '' && reportData.data.advanceCashBackMinRange ? reportData.data.advanceCashBackMinRange : ''}-₹ {reportData !== '' && reportData.data.advanceCashBackMaxRange ? reportData.data.advanceCashBackMaxRange : ''}</p>
+                <p style={{ alignSelf: "end", whiteSpace: "pre", color: '#149540' }}>    ₹ {reportData !== '' && reportData.data.advanceCashBackMinRange ? reportData.data.advanceCashBackMinRange : ''}{reportData !== '' && reportData.data.advanceCashBackMaxRange && reportData.data.advanceCashBackMaxRange !== reportData.data.advanceCashBackMinRange ? '-₹' : ''}{reportData !== '' && reportData.data.advanceCashBackMaxRange && reportData.data.advanceCashBackMaxRange !== reportData.data.advanceCashBackMinRange ? reportData.data.advanceCashBackMaxRange : ''}</p>
             </div>
             {/* <p style={{ marginLeft: '1%', fontSize: '12px' }}>Doctor will not collect the total amount due to the subvention charges borne by them.</p> */}
 
             <div style={{ background: '#ECEBFF', textAlign: 'center', width: '100%', marginTop: '10px', borderRadius: '5px', padding: '10px', fontSize: '14pxS' }}>
-                <p>{`Kindly pay Rs. ${reportData !== '' && reportData.data.amountPaidToClinic ? reportData.data.amountPaidToClinic : ''} to ${reportData !== '' && reportData.data.clinicName ? reportData.data.clinicName : ''} after the disbursal of your loan. The doctor will also be notified about this final payment amount.`}</p>
-            </div>
+                <p>
+                    Kindly pay Rs.
+                    <b>&nbsp;{reportData && reportData.data && reportData.data.amountPaidToClinic ? reportData.data.amountPaidToClinic : ''}</b>
+                    &nbsp;to
+                    <b>&nbsp;{reportData && reportData.data && reportData.data.clinicName ? reportData.data.clinicName : ''}</b>
+                    &nbsp;after the disbursal of your loan. The doctor will also be notified about this final payment amount.
+                </p>            </div>
 
             <div style={{ background: '#ECEBFF', paddingBottom: '10px', borderRadius: '5px', marginTop: '20px' }} >
                 <a target="_blank" style={{ cursor: 'pointer' }} href='https://play.google.com/store/apps/details?id=com.incred.customer' ><img src={Logo2} style={{ width: '100%', }} /></a>
@@ -66,7 +71,7 @@ const DownloadIncred = () => {
             </div>
             <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '20px' }}>Need further help? </p>
             <div style={{ width: 'fit-content', marginLeft: 'auto', marginRight: 'auto' }}>
-                <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}><div><img src={CallIcon} />&nbsp;Contact CarePay Support</div></button>
+                <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}><div style={{display:'flex'}}><img src={CallIcon} />&nbsp;<div style={{ marginTop: '-2px' }}>Contact CarePay Support</div></div></button>
             </div>
         </main>
     )
