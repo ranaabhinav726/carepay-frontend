@@ -231,7 +231,7 @@ const ArthmateOffers = () =>{
             <main className="arthmateOffers">
                 <Header progressbarDisplay='block' canGoBack={-1} />
 
-                <h3>EMI Details</h3>
+                <h3>Select your preferred tenure</h3>
 
                 <p style={{margin:"16px 0 10px 0", color:"rgba(0,0,0,0.6)"}}>Credit amount</p>
                 <p style={{margin:"0"}}>Rs. {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}</p>

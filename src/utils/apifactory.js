@@ -27,7 +27,8 @@ const APIS = {
     GET_NACH_DETAILS: BASE_URL + 'getRepaymentData?userId=',
     VERIFY_UPI_ID: BASE_URL + 'verifyHandel?userId=',
     GET_BANK_LIST_FOR_USERS: BASE_URL + 'getCashFreeSubscriptionPlanInfoDetail?userId=',
-    GET_TXN_SUMMARY:BASE_URL+'getMandateSummary?userId='
+    GET_TXN_SUMMARY:BASE_URL+'getMandateSummary?userId=',
+    GET_EMI_CALCULATION:BASE_URL+'getAmLoanCalculations?loanId='
 
 
 

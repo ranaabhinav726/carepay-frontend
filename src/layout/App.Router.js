@@ -160,6 +160,8 @@ function AppRouter() {
           <Route path={OurRoutes.WAIT_LEGALITY} element={<Routers.WAIT_LEGALITY />} />
           <Route path={OurRoutes.APPROVAL_INCRED} element={<Routers.APPROVAL_INCRED />} />
           <Route path={OurRoutes.INCRED_DOWNLOAD} element={<Routers.INCRED_DOWNLOAD />} />
+          <Route path={OurRoutes.INCRED_PREAPPROVED} element={<Routers.INCRED_PREAPPROVED />} />
+
           <Route path={OurRoutes.CONNECTING_WITH_LENDERS} element={<Routers.CONNECTING_WITH_LENDERS />} />
           <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />
           <Route path={OurRoutes.FINAL_SCREEN_ARTH} element={<Routers.FINAL_SCREEN_ARTH />} />

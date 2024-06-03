@@ -304,7 +304,19 @@ const BankDetails = () => {
                     // 
                 }
                 if (response.data.data === 'INCRED') {
-                    navigate(routes.APPROVAL_INCRED)
+
+                  
+                    axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
+                    .then(async (response) => {
+                        if (response.data.data === 'Green') {
+                            navigate(routes.APPROVAL_INCRED)
+                        }
+                        if (response.data.data === 'Amber') {
+                            navigate(routes.INCRED_PREAPPROVED)
+
+                        }
+
+                    })
 
                 }
                 if (response.data.data === 'WAIT') {

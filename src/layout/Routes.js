@@ -152,6 +152,7 @@ const routes = {
   PLEASE_WAIT:'/patient/pleasewait',
   FINAL_SCREEN_ARTH:'/patient/final',
   WAIT_FOR_PROCESSING:'/patient/processing',
+  INCRED_PREAPPROVED:'/patient/incredpreapproved',
 
 
   ///SCOUTS///

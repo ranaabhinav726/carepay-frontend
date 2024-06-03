@@ -10,10 +10,10 @@ const ConnectWithLenders = () => {
     let navigate = useNavigate()
 
     let userId = localStorage.getItem('userId')
-
+    let intervalId;
     useEffect(() => {
         let operatingsystem = detect()
-        console.log(operatingsystem,'operatingsystem')
+        console.log(operatingsystem, 'operatingsystem')
         axios.post(env.api_Url + "leadAPI?userId=" + userId)
             .then((response) => {
                 if (response.data.message === "success") {
@@ -41,37 +41,105 @@ const ConnectWithLenders = () => {
                 }
             })
         if (operatingsystem !== 'iOS') {
-            axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
-                .then((response) => {
-                    console.log(response.data)
-                    if (response.data.message === 'success') {
-                        axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
-                            .then((response) => {
-                                if (response.data.message === 'success') {
-                                    axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
-                                        .then((response) => {
-                                            if (response.data.message === 'success') {
-                                                axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
-                                                    .then((response) => {
-                                                        if (response.data.message === 'success') {
-
-                                                        }
-
-                                                    })
-                                            }
-
-                                        })
-                                }
-
-                            })
-                    }
-
-                })
+            initiateProcess()
         }
-        redirect()
+        // redirect()
 
     }, [])
-    const redirect =()=>{
+    function initiateProcess() {
+       
+        const apiUrl = env.api_Url;
+    
+     
+            // axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
+            // .then((response) => {
+            //     console.log(response.data)
+            //     if (response.data.message === 'success') {
+            //         axios.get(env.api_Url + "/initiateApplicationForIncred?userId=" + userId)
+            //             .then((response) => {
+            //                 if (response.data.message === 'success') {
+            //                     axios.get(env.api_Url + "/generateOfferInCred?userId=" + userId)
+            //                         .then((response) => {
+            //                             if (response.data.message === 'success') {
+            //                                 checkOfferStatus()
+            //                                 // axios.get(env.api_Url + "/offerStatusIncred?userId=" + userId)
+            //                                 //     .then((response) => {
+            //                                 //         if (response.data.message === 'success') {
+
+            //                                 //         }
+
+            //                                 //     })
+            //                             }
+
+            //                         })
+            //                 }
+
+            //             })
+            //     }
+
+            // })
+            axios.get(`${apiUrl}/checkNbfcEligibilityForUser?userId=${userId}&nbfcName=INCRED`)
+                .then((response) => {
+                    if (response.data.message === 'success') {
+                        axios.get(`${apiUrl}/initiateApplicationForIncred?userId=${userId}`)
+                            .then((response) => {
+                                if (response.data.message === 'success') {
+                                    axios.get(`${apiUrl}/generateOfferInCred?userId=${userId}`)
+                                        .then((response) => {
+                                            if (response.data.message === 'success') {
+                                                intervalId = setInterval(checkOfferStatus, 10000);
+                                            } else {
+                                                console.log('Error generating offer');
+                                            }
+                                        })
+                                        .catch((error) => {
+                                            console.error('Error generating offer:', error);
+                                        });
+                                } else {
+                                    console.log('Error initiating application');
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('Error initiating application:', error);
+                            });
+                    } else {
+                        console.log('Error checking eligibility');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error checking eligibility:', error);
+                });
+        
+    }
+    
+   
+    function checkOfferStatus() {
+       
+        const apiUrl = `${env.api_Url}/offerStatusIncred?userId=${userId}`;
+
+        axios.get(apiUrl)
+            .then((response) => {
+                if (response.data.message === 'success') {
+                    const status = response.data.data;
+                    if (status === 'COMPLETED' || status === 'REJECTED') {
+                        clearInterval(intervalId); 
+                        console.log(`Offer status: ${status}`);
+                        redirect()
+                    } else {
+                        console.log(`Current status: ${status}`);
+                    }
+                } else {
+                    console.log('Error: Unsuccessful response');
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching offer status:', error);
+            });
+    }
+
+    
+
+    const redirect = () => {
         setTimeout(() => {
             navigate(routes.ARTHMATE_OFFERS)
         }, 5000);
