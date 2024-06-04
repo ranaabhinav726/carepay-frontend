@@ -63,7 +63,7 @@ const Congrats = () => {
                         <img src={Incredlogo} style={{ marginTop: '10px' }} />
                     </div>
                     <p style={{textAlign:'center',marginTop:'30px'}}>Sharing you bank statement of last 3 months <br />
-                        will significantly increase your chance of approval.</p>
+                    Sharing you bank statement of last 3 months .</p>
                     <button className='submit' onClick={() => submit()}>Proceed with Incred</button>
                 </>
 
