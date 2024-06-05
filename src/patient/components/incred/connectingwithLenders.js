@@ -102,6 +102,8 @@ const ConnectWithLenders = () => {
                                     });
                             } else {
                                 console.log('Error initiating application');
+                                navigate(routes.REJECTED_SCREEN)
+
                             }
                         })
                         .catch((error) => {

@@ -518,7 +518,7 @@ const ArthCreditDetails = () => {
                             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                                 <span style={{ minWidth: "max-content" }}>Patient is my:</span>
                                 <select name="relation" id="relation" style={{ marginBottom: "0" }} value={relation} onChange={(e) => setRelation(e.target.value)}>
-                                    {/* <option disabled value={""}></option> */}
+                                    <option  value={""}>Select Relationship</option>
                                     <option value={"MOTHER"}>Mother</option>
                                     <option value={"FATHER"}>Father</option>
                                     <option value={"BROTHER"}>Brother</option>
