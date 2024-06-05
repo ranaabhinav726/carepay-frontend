@@ -292,10 +292,10 @@ const BankDetails = () => {
                 if (response.data.data === 'FIBE') {
                     axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
                         .then( (response) => {
-                            if (response.data.data === 'Green') {
+                            if (response.data.data === 'GREEN') {
                                 navigate(routes.FIBE_LOAN_APPROVED)
                             }
-                            if (response.data.data === 'Amber') {
+                            if (response.data.data === 'AMBER') {
                                 navigate(routes.FIBE_BANK_STATEMENT_REQUIRED)
 
                             }
