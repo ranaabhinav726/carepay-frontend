@@ -32,6 +32,7 @@ const Congrats = () => {
 
     let ref = useRef(0);
     useEffect(() => {
+        if( window.localStorage.getItem('doctorId') !== '9CQtIYcGcOiUTaM8otKQcAE1GyRbMdct'){
         axios.get(env.api_Url + "getLoanApprovedDetailForUser?userId=" + userId + '&type=INCRED')
             .then(response => {
                 console.log(response.data.data)
@@ -42,6 +43,7 @@ const Congrats = () => {
 
 
             })
+        }
     }, [])
     const submit = () => {
         navigate(routes.INCRED_DOWNLOAD)

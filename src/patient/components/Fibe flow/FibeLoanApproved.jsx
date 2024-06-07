@@ -14,7 +14,7 @@ export default function FibeLoanApproved() {
     let bitlyUrl = location?.state?.data?.bitlyUrl;
     let userId = localStorage.getItem('userId')
     const [amount, setAmount] = useState("0");
-    const [fibeBitlyUrl, setbitlyUrl] = useState("0");
+    const [fibeBitlyUrl, setbitlyUrl] = useState("");
 
     const navigate = useNavigate();
 
@@ -74,7 +74,7 @@ export default function FibeLoanApproved() {
                 </ul>
                 <p style={{ margin: "0" }}>No paperwork needed, this is completely a digital process.</p>
                 {fibeBitlyUrl !== '' ? <a href={fibeBitlyUrl} target="_blank">
-                    <button style={{ background: "#00A1A0" }} className="submit">Continue</button>
+                    <button style={{ background: "#00A1A0" }} className="submit" >Continue</button>
                 </a> : ""}
             </div>
         </main>

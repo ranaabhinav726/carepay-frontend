@@ -278,10 +278,10 @@ const BankDetails = () => {
         hideWrapper(ref.current);
     }
 
-     function checkAndNavigate() {
+    function checkAndNavigate() {
         // navigate(routes.ARTH_CONGRATULATIONS)
         axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
-            .then( (response) => {
+            .then((response) => {
                 console.log(response.data.data)
                 if (response.data.data === 'AM') {
                     navigate(routes.ARTH_CONGRATULATIONS)
@@ -291,7 +291,7 @@ const BankDetails = () => {
                 }
                 if (response.data.data === 'FIBE') {
                     axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
-                        .then( (response) => {
+                        .then((response) => {
                             if (response.data.data === 'GREEN') {
                                 navigate(routes.FIBE_LOAN_APPROVED)
                             }
@@ -304,21 +304,21 @@ const BankDetails = () => {
 
                     // 
                 }
-                if (response.data.data === 'INCRED') {
+                if (response.data.data === 'INCRED' && window.localStorage.getItem('doctorId') !== '9CQtIYcGcOiUTaM8otKQcAE1GyRbMdct') {
 
-                  
+
                     axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
-                    .then( (response) => {
-                        console.log(response.data.data.status,'response.data.data')
-                        if (response.data.data.status === 'GREEN') {
-                            navigate(routes.APPROVAL_INCRED)
-                        }
-                        if (response.data.data.status === 'AMBER') {
-                            navigate(routes.INCRED_PREAPPROVED)
+                        .then((response) => {
+                            console.log(response.data.data.status, 'response.data.data')
+                            if (response.data.data.status === 'GREEN') {
+                                navigate(routes.APPROVAL_INCRED)
+                            }
+                            if (response.data.data.status === 'AMBER') {
+                                navigate(routes.INCRED_PREAPPROVED)
 
-                        }
+                            }
 
-                    })
+                        })
 
                 }
                 if (response.data.data === 'WAIT') {

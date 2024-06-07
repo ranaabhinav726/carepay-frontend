@@ -8,7 +8,7 @@ import { env } from "../../environment/environment";
 
 const ConnectWithLenders = () => {
     let navigate = useNavigate()
-    let userId=localStorage.getItem('userId')
+    let userId = localStorage.getItem('userId')
     useEffect(() => {
         axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=CF')
             .then((response) => {
@@ -32,13 +32,13 @@ const ConnectWithLenders = () => {
 
 
                                 //     })
-                            }else{
+                            } else {
                                 navigate(routes.ARTH_BANKDETAILS)
                             }
 
                         })
 
-                }else{
+                } else {
                     navigate(routes.ARTH_BANKDETAILS)
                 }
 
@@ -50,10 +50,10 @@ const ConnectWithLenders = () => {
             <div style={{ marginTop: "12%", textAlign: 'center' }} >
                 <img src={Loader} style={{ width: '30%' }} />
                 <p>Sit back and relax!
-while we assess your credit application...</p>
+                    while we assess your credit application...</p>
             </div>
-            <p className="text-center" style={{marginTop:'40px'}}>Need help? Reach out to us.</p>
-            <a style={{ color: '#000' }} href={"tel:+91 806 948 9655"}>  <button style={{color: "#514C9F",background:'#ECEBFF', fontWeight: "700", textDecoration: "underline", textAlign: "center"}} className="submit">Contact Support</button></a>
+            <p className="text-center" style={{ marginTop: '40px' }}>Need help? Reach out to us.</p>
+            <a style={{ color: '#000' }} href={"tel:+91 806 948 9655"}>  <button style={{ color: "#514C9F", background: '#ECEBFF', fontWeight: "700", textDecoration: "underline", textAlign: "center" }} className="submit">Contact Support</button></a>
 
         </main>
     )
