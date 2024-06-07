@@ -36,7 +36,7 @@ const Processing = () => {
 
                     // 
                 }
-                if (response.data.data === 'INCRED' && window.localStorage.getItem('doctorId') !== '9CQtIYcGcOiUTaM8otKQcAE1GyRbMdct') {
+                if (response.data.data === 'INCRED') {
                     navigate(routes.APPROVAL_INCRED)
 
                 }
