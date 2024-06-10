@@ -157,7 +157,43 @@ const ArthCreditDetails = () => {
         "Reduction of dislocations",
         "Dialysis",
         "Angiography",
-        "Heart Attack",
+        // "Heart Attack",
+        // "Stroke",
+        // "Kidney Failure",
+        // "Multiple Sclerosis",
+        // "Parkinson Disease",
+        // "Alzheimer’s Disease",
+        // "Paralysis",
+        // "Muscular Dystrophy",
+        // "Cardiomyopathy",
+        // "Loss of Speech",
+        // "Chronic Aplastic Anemia",
+        // "Organ Transplants (All Types)",
+        // "Hepatitis",
+        // "Coronary Artery, By-Pass Surgery Disease",
+        // "Head Trauma",
+        // "Angioplasty",
+        // "Bone Marrow Transplant (BMT)",
+        // "Operable Cancers",
+        // "Early-Stage Cancers",
+        // "Heart Valve Surgery",
+        // "Pediatric Cancers",
+        // "Neurosurgeries",
+        // "Road Traffic Accidents (RTA)",
+        // "Brain Surgery",
+        // "Bacterial Meningitis",
+        // "End Stage Renal Disease",
+        // "End Stage Liver Disease",
+        // "Sepsis",
+        // "HIV",
+        // "COMA",
+        // "End Stage Lung and Liver Cancer",
+        // "Blood Cancers Adults",
+        // "Third Degree Burns",
+        // "Terminal Illness",
+        // "Encephalitis"
+    ];
+    const notsercicable = ["Heart Attack",
         "Stroke",
         "Kidney Failure",
         "Multiple Sclerosis",
@@ -191,8 +227,8 @@ const ArthCreditDetails = () => {
         "Blood Cancers Adults",
         "Third Degree Burns",
         "Terminal Illness",
-        "Encephalitis"
-    ];
+        "Encephalitis"]
+
 
     useEffect(() => {
         if (!!userId) {
@@ -252,7 +288,7 @@ const ArthCreditDetails = () => {
                 if (elem) showErrorOnUI(elem);
                 return;
             }
-           
+
             if (!patientPhoneNumber) {
                 let elem = document.getElementById('patientPhoneNumber');
                 if (elem) showErrorOnUI(elem);
@@ -262,12 +298,12 @@ const ArthCreditDetails = () => {
                 let elem = document.getElementById('patientEmailId');
                 if (elem) showErrorOnUI(elem);
                 return;
-            }else if (!validateEmail(patientEmailId)) {
+            } else if (!validateEmail(patientEmailId)) {
                 let elem = document.getElementById('patientEmailId');
                 if (elem) showErrorOnUI(elem);
                 return;
             }
-           
+
             if (!relation) {
                 let elem = document.getElementById('relation');
                 if (elem) showErrorOnUI(elem);
@@ -322,8 +358,12 @@ const ArthCreditDetails = () => {
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
                     if (!number) return;
+                    if (!notsercicable.includes(treatment)) {
+                        navigate(routes.ARTH_PERSONAL_DETAILS);
+                    } else {
+                        navigate(routes.NOT_SERVICEABLE);
+                    }
 
-                    navigate(routes.ARTH_PERSONAL_DETAILS);
                     // if(amount > 100000){
                     //     navigate('/patient/ArthPresciptionUpload');
                     // }else{
@@ -558,7 +598,7 @@ const ArthCreditDetails = () => {
                             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                                 <span style={{ minWidth: "max-content" }}>Patient is my:</span>
                                 <select name="relation" id="relation" style={{ marginBottom: "0" }} value={relation} onChange={(e) => setRelation(e.target.value)}>
-                                    <option  value={""}>Select Relationship</option>
+                                    <option value={""}>Select Relationship</option>
                                     <option value={"MOTHER"}>Mother</option>
                                     <option value={"FATHER"}>Father</option>
                                     <option value={"BROTHER"}>Brother</option>
