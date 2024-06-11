@@ -43,6 +43,7 @@ import PharmaBizLogo from '../assets/PharmaBiz logo.png'
 
 import Aos from 'aos';
 import 'aos/dist/aos.css'
+import routes from '../../layout/Routes'
 
 function WebHomepage() {
 
@@ -63,7 +64,7 @@ function WebHomepage() {
             <Operations />
             <HowItWorks />
             <HealthcareFinance />
-            <LendingPartners />
+            {/* <LendingPartners /> */}
             {/* <Reviews /> */}
             <Articles />
             <Branding />
@@ -312,10 +313,10 @@ function LendingPartners() {
     return (
         <section className='lending-partners'>
             <h4>Our lending partners</h4>
-            <div className="container mobile-logo" style={{textAlign:'center'}}>
-                <div style={{padding:'10px',minWidth:'33%'}}> <img src={I2ILogo} alt="" /></div>
-                <div style={{padding:'10px',minWidth:'33%'}}>  <img src={CreditFairLogo} alt="" /></div>
-                <div style={{padding:'10px',minWidth:'33%'}}>  <img src={LiquiLoansLogo} alt="" /></div>
+            <div className="container mobile-logo" style={{ textAlign: 'center' }}>
+                <div style={{ padding: '10px', minWidth: '33%' }}> <img src={I2ILogo} alt="" /></div>
+                <div style={{ padding: '10px', minWidth: '33%' }}>  <img src={CreditFairLogo} alt="" /></div>
+                <div style={{ padding: '10px', minWidth: '33%' }}>  <img src={LiquiLoansLogo} alt="" /></div>
             </div>
         </section>
     )
@@ -677,7 +678,7 @@ export function Footer() {
                             <Link to={"/privacyPolicy"}>Privacy Policy</Link>
                             <Link to={"/TermsAndConditions"}>Terms and Conditions</Link>
                             {/* <Link to={"/patient"}>For Patients</Link> */}
-                            <Link to={"/lendingPartners"}>Our Lending Partners</Link>
+                            <div style={{ display: 'flex',textDecoration:'underline' }}> <Link to={routes.LENDING_PARTNERS}> Our</Link><div style={{marginTop:'12px',textDecoration:'underline',color:'#fff',marginLeft:'-5px',cursor:'pointer'}}>Lending Partners</div></div>
                         </div>
                         <div className="contact-us">
                             <h5>Contact us</h5>

@@ -5,7 +5,7 @@ const routes = {
   TERMS_AND_CONDITIONS: '/TermsAndConditions',
   REFUND_AND_CANCELLATION: '/RefundAndCancellation',
   ICICI_TERMS_AND_CONDITIONS: '/ICICITermsAndConditions',
-  LENDING_PARTNERS: "/lendingPartners",
+  LENDING_PARTNERS: "/partnersforlending",
 
   PATIENT_HOMEPAGE: '/patient/*',
   DOCTOR_NOT_AVAILABLE: '/patient/DoctorNotAvailable',
@@ -153,6 +153,7 @@ const routes = {
   FINAL_SCREEN_ARTH:'/patient/final',
   WAIT_FOR_PROCESSING:'/patient/processing',
   INCRED_PREAPPROVED:'/patient/incredpreapproved',
+  FLEX_WAIT_SCREEN:'/patient/flexwait',
 
 
   ///SCOUTS///
