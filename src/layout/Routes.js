@@ -154,6 +154,7 @@ const routes = {
   WAIT_FOR_PROCESSING:'/patient/processing',
   INCRED_PREAPPROVED:'/patient/incredpreapproved',
   FLEX_WAIT_SCREEN:'/patient/flexwait',
+  FLEX_APPROVAL_SCREEN:'/patient/flexApproval',
 
 
   ///SCOUTS///
@@ -167,7 +168,8 @@ const routes = {
   SCOUTES_PRACTICE:'/scouts/practice',
   SCOUTES_ADDRESS:'/scouts/address',
   SCOUTES_BANK:'/scouts/bank',
-  SCOUTES_DOC:'/scouts/document'
+  SCOUTES_DOC:'/scouts/document',
+
 
 
 

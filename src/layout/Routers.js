@@ -167,5 +167,7 @@ export const FINAL_SCREEN_ARTH = React.lazy(() => import('../patient/components/
 export const WAIT_FOR_PROCESSING = React.lazy(() => import('../patient/components/incred/processing'));
 export const INCRED_PREAPPROVED = React.lazy(() => import('../patient/components/incred/incredpreapproved'));
 export const FLEX_WAIT_SCREEN = React.lazy(() => import('../patient/components/flexmoney/searchingflexmoney'));
+export const FLEX_APPROVAL_SCREEN = React.lazy(() => import('../patient/components/flexmoney/flexapproval'));
+
 
 

@@ -186,6 +186,30 @@ const ArthAddressDetails = () => {
             })
         }
     }
+    function handlePincodep(val, type){
+        if(val.length < 6){
+            setPincodeP(val);
+        }else if(val.length == 6){
+            setFetching(true);
+            setPincodeP(val);
+            axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
+            .then(response =>{
+                console.log(response)
+                let city = response?.data?.city || "";
+                let state = response?.data?.state || "Select state";
+                if(type === "current"){
+                    setCity(city); 
+                    setState(state);
+                }else{
+                    setCityP(city); 
+                    setStateP(state);
+                }
+                setFetching(false);
+            }).catch(()=>{
+                setFetching(false);
+            })
+        }
+    }
 
     //////////// To alert the user about wrong formatted input ////////////////////
     // function showErrorOnUI(elem){
@@ -257,6 +281,15 @@ const ArthAddressDetails = () => {
             "city": city,
             "formStatus": ""
         };
+        let submitObjPermanent = {
+            "userId": userId,
+            "address": firstLineP.trim(),
+            "pincode": pincodeP,
+            "state": stateP,
+            "city": cityP,
+            "formStatus": "",
+            "addressType":'permanent'
+        };
     
         // If isPermAddrSame is true, call API with both current and permanent address types
         if (isPermAddrSame) {
@@ -285,6 +318,16 @@ const ArthAddressDetails = () => {
             // If isPermAddrSame is false, call API only once with the provided address type
             submitObj.addressType = addressType;
             saveAddressDetails(submitObj, res => {
+                if (res.data.message === "success") {
+                    navigate('/patient/ArthEmploymentDetails');
+                } else {
+                    apiErrorHandler();
+                }
+                setCanSubmit(true);
+                hideWrapper(ref.current);
+            });
+            // submitObj.addressType = addressType;
+            saveAddressDetails(submitObjPermanent, res => {
                 if (res.data.message === "success") {
                     navigate('/patient/ArthEmploymentDetails');
                 } else {
@@ -427,7 +470,7 @@ const ArthAddressDetails = () => {
             <input type="number" 
                 id="pincode"
                 value={pincodeP ?? ""} 
-                onChange={(e)=> handlePincode(e.target.value)}
+                onChange={(e)=> handlePincodep(e.target.value)}
                 placeholder="Enter your pincode here" 
                 min={0}
                 required 

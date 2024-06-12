@@ -17,6 +17,7 @@ const WaitArhmate = () => {
         if (scoreState === true) {
             axios.post(env.api_Url + "coLenderSelection?userId=" + userId)
                 .then((response) => {
+                    console.log(response.data.message)
                     if (response.data.message === 'success') {
                         axios.post(env.api_Url + "loanApi?userId=" + userId)
                             .then((response) => {
