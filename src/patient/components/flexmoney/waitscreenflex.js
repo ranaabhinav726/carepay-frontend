@@ -41,32 +41,35 @@ const CheckoutComponent = () => {
         console.log(message, 'message')
         let originUrl = message.origin + '/';
         // if (originUrl === BASE_URL) {
-            if (message != null) {
-                if (message.data !== undefined) {
-                    const parsedMessage = JSON.parse(message.data);
-                    if (parsedMessage.actionName === "onTransactionComplete") {
-                        // Decode the Base64 payload
-                        const decodedPayload = atob(parsedMessage.payload);
+        if (message != null) {
+            if (message.data !== undefined) {
+                const parsedMessage = JSON.parse(message.data);
+                if (parsedMessage.actionName === "onTransactionComplete") {
+                    // Decode the Base64 payload
+                    const decodedPayload = atob(parsedMessage.payload);
 
-                        // Parse the JSON
-                        const transactionData = JSON.parse(decodedPayload);
+                    // Parse the JSON
+                    const transactionData = JSON.parse(decodedPayload);
 
-                        console.log(transactionData, 'transactionData');
-
-                        // You can handle the transaction data here, for example, update the state
-                        // or perform any other necessary actions
-                    } else if (typeof message.data === 'string') {
-                        const url = message.data.substr(1);
-                        setPageStates((prevState) => ({
-                            ...prevState,
-                            firstPopup: false,
-                            secondPopup: true,
-                            popupNextDisabled: false
-                        }));
-                        setPdfUrl(url);
+                    console.log(transactionData, 'transactionData');
+                    if (transactionData.orderStatus === "FAILED") {
+                        window.location.reload()
                     }
+
+                    // You can handle the transaction data here, for example, update the state
+                    // or perform any other necessary actions
+                } else if (typeof message.data === 'string') {
+                    const url = message.data.substr(1);
+                    setPageStates((prevState) => ({
+                        ...prevState,
+                        firstPopup: false,
+                        secondPopup: true,
+                        popupNextDisabled: false
+                    }));
+                    setPdfUrl(url);
                 }
             }
+        }
         // }
     };
 
@@ -95,15 +98,15 @@ const CheckoutComponent = () => {
             <Header progressbarDisplay="none" />
 
             {loaderState ? <img src={Loadinggif} alt="Loading" /> : ""}
-            {loaderState 
+            {loaderState
                 ? <p className='text-center'>connecting with your bank...</p>
-                : <p className='text-center' style={{marginTop:'150px'}}>You will be shown a popup to go ahead with your credit application. Press continue to start.</p>
+                : <p className='text-center' style={{ marginTop: '150px' }}>You will be shown a popup to go ahead with your credit application. Press continue to start.</p>
             }
             <div id="instaCredWidget"></div>
-            {orderTokenData !== '' ? 
-                <button 
-                    className='' 
-                    onClick={handleCheckout} 
+            {orderTokenData !== '' ?
+                <button
+                    className=''
+                    onClick={handleCheckout}
                     style={{ marginTop: '20px', padding: '15px', color: '#504c9a', background: '#ecebfd', border: 'none', borderRadius: '5px', fontSize: '14px', fontWeight: '700' }}
                 >
                     Continue
