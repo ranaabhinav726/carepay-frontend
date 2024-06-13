@@ -51,6 +51,7 @@ const CheckoutComponent = () => {
 
         <main className='congrats'>
             <Header progressbarDisplay="none" />
+            <div id="instaCredWidget"></div> 
             <img src={Loadinggif}/>
             <p className='text-center'>connecting with your bank...</p>
             {/* <button onClick={handleCheckout}>Checkout with InstaCred</button>
