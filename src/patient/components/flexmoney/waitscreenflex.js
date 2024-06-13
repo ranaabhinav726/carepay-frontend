@@ -3,9 +3,17 @@ import Header from '../Header/Header';
 import Loadinggif from '../../../utils/loader/Loading 3.gif';
 import { createOrderApiFm } from './actioncreator';
 
+const BASE_URL = 'https://your-base-url.com/'; // Replace with your actual base URL
+
 const CheckoutComponent = () => {
-    const [orderTokenData, setOrderTokenData] = useState('')
-    const [loaderState, setloaderState] = useState(true)
+    const [orderTokenData, setOrderTokenData] = useState('');
+    const [loaderState, setLoaderState] = useState(true);
+    const [pageStates, setPageStates] = useState({
+        firstPopup: true,
+        secondPopup: false,
+        popupNextDisabled: true
+    });
+    const [pdfUrl, setPdfUrl] = useState('');
 
     window.onICMerchantSDKReady = () => {
         window.ICMerchantSDK.init({
@@ -17,7 +25,7 @@ const CheckoutComponent = () => {
     };
 
     const handleCheckout = () => {
-        console.log(orderTokenData)
+        console.log(orderTokenData);
 
         window.ICMerchantSDK.startPayment({
             orderToken: orderTokenData.orderToken,
@@ -29,41 +37,74 @@ const CheckoutComponent = () => {
         });
     };
 
+    const messageFromChildWindowCallback = (message) => {
+        console.log(message,'message')
+        let originUrl = message.origin + '/';
+        if (originUrl === BASE_URL) {
+            var uperUrl = window.location.href;
+            var id = uperUrl.substring(uperUrl.lastIndexOf('/') + 1);
+            if (message != null) {
+                let url = message.data.substr(1);
+                if (message.data !== undefined) {
+                    if (typeof message.data === 'string') {
+                        url = message.data.substr(1);
+                        setPageStates((prevState) => ({
+                            ...prevState,
+                           
+                        }));
+                     
+                    }
+                }
+            }
+        }
+    };
+
     useEffect(() => {
+        window.addEventListener('message', messageFromChildWindowCallback);
+
         createOrderApiFm(localStorage.getItem('userId'), callback => {
-            console.log(callback)
-            setOrderTokenData(callback.data)
-            setloaderState(false)
-            // setTimeout(() => {
-            //     handleCheckout()
-            // }, 10000);
-        })
+            console.log(callback);
+            setOrderTokenData(callback.data);
+            setLoaderState(false);
+        });
+
         const script = document.createElement('script');
         script.async = true;
         script.src = 'https://iccdn.in/web-merchant-sdk-uat/v-1.0/static/instaCred-merchant-sdk.js';
         document.body.appendChild(script);
 
         return () => {
+            window.removeEventListener('message', messageFromChildWindowCallback);
             document.body.removeChild(script);
         };
-
     }, []);
 
-
     return (
-
         <main className='congrats'>
             <Header progressbarDisplay="none" />
 
-            {loaderState ? <img src={Loadinggif} /> : ""}
-            {loaderState ?  <p className='text-center'>connecting with your bank...</p>:""}
-            {/* <button onClick={handleCheckout}>Checkout with InstaCred</button> */}
+            {loaderState ? <img src={Loadinggif} alt="Loading" /> : ""}
+            {loaderState 
+                ? <p className='text-center'>connecting with your bank...</p>
+                : <p className='text-center' style={{marginTop:'150px'}}>You will be shown a popup to go ahead with your credit application. Press continue to start.</p>
+            }
             <div id="instaCredWidget"></div>
-           {orderTokenData !==''? <button className='' onClick={handleCheckout} style={{ marginTop: '20px', padding: '15px', color: '#504c9a', background: '#ecebfd', border: 'none', borderRadius: '5px', fontSize: '14px', fontWeight: '700' }}>Continue</button>:""}
-            {/* <button onClick={handleCheckout}>Continue </button> */}
-            <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.-</p>
-
-            <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>  <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>Contact Support</button></a>
+            {orderTokenData !== '' ? 
+                <button 
+                    className='' 
+                    onClick={handleCheckout} 
+                    style={{ marginTop: '20px', padding: '15px', color: '#504c9a', background: '#ecebfd', border: 'none', borderRadius: '5px', fontSize: '14px', fontWeight: '700' }}
+                >
+                    Continue
+                </button>
+                : ""
+            }
+            <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.</p>
+            <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>
+                <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>
+                    Contact Support
+                </button>
+            </a>
         </main>
     );
 };
