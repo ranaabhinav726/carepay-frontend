@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import Header from '../Header/Header';
 import Loadinggif from '../../../utils/loader/loadergif';
 import routes from '../../../layout/Routes';
+import { getLogoApi } from './actioncreator';
 
 // let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
 
@@ -16,11 +17,16 @@ const Congrats = () => {
     const navigate = useNavigate()
     const [amount,setAmount]=useState(30)
     const [loaderState,setloaderState]=useState(30)
+    const [userData,setUserData]=useState('')
 
 
 
     let ref = useRef(0);
     useEffect(() => {
+        getLogoApi(localStorage.getItem('userId'),callback=>{
+            console.log(callback)
+            setUserData(callback.data)
+        })
      
     }, [])
     const submit = () => {
@@ -46,7 +52,9 @@ const Congrats = () => {
                     <div style={{ width: "90%", color: "#149540", height: "max-content", padding: "10px 16px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "700", borderRadius: "4px", background: "#EBFEED" }}>
                         <BiRupee /> {amount}
                     </div>
-                    <p style={{ textAlign: 'center', marginTop: '10px' }}>from your bank</p>
+                    <p style={{ textAlign: 'center', marginTop: '40px' }}>from your bank</p>
+                    {userData!==''&&userData.bankLogo!==null?<img style={{}} src={userData.bankLogo}/>:""}
+                   
 
                     <button className='submit' style={{marginTop:'100px'}} onClick={() => submit()}>Proceed with your bank</button>
                     <button className='submit' style={{background:'#ECEBFF',color:'#504c9a',marginTop:'-2px'}} onClick={() => submit()}>Explore other offers</button>

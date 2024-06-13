@@ -40,7 +40,7 @@ const CheckoutComponent = () => {
     const messageFromChildWindowCallback = (message) => {
         console.log(message, 'message')
         let originUrl = message.origin + '/';
-        if (originUrl === BASE_URL) {
+        // if (originUrl === BASE_URL) {
             if (message != null) {
                 if (message.data !== undefined) {
                     const parsedMessage = JSON.parse(message.data);
@@ -67,7 +67,7 @@ const CheckoutComponent = () => {
                     }
                 }
             }
-        }
+        // }
     };
 
     useEffect(() => {
