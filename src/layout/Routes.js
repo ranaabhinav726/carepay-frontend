@@ -155,6 +155,8 @@ const routes = {
   INCRED_PREAPPROVED:'/patient/incredpreapproved',
   FLEX_WAIT_SCREEN:'/patient/flexwait',
   FLEX_APPROVAL_SCREEN:'/patient/flexApproval',
+  FLEX_APPROVAL_WAIT:'/patient/refresh',
+
 
 
   ///SCOUTS///

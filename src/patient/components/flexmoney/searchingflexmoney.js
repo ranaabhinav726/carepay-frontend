@@ -7,18 +7,21 @@ import routes from "../../../layout/Routes";
 const SearchFlex = () => {
     let userId = window.localStorage.getItem('userId')
     let navigate=useNavigate()
-    // useState(() => {
-    //     checkEligibilityForFMApi(userId, callback => {
+    useState(() => {
+        checkEligibilityForFMApi(userId, callback => {
            
-    //         if (callback.data === true) {
+            if (callback.data === 'true') {
 
-    //             navigate(routes.FLEX_APPROVAL_SCREEN)
+                navigate(routes.FLEX_APPROVAL_SCREEN)
 
-    //         } else {
-    //             navigate(routes.ARTH_PERSONAL_DETAILS)
-    //         }
-    //     })
-    // })
+            } else {
+                navigate(routes.ARTH_PERSONAL_DETAILS)
+            }
+        })
+        setTimeout(() => {
+            navigate(routes.FLEX_APPROVAL_SCREEN)
+        }, 5000);
+    })
     return (
         <main className="waitingForApproval">
             <>

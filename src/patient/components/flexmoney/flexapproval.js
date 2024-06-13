@@ -1,104 +1,63 @@
-// import '../../../patient/components/Income_Verification_Notification/Congratulation/congratulation.scss'
-// // import CongratsImg from '../../../assets/congrats.png'
-// import Confetti from '../../assets/GIFs/confetti.gif'
-// import { useNavigate } from 'react-router-dom';
-// import { BiRupee } from 'react-icons/bi';
-// import { useEffect, useRef, useState } from 'react';
+import '../../../patient/components/Income_Verification_Notification/Congratulation/congratulation.scss'
+// import CongratsImg from '../../../assets/congrats.png'
+import Confetti from '../../assets/GIFs/confetti.gif'
+import { useNavigate } from 'react-router-dom';
+import { BiRupee } from 'react-icons/bi';
+import { useEffect, useRef, useState } from 'react';
 
-// import Header from '../Header/Header';
-// import Loadinggif from '../../../utils/loader/loadergif';
+import Header from '../Header/Header';
+import Loadinggif from '../../../utils/loader/loadergif';
+import routes from '../../../layout/Routes';
 
-// // let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
-
-
-// const Congrats = () => {
-//     const navigate = useNavigate()
-//     const [amount,setAmount]=useState(30)
-//     const [loaderState,setloaderState]=useState(30)
+// let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
 
 
+const Congrats = () => {
+    const navigate = useNavigate()
+    const [amount,setAmount]=useState(30)
+    const [loaderState,setloaderState]=useState(30)
 
-//     let ref = useRef(0);
-//     useEffect(() => {
+
+
+    let ref = useRef(0);
+    useEffect(() => {
      
-//     }, [])
-//     const submit = () => {
+    }, [])
+    const submit = () => {
+        navigate(routes.FLEX_APPROVAL_WAIT)
      
         
-//     }
+    }
 
 
-
-//     return (
-//         <>
-//             <main className='congrats'>
-//                 <Header progressbarDisplay="none" />
-//                 {/* {loaderState ? <Loadinggif /> : ""} */}
-//                 <>
-//                     <div style={{ display: "flex", position: "relative", flexDirection: "row", alignItems: "baseline", justifyContent: "space-around", marginTop: "1rem" }}>
-//                         <img src={Confetti} style={{ transform: "scaleX(-1)", maxWidth: "25%" }} alt="" />
-//                         <p style={{ position: "absolute", fontSize: "24px", lineHeight: "26px", color: "#149540", fontWeight: "700", marginTop: "1rem" }}>Congratulations</p>
-//                         <img src={Confetti} style={{ maxWidth: "25%" }} alt="" />
-//                     </div>
-//                     <p className='subtitle'>Your credit application is <span style={{ color: "#149540", fontWeight: "700" }}>approved</span> for</p>
-//                     <div style={{ width: "90%", color: "#149540", height: "max-content", padding: "10px 16px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "700", borderRadius: "4px", background: "#EBFEED" }}>
-//                         <BiRupee /> {amount}
-//                     </div>
-//                     <p style={{ textAlign: 'center', marginTop: '10px' }}>from your bank</p>
-
-//                     <button className='submit' style={{marginTop:'100px'}} onClick={() => submit()}>Proceed with your bank</button>
-//                     <button className='submit' style={{background:'#ECEBFF',color:'#504c9a',marginTop:'-2px'}} onClick={() => submit()}>Explore other offers</button>
-
-//                 </>
-
-//             </main>
-//         </>
-//     )
-// }
-
-// export default Congrats
-
-///////////////////////////////////////////////////
-import React, { useEffect } from 'react';
-
-const CheckoutComponent = () => {
-    window.onICMerchantSDKReady = () => {
-        window.ICMerchantSDK.init({
-            merchantKey: '91838b89-1634-4d44-866e-722995f4c5f0',
-            onSDKInit: () => {
-                console.log('InstaCred SDK initialized');
-            }
-        });
-    };
-
-    const handleCheckout =  () => {
-     
-        window.ICMerchantSDK.startPayment({
-            orderToken: 'sslle7jK/mkYUhlc7lqrZUcue8hgwsvrlTuVpCORkHyXKyL3dOIfvNqwk0BcZeclkj4o5j5+KRYkghhgqE4NgFRM8xLADuo0/wS8MoeWKMUsyYBAC6maJLU+C8GpDdh4+I0uhoDIF0I4RV+iRT5Q6QUrGlDXmZKIrPa9Z/WUcfk=',
-            orderAmount: 50000,
-            targetElementId: 'instaCredWidget',
-            onTransactionComplete: (payload) => {
-                console.log(payload,'payloadpayload');
-            }
-        });
-    };
-    
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://iccdn.in/web-merchant-sdk-uat/v-1.0/static/instaCred-merchant-sdk.js';
-        document.body.appendChild(script);
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
 
     return (
-        <div>
-            <button onClick={handleCheckout}>Checkout with InstaCred</button>
-            <div id="instaCredWidget"></div>
-        </div>
-    );
-};
+        <>
+            <main className='congrats'>
+                <Header progressbarDisplay="none" />
+                {/* {loaderState ? <Loadinggif /> : ""} */}
+                <>
+                    <div style={{ display: "flex", position: "relative", flexDirection: "row", alignItems: "baseline", justifyContent: "space-around", marginTop: "1rem" }}>
+                        <img src={Confetti} style={{ transform: "scaleX(-1)", maxWidth: "25%" }} alt="" />
+                        <p style={{ position: "absolute", fontSize: "24px", lineHeight: "26px", color: "#149540", fontWeight: "700", marginTop: "1rem" }}>Congratulations</p>
+                        <img src={Confetti} style={{ maxWidth: "25%" }} alt="" />
+                    </div>
+                    <p className='subtitle'>Your credit application is <span style={{ color: "#149540", fontWeight: "700" }}>approved</span> for</p>
+                    <div style={{ width: "90%", color: "#149540", height: "max-content", padding: "10px 16px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "700", borderRadius: "4px", background: "#EBFEED" }}>
+                        <BiRupee /> {amount}
+                    </div>
+                    <p style={{ textAlign: 'center', marginTop: '10px' }}>from your bank</p>
 
-export default CheckoutComponent;
+                    <button className='submit' style={{marginTop:'100px'}} onClick={() => submit()}>Proceed with your bank</button>
+                    <button className='submit' style={{background:'#ECEBFF',color:'#504c9a',marginTop:'-2px'}} onClick={() => submit()}>Explore other offers</button>
+
+                </>
+
+            </main>
+        </>
+    )
+}
+
+export default Congrats
+
+///////////////////////////////////////////////////
