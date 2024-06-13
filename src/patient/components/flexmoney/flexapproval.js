@@ -74,8 +74,8 @@ const CheckoutComponent = () => {
     const handleCheckout =  () => {
      
         window.ICMerchantSDK.startPayment({
-            orderToken: 'zJyicQmTffUXPlcwfa0wYpUYKKxarEdHuGiBvC8fYx75U7VIog+mcseSAfV5+6xwjGfv0IzuvfbChZPniK2Le+fDU/qu1lUZKmvusuK4oHjg6kzXJLqU8r/tI2JuAUMI7bn4EiGwXpS9jHzvL4f1FQzru0zz/ahPWSJX7WuizM4=',
-            orderAmount: 1000,
+            orderToken: 'sslle7jK/mkYUhlc7lqrZUcue8hgwsvrlTuVpCORkHyXKyL3dOIfvNqwk0BcZeclkj4o5j5+KRYkghhgqE4NgFRM8xLADuo0/wS8MoeWKMUsyYBAC6maJLU+C8GpDdh4+I0uhoDIF0I4RV+iRT5Q6QUrGlDXmZKIrPa9Z/WUcfk=',
+            orderAmount: 50000,
             targetElementId: 'instaCredWidget',
             onTransactionComplete: (payload) => {
                 console.log(payload,'payloadpayload');
@@ -86,9 +86,8 @@ const CheckoutComponent = () => {
     useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
-        script.src = 'https://iccdn.in/web-merchant-sdk/v-1.0/static/instaCred-merchant-sdk.js';
+        script.src = 'https://iccdn.in/web-merchant-sdk-uat/v-1.0/static/instaCred-merchant-sdk.js';
         document.body.appendChild(script);
-
         return () => {
             document.body.removeChild(script);
         };
