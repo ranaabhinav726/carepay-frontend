@@ -51,11 +51,11 @@ const CheckoutComponent = () => {
 
         <main className='congrats'>
             <Header progressbarDisplay="none" />
-            <div id="instaCredWidget"></div> 
+             
             <img src={Loadinggif}/>
             <p className='text-center'>connecting with your bank...</p>
-            {/* <button onClick={handleCheckout}>Checkout with InstaCred</button>
-            <div id="instaCredWidget"></div> */}
+            <button onClick={handleCheckout}>Checkout with InstaCred</button>
+            <div id="instaCredWidget"></div>
             <button className='' style={{marginTop:'20px',padding:'15px',color:'#504c9a',background:'#ecebfd',border:'none',borderRadius:'5px',fontSize:'14px',fontWeight:'700'}}>Refresh</button>
             <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.-</p>
 
