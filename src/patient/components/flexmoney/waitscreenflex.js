@@ -38,21 +38,32 @@ const CheckoutComponent = () => {
     };
 
     const messageFromChildWindowCallback = (message) => {
-        console.log(message,'message')
+        console.log(message, 'message')
         let originUrl = message.origin + '/';
         if (originUrl === BASE_URL) {
-            var uperUrl = window.location.href;
-            var id = uperUrl.substring(uperUrl.lastIndexOf('/') + 1);
             if (message != null) {
-                let url = message.data.substr(1);
                 if (message.data !== undefined) {
-                    if (typeof message.data === 'string') {
-                        url = message.data.substr(1);
+                    const parsedMessage = JSON.parse(message.data);
+                    if (parsedMessage.actionName === "onTransactionComplete") {
+                        // Decode the Base64 payload
+                        const decodedPayload = atob(parsedMessage.payload);
+
+                        // Parse the JSON
+                        const transactionData = JSON.parse(decodedPayload);
+
+                        console.log(transactionData, 'transactionData');
+
+                        // You can handle the transaction data here, for example, update the state
+                        // or perform any other necessary actions
+                    } else if (typeof message.data === 'string') {
+                        const url = message.data.substr(1);
                         setPageStates((prevState) => ({
                             ...prevState,
-                           
+                            firstPopup: false,
+                            secondPopup: true,
+                            popupNextDisabled: false
                         }));
-                     
+                        setPdfUrl(url);
                     }
                 }
             }
