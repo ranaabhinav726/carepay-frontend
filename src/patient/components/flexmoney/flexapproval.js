@@ -9,31 +9,35 @@ import Header from '../Header/Header';
 import Loadinggif from '../../../utils/loader/loadergif';
 import routes from '../../../layout/Routes';
 import { getLogoApi } from './actioncreator';
+import ExploreOffer from './exporepopup';
 
 // let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
 
 
 const Congrats = () => {
     const navigate = useNavigate()
-    const [amount,setAmount]=useState(30)
-    const [loaderState,setloaderState]=useState(30)
-    const [userData,setUserData]=useState('')
+    const [amount, setAmount] = useState(30)
+    const [loaderState, setloaderState] = useState(30)
+    const [userData, setUserData] = useState('')
+    const [showPopOver, setShowPopOver] = useState('')
 
 
 
     let ref = useRef(0);
     useEffect(() => {
-        getLogoApi(localStorage.getItem('userId'),callback=>{
+        getLogoApi(localStorage.getItem('userId'), callback => {
             console.log(callback)
-            setUserData(callback.data)
-            setAmount(callback.data.orderAmount)
+            if (callback.message === 'success' && callback.data.data !== null) {
+                setUserData(callback.data)
+                setAmount(callback.data.orderAmount)
+            }
         })
-     
+
     }, [])
     const submit = () => {
         navigate(routes.FLEX_APPROVAL_WAIT)
-     
-        
+
+
     }
 
 
@@ -54,14 +58,19 @@ const Congrats = () => {
                         <BiRupee /> {amount}
                     </div>
                     <p style={{ textAlign: 'center', marginTop: '40px' }}>from your bank</p>
-                    {userData!==''&&userData.bankLogo!==null?<img style={{}} src={userData.bankLogo}/>:""}
-                   
+                    {userData !== '' && userData !== null && userData.bankLogo !== null && userData.bankLogo !== undefined ? <img src={userData.bankLogo} /> : ""}
 
-                    <button className='submit' style={{marginTop:'100px'}} onClick={() => submit()}>Proceed with your bank</button>
-                    <button className='submit' style={{background:'#ECEBFF',color:'#504c9a',marginTop:'-2px'}} onClick={() => submit()}>Explore other offers</button>
 
+                    <button className='submit' style={{ marginTop: '100px' }} onClick={() => submit()}>Proceed with your bank</button>
+                    <button className='submit' style={{ background: '#ECEBFF', color: '#504c9a', marginTop: '-2px' }} onClick={() => setShowPopOver('open')}>Explore other offers</button>
+                    <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.</p>
+                    <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>
+                        <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>
+                            Contact Support
+                        </button>
+                    </a>
                 </>
-
+                <ExploreOffer showPopOver={showPopOver} setShowPopOver={setShowPopOver} />
             </main>
         </>
     )
