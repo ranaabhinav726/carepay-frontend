@@ -22,6 +22,7 @@ export default function ArthSElfie() {
     const [panCard, setpanCard] = useState('')
     const [panCardType, setpanCardType] = useState('')
     const [loaderState, setloaderState] = useState(false)
+    const [refreshbuttonDisable,setrefreshbuttonDisable]=useState(false)
 
     let navigate = useNavigate()
 
@@ -58,6 +59,7 @@ export default function ArthSElfie() {
     function savefiles() {
         console.log(panCardType, 'panCardType')
         if (panCardType !== '') {
+            setrefreshbuttonDisable(true)
             setloaderState(true)
             let data = new FormData();
             data.append("uploadfile", panCard);
@@ -73,6 +75,8 @@ export default function ArthSElfie() {
                                 if (res.status === 200) {
                                     if (res.data.message === 'success') {
                                         // setUpload2(true)
+                                        setrefreshbuttonDisable(false)
+
                                         setloaderState(false)
 
                                         navigate(routes.ARTH_KYC_SUCCESS)
@@ -128,7 +132,7 @@ export default function ArthSElfie() {
                     <p className="fileTypeError">Only .pdf, .png, .jpg and .jpeg files are allowed</p>
                 </div>
                 <div className=''>
-                    <button className={panCard ? "carepay-button-purple" : 'carepay-button-purple-disable'} onClick={() => savefiles()}>Submit</button>
+                    <button disabled={refreshbuttonDisable} className={panCard ? "carepay-button-purple" : 'carepay-button-purple-disable'} onClick={() => savefiles()}>Submit</button>
                 </div>
             </>
                 : ""}

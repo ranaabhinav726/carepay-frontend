@@ -12,9 +12,11 @@ const WaitArhmate = () => {
     let userId = localStorage.getItem('userId')
     const [scoreState, setAScore] = useState(false)
     const [refreshState, setRefreshButton] = useState(true)
+    const [refreshbuttonDisable,setrefreshbuttonDisable]=useState(false)
 
     const refreshScreen = () => {
         if (scoreState === true) {
+            setrefreshbuttonDisable(true)
             axios.post(env.api_Url + "coLenderSelection?userId=" + userId)
                 .then((response) => {
                     console.log(response.data.message)
@@ -23,6 +25,8 @@ const WaitArhmate = () => {
                             .then((response) => {
                                 if (response.data.message === 'success') {
                                     setRefreshButton(false)
+                                    setrefreshbuttonDisable(false)
+
                                     axios.get(env.api_Url + "getLoanApi?userId=" + userId,)
                                         .then((response) => {
 
@@ -147,7 +151,7 @@ const WaitArhmate = () => {
                 <NoteText text="Generating credit agreement..." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
                 <NoteText text="This may take 5 to 10 minutes." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
 
-                {refreshState ? <button className="submit" style={{ margin: "2rem 0 12px 0" }} onClick={() => refreshScreen()}>Refresh status</button> : ""}
+                {refreshState ? <button disabled={refreshbuttonDisable} className="submit" style={{ margin: "2rem 0 12px 0" }} onClick={() => refreshScreen()}>Refresh status</button> : ""}
                 {refreshState === false ?
                     <button className="submit" style={{ margin: "2rem 0 12px 0" }} onClick={() => refresh2()}>Refresh Again</button>
                     : ""}

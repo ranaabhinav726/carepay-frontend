@@ -104,8 +104,8 @@ export default function ArthAutoRepayment() {
         // }
 
     }, []);
-    const getloanCalc=(loanId)=>{
-        getemiApi(loanId,callback=>{
+    const getloanCalc = (loanId) => {
+        getemiApi(loanId, callback => {
             console.log(callback)
         })
     }
@@ -175,7 +175,7 @@ export default function ArthAutoRepayment() {
             console.log(cashFreeData.data.loanId)
             if (emiAmount > 15000) {
                 setPaymentType('E_MANDATE')
-              
+
                 createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, 'E_MANDATE', vpa, callback => {
                     console.log(callback)
                     setScreenState('EMANDATE')
@@ -218,17 +218,25 @@ export default function ArthAutoRepayment() {
         getPaymentStatusApi(cashFreeData.data.loanId, paymentType, callback => {
             console.log(callback)
             if (callback.message === 'success') {
-                axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
                     .then((response) => {
-                        console.log(response)
+                        console.log(response);
                         if (response.data.message === 'success') {
+                            axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                                .then((response) => {
+                                    console.log(response)
+                                    if (response.data.message === 'success') {
 
+                                    }
+                                }).catch(error => {
+                                    console.log(error);
+                                });
+                            setScreenState('successScreen')
+                            redirect()
+                        } else {
+                            alert(response.data.message)
                         }
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                setScreenState('successScreen')
-                redirect()
+                    })
             } else {
                 { console.log(paymentType, 'jhgfdfgh') }
                 if (paymentType === 'UPI_QR') {
@@ -248,22 +256,30 @@ export default function ArthAutoRepayment() {
         getPaymentStatusApi(cashFreeData.data.loanId, 'E_MANDATE', callback => {
             console.log(callback)
             if (callback.message === 'success') {
-                axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
                     .then((response) => {
-                        console.log(response)
+                        console.log(response);
                         if (response.data.message === 'success') {
+                            axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                                .then((response) => {
+                                    console.log(response)
+                                    if (response.data.message === 'success') {
 
+                                    }
+                                }).catch(error => {
+                                    console.log(error);
+                                });
+                            lottie.loadAnimation({
+                                container: document.querySelector("#completeAnimation"),
+                                animationData: completeAnimation,
+                                renderer: "canvas"
+                            });
+                            setScreenState('successScreen')
+                            redirect()
+                        } else {
+                            alert(response.data.message)
                         }
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                lottie.loadAnimation({
-                    container: document.querySelector("#completeAnimation"),
-                    animationData: completeAnimation,
-                    renderer: "canvas"
-                });
-                setScreenState('successScreen')
-                redirect()
+                    })
             } else {
                 { console.log(paymentType, 'jhgfdfgh') }
                 if (paymentType === 'UPI_QR') {
