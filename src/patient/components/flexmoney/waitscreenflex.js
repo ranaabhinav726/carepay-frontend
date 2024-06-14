@@ -63,7 +63,7 @@ const CheckoutComponent = () => {
                         // window.location.reload()
                         navigate(routes.FLEX_APPROVAL_SCREEN)
                     }
-                    if (transactionData.orderStatus === "COMPLETED") {
+                    if (transactionData.orderStatus === "COMPLETE") {
                         navigate(routes.FIBE_CONGRATS_USER)
                     }
                     // You can handle the transaction data here, for example, update the state
