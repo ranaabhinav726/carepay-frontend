@@ -26,6 +26,7 @@ const Congrats = () => {
         getLogoApi(localStorage.getItem('userId'),callback=>{
             console.log(callback)
             setUserData(callback.data)
+            setAmount(callback.data.orderAmount)
         })
      
     }, [])

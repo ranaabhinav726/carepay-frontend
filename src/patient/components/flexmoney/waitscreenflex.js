@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Loadinggif from '../../../utils/loader/Loading 3.gif';
-import { createOrderApiFm } from './actioncreator';
+import { createOrderApiFm, webHookCallApiFlexMoney } from './actioncreator';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../../layout/Routes';
 
 const BASE_URL = 'https://your-base-url.com/'; // Replace with your actual base URL
 
 const CheckoutComponent = () => {
+    let navigate=useNavigate()
     const [orderTokenData, setOrderTokenData] = useState('');
     const [loaderState, setLoaderState] = useState(true);
     const [pageStates, setPageStates] = useState({
@@ -43,6 +46,9 @@ const CheckoutComponent = () => {
         // if (originUrl === BASE_URL) {
         if (message != null) {
             if (message.data !== undefined) {
+                webHookCallApiFlexMoney(message.data,callback=>{
+                    console.log(callback)
+                })
                 const parsedMessage = JSON.parse(message.data);
                 if (parsedMessage.actionName === "onTransactionComplete") {
                     // Decode the Base64 payload
@@ -52,10 +58,14 @@ const CheckoutComponent = () => {
                     const transactionData = JSON.parse(decodedPayload);
 
                     console.log(transactionData, 'transactionData');
-                    if (transactionData.orderStatus === "FAILED") {
-                        window.location.reload()
-                    }
 
+                    if (transactionData.orderStatus === "FAILED") {
+                        // window.location.reload()
+                        navigate(routes.FLEX_APPROVAL_SCREEN)
+                    }
+                    if (transactionData.orderStatus === "COMPLETED") {
+                        navigate(routes.FIBE_CONGRATS_USER)
+                    }
                     // You can handle the transaction data here, for example, update the state
                     // or perform any other necessary actions
                 } else if (typeof message.data === 'string') {

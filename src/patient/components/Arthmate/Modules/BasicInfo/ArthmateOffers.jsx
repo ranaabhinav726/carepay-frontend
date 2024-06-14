@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { env, showWrapper, hideWrapper } from '../../../../environment/environment';
 import routes from '../../../../../layout/Routes';
 
-const ArthmateOffers = () =>{
+const ArthmateOffers = () => {
 
     const navigate = useNavigate();
 
@@ -18,9 +18,9 @@ const ArthmateOffers = () =>{
     const [doctorId, setDoctorId] = useState('');
 
     const [selected, setSelected] = useState({
-        "cardName" : "card-1",
+        "cardName": "card-1",
         "productId": "",
-        "tenure"   : ""
+        "tenure": ""
     });
 
     const [offers, setOffers] = useState([]);
@@ -28,118 +28,118 @@ const ArthmateOffers = () =>{
     const [renderAllProducts, setRenderAllProducts] = useState(false);
 
     const [apiError, setApiError] = useState(false);
-    let ref = useRef(0);   
+    let ref = useRef(0);
 
     let userId = localStorage.getItem('userId');
 
     // let errorMsg = "An error has occured, please try again.";
     const [errorMsg, setErrorMsg] = useState("An error has occured, please try again.")
 
-    useEffect(()=>{
+    useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
         axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
-        .then(response =>{
-            if(response.data.message === "success"){
-                let data = response.data.data;
-                if(!! data){
-                    setLoanAmount(parseInt(data.loanAmount));
-                    setLoanPurpose(data.loanReason);
-                    // setDoctorName(data.doctorName);
-                    setDoctorId(data.doctorId);
-                }
-            }
-        }).catch(error =>{
-            console.log(error);
-        })
-    }, [])
-
-    useEffect(()=>{
-        if(!! doctorId){
-            // axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
-            axios.get(env.api_Url + "getOffersAssigned" + "?doctorId=" + doctorId)
-            .then(response =>{
-                console.log(response)
-                if(response.data.message === "success"){
-                    if(response?.data?.data === "No Offers Found"){
-                        setOffers([]);
-                    }else{
-                        let offers = response?.data?.data;
-                        let sortedOffers = offers.sort(function(a, b) {
-                                                return a.totalEmi - b.totalEmi;
-                                            });
-                        setOffers(sortedOffers)
+            .then(response => {
+                if (response.data.message === "success") {
+                    let data = response.data.data;
+                    if (!!data) {
+                        setLoanAmount(parseInt(data.loanAmount));
+                        setLoanPurpose(data.loanReason);
+                        // setDoctorName(data.doctorName);
+                        setDoctorId(data.doctorId);
                     }
                 }
-            }).catch(error =>{
+            }).catch(error => {
                 console.log(error);
             })
+    }, [])
+
+    useEffect(() => {
+        if (!!doctorId) {
+            // axios.get(env.api_Url + "getCreditFairOffers" + "?doctorId=" + doctorId)
+            axios.get(env.api_Url + "getOffersAssigned" + "?doctorId=" + doctorId)
+                .then(response => {
+                    console.log(response)
+                    if (response.data.message === "success") {
+                        if (response?.data?.data === "No Offers Found") {
+                            setOffers([]);
+                        } else {
+                            let offers = response?.data?.data;
+                            let sortedOffers = offers.sort(function (a, b) {
+                                return a.totalEmi - b.totalEmi;
+                            });
+                            setOffers(sortedOffers)
+                        }
+                    }
+                }).catch(error => {
+                    console.log(error);
+                })
         }
     }, [doctorId])
- 
+
 
     ////// To set default productId and tenure to first first offer, 
     ////// just in case user proceeds with the first selected offer
 
-    useEffect(()=>{
-        if(! offers[0]) return;
+    useEffect(() => {
+        if (!offers[0]) return;
         setSelected({
-            "cardName" : "card-1",
+            "cardName": "card-1",
             "productId": offers[0].productId,
-            "tenure"   : offers[0].totalEmi
+            "tenure": offers[0].totalEmi
         })
         // console.log(offers[0].productId)
     }, [offers])
 
     let minCount = Math.min(offers?.length, 3);
 
-    useEffect(()=>{
+    useEffect(() => {
         let tempOfferCards = [];
 
-        if(renderAllProducts === false){
-            for(let idx = 0; idx<minCount; idx++){
+        if (renderAllProducts === false) {
+            for (let idx = 0; idx < minCount; idx++) {
                 tempOfferCards.push(
-                    <OfferCard 
-                        cardName={`card-${idx+1}`} 
-                        offerDetails={offers[idx]} 
-                        loanAmount={loanAmt} 
-                        selected={selected} 
-                        setSelected={setSelected} 
-                        key={idx} 
+                    <OfferCard
+                        cardName={`card-${idx + 1}`}
+                        offerDetails={offers[idx]}
+                        loanAmount={loanAmt}
+                        selected={selected}
+                        setSelected={setSelected}
+                        key={idx}
                     />
                 )
             }
-        }else{
-            tempOfferCards = offers.map((offer, idx) =>{
+        } else {
+            tempOfferCards = offers.map((offer, idx) => {
                 return (
-                        <OfferCard 
-                            cardName={`card-${idx+1}`} 
-                            offerDetails={offer} 
-                            loanAmount={loanAmt} 
-                            selected={selected} 
-                            setSelected={setSelected} 
-                            key={idx} 
-                        />
-                        )
+                    <OfferCard
+                        cardName={`card-${idx + 1}`}
+                        offerDetails={offer}
+                        loanAmount={loanAmt}
+                        selected={selected}
+                        setSelected={setSelected}
+                        key={idx}
+                    />
+                )
             })
         }
         setOfferCards(tempOfferCards)
     }, [offers, selected, renderAllProducts])
 
-    function checkLoanAmountAndNavigate(){
-        if(loanAmt <= 300001){
-            navigate('/patient/BankDetails', {state : {"reVisitToUploadStatement" : true}})
-        }else{
+    function checkLoanAmountAndNavigate() {
+        if (loanAmt <= 300001) {
+            navigate('/patient/BankDetails', { state: { "reVisitToUploadStatement": true } })
+        } else {
             navigate('/patient/WaitingForApproval')
         }
     }
 
-    async function submitLoanData(){
+    async function submitLoanData() {
         let creditFairProductId;
         await axios
             .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId)
-            .then(async(res)=>{
+            .then(async (res) => {
                 creditFairProductId = await res.data.data;
-                if(creditFairProductId === "Product Not configured"){
+                if (creditFairProductId === "Product Not configured") {
                     creditFairProductId = 11111;
                 }
                 console.log(creditFairProductId)
@@ -152,10 +152,10 @@ const ArthmateOffers = () =>{
             "loanReason": loanPurpose,
             "loanEMI": selected.tenure,
             "productId": creditFairProductId, // 5 digit
-            "internalProductId" : selected.productId // 32chars
+            "internalProductId": selected.productId // 32chars
         }
 
-        if(!(submitObj.loanEMI && submitObj.productId)){
+        if (!(submitObj.loanEMI && submitObj.productId)) {
             setErrorMsg("Please select a offer.");
             apiErrorHandler();
             return;
@@ -165,14 +165,14 @@ const ArthmateOffers = () =>{
 
         await axios
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
-            .then(async(response) => {
-                console.log(response,'response')
+            .then(async (response) => {
+                console.log(response, 'response')
 
-                if(response.data.message === "success"){
+                if (response.data.message === "success") {
                     // navigate("/patient/ArthIncomeVerification")
                     navigate(routes.PLEASE_WAIT)
 
-                }else{
+                } else {
                     apiErrorHandler();
                 }
             }).catch(error => {
@@ -217,25 +217,25 @@ const ArthmateOffers = () =>{
         hideWrapper(ref.current);
     }
 
-    function apiErrorHandler(){
+    function apiErrorHandler() {
         setApiError(true)
-        setTimeout(()=>{
+        setTimeout(() => {
             setApiError(false);
         }, 1500);
     }
 
-    
 
-    return(
+
+    return (
         <>
             <main className="arthmateOffers">
                 <Header progressbarDisplay='block' canGoBack={-1} />
 
                 <h3>Select your preferred tenure</h3>
 
-                <p style={{margin:"16px 0 10px 0", color:"rgba(0,0,0,0.6)"}}>Credit amount</p>
-                <p style={{margin:"0"}}>Rs. {loanAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}</p>
-                <p style={{color:"rgba(0,0,0,0.4)", marginTop:"10px"}}>Final credit amount will change according to the option you will select.</p>
+                <p style={{ margin: "16px 0 10px 0", color: "rgba(0,0,0,0.6)" }}>Credit amount</p>
+                <p style={{ margin: "0" }}>Rs. {loanAmt.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</p>
+                <p style={{ color: "rgba(0,0,0,0.4)", marginTop: "10px" }}>Final credit amount will change according to the option you will select.</p>
 
                 <p className="subheading">Select EMI options</p>
                 <div className="msgBox">
@@ -249,13 +249,13 @@ const ArthmateOffers = () =>{
                 <OfferCard />
                 <OfferCard /> */}
 
-                {!renderAllProducts && <button className="submit lite" onClick={()=>setRenderAllProducts(true)}>Show more options</button>}
+                {!renderAllProducts && <button className="submit lite" onClick={() => setRenderAllProducts(true)}>Show more options</button>}
 
-                <p className={apiError?"apiError": "apiError hide"}>{errorMsg}</p>
+                <p className={apiError ? "apiError" : "apiError hide"}>{errorMsg}</p>
 
-                <button className='submit' onClick={()=>submitLoanData()}>Proceed</button>
-                <p style={{textAlign:"center", margin:"1rem 0"}}>For more details and enquiries, reach out to us</p>
-                <a href="tel:+918069489655"><button className="submit" style={{color:"#514C9F", background:"#ECEBFF", marginTop:"0px"}}>Contact Support</button></a>
+                <button className='submit' onClick={() => submitLoanData()}>Proceed</button>
+                <p style={{ textAlign: "center", margin: "1rem 0" }}>For more details and enquiries, reach out to us</p>
+                <a href="tel:+918069489655"><button className="submit" style={{ color: "#514C9F", background: "#ECEBFF", marginTop: "0px" }}>Contact Support</button></a>
             </main>
         </>
     )
@@ -263,45 +263,45 @@ const ArthmateOffers = () =>{
 
 export default ArthmateOffers
 
-const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) =>{
+const OfferCard = ({ cardName, offerDetails, loanAmount, selected, setSelected }) => {
 
     let months = offerDetails?.totalEmi ?? "0";
-    let amount = parseInt(loanAmount/months);
+    let amount = parseInt(loanAmount / months);
     let pf = "0";
-    if(!! offerDetails?.processingFesIncludingGSTINR){
+    if (!!offerDetails?.processingFesIncludingGSTINR) {
         pf = "Rs. " + offerDetails?.processingFesIncludingGSTINR;
-    }else if(!! offerDetails?.processingFesIncludingGSTRate){
+    } else if (!!offerDetails?.processingFesIncludingGSTRate) {
         pf = offerDetails?.processingFesIncludingGSTRate + " %";
     }
     let interest = offerDetails?.interest ?? "0";
     let advEmi = offerDetails?.advanceEmi ?? "0";
 
-    function cardSelector(){
+    function cardSelector() {
         let obj = {
-            "cardName" : cardName,
+            "cardName": cardName,
             "productId": offerDetails?.productId,
-            "tenure"   : months
+            "tenure": months
         }
         console.log(obj)
         setSelected(obj)
     }
 
-    return(
-        <div className={selected.cardName === cardName ? "offerCard selected":"offerCard"} onClick={cardSelector}>
+    return (
+        <div className={selected.cardName === cardName ? "offerCard selected" : "offerCard"} onClick={cardSelector}>
             <div className="select">
                 <div className="selectCircle">
                     <div className="innerCirle selected"></div>
                 </div>
             </div>
             <div className='offerContentWrapper'>
-                <div className='offerContent' style={{borderBottom:"1px solid #ccc"}}>
+                <div className='offerContent' style={{ borderBottom: "1px solid #ccc" }}>
                     <div className="offerContentLeft">
                         <span className='offerCardSpan'>Tenure</span>
-                        <span className='offerCardSpan largeText'>{months} month{months>1 && "s"}</span>
+                        <span className='offerCardSpan largeText'>{months} month{months > 1 && "s"}</span>
                     </div>
                     <div className="offerContentRight">
                         <span className='offerCardSpan'>EMI amount</span>
-                        <span className='offerCardSpan largeText'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {amount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                        <span className='offerCardSpan largeText'><BiRupee style={{ margin: "0 -6px -3px -4px" }} /> {amount?.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
                     </div>
                 </div>
                 <div className="offerContent">
@@ -315,7 +315,7 @@ const OfferCard = ({cardName, offerDetails, loanAmount, selected, setSelected}) 
                         {/* <span className='offerCardSpan'><BiRupee style={{margin:"0 -6px -3px -4px"}} /> {loanAmount?.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span> */}
                         <span className='offerCardSpan'>{pf}</span>
                         <span className='offerCardSpan'>{interest} %</span>
-                        <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN',{maximumFractionDigits: 2})}</span>
+                        <span className='offerCardSpan'>{advEmi.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
                     </div>
                     {/* <BiRupee style={{margin:"0 -4px -2px -2px"}} />  */}
                 </div>

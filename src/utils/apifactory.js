@@ -31,7 +31,8 @@ const APIS = {
     GET_EMI_CALCULATION: BASE_URL + 'getAmLoanCalculations?loanId=',
     CHECK_ELIGIBILITY_FOR_FM: BASE_URL + 'checkEligibilityForFM?userId=',
     CREATE_ORDER_FOR_FM: BASE_URL + 'createOrderForFM?userId=',
-    GET_LOGO_API: BASE_URL + 'getFlexMoneyUserDetail?userId='
+    GET_LOGO_API: BASE_URL + 'getFlexMoneyUserDetail?userId=',
+    WEB_HOOK_CALL:BASE_URL+'flexMoneyTransactionWebhook'
 
 
 
