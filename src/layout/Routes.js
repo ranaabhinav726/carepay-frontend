@@ -157,6 +157,7 @@ const routes = {
   FLEX_APPROVAL_SCREEN:'/patient/flexApproval',
   FLEX_APPROVAL_WAIT:'/patient/refresh',
   REDIRECT_AUTO_MANDATE:'/patient/nachmandatewait',
+  FLEX_USER_WAIT:'/patient/flexuserwait',
 
 
 

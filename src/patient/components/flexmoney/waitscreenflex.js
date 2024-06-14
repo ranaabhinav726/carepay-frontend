@@ -66,6 +66,9 @@ const CheckoutComponent = () => {
                     if (transactionData.orderStatus === "COMPLETE") {
                         navigate(routes.FIBE_CONGRATS_USER)
                     }
+                    if (transactionData.orderStatus === "INITIATED") {
+                        navigate(routes.FLEX_USER_WAIT)
+                    }
                     // You can handle the transaction data here, for example, update the state
                     // or perform any other necessary actions
                 } else if (typeof message.data === 'string') {

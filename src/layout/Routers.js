@@ -170,6 +170,9 @@ export const FLEX_WAIT_SCREEN = React.lazy(() => import('../patient/components/f
 export const FLEX_APPROVAL_SCREEN = React.lazy(() => import('../patient/components/flexmoney/flexapproval'));
 export const FLEX_APPROVAL_WAIT = React.lazy(() => import('../patient/components/flexmoney/waitscreenflex'));
 export const REDIRECT_AUTO_MANDATE = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/redirectAutorepayment'));
+export const FLEX_USER_WAIT = React.lazy(() => import('../patient/components/flexmoney/refreshflex'));
+
+
 
 
 

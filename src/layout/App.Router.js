@@ -165,6 +165,7 @@ function AppRouter() {
           <Route path={OurRoutes.FLEX_APPROVAL_SCREEN} element={<Routers.FLEX_APPROVAL_SCREEN />} />
           <Route path={OurRoutes.FLEX_APPROVAL_WAIT} element={<Routers.FLEX_APPROVAL_WAIT />} />
           <Route path={OurRoutes.REDIRECT_AUTO_MANDATE} element={<Routers.REDIRECT_AUTO_MANDATE />} />
+          <Route path={OurRoutes.FLEX_USER_WAIT} element={<Routers.FLEX_USER_WAIT />} />
 
           <Route path={OurRoutes.CONNECTING_WITH_LENDERS} element={<Routers.CONNECTING_WITH_LENDERS />} />
           <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />
