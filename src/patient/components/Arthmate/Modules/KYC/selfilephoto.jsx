@@ -69,6 +69,7 @@ export default function ArthSElfie() {
             axios.post(env.api_Url + "uploadpdf", data)
                 .then(res => {
                     if (res.status === 200) {
+                        console.log(res)
                         // navigate(routes.ARTH_KYC_SUCCESS)
                         axios.post(env.api_Url + "loanDocumentApi?userId=" + userId + '&documentName=' + 'selfie' + '&url=' + res.data)
                             .then(res => {

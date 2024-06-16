@@ -39,12 +39,24 @@ const RedirectAutoRepayment = () => {
 
     let navigate = useNavigate()
     useEffect(() => {
-        if (localStorage.getItem('userId') !== null && localStorage.getItem('userId') !== '') {
+        // if (localStorage.getItem('userId') !== null && localStorage.getItem('userId') !== '') {
 
-            createCashfreeSubscription(localStorage.getItem('userId'), callback => {
+        //     createCashfreeSubscription(localStorage.getItem('userId'), callback => {
+        //         console.log(callback)
+        //         setCashfreeData(callback)
+        //     })
+        // }
+        let url = window.location.href
+        if (url.includes('/patient/nachmandatewait/')) {
+            let userId = url.split('/patient/nachmandatewait/')
+            console.log(userId)
+            createCashfreeSubscription(userId[1], callback => {
                 console.log(callback)
                 setCashfreeData(callback)
             })
+
+        } else {
+            navigate(routes.DOCTOR_NOT_AVAILABLE)
         }
     }, [])
 
