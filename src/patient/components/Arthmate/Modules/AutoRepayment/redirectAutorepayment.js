@@ -51,7 +51,8 @@ const RedirectAutoRepayment = () => {
         if (url.includes('/patient/nachmandatewait/')) {
             let userId = url.split('/patient/nachmandatewait/')
             console.log(userId)
-            setUserId(userId)
+            setUserId(userId[1])
+            localStorage.setItem('userId', userId[1])
             createCashfreeSubscription(userId[1], callback => {
                 console.log(callback)
                 setCashfreeData(callback)
