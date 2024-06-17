@@ -113,21 +113,39 @@ export default function ArthAutoRepayment() {
         getPaymentStatusApi(loanId, 'UPI_QR', callback => {
             console.log(callback)
             if (callback.message === 'success') {
-                setScreenState('successScreen')
-                redirect()
+                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
+                    .then((response) => {
+                        console.log(response);
+                        if (response.data.message === 'success') {
+                            setScreenState('successScreen')
+                            redirect()
+                        }
+                    })
             } else {
                 getPaymentStatusApi(loanId, 'UPI_COLLECT', callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
-                        setScreenState('successScreen')
-                        redirect()
+                        axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
+                            .then((response) => {
+                                console.log(response);
+                                if (response.data.message === 'success') {
+                                    setScreenState('successScreen')
+                                    redirect()
+                                }
+                            })
 
                     } else {
                         getPaymentStatusApi(loanId, 'E_MANDATE', callback => {
                             console.log(callback)
                             if (callback.message === 'success') {
-                                setScreenState('successScreen')
-                                redirect()
+                                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
+                                    .then((response) => {
+                                        console.log(response);
+                                        if (response.data.message === 'success') {
+                                            setScreenState('successScreen')
+                                            redirect()
+                                        }
+                                    })
 
                             }
                         })
