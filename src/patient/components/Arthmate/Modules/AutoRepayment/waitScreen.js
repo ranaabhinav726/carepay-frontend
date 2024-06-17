@@ -12,7 +12,7 @@ const WaitArhmate = () => {
     let userId = localStorage.getItem('userId')
     const [scoreState, setAScore] = useState(false)
     const [refreshState, setRefreshButton] = useState(true)
-    const [refreshbuttonDisable,setrefreshbuttonDisable]=useState(false)
+    const [refreshbuttonDisable, setrefreshbuttonDisable] = useState(false)
 
     const refreshScreen = () => {
         if (scoreState === true) {
@@ -31,25 +31,31 @@ const WaitArhmate = () => {
                                         .then((response) => {
 
                                             if (response.data.message === 'success' && response.data.data.status === 'open') {
-                                                axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'kyc_data_approved',)
+                                                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
                                                     .then((response) => {
-
+                                                        console.log(response);
                                                         if (response.data.message === 'success') {
-                                                            axios.post(env.api_Url + "repaymentScheduleApi?userId=" + userId)
+                                                            axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'kyc_data_approved',)
                                                                 .then((response) => {
 
                                                                     if (response.data.message === 'success') {
-                                                                        navigate(routes.ARTH_CREDIT_AGREEMENT)
+                                                                        axios.post(env.api_Url + "repaymentScheduleApi?userId=" + userId)
+                                                                            .then((response) => {
+
+                                                                                if (response.data.message === 'success') {
+                                                                                    navigate(routes.ARTH_CREDIT_AGREEMENT)
+
+                                                                                }
+                                                                            }).catch(error => {
+                                                                                console.log(error);
+                                                                            });
 
                                                                     }
                                                                 }).catch(error => {
                                                                     console.log(error);
                                                                 });
-
                                                         }
-                                                    }).catch(error => {
-                                                        console.log(error);
-                                                    });
+                                                    })
                                             }
 
                                         }).catch(error => {
@@ -72,25 +78,31 @@ const WaitArhmate = () => {
             .then((response) => {
 
                 if (response.data.message === 'success' && response.data.data.status === 'open') {
-                    axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'kyc_data_approved',)
+                    axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
                         .then((response) => {
-
+                            console.log(response);
                             if (response.data.message === 'success') {
-                                axios.post(env.api_Url + "repaymentScheduleApi?userId=" + userId)
+                                axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'kyc_data_approved',)
                                     .then((response) => {
 
                                         if (response.data.message === 'success') {
-                                            navigate(routes.ARTH_CREDIT_AGREEMENT)
+                                            axios.post(env.api_Url + "repaymentScheduleApi?userId=" + userId)
+                                                .then((response) => {
+
+                                                    if (response.data.message === 'success') {
+                                                        navigate(routes.ARTH_CREDIT_AGREEMENT)
+
+                                                    }
+                                                }).catch(error => {
+                                                    console.log(error);
+                                                });
 
                                         }
                                     }).catch(error => {
                                         console.log(error);
                                     });
-
                             }
-                        }).catch(error => {
-                            console.log(error);
-                        });
+                        })
                 }
                 if (response.data.message === 'success' && response.data.data.status === 'kyc_data_approved') {
                     axios.post(env.api_Url + "repaymentScheduleApi?userId=" + userId)
