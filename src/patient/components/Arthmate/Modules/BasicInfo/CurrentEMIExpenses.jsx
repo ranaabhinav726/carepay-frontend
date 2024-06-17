@@ -34,7 +34,7 @@ export default function ArthCurrentEMIExpenses() {
 
         saveMonthlyExpensesApi(data, res => {
             if (res.data.status === 200) {
-              
+
                 // navigate("/patient/ArthmateOffers")
                 // if (window.localStorage.getItem('flowRedirect') === 'CF' && window.localStorage.getItem('flowRedirect') !== null) {
                 //     navigate(routes.CREDIT_FAIR_OFFERS)
@@ -46,14 +46,14 @@ export default function ArthCurrentEMIExpenses() {
                 axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
                     .then(response => {
                         if (response.data.status === 200) {
-                            if(response.data.message==='success'){
-                            console.log(response.data.data)
-                            let data = response.data.data;
-                            if (!!data) {
-                                window.localStorage.setItem('flowRedirect', data)
-                                navigate(routes.CONNECTING_WITH_LENDERS)
+                            if (response.data.message === 'success') {
+                                console.log(response.data.data)
+                                let data = response.data.data;
+                                if (!!data) {
+                                    window.localStorage.setItem('flowRedirect', data)
+                                    navigate(routes.CONNECTING_WITH_LENDERS)
+                                }
                             }
-                        }
                         }
                     }).catch(() => {
                         console.log("Error fetching data");
@@ -80,7 +80,7 @@ export default function ArthCurrentEMIExpenses() {
 
 
             }
-        
+
         })
     }
 
@@ -108,47 +108,51 @@ export default function ArthCurrentEMIExpenses() {
                 // }
                 // if (window.localStorage.getItem('flowRedirect') === 'AM' ) {
                 // axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
-                axios.post(env.api_Url + "leadAPI?userId=" + userId)
+                axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=AM')
+                    .then((response) => {
+                        if (response.data.message === "success") {
+                            axios.post(env.api_Url + "leadAPI?userId=" + userId)
 
-                    .then(response => {
-                        if (response.data.status === 200) {
-                            console.log(response.data.data)
+                                .then(response => {
+                                    if (response.data.status === 200) {
+                                        console.log(response.data.data)
 
-                            let data = response.data.data;
-                            if (!!data) {
-                                window.localStorage.setItem('flowRedirect', data)
-                            }
-                            if (response.data.message === "success") {
-                                axios.post(env.api_Url + "requestAScore?userId=" + userId)
-                                    .then((response) => {
-                                        console.log(response)
-                                        if (response.data.message === "success") {
-                                            axios.post(env.api_Url + 'getAScore?userId=' + userId)
-                                                .then((response) => {
-            
-                                                    if (response.data.message === 'success') {
-                                                        axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
-                                                    } else {
-                                                   
-            
-            
-                                                    }
-            
-                                                })
+                                        let data = response.data.data;
+                                        if (!!data) {
+                                            window.localStorage.setItem('flowRedirect', data)
                                         }
-            
-                                    }).catch(error => {
-                                        console.log(error);
-                                    });
-                                navigate(routes.ARTHMATE_OFFERS)
-                            }
-                        }
-                    }).catch(() => {
-                        console.log("Error fetching data");
-                    })
+                                        if (response.data.message === "success") {
+                                            axios.post(env.api_Url + "requestAScore?userId=" + userId)
+                                                .then((response) => {
+                                                    console.log(response)
+                                                    if (response.data.message === "success") {
+                                                        axios.post(env.api_Url + 'getAScore?userId=' + userId)
+                                                            .then((response) => {
+
+                                                                if (response.data.message === 'success') {
+                                                                    axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
+                                                                } else {
 
 
-               
+
+                                                                }
+
+                                                            })
+                                                    }
+
+                                                }).catch(error => {
+                                                    console.log(error);
+                                                });
+                                            navigate(routes.ARTHMATE_OFFERS)
+                                        }
+                                    }
+                                }).catch(() => {
+                                    console.log("Error fetching data");
+                                })
+                            }})
+                        
+
+
 
 
 
