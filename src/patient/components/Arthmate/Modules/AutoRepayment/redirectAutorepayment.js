@@ -76,7 +76,8 @@ const RedirectAutoRepayment = () => {
                                 .then((response) => {
                                     console.log(response)
                                     if (response.data.message === 'success') {
-
+                                        setScreenState('successScreen')
+                                        redirect()
                                     }
                                 }).catch(error => {
                                     console.log(error);
@@ -86,8 +87,7 @@ const RedirectAutoRepayment = () => {
                                 animationData: completeAnimation,
                                 renderer: "canvas"
                             });
-                            setScreenState('successScreen')
-                            redirect()
+                          
                         }
                     })
             } else {

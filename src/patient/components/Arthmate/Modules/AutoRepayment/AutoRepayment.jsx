@@ -262,13 +262,13 @@ export default function ArthAutoRepayment() {
                                 .then((response) => {
                                     console.log(response)
                                     if (response.data.message === 'success') {
-
+                                        setScreenState('successScreen')
+                                        redirect()
                                     }
                                 }).catch(error => {
                                     console.log(error);
                                 });
-                            setScreenState('successScreen')
-                            redirect()
+                        
                         } else {
                             alert(response.data.message)
                         }
@@ -301,7 +301,8 @@ export default function ArthAutoRepayment() {
                                     console.log(response)
                                     if (response.data.message === 'success') {
 
-
+                                        setScreenState('successScreen')
+                                        redirect()
                                     }
                                 }).catch(error => {
                                     console.log(error);
@@ -311,8 +312,7 @@ export default function ArthAutoRepayment() {
                                 animationData: completeAnimation,
                                 renderer: "canvas"
                             });
-                            setScreenState('successScreen')
-                            redirect()
+                           
                         } else {
                             alert(response.data.message)
                         }
