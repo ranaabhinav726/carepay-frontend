@@ -117,8 +117,14 @@ export default function ArthAutoRepayment() {
                     .then((response) => {
                         console.log(response);
                         if (response.data.message === 'success') {
-                            setScreenState('successScreen')
-                            redirect()
+                            axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                                .then((response) => {
+                                    console.log(response)
+                                    if (response.data.message === 'success') {
+                                        setScreenState('successScreen')
+                                        redirect()
+                                    }
+                                })
                         }
                     })
             } else {
@@ -129,8 +135,14 @@ export default function ArthAutoRepayment() {
                             .then((response) => {
                                 console.log(response);
                                 if (response.data.message === 'success') {
-                                    setScreenState('successScreen')
-                                    redirect()
+                                    axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                                        .then((response) => {
+                                            console.log(response)
+                                            if (response.data.message === 'success') {
+                                                setScreenState('successScreen')
+                                                redirect()
+                                            }
+                                        })
                                 }
                             })
 
@@ -142,8 +154,14 @@ export default function ArthAutoRepayment() {
                                     .then((response) => {
                                         console.log(response);
                                         if (response.data.message === 'success') {
-                                            setScreenState('successScreen')
-                                            redirect()
+                                            axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                                                .then((response) => {
+                                                    console.log(response)
+                                                    if (response.data.message === 'success') {
+                                                        setScreenState('successScreen')
+                                                        redirect()
+                                                    }
+                                                })
                                         }
                                     })
 
@@ -282,6 +300,7 @@ export default function ArthAutoRepayment() {
                                 .then((response) => {
                                     console.log(response)
                                     if (response.data.message === 'success') {
+
 
                                     }
                                 }).catch(error => {
