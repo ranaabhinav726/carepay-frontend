@@ -14,20 +14,25 @@ const ConnectWithLenders = () => {
     useEffect(() => {
         let operatingsystem = detect()
         console.log(operatingsystem, 'operatingsystem')
-        axios.post(env.api_Url + "leadAPI?userId=" + userId)
+        axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=AM')
             .then((response) => {
                 if (response.data.message === "success") {
-                    axios.post(env.api_Url + "requestAScore?userId=" + userId)
+                    axios.post(env.api_Url + "leadAPI?userId=" + userId)
                         .then((response) => {
-                            console.log(response)
+                            if (response.data.message === "success") {
+                                axios.post(env.api_Url + "requestAScore?userId=" + userId)
+                                    .then((response) => {
+                                        console.log(response)
+                                    }).catch(error => {
+                                        console.log(error);
+                                    });
+
+                            }
                         }).catch(error => {
                             console.log(error);
                         });
-
                 }
-            }).catch(error => {
-                console.log(error);
-            });
+            })
         axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=FIBE')
             .then((response) => {
                 if (response.data.message === "success") {
