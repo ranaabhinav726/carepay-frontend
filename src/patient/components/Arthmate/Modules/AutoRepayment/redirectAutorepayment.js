@@ -68,22 +68,28 @@ const RedirectAutoRepayment = () => {
         getPaymentStatusApi(cashFreeData.data.loanId, 'E_MANDATE', callback => {
             console.log(callback)
             if (callback.message === 'success') {
-                axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'credit_approved',)
+                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
                     .then((response) => {
-                        console.log(response)
+                        console.log(response);
                         if (response.data.message === 'success') {
+                            axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'credit_approved',)
+                                .then((response) => {
+                                    console.log(response)
+                                    if (response.data.message === 'success') {
 
+                                    }
+                                }).catch(error => {
+                                    console.log(error);
+                                });
+                            lottie.loadAnimation({
+                                container: document.querySelector("#completeAnimation"),
+                                animationData: completeAnimation,
+                                renderer: "canvas"
+                            });
+                            setScreenState('successScreen')
+                            redirect()
                         }
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                lottie.loadAnimation({
-                    container: document.querySelector("#completeAnimation"),
-                    animationData: completeAnimation,
-                    renderer: "canvas"
-                });
-                setScreenState('successScreen')
-                redirect()
+                    })
             } else {
 
             }
