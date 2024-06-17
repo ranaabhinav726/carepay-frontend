@@ -34,6 +34,7 @@ import moment from "moment/moment";
 const RedirectAutoRepayment = () => {
     const [screenState, setScreenState] = useState("netbankingrefresh"); // landing, methodSelection, summary, upiId
     const [cashFreeData, setCashfreeData] = useState('');
+    const [userId, setUserId] = useState('');
 
 
 
@@ -50,6 +51,7 @@ const RedirectAutoRepayment = () => {
         if (url.includes('/patient/nachmandatewait/')) {
             let userId = url.split('/patient/nachmandatewait/')
             console.log(userId)
+            setUserId(userId)
             createCashfreeSubscription(userId[1], callback => {
                 console.log(callback)
                 setCashfreeData(callback)
@@ -65,7 +67,7 @@ const RedirectAutoRepayment = () => {
         getPaymentStatusApi(cashFreeData.data.loanId, 'E_MANDATE', callback => {
             console.log(callback)
             if (callback.message === 'success') {
-                axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'credit_approved',)
                     .then((response) => {
                         console.log(response)
                         if (response.data.message === 'success') {
