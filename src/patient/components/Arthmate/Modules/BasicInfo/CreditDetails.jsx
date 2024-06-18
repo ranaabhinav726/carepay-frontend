@@ -193,11 +193,25 @@ const ArthCreditDetails = () => {
         "Terminal Illness",
         "Encephalitis"
     ];
-    const notsercicable = ["Heart Attack",
+    const notsercicable = [
+        "Bacterial Meningitis",
+        "End Stage Renal Disease",
+        "End Stage Liver Disease",
+        "Sepsis",
+        "HIV",
+        "COMA",
+        "End Stage Lung and Liver Cancer",
+        "Blood Cancers in Adults",
+        "Third Degree Burns",
+        "Terminal Illness",
+        "Encephalitis"
+    ]
+    const servicableForSomeoneElse = [
+        "Heart Attack",
         "Stroke",
         "Kidney Failure",
         "Multiple Sclerosis",
-        "Parkinson Disease",
+        "Parkinson's Disease",
         "Alzheimer’s Disease",
         "Paralysis",
         "Muscular Dystrophy",
@@ -206,7 +220,7 @@ const ArthCreditDetails = () => {
         "Chronic Aplastic Anemia",
         "Organ Transplants (All Types)",
         "Hepatitis",
-        "Coronary Artery, By-Pass Surgery Disease",
+        "Coronary Artery Bypass Surgery Disease",
         "Head Trauma",
         "Angioplasty",
         "Bone Marrow Transplant (BMT)",
@@ -216,18 +230,8 @@ const ArthCreditDetails = () => {
         "Pediatric Cancers",
         "Neurosurgeries",
         "Road Traffic Accidents (RTA)",
-        "Brain Surgery",
-        "Bacterial Meningitis",
-        "End Stage Renal Disease",
-        "End Stage Liver Disease",
-        "Sepsis",
-        "HIV",
-        "COMA",
-        "End Stage Lung and Liver Cancer",
-        "Blood Cancers Adults",
-        "Third Degree Burns",
-        "Terminal Illness",
-        "Encephalitis"]
+        "Brain Surgery"
+    ]
 
 
     useEffect(() => {
@@ -358,12 +362,23 @@ const ArthCreditDetails = () => {
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
                     if (!number) return;
-                    if (!notsercicable.includes(treatment) && borrower !== 'someone else') {
-                        // navigate(routes.ARTH_PERSONAL_DETAILS);
-                        navigate(routes.FLEX_WAIT_SCREEN)
-                    } else {
-                        navigate(routes.NOT_SERVICEABLE);
+                    if (borrower === 'myself') {
+                        if (!notsercicable.includes(treatment)) {
+                            // navigate(routes.ARTH_PERSONAL_DETAILS);
+                            navigate(routes.FLEX_WAIT_SCREEN)
+                        } else {
+                            navigate(routes.NOT_SERVICEABLE);
+                        }
                     }
+                    if (borrower === 'someone else') {
+                        if (!servicableForSomeoneElse.includes(treatment)) {
+                            // navigate(routes.ARTH_PERSONAL_DETAILS);
+                            navigate(routes.FLEX_WAIT_SCREEN)
+                        } else {
+                            navigate(routes.NOT_SERVICEABLE);
+                        }
+                    }
+
 
                     // if(amount > 100000){
                     //     navigate('/patient/ArthPresciptionUpload');
