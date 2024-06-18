@@ -362,16 +362,16 @@ const ArthCreditDetails = () => {
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
                     if (!number) return;
-                    if (borrower === 'myself') {
-                        if (!notsercicable.includes(treatment)) {
-                            // navigate(routes.ARTH_PERSONAL_DETAILS);
-                            navigate(routes.FLEX_WAIT_SCREEN)
-                        } else {
-                            navigate(routes.NOT_SERVICEABLE);
-                        }
+                    // if (borrower === 'myself') {
+                    if (notsercicable.includes(treatment) && borrower === 'myself') {
+                        // navigate(routes.ARTH_PERSONAL_DETAILS);
+                        navigate(routes.FLEX_WAIT_SCREEN)
+                    } else {
+                        navigate(routes.NOT_SERVICEABLE);
                     }
+                    // }
                     if (borrower === 'someone else') {
-                        if (!servicableForSomeoneElse.includes(treatment)) {
+                        if (servicableForSomeoneElse.includes(treatment)) {
                             // navigate(routes.ARTH_PERSONAL_DETAILS);
                             navigate(routes.FLEX_WAIT_SCREEN)
                         } else {
