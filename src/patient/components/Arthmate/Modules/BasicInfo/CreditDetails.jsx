@@ -365,8 +365,8 @@ const ArthCreditDetails = () => {
                     console.log(borrower)
                     if (borrower === 'myself') {
                         if (!notsercicable.includes(treatment)&&!servicableForSomeoneElse.includes(treatment)) {
-                            // navigate(routes.ARTH_PERSONAL_DETAILS);
-                            navigate(routes.FLEX_WAIT_SCREEN)
+                            navigate(routes.ARTH_PERSONAL_DETAILS);
+                            // navigate(routes.FLEX_WAIT_SCREEN)
                         } else {
                             navigate(routes.NOT_SERVICEABLE);
                         }
@@ -375,7 +375,8 @@ const ArthCreditDetails = () => {
                         if (servicableForSomeoneElse.includes(treatment)) {
                             // navigate(routes.ARTH_PERSONAL_DETAILS);
                             if (!notsercicable.includes(treatment)) {
-                                navigate(routes.FLEX_WAIT_SCREEN)
+                                // navigate(routes.FLEX_WAIT_SCREEN)
+                                navigate(routes.ARTH_PERSONAL_DETAILS);
                             } else {
                                 navigate(routes.NOT_SERVICEABLE);
                             }
