@@ -358,7 +358,7 @@ const ArthCreditDetails = () => {
                     // await handleNavigation();
                     localStorage.setItem("fullName", fullName);
                     if (!number) return;
-                    if (!notsercicable.includes(treatment)) {
+                    if (!notsercicable.includes(treatment) && borrower !== 'someone else') {
                         // navigate(routes.ARTH_PERSONAL_DETAILS);
                         navigate(routes.FLEX_WAIT_SCREEN)
                     } else {

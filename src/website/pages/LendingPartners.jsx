@@ -32,7 +32,7 @@ export default function LendingPartners(){
                     policyLink={"https://www.i2ifunding.com/grievance-redressal-policy"} 
                     officerName={"Nishant Gupta"}
                     phoneNum={"+919717420307"}
-                    mailId={"investment@i2ifunding.com"}
+                    mailId={"nishant.gupta@i2ifunding.co.in"}
                     address={"i2iFunding, Ground Floor, A-217, Sector 69, Noida, 201301"}
                 />
                 <LendingPartnerCard 
