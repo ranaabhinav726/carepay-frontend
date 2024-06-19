@@ -48,6 +48,9 @@ const Processing = () => {
                     navigate(routes.REJECTED_SCREEN)
 
                 }
+                if (response.data.data === 'NOT_FIT') {
+                    navigate(routes.REJECTED_SCREEN)
+                }
 
 
             })
