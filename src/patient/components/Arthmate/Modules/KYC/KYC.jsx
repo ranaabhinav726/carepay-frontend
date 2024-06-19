@@ -61,7 +61,7 @@ export default function ArthKyc(){
                     htmlFor='kycConsent'
                     style={{userSelect:"none"}}
                 >
-                    I hereby give my consent to CarePay and Arthmatetech 
+                    I hereby give my consent to Arthmatetech 
                     Private limited to collect, store and verify my KYC details for 
                     processing my loan application.
                 </label>
