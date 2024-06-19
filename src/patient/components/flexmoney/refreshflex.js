@@ -20,7 +20,7 @@ const FlexRefresh = () => {
                     navigate(routes.FLEX_APPROVAL_SCREEN)
                 }
                 if (callback.data.orderStatus === "COMPLETE") {
-                    navigate(routes.FIBE_CONGRATS_USER)
+                    navigate(routes.FINAL_SCREEN_ARTH)
                 }
 
             }
