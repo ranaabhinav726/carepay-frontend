@@ -362,15 +362,29 @@ export default function ArthAutoRepayment() {
         let authmode = bankingType === 'debit' ? 'DEBIT_CARD' : bankingType === 'netBanking' ? 'NET_BANKING' : ''
         if (authmode !== '') {
             setPaymentType('E_MANDATE')
-            axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + cashFreeData.data.loanId + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
-                .then(response => {
-                    if (response.data.message === 'success') {
-                        window.open(response.data.data, '_blank');
-                        setScreenState('netbankingrefresh')
-                    }
-                })
+            setScreenState('summary')
+            // axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + cashFreeData.data.loanId + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
+            //     .then(response => {
+            //         if (response.data.message === 'success') {
+            //             window.open(response.data.data, '_blank');
+            //             setScreenState('netbankingrefresh')
+            //         }
+            //     })
 
         }
+    }
+    const cashfreeRedirect=()=>{
+        let authmode = bankingType === 'debit' ? 'DEBIT_CARD' : bankingType === 'netBanking' ? 'NET_BANKING' : ''
+
+        axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + cashFreeData.data.loanId + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
+        .then(response => {
+            if (response.data.message === 'success') {
+                window.open(response.data.data, '_blank');
+                setScreenState('netbankingrefresh')
+            }else{
+                setScreenState('physicalmandate')
+            }
+        })
     }
     const changeUpiId = () => {
         setScreenState('upiId')
@@ -505,7 +519,10 @@ export default function ArthAutoRepayment() {
                             I allow RNVP Technology Private Limited to debit the amount mentioned above from by bank account as per the payment instructions stated.
                         </label>
                     </div>
-                    <button className={'submit' + (consent ? "" : " disabled")} onClick={() => setScreenState(isUpiApp ? 'QrCode' : 'upiId')}>Proceed</button>
+                    {/* cashfreeRedirect */}
+                    <button className={'submit' + (consent ? "" : " disabled")} onClick={() => cashfreeRedirect()}>Proceed</button>
+
+                    {/* <button className={'submit' + (consent ? "" : " disabled")} onClick={() => setScreenState(isUpiApp ? 'QrCode' : 'upiId')}>Proceed</button> */}
                 </>
                 : ""}
             {screenState === "upiId" ?

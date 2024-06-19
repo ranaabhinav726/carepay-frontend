@@ -373,7 +373,7 @@ const ArthCreditDetails = () => {
                     }
                     if (borrower === 'someone else') {
                         if (servicableForSomeoneElse.includes(treatment)) {
-                            // navigate(routes.ARTH_PERSONAL_DETAILS);
+                          
                             if (!notsercicable.includes(treatment)) {
                                 // navigate(routes.FLEX_WAIT_SCREEN)
                                 navigate(routes.ARTH_PERSONAL_DETAILS);
