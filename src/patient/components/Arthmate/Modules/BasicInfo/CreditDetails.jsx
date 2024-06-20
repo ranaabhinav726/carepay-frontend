@@ -193,45 +193,92 @@ const ArthCreditDetails = () => {
         "Terminal Illness",
         "Encephalitis"
     ];
-    const notsercicable = [
-        "Bacterial Meningitis",
-        "End Stage Renal Disease",
-        "End Stage Liver Disease",
-        "Sepsis",
-        "HIV",
-        "COMA",
-        "End Stage Lung and Liver Cancer",
-        "Blood Cancers in Adults",
-        "Third Degree Burns",
-        "Terminal Illness",
-        "Encephalitis"
-    ]
-    const servicableForSomeoneElse = [
-        "Heart Attack",
-        "Stroke",
-        "Kidney Failure",
-        "Multiple Sclerosis",
-        "Parkinson's Disease",
-        "Alzheimer’s Disease",
-        "Paralysis",
-        "Muscular Dystrophy",
-        "Cardiomyopathy",
-        "Loss of Speech",
-        "Chronic Aplastic Anemia",
-        "Organ Transplants (All Types)",
-        "Hepatitis",
-        "Coronary Artery Bypass Surgery Disease",
-        "Head Trauma",
-        "Angioplasty",
-        "Bone Marrow Transplant (BMT)",
-        "Operable Cancers",
-        "Early-Stage Cancers",
-        "Heart Valve Surgery",
-        "Pediatric Cancers",
-        "Neurosurgeries",
-        "Road Traffic Accidents (RTA)",
-        "Brain Surgery"
-    ]
+    // const notsercicable = [
+    //     "Bacterial Meningitis",
+    //     "End Stage Renal Disease",
+    //     "End Stage Liver Disease",
+    //     "Sepsis",
+    //     "HIV",
+    //     "COMA",
+    //     "End Stage Lung and Liver Cancer",
+    //     "Blood Cancers in Adults",
+    //     "Third Degree Burns",
+    //     "Terminal Illness",
+    //     "Encephalitis"
+    // ]
+    // const servicableForSomeoneElse = [
+    //     "Heart Attack",
+    //     "Stroke",
+    //     "Kidney Failure",
+    //     "Multiple Sclerosis",
+    //     "Parkinson's Disease",
+    //     "Alzheimer’s Disease",
+    //     "Paralysis",
+    //     "Muscular Dystrophy",
+    //     "Cardiomyopathy",
+    //     "Loss of Speech",
+    //     "Chronic Aplastic Anemia",
+    //     "Organ Transplants (All Types)",
+    //     "Hepatitis",
+    //     "Coronary Artery Bypass Surgery Disease",
+    //     "Head Trauma",
+    //     "Angioplasty",
+    //     "Bone Marrow Transplant (BMT)",
+    //     "Operable Cancers",
+    //     "Early-Stage Cancers",
+    //     "Heart Valve Surgery",
+    //     "Pediatric Cancers",
+    //     "Neurosurgeries",
+    //     "Road Traffic Accidents (RTA)",
+    //     "Brain Surgery"
+    // ]
+    const servicableForMyself = [
+        "Infertility Treatment (Other than IVF)", "In vitro fertilization (IVF)", "MTPs", 
+        "Diagnostic Laparoscopy", "Minor Surgeries like Polyp, Fibroid etc.", "Therapeutic Curettage", 
+        "Small operations of Uterus, Cervix etc.", "Small operations of Fallopian tube, Vagina etc.", 
+        "Lithotripsy", "Hydrocele", "Piles / Fistula", "Prostate", "Varicose Veins", 
+        "Colonoscopy / Gastroscopy", "Appendectomy", "Cystoscopic removal of stones", 
+        "Ultrasound guided aspirations", "Hernia", "Hair transplant", "Stretch mark removal", 
+        "Facelift", "Rhinoplasty", "Liposuction", "Tummy tuck", "Breast Augmentation", 
+        "Breast Reduction and Breast Lift", "Gynecomastia (Male Breast Reduction)", 
+        "Vulvovaginal", "Buttock Augmentation", "Buttock Lift", "Blepharoplasty (Eyelid surgery)", 
+        "Rhinoplasty (Nose Surgery)", "Otoplasty (Ear Pinning)", "Brow lift", 
+        "Chin Augmentation", "Malar or Cheek Augmentation", "Chemical Peel", "Botulinum toxin or Botox", 
+        "Soft Tissue Fillers", "Stem Cell Enriched Fat Graft", "Fat Injection/Fat Grafting", 
+        "Cleft Lip and Cleft Palate", "Dental Implants / Crowns & Bridges", 
+        "Removable Partial Dentures (Imported)", "Removable Partial Denture (Flexible)", 
+        "Upper and Lower Complete Denture (Imported)", "E-Max Metal Free Crown / Veneer – Metal Free", 
+        "Ceramil / Azir (Zirconia Crowns) – Metal Free", "Zoom Advanced Whitening (3 Cycles)", 
+        "Ant.RCT/ Post.RCT or Re-RCT", "Ceramic Fillings/Inlay (Per Tooth)", "Dental Jewellery (Dental Crystal)", 
+        "Composite Bonding", "Componeers", "Night Guard", "Dental Diode Laser", "Diode Laser Frenectomy", 
+        "Laser Gum Contouring", "Laser Depigmentation", "Full Mouth Scaling & Polishing", "Deep Scaling (Curretage)", 
+        "Gum- Flap Surgery", "Bone Grafting", "Gum Graft", "Extraction", "Impaction / Wisdom Tooth Removal", 
+        "Biopsy", "Apicectomy", "Sinuslift", "Braces (Metallic) Full Mouth", "Metallic- Self Ligating (Damon)", 
+        "ORTHODONTI - BRACES TREATEMENT", "Clear Aligners Invisible Braces (Clear Path)", 
+        "Clear Aligners Invisible Braces (Invisalign)", "Clear Aligners Invisible Braces (Others)", 
+        "Braces (Ceramic) Full Mouth", "Invisalign", "Cataract operation.", "Removal of foreign body.", 
+        "Corneal transplant", "Tear duct operations.", "Ptosis", "Lasik Surgery", "Glaucoma", 
+        "Squint", "Vitreous surgery (Vitreoretinal surgery)", "Retinal Detachment", "Ossiculoplasty", 
+        "Functional Endoscopic Sinus Surgery", "Stapedectomy.", "Microlaryngeal surgery", 
+        "Foreign body removal.", "Tympanoplasty.", "Glossectomy", "Frenuloplasty", "Reconstruction of the tongue.", 
+        "Closed reduction of fractures", "Operations of tendons / Tendon sheath", "Arthroscopic Knee Aspiration", 
+        "Reduction of dislocations", "Dialysis", "Angiography"
+    ];
+    
+    const servicableForSomeoneElse = servicableForMyself.concat([
+        "Heart Attack", "Stroke", "Kidney Failure", "Multiple Sclerosis", 
+        "Parkinson Disease", "Alzheimer’s Disease", "Paralysis", "Muscular Dystrophy", 
+        "Cardiomyopathy", "Loss of Speech", "Chronic Aplastic Anemia", "Organ Transplants(All Types)", 
+        "Hepatitis", "Coronary Artery, By-Pass Surgery Disease", "Head Trauma", "Angioplasty", 
+        "BMT", "Operable Cancers", "Early-Stage Cancers", "Heart Valve Surgery", 
+        "Pediatric Cancers", "Neurosurgeries", "RTA", "Brain Surgery"
+    ]);
+    
+    const notServiceable = [
+        "Bacterial Meningitis", "End Stage Renal Disease", "End Stage Liver Disease", 
+        "Sepsis", "HIV", "COMA", "End Stage Lung and Liver Cancer", "Blood Cancers Adults", 
+        "Third Degree Burns", "Terminal Illness", "Encephalitis"
+    ];
 
 
     useEffect(() => {
@@ -367,18 +414,16 @@ const ArthCreditDetails = () => {
                     console.log(treatment)
                     if (treatment !== 'Other') {
                         if (borrower === 'myself') {
-                            if (!notsercicable.includes(treatment) && !servicableForSomeoneElse.includes(treatment)) {
+                            if (servicableForMyself.includes(treatment)) {
                                 navigate(routes.ARTH_PERSONAL_DETAILS);
-                                // navigate(routes.FLEX_WAIT_SCREEN)
+                            } else if (notServiceable.includes(treatment)) {
+                                navigate(routes.NOT_SERVICEABLE);
                             } else {
                                 navigate(routes.NOT_SERVICEABLE);
                             }
-                        }
-                        if (borrower === 'someone else') {
+                        } else if (borrower === 'someone else') {
                             if (servicableForSomeoneElse.includes(treatment)) {
-
-                                if (!notsercicable.includes(treatment)) {
-                                    // navigate(routes.FLEX_WAIT_SCREEN)
+                                if (!notServiceable.includes(treatment)) {
                                     navigate(routes.ARTH_PERSONAL_DETAILS);
                                 } else {
                                     navigate(routes.NOT_SERVICEABLE);
@@ -386,13 +431,38 @@ const ArthCreditDetails = () => {
                             } else {
                                 navigate(routes.NOT_SERVICEABLE);
                             }
-
                         }
-                    }
-                    if(treatment==='Other'){
-                        // navigate(routes.FLEX_WAIT_SCREEN)
+                    } else {
                         navigate(routes.ARTH_PERSONAL_DETAILS);
                     }
+                    // if (treatment !== 'Other') {
+                    //     if (borrower === 'myself') {
+                    //         if (!notsercicable.includes(treatment) && !servicableForSomeoneElse.includes(treatment)) {
+                    //             navigate(routes.ARTH_PERSONAL_DETAILS);
+                    //             // navigate(routes.FLEX_WAIT_SCREEN)
+                    //         } else {
+                    //             navigate(routes.NOT_SERVICEABLE);
+                    //         }
+                    //     }
+                    //     if (borrower === 'someone else') {
+                    //         if (servicableForSomeoneElse.includes(treatment)) {
+
+                    //             if (!notsercicable.includes(treatment)) {
+                    //                 // navigate(routes.FLEX_WAIT_SCREEN)
+                    //                 navigate(routes.ARTH_PERSONAL_DETAILS);
+                    //             } else {
+                    //                 navigate(routes.NOT_SERVICEABLE);
+                    //             }
+                    //         } else {
+                    //             navigate(routes.NOT_SERVICEABLE);
+                    //         }
+
+                    //     }
+                    // }
+                    // if(treatment==='Other'){
+                    //     // navigate(routes.FLEX_WAIT_SCREEN)
+                    //     navigate(routes.ARTH_PERSONAL_DETAILS);
+                    // }
 
 
 
