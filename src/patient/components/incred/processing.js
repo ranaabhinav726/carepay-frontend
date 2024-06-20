@@ -37,7 +37,19 @@ const Processing = () => {
                     // 
                 }
                 if (response.data.data === 'INCRED') {
-                    navigate(routes.APPROVAL_INCRED)
+                    // navigate(routes.APPROVAL_INCRED)
+                    axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
+                    .then( (response) => {
+                        console.log(response.data.data.status,'response.data.data')
+                        if (response.data.data.status === 'GREEN') {
+                            navigate(routes.APPROVAL_INCRED)
+                        }
+                        if (response.data.data.status === 'AMBER') {
+                            navigate(routes.INCRED_PREAPPROVED)
+
+                        }
+
+                    })
 
                 }
                 if (response.data.data === 'WAIT') {
