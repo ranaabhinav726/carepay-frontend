@@ -279,6 +279,7 @@ const ArthCreditDetails = () => {
                 if (elem) showErrorOnUI(elem);
                 return;
             }
+
         } else {
             if (!treatmentList.includes(treatment)) {
                 let elem = document.getElementById('treatment');
@@ -363,27 +364,34 @@ const ArthCreditDetails = () => {
                     localStorage.setItem("fullName", fullName);
                     if (!number) return;
                     console.log(borrower)
-                    if (borrower === 'myself') {
-                        if (!notsercicable.includes(treatment)&&!servicableForSomeoneElse.includes(treatment)) {
-                            // navigate(routes.ARTH_PERSONAL_DETAILS);
-                            navigate(routes.FLEX_WAIT_SCREEN)
-                        } else {
-                            navigate(routes.NOT_SERVICEABLE);
-                        }
-                    }
-                    if (borrower === 'someone else') {
-                        if (servicableForSomeoneElse.includes(treatment)) {
-                          
-                            if (!notsercicable.includes(treatment)) {
-                                navigate(routes.FLEX_WAIT_SCREEN)
-                                // navigate(routes.ARTH_PERSONAL_DETAILS);
+                    console.log(treatment)
+                    if (treatment !== 'Other') {
+                        if (borrower === 'myself') {
+                            if (!notsercicable.includes(treatment) && !servicableForSomeoneElse.includes(treatment)) {
+                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                // navigate(routes.FLEX_WAIT_SCREEN)
                             } else {
                                 navigate(routes.NOT_SERVICEABLE);
                             }
-                        } else {
-                            navigate(routes.NOT_SERVICEABLE);
                         }
+                        if (borrower === 'someone else') {
+                            if (servicableForSomeoneElse.includes(treatment)) {
 
+                                if (!notsercicable.includes(treatment)) {
+                                    // navigate(routes.FLEX_WAIT_SCREEN)
+                                    navigate(routes.ARTH_PERSONAL_DETAILS);
+                                } else {
+                                    navigate(routes.NOT_SERVICEABLE);
+                                }
+                            } else {
+                                navigate(routes.NOT_SERVICEABLE);
+                            }
+
+                        }
+                    }
+                    if(treatment==='Other'){
+                        // navigate(routes.FLEX_WAIT_SCREEN)
+                        navigate(routes.ARTH_PERSONAL_DETAILS);
                     }
 
 
