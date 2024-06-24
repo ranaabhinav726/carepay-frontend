@@ -36,6 +36,8 @@ const ArthCreditDetails = () => {
     const [number,] = useState(localStorage.getItem("phoneNumber"));
     const [patientPhoneNumber, setpatientPhoneNumber] = useState("");
     const [patientEmailId, setpatientEmailId] = useState("");
+    const [firstName, setfirstName] = useState("");
+    const [lastName, setlastName] = useState("");
 
     // const [doctorId, setDoctorId] = useState("");
     // const [doctorName, setDoctorName] = useState("");
@@ -362,8 +364,18 @@ const ArthCreditDetails = () => {
                 return;
             }
         }
-        if (!fullName) {
-            let elem = document.getElementById('fullName');
+        // if (!fullName) {
+        //     let elem = document.getElementById('fullName');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
+        if (!firstName) {
+            let elem = document.getElementById('firstName');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+        if (!lastName) {
+            let elem = document.getElementById('lastName');
             if (elem) showErrorOnUI(elem);
             return;
         }
@@ -408,7 +420,7 @@ const ArthCreditDetails = () => {
                 console.log(response)
                 if (response.data.message === "success") {
                     // await handleNavigation();
-                    localStorage.setItem("fullName", fullName);
+                    localStorage.setItem("fullName", firstName + ' ' + lastName);
                     if (!number) return;
                     console.log(borrower)
                     console.log(treatment)
@@ -612,18 +624,31 @@ const ArthCreditDetails = () => {
                 }
 
                 <div className="inputGroup" style={{ marginTop: "1.5rem" }}>
-                    <p>Full name (as per PAN)</p>
+                    <p>First name (as per PAN)</p>
                     <input
-                        id="fullName"
+                        id="firstName"
                         type="text"
-                        value={fullName}
-                        placeholder="Enter your name"
-                        // onChange={(e)=>setFullName(e.target.value)}  
-                        onChange={(e) => onlyCharacters(e.target.value, setFullName)}
+                        value={firstName}
+                        placeholder="Enter your first name"
+                        // onChange={(e)=>setfirstName(e.target.value)}  
+                        onChange={(e) => onlyCharacters(e.target.value, setfirstName)}
                         style={{ marginBottom: "10px" }}
                     />
-                    <span className="fieldError">Please enter your full name</span>
+                    <span className="fieldError">Please enter your first name</span>
                     <p style={{ fontSize: "14px" }}>If not sure, please check your PAN and then enter the name accordingly.</p>
+                </div>
+                <div className="inputGroup" style={{ marginTop: "1.5rem" }}>
+                    <p>Middle & Last name (as per PAN)</p>
+                    <input
+                        id="lastName"
+                        type="text"
+                        value={lastName}
+                        placeholder="Enter your middle & last name"
+                        // onChange={(e)=>setlastName(e.target.value)}  
+                        onChange={(e) => onlyCharacters(e.target.value, setlastName)}
+                        style={{ marginBottom: "10px" }}
+                    />
+                    <span className="fieldError">Please enter your middle & last name</span>
                 </div>
 
                 {/* <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
