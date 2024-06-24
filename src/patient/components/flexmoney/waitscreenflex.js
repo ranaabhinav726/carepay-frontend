@@ -64,7 +64,7 @@ const CheckoutComponent = () => {
                         navigate(routes.FLEX_APPROVAL_SCREEN)
                     }
                     if (transactionData.orderStatus === "COMPLETE") {
-                        navigate(routes.FIBE_CONGRATS_USER)
+                        navigate(routes.FINAL_SCREEN_ARTH)
                     }
                     if (transactionData.orderStatus === "INITIATED") {
                         navigate(routes.FLEX_USER_WAIT)
