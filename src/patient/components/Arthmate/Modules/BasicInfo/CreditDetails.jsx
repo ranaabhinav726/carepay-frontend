@@ -427,8 +427,8 @@ const ArthCreditDetails = () => {
                     if (treatment !== 'Other') {
                         if (borrower === 'myself') {
                             if (servicableForMyself.includes(treatment)) {
-                                // navigate(routes.ARTH_PERSONAL_DETAILS);
-                                navigate(routes.FLEX_WAIT_SCREEN)
+                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                // navigate(routes.FLEX_WAIT_SCREEN)
                             } else if (notServiceable.includes(treatment)) {
                                 navigate(routes.NOT_SERVICEABLE);
                             } else {
@@ -437,8 +437,8 @@ const ArthCreditDetails = () => {
                         } else if (borrower === 'someone else') {
                             if (servicableForSomeoneElse.includes(treatment)) {
                                 if (!notServiceable.includes(treatment)) {
-                                    // navigate(routes.ARTH_PERSONAL_DETAILS);
-                                    navigate(routes.FLEX_WAIT_SCREEN)
+                                    navigate(routes.ARTH_PERSONAL_DETAILS);
+                                    // navigate(routes.FLEX_WAIT_SCREEN)
                                 } else {
                                     navigate(routes.NOT_SERVICEABLE);
                                 }
@@ -447,8 +447,8 @@ const ArthCreditDetails = () => {
                             }
                         }
                     } else if (treatment === 'Other') {
-                        // navigate(routes.ARTH_PERSONAL_DETAILS);
-                        navigate(routes.FLEX_WAIT_SCREEN)
+                        navigate(routes.ARTH_PERSONAL_DETAILS);
+                        // navigate(routes.FLEX_WAIT_SCREEN)
 
                     }
                     // if (treatment !== 'Other') {
