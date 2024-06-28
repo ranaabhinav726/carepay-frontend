@@ -15,16 +15,16 @@ import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomPopOverModal from '../../utility/BottomPopOverModal';
 
-const FileUpload = () =>{
+const FileUpload = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
     let isReVisitToUploadStatement = location?.state?.reVisitToUploadStatement;
     console.log(isReVisitToUploadStatement)
-    
+
     // let token = localStorage.getItem('access_token');
     const fileConfig = {
-        headers: {"Content-Type": "multipart/form-data"}
+        headers: { "Content-Type": "multipart/form-data" }
     };
     // const config = {
     //     headers: { Authorization: `Bearer ${token}`}
@@ -32,7 +32,7 @@ const FileUpload = () =>{
 
     const [fileCount, setFileCount] = useState(0);
     const [files, setFiles] = useState([]);
-    
+
     const [prevFiles, setPrevFiles] = useState([]);
 
     const [password, setPassword] = useState('');
@@ -46,29 +46,29 @@ const FileUpload = () =>{
     let userId = localStorage.getItem("userId");
 
     let ref = useRef(0);
-    useEffect(()=>{
+    useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
 
-        async function makeApiCall(){
+        async function makeApiCall() {
             await axios.get(env.api_Url + "/getDocumentsByUserId?userId=" + userId)
-            .then(response =>{
-                if(response.data.status === 200){
-                    console.log(response)
-                    let uploadedFiles = response?.data?.data?.multipleBankStatements?.split(',');
-                    console.log(uploadedFiles)
-                    setPrevFiles(uploadedFiles);
-                }
-            })
+                .then(response => {
+                    if (response.data.status === 200) {
+                        console.log(response)
+                        let uploadedFiles = response?.data?.data?.multipleBankStatements?.split(',');
+                        console.log(uploadedFiles)
+                        setPrevFiles(uploadedFiles);
+                    }
+                })
         }
         makeApiCall();
-    },[])
+    }, [])
 
-    const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+    const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
     const today = new Date();
 
     let year = today.getFullYear();
-    year =  year % 100; // to remove century, "2023" will remain "23"
+    year = year % 100; // to remove century, "2023" will remain "23"
 
     let curr_month = today.getMonth();
     let last_month = curr_month - 1;
@@ -76,9 +76,9 @@ const FileUpload = () =>{
     let third_last_month = last_month - 2;
     third_last_month = fixMonth(third_last_month);
 
-    function fixMonth(month){
-        if(month < 0){
-            month = 12+month;
+    function fixMonth(month) {
+        if (month < 0) {
+            month = 12 + month;
         }
         return month;
     }
@@ -88,54 +88,56 @@ const FileUpload = () =>{
     let to_month = months[last_month];
 
     let fileList = [];
-    for(let i=0; i<files.length; i++){
+    for (let i = 0; i < files.length; i++) {
         fileList.push(<File fileName={files[i].name} files={files} setFiles={setFiles} fileCount={fileCount} setFileCount={setFileCount} key={i} />);
     }
 
     let fileIconList = [];
-    for(let i=0; i<fileCount; i++){
+    for (let i = 0; i < fileCount; i++) {
         fileIconList.push(<FileIcon key={i} />);
     }
 
     let prevFilesList = [];
-    for(let i=1; i<=prevFiles.length; i++){
-        prevFilesList.push(<PrevFile link={prevFiles[i-1]} count={i} key={i} />)
+    for (let i = 1; i <= prevFiles.length; i++) {
+        prevFilesList.push(<PrevFile link={prevFiles[i - 1]} count={i} key={i} />)
     }
 
-    function handleEyeClick(){
+    function handleEyeClick() {
         let inputBox = document.getElementById('password');
         let type = inputBox.type;
-        if(type == 'password'){
+        if (type == 'password') {
             inputBox.type = 'text';
-        }else{
+        } else {
             inputBox.type = 'password';
         }
-        setShowPass(!showPass) 
+        setShowPass(!showPass)
     }
 
-    function invokeFileHandler(){
+    function invokeFileHandler() {
         document.getElementById('filePicker')?.click();
     }
 
-    function passwordHandler(e){
+    function passwordHandler(e) {
         // let elem2 = document.getElementById('passError');
         // if(elem2) elem2.style.display = "none";
 
         setPassword(e.target.value);
     }
 
-    function uploadHandler(event){
+    function uploadHandler(event) {
         let file = event.target.files[0];
         // console.log(event.target.files)
-        if(file.type !== "application/pdf"){
-            document.getElementById('errorMsg').style.visibility = "visible";
-            setTimeout(()=>{
-                document.getElementById('errorMsg').style.visibility = "hidden";
-            }, 3500)
-            return;
+        if (!file) {
+            if (file.type !== "application/pdf") {
+                document.getElementById('errorMsg').style.visibility = "visible";
+                setTimeout(() => {
+                    document.getElementById('errorMsg').style.visibility = "hidden";
+                }, 3500)
+                return;
+            }
+            setFiles(files => [...files, file])
+            setFileCount(fileCount => fileCount + 1)
         }
-        setFiles(files => [...files, file])
-        setFileCount(fileCount => fileCount+1)
     }
 
     // let [objectState, setObjectState] = useState({});
@@ -144,38 +146,38 @@ const FileUpload = () =>{
     //     file_path: [...fileURLs],
     //     password: password
     // };
-    
 
-    async function checkAssignedNbfcAndNavigate(){
+
+    async function checkAssignedNbfcAndNavigate() {
         //call initateFlow -> customer , if success, below code else same screen...
         // axios
         //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=customer", {},)
         //     .then(response =>{
         //         console.log(response)
-                // if(response.data.message === "success"){
+        // if(response.data.message === "success"){
 
-        if(isReVisitToUploadStatement === true){
+        if (isReVisitToUploadStatement === true) {
             showWrapper(ref.current)
             await axios.post(env.api_Url + "uploadDocumentsDetailCF?userId=" + userId)
-            .then(res=>{
-                if(res.data.message === "success"){
+                .then(res => {
+                    if (res.data.message === "success") {
+                        hideWrapper(ref.current)
+                        navigate("/patient/WaitingForApproval");
+                    }
+                }).catch(err => {
                     hideWrapper(ref.current)
-                    navigate("/patient/WaitingForApproval");
-                }
-            }).catch(err=>{
-                hideWrapper(ref.current)
-                console.log(err)
-            })
-        }else{
+                    console.log(err)
+                })
+        } else {
             navigate("/patient/CreditFairOffers");
         }
-        
+
         // axios
         //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
         //     .then((response) => {
         //         if(response.data.message === "success"){
         //             let nbfc = response?.data?.data?.nbfcAssigned;
-                    
+
         //         }
         //     }).catch(error => {
         //         console.log(error);
@@ -188,33 +190,33 @@ const FileUpload = () =>{
         // })
     }
 
-    async function uploadFiles(){
+    async function uploadFiles() {
         // console.log(files[0])
 
-        if(prevFiles.length > 0 && files.length === 0){
+        if (prevFiles.length > 0 && files.length === 0) {
             // navigate('/patient/KycVerification');
             setShowPopOver(true);
             return;
         }
-        if(!password){
+        if (!password) {
             let elem = document.getElementById('password');
             let elem2 = document.getElementById('passError');
 
             elem.classList.add('errorAnimate');
             elem.classList.add('inputBoxError');
-            if(elem2) elem2.style.display = "block";
+            if (elem2) elem2.style.display = "block";
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 elem.classList.remove('errorAnimate');
                 elem.classList.remove('inputBoxError');
-            },500)
+            }, 500)
             // navigator.vibrate(
             //     [150, 30, 150, 30]
             // );
             return;
         }
 
-        if(! canSubmit){
+        if (!canSubmit) {
             return;
         }
         setCanSubmit(false);
@@ -222,29 +224,29 @@ const FileUpload = () =>{
 
 
         let data = new FormData()
-        for(let i=0; i<files.length; i++){
+        for (let i = 0; i < files.length; i++) {
             data.append("uploadfile", files[i]);
         }
         data.append("fileName", "multipleBankStatement");
         data.append("userId", userId);
         data.append("password", password);
 
-        await axios.post(env.api_Url + "uploadMultipleBankStatements", data, fileConfig )
+        await axios.post(env.api_Url + "uploadMultipleBankStatements", data, fileConfig)
             .then((response) => {
                 console.log(response)
-                if(response.data.message === "success"){
+                if (response.data.message === "success") {
                     // navigate('/patient/KycVerification');
                     setShowPopOver(true);
-                }else{
+                } else {
                     apiErrorHandler();
                 }
             }).catch(error => {
                 apiErrorHandler();
                 console.log(error);
             });
-            
-            setCanSubmit(true);
-            hideWrapper(ref.current)
+
+        setCanSubmit(true);
+        hideWrapper(ref.current)
         // let canUploadLink = true;
 
         // for(let i=0; i<files.length; i++){
@@ -305,107 +307,107 @@ const FileUpload = () =>{
     //         postCall();
     // }, [fileURLs])
 
-    function apiErrorHandler(){
+    function apiErrorHandler() {
         setApiError(true)
-        setTimeout(()=>{
+        setTimeout(() => {
             setApiError(false);
         }, 1500);
     }
-    return(
-    <>
-        <main className='fileUpload' style={{position:"relative"}}>
-        <Header progressbarDisplay="block" progress="91" canGoBack='/patient/IncomeVerification' />
-        <h3>Account statement upload</h3>
-            
-        <div className="msg">Upload Bank Statement for the last 3 months from <span className='date'>{from_month} {year}</span> to <span className='date'>{to_month} {year}</span></div>
-        <p id="errorMsg">Only PDFs are allowed to upload</p>
-
-        {fileCount === 0 && 
-            <div className="previouslyUploaded">
-                <p className='h2'>Previously uploaded files</p>
-                {prevFilesList}
-            </div>
-        }
-
-        {fileCount>0 &&
+    return (
         <>
-            <div className="fileList">
-                {fileList}
-            </div>
+            <main className='fileUpload' style={{ position: "relative" }}>
+                <Header progressbarDisplay="block" progress="91" canGoBack='/patient/IncomeVerification' />
+                <h3>Account statement upload</h3>
 
-            <div className="uploadedFiles">
-                <p>Uploaded PDFs ({fileCount})</p>
+                <div className="msg">Upload Bank Statement for the last 3 months from <span className='date'>{from_month} {year}</span> to <span className='date'>{to_month} {year}</span></div>
+                <p id="errorMsg">Only PDFs are allowed to upload</p>
 
-                <div className="fileIconList">
-                    {fileIconList}
-                    {fileCount<3 && 
-                        <div onClick={invokeFileHandler} className="uploadPDF">
-                            <FaPlus style={{fontSize:"20px", color:"#514C9F"}} />
-                            <p>Upload PDF</p>
-                        </div>
-                    }
-                </div>
-            </div>
-
-            <div className="pdfPassword">
-                <div className="passTitle">
-                    <p>PDF Password</p>
-                    <div className='pass-tooltip'>
-                        <AiFillInfoCircle style={{color:"#908dc1", fontSize:"20px"}} />
-                        <span className='tooltiptext'>This is the password to open your bank statement. Typically a combination of your DOB and phone number. You can find it in your bank's monthly statement email to you.</span>
+                {fileCount === 0 &&
+                    <div className="previouslyUploaded">
+                        <p className='h2'>Previously uploaded files</p>
+                        {prevFilesList}
                     </div>
-                </div>
-                <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank (If PDF does not have any password,please type ‘0’ in the box below and submit).</p>
-                <input 
-                    value={password ?? ""}
-                    onChange={(e)=> passwordHandler(e)}
-                    type="password" 
-                    name="" 
-                    placeholder='Enter password here'
-                    id="password"
-                />
-                <div onClick={()=>handleEyeClick()} className="eye">{showPass? <AiFillEyeInvisible/> : <AiFillEye/>}</div>
-                {/* <p id="passError">Please enter your file password, if files don't have a password then put "0" in the password box.</p> */}
-                
-                <span className='safe'>Your data is encrypted and will be safe with us!</span>
-            </div>
-            <p className={apiError?"apiError": "apiError hide"} style={{marginTop:"10px"}}>An error has occured, please try again.</p>
-        </>
-        }
-        {(fileCount>0 || prevFiles.length>0) &&
-            <button onClick={()=>uploadFiles()} className='submit'>Continue</button>
-        }
-        {fileCount == 0 &&
-            <button onClick={()=>invokeFileHandler()} className="uploadAccountStatement">
-                <FaArrowUp style={{ color:"#514C9F", fontSize:"20px", marginRight:"10px"}} />
-                <span>Upload Account Statement PDF</span>
-            </button>
-        }
+                }
 
-        <input type="file" name="" id="filePicker" accept='.pdf' onChange={(e)=>uploadHandler(e)} />
-        <BottomPopOverModal searchAnimation={animationData} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAssignedNbfcAndNavigate} />
-        </main>
-    </>
+                {fileCount > 0 &&
+                    <>
+                        <div className="fileList">
+                            {fileList}
+                        </div>
+
+                        <div className="uploadedFiles">
+                            <p>Uploaded PDFs ({fileCount})</p>
+
+                            <div className="fileIconList">
+                                {fileIconList}
+                                {fileCount < 3 &&
+                                    <div onClick={invokeFileHandler} className="uploadPDF">
+                                        <FaPlus style={{ fontSize: "20px", color: "#514C9F" }} />
+                                        <p>Upload PDF</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div className="pdfPassword">
+                            <div className="passTitle">
+                                <p>PDF Password</p>
+                                <div className='pass-tooltip'>
+                                    <AiFillInfoCircle style={{ color: "#908dc1", fontSize: "20px" }} />
+                                    <span className='tooltiptext'>This is the password to open your bank statement. Typically a combination of your DOB and phone number. You can find it in your bank's monthly statement email to you.</span>
+                                </div>
+                            </div>
+                            <p className="fileNote"><b>NOTE:</b> Kindly enter correct password in the format provided by your bank (If PDF does not have any password,please type ‘0’ in the box below and submit).</p>
+                            <input
+                                value={password ?? ""}
+                                onChange={(e) => passwordHandler(e)}
+                                type="password"
+                                name=""
+                                placeholder='Enter password here'
+                                id="password"
+                            />
+                            <div onClick={() => handleEyeClick()} className="eye">{showPass ? <AiFillEyeInvisible /> : <AiFillEye />}</div>
+                            <p id="passError">Please enter your file password, if files don't have a password then put "0" in the password box.</p>
+
+                            <span className='safe'>Your data is encrypted and will be safe with us!</span>
+                        </div>
+                        <p className={apiError ? "apiError" : "apiError hide"} style={{ marginTop: "10px" }}>An error has occured, please try again.</p>
+                    </>
+                }
+                {(fileCount > 0 || prevFiles.length > 0) &&
+                    <button onClick={() => uploadFiles()} className='submit'>Continue</button>
+                }
+                {fileCount == 0 &&
+                    <button onClick={() => invokeFileHandler()} className="uploadAccountStatement">
+                        <FaArrowUp style={{ color: "#514C9F", fontSize: "20px", marginRight: "10px" }} />
+                        <span>Upload Account Statement PDF</span>
+                    </button>
+                }
+
+                <input type="file" name="" id="filePicker" accept='.pdf' onChange={(e) => uploadHandler(e)} />
+                <BottomPopOverModal searchAnimation={animationData} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAssignedNbfcAndNavigate} />
+            </main>
+        </>
     )
 }
 
 export default FileUpload
 
-const File = ({fileName, files, setFiles, setFileCount}) =>{
+const File = ({ fileName, files, setFiles, setFileCount }) => {
 
     let name = fileName;
     name = name.split('.')[0];
-    if(name.length > 40){
-        name = name.slice(0,35).concat("...");
+    if (name.length > 40) {
+        name = name.slice(0, 35).concat("...");
     }
     name = name.concat(".pdf");
 
-    function removeFile(){
+    function removeFile() {
         // let newState = files.filter(file=> file.name !== fileName)
         let newState = [];
         let rem = false;
-        for(let i=0; i<files.length; i++){
-            if(!rem && files[i].name === fileName){
+        for (let i = 0; i < files.length; i++) {
+            if (!rem && files[i].name === fileName) {
                 rem = true;
                 continue;
             }
@@ -415,24 +417,24 @@ const File = ({fileName, files, setFiles, setFileCount}) =>{
         setFileCount(newState.length)
         // console.log(files, fileCount)
     }
-    
-    return(
+
+    return (
         <div className='file'>
-            <AiFillCheckCircle style={{fontSize:"24px", marginRight:"10px"}} />
+            <AiFillCheckCircle style={{ fontSize: "24px", marginRight: "10px" }} />
             <p>{name}</p>
-            <AiOutlineClose className='remove' onClick={()=>removeFile()}/>
+            <AiOutlineClose className='remove' onClick={() => removeFile()} />
         </div>
     )
 }
 
-const FileIcon = () =>{
-    return(
+const FileIcon = () => {
+    return (
         <img className='pdfIcon' src={PDFIcon} alt="pdfIcon" />
     )
 }
 
-const PrevFile = ({link, count}) =>{
-    return(
+const PrevFile = ({ link, count }) => {
+    return (
         <p className='prevFile'>File-{count} <a href={link} target='_blank' className="viewFile">Click to view</a></p>
     )
 }

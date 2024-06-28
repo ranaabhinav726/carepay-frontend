@@ -32,6 +32,7 @@ const BankDetails = () => {
     useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
         if (!!userId) {
+
             axios.get(env.api_Url + "userDetails/getAccountInfoByUserId?userId=" + userId)
                 .then(response => {
                     if (response.data.message === "success") {
@@ -125,6 +126,7 @@ const BankDetails = () => {
     const [loading, setLoading] = useState(false);
     const [accountType, setaccountType] = useState('Savings');
     const [nameAsBankAccount, setnameAsBankAccount] = useState('');
+    const [didgitapData, setDigitapData] = useState('');
 
     let popUpMsg = "This account will be used to set up auto repayment of EMIs. Are you sure you want to proceed with this bank account?"
     // useEffect(()=>{
@@ -278,20 +280,21 @@ const BankDetails = () => {
         hideWrapper(ref.current);
     }
 
-     function checkAndNavigate() {
+    function checkAndNavigate() {
         // navigate(routes.ARTH_CONGRATULATIONS)
         axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
-            .then( (response) => {
+            .then((response) => {
                 console.log(response.data.data)
                 if (response.data.data === 'AM') {
-                    navigate(routes.ARTH_CONGRATULATIONS)
+                    // navigate(routes.ARTH_CONGRATULATIONS)
+                    checkdigitapdataForAthMate()
                 }
                 if (response.data.data === 'CF') {
                     navigate(routes.CONGRATS)
                 }
                 if (response.data.data === 'FIBE') {
                     axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
-                        .then( (response) => {
+                        .then((response) => {
                             if (response.data.data === 'GREEN') {
                                 navigate(routes.FIBE_LOAN_APPROVED)
                             }
@@ -306,19 +309,19 @@ const BankDetails = () => {
                 }
                 if (response.data.data === 'INCRED') {
 
-                  
+
                     axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
-                    .then( (response) => {
-                        console.log(response.data.data.status,'response.data.data')
-                        if (response.data.data.status === 'GREEN') {
-                            navigate(routes.APPROVAL_INCRED)
-                        }
-                        if (response.data.data.status === 'AMBER') {
-                            navigate(routes.INCRED_PREAPPROVED)
+                        .then((response) => {
+                            console.log(response.data.data.status, 'response.data.data')
+                            if (response.data.data.status === 'GREEN') {
+                                navigate(routes.APPROVAL_INCRED)
+                            }
+                            if (response.data.data.status === 'AMBER') {
+                                navigate(routes.INCRED_PREAPPROVED)
 
-                        }
+                            }
 
-                    })
+                        })
 
                 }
                 if (response.data.data === 'WAIT') {
@@ -336,6 +339,26 @@ const BankDetails = () => {
 
             })
         setShowPopOver(false)
+    }
+    const checkdigitapdataForAthMate = () => {
+        axios.get(env.api_Url + "checkAMFlowGreenOrAmber?userId=" + userId)
+            .then(response => {
+                if (response.data.message === "success") {
+                    let data = response.data.data;
+                    if (!!data) {
+                        setDigitapData(data)
+                        if (data === 'GREEN') {
+                            navigate(routes.ARTH_CONGRATULATIONS)
+                        }
+                        if (data === 'AMBER') {
+                            navigate(routes.DIGITAP_BANK_STATEMENT)
+                        }
+
+                    }
+                }
+            }).catch(() => {
+                console.log("Error fetching data");
+            })
     }
 
     return (

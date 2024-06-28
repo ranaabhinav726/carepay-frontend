@@ -31,10 +31,10 @@ const WaitArhmate = () => {
                                         .then((response) => {
 
                                             if (response.data.message === 'success' && response.data.data.status === 'open') {
-                                                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
-                                                    .then((response) => {
-                                                        console.log(response);
-                                                        if (response.data.message === 'success') {
+                                                // axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
+                                                //     .then((response) => {
+                                                //         console.log(response);
+                                                //         if (response.data.message === 'success') {
                                                             axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'kyc_data_approved',)
                                                                 .then((response) => {
 
@@ -54,8 +54,8 @@ const WaitArhmate = () => {
                                                                 }).catch(error => {
                                                                     console.log(error);
                                                                 });
-                                                        }
-                                                    })
+                                                    //     }
+                                                    // })
                                             }
 
                                         }).catch(error => {
@@ -78,10 +78,10 @@ const WaitArhmate = () => {
             .then((response) => {
 
                 if (response.data.message === 'success' && response.data.data.status === 'open') {
-                    axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
-                        .then((response) => {
-                            console.log(response);
-                            if (response.data.message === 'success') {
+                    // axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
+                    //     .then((response) => {
+                    //         console.log(response);
+                    //         if (response.data.message === 'success') {
                                 axios.put(env.api_Url + "loanStatusApi?userId=" + userId + '&status=' + 'kyc_data_approved',)
                                     .then((response) => {
 
@@ -101,8 +101,8 @@ const WaitArhmate = () => {
                                     }).catch(error => {
                                         console.log(error);
                                     });
-                            }
-                        })
+                        //     }
+                        // })
                 }
                 if (response.data.message === 'success' && response.data.data.status === 'kyc_data_approved') {
                     axios.post(env.api_Url + "repaymentScheduleApi?userId=" + userId)

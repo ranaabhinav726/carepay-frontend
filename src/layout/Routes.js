@@ -158,6 +158,8 @@ const routes = {
   FLEX_APPROVAL_WAIT:'/patient/refresh',
   REDIRECT_AUTO_MANDATE:'/patient/nachmandatewait/:userId',
   FLEX_USER_WAIT:'/patient/flexuserwait',
+  DIGITAP_BANK_STATEMENT:'/patient/digibankstatement',
+  DIGITAP_AGREEGATOR:'/patient/agreegator',
 
 
 

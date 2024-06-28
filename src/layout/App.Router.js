@@ -171,6 +171,8 @@ function AppRouter() {
           <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />
           <Route path={OurRoutes.FINAL_SCREEN_ARTH} element={<Routers.FINAL_SCREEN_ARTH />} />
           <Route path={OurRoutes.WAIT_FOR_PROCESSING} element={<Routers.WAIT_FOR_PROCESSING />} />
+          <Route path={OurRoutes.DIGITAP_BANK_STATEMENT} element={<Routers.DIGITAP_BANK_STATEMENT />} />
+          <Route path={OurRoutes.DIGITAP_AGREEGATOR} element={<Routers.DIGITAP_AGREEGATOR />} />
 
           {/* scouts */}
           <Route path={OurRoutes.SCOUTS_MAIN} element={<Routers.SCOUTS_MAIN />} />
