@@ -53,6 +53,8 @@ export default function ArthCurrentEMIExpenses() {
                                     window.localStorage.setItem('flowRedirect', data)
                                     navigate(routes.CONNECTING_WITH_LENDERS)
                                 }
+                            }else{
+                                navigate(routes.REJECTED_SCREEN) 
                             }
                         }
                     }).catch(() => {
