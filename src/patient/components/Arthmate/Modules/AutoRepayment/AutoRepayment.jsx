@@ -459,7 +459,6 @@ export default function ArthAutoRepayment() {
     }
     return (
         <main className="personalDetails" style={{ position: "relative" }}>
-                  <button onClick={handleButtonClick}>Click for Emandate auth</button>
 
             {screenState === "landing" ?
                 <>
