@@ -380,14 +380,15 @@ export default function ArthAutoRepayment() {
             .then(response => {
                 if (response.data.message === 'success') {
                     // window.open(response.data.data, '_blank');
-                    sendRequest(response.data.data.data,response.data.data.link)
+                    // sendRequest(response.data.data.data, response.data.data.link)
+                    handleButtonClick(response.data.data.data, response.data.data.link)
                     setScreenState('netbankingrefresh')
                 } else {
                     setScreenState('physicalmandate')
                 }
             })
     }
-    const sendRequest = async (apidata,link) => {
+    const sendRequest = async (apidata, link) => {
         let data2 = JSON.parse(apidata)
         const requestData = {
             MandateReqDoc: data2.MandateReqDoc,
@@ -411,6 +412,45 @@ export default function ArthAutoRepayment() {
             console.error('Error making request', error);
         }
     };
+
+        // const redirectUrl = "https://enach.npci.org.in/onmags/sendRequest";
+
+        const handleButtonClick = (apidata,link) => {
+            let data2 = JSON.parse(apidata)
+            const requestData = {
+                MandateReqDoc: data2.MandateReqDoc,
+                AuthMode: data2.AuthMode,
+                BankID: data2.BankID,
+                CheckSumVal: data2.CheckSumVal,
+                MerchantID: data2.MerchantID,
+                SPID: data2.SPID
+    
+            };
+            try {
+                const data = JSON.parse(apidata);
+                redirectToUrl(link, data);
+            } catch (error) {
+                console.error('Invalid JSON format:', error);
+            }
+        };
+
+        const redirectToUrl = (url, data) => {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = url;
+
+            Object.keys(data).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = data[key];
+                form.appendChild(input);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+        };
+    
     const changeUpiId = () => {
         setScreenState('upiId')
         setsentPopup(false)
@@ -419,6 +459,8 @@ export default function ArthAutoRepayment() {
     }
     return (
         <main className="personalDetails" style={{ position: "relative" }}>
+                  <button onClick={handleButtonClick}>Click for Emandate auth</button>
+
             {screenState === "landing" ?
                 <>
                     <Header />
