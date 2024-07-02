@@ -268,7 +268,7 @@ export default function ArthAutoRepayment() {
                                 }).catch(error => {
                                     console.log(error);
                                 });
-                        
+
                         } else {
                             alert(response.data.message)
                         }
@@ -312,7 +312,7 @@ export default function ArthAutoRepayment() {
                                 animationData: completeAnimation,
                                 renderer: "canvas"
                             });
-                           
+
                         } else {
                             alert(response.data.message)
                         }
@@ -373,19 +373,44 @@ export default function ArthAutoRepayment() {
 
         }
     }
-    const cashfreeRedirect=()=>{
+    const cashfreeRedirect = () => {
         let authmode = bankingType === 'debit' ? 'DEBIT_CARD' : bankingType === 'netBanking' ? 'NET_BANKING' : ''
 
         axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + cashFreeData.data.loanId + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
-        .then(response => {
-            if (response.data.message === 'success') {
-                window.open(response.data.data, '_blank');
-                setScreenState('netbankingrefresh')
-            }else{
-                setScreenState('physicalmandate')
-            }
-        })
+            .then(response => {
+                if (response.data.message === 'success') {
+                    // window.open(response.data.data, '_blank');
+                    sendRequest(response.data.data.data,response.data.data.link)
+                    setScreenState('netbankingrefresh')
+                } else {
+                    setScreenState('physicalmandate')
+                }
+            })
     }
+    const sendRequest = async (apidata,link) => {
+        let data2 = JSON.parse(apidata)
+        const requestData = {
+            MandateReqDoc: data2.MandateReqDoc,
+            AuthMode: data2.AuthMode,
+            BankID: data2.BankID,
+            CheckSumVal: data2.CheckSumVal,
+            MerchantID: data2.MerchantID,
+            SPID: data2.SPID
+
+        };
+
+        try {
+            const response = await axios.post(link, requestData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error making request', error);
+        }
+    };
     const changeUpiId = () => {
         setScreenState('upiId')
         setsentPopup(false)
