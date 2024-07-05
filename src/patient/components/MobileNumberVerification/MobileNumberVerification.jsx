@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 // import { DataContext } from "../../App"
 
 import { env, showWrapper, hideWrapper } from "../../environment/environment"
+import routes from "../../../layout/Routes";
 // import { useData } from "../data";
 
 const MobileNumberVerification = () =>{
@@ -131,6 +132,9 @@ const MobileNumberVerification = () =>{
             setApiError(false);
         }, 1500);
     }
+    const navigateToterms=()=>{
+        navigate(routes.PATIENT_TERMS)
+    }
 
    return(
     <>
@@ -157,7 +161,7 @@ const MobileNumberVerification = () =>{
         </div>
         <div className="termsAndConditions">
             <input id="terms" type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
-            <label htmlFor="terms">I accept the <a href="" className="termsAndCond">Terms & Conditions</a></label>
+            <label htmlFor="terms">I accept the <a href={routes.PATIENT_TERMS} target="_blank" className="termsAndCond">Terms & Conditions</a></label>
         </div>
         <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
         <button onClick={()=> verifyAndNavigate()} className="submit">Send OTP</button>

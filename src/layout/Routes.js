@@ -160,6 +160,7 @@ const routes = {
   FLEX_USER_WAIT:'/patient/flexuserwait',
   DIGITAP_BANK_STATEMENT:'/patient/digibankstatement',
   DIGITAP_AGREEGATOR:'/patient/agreegator',
+  PATIENT_TERMS:'/patient/termspatient',
 
 
 
@@ -175,6 +176,7 @@ const routes = {
   SCOUTES_ADDRESS:'/scouts/address',
   SCOUTES_BANK:'/scouts/bank',
   SCOUTES_DOC:'/scouts/document',
+
 
 
 

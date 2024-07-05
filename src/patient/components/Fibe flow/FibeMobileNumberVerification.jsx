@@ -12,12 +12,14 @@ import { useNavigate } from "react-router-dom";
 import { env, hideWaitingModal, showErrorOnUI, showWaitingModal } from "../../environment/environment";
 import axios from "axios";
 import InputCheckBox2 from "./checkbox2";
+import routes from "../../../layout/Routes";
 
 export default function FibeMobileNumberVerification() {
 
     const [number, setNumber] = useState(localStorage.getItem('phoneNumber'));
     const [accepted, setAccepted] = useState(true);
     const [accepted2, setAccepted2] = useState(true);
+    const [termsAccept, setTerms] = useState(true);
 
     const navigate = useNavigate();
 
@@ -80,6 +82,20 @@ export default function FibeMobileNumberVerification() {
                 value={accepted2}
                 setValue={setAccepted2}
             />
+            <div className="termsAndConditions" style={{marginLeft:'10px'}}>
+                <input id="terms"    style={{
+                    minHeight: "16.5px",
+                    minWidth: "16.5px",
+                    accentColor: "#514C9F",
+                    borderRadius: "4px"
+                }} type="checkbox" checked={termsAccept} onChange={e => setTerms(e.target.checked)} />
+                <label  style={{
+                    fontSize: "14px",
+                    lineHeight: "18px",
+                    userSelect: "none",
+                    marginLeft:'10px'
+                }} htmlFor="terms">I accept the <a href={routes.PATIENT_TERMS} target="_blank" className="termsAndCond">Terms & Conditions.</a></label>
+            </div>
             <button style={{ marginTop: "32px" }} onClick={() => handleNavigation()} className="submit">Send OTP</button>
 
             <div style={{ display: "flex", placeContent: "center", alignSelf: "flex-end", marginTop: "64px" }}>
