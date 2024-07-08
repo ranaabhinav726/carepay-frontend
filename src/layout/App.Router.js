@@ -174,6 +174,7 @@ function AppRouter() {
           <Route path={OurRoutes.DIGITAP_BANK_STATEMENT} element={<Routers.DIGITAP_BANK_STATEMENT />} />
           <Route path={OurRoutes.DIGITAP_AGREEGATOR} element={<Routers.DIGITAP_AGREEGATOR />} />
           <Route path={OurRoutes.PATIENT_TERMS} element={<Routers.PATIENT_TERMS />} />
+          <Route path={OurRoutes.NOT_FOUND_SCREEN} element={<Routers.NOT_FOUND_SCREEN />} />
 
           {/* scouts */}
           <Route path={OurRoutes.SCOUTS_MAIN} element={<Routers.SCOUTS_MAIN />} />

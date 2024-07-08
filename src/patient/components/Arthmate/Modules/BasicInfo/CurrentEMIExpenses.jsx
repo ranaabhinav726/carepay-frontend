@@ -53,9 +53,18 @@ export default function ArthCurrentEMIExpenses() {
                                     window.localStorage.setItem('flowRedirect', data)
                                     navigate(routes.CONNECTING_WITH_LENDERS)
                                 }
-                            }else{
-                                navigate(routes.REJECTED_SCREEN) 
                             }
+                            if (response.data.message === 'Reject') {
+
+                                navigate(routes.REJECTED_SCREEN)
+                            }
+
+
+                            // if (response.data.message === 'NOT_FOUND') {
+
+                            //     navigate(routes.NOT_FOUND_SCREEN)
+                            // }
+
                         }
                     }).catch(() => {
                         console.log("Error fetching data");
@@ -151,8 +160,9 @@ export default function ArthCurrentEMIExpenses() {
                                 }).catch(() => {
                                     console.log("Error fetching data");
                                 })
-                            }})
-                        
+                        }
+                    })
+
 
 
 

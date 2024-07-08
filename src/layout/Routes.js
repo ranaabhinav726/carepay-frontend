@@ -161,7 +161,7 @@ const routes = {
   DIGITAP_BANK_STATEMENT:'/patient/digibankstatement',
   DIGITAP_AGREEGATOR:'/patient/agreegator',
   PATIENT_TERMS:'/patient/termspatient',
-
+  NOT_FOUND_SCREEN:'/patient/notfound',
 
 
   ///SCOUTS///
@@ -176,6 +176,7 @@ const routes = {
   SCOUTES_ADDRESS:'/scouts/address',
   SCOUTES_BANK:'/scouts/bank',
   SCOUTES_DOC:'/scouts/document',
+
 
 
 

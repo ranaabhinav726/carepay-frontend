@@ -24,6 +24,11 @@ const BankstatementShare = () => {
 
 
                     }
+                } else {
+                    if (response.data.message === "failure") {
+                        navigate(routes.FILE_UPLOAD)
+                    }
+
                 }
             }).catch(() => {
                 console.log("Error fetching data");
@@ -33,21 +38,21 @@ const BankstatementShare = () => {
     }, [])
     const submitData = (type, instituteId) => {
         if (accept) {
-            if (type !== 'statement') {
-                setErrorMsg('')
-                axios.post(env.api_Url + "generateURL" + '&userId=' + userId + '&type=' + type + '&instituteId=' + instituteId, {
+            // if (type !== 'statement') {
+            setErrorMsg('')
+            axios.post(env.api_Url + "generateURL" + '&userId=' + userId + '&type=' + type + '&instituteId=' + instituteId, {
 
+            })
+                .then((response) => {
+                    console.log(response)
+                    if (response.data.message === "success") {
+                    }
                 })
-                    .then((response) => {
-                        console.log(response)
-                        if (response.data.message === "success") {
-                        }
-                    })
-            } else {
-                if (type === 'statement') {
-                    navigate(routes.FILE_UPLOAD)
-                }
-            }
+            // } else {
+            //     if (type === 'statement') {
+            //         navigate(routes.FILE_UPLOAD)
+            //     }
+            // }
         } else {
             setErrorMsg('Please tick to proceed !')
         }
@@ -67,9 +72,9 @@ const BankstatementShare = () => {
                         <div style={{ width: '90%' }}><p style={{ fontSize: '12px' }}>I allow CareCoin Technologies Pvt Ltd and its partners to be<br /> my authorised representative for fetching my transactions <br />data from my bank.</p></div>
                     </div>
                     <p className="" style={{ color: 'red' }}>{errorMsg}</p>
-                    {digitTapData !== '' && digitTapData.Statement ?
+                    {digitTapData !== '' && digitTapData.AccountAggregator ?
                         <>
-                            <div onClick={() => submitData('accountAggregator', digitTapData.instituteIdForNetBanking)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px' }}>
+                            <div onClick={() => submitData('accountAggregator', digitTapData.instituteIdForAccountAggregator)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px' }}>
                                 <p style={{ color: '#504c9a' }}><b>Proceed with Account Aggregator</b></p>
                                 <p style={{ color: '#8e8d98' }}>Faster and secure financial data transfer via<br />
                                     RBI regulated entity</p>
