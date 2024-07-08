@@ -94,7 +94,7 @@ export default function FibeMobileNumberVerification() {
                     lineHeight: "18px",
                     userSelect: "none",
                     marginLeft:'10px'
-                }} htmlFor="terms">I accept the <a href={routes.PATIENT_TERMS} target="_blank" className="termsAndCond">Terms & Conditions.</a></label>
+                }} htmlFor="terms">I accept the <a style={{textDecoration:'underline'}} href={routes.PATIENT_TERMS} target="_blank" className="termsAndCond">Terms & Conditions.</a></label>
             </div>
             <button style={{ marginTop: "32px" }} onClick={() => handleNavigation()} className="submit">Send OTP</button>
 

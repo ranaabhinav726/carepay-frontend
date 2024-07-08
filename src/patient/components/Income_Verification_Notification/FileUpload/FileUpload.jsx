@@ -98,9 +98,12 @@ const FileUpload = () => {
     }
 
     let prevFilesList = [];
-    for (let i = 1; i <= prevFiles.length; i++) {
-        prevFilesList.push(<PrevFile link={prevFiles[i - 1]} count={i} key={i} />)
+    if (prevFiles && Array.isArray(prevFiles)) {
+        for (let i = 1; i <= prevFiles.length; i++) {
+            prevFilesList.push(<PrevFile link={prevFiles[i - 1]} count={i} key={i} />);
+        }
     }
+    
 
     function handleEyeClick() {
         let inputBox = document.getElementById('password');

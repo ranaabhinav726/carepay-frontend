@@ -173,7 +173,7 @@ export const REDIRECT_AUTO_MANDATE = React.lazy(() => import('../patient/compone
 export const FLEX_USER_WAIT = React.lazy(() => import('../patient/components/flexmoney/refreshflex'));
 export const DIGITAP_BANK_STATEMENT = React.lazy(() => import('../patient/components/Arthmate/Modules/bankstatementshare.jsx'));
 export const DIGITAP_AGREEGATOR = React.lazy(() => import('../patient/components/Arthmate/Modules/agreegator.jsx'));
-export const PATIENT_TERMS = React.lazy(() => import('../patient/components/termspatient'));
+export const PATIENT_TERMS = React.lazy(() => import('../website/pages/patientTermscondition'));
 
 
 
