@@ -58,15 +58,16 @@ export default function ArthCurrentEMIExpenses() {
                            
 
 
-                            // if (response.data.message === 'NOT_FOUND') {
-
-                            //     navigate(routes.NOT_FOUND_SCREEN)
-                            // }
+                     
 
                         }
                         if (response.data.message === 'Reject' || response.data.message === 'reject') {
 
                             navigate(routes.REJECTED_SCREEN)
+                        }
+                        if (response.data.message === 'Not Found') {
+
+                            navigate(routes.NOT_FOUND_SCREEN)
                         }
                     }).catch(() => {
                         console.log("Error fetching data");
