@@ -29,12 +29,13 @@ const NotFoundScreen = () => {
                             navigate(routes.CONNECTING_WITH_LENDERS)
                         }
                     }
-                    if (response.data.message === 'Reject'||response.data.message === 'reject') {
-
-                        navigate(routes.REJECTED_SCREEN)
-                    }
 
 
+
+                }
+                if (response.data.message === 'Reject' || response.data.message === 'reject') {
+
+                    navigate(routes.REJECTED_SCREEN)
                 }
             }).catch(() => {
                 console.log("Error fetching data");
