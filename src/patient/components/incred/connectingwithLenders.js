@@ -94,17 +94,18 @@ const ConnectWithLenders = () => {
                     axios.get(`${apiUrl}/initiateApplicationForIncred?userId=${userId}`)
                         .then((response) => {
                             if (response.data.message === 'success') {
-                                axios.get(`${apiUrl}/generateOfferInCred?userId=${userId}`)
-                                    .then((response) => {
-                                        if (response.data.message === 'success') {
-                                            intervalId = setInterval(checkOfferStatus, 10000);
-                                        } else {
-                                            console.log('Error generating offer');
-                                        }
-                                    })
-                                    .catch((error) => {
-                                        console.error('Error generating offer:', error);
-                                    });
+                                makeApiCall()
+                                // axios.get(`${apiUrl}/generateOfferInCred?userId=${userId}`)
+                                //     .then((response) => {
+                                //         if (response.data.message === 'success') {
+                                //             intervalId = setInterval(checkOfferStatus, 10000);
+                                //         } else {
+                                //             console.log('Error generating offer');
+                                //         }
+                                //     })
+                                //     .catch((error) => {
+                                //         console.error('Error generating offer:', error);
+                                //     });
                             } else {
                                 console.log('Error initiating application');
                                 // navigate(routes.REJECTED_SCREEN)
@@ -124,7 +125,33 @@ const ConnectWithLenders = () => {
             });
 
     }
+    const makeApiCall = () => {
+        const apiUrl = env.api_Url;
 
+        axios.get(`${apiUrl}/generateOfferInCred?userId=${userId}`)
+            .then((response) => {
+                if (response.status === 200) {
+                    if (response.data.message === 'success') {
+                        intervalId = setInterval(checkOfferStatus, 10000);
+                    } else {
+                        console.log('Error generating offer');
+                    }
+                } else {
+                    // For any status code other than 200 and 500
+                    navigate(routes.ARTHMATE_OFFERS)
+                }
+            })
+            .catch((error) => {
+                if (error.response && error.response.status === 500) {
+                    console.error('Error 500, re-hitting the API');
+                    makeApiCall(); // Re-hit the API
+                } else {
+                    console.error('Error generating offer:', error);
+                    // For any status code other than 200 and 500
+                    navigate(routes.ARTHMATE_OFFERS)
+                }
+            });
+    };
 
     function checkOfferStatus() {
 

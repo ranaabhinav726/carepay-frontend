@@ -29,7 +29,7 @@ const NotFoundScreen = () => {
                             navigate(routes.CONNECTING_WITH_LENDERS)
                         }
                     }
-                    if (response.data.message === 'Reject') {
+                    if (response.data.message === 'Reject'||response.data.message === 'reject') {
 
                         navigate(routes.REJECTED_SCREEN)
                     }
