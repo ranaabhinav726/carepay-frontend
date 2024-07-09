@@ -45,6 +45,7 @@ export default function ArthCurrentEMIExpenses() {
                 // if (window.localStorage.getItem('flowRedirect') === 'AM' ) {
                 axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
                     .then(response => {
+                        console.log(response.data.message)
                         if (response.data.status === 200) {
                             if (response.data.message === 'success') {
                                 console.log(response.data.data)
@@ -54,10 +55,7 @@ export default function ArthCurrentEMIExpenses() {
                                     navigate(routes.CONNECTING_WITH_LENDERS)
                                 }
                             }
-                            if (response.data.message === 'Reject'||response.data.message === 'reject') {
-
-                                navigate(routes.REJECTED_SCREEN)
-                            }
+                           
 
 
                             // if (response.data.message === 'NOT_FOUND') {
@@ -65,6 +63,10 @@ export default function ArthCurrentEMIExpenses() {
                             //     navigate(routes.NOT_FOUND_SCREEN)
                             // }
 
+                        }
+                        if (response.data.message === 'Reject' || response.data.message === 'reject') {
+
+                            navigate(routes.REJECTED_SCREEN)
                         }
                     }).catch(() => {
                         console.log("Error fetching data");
