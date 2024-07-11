@@ -78,7 +78,7 @@ function EmiOptions(){
     })
 
     function amountHandler(val){
-        // console.log(val)
+        console.log(val)
         if(val === ""){
             setReqAmount("");
             return;
@@ -126,11 +126,16 @@ function EmiOptions(){
             <h3 style={{margin:"1rem 0"}}>EMI options</h3>
 
             <p>Confirm credit amount</p>
+            <div className="inputGroup">
             <input autoComplete="off"Box 
+            type='number'
+            placeholder="Enter Credit Amount"
+            className="input-group"
                 Prefix={<BiRupee style={{fontSize:"20px"}} />}
                 value={reqAmount}
-                setValue={amountHandler}
+                onChange={(e)=>amountHandler(e.target.value)}
             />
+            </div>
             <div style={{background:"#FAE1CD", textAlign:"center", borderRadius:"4px", padding:"10px", marginBottom:"1rem"}}>
                 Please keep the required credit amount <br/>under your <b>approved limit of ₹ {maxLoanLimit.toLocaleString('en-IN',{maximumFractionDigits: 2})}</b> only.
             </div>

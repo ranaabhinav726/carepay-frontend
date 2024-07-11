@@ -98,14 +98,17 @@ function PanVerificationIcici(){
                 autoCapitalize="characters"
                 required
             /> */}
+            <div className="inputGroup">
             <input autoComplete="off"Box
                 value={panNumber}
-                setValue={handlePan}
+                onChange={(e)=>handlePan(e.target.value)}
                 placeholder="Enter your PAN here"
                 styles={{
                     marginBottom:"12px"
                 }}
+                className='group-input'
             />
+            </div>
             {error && <span style={{color:"red", fontSize:"14px"}}>Please enter correct PAN number</span>}
             </div>
 
