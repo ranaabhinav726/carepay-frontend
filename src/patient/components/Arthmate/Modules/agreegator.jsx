@@ -6,6 +6,7 @@ import axios from "axios";
 import { env } from "../../../environment/environment";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../layout/Routes";
+import { Call } from "@mui/icons-material";
 let userId = localStorage.getItem('userId')
 const BankstatementShare = () => {
     let navigate = useNavigate()
@@ -40,12 +41,13 @@ const BankstatementShare = () => {
         if (accept) {
             // if (type !== 'statement') {
             setErrorMsg('')
-            axios.post(env.api_Url + "generateURL" + '&userId=' + userId + '&type=' + type + '&instituteId=' + instituteId, {
+            axios.post(env.api_Url + "generateURL" + '?userId=' + userId + '&type=' + type + '&instituteId=' + instituteId, {
 
             })
                 .then((response) => {
                     console.log(response)
                     if (response.data.message === "success") {
+                        window.open(response.data.data.url)
                     }
                 })
             // } else {

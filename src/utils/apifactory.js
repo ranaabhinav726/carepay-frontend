@@ -32,7 +32,9 @@ const APIS = {
     CHECK_ELIGIBILITY_FOR_FM: BASE_URL + 'checkEligibilityForFM?userId=',
     CREATE_ORDER_FOR_FM: BASE_URL + 'createOrderForFM?userId=',
     GET_LOGO_API: BASE_URL + 'getFlexMoneyUserDetail?userId=',
-    WEB_HOOK_CALL:BASE_URL+'flexMoneyTransactionWebhook'
+    WEB_HOOK_CALL:BASE_URL+'flexMoneyTransactionWebhook',
+    GET_DIGITA_BANK_REPORT:BASE_URL+'getDigitapBankStatementDetailByUserId?userId='
+
 
 
 
