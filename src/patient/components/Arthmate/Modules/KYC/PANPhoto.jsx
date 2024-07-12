@@ -3,7 +3,7 @@ import { Header } from "../../comps/Header";
 import { useCallback } from "react";
 import WebcamCapture from "../../comps/WebCam";
 import { BsFillCameraFill } from "react-icons/bs";
-import { MdCloudUpload } from "react-icons/md";
+import { MdCall, MdCloudUpload } from "react-icons/md";
 import axios from "axios";
 import { env } from "../../../../environment/environment";
 import { useNavigate } from "react-router-dom";
@@ -207,6 +207,8 @@ export default function ArthPANPhoto() {
                     <button className="submit lite" onClick={()=>setImgSrc(null)}>No, let’s retake</button>
                 </div>
             } */}
+             <div className='text-center' style={{ marginTop: '20px', fontSize: '14px' }}>Need help? Reach out to us.</div>
+            <button className="submit" style={{ background: '#ECEBFF', color: '#504c9a' }}><a href="tel:+918069489655" className=''><MdCall className='btnIcon' /> Call support</a></button>
         </main>
     )
 }
