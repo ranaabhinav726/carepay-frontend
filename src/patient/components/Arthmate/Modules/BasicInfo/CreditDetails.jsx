@@ -427,7 +427,19 @@ const ArthCreditDetails = () => {
                     if (treatment !== 'Other') {
                         if (borrower === 'myself') {
                             if (servicableForMyself.includes(treatment)) {
-                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                // navigate(routes.ARTH_PERSONAL_DETAILS);
+                                axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
+                                    .then(response => {
+                                        if (response.data.data === 'true'&&response.data.message==='success') {
+                                                navigate(routes.FLEX_WAIT_SCREEN)
+                                            } else {
+                                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                            }
+
+                                        
+                                    }).catch(() => {
+
+                                    });
                                 // navigate(routes.FLEX_WAIT_SCREEN)
                             } else if (notServiceable.includes(treatment)) {
                                 navigate(routes.NOT_SERVICEABLE);
@@ -437,8 +449,21 @@ const ArthCreditDetails = () => {
                         } else if (borrower === 'someone else') {
                             if (servicableForSomeoneElse.includes(treatment)) {
                                 if (!notServiceable.includes(treatment)) {
-                                    navigate(routes.ARTH_PERSONAL_DETAILS);
+                                    // navigate(routes.ARTH_PERSONAL_DETAILS);
                                     // navigate(routes.FLEX_WAIT_SCREEN)
+                                    axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
+                                    .then(response => {
+                                       console.log(response.data)
+                                            if (response.data.data === 'true'&&response.data.message==='success') {
+                                                navigate(routes.FLEX_WAIT_SCREEN)
+                                            } else {
+                                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                            }
+
+                                        
+                                    }).catch(() => {
+
+                                    });
                                 } else {
                                     navigate(routes.NOT_SERVICEABLE);
                                 }
