@@ -67,6 +67,12 @@ export default function FibeNumberVerified() {
                         }, 2500);
 
                     }
+                    if (response.data.data === null||response.data.data === '') {
+                        setTimeout(() => {
+                            navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
+                        }, 2500);
+
+                    }
 
                 }
                 )
