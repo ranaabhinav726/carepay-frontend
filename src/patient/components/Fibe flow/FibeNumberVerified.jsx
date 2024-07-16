@@ -25,6 +25,13 @@ export default function FibeNumberVerified() {
 
             axios.get(env.api_Url + "userDetails/getUserLoanFormStatus?userId=" + userId)
                 .then(response => {
+                    if (response.data.data === null||response.data.data === '') {
+                        setTimeout(() => {
+                            navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
+                        }, 2500);
+
+                    }
+
                     if (response.data.data !== 'LEAD_CREATED_AM' && response.data.data !== 'KYC_AADHAR_AM' && response.data.data !== 'KYC_PAN_AM' && response.data.data !== 'ESIGN_AM' && response.data.data !== 'KYC_SELFIE_AM' && response.data.data !== 'LOAN_CREATED_AM' && response.data.data !== 'NACH_AM') {
                         setTimeout(() => {
                             navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
@@ -67,13 +74,7 @@ export default function FibeNumberVerified() {
                         }, 2500);
 
                     }
-                    if (response.data.data === null||response.data.data === '') {
-                        setTimeout(() => {
-                            navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
-                        }, 2500);
-
-                    }
-
+                  
                 }
                 )
         } else {
