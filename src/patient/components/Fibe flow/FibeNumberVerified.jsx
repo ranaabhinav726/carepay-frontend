@@ -20,7 +20,7 @@ export default function FibeNumberVerified() {
     }, 2500);
 
     useEffect(() => {
-        if (userId && userId !== 'null') {
+        // if (userId && userId !== 'null') {
             axios.get(`${env.api_Url}userDetails/getUserLoanFormStatus?userId=${userId}`)
                 .then(response => {
                     const data = response.data.data;
@@ -49,7 +49,7 @@ export default function FibeNumberVerified() {
                 .catch(error => {
                     console.error("Error fetching user loan form status:", error);
                 });
-        }
+        // }
     }, [userId, navigate]);
 
 
