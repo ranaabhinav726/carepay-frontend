@@ -162,7 +162,9 @@ const routes = {
   DIGITAP_AGREEGATOR:'/patient/agreegator',
   PATIENT_TERMS:'/patient/termspatient',
   NOT_FOUND_SCREEN:'/patient/notfound',
-  DIGITAP_REDIRECTION:'/patient/digitapredirection',
+  DIGITAP_REDIRECT_URL:'/patient/digitapredirection',
+  DIGITAP_DATA_RECEIVED:'/patient/digireport',
+
 
 
   ///SCOUTS///
