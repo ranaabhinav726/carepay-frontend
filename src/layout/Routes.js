@@ -166,7 +166,6 @@ const routes = {
   DIGITAP_DATA_RECEIVED:'/patient/digireport',
 
 
-
   ///SCOUTS///
   SCOUTS_MAIN: '/scouts',
   SCOUTS_LOGIN: '/scouts/login',

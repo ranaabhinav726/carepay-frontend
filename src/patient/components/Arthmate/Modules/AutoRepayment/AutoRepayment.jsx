@@ -171,9 +171,6 @@ export default function ArthAutoRepayment() {
                 })
             }
         })
-
-
-
     }
     const redirect = () => {
         setTimeout(() => {
