@@ -20,67 +20,40 @@ export default function FibeNumberVerified() {
     }, 2500);
 
     useEffect(() => {
-        console.log(userId)
-        if (userId !== null && userId !== '' && userId !== 'null') {
-
-            axios.get(env.api_Url + "userDetails/getUserLoanFormStatus?userId=" + userId)
+        if (userId && userId !== 'null') {
+            axios.get(`${env.api_Url}userDetails/getUserLoanFormStatus?userId=${userId}`)
                 .then(response => {
-                    if (response.data.data === null||response.data.data === '') {
+                    const data = response.data.data;
+                    if (!data) {
                         setTimeout(() => {
-                            navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
+                            navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
                         }, 2500);
-
+                        return;
                     }
 
-                    if (response.data.data !== 'LEAD_CREATED_AM' && response.data.data !== 'KYC_AADHAR_AM' && response.data.data !== 'KYC_PAN_AM' && response.data.data !== 'ESIGN_AM' && response.data.data !== 'KYC_SELFIE_AM' && response.data.data !== 'LOAN_CREATED_AM' && response.data.data !== 'NACH_AM') {
-                        setTimeout(() => {
-                            navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
-                        }, 2500);
+                    const navigationMap = {
+                        'LEAD_CREATED_AM': routes.CONNECTING_WITH_LENDERS,
+                        'KYC_AADHAR_AM': routes.ARTH_PAN_PHOTO,
+                        'KYC_PAN_AM': routes.KYC_PAN_AM,
+                        'ESIGN_AM': routes.ARTH_AUTO_REPAYMENT,
+                        'KYC_SELFIE_AM': routes.WAIT_ARTH,
+                        'LOAN_CREATED_AM': routes.WAIT_ARTH,
+                        'NACH_AM': `/patient/nachmandatewait/${userId}`
+                    };
 
-                    }
-                    if (response.data.data === 'LEAD_CREATED_AM') {
-                        setTimeout(() => {
-                            navigate(routes.CONNECTING_WITH_LENDERS, { replace: "true" })
-                        }, 2500);
-
-                    }
-                    if (response.data.data === 'KYC_AADHAR_AM') {
-                        setTimeout(() => {
-                            navigate(routes.ARTH_PAN_PHOTO, { replace: "true" })
-                        }, 2500);
-
-                    }
-                    if (response.data.data === 'KYC_PAN_AM') {
-                        setTimeout(() => {
-                            navigate(routes.KYC_PAN_AM, { replace: "true" })
-                        }, 2500);
-
-                    }
-                    if (response.data.data === 'ESIGN_AM') {
-                        setTimeout(() => {
-                            navigate(routes.ARTH_AUTO_REPAYMENT, { replace: "true" })
-                        }, 2500);
-
-                    }
-                    if (response.data.data === 'KYC_SELFIE_AM' || response.data.data === 'LOAN_CREATED_AM') {
-                        setTimeout(() => {
-                            navigate(routes.WAIT_ARTH, { replace: "true" })
-                        }, 2500);
-
-                    }
-                    if (response.data.data === 'NACH_AM') {
-                        setTimeout(() => {
-                            navigate('/patient/nachmandatewait/' + userId, { replace: "true" })
-                        }, 2500);
-
-                    }
-                  
-                }
-                )
-        } else {
-
+                    const route = navigationMap[data] || routes.ARTH_CREDIT_DETAILS;
+                    setTimeout(() => {
+                        navigate(route, { replace: true });
+                    }, 2500);
+                })
+                .catch(error => {
+                    console.error("Error fetching user loan form status:", error);
+                });
         }
-    }, [])
+    }, [userId, navigate]);
+
+
+
     // setTimeout(()=>{
     //     let elem = document.getElementById('screen3Title');
     //     elem.classList.add('fadeInUpAnimate');
