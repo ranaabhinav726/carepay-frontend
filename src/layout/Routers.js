@@ -175,6 +175,7 @@ export const DIGITAP_BANK_STATEMENT = React.lazy(() => import('../patient/compon
 export const DIGITAP_AGREEGATOR = React.lazy(() => import('../patient/components/Arthmate/Modules/agreegator.jsx'));
 export const PATIENT_TERMS = React.lazy(() => import('../website/pages/patientTermscondition'));
 export const NOT_FOUND_SCREEN = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/notfoundScreen'));
+export const DIGITAP_REDIRECTION = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/notfoundScreen'));
 
 
 

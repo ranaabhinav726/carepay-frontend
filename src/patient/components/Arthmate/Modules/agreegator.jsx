@@ -40,12 +40,13 @@ const BankstatementShare = () => {
         if (accept) {
             // if (type !== 'statement') {
             setErrorMsg('')
-            axios.post(env.api_Url + "generateURL" + '&userId=' + userId + '&type=' + type + '&instituteId=' + instituteId, {
+            axios.post(env.api_Url + "generateURL" + '?userId=' + userId + '&type=' + type + '&instituteId=' + instituteId, {
 
             })
                 .then((response) => {
                     console.log(response)
                     if (response.data.message === "success") {
+                        window.open(response.data.data.url)
                     }
                 })
             // } else {
