@@ -5,7 +5,7 @@ import WebcamCapture from "../../comps/WebCam";
 import { useNavigate } from "react-router-dom";
 import { uploadDoc } from "../../servicesAndUtility/api";
 import jsPDF from "jspdf";
-import { MdCloudUpload } from 'react-icons/md';
+import { MdCall, MdCloudUpload } from 'react-icons/md';
 import axios from 'axios';
 import { env } from '../../../../environment/environment';
 import routes from '../../../../../layout/Routes';
@@ -31,7 +31,7 @@ export default function ArthAadhaarPhoto() {
 
     useEffect(() => {
         // Reset image sources when imageset changes
-      
+
         setImgSrcFront(null);
         setImgSrcBack(null);
         setPdfPreview(null);
@@ -159,8 +159,8 @@ export default function ArthAadhaarPhoto() {
         })
     }
     function savefiles() {
-     
-      
+
+
         if (img1Type !== '' && img2Type !== '') {
             setLoader(true)
             let data = new FormData();
@@ -208,7 +208,7 @@ export default function ArthAadhaarPhoto() {
                                         // setUpload2(true)
                                         chheckUpload(true, true)
                                         setLoader(false)
-                                    }else {
+                                    } else {
                                         setLoader(false)
                                         alert('Upload Again')
                                     }
@@ -234,7 +234,7 @@ export default function ArthAadhaarPhoto() {
             <Header />
             {loaderState ?
                 <>
-                   <Loadinggif/>
+                    <Loadinggif />
                 </>
                 : ""}
 
@@ -295,6 +295,8 @@ export default function ArthAadhaarPhoto() {
             <button className="capture-btn" onClick={captureFront}>Capture Front</button>
             <button className="capture-btn" onClick={captureBack}>Capture Back</button>
             <button className="submit" onClick={uploadAadhaar}>Upload</button> */}
+            <div className='text-center' style={{ marginTop: '20px', fontSize: '14px' }}>Need help? Reach out to us.</div>
+            <button className="submit" style={{ background: '#ECEBFF', color: '#504c9a' }}><a href="tel:+918069489655" className=''><MdCall className='btnIcon' /> Call support</a></button>
         </main>
     );
 }

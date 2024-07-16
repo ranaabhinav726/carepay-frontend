@@ -17,7 +17,7 @@ const ArthAddressDetails = () => {
     const navigate = useNavigate();
     let fullName = localStorage.getItem('P_userName');
     let userId = localStorage.getItem('userId');
-    
+
     // let token = localStorage.getItem('access_token');
     // const config = {
     //     headers: { Authorization: `Bearer ${token}` }
@@ -59,75 +59,75 @@ const ArthAddressDetails = () => {
 
     const [isDecentroCall, setDecentroCall] = useState(false);
 
-    let specialChars =/[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
+    let specialChars = /[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
 
     let states = [
-                    "Select state", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chattisgarh", "Chandigarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep Islands", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Other"
-                ];
+        "Select state", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chattisgarh", "Chandigarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep Islands", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Other"
+    ];
 
-    let stateOptions = states.map((state, idx)=>{
-        if(idx > 0) return <option key={idx} value={state}>{state}</option>;
+    let stateOptions = states.map((state, idx) => {
+        if (idx > 0) return <option key={idx} value={state}>{state}</option>;
 
         return <option disabled key={idx} value={state}>{state}</option>
     })
 
     let ref = useRef(0);
-    useEffect(()=>{
+    useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
         let userId = localStorage.getItem('userId');
-        if(!! userId){
+        if (!!userId) {
             axios.get(env.api_Url + "userDetails/getUserAddressByUserId?userId=" + userId)
-            .then(response => {
-                if(response.data.status === 200){
-                    let data = response.data.data;
-                    if(!! data){
-                        setAddressType(data.addressType);
-                        setFirstLine(data.address);
-                        // setLocality(data.locality);
-                        // setLandmark(data.landmark);
-                        handlePincode(data?.pincode?.toString());
-                        setState(data.state ?? "Select state");
-                        setCity(data.city);
-                    }
-                    if(data.addressType === null){
+                .then(response => {
+                    if (response.data.status === 200) {
+                        let data = response.data.data;
+                        if (!!data) {
+                            setAddressType(data.addressType);
+                            setFirstLine(data.address);
+                            // setLocality(data.locality);
+                            // setLandmark(data.landmark);
+                            handlePincode(data?.pincode?.toString());
+                            setState(data.state ?? "Select state");
+                            setCity(data.city);
+                        }
+                        if (data.addressType === null) {
+                            getDataFromDecentro();
+                        }
+                    } else {
                         getDataFromDecentro();
                     }
-                }else{
+                }).catch(error => {
                     getDataFromDecentro();
-                }
-            }).catch(error =>{
-                getDataFromDecentro();
-            })
+                })
         }
-    },[])
+    }, [])
 
     const [addresses, setAddresses] = useState([]);
 
-    function getDataFromDecentro(){
+    function getDataFromDecentro() {
         setDecentroCall(true);
-        axios.get(env.api_Url+"/getCibilDataDecentro?consent=true&userId="+ userId +"&name=" + fullName)
-        .then(response=>{
-            console.log(response);
-            if(response.data.status === 200){
-                const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
-                setAddresses(idandContactInfo?.addressInfo || []);
-            }
-        })
+        axios.get(env.api_Url + "/getCibilDataDecentro?consent=true&userId=" + userId + "&name=" + fullName)
+            .then(response => {
+                console.log(response);
+                if (response.data.status === 200) {
+                    const idandContactInfo = response?.data?.data?.data?.cCRResponse?.cirreportDataLst[0]?.cirreportData?.idandContactInfo;
+                    setAddresses(idandContactInfo?.addressInfo || []);
+                }
+            })
     }
 
 
-    let addressOptions = addresses.map((address, idx)=>{
-        return <option key={idx+1} value={idx+1}>{address.address}</option>
+    let addressOptions = addresses.map((address, idx) => {
+        return <option key={idx + 1} value={idx + 1}>{address.address}</option>
     })
-    addressOptions.splice(0,0, <option key={0} value={0} disabled>Select address …</option>)
-    addressOptions.splice(addressOptions.length,0, <option key={addressOptions.length} value={0}>Address not found, Enter new</option>)
+    addressOptions.splice(0, 0, <option key={0} value={0} disabled>Select address …</option>)
+    addressOptions.splice(addressOptions.length, 0, <option key={addressOptions.length} value={0}>Address not found, Enter new</option>)
 
-    function selectAddress(idx){
-        if(idx==0  || addresses.length===0){
+    function selectAddress(idx) {
+        if (idx == 0 || addresses.length === 0) {
             setFirstLine("");
             return;
         }
-        let obj = addresses[idx-1];
+        let obj = addresses[idx - 1];
         console.log(obj)
         setFirstLine(obj?.address);
         handlePincode(obj?.postal);
@@ -162,52 +162,52 @@ const ArthAddressDetails = () => {
     //         fetchCityAndState(pin);
     //     }
     // }
-    function handlePincode(val, type){
-        if(val.length < 6){
+    function handlePincode(val, type) {
+        if (val.length < 6) {
             setPincode(val);
-        }else if(val.length == 6){
+        } else if (val.length == 6) {
             setFetching(true);
             setPincode(val);
-            axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
-            .then(response =>{
-                console.log(response)
-                let city = response?.data?.city || "";
-                let state = response?.data?.state || "Select state";
-                if(type === "current"){
-                    setCity(city); 
-                    setState(state);
-                }else{
-                    setCityP(city); 
-                    setStateP(state);
-                }
-                setFetching(false);
-            }).catch(()=>{
-                setFetching(false);
-            })
+            axios.get(env.api_Url + "userDetails/codeDetail?code=" + val + "&type=zip")
+                .then(response => {
+                    console.log(response)
+                    let city = response?.data?.city || "";
+                    let state = response?.data?.state || "Select state";
+                    if (type === "current") {
+                        setCity(city);
+                        setState(state);
+                    } else {
+                        setCityP(city);
+                        setStateP(state);
+                    }
+                    setFetching(false);
+                }).catch(() => {
+                    setFetching(false);
+                })
         }
     }
-    function handlePincodep(val, type){
-        if(val.length < 6){
+    function handlePincodep(val, type) {
+        if (val.length < 6) {
             setPincodeP(val);
-        }else if(val.length == 6){
+        } else if (val.length == 6) {
             setFetching(true);
             setPincodeP(val);
-            axios.get(env.api_Url+"userDetails/codeDetail?code=" + val +"&type=zip")
-            .then(response =>{
-                console.log(response)
-                let city = response?.data?.city || "";
-                let state = response?.data?.state || "Select state";
-                if(type === "current"){
-                    setCity(city); 
-                    setState(state);
-                }else{
-                    setCityP(city); 
-                    setStateP(state);
-                }
-                setFetching(false);
-            }).catch(()=>{
-                setFetching(false);
-            })
+            axios.get(env.api_Url + "userDetails/codeDetail?code=" + val + "&type=zip")
+                .then(response => {
+                    console.log(response)
+                    let city = response?.data?.city || "";
+                    let state = response?.data?.state || "Select state";
+                    if (type === "current") {
+                        setCity(city);
+                        setState(state);
+                    } else {
+                        setCityP(city);
+                        setStateP(state);
+                    }
+                    setFetching(false);
+                }).catch(() => {
+                    setFetching(false);
+                })
         }
     }
 
@@ -221,24 +221,76 @@ const ArthAddressDetails = () => {
     // }
 
     async function handleForm() {
-        if (!(firstLine && pincode && city && state)) {
-            console.log(firstLine, pincode, city, state);
-            return;
+        if (isPermAddrSame === false) {
+            if (!(firstLineP)) {
+                let elem = document.getElementById('firstLineP');
+                if (elem) showErrorOnUI(elem);
+                return;
+
+            }
+
+            let addressWordLength = firstLineP.split(" ").length;
+            if (!firstLineP || addressWordLength < 2) {
+                let elem = document.getElementById('firstLineP');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+
+            if (pincodeP === '' || pincodeP == 0) {
+                let elem = document.getElementById('pincodeP');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+
+            if (!cityP) {
+                let elem = document.getElementById('cityP');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+            if (specialChars.test(cityP)) {
+                let elem = document.getElementById('cityP');
+                setErrorMsg("Special characters are not allowed.");
+                setTimeout(() => {
+                    setErrorMsg("This field can't be empty.");
+                }, 3000);
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+
+            if (stateP === "Select state") {
+                let elem = document.getElementById('stateP');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+
+            if (stateP === "Other" && !otherStateP) {
+                let elem = document.getElementById('otherStateP');
+                if (elem) showErrorOnUI(elem);
+                return;
+            }
+
         }
-    
+        if (!(firstLine)) {
+            console.log(firstLine, pincode, city, state);
+            let elem = document.getElementById('firstLine');
+            if (elem) showErrorOnUI(elem);
+            return;
+
+        }
+
         let addressWordLength = firstLine.split(" ").length;
         if (!firstLine || addressWordLength < 2) {
             let elem = document.getElementById('firstLine');
             if (elem) showErrorOnUI(elem);
             return;
         }
-    
-        if (!pincode) {
+
+        if (pincode === '' || pincode == 0) {
             let elem = document.getElementById('pincode');
             if (elem) showErrorOnUI(elem);
             return;
         }
-    
+
         if (!city) {
             let elem = document.getElementById('city');
             if (elem) showErrorOnUI(elem);
@@ -253,25 +305,25 @@ const ArthAddressDetails = () => {
             if (elem) showErrorOnUI(elem);
             return;
         }
-    
+
         if (state === "Select state") {
             let elem = document.getElementById('state');
             if (elem) showErrorOnUI(elem);
             return;
         }
-    
+
         if (state === "Other" && !otherState) {
             let elem = document.getElementById('otherState');
             if (elem) showErrorOnUI(elem);
             return;
         }
-    
+
         if (!canSubmit) {
             return;
         }
         setCanSubmit(false);
         showWrapper(ref.current);
-    
+
         let userId = localStorage.getItem("userId");
         let submitObj = {
             "userId": userId,
@@ -288,11 +340,59 @@ const ArthAddressDetails = () => {
             "state": stateP,
             "city": cityP,
             "formStatus": "",
-            "addressType":'permanent'
+            "addressType": 'permanent'
         };
-    
+
         // If isPermAddrSame is true, call API with both current and permanent address types
         if (isPermAddrSame) {
+            if (isPermAddrSame) {
+                submitObj.addressType = "current";
+                saveAddressDetails(submitObj, res => {
+                    if (res.data.message === "success") {
+                        // Handle success
+                    } else {
+                        apiErrorHandler();
+                    }
+                    setCanSubmit(true);
+                    hideWrapper(ref.current);
+                });
+
+                submitObj.addressType = "permanent";
+                saveAddressDetails(submitObj, res => {
+                    if (res.data.message === "success") {
+                        navigate('/patient/ArthEmploymentDetails');
+                    } else {
+                        apiErrorHandler();
+                    }
+                    setCanSubmit(true);
+                    hideWrapper(ref.current);
+                });
+            } else {
+                // If isPermAddrSame is false, call API only once with the provided address type
+                submitObj.addressType = addressType;
+                saveAddressDetails(submitObj, res => {
+                    if (res.data.message === "success") {
+                        navigate('/patient/ArthEmploymentDetails');
+                    } else {
+                        apiErrorHandler();
+                    }
+                    setCanSubmit(true);
+                    hideWrapper(ref.current);
+                });
+                // submitObj.addressType = addressType;
+                saveAddressDetails(submitObjPermanent, res => {
+                    if (res.data.message === "success") {
+                        navigate('/patient/ArthEmploymentDetails');
+                    } else {
+                        apiErrorHandler();
+                    }
+                    setCanSubmit(true);
+                    hideWrapper(ref.current);
+                });
+            }
+        }
+        console.log(isPermAddrSame)
+        if (isPermAddrSame === false) {
             submitObj.addressType = "current";
             saveAddressDetails(submitObj, res => {
                 if (res.data.message === "success") {
@@ -303,30 +403,7 @@ const ArthAddressDetails = () => {
                 setCanSubmit(true);
                 hideWrapper(ref.current);
             });
-    
-            submitObj.addressType = "permanent";
-            saveAddressDetails(submitObj, res => {
-                if (res.data.message === "success") {
-                    navigate('/patient/ArthEmploymentDetails');
-                } else {
-                    apiErrorHandler();
-                }
-                setCanSubmit(true);
-                hideWrapper(ref.current);
-            });
-        } else {
-            // If isPermAddrSame is false, call API only once with the provided address type
-            submitObj.addressType = addressType;
-            saveAddressDetails(submitObj, res => {
-                if (res.data.message === "success") {
-                    navigate('/patient/ArthEmploymentDetails');
-                } else {
-                    apiErrorHandler();
-                }
-                setCanSubmit(true);
-                hideWrapper(ref.current);
-            });
-            // submitObj.addressType = addressType;
+            submitObjPermanent.addressType = "permanent";
             saveAddressDetails(submitObjPermanent, res => {
                 if (res.data.message === "success") {
                     navigate('/patient/ArthEmploymentDetails');
@@ -338,187 +415,187 @@ const ArthAddressDetails = () => {
             });
         }
     }
-    
-    function apiErrorHandler(){
+
+    function apiErrorHandler() {
         setApiError(true)
-        setTimeout(()=>{
+        setTimeout(() => {
             setApiError(false);
         }, 1500);
     }
 
-   return(
-    <>
+    return (
+        <>
 
-    <main className="addressDetails">
-    <Header progressbarDisplay="block" progress="55" canGoBack="/patient/PersonalDetails" />
-        <h3>Address Details</h3>
-        <div style={{width:"100%", background:"#FAE1CD", padding:"12px", borderRadius:"4px", textAlign:"center", marginBottom:"2rem"}}>
-            Please select and verify your address.
-        </div>
+            <main className="addressDetails">
+                <Header progressbarDisplay="block" progress="55" canGoBack="/patient/PersonalDetails" />
+                <h3>Address Details</h3>
+                <div style={{ width: "100%", background: "#FAE1CD", padding: "12px", borderRadius: "4px", textAlign: "center", marginBottom: "2rem" }}>
+                    Please select and verify your address.
+                </div>
 
-        <p className='sectionHead'>Current address</p>
+                <p className='sectionHead'>Current address</p>
 
-        <div className="addressType">
-            <p>Select address</p>
-            <select name="selectAddress" id="selectAddress" onChange={(e)=>selectAddress(e.target.value)}>
-                {addressOptions}
-            </select>
-        </div>
+                <div className="addressType">
+                    <p>Select address</p>
+                    <select name="selectAddress" id="selectAddress" onChange={(e) => selectAddress(e.target.value)}>
+                        {addressOptions}
+                    </select>
+                </div>
 
-        <div className="firstLine">
-            <p>Address line 1</p>
-            <input type="text" 
-                id="firstLine"
-                value={firstLine ?? ""} 
-                onChange={(e)=> setFirstLine(e.target.value)} 
-                placeholder="Please enter your address" 
-                required 
-            />
-            <span className="fieldError">Please enter your complete address</span>
-        </div>
+                <div className="firstLine">
+                    <p>Address line 1</p>
+                    <input type="text"
+                        id="firstLine"
+                        value={firstLine ?? ""}
+                        onChange={(e) => setFirstLine(e.target.value)}
+                        placeholder="Please enter your address"
+                        required
+                    />
+                    <span className="fieldError">Please enter your complete address</span>
+                </div>
 
-        <div className="pincode">
-            <p>Address pincode</p>
-            <input type="number" 
-                id="pincode"
-                value={pincode ?? ""} 
-                onChange={(e)=> handlePincode(e.target.value, "current")}
-                placeholder="Enter your pincode here" 
-                min={0}
-                required 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div>
+                <div className="pincode">
+                    <p>Address pincode</p>
+                    <input type="number"
+                        id="pincode"
+                        value={pincode ?? ""}
+                        onChange={(e) => handlePincode(e.target.value, "current")}
+                        placeholder="Enter your pincode here"
+                        min={0}
+                        required
+                    />
+                    <span className="fieldError">This field can't be empty.</span>
+                </div>
 
-        <div style={{display:"flex", justifyContent:"space-between"}}>
-            <div className="city" style={{width:"49%"}}>
-                <p>City</p>
-                <input type="text"
-                    id="city"
-                    className={fetching === true ? "dynamicFetching" : ""}
-                    value={city ?? ""}
-                    disabled={fetching === true}
-                    onChange={(e)=> setCity(e.target.value)}
-                    placeholder={fetching ? "fetching..." : "Enter your city here" }
-                    required 
-                />
-                <span className="fieldError">{errorMsg}</span>
-            </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <div className="city" style={{ width: "49%" }}>
+                        <p>City</p>
+                        <input type="text"
+                            id="city"
+                            className={fetching === true ? "dynamicFetching" : ""}
+                            value={city ?? ""}
+                            disabled={fetching === true}
+                            onChange={(e) => setCity(e.target.value)}
+                            placeholder={fetching ? "fetching..." : "Enter your city here"}
+                            required
+                        />
+                        <span className="fieldError">{errorMsg}</span>
+                    </div>
 
-            <div className="state" style={{width:"49%"}}>
-                <p>State</p>
-                <select id="state" value={state} onChange={(e)=> setState(e.target.value)}>
-                    {stateOptions}
-                </select>
-                <span className="fieldError">Please select your state</span>
-                {state === "Other" && 
-                    <input type="text" 
-                    id="otherState"
-                    value={otherState ?? ""}
-                    onChange={(e)=> setOtherState(e.target.value)}
-                    placeholder={"Enter your state here" }
-                    style={{marginTop:"12px"}}
-                    required 
-                    />    
+                    <div className="state" style={{ width: "49%" }}>
+                        <p>State</p>
+                        <select id="state" value={state} onChange={(e) => setState(e.target.value)}>
+                            {stateOptions}
+                        </select>
+                        <span className="fieldError">Please select your state</span>
+                        {state === "Other" &&
+                            <input type="text"
+                                id="otherState"
+                                value={otherState ?? ""}
+                                onChange={(e) => setOtherState(e.target.value)}
+                                placeholder={"Enter your state here"}
+                                style={{ marginTop: "12px" }}
+                                required
+                            />
+                        }
+                        <span className="fieldError">This field can't be empty.</span>
+                    </div>
+
+                </div>
+
+
+
+                <p className='sectionHead' style={{ marginTop: '20px' }}>Permanent address</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <input
+                        style={{
+                            width: "20px",
+                            accentColor: "#514C9F"
+                        }}
+                        type="checkbox"
+                        name="samePermAddr"
+                        id="samePermAddr"
+                        value={isPermAddrSame}
+                        onClick={() => setIsPermAddrSame(!isPermAddrSame)}
+                    />
+                    <label htmlFor='samePermAddr'>My permanent address is same as my current address.</label>
+                </div>
+                {!isPermAddrSame &&
+                    <>
+
+                        <div className="addressType">
+                            <p>Select address</p>
+                            <select name="selectAddress" id="selectAddress" onChange={(e) => selectAddress(e.target.value)}>
+                                {addressOptions}
+                            </select>
+                        </div>
+
+                        <div className="firstLine">
+                            <p>Address line 1</p>
+                            <input type="text"
+                                id="firstLineP"
+                                value={firstLineP ?? ""}
+                                onChange={(e) => setFirstLineP(e.target.value)}
+                                placeholder="Please enter your address"
+                                required
+                            />
+                            <span className="fieldError">Please enter your complete address</span>
+                        </div>
+
+                        <div className="pincode">
+                            <p>Address pincode</p>
+                            <input type="number"
+                                id="pincodeP"
+                                value={pincodeP ?? ""}
+                                onChange={(e) => handlePincodep(e.target.value)}
+                                placeholder="Enter your pincode here"
+                                min={0}
+                                required
+                            />
+                            <span className="fieldError">This field can't be empty.</span>
+                        </div>
+
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <div className="city" style={{ width: "49%" }}>
+                                <p>City</p>
+                                <input type="text"
+                                    id="cityP"
+                                    className={fetching === true ? "dynamicFetching" : ""}
+                                    value={cityP ?? ""}
+                                    disabled={fetching === true}
+                                    onChange={(e) => setCityP(e.target.value)}
+                                    placeholder={fetching ? "fetching..." : "Enter your city here"}
+                                    required
+                                />
+                                <span className="fieldError">{errorMsg}</span>
+                            </div>
+
+                            <div className="state" style={{ width: "49%" }}>
+                                <p>State</p>
+                                <select id="stateP" value={stateP} onChange={(e) => setStateP(e.target.value)}>
+                                    {stateOptions}
+                                </select>
+                                <span className="fieldError">Please select your state</span>
+                                {stateP === "Other" &&
+                                    <input type="text"
+                                        id="otherStateP"
+                                        value={otherStateP ?? ""}
+                                        onChange={(e) => setOtherStateP(e.target.value)}
+                                        placeholder={"Enter your state here"}
+                                        style={{ marginTop: "12px" }}
+                                        required
+                                    />
+                                }
+                                <span className="fieldError">This field can't be empty.</span>
+                            </div>
+                        </div>
+                    </>
                 }
-                <span className="fieldError">This field can't be empty.</span>
-            </div>
-
-        </div>
-        
-
-        
-        <p className='sectionHead' style={{marginTop:'20px'}}>Permanent address</p>
-        <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-            <input 
-                style={{
-                    width:"20px", 
-                    accentColor:"#514C9F"
-                }} 
-                type="checkbox" 
-                name="samePermAddr" 
-                id="samePermAddr" 
-                value={isPermAddrSame} 
-                onClick={()=>setIsPermAddrSame(!isPermAddrSame)}
-            />
-            <label htmlFor='samePermAddr'>My permanent address is same as my current address.</label>
-        </div>
-        {!isPermAddrSame &&
-        <>  
-        
-        <div className="addressType">
-            <p>Select address</p>
-            <select name="selectAddress" id="selectAddress" onChange={(e)=>selectAddress(e.target.value)}>
-                {addressOptions}
-            </select>
-        </div>
-
-        <div className="firstLine">
-            <p>Address line 1</p>
-            <input type="text" 
-                id="firstLine"
-                value={firstLineP ?? ""} 
-                onChange={(e)=> setFirstLineP(e.target.value)} 
-                placeholder="Please enter your address" 
-                required 
-            />
-            <span className="fieldError">Please enter your complete address</span>
-        </div>
-
-        <div className="pincode">
-            <p>Address pincode</p>
-            <input type="number" 
-                id="pincode"
-                value={pincodeP ?? ""} 
-                onChange={(e)=> handlePincodep(e.target.value)}
-                placeholder="Enter your pincode here" 
-                min={0}
-                required 
-            />
-            <span className="fieldError">This field can't be empty.</span>
-        </div>
-
-        <div style={{display:"flex", justifyContent:"space-between"}}>
-            <div className="city" style={{width:"49%"}}>
-                <p>City</p>
-                <input type="text"
-                    id="city"
-                    className={fetching === true ? "dynamicFetching" : ""}
-                    value={cityP ?? ""}
-                    disabled={fetching === true}
-                    onChange={(e)=> setCityP(e.target.value)}
-                    placeholder={fetching ? "fetching..." : "Enter your city here" }
-                    required 
-                />
-                <span className="fieldError">{errorMsg}</span>
-            </div>
-
-            <div className="state" style={{width:"49%"}}>
-                <p>State</p>
-                <select id="state" value={stateP} onChange={(e)=> setStateP(e.target.value)}>
-                    {stateOptions}
-                </select>
-                <span className="fieldError">Please select your state</span>
-                {stateP === "Other" && 
-                    <input type="text" 
-                    id="otherState"
-                    value={otherStateP ?? ""}
-                    onChange={(e)=> setOtherStateP(e.target.value)}
-                    placeholder={"Enter your state here" }
-                    style={{marginTop:"12px"}}
-                    required 
-                    />    
-                }
-                <span className="fieldError">This field can't be empty.</span>
-            </div>
-        </div>
+                <p className={apiError ? "apiError" : "apiError hide"}>An error has occured, please try again.</p>
+                <button onClick={() => handleForm()} className="submit">Confirm</button>
+            </main>
         </>
-        }
-        <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
-        <button onClick={()=>handleForm()} className="submit">Confirm</button>
-    </main>
-    </>
-   )
+    )
 }
 
 
