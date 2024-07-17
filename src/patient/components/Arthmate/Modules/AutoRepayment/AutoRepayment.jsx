@@ -68,19 +68,19 @@ export default function ArthAutoRepayment() {
         });
         if (localStorage.getItem('userId') !== null && localStorage.getItem('userId') !== '') {
 
-            createCashfreeSubscription(localStorage.getItem('userId'), callback => {
-                console.log(callback)
-                setCashfreeData(callback)
-                if (callback.data.loanId !== undefined) {
-                    getNach(callback.data.loanId)
-                    checkMandate(callback.data.loanId)
-                    checkMandateisdone(callback.data.loanId)
-                    getloanCalc(callback.data.loanId)
-                }
-                if (callback.message === 'success') {
-                    setProceedButton(false)
-                }
-            })
+            // createCashfreeSubscription(localStorage.getItem('userId'), callback => {
+            //     console.log(callback)
+            //     setCashfreeData(callback)
+            //     if (callback.data.loanId !== undefined) {
+            //         getNach(callback.data.loanId)
+            //         checkMandate(callback.data.loanId)
+            //         checkMandateisdone(callback.data.loanId)
+            //         getloanCalc(callback.data.loanId)
+            //     }
+            //     if (callback.message === 'success') {
+            //         setProceedButton(false)
+            //     }
+            // })
             getBankListByUserId(localStorage.getItem('userId'), callBack => {
                 if (callBack.data) {
                     // let Data = JSON.parse(callBack.data.allBankDetails);
@@ -203,8 +203,26 @@ export default function ArthAutoRepayment() {
             setNachData(callback.data)
         })
     }
+    const getCashfree=()=>{
+        createCashfreeSubscription(localStorage.getItem('userId'), callback => {
+            console.log(callback)
+            setCashfreeData(callback)
+            if (callback.data.loanId !== undefined) {
+                getNach(callback.data.loanId)
+                checkMandate(callback.data.loanId)
+                checkMandateisdone(callback.data.loanId)
+                getloanCalc(callback.data.loanId)
+
+            }
+            if (callback.message === 'success') {
+                // setProceedButton(false)
+                handleNext('first')
+            }
+        })
+    }
     const handleNext = (type) => {
         if (type === 'first') {
+       
             console.log(cashFreeData.data.loanId)
             if (emiAmount > 15000) {
                 setPaymentType('E_MANDATE')
@@ -465,7 +483,7 @@ export default function ArthAutoRepayment() {
                     <div style={{ display: "flex" }}>
                         <img src={EmandateImg} alt="" style={{ maxWidth: "30%", margin: "2rem auto" }} />
                     </div>
-                    <button disabled={proceedButton} onClick={() => handleNext('first')} className={'submit' + (!proceedButton ? "" : " disabled")}>Proceed</button>
+                    <button  onClick={() => getCashfree('first')} className={'submit'}>Proceed</button>
                     {proceedButton ? <h5 className="text-center" style={{ color: 'red' }}>{cashFreeData !== '' && cashFreeData.data ? cashFreeData.data : ''}</h5> : ""}
                 </>
                 : ""}

@@ -18,9 +18,9 @@ const SearchFlex = () => {
                 navigate(routes.ARTH_PERSONAL_DETAILS)
             }
         })
-        setTimeout(() => {
-            navigate(routes.FLEX_APPROVAL_SCREEN)
-        }, 5000);
+        // setTimeout(() => {
+        //     navigate(routes.FLEX_APPROVAL_SCREEN)
+        // }, 5000);
     })
     return (
         <main className="waitingForApproval">
