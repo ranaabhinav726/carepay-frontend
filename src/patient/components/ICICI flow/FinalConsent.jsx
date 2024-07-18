@@ -168,7 +168,7 @@ function FinalConsent(){
 
                     length={6}
                     value={otp}
-                    setValue={setOtp}
+                    onChange={(e)=>setOtp(e.target.value)}
                     placeholder="______"
                     styles={{
                         letterSpacing : "10px"
@@ -186,7 +186,7 @@ function FinalConsent(){
             </div>
 
             <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
-                <input autoComplete="off" checked={consent} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F"}} type="checkbox" name="" id="kfsConsentCheckbox" />
+                <input autoComplete="off" onChange={(e)=>setConsent(e.target.checked)} checked={consent} style={{height:"16px", aspectRatio:"1/1", accentColor:"#514C9F",width:'20px'}} type="checkbox" name="" id="kfsConsentCheckbox" />
                 <label htmlFor="kfsConsentCheckbox" onClick={()=>downloadAndSaveKfs()} style={{userSelect:"none"}}>I agree to the <span style={{color:"#000000", fontWeight:"600", textDecoration:"underline", cursor:"pointer"}}>Key fact Statement</span></label>
             </div>
             <button className={"submit" + (!consent?" disabled" : "")} onClick={()=>handleSubmit()}>Submit OTP</button>
