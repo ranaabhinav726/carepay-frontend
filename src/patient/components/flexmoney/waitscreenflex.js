@@ -5,7 +5,6 @@ import { createOrderApiFm, webHookCallApiFlexMoney } from './actioncreator';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../layout/Routes';
 
-const BASE_URL = 'https://your-base-url.com/'; // Replace with your actual base URL
 
 const CheckoutComponent = () => {
     let navigate=useNavigate()

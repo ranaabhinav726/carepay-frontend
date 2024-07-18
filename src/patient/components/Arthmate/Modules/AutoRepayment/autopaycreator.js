@@ -146,3 +146,21 @@ export const getemiApi = (loanId, callBack) => {
             }
         });
 };
+export const getSubscriptionStatusApi = (loanId, callBack) => {
+    axios.get(APIS.GET_SUBSCRIPTION_STATUS + loanId )
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};

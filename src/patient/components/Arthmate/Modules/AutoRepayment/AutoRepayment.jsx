@@ -10,7 +10,7 @@ import { BsCheck } from "react-icons/bs";
 import BottomPopOverModal from "../../comps/BottomPopOverModal";
 import lottie from "lottie-web";
 import animationData from '../../../../assets/GIFs/Comp 1.json'
-import { createAuthRequest, getBankListByUserId, createCashfreeSubscription, getTxnApi, getPaymentStatusApi, verifyUpiAPi, getemiApi } from "./autopaycreator";
+import { createAuthRequest, getBankListByUserId, createCashfreeSubscription, getTxnApi, getPaymentStatusApi, verifyUpiAPi, getemiApi, getSubscriptionStatusApi } from "./autopaycreator";
 import PaymentImg from '../../assets/payment.svg'
 import Logo from '../../../../assets/Logo-carepay.svg'
 import Happyface from '../../assets/happyface.svg'
@@ -203,26 +203,43 @@ export default function ArthAutoRepayment() {
             setNachData(callback.data)
         })
     }
-    const getCashfree=()=>{
-        createCashfreeSubscription(localStorage.getItem('userId'), callback => {
-            console.log(callback)
-            setCashfreeData(callback)
-            if (callback.data.loanId !== undefined) {
-                getNach(callback.data.loanId)
-                checkMandate(callback.data.loanId)
-                checkMandateisdone(callback.data.loanId)
-                getloanCalc(callback.data.loanId)
+    const getCashfree = () => {
+        getSubscriptionStatusApi(localStorage.getItem('userId'), callBack => {
+            if (callBack.data === 'Subscription plan details not found !!!') {
+                createCashfreeSubscription(localStorage.getItem('userId'), callback => {
+                    console.log(callback)
+                    setCashfreeData(callback)
+                    if (callback.data.loanId !== undefined) {
+                        getNach(callback.data.loanId)
+                        checkMandate(callback.data.loanId)
+                        checkMandateisdone(callback.data.loanId)
+                        getloanCalc(callback.data.loanId)
+                        if (callback.message === 'success') {
+                            handleNext('first')
+                        }
+
+                    }
+                    // if (callback.message === 'success') {
+                    //     // setProceedButton(false)
+                    //     handleNext('first')
+                    // }
+                })
+            }
+            if (callBack.data.umrm !== undefined && callBack.data.umrm === '') {
+                setScreenState('EMANDATE')
 
             }
-            if (callback.message === 'success') {
-                // setProceedButton(false)
-                handleNext('first')
+            if (callBack.data.umrm !== undefined && callBack.data.umrm !== '') {
+                setScreenState('netbankingrefresh')
+
             }
+
         })
+
     }
     const handleNext = (type) => {
         if (type === 'first') {
-       
+
             console.log(cashFreeData.data.loanId)
             if (emiAmount > 15000) {
                 setPaymentType('E_MANDATE')
@@ -428,44 +445,44 @@ export default function ArthAutoRepayment() {
         }
     };
 
-        // const redirectUrl = "https://enach.npci.org.in/onmags/sendRequest";
+    // const redirectUrl = "https://enach.npci.org.in/onmags/sendRequest";
 
-        const handleButtonClick = (apidata,link) => {
-            let data2 = JSON.parse(apidata)
-            const requestData = {
-                MandateReqDoc: data2.MandateReqDoc,
-                AuthMode: data2.AuthMode,
-                BankID: data2.BankID,
-                CheckSumVal: data2.CheckSumVal,
-                MerchantID: data2.MerchantID,
-                SPID: data2.SPID
-    
-            };
-            try {
-                const data = JSON.parse(apidata);
-                redirectToUrl(link, data);
-            } catch (error) {
-                console.error('Invalid JSON format:', error);
-            }
+    const handleButtonClick = (apidata, link) => {
+        let data2 = JSON.parse(apidata)
+        const requestData = {
+            MandateReqDoc: data2.MandateReqDoc,
+            AuthMode: data2.AuthMode,
+            BankID: data2.BankID,
+            CheckSumVal: data2.CheckSumVal,
+            MerchantID: data2.MerchantID,
+            SPID: data2.SPID
+
         };
+        try {
+            const data = JSON.parse(apidata);
+            redirectToUrl(link, data);
+        } catch (error) {
+            console.error('Invalid JSON format:', error);
+        }
+    };
 
-        const redirectToUrl = (url, data) => {
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = url;
+    const redirectToUrl = (url, data) => {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
 
-            Object.keys(data).forEach(key => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = data[key];
-                form.appendChild(input);
-            });
+        Object.keys(data).forEach(key => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        });
 
-            document.body.appendChild(form);
-            form.submit();
-        };
-    
+        document.body.appendChild(form);
+        form.submit();
+    };
+
     const changeUpiId = () => {
         setScreenState('upiId')
         setsentPopup(false)
@@ -483,7 +500,7 @@ export default function ArthAutoRepayment() {
                     <div style={{ display: "flex" }}>
                         <img src={EmandateImg} alt="" style={{ maxWidth: "30%", margin: "2rem auto" }} />
                     </div>
-                    <button  onClick={() => getCashfree('first')} className={'submit'}>Proceed</button>
+                    <button onClick={() => getCashfree('first')} className={'submit'}>Proceed</button>
                     {proceedButton ? <h5 className="text-center" style={{ color: 'red' }}>{cashFreeData !== '' && cashFreeData.data ? cashFreeData.data : ''}</h5> : ""}
                 </>
                 : ""}
