@@ -93,11 +93,12 @@ function FinalConsent(){
 
 
     function handleSubmit(){
-
+        console.log(data,'datadatadatadata')
         if(otp.toString().length < 6){
             showOtpEror()
             return;
         }
+        
 
         let pInstId = data?.pInstId;
         showWaitingModal();
