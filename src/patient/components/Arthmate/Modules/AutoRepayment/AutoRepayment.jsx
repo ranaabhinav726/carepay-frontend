@@ -517,7 +517,7 @@ export default function ArthAutoRepayment() {
         console.log('handleSuccessFlow')
         createAuthRequest(localStorage.getItem('userId'), loanIdFromApi, paymentType, vpa, authCallback => {
             console.log(authCallback);
-            setScreenState('successQrCollect');
+            setScreenState('EMANDATE');
             setAuthData(authCallback.data);
         });
 
