@@ -8,19 +8,20 @@ export const createCashfreeSubscription = (userId, callBack) => {
             callBack(response.data);
         })
         .catch(error => {
-            if (error.response) {
-                console.error('Response error:', error.response.data);
-                callBack({ error: error.response.data });
-            } else if (error.request) {
-                console.error('Request error:', error.request);
-                callBack({ error: 'Request error: No response received' });
-            } else {
-                console.error('Error:', error.message);
-                callBack({ error: 'Error: ' + error.message });
-            }
+            // if (error.response) {
+            //     console.error('Response error:', error.response.data);
+            //     callBack({ error: error.response.data });
+            // } else if (error.request) {
+            //     console.error('Request error:', error.request);
+            //     callBack({ error: 'Request error: No response received' });
+            // } else {
+            //     console.error('Error:', error.message);
+            //     callBack({ error: 'Error: ' + error.message });
+            // }
         });
 };
 export const createAuthRequest = (userId, loanId, type, vpa, callBack) => {
+    console.log(APIS.CREATE_AUTH_REQUEST + userId + '&loanId=' + loanId + '&type=' + type + '&vpa=' + vpa)
     axios.post(APIS.CREATE_AUTH_REQUEST + userId + '&loanId=' + loanId + '&type=' + type + '&vpa=' + vpa)
         .then(response => {
             callBack(response.data);
@@ -116,16 +117,16 @@ export const getTxnApi = (userId, callBack) => {
             callBack(response.data);
         })
         .catch(error => {
-            if (error.response) {
-                console.error('Response error:', error.response.data);
-                callBack({ error: error.response.data });
-            } else if (error.request) {
-                console.error('Request error:', error.request);
-                callBack({ error: 'Request error: No response received' });
-            } else {
-                console.error('Error:', error.message);
-                callBack({ error: 'Error: ' + error.message });
-            }
+            // if (error.response) {
+            //     console.error('Response error:', error.response.data);
+            //     callBack({ error: error.response.data });
+            // } else if (error.request) {
+            //     console.error('Request error:', error.request);
+            //     callBack({ error: 'Request error: No response received' });
+            // } else {
+            //     console.error('Error:', error.message);
+            //     callBack({ error: 'Error: ' + error.message });
+            // }
         });
 };
 export const getemiApi = (loanId, callBack) => {
@@ -147,20 +148,12 @@ export const getemiApi = (loanId, callBack) => {
         });
 };
 export const getSubscriptionStatusApi = (loanId, callBack) => {
+    console.log(APIS.GET_SUBSCRIPTION_STATUS + loanId)
     axios.get(APIS.GET_SUBSCRIPTION_STATUS + loanId )
         .then(response => {
             callBack(response.data);
         })
         .catch(error => {
-            if (error.response) {
-                console.error('Response error:', error.response.data);
-                callBack({ error: error.response.data });
-            } else if (error.request) {
-                console.error('Request error:', error.request);
-                callBack({ error: 'Request error: No response received' });
-            } else {
-                console.error('Error:', error.message);
-                callBack({ error: 'Error: ' + error.message });
-            }
+          
         });
 };

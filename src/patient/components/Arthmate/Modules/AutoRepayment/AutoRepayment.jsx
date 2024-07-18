@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Header } from "../../comps/Header";
 import EmandateImg from '../../assets/emandate.png'
 import Paytm from '../../assets/paytm.png'
@@ -56,7 +56,9 @@ export default function ArthAutoRepayment() {
     const [bankId, setBankId] = useState('');
     const [sentPopup, setsentPopup] = useState(true);
     const [emiAmount, setEmiAmount] = useState(15001);
+    const [, updateState] = React.useState();
 
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     let navigate = useNavigate()
     useEffect(() => {
@@ -203,59 +205,25 @@ export default function ArthAutoRepayment() {
             setNachData(callback.data)
         })
     }
-    const getCashfree = () => {
-        getSubscriptionStatusApi(localStorage.getItem('userId'), callBack => {
-            if (callBack.data === 'Subscription plan details not found !!!') {
-                createCashfreeSubscription(localStorage.getItem('userId'), callback => {
-                    console.log(callback)
-                    setCashfreeData(callback)
-                    if (callback.data.loanId !== undefined) {
-                        getNach(callback.data.loanId)
-                        checkMandate(callback.data.loanId)
-                        checkMandateisdone(callback.data.loanId)
-                        getloanCalc(callback.data.loanId)
-                        if (callback.message === 'success') {
-                            handleNext('first')
-                        }
-
-                    }
-                    // if (callback.message === 'success') {
-                    //     // setProceedButton(false)
-                    //     handleNext('first')
-                    // }
-                })
-            }
-            if (callBack.data.umrm !== undefined && callBack.data.umrm === '') {
-                setScreenState('EMANDATE')
-
-            }
-            if (callBack.data.umrm !== undefined && callBack.data.umrm !== '') {
-                setScreenState('netbankingrefresh')
-
-            }
-
-        })
-
-    }
     const handleNext = (type) => {
+        console.log(type, cashFreeData)
         if (type === 'first') {
-
             console.log(cashFreeData.data.loanId)
-            if (emiAmount > 15000) {
-                setPaymentType('E_MANDATE')
+            // if (emiAmount > 15000) {
+            setPaymentType('E_MANDATE')
 
-                createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, 'E_MANDATE', vpa, callback => {
-                    console.log(callback)
-                    setScreenState('EMANDATE')
-                    setAuthData(callback.data)
-                })
-            } else if (emiAmount <= 15000) {
-                createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, callback => {
-                    console.log(callback)
-                    setScreenState('methodSelection')
-                    setAuthData(callback.data)
-                })
-            }
+            createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, 'E_MANDATE', vpa, callback => {
+                console.log(callback, 'EMANDATEEMANDATEEMANDATE')
+                setScreenState('EMANDATE')
+                setAuthData(callback.data)
+            })
+            // } else if (emiAmount <= 15000) {
+            //     createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, callback => {
+            //         console.log(callback)
+            //         setScreenState('methodSelection')
+            //         setAuthData(callback.data)
+            //     })
+            // }
 
 
         }
@@ -489,6 +457,64 @@ export default function ArthAutoRepayment() {
         setVerified(false)
 
     }
+    const getnewFlowCheck = () => {
+        const userId = localStorage.getItem('userId');
+    
+        getSubscriptionStatusApi(userId, callBack => {
+            console.log(callBack.data);
+    
+            if (callBack.data === 'Subscription plan details not found !!!') {
+                createCashfreeSubscription(userId, handleSubscriptionCallback);
+            } else if (callBack.data.umrm !== undefined && callBack.data.umrm !== '') {
+                setScreenState('netbankingrefresh');
+            } else if (!callBack.data.umrm || callBack.data.umrm === '') {
+                if ((callBack.data.authLink === '' || callBack.data.authLink === undefined) && (callBack.data.status === 'FAILED' || callBack.data.status === 'CANCELLED')) {
+                    createCashfreeSubscription(userId, handleSubscriptionCallback);
+                } else {
+                    handleSuccessFlow(callBack);
+                }
+            }
+        });
+    };
+    
+    const handleSubscriptionCallback = callback => {
+        console.log(callback);
+        setCashfreeData(callback);
+        forceUpdate();
+    
+        if (callback.data.loanId !== undefined) {
+            const loanId = callback.data.loanId;
+            getNach(loanId);
+            checkMandate(loanId);
+            checkMandateisdone(loanId);
+            getloanCalc(loanId);
+        }
+    
+        if (callback.message === 'success') {
+            setPaymentType('E_MANDATE');
+            createAuthRequest(localStorage.getItem('userId'), callback.data.loanId, 'E_MANDATE', vpa, authCallback => {
+                console.log(authCallback, 'EMANDATEEMANDATEEMANDATE');
+                setScreenState('EMANDATE');
+                setAuthData(authCallback.data);
+            });
+        }
+    };
+    
+    const handleSuccessFlow = callBack => {
+        setShowPopOver(true);
+        lottie.loadAnimation({
+            container: document.querySelector("#doneAnimation"),
+            animationData: animationData,
+            renderer: "canvas"
+        });
+    
+        createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, authCallback => {
+            console.log(authCallback);
+            setScreenState('successQrCollect');
+            setAuthData(authCallback.data);
+        });
+    };
+    
     return (
         <main className="personalDetails" style={{ position: "relative" }}>
 
@@ -500,8 +526,8 @@ export default function ArthAutoRepayment() {
                     <div style={{ display: "flex" }}>
                         <img src={EmandateImg} alt="" style={{ maxWidth: "30%", margin: "2rem auto" }} />
                     </div>
-                    <button onClick={() => getCashfree('first')} className={'submit'}>Proceed</button>
-                    {proceedButton ? <h5 className="text-center" style={{ color: 'red' }}>{cashFreeData !== '' && cashFreeData.data ? cashFreeData.data : ''}</h5> : ""}
+                    <button onClick={() => getnewFlowCheck('first')} className={'submit'}>Proceed</button>
+                    {/* {proceedButton ? <h5 className="text-center" style={{ color: 'red' }}>{cashFreeData !== '' && cashFreeData.data ? cashFreeData.data : ''}</h5> : ""} */}
                 </>
                 : ""}
             {screenState === "methodSelection" ?
