@@ -56,13 +56,18 @@ export default function ArthAutoRepayment() {
     const [bankId, setBankId] = useState('');
     const [sentPopup, setsentPopup] = useState(true);
     const [emiAmount, setEmiAmount] = useState(15001);
+    const [loanIdFromApi, setLoanId] = useState('');
+
     const [, updateState] = React.useState();
 
     const forceUpdate = React.useCallback(() => updateState({}), []);
 
     let navigate = useNavigate()
     useEffect(() => {
-
+        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+            .then((response) => {
+                setLoanId(response.data.data.loanId)
+            })
         lottie.loadAnimation({
             container: document.querySelector("#completeAnimation"),
             animationData: completeAnimation,
@@ -73,11 +78,11 @@ export default function ArthAutoRepayment() {
             // createCashfreeSubscription(localStorage.getItem('userId'), callback => {
             //     console.log(callback)
             //     setCashfreeData(callback)
-            //     if (callback.data.loanId !== undefined) {
-            //         getNach(callback.data.loanId)
-            //         checkMandate(callback.data.loanId)
-            //         checkMandateisdone(callback.data.loanId)
-            //         getloanCalc(callback.data.loanId)
+            //     if (loanIdFromApi !== undefined) {
+            //         getNach(loanIdFromApi)
+            //         checkMandate(loanIdFromApi)
+            //         checkMandateisdone(loanIdFromApi)
+            //         getloanCalc(loanIdFromApi)
             //     }
             //     if (callback.message === 'success') {
             //         setProceedButton(false)
@@ -208,17 +213,17 @@ export default function ArthAutoRepayment() {
     const handleNext = (type) => {
         console.log(type, cashFreeData)
         if (type === 'first') {
-            console.log(cashFreeData.data.loanId)
+            console.log(loanIdFromApi)
             // if (emiAmount > 15000) {
             setPaymentType('E_MANDATE')
 
-            createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, 'E_MANDATE', vpa, callback => {
+            createAuthRequest(localStorage.getItem('userId'), loanIdFromApi, 'E_MANDATE', vpa, callback => {
                 console.log(callback, 'EMANDATEEMANDATEEMANDATE')
                 setScreenState('EMANDATE')
                 setAuthData(callback.data)
             })
             // } else if (emiAmount <= 15000) {
-            //     createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, callback => {
+            //     createAuthRequest(localStorage.getItem('userId'), loanIdFromApi, paymentType, vpa, callback => {
             //         console.log(callback)
             //         setScreenState('methodSelection')
             //         setAuthData(callback.data)
@@ -228,14 +233,14 @@ export default function ArthAutoRepayment() {
 
         }
         if (type === 'second') {
-            console.log(cashFreeData.data.loanId)
+            console.log(loanIdFromApi)
             setShowPopOver(true)
             lottie.loadAnimation({
                 container: document.querySelector("#doneAnimation"),
                 animationData: animationData,
                 renderer: "canvas"
             });
-            createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, callback => {
+            createAuthRequest(localStorage.getItem('userId'), loanIdFromApi, paymentType, vpa, callback => {
                 console.log(callback)
 
                 setScreenState('successQrCollect')
@@ -251,7 +256,7 @@ export default function ArthAutoRepayment() {
             animationData: completeAnimation,
             renderer: "canvas"
         });
-        getPaymentStatusApi(cashFreeData.data.loanId, paymentType, callback => {
+        getPaymentStatusApi(loanIdFromApi, paymentType, callback => {
             console.log(callback)
             if (callback.message === 'success') {
                 axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
@@ -289,7 +294,7 @@ export default function ArthAutoRepayment() {
     }
     const refreshStatusBank = () => {
 
-        getPaymentStatusApi(cashFreeData.data.loanId, 'E_MANDATE', callback => {
+        getPaymentStatusApi(loanIdFromApi, 'E_MANDATE', callback => {
             console.log(callback)
             if (callback.message === 'success') {
                 axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
@@ -363,7 +368,7 @@ export default function ArthAutoRepayment() {
         if (authmode !== '') {
             setPaymentType('E_MANDATE')
             setScreenState('summary')
-            // axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + cashFreeData.data.loanId + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
+            // axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + loanIdFromApi + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
             //     .then(response => {
             //         if (response.data.message === 'success') {
             //             window.open(response.data.data, '_blank');
@@ -376,7 +381,7 @@ export default function ArthAutoRepayment() {
     const cashfreeRedirect = () => {
         let authmode = bankingType === 'debit' ? 'DEBIT_CARD' : bankingType === 'netBanking' ? 'NET_BANKING' : ''
 
-        axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + cashFreeData.data.loanId + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
+        axios.post(APIS.CREATE_AUTH_REQUEST + localStorage.getItem('userId') + '&loanId=' + loanIdFromApi + '&type=' + 'E_MANDATE' + '&authMode=' + authmode + '&bankId=' + bankId)
             .then(response => {
                 if (response.data.message === 'success') {
                     // window.open(response.data.data, '_blank');
@@ -459,47 +464,49 @@ export default function ArthAutoRepayment() {
     }
     const getnewFlowCheck = () => {
         const userId = localStorage.getItem('userId');
-    
+
         getSubscriptionStatusApi(userId, callBack => {
             console.log(callBack.data);
-    
+
             if (callBack.data === 'Subscription plan details not found !!!') {
                 createCashfreeSubscription(userId, handleSubscriptionCallback);
             } else if (callBack.data.umrm !== undefined && callBack.data.umrm !== '') {
                 setScreenState('netbankingrefresh');
-            } else if (!callBack.data.umrm || callBack.data.umrm === '') {
+            }
+            else if (!callBack.data.umrm || callBack.data.umrm === '') {
                 if ((callBack.data.authLink === '' || callBack.data.authLink === undefined) && (callBack.data.status === 'FAILED' || callBack.data.status === 'CANCELLED')) {
                     createCashfreeSubscription(userId, handleSubscriptionCallback);
                 } else {
+                    console.log('yes')
                     handleSuccessFlow(callBack);
                 }
             }
         });
     };
-    
+
     const handleSubscriptionCallback = callback => {
         console.log(callback);
         setCashfreeData(callback);
         forceUpdate();
-    
-        if (callback.data.loanId !== undefined) {
-            const loanId = callback.data.loanId;
+
+        if (loanIdFromApi !== undefined) {
+            const loanId = loanIdFromApi;
             getNach(loanId);
             checkMandate(loanId);
             checkMandateisdone(loanId);
             getloanCalc(loanId);
         }
-    
+
         if (callback.message === 'success') {
             setPaymentType('E_MANDATE');
-            createAuthRequest(localStorage.getItem('userId'), callback.data.loanId, 'E_MANDATE', vpa, authCallback => {
+            createAuthRequest(localStorage.getItem('userId'), loanIdFromApi, 'E_MANDATE', vpa, authCallback => {
                 console.log(authCallback, 'EMANDATEEMANDATEEMANDATE');
                 setScreenState('EMANDATE');
                 setAuthData(authCallback.data);
             });
         }
     };
-    
+
     const handleSuccessFlow = callBack => {
         setShowPopOver(true);
         lottie.loadAnimation({
@@ -507,14 +514,15 @@ export default function ArthAutoRepayment() {
             animationData: animationData,
             renderer: "canvas"
         });
-    
-        createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, authCallback => {
+        console.log('handleSuccessFlow')
+        createAuthRequest(localStorage.getItem('userId'), loanIdFromApi, paymentType, vpa, authCallback => {
             console.log(authCallback);
             setScreenState('successQrCollect');
             setAuthData(authCallback.data);
         });
+
     };
-    
+
     return (
         <main className="personalDetails" style={{ position: "relative" }}>
 
