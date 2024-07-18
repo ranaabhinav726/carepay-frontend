@@ -135,7 +135,7 @@ function FinalConsent(){
     }
 
     return(
-        <main style={{display: "flex", flexDirection:"column", gap:"1rem", position:"relative"}}>
+        <main className="employmentDetails" style={{display: "flex", flexDirection:"column", gap:"1rem", position:"relative"}}>
             <Header progressbarDisplay='none' />
             <StepBar currStep={3} />
 
@@ -165,6 +165,7 @@ function FinalConsent(){
             <div className="number-group">
                 <input autoComplete="off"Box
                     type="number"
+
                     length={6}
                     value={otp}
                     setValue={setOtp}
