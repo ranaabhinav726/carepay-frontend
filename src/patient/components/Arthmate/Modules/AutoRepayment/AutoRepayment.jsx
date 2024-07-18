@@ -459,30 +459,29 @@ export default function ArthAutoRepayment() {
     }
     const getnewFlowCheck = () => {
         const userId = localStorage.getItem('userId');
-
+    
         getSubscriptionStatusApi(userId, callBack => {
             console.log(callBack.data);
-
+    
             if (callBack.data === 'Subscription plan details not found !!!') {
                 createCashfreeSubscription(userId, handleSubscriptionCallback);
             } else if (callBack.data.umrm !== undefined && callBack.data.umrm !== '') {
                 setScreenState('netbankingrefresh');
+            } else if (!callBack.data.umrm || callBack.data.umrm === '') {
+                if ((callBack.data.authLink === '' || callBack.data.authLink === undefined) && (callBack.data.status === 'FAILED' || callBack.data.status === 'CANCELLED')) {
+                    createCashfreeSubscription(userId, handleSubscriptionCallback);
+                } else {
+                    handleSuccessFlow(callBack);
+                }
             }
-            if ((callBack.data.status !== 'FAILED' || callBack.data.status !== 'CANCELLED')) {
-                createCashfreeSubscription(userId, handleSubscriptionCallback);
-            } else {
-
-                handleSuccessFlow(callBack);
-            }
-
         });
     };
-
+    
     const handleSubscriptionCallback = callback => {
         console.log(callback);
         setCashfreeData(callback);
         forceUpdate();
-
+    
         if (callback.data.loanId !== undefined) {
             const loanId = callback.data.loanId;
             getNach(loanId);
@@ -490,7 +489,7 @@ export default function ArthAutoRepayment() {
             checkMandateisdone(loanId);
             getloanCalc(loanId);
         }
-
+    
         if (callback.message === 'success') {
             setPaymentType('E_MANDATE');
             createAuthRequest(localStorage.getItem('userId'), callback.data.loanId, 'E_MANDATE', vpa, authCallback => {
@@ -500,7 +499,7 @@ export default function ArthAutoRepayment() {
             });
         }
     };
-
+    
     const handleSuccessFlow = callBack => {
         setShowPopOver(true);
         lottie.loadAnimation({
@@ -508,14 +507,14 @@ export default function ArthAutoRepayment() {
             animationData: animationData,
             renderer: "canvas"
         });
-
+    
         createAuthRequest(localStorage.getItem('userId'), cashFreeData.data.loanId, paymentType, vpa, authCallback => {
             console.log(authCallback);
             setScreenState('successQrCollect');
             setAuthData(authCallback.data);
         });
     };
-
+    
     return (
         <main className="personalDetails" style={{ position: "relative" }}>
 
