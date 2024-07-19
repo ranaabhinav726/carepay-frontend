@@ -111,7 +111,7 @@ function FinalConsent(){
                 let txnId = data?.txnId;
                 confirmUser(loanAmount, tenure, txnId, pInstId, res=>{
                     if(res?.data?.data?.status === 1){
-                        navigate("/patient/LoanAppSuccessful")
+                        navigate("/patient/final")
                     }else{
                         hideWaitingModal()
                     }

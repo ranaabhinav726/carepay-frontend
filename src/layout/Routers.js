@@ -98,6 +98,7 @@ export const CongratsPreApprovedICICI = React.lazy(() => import('../patient/comp
 export const EmiOptions = React.lazy(() => import('../patient/components/ICICI flow/EmiOptions'));
 export const PanVerificationIcici = React.lazy(() => import('../patient/components/ICICI flow/PanVerificationIcici'));
 export const FinalConsent = React.lazy(() => import('../patient/components/ICICI flow/FinalConsent'));
+export const ICICI_FINAL = React.lazy(() => import('../patient/components/ICICI flow/finalscreen'));
 
 export const FibeMobileNumberVerification = React.lazy(() => import('../patient/components/Fibe flow/FibeMobileNumberVerification'));
 export const FibeOtpAuthentication = React.lazy(() => import('../patient/components/Fibe flow/FibeOtpAuthentication'));

@@ -150,6 +150,7 @@ function AppRouter() {
           <Route path={OurRoutes.PAN_VERIFICATION_ICICI} element={<Routers.PanVerificationIcici />} />
           <Route path={OurRoutes.CONGRATS_APPROVED_ICICI} element={<Routers.CongratsApprovedICICI />} />
           <Route path={OurRoutes.FINAL_CONSENT} element={<Routers.FinalConsent />} />
+          <Route path={OurRoutes.ICICI_FINAL} element={<Routers.ICICI_FINAL />} />
 
           <Route path={OurRoutes.FIBE_MOBILE_NUMBER_VERIFICATION} element={<Routers.FibeMobileNumberVerification />} />
           <Route path={OurRoutes.FIBE_OTP_AUTHENTICATION} element={<Routers.FibeOtpAuthentication />} />

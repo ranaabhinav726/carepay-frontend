@@ -140,6 +140,8 @@ const routes = {
   ARTH_AADHAAR_VERIFICATION: '/patient/ArthAadhaarVerification',
   ARTH_AADHAAR_PHOTO: '/patient/ArthAadhaarPhoto',
   ARTH_PAN_PHOTO: '/patient/ArthPANPhoto',
+  ICICI_FINAL: '/patient/final',
+
   ///SCOUTS///
   SCOUTS_MAIN: '/scouts',
   SCOUTS_LOGIN: '/scouts/login',
