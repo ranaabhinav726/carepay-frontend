@@ -140,7 +140,7 @@ export default function ArthAadhaarVerification() {
                                     }, 5000);
 
                                 } else {
-                                    setError(callback.data.data)
+                                    // setError(callback.data.data)
 
                                     navigate(routes.ARTH_AADHAAR_PHOTO)
                                 }
