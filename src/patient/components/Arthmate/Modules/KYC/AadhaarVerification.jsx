@@ -140,6 +140,8 @@ export default function ArthAadhaarVerification() {
                                     }, 5000);
 
                                 } else {
+                                    setError(callback.data.data)
+
                                     navigate(routes.ARTH_AADHAAR_PHOTO)
                                 }
                             })
@@ -148,7 +150,8 @@ export default function ArthAadhaarVerification() {
                     } else {
                         setLoader(false)
 
-                        navigate(routes.ARTH_AADHAAR_PHOTO)
+                        // navigate(routes.ARTH_AADHAAR_PHOTO)
+                        setError(callback.data.data)
                     }
                 })
         } else {
@@ -161,9 +164,9 @@ export default function ArthAadhaarVerification() {
 
     return (
         <main>
-             {loaderState ?
+            {loaderState ?
                 <>
-                   <Loadinggif/>
+                    <Loadinggif />
                 </>
                 : ""}
             {screenState === "sendingOtp" &&
@@ -229,7 +232,7 @@ export default function ArthAadhaarVerification() {
                 <>
                     <Header progressBar="hidden" />
                     {/* <div style={{ marginTop: "12%" }} id="doneAnim"></div> */}
-                    <CompletedGif text={'Aadhaar verified!'}/>
+                    <CompletedGif text={'Aadhaar verified!'} />
                     {/* <p style={{ color: "#514C9F", fontWeight: "bold", fontSize: "18px", textAlign: "center" }}>Aadhaar verified!</p> */}
                 </>
             }

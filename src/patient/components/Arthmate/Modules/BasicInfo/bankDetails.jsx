@@ -431,21 +431,22 @@ const BankDetails = () => {
                             />
                             <span className="fieldError">Please enter a correct IFSC</span>
                         </div>
+                        <span>
+                            Bank name : <span style={{ opacity: "0.6" }}>{bankName || ""}</span>
+                        </span>
+
                         <div className="bankName">
-                            <p>Name as on Bank </p>
+                            <p>Your Name (as per your bank account) </p>
                             <input
                                 id="nameAsBankAccount"
                                 defaultValue={nameAsBankAccount ?? ""}
                                 onChange={(e) => setnameAsBankAccount(e.target.value)}
                                 type="text"
-                                placeholder="Enter your Name as on bank"
+                                placeholder="Enter Your Name (as per your bank account)"
                             />
                             <span className="fieldError">This field can't be empty.</span>
                         </div>
 
-                        <span>
-                            Bank name : <span style={{ opacity: "0.6" }}>{bankName || ""}</span>
-                        </span>
 
                         <button onClick={() => onSubmit()} className="submit">Submit</button>
                         <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} />
