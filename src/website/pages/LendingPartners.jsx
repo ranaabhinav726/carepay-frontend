@@ -61,7 +61,7 @@ export default function LendingPartners(){
                     bgColor={"#ECEBFF"} 
                     logo={IncredLogo}
                     lenderName={"Incred Financial Services Limited"} 
-                    policyLink={"https://www.incred.com/grievance.html"}
+                    policyLink={"https://www.incred.com/grievance-bee-secure.html"}
                     officerTitle="Grievance redressal officer: " 
                     officerName={"Mr. Vaidyanathan Ramamoorthy"}
                     phoneNum={"022-42117799"}
@@ -177,6 +177,15 @@ return(
                 <img src={Globe} style={{padding:"6px", height:"34px", aspectRatio:"1/1", background:"white", borderRadius:"4px"}} alt="" />
                 <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>
                     <a target="_blank" href={policyLink}>{policyLink}</a>
+                </span>
+            </div>
+        </div>
+        <p style={{fontSize:"14px", fontWeight:"700", margin:"1rem 0 0.8rem 0"}}>Partnership</p>
+        <div>
+            <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
+                <img src={Globe} style={{padding:"6px", height:"34px", aspectRatio:"1/1", background:"white", borderRadius:"4px"}} alt="" />
+                <span style={{fontSize:"14px", color:"rgba(0,0,0,0.8"}}>
+                    <a target="_blank" href={'https://www.incred.com/home/partnership/ '}>{'https://www.incred.com/home/partnership/ '}</a>
                 </span>
             </div>
         </div>
