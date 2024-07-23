@@ -151,7 +151,7 @@ export default function ArthAadhaarVerification() {
                         setLoader(false)
 
                         // navigate(routes.ARTH_AADHAAR_PHOTO)
-                        setError(callback.data.data)
+                        setError(response.data.data)
                     }
                 })
         } else {
