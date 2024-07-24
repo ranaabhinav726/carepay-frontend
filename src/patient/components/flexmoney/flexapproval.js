@@ -10,6 +10,7 @@ import Loadinggif from '../../../utils/loader/loadergif';
 import routes from '../../../layout/Routes';
 import { getLogoApi } from './actioncreator';
 import ExploreOffer from './exporepopup';
+import LogoGrid from './logogrid';
 
 // let refID = localStorage.getItem("new_reference_id") || "FGDTH12345RR";
 
@@ -40,7 +41,15 @@ const Congrats = () => {
 
     }
 
-
+    const userData1 = {
+        bankLogo: [
+          'https://picsum.photos/id/237/200/300', // Dummy image 1
+          'https://picsum.photos/id/237/200/300', // Dummy image 2
+          'https://picsum.photos/id/237/200/300', // Dummy image 3
+          'https://picsum.photos/id/237/200/300', // Dummy image 4
+          // Add more dummy images as needed
+        ],
+      };
 
     return (
         <>
@@ -58,8 +67,8 @@ const Congrats = () => {
                         <BiRupee /> {amount}
                     </div>
                     <p style={{ textAlign: 'center', marginTop: '40px' }}>from your bank</p>
-                    {userData !== '' && userData !== null && userData.bankLogo !== null && userData.bankLogo !== undefined ? <img src={userData.bankLogo} /> : ""}
-
+                    {/* {userData !== '' && userData !== null && userData.bankLogo !== null && userData.bankLogo !== undefined ? <img src={userData.bankLogo} /> : ""} */}
+                    <LogoGrid userData={userData} />
 
                     <button className='submit' style={{ marginTop: '100px' }} onClick={() => submit()}>Proceed with your bank</button>
                     <button className='submit' style={{ background: '#ECEBFF', color: '#504c9a', marginTop: '-2px' }} onClick={() => setShowPopOver('open')}>Explore other offers</button>

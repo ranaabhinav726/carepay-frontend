@@ -2063,3 +2063,17 @@ input.nosubmit {
 
 
 }
+
+  .logo-grid {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px; 
+  }
+  
+  .bank-logo {
+    width: 95%;
+    height: auto; 
+    margin-left: auto;
+    margin-right: auto;
+  }
