@@ -43,13 +43,13 @@ const Congrats = () => {
 
     const userData1 = {
         bankLogo: [
-          'https://picsum.photos/id/237/200/300', // Dummy image 1
-          'https://picsum.photos/id/237/200/300', // Dummy image 2
-          'https://picsum.photos/id/237/200/300', // Dummy image 3
-          'https://picsum.photos/id/237/200/300', // Dummy image 4
-          // Add more dummy images as needed
+            'https://picsum.photos/id/237/200/300', // Dummy image 1
+            'https://picsum.photos/id/237/200/300', // Dummy image 2
+            'https://picsum.photos/id/237/200/300', // Dummy image 3
+            'https://picsum.photos/id/237/200/300', // Dummy image 4
+            // Add more dummy images as needed
         ],
-      };
+    };
 
     return (
         <>
@@ -66,12 +66,16 @@ const Congrats = () => {
                     <div style={{ width: "90%", color: "#149540", height: "max-content", padding: "10px 16px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "700", borderRadius: "4px", background: "#EBFEED" }}>
                         <BiRupee /> {amount}
                     </div>
-                    <p style={{ textAlign: 'center', marginTop: '40px' }}>from your bank</p>
+                    <button className='submit' style={{ marginTop: '50px' }} onClick={() => submit()}>Proceed with your bank</button>
+                    <button className='submit' style={{ background: '#ECEBFF', color: '#504c9a', marginTop: '-2px' }} onClick={() => setShowPopOver('open')}>Explore other offers</button>
+                    <p style={{ textAlign: 'center', marginTop: '20px' ,marginBottom:'20px'}}>Your credit requirement is under the,<br />
+                        pre-approved credit limit(s),<br />
+                        assigned to you by your bank(s).</p>
                     {/* {userData !== '' && userData !== null && userData.bankLogo !== null && userData.bankLogo !== undefined ? <img src={userData.bankLogo} /> : ""} */}
                     <LogoGrid userData={userData} />
 
-                    <button className='submit' style={{ marginTop: '100px' }} onClick={() => submit()}>Proceed with your bank</button>
-                    <button className='submit' style={{ background: '#ECEBFF', color: '#504c9a', marginTop: '-2px' }} onClick={() => setShowPopOver('open')}>Explore other offers</button>
+                    {/* <button className='submit' style={{ marginTop: '100px' }} onClick={() => submit()}>Proceed with your bank</button>
+                    <button className='submit' style={{ background: '#ECEBFF', color: '#504c9a', marginTop: '-2px' }} onClick={() => setShowPopOver('open')}>Explore other offers</button> */}
                     <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.</p>
                     <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>
                         <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>
