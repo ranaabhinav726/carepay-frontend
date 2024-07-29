@@ -28,6 +28,8 @@ import axios from "axios";
 import { env } from "../../../../environment/environment";
 import CompletedGif from "../../../../../utils/loader/completegif";
 import moment from "moment/moment";
+import SadFace from '../../assets/Group (4).svg'
+
 
 export default function ArthAutoRepayment() {
 
@@ -278,6 +280,7 @@ export default function ArthAutoRepayment() {
                             alert(response.data.message)
                         }
                     })
+
             } else {
                 { console.log(paymentType, 'jhgfdfgh') }
                 if (paymentType === 'UPI_QR') {
@@ -297,31 +300,42 @@ export default function ArthAutoRepayment() {
         getPaymentStatusApi(loanIdFromApi, 'E_MANDATE', callback => {
             console.log(callback)
             if (callback.message === 'success') {
-                axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
-                    .then((response) => {
-                        console.log(response);
-                        if (response.data.message === 'success') {
-                            axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
-                                .then((response) => {
-                                    console.log(response)
-                                    if (response.data.message === 'success') {
+                if (callback.data.authStatus !== '' && callback.data.umrnNumber !== '') {
 
-                                        setScreenState('successScreen')
-                                        redirect()
-                                    }
-                                }).catch(error => {
-                                    console.log(error);
+                    axios.patch(env.api_Url + "loanNachApi?userId=" + localStorage.getItem('userId'))
+                        .then((response) => {
+                            console.log(response);
+                            if (response.data.message === 'success') {
+                                axios.put(env.api_Url + "loanStatusApi?userId=" + localStorage.getItem('userId') + '&status=' + 'credit_approved',)
+                                    .then((response) => {
+                                        console.log(response)
+                                        if (response.data.message === 'success') {
+
+                                            setScreenState('successScreen')
+                                            redirect()
+                                        }
+                                    }).catch(error => {
+                                        console.log(error);
+                                    });
+                                lottie.loadAnimation({
+                                    container: document.querySelector("#completeAnimation"),
+                                    animationData: completeAnimation,
+                                    renderer: "canvas"
                                 });
-                            lottie.loadAnimation({
-                                container: document.querySelector("#completeAnimation"),
-                                animationData: completeAnimation,
-                                renderer: "canvas"
-                            });
 
-                        } else {
-                            alert(response.data.message)
-                        }
-                    })
+                            } else {
+                                alert(response.data.message)
+                            }
+                        })
+                } else {
+                    if (callback.data.authStatus == 'Pending') {
+                        
+
+                    }
+                    if (callback.data.authStatus == 'Initialised') {
+                        setScreenState('init')
+                    }
+                }
             } else {
                 { console.log(paymentType, 'jhgfdfgh') }
                 if (paymentType === 'UPI_QR') {
@@ -389,7 +403,7 @@ export default function ArthAutoRepayment() {
                     handleButtonClick(response.data.data.data, response.data.data.link)
                     setScreenState('netbankingrefresh')
                 } else {
-                    setScreenState('physicalmandate')
+                    // setScreenState('physicalmandate')
                 }
             })
     }
@@ -1039,6 +1053,60 @@ export default function ArthAutoRepayment() {
                         your registered contact number
                         <a style={{ color: '#000' }} >+91 {localStorage.getItem('phoneNumber')}</a> to take this forward</p>
                     <a style={{ color: '#000' }} href={"tel:+91 806 948 9655"}>  <button className="submit">Contact Support</button></a>
+
+                </>
+                : ""}
+            {screenState === 'failure' ?
+                <>
+                    <>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <img src={Logo} alt="carepay logo" style={{ height: "30px", aspectRatio: "107/26", margin: "18px auto" }} />
+                        </div>
+                        <div className="text-center">
+                            <img src={SadFace} width={'80px'} />
+                        </div>
+                        <div className="text-center">
+                            <p style={{ color: '#514C9F', marginTop: '20px' }}><b>Hmm!</b></p>
+                            <p style={{ marginTop: '20px' }}>Seems like mandate registration failed.</p>
+                        </div>
+                        <div style={{ background: '#ECEBFF', padding: '5px', borderRadius: '5px', textAlign: 'center', marginTop: '50px' }}>
+                            <p>Kindly try registering your mandate again and make sure you submit correct details to NPCI.</p>
+                            <button className={'submit'} style={{}} onClick={() => setScreenState('EMANDATE')}>Try Again</button>
+                        </div>
+                        <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.</p>
+                        <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>
+                            <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>
+                                Contact Support
+                            </button>
+                        </a>
+                    </>
+
+                </>
+                : ""}
+            {screenState === 'init' ?
+                <>
+                    <>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <img src={Logo} alt="carepay logo" style={{ height: "30px", aspectRatio: "107/26", margin: "18px auto" }} />
+                        </div>
+                        <div className="text-center">
+                            <img src={SadFace} width={'80px'} />
+                        </div>
+                        <div className="text-center">
+                            <p style={{ color: '#514C9F', marginTop: '20px' }}><b>Hmm!</b></p>
+                            <p style={{ marginTop: '20px' }}>Seems like the mandate was not registered!</p>
+                        </div>
+                        <div style={{ background: '#ECEBFF', padding: '5px', borderRadius: '5px', textAlign: 'center', marginTop: '50px' }}>
+                            <p>Kindly try registering your mandate again and make sure you submit correct details to NPCI.</p>
+                            <button className={'submit'} style={{}} onClick={() => cashfreeRedirect('')}>Try Again</button>
+                        </div>
+                        <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>Need help? Reach out to us.</p>
+                        <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>
+                            <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>
+                                Contact Support
+                            </button>
+                        </a>
+                    </>
 
                 </>
                 : ""}

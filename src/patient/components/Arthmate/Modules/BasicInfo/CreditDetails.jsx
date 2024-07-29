@@ -25,7 +25,7 @@ const ArthCreditDetails = () => {
     const [treatment, setTreatment] = useState("");
     const [otherTreatment, setOtherTreatment] = useState("");
 
-    const [borrower, setBorrower] = useState("");
+    const [borrower, setBorrower] = useState("myself");
     let isPatient = true;
     const [patientName, setPatientName] = useState("");
     const [relation, setRelation] = useState("MOTHER");

@@ -58,6 +58,8 @@ const ArthAddressDetails = () => {
     const [isPermAddrSame, setIsPermAddrSame] = useState(false);
 
     const [isDecentroCall, setDecentroCall] = useState(false);
+    const [pincodeError, setWrongPincode] = useState(false);
+    const [pincodeErrorp, setWrongPincodep] = useState(false);
 
     let specialChars = /[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
 
@@ -221,6 +223,60 @@ const ArthAddressDetails = () => {
     // }
 
     async function handleForm() {
+
+        if (!(firstLine)) {
+            console.log(firstLine, pincode, city, state);
+            let elem = document.getElementById('firstLine');
+            if (elem) showErrorOnUI(elem);
+            return;
+
+        }
+
+        let addressWordLength = firstLine.split(" ").length;
+        if (!firstLine || addressWordLength < 2) {
+            let elem = document.getElementById('firstLine');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if (pincode === '' || pincode == 0) {
+            let elem = document.getElementById('pincode');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+        if (pincode.length !== 6) {
+            let elem = document.getElementById('pincode');
+            if (elem) showErrorOnUI(elem);
+            setWrongPincode(true)
+            return;
+        }
+
+        if (!city) {
+            let elem = document.getElementById('city');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+        if (specialChars.test(city)) {
+            let elem = document.getElementById('city');
+            setErrorMsg("Special characters are not allowed.");
+            setTimeout(() => {
+                setErrorMsg("This field can't be empty.");
+            }, 3000);
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if (state === "Select state") {
+            let elem = document.getElementById('state');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+
+        if (state === "Other" && !otherState) {
+            let elem = document.getElementById('otherState');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
         if (isPermAddrSame === false) {
             if (!(firstLineP)) {
                 let elem = document.getElementById('firstLineP');
@@ -239,6 +295,13 @@ const ArthAddressDetails = () => {
             if (pincodeP === '' || pincodeP == 0) {
                 let elem = document.getElementById('pincodeP');
                 if (elem) showErrorOnUI(elem);
+                
+                return;
+            }
+            if (pincodeP.length !== 6 ) {
+                let elem = document.getElementById('pincodeP');
+                if (elem) showErrorOnUI(elem);
+                setWrongPincodep(true)
                 return;
             }
 
@@ -269,53 +332,6 @@ const ArthAddressDetails = () => {
                 return;
             }
 
-        }
-        if (!(firstLine)) {
-            console.log(firstLine, pincode, city, state);
-            let elem = document.getElementById('firstLine');
-            if (elem) showErrorOnUI(elem);
-            return;
-
-        }
-
-        let addressWordLength = firstLine.split(" ").length;
-        if (!firstLine || addressWordLength < 2) {
-            let elem = document.getElementById('firstLine');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
-
-        if (pincode === '' || pincode == 0) {
-            let elem = document.getElementById('pincode');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
-
-        if (!city) {
-            let elem = document.getElementById('city');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
-        if (specialChars.test(city)) {
-            let elem = document.getElementById('city');
-            setErrorMsg("Special characters are not allowed.");
-            setTimeout(() => {
-                setErrorMsg("This field can't be empty.");
-            }, 3000);
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
-
-        if (state === "Select state") {
-            let elem = document.getElementById('state');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
-
-        if (state === "Other" && !otherState) {
-            let elem = document.getElementById('otherState');
-            if (elem) showErrorOnUI(elem);
-            return;
         }
 
         if (!canSubmit) {
@@ -464,7 +480,7 @@ const ArthAddressDetails = () => {
                         min={0}
                         required
                     />
-                    <span className="fieldError">This field can't be empty.</span>
+                    {pincodeError ? <span className="fieldError">Please enter correct 6 digit Pincode.</span> : <span className="fieldError">This field can't be empty.</span>}
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -552,7 +568,9 @@ const ArthAddressDetails = () => {
                                 min={0}
                                 required
                             />
-                            <span className="fieldError">This field can't be empty.</span>
+                            {pincodeErrorp ? <span className="fieldError">Please enter correct 6 digit Pincode.</span> : <span className="fieldError">This field can't be empty.</span>}
+
+                            {/* <span className="fieldError">This field can't be empty.</span> */}
                         </div>
 
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
