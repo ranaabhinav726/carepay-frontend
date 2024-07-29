@@ -96,7 +96,7 @@ const CheckoutComponent = () => {
 
         const script = document.createElement('script');
         script.async = true;
-        script.src = 'https://iccdn.in/web-merchant-sdk-uat/v-1.0/static/instaCred-merchant-sdk.js';
+        script.src = 'https://iccdn.in/web-merchant-sdk/v-1.0/static/instaCred-merchant-sdk.js';
         document.body.appendChild(script);
 
         return () => {
