@@ -123,6 +123,7 @@ function FinalConsent(){
     }
 
     function downloadAndSaveKfs(){
+        console.log('yes i m here')
         if(consent){
             setConsent(false);
             return;
@@ -140,7 +141,7 @@ function FinalConsent(){
             <Header progressbarDisplay='none' />
             <StepBar currStep={3} />
 
-            <h3 style={{margin:"1rem 0"}}>Accept your credit & tenure</h3>
+            <h3 style={{}}>Accept your credit & tenure</h3>
 
             <div style={{background:"#EBFEED", borderRadius:"4px", padding:"1rem"}}>
                 <div style={{display:"flex", flexDirection:"column", gap:"8px", marginBottom:"1rem"}}>

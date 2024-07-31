@@ -18,7 +18,7 @@ export function preEligibility(number, callback) {
     .then((res) => {
       callback(res);
     })
-    .catch((e) => {});
+    .catch((e) => { });
 }
 
 export function eligibility(
@@ -52,7 +52,7 @@ export function eligibility(
     });
 }
 
-export function reSendOtp() {}
+export function reSendOtp() { }
 
 export function validateUser(otp, txnId, pInstId, callback, hideWaitingModal) {
   let data = {
@@ -109,7 +109,7 @@ export function confirmUser(
 
 export function downloadKfs(userId, hideWaitingModal, callBack) {
   axios
-    .get(env.api_Url + "getKFSDocument?userId=" + userId, {responseType: 'blob'})
+    .get(env.api_Url + "getKFSDocument?userId=" + userId, { responseType: 'blob' })
     .then((res) => {
       if (res.status === 200) {
         let fileBlob = res.data;
@@ -124,6 +124,21 @@ export function downloadKfs(userId, hideWaitingModal, callBack) {
         link.click();
         hideWaitingModal();
         callBack(fileURL);
+        // return fileURL;
+      }
+    })
+    .catch((e) => {
+      hideWaitingModal();
+      console.warn(e);
+    });
+}
+export function downloadKfswithoutdownload(userId, hideWaitingModal, callBack) {
+  axios
+    .get(env.api_Url + "getKFSDocument?userId=" + userId)
+    .then((res) => {
+      if (res.status === 200) {
+        console.log(res)
+        callBack(res.data);
         // return fileURL;
       }
     })

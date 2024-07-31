@@ -9,24 +9,24 @@ import { hideWaitingModal, showWaitingModal } from '../../environment/environmen
 import { downloadKfs } from './apis'
 const CongratsApprovedICICI = () =>{
 
-    let userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
     const location = useLocation();
-    let data = location?.state?.data;
-    let amount = data.loanAmount;
-    // const [amount, setAmount] = useState(54000);
-    const [loanAmount, ] = useState(Number(amount));
 
-    function downloadKfsAndHandleNavigation(){ // download and save KFS then navigate
-        // showWaitingModal();
+    let data = location?.state?.data || {}; // Default to an empty object if data is undefined
+    let amount = data.loanAmount || 0; // Default to 0 if loanAmount is undefined
+    const [loanAmount] = useState(Number(amount));
+
+    function downloadKfsAndHandleNavigation() {
         navigate("/patient/FinalConsent", {
-            state:{
-                "data" : data,
+            state: {
+                data: data,
             }
-        })
-        // downloadKfs(userId, hideWaitingModal, ()=>{
-        // })
+        });
+        // downloadKfs(userId, hideWaitingModal, () => {
+        // });
     }
+
 
     return(
         <main style={{display: "flex", flexDirection:"column", alignItems:"center", gap:"1rem"}}>
@@ -41,11 +41,11 @@ const CongratsApprovedICICI = () =>{
                 ₹ {loanAmount.toLocaleString('en-IN',{maximumFractionDigits: 2})}
             </div>
             {/* <p style={{textAlign:"center", marginTop:"1rem"}}>ICICI has sent an OTP on your registered mobile number. Enter that OTP in the next step as a final consent.</p> */}
-            <p style={{textAlign:"center", marginTop:"1rem"}}>Please click on the button below to download the <strong>Key Fact Statement</strong> and proceed.</p>
+            {/* <p style={{textAlign:"center", marginTop:"1rem"}}>Please click on the button below to download the <strong>Key Fact Statement</strong> and proceed.</p> */}
             
             {/* <button className="submit" onClick={()=>downloadKfsAndHandleNavigation()}>Continue with OTP</button> */}
             <button className="submit" onClick={()=>downloadKfsAndHandleNavigation()}>
-                Download Key Fact Statement
+                Continue
             </button>
         </main>
     )
