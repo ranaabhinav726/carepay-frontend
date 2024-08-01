@@ -16,6 +16,7 @@ import AutocompleteInput from "../../../utility/SuggestionInputBox/SuggestionInp
 import routes from "../../../../../layout/Routes";
 import { onlyNumbers } from "../../servicesAndUtility/utilityFunctions";
 import { validateEmail } from "../../../Fibe flow/Comps/Utility functions/helper";
+import BottomPopOverModal from "../../../utility/pannamepopup";
 // import { useData } from "../data";
 
 const ArthCreditDetails = () => {
@@ -38,6 +39,8 @@ const ArthCreditDetails = () => {
     const [patientEmailId, setpatientEmailId] = useState("");
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
+    const [onlyLastName, setOnlyLastName] = useState(false);
+    const [showPopOver, setShowPopOver] = useState(false);
 
     // const [doctorId, setDoctorId] = useState("");
     // const [doctorName, setDoctorName] = useState("");
@@ -308,9 +311,11 @@ const ArthCreditDetails = () => {
     }
 
     async function verifyAndNavigate() {
-        if (!canSubmit) {
-            return;
-        }
+        console.log('ggggg', canSubmit)
+
+        // if (!canSubmit) {
+        //     return;
+        // }
 
         if (!amount) {
             let elem = document.getElementById('loanAmount');
@@ -374,7 +379,7 @@ const ArthCreditDetails = () => {
             if (elem) showErrorOnUI(elem);
             return;
         }
-        if (!lastName) {
+        if (!lastName && onlyLastName === false) {
             let elem = document.getElementById('lastName');
             if (elem) showErrorOnUI(elem);
             return;
@@ -411,6 +416,13 @@ const ArthCreditDetails = () => {
             submitObj.patientPhoneNumber = patientPhoneNumber;
             submitObj.patientEmailId = patientEmailId;
         }
+        // if (!canSubmit) {
+        //     return;
+        // }
+        if (onlyLastName === true) {
+            setShowPopOver(true);
+            return;
+        }
 
         // console.log(submitObj); return
         // console.log(submitObj); return;
@@ -430,13 +442,13 @@ const ArthCreditDetails = () => {
                                 // navigate(routes.ARTH_PERSONAL_DETAILS);
                                 axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
                                     .then(response => {
-                                        if (response.data.data === 'true'&&response.data.message==='success') {
-                                                navigate(routes.FLEX_WAIT_SCREEN)
-                                            } else {
-                                                navigate(routes.ARTH_PERSONAL_DETAILS);
-                                            }
+                                        if (response.data.data === 'true' && response.data.message === 'success') {
+                                            navigate(routes.FLEX_WAIT_SCREEN)
+                                        } else {
+                                            navigate(routes.ARTH_PERSONAL_DETAILS);
+                                        }
 
-                                        
+
                                     }).catch(() => {
 
                                     });
@@ -452,18 +464,18 @@ const ArthCreditDetails = () => {
                                     // navigate(routes.ARTH_PERSONAL_DETAILS);
                                     // navigate(routes.FLEX_WAIT_SCREEN)
                                     axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
-                                    .then(response => {
-                                       console.log(response.data)
-                                            if (response.data.data === 'true'&&response.data.message==='success') {
+                                        .then(response => {
+                                            console.log(response.data)
+                                            if (response.data.data === 'true' && response.data.message === 'success') {
                                                 navigate(routes.FLEX_WAIT_SCREEN)
                                             } else {
                                                 navigate(routes.ARTH_PERSONAL_DETAILS);
                                             }
 
-                                        
-                                    }).catch(() => {
 
-                                    });
+                                        }).catch(() => {
+
+                                        });
                                 } else {
                                     navigate(routes.NOT_SERVICEABLE);
                                 }
@@ -587,9 +599,119 @@ const ArthCreditDetails = () => {
         if (val.length > 10) return;
         onlyNumbers(val, setpatientPhoneNumber)
     }
+    async function checkAndNavigate() {
+        console.log('ggggg', canSubmit)
+
+        // if (!canSubmit) {
+        //     return;
+        // }
+
+
+        let submitObj = {
+            "userId": userId,
+            "doctorName": doctorName,
+            "doctorId": doctorId,
+            "loanAmount": amount,
+            "formStatus": ""
+        };
+
+        if (treatment === "Other") {
+            submitObj.loanReason = otherTreatment;
+        } else {
+            submitObj.loanReason = treatment;
+        }
+
+        if (borrower === "someone else") {
+            submitObj.patientName = patientName;
+            submitObj.relationshipWithPatient = relation;
+            submitObj.patientPhoneNumber = patientPhoneNumber;
+            submitObj.patientEmailId = patientEmailId;
+        }
+
+        await axios
+            .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
+            .then(async (response) => {
+                console.log(response)
+                if (response.data.message === "success") {
+                    // await handleNavigation();
+                    localStorage.setItem("fullName", firstName + ' ' + lastName);
+                    if (!number) return;
+                    console.log(borrower)
+                    console.log(treatment)
+                    if (treatment !== 'Other') {
+                        if (borrower === 'myself') {
+                            if (servicableForMyself.includes(treatment)) {
+                                // navigate(routes.ARTH_PERSONAL_DETAILS);
+                                axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
+                                    .then(response => {
+                                        if (response.data.data === 'true' && response.data.message === 'success') {
+                                            navigate(routes.FLEX_WAIT_SCREEN)
+                                        } else {
+                                            navigate(routes.ARTH_PERSONAL_DETAILS);
+                                        }
+
+
+                                    }).catch(() => {
+
+                                    });
+                                // navigate(routes.FLEX_WAIT_SCREEN)
+                            } else if (notServiceable.includes(treatment)) {
+                                navigate(routes.NOT_SERVICEABLE);
+                            } else {
+                                navigate(routes.NOT_SERVICEABLE);
+                            }
+                        } else if (borrower === 'someone else') {
+                            if (servicableForSomeoneElse.includes(treatment)) {
+                                if (!notServiceable.includes(treatment)) {
+                                    axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
+                                        .then(response => {
+                                            console.log(response.data)
+                                            if (response.data.data === 'true' && response.data.message === 'success') {
+                                                navigate(routes.FLEX_WAIT_SCREEN)
+                                            } else {
+                                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                            }
+
+
+                                        }).catch(() => {
+
+                                        });
+                                } else {
+                                    navigate(routes.NOT_SERVICEABLE);
+                                }
+                            } else {
+                                navigate(routes.NOT_SERVICEABLE);
+                            }
+                        }
+                    } else if (treatment === 'Other') {
+                        navigate(routes.ARTH_PERSONAL_DETAILS);
+
+                    }
+
+                } else {
+                    apiErrorHandler();
+                }
+            }).catch(error => {
+                apiErrorHandler();
+                console.log(error);
+            });
+
+        setCanSubmit(true);
+        hideWrapper(ref.current)
+
+    }
+    const setShow = () => {
+        setShowPopOver(false)
+        hideWrapper(ref.current)
+    }
+    let popUpMsg = <p style={{ color: "black", lineHeight: 'revert', marginBottom: '-25px', fontSize: '15px' }}> <b>Does your name looks like this on your PAN?</b><br />
+        You must enter your name according to your PAN,<br /> this is necessary for assessment of your loan.</p>;
+
     return (
         <>
-            <main className="mobileNumberVerification">
+            {/* <main className="mobileNumberVerification" > */}
+            <main className="mobileNumberVerification" style={{ position: "relative" }}>
+
                 <Header progressBar="hidden" />
                 <h3 className="mobileVerificationHeading">Credit Details</h3>
 
@@ -673,7 +795,17 @@ const ArthCreditDetails = () => {
                         onChange={(e) => onlyCharacters(e.target.value, setlastName)}
                         style={{ marginBottom: "10px" }}
                     />
-                    <span className="fieldError">Please enter your middle & last name</span>
+                    <span className="fieldError">Please enter your middle and last name.<br />
+                        If your PAN does not have your middle and last name<br /> mentioned on it, then click the tickbox below.</span>
+                    <div style={{ marginBottom: "26px", display: "flex", alignItems: "center" }}>
+                        <input
+                            style={{ width: '20px' }}
+                            type="checkbox"
+                            placeholder=""
+                            onChange={(e) => setOnlyLastName(!onlyLastName)}
+                        />
+                        <label htmlFor="isPatient" style={{ paddingLeft: "10px", fontSize: "inherit", marginTop: '-20px' }}>My PAN card only has my first name.</label>
+                    </div>
                 </div>
 
                 {/* <div style={{marginBottom: "26px", display:"flex", alignItems:"center"}}>
@@ -778,7 +910,19 @@ const ArthCreditDetails = () => {
 
 
                 <p className={apiError ? "apiError" : "apiError hide"}>{errorMsg}</p>
+                {/* {onlyLastName === false ? */}
                 <button onClick={() => verifyAndNavigate()} className="submit">Submit</button>
+                {/* : ""} */}
+                <BottomPopOverModal
+                    firstName={firstName}
+                    popUpMsg={popUpMsg}
+                    showPopOver={showPopOver}
+                    setShowPopOver={setShow}
+                    checkAndNavigate={checkAndNavigate}
+                    yesBtnText={"Yes, continue."}
+                    noBtnText={"No, I want to change my name."}
+                // noBtnClick={salaryError}
+                />
             </main>
         </>
     )
