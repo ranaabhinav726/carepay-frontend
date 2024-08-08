@@ -62,6 +62,7 @@ const ArthEmploymentDetails = () => {
     const [studentMsg, toggleStudentMsg] = useState(false);
     const [showPopOver, setShowPopOver] = useState(false);
     const [pincode, setPincode] = useState('');
+    const [pincodeError, setWrongPincode] = useState(false);
 
 
     let userId = localStorage.getItem("userId");
@@ -305,9 +306,20 @@ const ArthEmploymentDetails = () => {
         //     return;
         // }
 
-        if (!pincode) {
+        // if (!pincode) {
+        //     let elem = document.getElementById('pincode');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
+        if (pincode === '' || pincode == 0) {
             let elem = document.getElementById('pincode');
             if (elem) showErrorOnUI(elem);
+            return;
+        }
+        if (pincode.length !== 6) {
+            let elem = document.getElementById('pincode');
+            if (elem) showErrorOnUI(elem);
+            setWrongPincode(true)
             return;
         }
 
@@ -788,7 +800,9 @@ const ArthEmploymentDetails = () => {
                         placeholder="Enter pincode here"
                         inputMode="numeric"
                     />
-                    <span className="fieldError">This field can't be empty.</span>
+                    {pincodeError ? <span className="fieldError">Please enter correct 6 digit Pincode.</span> : <span className="fieldError">This field can't be empty.</span>}
+
+                    {/* <span className="fieldError">This field can't be empty.</span> */}
                 </div>
                 {/* <p style={{marginTop:"-8px", marginBottom:"20px", color:"rgba(0,0,0,0.4)"}}>City : {cityName}</p> */}
 

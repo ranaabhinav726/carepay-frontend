@@ -19,7 +19,7 @@ import BottomPopOverModal from "../utility/BottomPopOverModal";
 var convertRupeesIntoWords = require('convert-rupees-into-words');
 
 
-export default function FibeCreditDetails(){
+export default function FibeCreditDetails() {
 
     const [creditAmt, setCreditAmount] = useState("");
     const [amountInWords, setAmountInWords] = useState("");
@@ -39,16 +39,16 @@ export default function FibeCreditDetails(){
 
     let userId = localStorage.getItem("userId");
 
-    useEffect(()=>{
-        let localizedAmount =   <span 
-                                    style={{whiteSpace:"pre"}}
-                                >
-                                    (₹ {creditAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})})
-                                </span>
-        let elem = <p style={{color:"black"}}>
-                        Are you sure you want to apply for a loan of 
-                        <strong> {amountInWords} {localizedAmount}?</strong>
-                    </p>
+    useEffect(() => {
+        let localizedAmount = <span
+            style={{ whiteSpace: "pre" }}
+        >
+            (₹ {creditAmt.toLocaleString('en-IN', { maximumFractionDigits: 2 })})
+        </span>
+        let elem = <p style={{ color: "black" }}>
+            Are you sure you want to apply for a loan of
+            <strong> {amountInWords} {localizedAmount}?</strong>
+        </p>
         setPopUpMsg(elem);
     }, [showPopOver])
 
@@ -304,35 +304,35 @@ export default function FibeCreditDetails(){
     //     });
     //   }, [waiting]);
 
-    useEffect(()=>{
-        if(!! userId){
+    useEffect(() => {
+        if (!!userId) {
             axios.get(env.api_Url + "userDetails/getLoanDetailsByUserId?userId=" + userId)
-            .then(response =>{
-                if(response?.data.status === 200){
-                    let data = response?.data?.data;
-                    if(!! data){
-                        creditAmountHandler(data?.loanAmount);
-                        setDoctorName(data?.doctorName);
-                        if(data?.doctorId) setDoctorId(data?.doctorId);
+                .then(response => {
+                    if (response?.data.status === 200) {
+                        let data = response?.data?.data;
+                        if (!!data) {
+                            creditAmountHandler(data?.loanAmount);
+                            setDoctorName(data?.doctorName);
+                            if (data?.doctorId) setDoctorId(data?.doctorId);
 
-                        let treatmentName = data?.loanReason;
-                        if(treatmentName){
-                            if(allTreatmentList.includes(treatmentName)){
-                                setLoanReason(data.loanReason);
-                            }else{
-                                // console.log("other treatment")
-                                setLoanReason("Other");
-                                setOtherTreatment(treatmentName)
+                            let treatmentName = data?.loanReason;
+                            if (treatmentName) {
+                                if (allTreatmentList.includes(treatmentName)) {
+                                    setLoanReason(data.loanReason);
+                                } else {
+                                    // console.log("other treatment")
+                                    setLoanReason("Other");
+                                    setOtherTreatment(treatmentName)
+                                }
                             }
                         }
                     }
-                }
-            })
+                })
         }
 
-    },[userId])
+    }, [userId])
 
-    function creditAmountError(){
+    function creditAmountError() {
         let elem = document.getElementById("creditAmt");
         showErrorOnUI(elem, false);
         setAmountError(true);
@@ -342,8 +342,8 @@ export default function FibeCreditDetails(){
         return;
     }
 
-    function postDetails(){
-        if(! creditAmt){
+    function postDetails() {
+        if (!creditAmt) {
             let elem = document.getElementById("creditAmt");
             showErrorOnUI(elem, false);
             return;
@@ -353,21 +353,21 @@ export default function FibeCreditDetails(){
         //     showErrorOnUI(elem, false);
         //     return;
         // }
-        if(loanReason === "Other"){
-            if(! otherTreatment){
+        if (loanReason === "Other") {
+            if (!otherTreatment) {
                 let elem = document.getElementById('otherTreatment');
-                if(elem) showErrorOnUI(elem);
+                if (elem) showErrorOnUI(elem);
                 return;
             }
-        }else{
-            if(!allTreatmentList.includes(loanReason)){
+        } else {
+            if (!allTreatmentList.includes(loanReason)) {
                 let elem = document.getElementById('treatment');
-                if(elem) showErrorOnUI(elem, false);
+                if (elem) showErrorOnUI(elem, false);
                 return;
             }
         }
 
-        if(nonServiceableTreatments.includes(loanReason)){
+        if (nonServiceableTreatments.includes(loanReason)) {
             navigate("/patient/NotServiceable");
             return;
         }
@@ -376,16 +376,16 @@ export default function FibeCreditDetails(){
 
 
         let submitObj = {
-            "userId" : userId,
+            "userId": userId,
             "doctorId": doctorId,
             "loanReason": loanReason,
             "loanAmount": creditAmt,
             "doctorName": doctorName
         };
 
-        if(loanReason === "Other"){
+        if (loanReason === "Other") {
             submitObj.loanReason = otherTreatment;
-        }else{
+        } else {
             submitObj.loanReason = loanReason;
         }
 
@@ -394,21 +394,21 @@ export default function FibeCreditDetails(){
             .post(env.api_Url + "userDetails/saveLoanDetails", submitObj,)
             .then(response => {
                 console.log(response)
-                if(response.data.message === "success"){
+                if (response.data.message === "success") {
                     // await handleNavigation();
                     // setWaiting(true);
                     // setTimeout(() => {
                     //     navigate('/patient/fibePrescriptionUpload');
                     //     setWaiting(false);
                     // }, 3000);
-// 
+                    // 
 
                     navigate('/patient/fibeBasicDetails');
                     // Prescription module is being removed from the flow, so this screen will now directly point to "fibeBasicDetails" screen
                     // effectively bypassing prescription module
                     // navigate('/patient/fibePrescriptionUpload');
-                    
-                    }else{
+
+                } else {
                     // setErrorMsg()
                 }
                 hideWaitingModal();
@@ -419,58 +419,58 @@ export default function FibeCreditDetails(){
     }
 
     const onlyCharRegex = /^[a-zA-Z\s]*$/;
-    function onlyCharacters(val, setter){
-        if(onlyCharRegex.test(val)){
+    function onlyCharacters(val, setter) {
+        if (onlyCharRegex.test(val)) {
             setter(val);
         }
     }
 
-    function otherTreatmentNameAndFocusSetter(otherTreatmentName){
+    function otherTreatmentNameAndFocusSetter(otherTreatmentName) {
         setOtherTreatment(otherTreatmentName);
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         // console.log(otherTreatmentRef.current);
-        if(otherTreatmentRef.current !== null){
+        if (otherTreatmentRef.current !== null) {
             otherTreatmentRef.current.focus();
         }
     }, [loanReason])
 
-    function creditAmountHandler(val){
-        if(val === ""){
+    function creditAmountHandler(val) {
+        if (val === "") {
             setCreditAmount("");
             setAmountInWords("");
             return;
         }
-        if(!val) return;
-        val = val.split("").filter(letter=>letter !==",").join("");
+        if (!val) return;
+        val = val.split("").filter(letter => letter !== ",").join("");
         val = parseInt(val);
-        if(val >= 0 && val <= 1000000){
+        if (val >= 0 && val <= 1000000) {
             setCreditAmount(val);
             let amtInWords = convertRupeesIntoWords(val);
             setAmountInWords(amtInWords);
         }
     }
 
-    return(
-        <main className="screenContainer" style={{position:"relative"}}>
+    return (
+        <main className="screenContainer" style={{ position: "relative" }}>
             <Header progress={55} canGoBack={-1} />
             <ScreenTitle title="Tell us what you need" />
             <InputBoxLabel label='Credit amount' />
-            <InputBox 
+            <InputBox
                 id="creditAmt"
-                Prefix={<BiRupee style={{fontSize:"20px", margin:"0 0 -4px 0"}} />} 
-                placeholder="How much credit do you need?" 
-                value={creditAmt.toLocaleString('en-IN',{maximumFractionDigits: 2})}
+                Prefix={<BiRupee style={{ fontSize: "20px", margin: "0 0 -4px 0" }} />}
+                placeholder="How much credit do you need?"
+                value={creditAmt.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
                 setValue={creditAmountHandler}
                 styles={{
-                    marginTop:"12px", 
-                    marginBottom:"14px",
-                    border:"0"
+                    marginTop: "12px",
+                    marginBottom: "14px",
+                    border: "0"
                 }}
             />
-            {amountError && <p style={{margin:"-8px 0 14px 42px", fontSize:"14px", color:"red"}}>Please enter the correct credit amount.</p>}
-            {amountInWords && <p style={{margin:"-8px 0 14px 42px", fontSize:"14px"}}>{amountInWords}</p>}
+            {amountError && <p style={{ margin: "-8px 0 14px 42px", fontSize: "14px", color: "red" }}>Please enter the correct credit amount.</p>}
+            {amountInWords && <p style={{ margin: "-8px 0 14px 42px", fontSize: "14px" }}>{amountInWords}</p>}
             {/* <NoteText text="Please keep the credit amount under Rs. 10,00,000 only." styles={{margin:"12px 0 24px 0"}} /> */}
 
             {/* <InputBoxLabel label='Treatment name' />
@@ -496,20 +496,20 @@ export default function FibeCreditDetails(){
             />
             {loanReason === "Other" &&
                 <div className="inputGroup">
-                    <input 
+                    <input
                         id="otherTreatment"
-                        type="text" 
-                        value={otherTreatment} 
+                        type="text"
+                        value={otherTreatment}
                         placeholder="Enter your treatment name"
                         // onChange={(e)=>setOtherTreatment(e.target.value)}  
-                        onChange={(e)=> onlyCharacters(e.target.value, setOtherTreatment)}  
-                        style={{marginBottom:"10px"}}
+                        onChange={(e) => onlyCharacters(e.target.value, setOtherTreatment)}
+                        style={{ marginBottom: "10px" }}
                         ref={otherTreatmentRef}
                     />
                     <span className="fieldError">Please enter your treatment name</span>
                 </div>
             }
-            <button onClick={()=>setShowPopOver(true)} className="submit" style={{marginTop:"32px"}}>Next</button>
+            <button onClick={() => setShowPopOver(true)} className="submit" style={{ marginTop: "32px" }}>Next</button>
             {/* {waiting && 
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center", position:"absolute", top:"0", left:"0", height:"100%", width:"100%", background:"rgba(0,0,0,0.4)"}}>
                     <div style={{width:"50vh", maxWidth:"90vw", padding:"16px", background:"white", borderRadius:"16px"}}>
@@ -519,12 +519,12 @@ export default function FibeCreditDetails(){
                 </div>
             } */}
             <BottomPopOverModal
-                popUpMsg={popUpMsg} 
-                showPopOver={showPopOver} 
-                setShowPopOver={setShowPopOver} 
-                checkAndNavigate={postDetails} 
-                yesBtnText={"Yes"} 
-                noBtnText={"No"} 
+                popUpMsg={popUpMsg}
+                showPopOver={showPopOver}
+                setShowPopOver={setShowPopOver}
+                checkAndNavigate={postDetails}
+                yesBtnText={"Yes"}
+                noBtnText={"No"}
                 noBtnClick={creditAmountError}
             />
         </main>
