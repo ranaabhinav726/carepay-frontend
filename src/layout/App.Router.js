@@ -177,6 +177,9 @@ function AppRouter() {
           <Route path={OurRoutes.NOT_FOUND_SCREEN} element={<Routers.NOT_FOUND_SCREEN />} />
           <Route path={OurRoutes.DIGITAP_REDIRECT_URL} element={<Routers.DIGITAP_REDIRECT_URL />} />
           <Route path={OurRoutes.DIGITAP_DATA_RECEIVED} element={<Routers.DIGITAP_DATA_RECEIVED />} />
+          <Route path={OurRoutes.DIGITAP_REPORT_FAILURE} element={<Routers.DIGITAP_REPORT_FAILURE />} />
+
+          <Route path={OurRoutes.DEMO} element={<Routers.DEMO />} />
 
           {/* scouts */}
           <Route path={OurRoutes.SCOUTS_MAIN} element={<Routers.SCOUTS_MAIN />} />

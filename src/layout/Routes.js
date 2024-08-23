@@ -164,6 +164,8 @@ const routes = {
   NOT_FOUND_SCREEN:'/patient/notfound',
   DIGITAP_REDIRECT_URL:'/patient/digitapredirection',
   DIGITAP_DATA_RECEIVED:'/patient/digireport',
+  DIGITAP_REPORT_FAILURE:'/patient/reporfailure',
+  DEMO:'/demo',
 
 
   ///SCOUTS///

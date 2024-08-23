@@ -106,6 +106,12 @@ const BankstatementShare = () => {
                         : ""}
                     {/* <div style={{ marginTop: '24px', textAlign: 'center' }}> <img src={ImageBank} /></div> */}
                     {/* <button onClick={() => onSubmit()} className="submit">Continue</button> */}
+                    <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '20px', marginTop: '120px' }}>Need help? Reach out to us.</p>
+                    <a style={{ color: '#000', textDecoration: 'none', width: '100%' }} href={"tel:+91 806 948 9655"}>
+                        <button className="submit" style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}>
+                            Contact Support
+                        </button>
+                    </a>
                 </div>
 
             </main>

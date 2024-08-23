@@ -19,6 +19,9 @@ const DigitapRedirect = () => {
                 if (response.data.data.status === 'Success') {
                     navigate(routes.DIGITAP_DATA_RECEIVED)
                 }
+                if (response.data.data.status === 'Failure') {
+                    navigate(routes.DIGITAP_REPORT_FAILURE)
+                }
 
             })
 
