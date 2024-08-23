@@ -286,8 +286,8 @@ const BankDetails = () => {
             .then((response) => {
                 console.log(response.data.data)
                 if (response.data.data === 'AM') {
-                    navigate(routes.ARTH_CONGRATULATIONS)
-                    // checkdigitapdataForAthMate()
+                    // navigate(routes.ARTH_CONGRATULATIONS)
+                    checkdigitapdataForAthMate()
                 }
                 if (response.data.data === 'CF') {
                     navigate(routes.CONGRATS)
