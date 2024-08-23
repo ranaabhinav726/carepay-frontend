@@ -177,7 +177,7 @@ export const PATIENT_TERMS = React.lazy(() => import('../website/pages/patientTe
 export const NOT_FOUND_SCREEN = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/notfoundScreen'));
 export const DIGITAP_REDIRECT_URL = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/digitapredirect'));
 export const DIGITAP_DATA_RECEIVED = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/accountDataReceive'));
-export const DIGITAP_REPORT_FAILURE = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/failurescreen'));
+export const DIGITAP_REPORT_FAILURE = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/failurescreen.js'));
 
 export const DEMO = React.lazy(() => import('../patient/components/flexmoney/demo'));
 
