@@ -12,11 +12,32 @@ const Processing = () => {
     // useEffect(() => {
 
     // }, [])
+    const checkdigitapdataForAthMate = () => {
+        axios.get(env.api_Url + "checkAMFlowGreenOrAmber?userId=" + userId)
+            .then(response => {
+                if (response.data.message === "success") {
+                    let data = response.data.data;
+                    if (!!data) {
+                        // setDigitapData(data)
+                        if (data === 'GREEN') {
+                            navigate(routes.ARTH_CONGRATULATIONS)
+                        }
+                        if (data === 'AMBER') {
+                            navigate(routes.DIGITAP_BANK_STATEMENT)
+                        }
+
+                    }
+                }
+            }).catch(() => {
+                console.log("Error fetching data");
+            })
+    }
     const refreshBtn = () => {
         axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
             .then(async (response) => {
                 if (response.data.data === 'AM') {
-                    navigate(routes.ARTH_CONGRATULATIONS)
+                    // navigate(routes.ARTH_CONGRATULATIONS)
+                    checkdigitapdataForAthMate()
                 }
                 if (response.data.data === 'CF') {
                     navigate(routes.CONGRATS)
