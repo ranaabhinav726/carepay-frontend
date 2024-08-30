@@ -75,7 +75,7 @@ const RazorpayRefresh = () => {
                 "description": "",
                 "image": CarepayLogo,
                 "order_id": orderData.orderId,
-                "callback_url": orderData.callback_url + loanId,
+                "callback_url": orderData.callback_url ,
                 "redirect": "false",
                 "prefill": {
                     "name": orderData.userName,

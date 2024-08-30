@@ -34,7 +34,7 @@ const Homepage = () => {
     if (doctorId !== undefined && doctorId.length === 32) {
         if (!!doctorId) localStorage.setItem("doctorId", doctorId);
     } else {
-        if (URL !== routes.RAZORPAY_SCREEN_REFRESH) {
+        if (!URL.includes(routes.RAZORPAY_SCREEN_REFRESH)) {
             window.location.href = routes.DOCTOR_NOT_AVAILABLE
         }
     }
