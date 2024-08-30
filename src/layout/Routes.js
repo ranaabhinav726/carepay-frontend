@@ -166,6 +166,15 @@ const routes = {
   DIGITAP_DATA_RECEIVED:'/patient/digireport',
   DIGITAP_REPORT_FAILURE:'/patient/reporfailure',
   DEMO:'/demo',
+  PAY_SCREEN:'/patient/offerspayu',
+  PAY_SCREEN_REFRESH:'/patient/payurefresh',
+  PAY_STATUS:'/patient/payustatus',
+  RAZORPAY_OFFERS:'/patient/razorpayoffer',
+  RAZORPAY_SCREEN_REFRESH:'/patient/razorpayrefresh/:loanId',
+  RAZORPAY_SCREEN_STATUS:'/patient/razorpaystatus',
+
+
+
 
 
   ///SCOUTS///

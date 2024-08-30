@@ -28,6 +28,7 @@ export default function BottomPopOverModal({showPopOver, setShowPopOver, color="
                 }}
                 onClick={(e)=>e.stopPropagation()}
             >
+                {console.log(props.children)}
                 {props.children}
                 
             </div>

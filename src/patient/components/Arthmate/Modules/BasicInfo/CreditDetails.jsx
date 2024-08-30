@@ -445,7 +445,31 @@ const ArthCreditDetails = () => {
                                         if (response.data.data === 'true' && response.data.message === 'success') {
                                             navigate(routes.FLEX_WAIT_SCREEN)
                                         } else {
-                                            navigate(routes.ARTH_PERSONAL_DETAILS);
+                                            // navigate(routes.RAZORPAY_OFFERS);
+                                            axios.get(env.api_Url + 'getActiveFlow')
+                                            .then((response) => {
+                                                if (response.data.data === 'PAYU') {
+                                                    axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                                                        .then((response) => {
+                                                            axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                                .then(response => {
+                                                                    axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
+                                                                        .then(response => {
+                                                                            console.log(response)
+                                                                        })
+                                                                })
+                                                        })
+                                                }
+                                                if (response.data.data === 'RAZORPAY') {
+                                                    navigate(routes.RAZORPAY_OFFERS)
+                                                }
+                                                if (response.data.data === 'MASTER') {
+                                                    navigate(routes.ARTH_PERSONAL_DETAILS)
+                        
+                        
+                                                }
+                                            }
+                                            )
                                         }
 
 
@@ -469,7 +493,56 @@ const ArthCreditDetails = () => {
                                             if (response.data.data === 'true' && response.data.message === 'success') {
                                                 navigate(routes.FLEX_WAIT_SCREEN)
                                             } else {
-                                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                                axios.get(env.api_Url + 'getActiveFlow')
+                                                .then((response) => {
+                                                    if (response.data.data === 'PAYU') {
+                                                        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                                                            .then((response) => {
+                                                                axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                                    .then(response => {
+                                                                        axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
+                                                                            .then(response => {
+                                                                                console.log(response)
+                                                                            })
+                                                                    })
+                                                            })
+                                                    }
+                                                    if (response.data.data === 'RAZORPAY') {
+                                                        navigate(routes.RAZORPAY_OFFERS)
+                                                    }
+                                                    if (response.data.data === 'MASTER') {
+                                                        navigate(routes.ARTH_PERSONAL_DETAILS)
+                            
+                            
+                                                    }
+                                                }
+                                                )
+                                                // navigate(routes.ARTH_PERSONAL_DETAILS);
+                                                // navigate(routes.RAZORPAY_OFFERS);
+                                                axios.get(env.api_Url + 'getActiveFlow')
+                                                .then((response) => {
+                                                    if (response.data.data === 'PAYU') {
+                                                        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                                                            .then((response) => {
+                                                                axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                                    .then(response => {
+                                                                        axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
+                                                                            .then(response => {
+                                                                                console.log(response)
+                                                                            })
+                                                                    })
+                                                            })
+                                                    }
+                                                    if (response.data.data === 'RAZORPAY') {
+                                                        navigate(routes.RAZORPAY_OFFERS)
+                                                    }
+                                                    if (response.data.data === 'MASTER') {
+                                                        navigate(routes.ARTH_PERSONAL_DETAILS)
+                            
+                            
+                                                    }
+                                                }
+                                                )
                                             }
 
 
@@ -647,7 +720,32 @@ const ArthCreditDetails = () => {
                                         if (response.data.data === 'true' && response.data.message === 'success') {
                                             navigate(routes.FLEX_WAIT_SCREEN)
                                         } else {
-                                            navigate(routes.ARTH_PERSONAL_DETAILS);
+                                            // navigate(routes.ARTH_PERSONAL_DETAILS);
+                                            // navigate(routes.RAZORPAY_OFFERS);
+                                            axios.get(env.api_Url + 'getActiveFlow')
+                                            .then((response) => {
+                                                if (response.data.data === 'PAYU') {
+                                                    axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                                                        .then((response) => {
+                                                            axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                                .then(response => {
+                                                                    axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
+                                                                        .then(response => {
+                                                                            console.log(response)
+                                                                        })
+                                                                })
+                                                        })
+                                                }
+                                                if (response.data.data === 'RAZORPAY') {
+                                                    navigate(routes.RAZORPAY_OFFERS)
+                                                }
+                                                if (response.data.data === 'MASTER') {
+                                                    navigate(routes.ARTH_PERSONAL_DETAILS)
+                        
+                        
+                                                }
+                                            }
+                                            )
                                         }
 
 
@@ -669,7 +767,35 @@ const ArthCreditDetails = () => {
                                             if (response.data.data === 'true' && response.data.message === 'success') {
                                                 navigate(routes.FLEX_WAIT_SCREEN)
                                             } else {
-                                                navigate(routes.ARTH_PERSONAL_DETAILS);
+                                                axios.get(env.api_Url + 'getActiveFlow')
+                                                .then((response) => {
+                                                    if (response.data.data === 'PAYU') {
+                                                        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                                                            .then((response) => {
+                                                                axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                                    .then(response => {
+                                                                        axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
+                                                                            .then(response => {
+                                                                                console.log(response)
+                                                                            })
+                                                                    })
+                                                            })
+                                                    }
+                                                    if (response.data.data === 'RAZORPAY') {
+                                                        navigate(routes.RAZORPAY_OFFERS)
+                                                    }
+                                                    if (response.data.data === 'MASTER') {
+                                                        navigate(routes.ARTH_PERSONAL_DETAILS)
+                            
+                            
+                                                    }
+                                                }
+                                                )
+                                                // navigate(routes.RAZORPAY_OFFERS);
+                                                ////check pay or razorpay active
+                                                //// if pay active  the pay eligibility api call
+                                                
+                                                // navigate(routes.ARTH_PERSONAL_DETAILS);
                                             }
 
 

@@ -178,6 +178,12 @@ export const NOT_FOUND_SCREEN = React.lazy(() => import('../patient/components/A
 export const DIGITAP_REDIRECT_URL = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/digitapredirect'));
 export const DIGITAP_DATA_RECEIVED = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/accountDataReceive'));
 export const DIGITAP_REPORT_FAILURE = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/failurescreen.js'));
+export const PAY_SCREEN = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/payoffers'));
+export const PAY_SCREEN_REFRESH = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/refreshScreenpayu'));
+export const PAY_STATUS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/paystatus'));
+export const RAZORPAY_OFFERS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/razorpayoffers'));
+export const RAZORPAY_SCREEN_REFRESH = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/razorpayrefresh'));
+export const RAZORPAY_SCREEN_STATUS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/razorpaystatus'));
 
 export const DEMO = React.lazy(() => import('../patient/components/flexmoney/demo'));
 

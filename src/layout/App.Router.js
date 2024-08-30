@@ -178,6 +178,12 @@ function AppRouter() {
           <Route path={OurRoutes.DIGITAP_REDIRECT_URL} element={<Routers.DIGITAP_REDIRECT_URL />} />
           <Route path={OurRoutes.DIGITAP_DATA_RECEIVED} element={<Routers.DIGITAP_DATA_RECEIVED />} />
           <Route path={OurRoutes.DIGITAP_REPORT_FAILURE} element={<Routers.DIGITAP_REPORT_FAILURE />} />
+          <Route path={OurRoutes.PAY_SCREEN} element={<Routers.PAY_SCREEN />} />
+          <Route path={OurRoutes.PAY_SCREEN_REFRESH} element={<Routers.PAY_SCREEN_REFRESH />} />
+          <Route path={OurRoutes.PAY_STATUS} element={<Routers.PAY_STATUS />} />
+          <Route path={OurRoutes.RAZORPAY_OFFERS} element={<Routers.RAZORPAY_OFFERS />} />
+          <Route path={OurRoutes.RAZORPAY_SCREEN_REFRESH} element={<Routers.RAZORPAY_SCREEN_REFRESH />} />
+          <Route path={OurRoutes.RAZORPAY_SCREEN_STATUS} element={<Routers.RAZORPAY_SCREEN_STATUS />} />
 
           <Route path={OurRoutes.DEMO} element={<Routers.DEMO />} />
 
