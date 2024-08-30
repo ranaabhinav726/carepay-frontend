@@ -34,7 +34,9 @@ const Homepage = () => {
     if (doctorId !== undefined && doctorId.length === 32) {
         if (!!doctorId) localStorage.setItem("doctorId", doctorId);
     } else {
-        window.location.href =routes.DOCTOR_NOT_AVAILABLE
+        if (URL !== routes.RAZORPAY_SCREEN_REFRESH) {
+            window.location.href = routes.DOCTOR_NOT_AVAILABLE
+        }
     }
 
     if (!!clinicName) clinicName = clinicName.split("_").join(" ");
@@ -93,7 +95,7 @@ const Homepage = () => {
     function navigateToNext() {
         // animateScreen();
         // if (nbfcId === fibeNbfcId) {
-            navigate('/patient/fibeMobileNumberVerification')
+        navigate('/patient/fibeMobileNumberVerification')
         // } else {
         //     navigate('/patient/MobileNumberVerification')
         // }
