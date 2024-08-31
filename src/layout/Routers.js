@@ -90,6 +90,7 @@ export const LendingPartners = React.lazy(() => import('../website/pages/Lending
 export const TermsAndConditions = React.lazy(() => import('../website/pages/TermsAndConditions'));
 export const RefundandCancellation = React.lazy(() => import('../website/pages/RefundandCancellation'));
 export const ICICITermsAndConditions = React.lazy(() => import('../website/pages/ICICITermsAndConditions'));
+export const SUPPORTED_TREATMENTS = React.lazy(() => import('../website/pages/supportedtreatments'));
 
 export const SearchingOffers = React.lazy(() => import('../patient/components/ICICI flow/SearchingOffers'));
 export const CongratsApprovedICICI = React.lazy(() => import('../patient/components/ICICI flow/CongratsApprovedICICI'));

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import CarepayLogo from '../../../../assets/Logo-carepay.svg'
 const PayUCheckoutComponent = () => {
+    let data=''
     const [loaderState, setLoaderState] = useState(false);
     const [showPopOver, setShowPopOver] = useState(false);
     const [scriptLoaded, setScriptLoaded] = useState(false);

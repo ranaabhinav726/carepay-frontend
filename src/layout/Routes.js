@@ -6,6 +6,7 @@ const routes = {
   REFUND_AND_CANCELLATION: '/RefundAndCancellation',
   ICICI_TERMS_AND_CONDITIONS: '/ICICITermsAndConditions',
   LENDING_PARTNERS: "/partnersforlending",
+  SUPPORTED_TREATMENTS: "/supportedtreatements",
 
   PATIENT_HOMEPAGE: '/patient/*',
   DOCTOR_NOT_AVAILABLE: '/patient/DoctorNotAvailable',
