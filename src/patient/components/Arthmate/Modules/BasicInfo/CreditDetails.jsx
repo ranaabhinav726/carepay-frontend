@@ -686,7 +686,8 @@ const ArthCreditDetails = () => {
             "doctorName": doctorName,
             "doctorId": doctorId,
             "loanAmount": amount,
-            "formStatus": ""
+            "formStatus": "",
+            "name": firstName + lastName
         };
 
         if (treatment === "Other") {
