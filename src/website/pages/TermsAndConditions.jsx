@@ -28,16 +28,16 @@ function TermsAndConditionsContent() {
       <h2 style={{ fontFamily: "DM sans" }}>Terms And Conditions</h2>
 
       <p>
-        A. <strong>Company</strong> is a technology company with the brand name as <strong>CarePay</strong> 
-        whereby it facilitates appointment booking with MSP, telemedicine 
-        and access to credit in partnership with its Lending Partners (defined below) 
-        to Patients (defined below) visiting the MSP’s office premises in need of a 
+        A. <strong>Company</strong> is a technology company with the brand name as <strong>CarePay</strong>
+        whereby it facilitates appointment booking with MSP, telemedicine
+        and access to credit in partnership with its Lending Partners (defined below)
+        to Patients (defined below) visiting the MSP’s office premises in need of a
         Credit Facility (defined below);
       </p>
       <p>
-        B. The <strong>Medical Service Provider(MSP)</strong> is a clinic/ hospital/ healthcare 
-        establishment/ pharmacy/ wellness centre which employs professionally 
-        qualified medical personnel engaged in the business of offering MSP 
+        B. The <strong>Medical Service Provider(MSP)</strong> is a clinic/ hospital/ healthcare
+        establishment/ pharmacy/ wellness centre which employs professionally
+        qualified medical personnel engaged in the business of offering MSP
         Product/Services (defined below) at its Office Premises/via the MSP Platform.
       </p>
 
@@ -339,23 +339,21 @@ function TermsAndConditionsContent() {
             REFUNDS
           </h5>
           <p>
-            The MSP shall be liable to initiate a full refund of the Relevant
-            Invoice Amount to the Lending Partner in the event that any of the
-            following conditions are fulfilled in the Company’s sole discretion:
+            The MSP shall be liable to initiate a full refund of the Relevant Invoice Amount to the Lending Partner within 2 working days in the event that any of the following conditions are fulfilled in the Company’s sole discretion:
           </p>
           <ul>
             <li>
-              The Patient is not contactable by the Company for a period of 24
-              hours from the time the Invoice was raised.
+              The Patient is not contactable by the Company for a period of 24 hoursfrom the time the Invoice was raised.
             </li>
             <li>
-              The Patient raises a dispute with respect to the Invoice which is
-              not resolved within 72 hours.
+              Patient was unaware that the loan was being applied for services.
             </li>
             <li>
-              The Patient raises a dispute with respect to the MSP
-              Product/Services offered by the MSP through its Platform.
+              Any dispute raised by the Patient for the treatment including any issues wrt treatment/service quality.
             </li>
+            <li>If the patient hasn’t been provided with the treatment.</li>
+            <li>The Patient raises a dispute with respect to the Invoice which is not resolved within 72 hours.</li>
+            <li>The Patient raises a dispute with respect to the MSP Product/Services offered by the MSP.</li>
           </ul>
 
           <h5 className="policy-heading" id="policy-4">
