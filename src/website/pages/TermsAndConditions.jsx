@@ -343,7 +343,7 @@ function TermsAndConditionsContent() {
           </p>
           <ul>
             <li>
-              The Patient is not contactable by the Company for a period of 24 hoursfrom the time the Invoice was raised.
+              The Patient is not contactable by the Company for a period of 24 hours from the time the Invoice was raised.
             </li>
             <li>
               Patient was unaware that the loan was being applied for services.

@@ -402,7 +402,7 @@ const ArthCreditDetails = () => {
             "doctorId": doctorId,
             "loanAmount": amount,
             "formStatus": "",
-            "name": firstName + lastName
+            "name": firstName +' '+ lastName
         };
 
         if (treatment === "Other") {
@@ -687,7 +687,7 @@ const ArthCreditDetails = () => {
             "doctorId": doctorId,
             "loanAmount": amount,
             "formStatus": "",
-            "name": firstName + lastName
+            "name": firstName +' '+ lastName
         };
 
         if (treatment === "Other") {

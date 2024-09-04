@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Logo from '../../assets/Logo-carepay.webp'
-import Lens from '../../assets/lens.png'
+import Lens from './Group 113279.svg'
 
 import './thankYou.scss'
 import axios from 'axios';

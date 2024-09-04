@@ -127,6 +127,14 @@ function AppRouter() {
           <Route path={OurRoutes.DOCTOR_BANK_DETAILS} element={<Routers.DocBankDetails />} />
           <Route path={OurRoutes.DOCTOR_UPLOAD_DOCUMENTS} element={<Routers.UploadDocuments />} />
           <Route path={OurRoutes.DOCTOR_THANK_YOU} element={<Routers.ThankYou />} />
+          <Route path={OurRoutes.DOCTOR_AGREEMENT} element={<Routers.DOCTOR_AGREEMENT />} />
+          <Route path={OurRoutes.SIGNZY_AGREEMENT} element={<Routers.SIGNZY_AGREEMENT />} />
+          <Route path={OurRoutes.AGREEMENT_REFRESH} element={<Routers.AGREEMENT_REFRESH />} />
+          {/* <Route path={OurRoutes.RETRY_DOC_AGREEMENT} element={<Routers.RETRY_DOC_AGREEMENT />} /> */}
+          <Route path={OurRoutes.AGREEMENT_TRY_AGAIN} element={<Routers.AGREEMENT_TRY_AGAIN />} />
+          <Route path={OurRoutes.UPLODED_DOC} element={<Routers.UPLODED_DOC />} />
+          <Route path={OurRoutes.DOCTOR_AGREEMENT_DONE} element={<Routers.DOCTOR_AGREEMENT_DONE />} />
+
 
           <Route path={OurRoutes.DOCTOR_DASHBOARD} element={<Routers.DoctorDashboard />} />
           <Route path={OurRoutes.ALL_TRANSACTIONS} element={<Routers.AllTransactions />} />

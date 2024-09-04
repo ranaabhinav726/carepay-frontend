@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { env, showErrorOnUI, showWrapper, hideWrapper } from "../../environment"
+import routes from "../../../layout/Routes"
 
 const UploadDocuments = () =>{
 
@@ -20,7 +21,7 @@ const UploadDocuments = () =>{
     const [GSTIN, setGSTIN] = useState("");
     const [misc, setMisc] = useState("");
 
-    const [accepted, setAccept] = useState(false);
+    const [accepted, setAccept] = useState(true);
     const [apiError, setApiError] = useState(false);
     const [canSubmit, setCanSubmit] = useState(true);
 
@@ -157,6 +158,7 @@ const UploadDocuments = () =>{
 
         let data = new FormData()
         if(panCard){
+            
             data.append('fileName', "panCard"); //gst, other
             data.append('uploadfile', panCard);
             let type = panCard.type.split('/');
@@ -239,11 +241,13 @@ const UploadDocuments = () =>{
         }
         // console.log(Boolean(panCard) == panCardUploaded, panCard, panCardUploaded);
         setTimeout(() => {
+            showWrapper(ref.current);
             console.log((Boolean(panCard) == panCardUploaded) , (Boolean(GSTIN) == GSTINUploaded) , (Boolean(misc) == miscUploaded) )
             if((Boolean(panCard) == panCardUploaded) && (Boolean(GSTIN) == GSTINUploaded) && (Boolean(misc) == miscUploaded) ){
                 axios.get(env.api_Url + "sendUnderReviewMail?doctorId=" + doctorId)
                 .then(response =>{
-                    navigate('/doctor/ThankYou')
+                    hideWrapper(ref.current);
+                    navigate(routes.DOCTOR_AGREEMENT)
                     console.log(response)
                 })
             }else{
@@ -304,10 +308,10 @@ const UploadDocuments = () =>{
                 <p className="fileTypeError">Only .pdf, .png, .jpg and .jpeg files are allowed</p>
             </div>
 
-            <div className="termsAndConditions">
+            {/* <div className="termsAndConditions">
                 <input type="checkbox" checked={accepted} onChange={e => setAccept(e.target.checked)} />
                 <p id="terms">I accept the <a href="https://docs.google.com/document/d/1ahwOUCCj6uWcx96PQ2wBup3MhxbLdf82ONzMnLvwEek/edit?usp=sharing" target="_blank" className="termsAndCond">Terms & Conditions</a></p>
-            </div>
+            </div> */}
 
             <p className={apiError?"apiError": "apiError hide"}>An error has occured, please try again.</p>
             <button onClick={()=>onSubmit()} className="submit">Submit</button>

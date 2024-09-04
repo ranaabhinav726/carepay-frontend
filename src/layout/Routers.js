@@ -74,7 +74,13 @@ export const PracticeDetails = React.lazy(() => import('../doctor/Components/Pra
 export const DocAddressDetails = React.lazy(() => import('../doctor/Components/AddressDetails/AddressDetails'));
 export const DocBankDetails = React.lazy(() => import('../doctor/Components/BankDetails/BankDetails'));
 export const UploadDocuments = React.lazy(() => import('../doctor/Components/UploadDocuments/UploadDocuments'));
+export const DOCTOR_AGREEMENT =React.lazy(() => import('../doctor/Components/agreement/agreement'));
 export const ThankYou = React.lazy(() => import('../doctor/Components/ThankYou/ThankYou'));
+export const SIGNZY_AGREEMENT =React.lazy(() => import('../doctor/Components/agreement/pdfFile'));
+export const AGREEMENT_REFRESH =React.lazy(() => import('../doctor/Components/agreement/refreshagreement'));
+export const AGREEMENT_TRY_AGAIN = React.lazy(() => import('../doctor/Components/agreement/tryagain'));
+export const UPLODED_DOC = React.lazy(() => import('../doctor/Components/UploadDocuments/uploaded'));
+export const DOCTOR_AGREEMENT_DONE = React.lazy(() => import('../doctor/Components/agreement/uplodedagreement'));
 
 export const UnderReview = React.lazy(() => import('../doctor/Components/Dashboard/components/UnderReview/UnderReview'));
 export const DoctorDashboard = React.lazy(() => import('../doctor/Components/Dashboard/components/Dashboard/Dashboard'));

@@ -204,7 +204,7 @@ const PayUCheckoutComponent = () => {
             {loaderState ===false?
             <>
             <p style={{ marginTop: '30px', marginBottom: '10px', fontSize: '14px' }}>Select your preferred mode of credit application:</p>
-            <div
+            {/* <div
                 style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
                 onClick={createorder}
             >
@@ -213,7 +213,7 @@ const PayUCheckoutComponent = () => {
                     <div style={{ float: 'right', width: '5%' }}><KeyboardDoubleArrowRightIcon style={{ color: '#514C9F' }} /></div>
                 </div>
                 <p style={{ fontSize: '12px' }}>HDFC, ICICI, IDFC & more available</p>
-            </div>
+            </div> */}
             <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
                 {/* <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp; */}
                 <p style={{ marginTop: '5px', fontWeight: 'bold', color: '#FF8B2E' }}>Interest rates applicable. </p>
