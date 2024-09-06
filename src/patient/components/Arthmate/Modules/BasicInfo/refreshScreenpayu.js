@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../../Header/Header";
 import lottie from "lottie-web";
 import animationData from '../../../../assets/JSON animations/loader simple.json'
+import axios from "axios";
+import { env } from "../../../../environment/environment";
 
 const PayRefresh = () => {
     const [userData, setUserData] = useState('')
     let navigate = useNavigate()
+    let userId =localStorage.getItem('userId')
     useEffect(() => {
         lottie.loadAnimation({
             container: document.querySelector("#searchAnimation"),
@@ -15,8 +18,18 @@ const PayRefresh = () => {
           });
     }, [])
     const checkStatus = () => {
-    
+        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+        .then((loandata) => {
+            const loanId = loandata?.data?.data?.loanId;
+            if (loanId) {
+                axios.post(env.api_Url + 'verifyPayment?loanId=' + loanId)
+                    .then((paymentData) => {
+                        console.log(paymentData,'paymentData')
+                    })
+            }
+        })
     }
+    
     return (
         <main className='congrats'>
             <Header progressbarDisplay="none" />

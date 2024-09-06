@@ -4,7 +4,7 @@ import Header from '../../../Header/Header';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import StarIcon from '@mui/icons-material/Star';
 import BottomPopOverModal from '../../comps/newpoup';
-import { env, hideWrapper } from '../../../../environment/environment';
+import { env, hideWrapper, showWrapper } from '../../../../environment/environment';
 import routes from '../../../../../layout/Routes';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
@@ -12,16 +12,65 @@ import axios from 'axios';
 const PayUCheckoutComponent = () => {
     const [loaderState, setLoaderState] = useState(true);
     const [showPopOver, setShowPopOver] = useState(false);
+    const [payuData, setPayData] = useState({});
+
     let ref = useRef(0);
-    let userId = localStorage.getItem('userId')
+    let userId = localStorage.getItem('userId');
     const formRef = useRef(null);
-    let navigate = useNavigate()
+    let navigate = useNavigate();
 
     useEffect(() => {
+        const deviceType = getDeviceType();
+
+        axios
+            .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+            .then((loandata) => {
+                const loanId = loandata?.data?.data?.loanId;  
+                if (loanId) {
+                    axios
+                        .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
+                        .then(response => {
+                            console.log(JSON.parse(response.data.data), 'Checkout Details Response'); 
+                            axios
+                                .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                .then(eligibilityResponse => {
+                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response'); 
+                                    if (eligibilityResponse.data.message === 'success') {
+                                        showWrapper(ref.current)
+                                        axios.get(env.api_Url + "getCollectPaymentData?loanId=" + loanId + '&deviceType=' + deviceType)
+                                            .then(response => {
+                                                if (response.data.status === 200) {
+                                                    let data = response.data.data;
+                                                    if (data) {
+                                                        setPayData(JSON.parse(data));
+                                                        hideWrapper(ref.current)
+                                                    }
+                                                }
+                                            }).catch(err => {
+                                                console.error('Error fetching collect payment data:', err);
+                                            });
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Error fetching customer eligibility:', err);
+                                });
+                        })
+                        .catch(err => {
+                            console.error('Error fetching checkout details:', err);
+                        });
+                } else {
+                    console.error('Loan ID not found');
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching loan details:', err);
+            });
+
         setTimeout(() => {
             setLoaderState(false);
         }, 1000);
-    }, []);
+    }, [userId]);
+
     const getDeviceType = () => {
         const userAgent = navigator.userAgent.toLowerCase();
 
@@ -35,27 +84,31 @@ const PayUCheckoutComponent = () => {
 
         return "Unknown Device";
     };
-    useEffect(() => {
-        let deviceType = getDeviceType()
-        if (!!userId) {
-            axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                .then((response) => {
 
+    useEffect(() => {
+        const deviceType = getDeviceType();
+        if (userId) {
+            showWrapper(ref.current)
+            axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                .then(response => {
                     axios.get(env.api_Url + "getCollectPaymentData?loanId=" + response.data.data.loanId + '&deviceType=' + deviceType)
                         .then(response => {
                             if (response.data.status === 200) {
                                 let data = response.data.data;
-                                if (!!data) {
+                                if (data) {
+                                    setPayData(JSON.parse(data));
+                                    hideWrapper(ref.current)
 
                                 }
                             }
-                        }).catch(() => {
-
+                        }).catch(err => {
+                            console.error('Error fetching collect payment data:', err);
                         });
-                })
+                }).catch(err => {
+                    console.error('Error fetching loan details:', err);
+                });
         }
-
-    }, [])
+    }, [userId]);
 
     const paycheckout = () => {
         if (formRef.current) {
@@ -64,16 +117,20 @@ const PayUCheckoutComponent = () => {
     };
 
     const exploreMore = () => {
-        setShowPopOver(true)
+        setShowPopOver(true);
     };
+
     const setShow = () => {
-        setShowPopOver(false)
-        hideWrapper(ref.current)
-    }
+        setShowPopOver(false);
+        hideWrapper(ref.current);
+    };
+
     const navigateToPersonal = () => {
-        navigate(routes.ARTH_PERSONAL_DETAILS)
-    }
+        navigate(routes.ARTH_PERSONAL_DETAILS);
+    };
+
     let popUpMsg = <p style={{ color: "black", lineHeight: 'revert', marginBottom: '-25px', fontSize: '15px' }}>For more offers, we will have to check with<br /> other banks and NBFCs, <br />for which we require more data and <br />might require more time.</p>;
+
     return (
         <main className="mobileNumberVerification" style={{ position: "relative" }}>
             <Header progressbarDisplay="none" />
@@ -148,23 +205,22 @@ const PayUCheckoutComponent = () => {
                     target="_blank"
                     ref={formRef}
                 >
-                    <input type="hidden" name="key" value="JPM7Fg" />
-                    <input type="hidden" name="surl" value="https://test-payment-middleware.payu.in/simulatorResponse" />
-                    <input type="hidden" name="furl" value="https://test-payment-middleware.payu.in/simulatorResponse" />
-                    <input type="hidden" name="pg" value="EMI" />
-                    <input type="hidden" name="txnid" value="1234566" />
-                    <input type="hidden" name="amount" value="1234" />
-                    <input type="hidden" name="productinfo" value="iPhone" />
-                    <input type="hidden" name="firstname" value="prachi" />
-                    <input type="hidden" name="email" value="prachibindal2925@gmail.com" />
-                    <input type="hidden" name="bankcode" value="EMIAMEX12" />
-                    <input type="hidden" name="ccnum" value="1234" />
-                    <input type="hidden" name="ccvv" value="123" />
-                    <input type="hidden" name="ccname" value="12" />
-                    <input type="hidden" name="ccexpmon" value="05" />
-                    <input type="hidden" name="ccexpyr" value="2023" />
-                    <input type="hidden" name="hash" value="3cb56876a882b88f2d7d6b3264977b00b829378f53e655873946faada995617f1922d2735799f5217504450e77025c76bcebb5fca6a4297718fb6be18ae130bc" />
-
+                    <input type="hidden" name="key" value={payuData.key || ''} />
+                    <input type="hidden" name="surl" value={payuData.surl || 'https://test-payment-middleware.payu.in/simulatorResponse'} />
+                    <input type="hidden" name="furl" value={payuData.furl || 'https://test-payment-middleware.payu.in/simulatorResponse'} />
+                    <input type="hidden" name="pg" value={payuData.pg || 'EMI'} />
+                    <input type="hidden" name="txnid" value={payuData.txnid || '1234566'} />
+                    <input type="hidden" name="amount" value={payuData.amount || '1234'} />
+                    <input type="hidden" name="productinfo" value={payuData.productinfo || 'iPhone'} />
+                    <input type="hidden" name="firstname" value={payuData.firstname || 'prachi'} />
+                    <input type="hidden" name="email" value={payuData.email || 'prachibindal2925@gmail.com'} />
+                    <input type="hidden" name="bankcode" value={payuData.bankcode || 'EMIAMEX12'} />
+                    <input type="hidden" name="ccnum" value={payuData.ccnum || '1234'} />
+                    <input type="hidden" name="ccvv" value={payuData.ccvv || '123'} />
+                    <input type="hidden" name="ccname" value={payuData.ccname || '12'} />
+                    <input type="hidden" name="ccexpmon" value={payuData.ccexpmon || '05'} />
+                    <input type="hidden" name="ccexpyr" value={payuData.ccexpyr || '2023'} />
+                    <input type="hidden" name="hash" value={payuData.hash || '3cb56876a882b88f2d7d6b3264977b00b829378f53e655873946faada995617f1922d2735799f5217504450e77025c76bcebb5fca6a4297718fb6be18ae130bc'} />
                 </form>
             )}
 
@@ -190,7 +246,7 @@ const PayUCheckoutComponent = () => {
                 checkAndNavigate={exploreMore}
                 yesBtnText={"Yes, continue."}
                 noBtnText={"No, I want to change my name."}
-            // noBtnClick={salaryError}
+                // noBtnClick={salaryError}
             />
         </main>
     );

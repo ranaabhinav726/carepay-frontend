@@ -214,10 +214,10 @@ const PayUCheckoutComponent = () => {
                 </div>
                 <p style={{ fontSize: '12px' }}>HDFC, ICICI, IDFC & more available</p>
             </div> */}
-            <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
-                {/* <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp; */}
+            {/* <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
+                <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp;
                 <p style={{ marginTop: '5px', fontWeight: 'bold', color: '#FF8B2E' }}>Interest rates applicable. </p>
-            </div>
+            </div> */}
             <div
                 style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
                 onClick={createorder}

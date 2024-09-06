@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Happyface from '../../assets/Group (6).svg'
 import Header from "../../../Header/Header";
+import axios from "axios";
+import { env } from "../../../../environment/environment";
 const Payustatus = () => {
+    let userId=localStorage.getItem('userId')
     const tryAgain = () => {
 
     }
+
+
     return (
         <main className="personalDetails" style={{ position: "relative" }}>
             <>
@@ -17,9 +22,9 @@ const Payustatus = () => {
 
 
                 </div>
-                <div style={{ textAlign: 'center', color: '#514C9F',marginTop:'40px' }}><b>Application failed!</b></div>
+                <div style={{ textAlign: 'center', color: '#514C9F', marginTop: '40px' }}><b>Application failed!</b></div>
 
-                <button className={'submit'} style={{marginTop:'60px'}} onClick={() => tryAgain()}>Try Again</button>
+                <button className={'submit'} style={{ marginTop: '60px' }} onClick={() => tryAgain()}>Try Again</button>
                 <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '80px', marginBottom: '10px', marginTop: '120px' }}>
                     Need help? Reach out to us.
                 </p>

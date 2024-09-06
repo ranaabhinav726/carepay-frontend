@@ -402,7 +402,7 @@ const ArthCreditDetails = () => {
             "doctorId": doctorId,
             "loanAmount": amount,
             "formStatus": "",
-            "name": firstName +' '+ lastName
+            "name": firstName + ' ' + lastName
         };
 
         if (treatment === "Other") {
@@ -450,16 +450,36 @@ const ArthCreditDetails = () => {
                                             axios.get(env.api_Url + 'getActiveFlow')
                                                 .then((response) => {
                                                     if (response.data.data === 'PAYU') {
-                                                        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                                                            .then((response) => {
-                                                                axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                        axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                                        .then((loandata) => {
+                                                            const loanId = loandata?.data?.data?.loanId;
+                                                            if (loanId) {
+                                                                axios
+                                                                    .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
                                                                     .then(response => {
-                                                                        axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
-                                                                            .then(response => {
-                                                                                console.log(response)
+                                                                        console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                                        axios
+                                                                            .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                            .then(eligibilityResponse => {
+                                                                                console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                                if (eligibilityResponse.data.message === 'success') {
+                                                                                    navigate(routes.PAY_SCREEN)
+                                                                                }
                                                                             })
+                                                                            .catch(err => {
+                                                                                console.error('Error fetching customer eligibility:', err);
+                                                                            });
                                                                     })
-                                                            })
+                                                                    .catch(err => {
+                                                                        console.error('Error fetching checkout details:', err);
+                                                                    });
+                                                            } else {
+                                                                console.error('Loan ID not found');
+                                                            }
+                                                        })
+                                                        .catch(err => {
+                                                            console.error('Error fetching loan details:', err);
+                                                        });
                                                     }
                                                     if (response.data.data === 'RAZORPAY') {
                                                         navigate(routes.RAZORPAY_OFFERS)
@@ -497,16 +517,36 @@ const ArthCreditDetails = () => {
                                                 axios.get(env.api_Url + 'getActiveFlow')
                                                     .then((response) => {
                                                         if (response.data.data === 'PAYU') {
-                                                            axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                                                                .then((response) => {
-                                                                    axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
-                                                                        .then(response => {
-                                                                            axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
-                                                                                .then(response => {
-                                                                                    console.log(response)
-                                                                                })
-                                                                        })
+                                                            axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                                                .then((loandata) => {
+                                                                    const loanId = loandata?.data?.data?.loanId;
+                                                                    if (loanId) {
+                                                                        axios
+                                                                            .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
+                                                                            .then(response => {
+                                                                                console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                                                axios
+                                                                                    .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                                    .then(eligibilityResponse => {
+                                                                                        console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                                        if (eligibilityResponse.data.message === 'success') {
+                                                                                            navigate(routes.PAY_SCREEN)
+                                                                                        }
+                                                                                    })
+                                                                                    .catch(err => {
+                                                                                        console.error('Error fetching customer eligibility:', err);
+                                                                                    });
+                                                                            })
+                                                                            .catch(err => {
+                                                                                console.error('Error fetching checkout details:', err);
+                                                                            });
+                                                                    } else {
+                                                                        console.error('Loan ID not found');
+                                                                    }
                                                                 })
+                                                                .catch(err => {
+                                                                    console.error('Error fetching loan details:', err);
+                                                                });
                                                         }
                                                         if (response.data.data === 'RAZORPAY') {
                                                             navigate(routes.RAZORPAY_OFFERS)
@@ -523,16 +563,36 @@ const ArthCreditDetails = () => {
                                                 axios.get(env.api_Url + 'getActiveFlow')
                                                     .then((response) => {
                                                         if (response.data.data === 'PAYU') {
-                                                            axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                                                                .then((response) => {
-                                                                    axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                            axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                                            .then((loandata) => {
+                                                                const loanId = loandata?.data?.data?.loanId;
+                                                                if (loanId) {
+                                                                    axios
+                                                                        .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
                                                                         .then(response => {
-                                                                            axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
-                                                                                .then(response => {
-                                                                                    console.log(response)
+                                                                            console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                                            axios
+                                                                                .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                                .then(eligibilityResponse => {
+                                                                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                                    if (eligibilityResponse.data.message === 'success') {
+                                                                                        navigate(routes.PAY_SCREEN)
+                                                                                    }
                                                                                 })
+                                                                                .catch(err => {
+                                                                                    console.error('Error fetching customer eligibility:', err);
+                                                                                });
                                                                         })
-                                                                })
+                                                                        .catch(err => {
+                                                                            console.error('Error fetching checkout details:', err);
+                                                                        });
+                                                                } else {
+                                                                    console.error('Loan ID not found');
+                                                                }
+                                                            })
+                                                            .catch(err => {
+                                                                console.error('Error fetching loan details:', err);
+                                                            });
                                                         }
                                                         if (response.data.data === 'RAZORPAY') {
                                                             navigate(routes.RAZORPAY_OFFERS)
@@ -687,7 +747,7 @@ const ArthCreditDetails = () => {
             "doctorId": doctorId,
             "loanAmount": amount,
             "formStatus": "",
-            "name": firstName +' '+ lastName
+            "name": firstName + ' ' + lastName
         };
 
         if (treatment === "Other") {
@@ -727,16 +787,36 @@ const ArthCreditDetails = () => {
                                             axios.get(env.api_Url + 'getActiveFlow')
                                                 .then((response) => {
                                                     if (response.data.data === 'PAYU') {
-                                                        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                                                            .then((response) => {
-                                                                axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                        axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                                        .then((loandata) => {
+                                                            const loanId = loandata?.data?.data?.loanId;
+                                                            if (loanId) {
+                                                                axios
+                                                                    .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
                                                                     .then(response => {
-                                                                        axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
-                                                                            .then(response => {
-                                                                                console.log(response)
+                                                                        console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                                        axios
+                                                                            .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                            .then(eligibilityResponse => {
+                                                                                console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                                if (eligibilityResponse.data.message === 'success') {
+                                                                                    navigate(routes.PAY_SCREEN)
+                                                                                }
                                                                             })
+                                                                            .catch(err => {
+                                                                                console.error('Error fetching customer eligibility:', err);
+                                                                            });
                                                                     })
-                                                            })
+                                                                    .catch(err => {
+                                                                        console.error('Error fetching checkout details:', err);
+                                                                    });
+                                                            } else {
+                                                                console.error('Loan ID not found');
+                                                            }
+                                                        })
+                                                        .catch(err => {
+                                                            console.error('Error fetching loan details:', err);
+                                                        });
                                                     }
                                                     if (response.data.data === 'RAZORPAY') {
                                                         navigate(routes.RAZORPAY_OFFERS)
@@ -772,16 +852,36 @@ const ArthCreditDetails = () => {
                                                 axios.get(env.api_Url + 'getActiveFlow')
                                                     .then((response) => {
                                                         if (response.data.data === 'PAYU') {
-                                                            axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                                                                .then((response) => {
-                                                                    axios.get(env.api_Url + "getCheckoutDetails?loanId=" + response.data.data.loanId)
+                                                            axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                                            .then((loandata) => {
+                                                                const loanId = loandata?.data?.data?.loanId;
+                                                                if (loanId) {
+                                                                    axios
+                                                                        .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
                                                                         .then(response => {
-                                                                            axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + response.data.data.loanId)
-                                                                                .then(response => {
-                                                                                    console.log(response)
+                                                                            console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                                            axios
+                                                                                .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                                .then(eligibilityResponse => {
+                                                                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                                    if (eligibilityResponse.data.message === 'success') {
+                                                                                        navigate(routes.PAY_SCREEN)
+                                                                                    }
                                                                                 })
+                                                                                .catch(err => {
+                                                                                    console.error('Error fetching customer eligibility:', err);
+                                                                                });
                                                                         })
-                                                                })
+                                                                        .catch(err => {
+                                                                            console.error('Error fetching checkout details:', err);
+                                                                        });
+                                                                } else {
+                                                                    console.error('Loan ID not found');
+                                                                }
+                                                            })
+                                                            .catch(err => {
+                                                                console.error('Error fetching loan details:', err);
+                                                            });
                                                         }
                                                         if (response.data.data === 'RAZORPAY') {
                                                             navigate(routes.RAZORPAY_OFFERS)
