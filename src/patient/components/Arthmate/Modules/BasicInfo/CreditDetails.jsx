@@ -618,8 +618,63 @@ const ArthCreditDetails = () => {
                             }
                         }
                     } else if (treatment === 'Other') {
-                        navigate(routes.ARTH_PERSONAL_DETAILS);
+                        // navigate(routes.ARTH_PERSONAL_DETAILS);
                         // navigate(routes.FLEX_WAIT_SCREEN)
+                        axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
+                        .then(response => {
+                            if (response.data.data === 'true' && response.data.message === 'success') {
+                                navigate(routes.FLEX_WAIT_SCREEN)
+                            } else {
+                                // navigate(routes.ARTH_PERSONAL_DETAILS);
+                                // navigate(routes.RAZORPAY_OFFERS);
+                                axios.get(env.api_Url + 'getActiveFlow')
+                                    .then((response) => {
+                                        if (response.data.data === 'PAYU') {
+                                            axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                            .then((loandata) => {
+                                                const loanId = loandata?.data?.data?.loanId;
+                                                if (loanId) {
+                                                    axios.post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
+                                                        .then(response => {
+                                                            console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                            axios.get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                .then(eligibilityResponse => {
+                                                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                    if (eligibilityResponse.data.message === 'success') {
+                                                                        navigate(routes.PAY_SCREEN)
+                                                                    }
+                                                                })
+                                                                .catch(err => {
+                                                                    console.error('Error fetching customer eligibility:', err);
+                                                                });
+                                                        })
+                                                        .catch(err => {
+                                                            console.error('Error fetching checkout details:', err);
+                                                        });
+                                                } else {
+                                                    console.error('Loan ID not found');
+                                                }
+                                            })
+                                            .catch(err => {
+                                                console.error('Error fetching loan details:', err);
+                                            });
+                                        }
+                                        if (response.data.data === 'RAZORPAY') {
+                                            navigate(routes.RAZORPAY_OFFERS)
+                                        }
+                                        if (response.data.data === 'MASTER') {
+                                            navigate(routes.ARTH_PERSONAL_DETAILS)
+
+
+                                        }
+                                    }
+                                    )
+                            }
+
+
+                        }).catch(() => {
+
+                        });
 
                     }
                     // if (treatment !== 'Other') {
@@ -912,7 +967,64 @@ const ArthCreditDetails = () => {
                             }
                         }
                     } else if (treatment === 'Other') {
-                        navigate(routes.ARTH_PERSONAL_DETAILS);
+                        // navigate(routes.ARTH_PERSONAL_DETAILS);
+                        axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')
+                        .then(response => {
+                            if (response.data.data === 'true' && response.data.message === 'success') {
+                                navigate(routes.FLEX_WAIT_SCREEN)
+                            } else {
+                                // navigate(routes.ARTH_PERSONAL_DETAILS);
+                                // navigate(routes.RAZORPAY_OFFERS);
+                                axios.get(env.api_Url + 'getActiveFlow')
+                                    .then((response) => {
+                                        if (response.data.data === 'PAYU') {
+                                            axios .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                                            .then((loandata) => {
+                                                const loanId = loandata?.data?.data?.loanId;
+                                                if (loanId) {
+                                                    axios
+                                                        .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
+                                                        .then(response => {
+                                                            console.log(JSON.parse(response.data.data), 'Checkout Details Response');
+                                                            axios
+                                                                .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
+                                                                .then(eligibilityResponse => {
+                                                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response');
+                                                                    if (eligibilityResponse.data.message === 'success') {
+                                                                        navigate(routes.PAY_SCREEN)
+                                                                    }
+                                                                })
+                                                                .catch(err => {
+                                                                    console.error('Error fetching customer eligibility:', err);
+                                                                });
+                                                        })
+                                                        .catch(err => {
+                                                            console.error('Error fetching checkout details:', err);
+                                                        });
+                                                } else {
+                                                    console.error('Loan ID not found');
+                                                }
+                                            })
+                                            .catch(err => {
+                                                console.error('Error fetching loan details:', err);
+                                            });
+                                        }
+                                        if (response.data.data === 'RAZORPAY') {
+                                            navigate(routes.RAZORPAY_OFFERS)
+                                        }
+                                        if (response.data.data === 'MASTER') {
+                                            navigate(routes.ARTH_PERSONAL_DETAILS)
+
+
+                                        }
+                                    }
+                                    )
+                            }
+
+
+                        }).catch(() => {
+
+                        });
 
                     }
 
