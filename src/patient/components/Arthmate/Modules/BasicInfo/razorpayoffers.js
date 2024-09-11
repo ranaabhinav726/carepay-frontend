@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router';
 import axios from 'axios';
 import CarepayLogo from '../../../../assets/Logo-carepay.svg'
 const PayUCheckoutComponent = () => {
-    let data=''
+    let data = ''
     const [loaderState, setLoaderState] = useState(false);
     const [showPopOver, setShowPopOver] = useState(false);
     const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -100,7 +100,7 @@ const PayUCheckoutComponent = () => {
                 "description": "",
                 "image": CarepayLogo,
                 "order_id": orderData.orderId,
-                "callback_url": orderData.callback_url ,
+                "callback_url": orderData.callback_url,
                 "redirect": "false",
                 "prefill": {
                     "name": orderData.userName,
@@ -115,18 +115,29 @@ const PayUCheckoutComponent = () => {
                 },
                 config: {
                     display: {
-                      hide: [
-                        {
-                          method: 'upi'
-                        }
-                      ],
-                      preferences: {
-                        show_default_blocks: true,
-                      },
+                        hide: [
+                            {
+                                method: 'upi',
+
+                            },
+                            {
+                                method: 'netbanking',
+                            },
+                            {
+                                method: 'card',
+                            },
+                            {
+                                method: 'wallet',
+                            }
+                        ],
+                        preferences: {
+                            show_default_blocks: true,
+                        },
                     },
-                  },
-                
-                
+                },
+
+
+
             };
             const rzp1 = new window.Razorpay(options);
             rzp1.open();
@@ -201,10 +212,10 @@ const PayUCheckoutComponent = () => {
         <main className="mobileNumberVerification" style={{ position: "relative" }}>
             <Header progressbarDisplay="none" />
             <h3><b>Select application mode</b></h3>
-            {loaderState ===false?
-            <>
-            <p style={{ marginTop: '30px', marginBottom: '10px', fontSize: '14px' }}>Select your preferred mode of credit application:</p>
-            {/* <div
+            {loaderState === false ?
+                <>
+                    <p style={{ marginTop: '30px', marginBottom: '10px', fontSize: '14px' }}>Select your preferred mode of credit application:</p>
+                    {/* <div
                 style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
                 onClick={createorder}
             >
@@ -214,78 +225,78 @@ const PayUCheckoutComponent = () => {
                 </div>
                 <p style={{ fontSize: '12px' }}>HDFC, ICICI, IDFC & more available</p>
             </div> */}
-            {/* <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
+                    {/* <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
                 <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp;
                 <p style={{ marginTop: '5px', fontWeight: 'bold', color: '#FF8B2E' }}>Interest rates applicable. </p>
             </div> */}
-            <div
-                style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
-                onClick={createorder}
-            >
-                <div style={{ display: 'flex', width: '100%' }}>
-                    <div style={{ width: '95%', fontWeight: 'bold', color: '#514C9F' }}>Credit card EMI</div>
-                    <div style={{ float: 'right', width: '5%' }}><KeyboardDoubleArrowRightIcon style={{ color: '#514C9F' }} /></div>
-                </div>
-                <p style={{ fontSize: '12px' }}>HDFC, ICICI, Axis & more available</p>
-            </div>
-            <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
-                <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp;
-                <p style={{ marginTop: '5px', fontWeight: 'bold' }}>No-cost EMI available</p>
-            </div>
-            <div
-                style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
-                onClick={createorder}
-            >
-                <div style={{ display: 'flex', width: '100%' }}>
-                    <div style={{ width: '95%', fontWeight: 'bold', color: '#514C9F' }}>Debit card EMI</div>
-                    <div style={{ float: 'right', width: '5%' }}><KeyboardDoubleArrowRightIcon style={{ color: '#514C9F' }} /></div>
-                </div>
-                <p style={{ fontSize: '12px' }}>AU Bank, Axis, Bob, CANARA & more available</p>
-            </div>
-            <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
-                <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp;
-                <p style={{ marginTop: '5px', fontWeight: 'bold' }}>No-cost EMI available</p>
-            </div>
-            <button
-                onClick={exploreMore}
-                style={{
-                    width: '100%',
-                    marginTop: '20px',
-                    padding: '15px',
-                    color: '#504c9a',
-                    background: '#ecebfd',
-                    border: 'none',
-                    borderRadius: '5px',
-                    fontSize: '14px',
-                    fontWeight: '700'
-                }}
-            >
-                Explore other options
-            </button>
+                    <div
+                        style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
+                        onClick={createorder}
+                    >
+                        <div style={{ display: 'flex', width: '100%' }}>
+                            <div style={{ width: '95%', fontWeight: 'bold', color: '#514C9F' }}>Credit card EMI</div>
+                            <div style={{ float: 'right', width: '5%' }}><KeyboardDoubleArrowRightIcon style={{ color: '#514C9F' }} /></div>
+                        </div>
+                        <p style={{ fontSize: '12px' }}>HDFC, ICICI, Axis & more available</p>
+                    </div>
+                    <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
+                        <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp;
+                        <p style={{ marginTop: '5px', fontWeight: 'bold' }}>No-cost EMI available</p>
+                    </div>
+                    <div
+                        style={{ cursor: 'pointer', background: '#ECEBFF', padding: '10px', borderRadius: '5px', marginTop: '15px' }}
+                        onClick={createorder}
+                    >
+                        <div style={{ display: 'flex', width: '100%' }}>
+                            <div style={{ width: '95%', fontWeight: 'bold', color: '#514C9F' }}>Debit card EMI</div>
+                            <div style={{ float: 'right', width: '5%' }}><KeyboardDoubleArrowRightIcon style={{ color: '#514C9F' }} /></div>
+                        </div>
+                        <p style={{ fontSize: '12px' }}>AU Bank, Axis, Bob, CANARA & more available</p>
+                    </div>
+                    <div style={{ color: '#149540', fontSize: '12px', display: 'flex' }}>
+                        <StarIcon style={{ color: '#149540', width: '14px' }} /> &nbsp;&nbsp;
+                        <p style={{ marginTop: '5px', fontWeight: 'bold' }}>No-cost EMI available</p>
+                    </div>
+                    <button
+                        onClick={exploreMore}
+                        style={{
+                            width: '100%',
+                            marginTop: '20px',
+                            padding: '15px',
+                            color: '#504c9a',
+                            background: '#ecebfd',
+                            border: 'none',
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            fontWeight: '700'
+                        }}
+                    >
+                        Explore other options
+                    </button>
 
-            <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>
-                Need help? Reach out to us.
-            </p>
-            <a
-                style={{ color: '#000', textDecoration: 'none', width: '100%' }}
-                href={"tel:+91 806 948 9655"}
-            >
-                <button
-                    className="submit"
-                    style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}
-                >
-                    Contact Support
-                </button>
-            </a>
-            <BottomPopOverModal
-                navigateToPersonal={navigateToPersonal}
-                popUpMsg={popUpMsg}
-                showPopOver={showPopOver}
-                setShow={setShow}
-                setShowPopOver={setShowPopOver}
-            />
-            </>
-            :""}
+                    <p style={{ textAlign: 'center', fontSize: '14px', marginTop: '10px', marginBottom: '10px', marginTop: '120px' }}>
+                        Need help? Reach out to us.
+                    </p>
+                    <a
+                        style={{ color: '#000', textDecoration: 'none', width: '100%' }}
+                        href={"tel:+91 806 948 9655"}
+                    >
+                        <button
+                            className="submit"
+                            style={{ background: '#ECEBFF', color: "#514C9F", marginTop: '-6px' }}
+                        >
+                            Contact Support
+                        </button>
+                    </a>
+                    <BottomPopOverModal
+                        navigateToPersonal={navigateToPersonal}
+                        popUpMsg={popUpMsg}
+                        showPopOver={showPopOver}
+                        setShow={setShow}
+                        setShowPopOver={setShowPopOver}
+                    />
+                </>
+                : ""}
             {loaderState && <Loadinggif />}
         </main>
     );
