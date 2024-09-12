@@ -25,16 +25,16 @@ const PayUCheckoutComponent = () => {
         axios
             .get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
             .then((loandata) => {
-                const loanId = loandata?.data?.data?.loanId;  
+                const loanId = loandata?.data?.data?.loanId;
                 if (loanId) {
                     axios
                         .post(env.api_Url + "getCheckoutDetails?loanId=" + loanId)
                         .then(response => {
-                            console.log(JSON.parse(response.data.data), 'Checkout Details Response'); 
+                            console.log(JSON.parse(response.data.data), 'Checkout Details Response');
                             axios
                                 .get(env.api_Url + "checkCustomerEligibility?loanId=" + loanId)
                                 .then(eligibilityResponse => {
-                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response'); 
+                                    console.log(eligibilityResponse.data, 'Customer Eligibility Response');
                                     if (eligibilityResponse.data.message === 'success') {
                                         showWrapper(ref.current)
                                         axios.get(env.api_Url + "getCollectPaymentData?loanId=" + loanId + '&deviceType=' + deviceType)
@@ -197,7 +197,7 @@ const PayUCheckoutComponent = () => {
             </button>
 
             {loaderState ? <img src={Loadinggif} alt="Loading" /> : ""}
-
+            {console.log(payuData)}
             {!loaderState && (
                 <form
                     action="https://test.payu.in/_payment"
@@ -246,7 +246,7 @@ const PayUCheckoutComponent = () => {
                 checkAndNavigate={exploreMore}
                 yesBtnText={"Yes, continue."}
                 noBtnText={"No, I want to change my name."}
-                // noBtnClick={salaryError}
+            // noBtnClick={salaryError}
             />
         </main>
     );
