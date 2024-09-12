@@ -58,6 +58,7 @@ const PracticeDetails = () => {
         'Gastroenterology',
         'General',
         'Genetics',
+        'Gym',
         'Gynecology and obstetrics',
         'IVF',
         'Immunology',
@@ -77,10 +78,9 @@ const PracticeDetails = () => {
         'Pulmonology',
         'Radiology',
         'Rheumatology',
+        'Salon',
         'Urology',
         'Vascular Surgery',
-        'Gym',
-        'Salon',
         'Wellness',
         'Other'
     ]
