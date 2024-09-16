@@ -579,7 +579,7 @@ const MainScout = () => {
                                     <div className="" style={{ width: '49.5%' }}>
                                         <input className="input-scout" type="date" onChange={(e) => changefilterDate(e, 'start')} />
                                     </div>
-                                    <div className="" style={{ width: '%', textAlign: 'center', marginTop: '10px', color: 'rgb(81, 76, 159)', fontSize: '20px' }}>
+                                    <div className="" style={{ width: '%', textAlign: 'center', marginTop: '1%', color: 'rgb(81, 76, 159)', fontSize: '20px' }}>
                                         :
                                     </div>
                                     <div className="" style={{ width: '49.5%' }}>
