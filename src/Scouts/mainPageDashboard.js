@@ -152,6 +152,8 @@ const MainScout = () => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
+                    setfilter('')
+                    
                 }
             })
 
@@ -161,6 +163,7 @@ const MainScout = () => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
+                    setfilter('')
                 }
             })
 
@@ -170,6 +173,7 @@ const MainScout = () => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
+                    setfilter('')
                 }
             })
 
@@ -179,6 +183,7 @@ const MainScout = () => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
+                    setfilter('')
                 }
             })
 
