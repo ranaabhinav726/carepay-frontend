@@ -19,6 +19,7 @@ import GREY4 from './imagesscouts/grey3.svg'
 import Dots from './imagesscouts/threedots.png'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import NotFound from '../patient/assets/notFound.png'
+import moment from "moment";
 
 const MainScout = () => {
 
@@ -32,6 +33,11 @@ const MainScout = () => {
     const [allClinics, setAllClinic] = useState('');
     const [clinic, setClinic] = useState('');
     const [clinicValue, setClinicValue] = useState('');
+    const [filterType, setfilterType] = useState('month');
+    const [startDateDDMMYYYY, setStartDateDDMMYYYY] = useState('');
+    const [endDateDDMMYYYY, setEndDateDDMMYYYY] = useState('');
+    const [startDateYYYYMMDD, setStartDateYYYYMMDD] = useState('');
+    const [endDateYYYYMMDD, setEndDateYYYYMMDD] = useState('');
 
     const handlefilters = (type) => {
         setfilter((prevFilter) => (prevFilter === type ? '' : type));
@@ -43,7 +49,7 @@ const MainScout = () => {
 
         } else {
             if (window.sessionStorage.getItem('role') === 'SCOUT') {
-                getScoutDataById(window.sessionStorage.getItem('scoutId'), clinic, callback => {
+                getScoutDataById(window.sessionStorage.getItem('scoutId'), clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -54,7 +60,7 @@ const MainScout = () => {
                 })
             }
             if (window.sessionStorage.getItem('role') === 'DOCTOR') {
-                getDoctorDataById(window.sessionStorage.getItem('doctorId'), clinic, callback => {
+                getDoctorDataById(window.sessionStorage.getItem('doctorId'), clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -63,7 +69,7 @@ const MainScout = () => {
 
             }
             if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
-                getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), clinic, callback => {
+                getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -74,7 +80,7 @@ const MainScout = () => {
                 })
             }
             if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-                getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), clinic, callback => {
+                getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                     console.log(callback)
                     if (callback.message === 'success') {
                         setOjectData(callback.data)
@@ -142,7 +148,7 @@ const MainScout = () => {
     }
     const applyFilter = (data) => {
         if (window.sessionStorage.getItem('role') === 'SCOUT') {
-            getScoutDataById(window.sessionStorage.getItem('scoutId'), data !== undefined ? data : clinic, callback => {
+            getScoutDataById(window.sessionStorage.getItem('scoutId'), data !== undefined ? data : clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
@@ -151,7 +157,7 @@ const MainScout = () => {
 
         }
         if (window.sessionStorage.getItem('role') === 'DOCTOR') {
-            getDoctorDataById(window.sessionStorage.getItem('doctorId'), data !== undefined ? data : clinic, callback => {
+            getDoctorDataById(window.sessionStorage.getItem('doctorId'), data !== undefined ? data : clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
@@ -160,7 +166,7 @@ const MainScout = () => {
 
         }
         if (window.sessionStorage.getItem('role') === 'PARENT_DOCTOR') {
-            getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), data !== undefined ? data : clinic, callback => {
+            getParentDoctorDataById(window.sessionStorage.getItem('parentDoctorId'), data !== undefined ? data : clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
@@ -169,7 +175,7 @@ const MainScout = () => {
 
         }
         if (window.sessionStorage.getItem('role') === 'PARENT_SCOUT') {
-            getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), data !== undefined ? data : clinic, callback => {
+            getParentSCoutDataById(window.sessionStorage.getItem('parentScoutId'), data !== undefined ? data : clinic, startDateDDMMYYYY, endDateDDMMYYYY, callback => {
                 console.log(callback)
                 if (callback.message === 'success') {
                     setOjectData(callback.data)
@@ -177,6 +183,54 @@ const MainScout = () => {
             })
 
         }
+    }
+    const handleFilterDate = (e, type) => {
+        setfilterType(type);
+
+        let startDateDDMMYYYY, endDateDDMMYYYY;
+        let startDateYYYYMMDD, endDateYYYYMMDD;
+
+        if (type === 'month') {
+            startDateDDMMYYYY = moment().startOf('month').format('DD-MM-YYYY');
+            endDateDDMMYYYY = moment().endOf('month').format('DD-MM-YYYY');
+
+            startDateYYYYMMDD = moment().startOf('month').format('YYYY-MM-DD');
+            endDateYYYYMMDD = moment().endOf('month').format('YYYY-MM-DD');
+        } else if (type === '3month') {
+            startDateDDMMYYYY = moment().subtract(3, 'months').startOf('month').format('DD-MM-YYYY');
+            endDateDDMMYYYY = moment().endOf('month').format('DD-MM-YYYY');
+
+            startDateYYYYMMDD = moment().subtract(3, 'months').startOf('month').format('YYYY-MM-DD');
+            endDateYYYYMMDD = moment().endOf('month').format('YYYY-MM-DD');
+        } else if (type === '6month') {
+            startDateDDMMYYYY = moment().subtract(6, 'months').startOf('month').format('DD-MM-YYYY');
+            endDateDDMMYYYY = moment().endOf('month').format('DD-MM-YYYY');
+
+            startDateYYYYMMDD = moment().subtract(6, 'months').startOf('month').format('YYYY-MM-DD');
+            endDateYYYYMMDD = moment().endOf('month').format('YYYY-MM-DD');
+        } else if (type === '9month') {
+            startDateDDMMYYYY = moment().subtract(9, 'months').startOf('month').format('DD-MM-YYYY');
+            endDateDDMMYYYY = moment().endOf('month').format('DD-MM-YYYY');
+
+            startDateYYYYMMDD = moment().subtract(9, 'months').startOf('month').format('YYYY-MM-DD');
+            endDateYYYYMMDD = moment().endOf('month').format('YYYY-MM-DD');
+        }
+
+        setStartDateDDMMYYYY(startDateDDMMYYYY);
+        setEndDateDDMMYYYY(endDateDDMMYYYY);
+        setStartDateYYYYMMDD(startDateYYYYMMDD);
+        setEndDateYYYYMMDD(endDateYYYYMMDD);
+        console.log(startDateDDMMYYYY, endDateDDMMYYYY, startDateYYYYMMDD, endDateYYYYMMDD)
+    };
+    const changefilterDate = (e, type) => {
+        console.log(e.target.value)
+        if (type === 'start') {
+            setStartDateDDMMYYYY(moment(e.target.value).format('DD-MM-YYYY'))
+        }
+        if (type === 'end') {
+            setEndDateDDMMYYYY(moment(e.target.value).format('DD-MM-YYYY'))
+        }
+
     }
     return (
         <>
@@ -199,10 +253,10 @@ const MainScout = () => {
                             <h5>Scouts (5)</h5> &nbsp;
                             <span><FaAngleDown /></span>
                         </div> */}
-                        {/* <div className={`box ${filter === 'amount' ? 'active' : ''}`} onClick={() => handlefilters('amount')}>
-                            <h5>Amount</h5> &nbsp;
+                        <div className={`box ${filter === 'Date' ? 'active' : ''}`} onClick={() => handlefilters('Date')}>
+                            <h5>Date</h5> &nbsp;
                             <span><FaAngleDown /></span>
-                        </div> */}
+                        </div>
                         {allClinics.length > 0 ?
                             <div className={`box ${filter === 'clinics' ? 'active' : ''}`} onClick={() => handlefilters('clinics')}>
                                 <h5>Clinics</h5> &nbsp;
@@ -491,6 +545,43 @@ const MainScout = () => {
                                 </select>
 
                             </div>
+                            <div className="row filter-btn">
+                                <button className='apply-filter' onClick={() => applyFilter()}>Apply Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                : ""}
+            {filter === 'Date' ?
+                <div className="over-view-component background-blur radio-btn">
+                    <div className={`filter-dropdown animate__animated animate__slideInUp ${filter === 'Date' ? 'show' : ''}`}>
+                        <div className="filterscout">
+                            <div className="filterbox">
+                                <h5>Date</h5>&nbsp;<span><IoMdClose onClick={() => setfilter('')} className="closeicon" /></span>
+                            </div>
+                            <div className="checkboxes detailsform gender" style={{ textAlign: 'left' }}>
+
+                                <div className="radioOption"><input onChange={(e) => handleFilterDate(e, 'month')} type="radio" checked={filterType === 'month'} />&nbsp;&nbsp;This Month</div>
+                                <div className="radioOption"><input onChange={(e) => handleFilterDate(e, '3month')} type="radio" checked={filterType === '3month'} />&nbsp;&nbsp;Last 3 Month</div>
+                                <div className="radioOption"><input onChange={(e) => handleFilterDate(e, '6month')} type="radio" checked={filterType === '6month'} />&nbsp;&nbsp;Last 6 Month</div>
+                                <div className="radioOption"><input onChange={(e) => handleFilterDate(e, '9month')} type="radio" checked={filterType === '9month'} />&nbsp;&nbsp;Last 9 Month</div>
+                                <div className="radioOption"><input onChange={(e) => handleFilterDate(e, 'range')} type="radio" checked={filterType === 'range'} />&nbsp;&nbsp;Date Range</div>
+
+
+                            </div>
+                            {filterType === 'range' ?
+                                <div className="" style={{ display: 'flex', width: '100%' }}>
+                                    <div className="" style={{ width: '49.5%' }}>
+                                        <input className="input-scout" type="date" onChange={(e) => changefilterDate(e, 'start')} />
+                                    </div>
+                                    <div className="" style={{ width: '%', textAlign: 'center', marginTop: '10px', color: 'rgb(81, 76, 159)', fontSize: '20px' }}>
+                                        :
+                                    </div>
+                                    <div className="" style={{ width: '49.5%' }}>
+                                        <input className="input-scout" type="date" onChange={(e) => changefilterDate(e, 'end')} />
+                                    </div>
+                                </div>
+                                : ""}
                             <div className="row filter-btn">
                                 <button className='apply-filter' onClick={() => applyFilter()}>Apply Filter</button>
                             </div>

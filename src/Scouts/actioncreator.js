@@ -59,8 +59,8 @@ export const getScoutRole = (phoneNumber, callBack) => {
             }
         });
 };
-export const getScoutDataById = (scoutId,clinic, callBack) => {
-    axios.get(APIS.GET_SCOUT_DATA_BY_SCOUT_ID + scoutId + '&type=detail'+ '&clinicName=' + clinic)
+export const getScoutDataById = (scoutId, clinic, startDate, endDate, callBack) => {
+    axios.get(APIS.GET_SCOUT_DATA_BY_SCOUT_ID + scoutId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
         })
@@ -77,8 +77,8 @@ export const getScoutDataById = (scoutId,clinic, callBack) => {
             }
         });
 };
-export const getDoctorDataById = (docId,clinic, callBack) => {
-    axios.get(APIS.GET_DOCTOR_DATA_BY_ID + docId + '&type=detail'+ '&clinicName=' + clinic)
+export const getDoctorDataById = (docId, clinic , startDate, endDate, callBack) => {
+    axios.get(APIS.GET_DOCTOR_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
         })
@@ -95,8 +95,8 @@ export const getDoctorDataById = (docId,clinic, callBack) => {
             }
         });
 };
-export const getParentDoctorDataById = (docId,clinic, callBack) => {
-    axios.get(APIS.GET_PARENT_DOCTOR_DATA_BY_ID + docId + '&type=detail'+ '&clinicName=' + clinic)
+export const getParentDoctorDataById = (docId, clinic , startDate, endDate, callBack) => {
+    axios.get(APIS.GET_PARENT_DOCTOR_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
         })
@@ -113,8 +113,8 @@ export const getParentDoctorDataById = (docId,clinic, callBack) => {
             }
         });
 };
-export const getParentSCoutDataById = (docId, clinic, callBack) => {
-    axios.get(APIS.GET_PARENT_SCOUT_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic)
+export const getParentSCoutDataById = (docId, clinic , startDate, endDate, callBack) => {
+    axios.get(APIS.GET_PARENT_SCOUT_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
         })
@@ -131,7 +131,7 @@ export const getParentSCoutDataById = (docId, clinic, callBack) => {
             }
         });
 };
-export const getScoutTrendDataApi = (scoutId, type, loanStatus,clinic, callBack) => {
+export const getScoutTrendDataApi = (scoutId, type, loanStatus, clinic, callBack) => {
     axios.get(APIS.GET_GRAPH_DATA_BY_SCOUT_ID + scoutId + '&type=' + type + '&loanStatus=' + loanStatus + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -149,7 +149,7 @@ export const getScoutTrendDataApi = (scoutId, type, loanStatus,clinic, callBack)
             }
         });
 };
-export const getParentScoutTrendDataApi = (scoutId, type, loanStatus,clinic, callBack) => {
+export const getParentScoutTrendDataApi = (scoutId, type, loanStatus, clinic, callBack) => {
     axios.get(APIS.GET_PARENT_SCOUT_DATA_GRAPH + scoutId + '&type=' + type + '&loanStatus=' + loanStatus + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -168,7 +168,7 @@ export const getParentScoutTrendDataApi = (scoutId, type, loanStatus,clinic, cal
         });
 };
 
-export const getLeadsPerClinicByParentClinicId = (docId,clinic, callBack) => {
+export const getLeadsPerClinicByParentClinicId = (docId, clinic, callBack) => {
     axios.get(APIS.GET_MONTHLY_LEADS_BY_PARENT_DOCTOR_ID + docId + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -186,7 +186,7 @@ export const getLeadsPerClinicByParentClinicId = (docId,clinic, callBack) => {
             }
         });
 };
-export const getLeadsPerClinicByDoctorId = (docId,clinic, callBack) => {
+export const getLeadsPerClinicByDoctorId = (docId, clinic, callBack) => {
     axios.get(APIS.GET_MONTHLY_LEADS_BY_DOCTOR_ID + docId + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -204,7 +204,7 @@ export const getLeadsPerClinicByDoctorId = (docId,clinic, callBack) => {
             }
         });
 };
-export const getLeadsPerClinicByScoutId = (docId,clinic, callBack) => {
+export const getLeadsPerClinicByScoutId = (docId, clinic, callBack) => {
     axios.get(APIS.GET_MONTHLY_LEADS_BY_SCOUT_ID + docId + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -222,7 +222,7 @@ export const getLeadsPerClinicByScoutId = (docId,clinic, callBack) => {
             }
         });
 };
-export const getLeadsPerClinicByparentScoutId = (docId,clinic, callBack) => {
+export const getLeadsPerClinicByparentScoutId = (docId, clinic, callBack) => {
     axios.get(APIS.GET_MONTHLY_LEADS_BY_PARENT_SCOUT_ID + docId + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -240,7 +240,7 @@ export const getLeadsPerClinicByparentScoutId = (docId,clinic, callBack) => {
             }
         });
 };
-export const getLoanDataByScoutId = (docId,clinic, callBack) => {
+export const getLoanDataByScoutId = (docId, clinic, callBack) => {
     axios.get(APIS.GET_TOTAL_LOANS_BY_SCOUT_ID + docId + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -276,7 +276,7 @@ export const getLoanDataByUserId = (userId, callBack) => {
             }
         });
 };
-export const getPotentialByScoutId = (scoutId,clinic, callBack) => {
+export const getPotentialByScoutId = (scoutId, clinic, callBack) => {
     axios.get(APIS.GET_POTENTIAL_BY_SCOUT_ID + scoutId + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
@@ -294,7 +294,7 @@ export const getPotentialByScoutId = (scoutId,clinic, callBack) => {
             }
         });
 };
-export const getPotentialByParentScoutId = (id,clinic, callBack) => {
+export const getPotentialByParentScoutId = (id, clinic, callBack) => {
     axios.get(APIS.GET_POTENTIAL_BY_PARENT_SCOUT_ID + id + '&clinicName=' + clinic)
         .then(response => {
             callBack(response.data);
