@@ -37,6 +37,10 @@ const PayRefresh = () => {
                             navigate(routes.DOCTOR_AGREEMENT_DONE)
 
                         }
+                        if (response.data.data.contractStatus === 'COMPLETED' ) {
+                            navigate(routes.DOCTOR_AGREEMENT_DONE)
+
+                        }
 
 
                     }

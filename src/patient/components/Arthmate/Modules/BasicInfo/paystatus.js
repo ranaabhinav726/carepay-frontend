@@ -3,9 +3,14 @@ import Happyface from '../../assets/Group (6).svg'
 import Header from "../../../Header/Header";
 import axios from "axios";
 import { env } from "../../../../environment/environment";
+import { useNavigate } from "react-router-dom";
+import routes from "../../../../../layout/Routes";
 const Payustatus = () => {
+    let navigate=useNavigate()
+
     let userId=localStorage.getItem('userId')
     const tryAgain = () => {
+        navigate(routes.PAY_SCREEN)
 
     }
 
