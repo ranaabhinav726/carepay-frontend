@@ -21,7 +21,7 @@ export default function FibeNumberVerified() {
 
     useEffect(() => {
         const fetchLoanStatus = async () => {
-            if (userId ) {
+            // if (userId ) {
                 try {
                     const response = await axios.get(`${env.api_Url}userDetails/getUserLoanFormStatus?userId=${userId}`);
                     if (response.data.message === 'success') {
@@ -58,7 +58,7 @@ export default function FibeNumberVerified() {
                     console.error('Error fetching loan status:', error);
                     // Handle error, navigate to a fallback route or show an error message
                 }
-            }
+            // }
         };
     
         fetchLoanStatus();
