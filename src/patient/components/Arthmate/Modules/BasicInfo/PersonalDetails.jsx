@@ -53,6 +53,9 @@ const ArthPersonalDetails = () => {
     const [refNumber, setRefNumber] = useState("");
     const [refRelation, setRefRelation] = useState("");
     const [refErrorMsg, setRefErrorMsg] = useState("This field can't be empty.");
+    const [motherName, setmotherName] = useState("")
+    const [typeOfEmail, setTypeOfEmail] = useState("Professional")
+    const [educationLevel, seteducationLevel] = useState("")
 
 
     const [apiError, setApiError] = useState(false);
@@ -89,6 +92,13 @@ const ArthPersonalDetails = () => {
                         setRefName(data?.referenceName ?? "");
                         setRefNumber(data?.referenceNumber ?? "");
                         setRefRelation(data?.referenceRelation ?? "");
+                        setmotherName(data?.motherName)
+                        seteducationLevel(data?.educationLevel)
+                        setTypeOfEmail(data?.typeOfEmail)
+
+                        
+
+
                         if (response.data.data.panNo === null) {
                             getDataFromDecentro();
                         }
@@ -181,7 +191,7 @@ const ArthPersonalDetails = () => {
 
 
     async function handleForm() {
-      
+
         // if(!(panNumber && fullName && gender && email && dob)){ // All feilds must have something
         //     return;
         // }
@@ -215,7 +225,22 @@ const ArthPersonalDetails = () => {
             if (elem) showErrorOnUI(elem);
             return;
         }
+        if (!motherName) {
+            let elem = document.getElementById('motherName');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
+        if (!educationLevel) {
+            let elem = document.getElementById('educationLevel');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
 
+        if (!typeOfEmail) {
+            let elem = document.getElementById('typeOfEmail');
+            if (elem) showErrorOnUI(elem);
+            return;
+        }
         if (!refName) {
             let elem = document.getElementById('refName');
             if (elem) showErrorOnUI(elem);
@@ -277,7 +302,10 @@ const ArthPersonalDetails = () => {
             "referenceRelation": refRelation,
             "userId": localStorage.getItem('userId'),
             "formStatus": "",
-            "firstName":localStorage.getItem('fullName')
+            "firstName": localStorage.getItem('fullName'),
+            "motherName": motherName,
+            "educationLevel": educationLevel,
+            "typeOfEmail": typeOfEmail
 
         };
 
@@ -385,7 +413,10 @@ const ArthPersonalDetails = () => {
             "referenceRelation": refRelation,
             "userId": localStorage.getItem('userId'),
             "formStatus": "",
-            "firstName":localStorage.getItem('fullName')
+            "firstName": localStorage.getItem('fullName'),
+            "motherName": motherName,
+            "educationLevel": educationLevel,
+            "typeOfEmail": typeOfEmail
 
         };
 
@@ -440,7 +471,7 @@ const ArthPersonalDetails = () => {
                         <div className="aadhaarNumber">
                             <p>Aadhaar number</p>
                             <input
-                             type="number"
+                                type="number"
                                 id="aadhaarNumber"
                                 value={aadhaarNo ?? ""}
                                 onChange={(e) => setAadhaarNo(e.target.value)}
@@ -450,16 +481,7 @@ const ArthPersonalDetails = () => {
                             <span className="fieldError">Please enter a valid Aadhaar number.</span>
                         </div>
 
-                        <div className="email">
-                            <p>E-mail ID</p>
-                            <input type="email"
-                                value={email ?? ""}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter E-mail ID"
-                                required
-                            />
-                            <span className="fieldError">This field can't be empty.</span>
-                        </div>
+
 
                         <div className="fatherName">
                             <p>Father's name</p>
@@ -472,7 +494,53 @@ const ArthPersonalDetails = () => {
                             />
                             <span className="fieldError">This field can't be empty.</span>
                         </div>
+                        <div className="PAN">
+                            <p>Mother's name</p>
+                            <input type="text"
+                                id="motherName"
+                                value={motherName ?? ""}
+                                onChange={(e) => setmotherName(e.target.value)}
+                                placeholder="Enter your mother's name"
+                                required
+                            />
+                            <span className="fieldError">This field can't be empty.</span>
+                        </div>
+                        <div className="email">
+                            <p>E-mail ID</p>
+                            <input type="email"
+                                value={email ?? ""}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter E-mail ID"
+                                required
+                            />
+                            <span className="fieldError">This field can't be empty.</span>
+                        </div>
+                        <div className="gender" id="gender">
+                            <p>Select the type of your email</p>
+                            <div className="radioOption">
+                                <input type="radio" id="Professional" name="typeOfEmail" checked={typeOfEmail === "Professional"} onChange={(e) => setTypeOfEmail(e.target.value)} value="Professional" />
+                                <label htmlFor="Professional">Professional</label><br />
+                            </div>
+                            <div className="radioOption">
+                                <input type="radio" id="Personal" name="typeOfEmail" checked={typeOfEmail === "Personal"} onChange={(e) => setTypeOfEmail(e.target.value)} value="Personal" />
+                                <label htmlFor="Personal">Personal</label><br />
+                            </div>
 
+                        </div>
+                        <div className="marital-status">
+                            <p>Education</p>
+                            <select name="Education" value={educationLevel} onChange={(e) => seteducationLevel(e.target.value)}>
+                                <option value="">Select Education </option>
+                                <option value="LESS THAN 10TH">Less than 10th</option>
+                                <option value="PASSED 10TH">Passed 10th</option>
+                                <option value="PASSED 12TH">Passed 12th</option>
+                                <option value="DIPLOMA">Diploma</option>
+                                <option value="GRADUATION">Graduation</option>
+                                <option value="POST GRADUATION">Post graduation</option>
+                                <option value="PHD">P.H.D.</option>
+                            </select>
+                        </div>
+                        <span className="fieldError">This field can't be empty.</span>
                         <div className="DOB">
                             <p>Date of birth</p>
                             <input type="date"
@@ -547,7 +615,7 @@ const ArthPersonalDetails = () => {
                             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                                 <span style={{ minWidth: "max-content" }}>Reference is my:</span>
                                 <select name="refRelation" id="refRelation" style={{ marginBottom: "0" }} value={refRelation} onChange={(e) => setRefRelation(e.target.value)}>
-                                <option value={""}>Select Option</option>
+                                    <option value={""}>Select Option</option>
 
                                     <option value={"father"}>Father</option>
                                     <option value={"mother"}>Mother</option>

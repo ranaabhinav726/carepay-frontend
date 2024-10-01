@@ -32,6 +32,31 @@ const BankDetails = () => {
     useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
         if (!!userId) {
+            axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=MV')
+                .then((response) => {
+                    if (response.data.message === "success") {
+                        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                            .then((loanData) => {
+
+                                axios.get(env.api_Url + "checkLead?loanId=" + loanData.data.data.loanId)
+                                    .then((response) => {
+                                        if (response.data.message === "success" && response.data.data === "NEW_LEAD") {
+                                            axios.get(env.api_Url + "onboardLead?loanId=" + loanData.data.data.loanId)
+                                                .then((response) => {
+                                                    if (response.data.message === "success") {
+                                                        axios.get(env.api_Url + "checkDocsRequirement?loanId=" + loanData.data.data.loanId)
+                                                            .then((response) => {
+                                                                if (response.data.message === "success") {
+
+                                                                }
+                                                            })
+                                                    }
+                                                })
+                                        }
+                                    })
+                            })
+                    }
+                })
 
             axios.get(env.api_Url + "userDetails/getAccountInfoByUserId?userId=" + userId)
                 .then(response => {
@@ -335,6 +360,29 @@ const BankDetails = () => {
                 if (response.data.data === 'NOT_FIT') {
                     navigate(routes.REJECTED_SCREEN)
                 }
+                if (response.data.data === 'MV') {
+                    // navigate(routes.REJECTED_SCREEN)
+                    // mvscrees
+                    axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                        .then((loanData) => {
+                            axios.get(env.api_Url + 'moneyViewActivityStatus?loanId=' + loanData.data.data.loanId)
+                                .then((res) => {
+                                    if (res.data.data.leadStatus === 'DOCS_REQUIRED') {
+                                        navigate(routes.MONEY_VIEW_BANKSTATEMENT)
+
+                                    }
+                                    if (res.data.data.leadStatus === 'NOT_REQUIRED') {
+                                        navigate(routes.MV_CONGRATULATIONS)
+
+
+                                    }
+
+
+
+                                })
+                        })
+                }
+
 
 
             })

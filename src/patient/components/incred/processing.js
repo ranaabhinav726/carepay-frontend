@@ -84,6 +84,10 @@ const Processing = () => {
                 if (response.data.data === 'NOT_FIT') {
                     navigate(routes.REJECTED_SCREEN)
                 }
+                if (response.data.data === 'MV') {
+                    // navigate(routes.REJECTED_SCREEN)
+                    // mvscrees
+                }
 
 
             })

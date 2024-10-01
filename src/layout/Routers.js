@@ -191,6 +191,12 @@ export const PAY_STATUS = React.lazy(() => import('../patient/components/Arthmat
 export const RAZORPAY_OFFERS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/razorpayoffers'));
 export const RAZORPAY_SCREEN_REFRESH = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/razorpayrefresh'));
 export const RAZORPAY_SCREEN_STATUS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/razorpaystatus'));
+export const MONEY_VIEW_BANKSTATEMENT = React.lazy(() => import('../patient/components/Arthmate/Modules/mvbankstatement'));
+export const MVREFRESH = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/mvrefresh'));
+export const MV_CONGRATULATIONS = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/mvcongratulations'));
+export const MVREFRESH_FINAL = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/mvfinalrefresh'));
+export const MVREFRESH_TRY_AGAIN = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/mvtryagain'));
+
 
 export const DEMO = React.lazy(() => import('../patient/components/flexmoney/demo'));
 

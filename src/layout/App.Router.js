@@ -194,6 +194,11 @@ function AppRouter() {
           <Route path={OurRoutes.RAZORPAY_OFFERS} element={<Routers.RAZORPAY_OFFERS />} />
           <Route path={OurRoutes.RAZORPAY_SCREEN_REFRESH} element={<Routers.RAZORPAY_SCREEN_REFRESH />} />
           <Route path={OurRoutes.RAZORPAY_SCREEN_STATUS} element={<Routers.RAZORPAY_SCREEN_STATUS />} />
+          <Route path={OurRoutes.MONEY_VIEW_BANKSTATEMENT} element={<Routers.MONEY_VIEW_BANKSTATEMENT />} />
+          <Route path={OurRoutes.MVREFRESH} element={<Routers.MVREFRESH />} />
+          <Route path={OurRoutes.MV_CONGRATULATIONS} element={<Routers.MV_CONGRATULATIONS />} />
+          <Route path={OurRoutes.MVREFRESH_FINAL} element={<Routers.MVREFRESH_FINAL />} />
+          <Route path={OurRoutes.MVREFRESH_TRY_AGAIN} element={<Routers.MVREFRESH_TRY_AGAIN />} />
 
           <Route path={OurRoutes.DEMO} element={<Routers.DEMO />} />
 
@@ -204,16 +209,16 @@ function AppRouter() {
           <Route path={OurRoutes.SCOUTS_ALREADYEXIST} element={<Routers.SCOUTS_ALREADYEXIST />} />
           <Route path={OurRoutes.SCOUTES_WELCOME} element={<Routers.SCOUTES_WELCOME />} />
           <Route element={<ScoutDahboardLayout />}>
-          <Route path={OurRoutes.SCOUTES_DASHBOARD} element={<Routers.SCOUTES_DASHBOARD />} />
-        </Route>
-        <Route path={OurRoutes.SCOUTES_PERSONAL} element={<Routers.SCOUTES_PERSONAL />} />
-        <Route path={OurRoutes.SCOUTES_PRACTICE} element={<Routers.SCOUTES_PRACTICE />} />
-        <Route path={OurRoutes.SCOUTES_BANK} element={<Routers.SCOUTES_BANK />} />
-        <Route path={OurRoutes.SCOUTES_ADDRESS} element={<Routers.SCOUTES_ADDRESS />} />
-        <Route path={OurRoutes.SCOUTES_DOC} element={<Routers.SCOUTES_DOC />} />
+            <Route path={OurRoutes.SCOUTES_DASHBOARD} element={<Routers.SCOUTES_DASHBOARD />} />
+          </Route>
+          <Route path={OurRoutes.SCOUTES_PERSONAL} element={<Routers.SCOUTES_PERSONAL />} />
+          <Route path={OurRoutes.SCOUTES_PRACTICE} element={<Routers.SCOUTES_PRACTICE />} />
+          <Route path={OurRoutes.SCOUTES_BANK} element={<Routers.SCOUTES_BANK />} />
+          <Route path={OurRoutes.SCOUTES_ADDRESS} element={<Routers.SCOUTES_ADDRESS />} />
+          <Route path={OurRoutes.SCOUTES_DOC} element={<Routers.SCOUTES_DOC />} />
 
         </Routes>
-      
+
 
       </Suspense>
     </Router>
