@@ -1,23 +1,26 @@
 import { Header } from "./Comps/Header";
-import Gratification from '../../assets/GIFs/Gratification.gif'
+import Gratification from '../../assets/GIFs/Gratification.gif';
 import { useNavigate } from "react-router-dom";
 import lottie from "lottie-web";
-import animationData from '../../assets/JSON animations/Comp 1.json'
-import { useEffect } from "react";
+import animationData from '../../assets/JSON animations/Comp 1.json';
+import { useEffect, useState, useRef } from "react";
 import ScreenTitle from "./Comps/ScreenTitle";
 import routes from "../../../layout/Routes";
 import axios from "axios";
 import { env } from "../../environment/environment";
 
-let userId = localStorage.getItem("userId");
-
 export default function FibeNumberVerified() {
-
     const navigate = useNavigate();
-    let timerId = setTimeout(() => {
+    const [userId, setUserId] = useState(null);
+    const timerId = useRef(null);  // Use useRef to persist the timerId
 
-        // navigate(routes.ARTH_CREDIT_DETAILS, { replace: "true" })
-    }, 2500);
+    useEffect(() => {
+        // Fetch userId from localStorage after component mounts
+        const storedUserId = localStorage.getItem("userId");
+        if (storedUserId) {
+            setUserId(storedUserId);
+        }
+    }, []);
 
     useEffect(() => {
         if (userId && userId !== 'null') {
@@ -25,14 +28,14 @@ export default function FibeNumberVerified() {
                 .then(response => {
                     if (response.data.message === 'success') {
                         const data = response.data.data;
-    
+
                         if (!data) {
-                            setTimeout(() => {
+                            timerId.current = setTimeout(() => {
                                 navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
                             }, 2500);
                             return;
                         }
-    
+
                         const navigationMap = {
                             'LEAD_CREATED_AM': routes.CONNECTING_WITH_LENDERS,
                             'KYC_AADHAR_AM': routes.ARTH_PAN_PHOTO,
@@ -42,16 +45,15 @@ export default function FibeNumberVerified() {
                             'LOAN_CREATED_AM': routes.WAIT_ARTH,
                             'NACH_AM': `/patient/nachmandatewait/${userId}`
                         };
-    
+
                         const route = navigationMap[data] || routes.ARTH_CREDIT_DETAILS;
-                        setTimeout(() => {
+                        timerId.current = setTimeout(() => {
                             navigate(route, { replace: true });
                         }, 2500);
                     } else {
-                    
-                        // setTimeout(() => {
+                        timerId.current = setTimeout(() => {
                             navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
-                        // }, 2500);
+                        }, 2500);
                     }
                 })
                 .catch(error => {
@@ -60,14 +62,6 @@ export default function FibeNumberVerified() {
                 });
         }
     }, [userId, navigate]);
-    
-
-
-
-    // setTimeout(()=>{
-    //     let elem = document.getElementById('screen3Title');
-    //     elem.classList.add('fadeInUpAnimate');
-    // }, 2000)
 
     useEffect(() => {
         lottie.loadAnimation({
@@ -77,17 +71,16 @@ export default function FibeNumberVerified() {
         });
 
         return () => {
-            clearTimeout(timerId)
-        }
-
+            // Clean up the timer when component unmounts
+            if (timerId.current) {
+                clearTimeout(timerId.current);
+            }
+        };
     }, []);
 
     return (
         <main className="screenContainer">
             <Header progressBar="hidden" />
-            {/* <div style={{display:"flex", minHeight:"70vh", alignItems:"center", justifyContent:"center"}}>
-                <img src={Gratification} style={{maxWidth:"40%"}} alt="" />
-            </div> */}
             <div style={{ marginTop: "25%" }} id="searchAnimation"></div>
             <ScreenTitle
                 id="screen3Title"
@@ -101,5 +94,5 @@ export default function FibeNumberVerified() {
                 }}
             />
         </main>
-    )
+    );
 }
