@@ -20,48 +20,76 @@ export default function FibeNumberVerified() {
     }, 2500);
 
     useEffect(() => {
-        if (userId && userId !== 'null') {
-            axios.get(`${env.api_Url}userDetails/getUserLoanFormStatus?userId=${userId}`)
-                .then(response => {
+        const fetchLoanStatus = async () => {
+            if (userId ) {
+                try {
+                    const response = await axios.get(`${env.api_Url}userDetails/getUserLoanFormStatus?userId=${userId}`);
                     if (response.data.message === 'success') {
-                        getpage(response)
-
+                        const data = response.data.data;
+    
+                        if (!data) {
+                            setTimeout(() => {
+                                navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
+                            }, 2500);
+                            return;
+                        }
+                
+                        const navigationMap = {
+                            'LEAD_CREATED_AM': routes.CONNECTING_WITH_LENDERS,
+                            'KYC_AADHAR_AM': routes.ARTH_PAN_PHOTO,
+                            'KYC_PAN_AM': routes.KYC_PAN_AM,
+                            'ESIGN_AM': routes.ARTH_AUTO_REPAYMENT,
+                            'KYC_SELFIE_AM': routes.WAIT_ARTH,
+                            'LOAN_CREATED_AM': routes.WAIT_ARTH,
+                            'NACH_AM': `/patient/nachmandatewait/${userId}`
+                        };
+                
+                        const route = navigationMap[data] || routes.ARTH_CREDIT_DETAILS;
+                        setTimeout(() => {
+                            navigate(route, { replace: true });
+                        }, 2500);
+    
                     } else {
                         setTimeout(() => {
                             navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
                         }, 2500);
                     }
-                })
-
-        }
-
-    }, [userId, navigate]);
-    const getpage = (response) => {
-        const data = response.data.data;
-
-        if (!data) {
-            setTimeout(() => {
-                navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
-            }, 2500);
-            return;
-        }
-
-        const navigationMap = {
-            'LEAD_CREATED_AM': routes.CONNECTING_WITH_LENDERS,
-            'KYC_AADHAR_AM': routes.ARTH_PAN_PHOTO,
-            'KYC_PAN_AM': routes.KYC_PAN_AM,
-            'ESIGN_AM': routes.ARTH_AUTO_REPAYMENT,
-            'KYC_SELFIE_AM': routes.WAIT_ARTH,
-            'LOAN_CREATED_AM': routes.WAIT_ARTH,
-            'NACH_AM': `/patient/nachmandatewait/${userId}`
+                } catch (error) {
+                    console.error('Error fetching loan status:', error);
+                    // Handle error, navigate to a fallback route or show an error message
+                }
+            }
         };
+    
+        fetchLoanStatus();
+    }, [userId, navigate]);
+    
+    // const getpage = (response) => {
+    //     const data = response.data.data;
 
-        const route = navigationMap[data] || routes.ARTH_CREDIT_DETAILS;
-        setTimeout(() => {
-            navigate(route, { replace: true });
-        }, 2500);
+    //     if (!data) {
+    //         setTimeout(() => {
+    //             navigate(routes.ARTH_CREDIT_DETAILS, { replace: true });
+    //         }, 2500);
+    //         return;
+    //     }
 
-    }
+    //     const navigationMap = {
+    //         'LEAD_CREATED_AM': routes.CONNECTING_WITH_LENDERS,
+    //         'KYC_AADHAR_AM': routes.ARTH_PAN_PHOTO,
+    //         'KYC_PAN_AM': routes.KYC_PAN_AM,
+    //         'ESIGN_AM': routes.ARTH_AUTO_REPAYMENT,
+    //         'KYC_SELFIE_AM': routes.WAIT_ARTH,
+    //         'LOAN_CREATED_AM': routes.WAIT_ARTH,
+    //         'NACH_AM': `/patient/nachmandatewait/${userId}`
+    //     };
+
+    //     const route = navigationMap[data] || routes.ARTH_CREDIT_DETAILS;
+    //     setTimeout(() => {
+    //         navigate(route, { replace: true });
+    //     }, 2500);
+
+    // }
 
 
 
