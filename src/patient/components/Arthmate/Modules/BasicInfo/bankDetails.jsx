@@ -10,7 +10,7 @@ import BottomPopOverModal from "../../../utility/BottomPopOverModal";
 
 import SearchingDoc from '../../../../assets/GIFs/Document in process.gif'
 import routes from "../../../../../layout/Routes";
-
+import Loadinggif from "../../../../../utils/loader/Loading 3.gif";
 
 // let bankname = localStorage.getItem('bankName');
 
@@ -37,7 +37,7 @@ const BankDetails = () => {
                     if (response.data.message === "success") {
                         axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                             .then((loanData) => {
-
+                                setloaderState(true)
                                 axios.get(env.api_Url + "checkLead?loanId=" + loanData.data.data.loanId)
                                     .then((response) => {
                                         if (response.data.message === "success" && response.data.data === "NEW_LEAD") {
@@ -47,11 +47,17 @@ const BankDetails = () => {
                                                         axios.get(env.api_Url + "checkDocsRequirement?loanId=" + loanData.data.data.loanId)
                                                             .then((response) => {
                                                                 if (response.data.message === "success") {
-
+                                                                    setloaderState(false)
+                                                                } else {
+                                                                    setloaderState(false)
                                                                 }
                                                             })
+                                                    } else {
+                                                        setloaderState(false)
                                                     }
                                                 })
+                                        }else{
+                                            setloaderState(false)
                                         }
                                     })
                             })
@@ -152,22 +158,10 @@ const BankDetails = () => {
     const [accountType, setaccountType] = useState('Savings');
     const [nameAsBankAccount, setnameAsBankAccount] = useState('');
     const [didgitapData, setDigitapData] = useState('');
+    const [loaderState, setloaderState] = useState(false);
+
 
     let popUpMsg = "This account will be used to set up auto repayment of EMIs. Are you sure you want to proceed with this bank account?"
-    // useEffect(()=>{
-    //     axios.post(env.api_Url + "update_user_stage", {
-    //             "onboarding_stage": "BankDetails"
-    //         },
-    //             config
-    //         )
-    //     .then((response) => {
-    //         console.log(response)
-    //     }).catch(error => {
-    //         console.log(error);
-    //     });
-
-    //     setBankName(bankname);
-    // }, [])
 
 
 
@@ -204,20 +198,13 @@ const BankDetails = () => {
             fetchBankDetailsFromIFSC(val);
         }
     }
-    // function showErrorOnUI(elem){
-    //     elem.classList.add('inputBoxError');
 
-    //     setTimeout(()=>{
-    //         elem.classList.remove('inputBoxError');
-    //     }, 1000)
-    // }
 
     async function onSubmit() {
         if (!(bankName && IFSC && accountNumber && (accountNumber === confirmAccountNumber))) {
             console.log(bankName, accountNumber, branchAddress, branchName, IFSC);
             // return;
         }
-        // return;
 
         if (!accountNumber) {
             let elem = document.getElementById('accountNumber');
@@ -495,8 +482,15 @@ const BankDetails = () => {
                             <span className="fieldError">This field can't be empty.</span>
                         </div>
 
-
-                        <button onClick={() => onSubmit()} className="submit">Submit</button>
+                        {loaderState === false ?
+                            <button onClick={() => onSubmit()} className="submit">Submit</button>
+                            : ""}
+                        {loaderState === true ?
+                            // <Loadinggif />
+                            <div style={{textAlign:'center'}}>
+                            <img src={Loadinggif} width={'100px'}/>
+                            </div>
+                            : ""}
                         <BottomPopOverModal popUpMsg={popUpMsg} showPopOver={showPopOver} setShowPopOver={setShowPopOver} checkAndNavigate={checkAndNavigate} />
 
                     </>
