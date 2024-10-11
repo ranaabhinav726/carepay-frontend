@@ -23,18 +23,20 @@ const RazorpayRefresh = () => {
     }, [])
 
     const submit = () => {
-        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-            .then((loanData) => {
-                axios.get(env.api_Url + 'moneyViewActivityStatus?loanId=' + loanData.data.data.loanId)
-                    .then((res) => {
-                        setStatusData(res.data.data.leadStatus)
-                        if (res.data.data.leadStatus !== 'DOCS_REQUIRED') {
-                            navigate(routes.MV_CONGRATULATIONS)
+        // axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+        //     .then((loanData) => {
+        let loanId = (window.location.href).split('/patient/mvrefresh/')[1]
+        setLoanId(loanId)
+        axios.get(env.api_Url + 'moneyViewActivityStatus?loanId=' + loanId)
+            .then((res) => {
+                setStatusData(res.data.data.leadStatus)
+                if (res.data.data.leadStatus !== 'DOCS_REQUIRED') {
+                    navigate(routes.MV_CONGRATULATIONS)
 
 
-                        }
-                    })
+                }
             })
+        // })
     }
     const uploadAgain = () => {
         navigate(routes.MONEY_VIEW_BANKSTATEMENT)

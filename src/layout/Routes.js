@@ -179,9 +179,9 @@ const routes = {
   RAZORPAY_SCREEN_STATUS: '/patient/razorpaystatus',
 
   MONEY_VIEW_BANKSTATEMENT:'/patient/mvbankstatement',
-  MVREFRESH:'/patient/mvrefresh',
+  MVREFRESH:'/patient/mvrefresh/:loanId',
   MV_CONGRATULATIONS:'/patient/mvcongratulations',
-  MVREFRESH_FINAL:'/patient/mvfinalrefresh',
+  MVREFRESH_FINAL:'/patient/mvfinalrefresh/:loanId',
   MVREFRESH_TRY_AGAIN:'/patient/mvtryagain',
 
 
