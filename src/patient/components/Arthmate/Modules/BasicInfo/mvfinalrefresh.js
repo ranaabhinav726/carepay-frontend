@@ -14,6 +14,8 @@ const RazorpayRefresh = () => {
 
     let navigate = useNavigate()
     useEffect(() => {
+        let userId = (window.location.href).split('/patient/mvfinalrefresh/')[1]
+        localStorage.setItem('userId', userId)
         lottie.loadAnimation({
             container: document.querySelector("#searchAnimation"),
             animationData: animationData,
@@ -22,27 +24,27 @@ const RazorpayRefresh = () => {
     }, [])
 
     const submit = () => {
-        let loanId = (window.location.href).split('/patient/mvfinalrefresh/')[1]
-        setLoanId(loanId)
-        // axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-        //     .then((loanData) => {
-        axios.get(env.api_Url + 'checkDrawDownStatus?loanId=' + loanId)
-            .then((res) => {
-                if (res.data.message === 'success') {
-                    if (res.data.data === 'DISBURSED') {
-                        navigate(routes.FINAL_SCREEN_ARTH)
+        let userId = (window.location.href).split('/patient/mvfinalrefresh/')[1]
 
-                    } else {
-                        navigate(routes.MVREFRESH_TRY_AGAIN)
+        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+            .then((loanData) => {
+                axios.get(env.api_Url + 'checkDrawDownStatus?loanId=' + loanData.data.data.loanId)
+                    .then((res) => {
+                        if (res.data.message === 'success') {
+                            if (res.data.data === 'DISBURSED') {
+                                navigate(routes.FINAL_SCREEN_ARTH)
 
-                    }
+                            } else {
+                                navigate(routes.MVREFRESH_TRY_AGAIN)
+
+                            }
 
 
-                } else {
+                        } else {
 
-                }
+                        }
+                    })
             })
-        // })
     }
 
     return (
