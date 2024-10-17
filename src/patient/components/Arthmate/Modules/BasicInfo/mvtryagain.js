@@ -58,7 +58,7 @@ const FailureReport = () => {
 
 
                 <h3 className='text-center' style={{ marginTop: '15px', color: '#706cae' }}>Sorry!</h3>
-                <p className='text-center' style={{ marginTop: '15px', fontSize: '14px' }}>Seems like your application is incompleter<br />
+                <p className='text-center' style={{ marginTop: '15px', fontSize: '14px' }}>Seems like your application is incomplete<br />
                     on our lending partner’s portal.</p>
                     <div style={{background:'#EBFEED',color:'#149540',justifyContent:'center',marginTop:'20px',marginBottom:'20px',borderRadius:'5px',width:'100%'}}>
                         <div style={{display:'flex',fontSize:'14px',justifyContent:'center'}}><img src={LikeIMg}/>&nbsp;&nbsp;<div style={{marginTop:'20px'}}>Don’t worry, your progress has been saved.</div></div>

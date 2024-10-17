@@ -34,7 +34,9 @@ const APIS = {
     GET_LOGO_API: BASE_URL + 'getFlexMoneyUserDetail?userId=',
     WEB_HOOK_CALL: BASE_URL + 'flexMoneyTransactionWebhook',
     GET_DIGITA_BANK_REPORT: BASE_URL + 'getDigitapBankStatementDetailByUserId?userId=',
-    GET_SUBSCRIPTION_STATUS: BASE_URL + 'getSubscriptionDataFromCashFree?userId='
+    GET_SUBSCRIPTION_STATUS: BASE_URL + 'getSubscriptionDataFromCashFree?userId=',
+    GE_ALL_SCOUT_FOR_PARENT_SCOUTS:BASE_URL+'getAllScoutCodesByParentId?parentScoutId=',
+    GET_PARENT_SCOUNT_LEADS_CONTS:BASE_URL+'getAllDoctorCountAndStatusForParentScout?parentScoutId='
 
 
 

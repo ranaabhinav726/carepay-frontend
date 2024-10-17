@@ -195,12 +195,15 @@ const routes = {
   SCOUTS_OTP: '/scouts/verifyotp',
   SCOUTS_ALREADYEXIST: '/scouts/alreadyexist',
   SCOUTES_WELCOME: '/scouts/welcome',
-  SCOUTES_DASHBOARD: '/scouts/dashboard',
   SCOUTES_PERSONAL: '/scouts/personal',
   SCOUTES_PRACTICE: '/scouts/practice',
   SCOUTES_ADDRESS: '/scouts/address',
   SCOUTES_BANK: '/scouts/bank',
   SCOUTES_DOC: '/scouts/document',
+  SCOUTES_ONBOARD_LEADS:'/scouts/onboardleads',
+  SCOUTES_LOANS: '/scouts/allloans',
+  SCOUTES_LIVE_CLINIC:'/scouts/liveclinic'
+
 
 
 

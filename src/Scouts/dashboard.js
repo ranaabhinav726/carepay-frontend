@@ -17,6 +17,11 @@ const ChatGPTMobileMenu = () => {
         window.sessionStorage.clear()
         navigate(routes.SCOUTS_MAIN)
     }
+    const navigateHanlde=(data)=>{
+        setMenuOpen(!menuOpen);
+
+        navigate(data)
+    }
 
     return (
         <div className="screen-width-max">
@@ -25,9 +30,9 @@ const ChatGPTMobileMenu = () => {
                    <div > <img src={menuOpen ? CrossIcon : BarIcon} style={{ width: menuOpen?'20px':'25px' }} /></div><img src={CarepayLogo} style={{marginLeft:'20px',marginTop:'-4px'}} width={'150px'} />
                 </div>
                 <div style={{ width: window.innerWidth + 'px', }} className={`menu-items ${menuOpen ? 'animated slideInLeft open' : 'animated slideOutRight'}`}>
-                    <div className='menu-tab'>Onboarding Leads</div>
-                    <div className='menu-tab'>Live Clinics</div>
-                    <div className='menu-tab'>Loans</div>
+                    {/* <div className='menu-tab' style={{cursor:'pointer'}} onClick={()=>navigateHanlde('scouts/onboardleads')} >Onboarding Leads</div>
+                    <div className='menu-tab' style={{cursor:'pointer'}} onClick={()=>navigateHanlde('scouts/dashboard')}>Live Clinics</div>
+                    <div className='menu-tab' >Loans</div> */}
                     <div className='menu-tab' style={{ color: '#FF000066', position: 'fixed', bottom: '20%',cursor:'pointer' }} onClick={() => Logout()}>Logout</div>
                 </div>
             </div>

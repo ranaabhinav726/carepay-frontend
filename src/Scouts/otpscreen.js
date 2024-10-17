@@ -24,7 +24,7 @@ const LoginScout = () => {
 
             if (callback.message === 'success') {
                 setLoaderState(false)
-                navigate(routes.SCOUTES_DASHBOARD)
+                navigate(routes.SCOUTES_LOANS)
             } else {
                 seterrorMsg('Invalid OTP !')
                 setLoaderState(false)
@@ -67,7 +67,7 @@ const LoginScout = () => {
     }, [])
     const Submitpaas = () => {
         setLoaderState(false)
-        navigate(routes.SCOUTES_DASHBOARD)
+        navigate(routes.SCOUTES_LOANS)
     }
     const reSendOtp = () => {
         setLoaderState(true)

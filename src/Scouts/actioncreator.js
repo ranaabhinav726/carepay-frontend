@@ -77,7 +77,7 @@ export const getScoutDataById = (scoutId, clinic, startDate, endDate, callBack) 
             }
         });
 };
-export const getDoctorDataById = (docId, clinic , startDate, endDate, callBack) => {
+export const getDoctorDataById = (docId, clinic, startDate, endDate, callBack) => {
     axios.get(APIS.GET_DOCTOR_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
@@ -95,7 +95,7 @@ export const getDoctorDataById = (docId, clinic , startDate, endDate, callBack) 
             }
         });
 };
-export const getParentDoctorDataById = (docId, clinic , startDate, endDate, callBack) => {
+export const getParentDoctorDataById = (docId, clinic, startDate, endDate, callBack) => {
     axios.get(APIS.GET_PARENT_DOCTOR_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
@@ -113,7 +113,7 @@ export const getParentDoctorDataById = (docId, clinic , startDate, endDate, call
             }
         });
 };
-export const getParentSCoutDataById = (docId, clinic , startDate, endDate, callBack) => {
+export const getParentSCoutDataById = (docId, clinic, startDate, endDate, callBack) => {
     axios.get(APIS.GET_PARENT_SCOUT_DATA_BY_ID + docId + '&type=detail' + '&clinicName=' + clinic + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(response => {
             callBack(response.data);
@@ -327,6 +327,42 @@ export const getAllClinicName = (parentScoutId, scoutId, parentDoctorId, callBac
             } else {
                 console.error('Error:', error.message);
                 callBack('notfound');
+            }
+        });
+};
+export const getScoutsByParenScoutId = (docId, callBack) => {
+    axios.get(APIS.GE_ALL_SCOUT_FOR_PARENT_SCOUTS + docId)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getLeadsCountBYparentScoutId = (docId, type,callBack) => {
+    axios.get(APIS.GET_PARENT_SCOUNT_LEADS_CONTS + docId + '&type=' + type)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
             }
         });
 };

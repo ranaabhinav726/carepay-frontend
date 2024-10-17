@@ -155,12 +155,15 @@ export const SCOUTS_LOGIN = React.lazy(() => import('../Scouts/loginscreen'));
 export const SCOUTS_OTP = React.lazy(() => import('../Scouts/otpscreen'));
 export const SCOUTS_ALREADYEXIST = React.lazy(() => import('../Scouts/altreadyexist'));
 export const SCOUTES_WELCOME = React.lazy(() => import('../Scouts/welcome'));
-export const SCOUTES_DASHBOARD = React.lazy(() => import('../Scouts/mainPageDashboard'));
+export const SCOUTES_LOANS = React.lazy(() => import('../Scouts/mainPageDashboard'));
 export const SCOUTES_PERSONAL = React.lazy(() => import('../Scouts/Forms/PersonalDetails'));
 export const SCOUTES_ADDRESS = React.lazy(() => import('../Scouts/Forms/AddressDetails'));
 export const SCOUTES_PRACTICE = React.lazy(() => import('../Scouts/Forms/PracticeDetails'));
 export const SCOUTES_BANK = React.lazy(() => import('../Scouts/Forms/BankingDetails'));
 export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVerification'));
+export const SCOUTES_ONBOARD_LEADS = React.lazy(() => import('../Scouts/onboard/onboarddashboard'));
+export const SCOUTES_LIVE_CLINIC = React.lazy(() => import('../Scouts/onboard/onboarddashboard'));
+
 export const ARTH_SELFIE = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/selfilephoto'));
 export const ARTH_CONGRATULATIONS = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/congratulations'));
 export const ARTH_BANKDETAILS = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/bankDetails'));
