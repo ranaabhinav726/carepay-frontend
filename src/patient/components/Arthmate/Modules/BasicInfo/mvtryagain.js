@@ -24,6 +24,7 @@ const FailureReport = () => {
     useEffect(() => {
         axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
             .then((loanData) => {
+                console.log(loanData.data.data.loanId)
                 axios.get(env.api_Url + 'checkReferenceIdInDrawDownOffers?loanId=' + loanData.data.data.loanId)
                     .then((res) => {
                         if (res.data.message === 'success') {
