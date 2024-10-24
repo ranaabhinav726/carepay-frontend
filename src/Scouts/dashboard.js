@@ -25,14 +25,14 @@ const ChatGPTMobileMenu = () => {
 
     return (
         <div className="screen-width-max">
-            <div className="mobile-menu" style={{ position: 'sticky', top: 0, background: '#fff' }}>
+            <div className="mobile-menu" style={{ position: 'sticky', top: 0, background: menuOpen?'rgb(236, 235, 255)':'#fff',minHeight:menuOpen?'935px' :'auto'}}>
                 <div style={{display:'flex'}} className={`menu-icon ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                    <div > <img src={menuOpen ? CrossIcon : BarIcon} style={{ width: menuOpen?'20px':'25px' }} /></div><img src={CarepayLogo} style={{marginLeft:'20px',marginTop:'-4px'}} width={'150px'} />
                 </div>
                 <div style={{ width: window.innerWidth + 'px', }} className={`menu-items ${menuOpen ? 'animated slideInLeft open' : 'animated slideOutRight'}`}>
-                    {/* <div className='menu-tab' style={{cursor:'pointer'}} onClick={()=>navigateHanlde('scouts/onboardleads')} >Onboarding Leads</div>
-                    <div className='menu-tab' style={{cursor:'pointer'}} onClick={()=>navigateHanlde('scouts/dashboard')}>Live Clinics</div>
-                    <div className='menu-tab' >Loans</div> */}
+                   {window.sessionStorage.getItem('role') !== 'DOCTOR'? <div className='menu-tab' style={{cursor:'pointer'}} onClick={()=>navigateHanlde(routes.SCOUTES_CLINIC_LEADS)} >Onboarding Leads</div>:""}
+                   {window.sessionStorage.getItem('role') !== 'DOCTOR'?  <div className='menu-tab' style={{cursor:'pointer'}} onClick={()=>navigateHanlde(routes.SCOUTES_LIVE_CLINIC)}>Live Clinics</div>:""}
+                    <div className='menu-tab' style={{cursor:'pointer'}}  onClick={()=>navigateHanlde(routes.SCOUTES_LOANS)} >Loans</div>
                     <div className='menu-tab' style={{ color: '#FF000066', position: 'fixed', bottom: '20%',cursor:'pointer' }} onClick={() => Logout()}>Logout</div>
                 </div>
             </div>

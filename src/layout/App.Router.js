@@ -211,6 +211,8 @@ function AppRouter() {
           <Route element={<ScoutDahboardLayout />}>
             <Route path={OurRoutes.SCOUTES_LOANS} element={<Routers.SCOUTES_LOANS />} />
             <Route path={OurRoutes.SCOUTES_ONBOARD_LEADS} element={<Routers.SCOUTES_ONBOARD_LEADS />} />
+            <Route path={OurRoutes.SCOUTES_CLINIC_LEADS} element={<Routers.SCOUTES_CLINIC_LEADS />} />
+            <Route path={OurRoutes.SCOUTES_LIVE_CLINIC} element={<Routers.SCOUTES_LIVE_CLINIC />} />
 
           </Route>
           <Route path={OurRoutes.SCOUTES_PERSONAL} element={<Routers.SCOUTES_PERSONAL />} />

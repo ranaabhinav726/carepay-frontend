@@ -202,7 +202,9 @@ const routes = {
   SCOUTES_DOC: '/scouts/document',
   SCOUTES_ONBOARD_LEADS:'/scouts/onboardleads',
   SCOUTES_LOANS: '/scouts/allloans',
-  SCOUTES_LIVE_CLINIC:'/scouts/liveclinic'
+  SCOUTES_LIVE_CLINIC:'/scouts/liveclinic',
+  SCOUTES_CLINIC_LEADS:'/scouts/clinicleads'
+
 
 
 

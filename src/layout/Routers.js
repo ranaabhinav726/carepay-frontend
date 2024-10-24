@@ -163,6 +163,7 @@ export const SCOUTES_BANK = React.lazy(() => import('../Scouts/Forms/BankingDeta
 export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVerification'));
 export const SCOUTES_ONBOARD_LEADS = React.lazy(() => import('../Scouts/onboard/onboarddashboard'));
 export const SCOUTES_LIVE_CLINIC = React.lazy(() => import('../Scouts/onboard/onboarddashboard'));
+export const SCOUTES_CLINIC_LEADS = React.lazy(() => import('../Scouts/onboard/clinicleads'));
 
 export const ARTH_SELFIE = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/selfilephoto'));
 export const ARTH_CONGRATULATIONS = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/congratulations'));

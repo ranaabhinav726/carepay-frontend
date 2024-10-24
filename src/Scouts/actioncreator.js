@@ -348,8 +348,206 @@ export const getScoutsByParenScoutId = (docId, callBack) => {
             }
         });
 };
-export const getLeadsCountBYparentScoutId = (docId, type,callBack) => {
+export const getLeadsCountBYparentScoutId = (docId, type, callBack) => {
     axios.get(APIS.GET_PARENT_SCOUNT_LEADS_CONTS + docId + '&type=' + type)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getLeadsCountByScoutIdApi = (scoutId, type, callBack) => {
+    axios.get(APIS.GET_LEADS_COUNT_BY_SCOUT_ID + scoutId + '&type=' + type)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getLeadsByStatusForScoutsdApi = (scoutId, type, doctorStatus, callBack) => {
+    axios.get(APIS.GET_LEADS_COUNT_BY_SCOUT_ID + scoutId + '&type=' + type + '&doctorStatus=' + doctorStatus)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getLiveClinicsApi = (scoutId, callBack) => {
+    axios.get(APIS.GET_LIVE_CLINICS_BY_SCOUT_ID + scoutId)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getqrInstalledApiCount = (scoutId, callBack) => {
+    axios.get(APIS.GET_QR_INSTALLED_SCOUT_ID + scoutId + '&type=' + 'count')
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const productNotMappedCountApi = (scoutId, callBack) => {
+    axios.get(APIS.GET_PRODUCT_MAPPED_BY_SCOUT_ID + scoutId + '&type=' + 'count')
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getInactiveCountApi = (scoutId, callBack) => {
+    axios.get(APIS.GET_INACTIVE_CLINICS + scoutId + '&type=' + 'count')
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getqrInstalledApidetail = (scoutId, callBack) => {
+    axios.get(APIS.GET_QR_INSTALLED_SCOUT_ID + scoutId + '&type=' + 'detail')
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const productNotMappeddetailApi = (scoutId, callBack) => {
+    axios.get(APIS.GET_PRODUCT_MAPPED_BY_SCOUT_ID + scoutId + '&type=' + 'detail')
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getInactivedetailApi = (scoutId, callBack) => {
+    axios.get(APIS.GET_INACTIVE_CLINICS + scoutId + '&type=' + 'detail')
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const searchDetailsApi = (data, scoutId,callBack) => {
+    axios.get(APIS.SEARCH_API_DOCTOR_DETAILS + data + '&scoutId=' + scoutId)
+        .then(response => {
+            callBack(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                console.error('Response error:', error.response.data);
+                callBack({ error: error.response.data });
+            } else if (error.request) {
+                console.error('Request error:', error.request);
+                callBack({ error: 'Request error: No response received' });
+            } else {
+                console.error('Error:', error.message);
+                callBack({ error: 'Error: ' + error.message });
+            }
+        });
+};
+export const getactivePercentageApi = (scoutId, callBack) => {
+    axios.get(APIS.GET_AVERAGE_PERCENTAGE_BY_SCOUT_ID + scoutId )
         .then(response => {
             callBack(response.data);
         })
