@@ -150,6 +150,8 @@ export const ArthPANPhoto = React.lazy(() => import('../patient/components/Arthm
 export const ArthKyc = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/KYC'));
 export const ArthAadhaarPhoto = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/AadhaarPhoto'));
 export const ArthCreditDetails = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/CreditDetails'));
+export const BANK_LIST = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/banklist'));
+
 export const SCOUTS_MAIN = React.lazy(() => import('../Scouts/mainScreenScouts'));
 export const SCOUTS_LOGIN = React.lazy(() => import('../Scouts/loginscreen'));
 export const SCOUTS_OTP = React.lazy(() => import('../Scouts/otpscreen'));

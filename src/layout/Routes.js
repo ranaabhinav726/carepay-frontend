@@ -183,6 +183,7 @@ const routes = {
   MV_CONGRATULATIONS:'/patient/mvcongratulations',
   MVREFRESH_FINAL:'/patient/mvfinalrefresh/:loanId',
   MVREFRESH_TRY_AGAIN:'/patient/mvtryagain',
+  BANK_LIST:'/patient/banklist',
 
 
 

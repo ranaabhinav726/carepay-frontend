@@ -143,6 +143,7 @@ function AppRouter() {
           <Route path={OurRoutes.LOGIN_FROM_URL} element={<Routers.LoginFromURL />} />
 
           <Route path={OurRoutes.QR_DATA} element={<Routers.QrPdfMaker />} />
+          <Route path={OurRoutes.BANK_LIST} element={<Routers.BANK_LIST />} />
 
           <Route path={OurRoutes.ARTH_CREDIT_DETAILS} element={<Routers.ArthCreditDetails />} />
           <Route path={OurRoutes.ARTH_PRESCRIPTION_UPLOAD} element={<Routers.ArthPrescriptionUpload />} />
