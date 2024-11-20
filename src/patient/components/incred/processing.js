@@ -88,6 +88,32 @@ const Processing = () => {
                     // navigate(routes.REJECTED_SCREEN)
                     // mvscrees
                 }
+                if (response.data.data === 'FINZY') {
+
+                    axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                        .then((loanData) => {
+                            axios.get(env.api_Url + 'finzy/bankInfo?loanId=' + loanData.data.data.loanId)
+                                .then((res) => {
+                                    if (res.data.message === 'success') {
+                                        axios.get(env.api_Url + 'loanSanction?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                            .then((res) => {
+                                                if (res.data.message === 'success') {
+                                                    axios.get(env.api_Url + 'loanAccept?loanId=' + loanData.data.data.loanId + '&accept=true')
+                                                        .then((res) => {
+                                                            if (res.data.message === 'success') {
+
+                                                            }
+                                                        })
+                                                }
+                                            })
+                                    }
+
+
+
+
+                                })
+                        })
+                }
 
 
             })

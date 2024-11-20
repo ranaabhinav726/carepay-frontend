@@ -26,7 +26,7 @@ const ConnectWithLenders = () => {
                             console.log(error);
                         });
                 } else {
-                    axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=AM')
+                    axios.get(env.api_Url + "checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=AM')
                         .then((response) => {
                             if (response.data.message === "success") {
                                 axios.post(env.api_Url + "leadAPI?userId=" + userId)
@@ -50,7 +50,7 @@ const ConnectWithLenders = () => {
 
 
 
-        axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=FIBE')
+        axios.get(env.api_Url + "checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=FIBE')
             .then((response) => {
                 if (response.data.message === "success") {
                     axios.post(env.api_Url + "profileIngestionForFibe?userId=" + userId + "&type=customer")
@@ -78,7 +78,7 @@ const ConnectWithLenders = () => {
         const apiUrl = env.api_Url;
 
 
-        // axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
+        // axios.get(env.api_Url + "checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=INCRED')
         // .then((response) => {
         //     console.log(response.data)
         //     if (response.data.message === 'success') {
@@ -105,7 +105,7 @@ const ConnectWithLenders = () => {
         //     }
 
         // })
-        axios.get(`${apiUrl}/checkNbfcEligibilityForUser?userId=${userId}&nbfcName=INCRED`)
+        axios.get(`${apiUrl}checkNbfcEligibilityForUser?userId=${userId}&nbfcName=INCRED`)
             .then((response) => {
                 if (response.data.message === 'success') {
                     axios.get(`${apiUrl}/initiateApplicationForIncred?userId=${userId}`)

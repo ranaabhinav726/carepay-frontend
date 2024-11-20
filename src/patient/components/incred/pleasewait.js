@@ -10,7 +10,7 @@ const ConnectWithLenders = () => {
     let navigate = useNavigate()
     let userId = localStorage.getItem('userId')
     useEffect(() => {
-        axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=CF')
+        axios.get(env.api_Url + "checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=CF')
             .then((response) => {
                 if (response.data.message === "success") {
                     axios.post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")

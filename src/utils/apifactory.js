@@ -1,5 +1,5 @@
-const BASE_URL = process.env.REACT_APP_BACKEND
-// const BASE_URL = 'https://backend.carepay.money/'
+// const BASE_URL = process.env.REACT_APP_BACKEND
+const BASE_URL = 'https://backend.carepay.money/'
 
 const APIS = {
 
@@ -43,7 +43,8 @@ const APIS = {
     GET_PRODUCT_MAPPED_BY_SCOUT_ID: BASE_URL + 'getProductNotMappedDetailsForScout?scoutId=',
     GET_INACTIVE_CLINICS: BASE_URL + 'getInActiveClinicForScout?scoutId=',
     SEARCH_API_DOCTOR_DETAILS: BASE_URL + 'searchDoctorDetail?searchBy=',
-    GET_AVERAGE_PERCENTAGE_BY_SCOUT_ID: BASE_URL + 'getAverageApprovalRateScout?scoutId='
+    GET_AVERAGE_PERCENTAGE_BY_SCOUT_ID: BASE_URL + 'getAverageApprovalRateScout?scoutId=',
+    GET_BANK_LIST_FOR_USERS_API:BASE_URL+'getBanksInformation?page_no=1&no_of_entry=300'
 
 
 

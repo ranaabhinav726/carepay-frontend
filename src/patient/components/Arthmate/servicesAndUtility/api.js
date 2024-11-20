@@ -115,3 +115,10 @@ export  function getKycStatusApi(userId, type, callBack) {
             callBack(res.data);
         }).catch(err => console.warn(err));
 }
+export  function getBankListApi( callBack) {
+
+    axios.get(BASE_URL + 'getBanksInformation?page_no=1&no_of_entry=300')
+        .then(res => {
+            callBack(res.data);
+        }).catch(err => console.warn(err));
+}

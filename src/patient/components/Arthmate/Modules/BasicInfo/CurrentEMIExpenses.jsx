@@ -122,7 +122,7 @@ export default function ArthCurrentEMIExpenses() {
                 // }
                 // if (window.localStorage.getItem('flowRedirect') === 'AM' ) {
                 // axios.get(env.api_Url + "findSuitableNbfc?userId=" + userId + '&doctorId=' + doctorId)
-                axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=AM')
+                axios.get(env.api_Url + "checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=AM')
                     .then((response) => {
                         if (response.data.message === "success") {
                             axios.post(env.api_Url + "leadAPI?userId=" + userId)

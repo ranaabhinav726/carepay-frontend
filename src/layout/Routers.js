@@ -166,6 +166,8 @@ export const SCOUTES_DOC = React.lazy(() => import('../Scouts/Forms/DocumentVeri
 export const SCOUTES_ONBOARD_LEADS = React.lazy(() => import('../Scouts/onboard/onboarddashboard'));
 export const SCOUTES_LIVE_CLINIC = React.lazy(() => import('../Scouts/onboard/onboarddashboard'));
 export const SCOUTES_CLINIC_LEADS = React.lazy(() => import('../Scouts/onboard/clinicleads'));
+export const FINZY_AADHAR_WAIT = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/finzywait'));
+export const FINZY_AADHAR_VERIFICATION = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/finzyAAdharVerification'));
 
 export const ARTH_SELFIE = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/selfilephoto'));
 export const ARTH_CONGRATULATIONS = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/congratulations'));
@@ -202,6 +204,10 @@ export const MVREFRESH = React.lazy(() => import('../patient/components/Arthmate
 export const MV_CONGRATULATIONS = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/mvcongratulations'));
 export const MVREFRESH_FINAL = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/mvfinalrefresh'));
 export const MVREFRESH_TRY_AGAIN = React.lazy(() => import('../patient/components/Arthmate/Modules/BasicInfo/mvtryagain'));
+export const FINZY_APPROVAL = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finzyApprove'));
+export const FINZY_AGREEMENT = React.lazy(() => import('../patient/components/Arthmate/Modules/Esigning/finzyagreement/loanagreement'));
+export const FINZY_WAIT = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finzyesignwait'));
+export const FINZY_ESIGN_TRY_AGAIN = React.lazy(() => import('../patient/components/Arthmate/Modules/Esigning/finzyTryAgain'));
 
 
 export const DEMO = React.lazy(() => import('../patient/components/flexmoney/demo'));

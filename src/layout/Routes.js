@@ -124,7 +124,7 @@ const routes = {
   ADD_PATIENT: '/doctor/dashboard/addPatient',
   UNDER_REVIEW: '/doctor/dashboard/UnderReview',
   LOGIN_FROM_URL: '/doctor/:doctorId',
-  DOCTOR_AGREEMENT_DONE:'/doctor/agreementcompleted',
+  DOCTOR_AGREEMENT_DONE: '/doctor/agreementcompleted',
   QR_DATA: '/qrData/:doctorId',
 
   ARTH_CREDIT_DETAILS: '/patient/ArthCreditDetails',
@@ -178,12 +178,20 @@ const routes = {
   RAZORPAY_SCREEN_REFRESH: '/patient/razorpayrefresh/:loanId',
   RAZORPAY_SCREEN_STATUS: '/patient/razorpaystatus',
 
-  MONEY_VIEW_BANKSTATEMENT:'/patient/mvbankstatement',
-  MVREFRESH:'/patient/mvrefresh/:loanId',
-  MV_CONGRATULATIONS:'/patient/mvcongratulations',
-  MVREFRESH_FINAL:'/patient/mvfinalrefresh/:loanId',
-  MVREFRESH_TRY_AGAIN:'/patient/mvtryagain',
-  BANK_LIST:'/patient/banklist',
+  MONEY_VIEW_BANKSTATEMENT: '/patient/mvbankstatement',
+  MVREFRESH: '/patient/mvrefresh/:loanId',
+  MV_CONGRATULATIONS: '/patient/mvcongratulations',
+  MVREFRESH_FINAL: '/patient/mvfinalrefresh/:loanId',
+  MVREFRESH_TRY_AGAIN: '/patient/mvtryagain',
+  BANK_LIST: '/patient/banklist',
+  FINZY_AADHAR_WAIT: '/patient/aadharwait',
+  FINZY_AADHAR_VERIFICATION: '/patient/aadharVerification',
+  FINZY_APPROVAL:'/patient/approvalfinzy',
+  FINZY_AGREEMENT:'/patient/fmandate',
+  FINZY_WAIT:'/patient/fwait',
+  FINZY_ESIGN_TRY_AGAIN:'/patient/ftryagain',
+  FINZY_WAIT:'/patient/fmandatewait',
+
 
 
 
@@ -201,10 +209,10 @@ const routes = {
   SCOUTES_ADDRESS: '/scouts/address',
   SCOUTES_BANK: '/scouts/bank',
   SCOUTES_DOC: '/scouts/document',
-  SCOUTES_ONBOARD_LEADS:'/scouts/onboardleads',
+  SCOUTES_ONBOARD_LEADS: '/scouts/onboardleads',
   SCOUTES_LOANS: '/scouts/allloans',
-  SCOUTES_LIVE_CLINIC:'/scouts/liveclinic',
-  SCOUTES_CLINIC_LEADS:'/scouts/clinicleads'
+  SCOUTES_LIVE_CLINIC: '/scouts/liveclinic',
+  SCOUTES_CLINIC_LEADS: '/scouts/clinicleads'
 
 
 

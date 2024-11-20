@@ -32,7 +32,7 @@ const BankDetails = () => {
     useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
         if (!!userId) {
-            axios.get(env.api_Url + "/checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=MV')
+            axios.get(env.api_Url + "checkNbfcEligibilityForUser?userId=" + userId + '&nbfcName=MV')
                 .then((response) => {
                     if (response.data.message === "success") {
                         axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
@@ -293,87 +293,87 @@ const BankDetails = () => {
     }
 
     function checkAndNavigate() {
-        // navigate(routes.ARTH_CONGRATULATIONS)
-        axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
-            .then((response) => {
-                console.log(response.data.data)
-                if (response.data.data === 'AM') {
-                    // navigate(routes.ARTH_CONGRATULATIONS)
-                    checkdigitapdataForAthMate()
-                }
-                if (response.data.data === 'CF') {
-                    navigate(routes.CONGRATS)
-                }
-                if (response.data.data === 'FIBE') {
-                    axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
-                        .then((response) => {
-                            if (response.data.data === 'GREEN') {
-                                navigate(routes.FIBE_LOAN_APPROVED)
-                            }
-                            if (response.data.data === 'AMBER') {
-                                navigate(routes.FIBE_BANK_STATEMENT_REQUIRED)
+        navigate(routes.FINZY_AADHAR_WAIT)
+        // axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
+        //     .then((response) => {
+        //         console.log(response.data.data)
+        //         if (response.data.data === 'AM') {
+        //             // navigate(routes.ARTH_CONGRATULATIONS)
+        //             checkdigitapdataForAthMate()
+        //         }
+        //         if (response.data.data === 'CF') {
+        //             navigate(routes.CONGRATS)
+        //         }
+        //         if (response.data.data === 'FIBE') {
+        //             axios.get(env.api_Url + "checkFibeFlow?userId=" + userId)
+        //                 .then((response) => {
+        //                     if (response.data.data === 'GREEN') {
+        //                         navigate(routes.FIBE_LOAN_APPROVED)
+        //                     }
+        //                     if (response.data.data === 'AMBER') {
+        //                         navigate(routes.FIBE_BANK_STATEMENT_REQUIRED)
 
-                            }
+        //                     }
 
-                        })
+        //                 })
 
-                    // 
-                }
-                if (response.data.data === 'INCRED') {
-
-
-                    axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
-                        .then((response) => {
-                            console.log(response.data.data.status, 'response.data.data')
-                            if (response.data.data.status === 'GREEN') {
-                                navigate(routes.APPROVAL_INCRED)
-                            }
-                            if (response.data.data.status === 'AMBER') {
-                                navigate(routes.INCRED_PREAPPROVED)
-
-                            }
-
-                        })
-
-                }
-                if (response.data.data === 'WAIT') {
-                    navigate(routes.WAIT_FOR_PROCESSING)
-
-                }
-                if (response.data.data === 'LOL') {
-                    navigate(routes.REJECTED_SCREEN)
-
-                }
-                if (response.data.data === 'NOT_FIT') {
-                    navigate(routes.REJECTED_SCREEN)
-                }
-                if (response.data.data === 'MV') {
-                    // navigate(routes.REJECTED_SCREEN)
-                    // mvscrees
-                    axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-                        .then((loanData) => {
-                            axios.get(env.api_Url + 'moneyViewActivityStatus?loanId=' + loanData.data.data.loanId)
-                                .then((res) => {
-                                    if (res.data.data.leadStatus === 'DOCS_REQUIRED') {
-                                        navigate(routes.MONEY_VIEW_BANKSTATEMENT)
-
-                                    }
-                                    if (res.data.data.leadStatus === 'NOT_REQUIRED') {
-                                        navigate(routes.MV_CONGRATULATIONS)
+        //             // 
+        //         }
+        //         if (response.data.data === 'INCRED') {
 
 
-                                    }
+        //             axios.get(env.api_Url + "getIncredStatusForUser?userId=" + userId)
+        //                 .then((response) => {
+        //                     console.log(response.data.data.status, 'response.data.data')
+        //                     if (response.data.data.status === 'GREEN') {
+        //                         navigate(routes.APPROVAL_INCRED)
+        //                     }
+        //                     if (response.data.data.status === 'AMBER') {
+        //                         navigate(routes.INCRED_PREAPPROVED)
+
+        //                     }
+
+        //                 })
+
+        //         }
+        //         if (response.data.data === 'WAIT') {
+        //             navigate(routes.WAIT_FOR_PROCESSING)
+
+        //         }
+        //         if (response.data.data === 'LOL') {
+        //             navigate(routes.REJECTED_SCREEN)
+
+        //         }
+        //         if (response.data.data === 'NOT_FIT') {
+        //             navigate(routes.REJECTED_SCREEN)
+        //         }
+        //         if (response.data.data === 'MV') {
+        //             // navigate(routes.REJECTED_SCREEN)
+        //             // mvscrees
+        //             axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+        //                 .then((loanData) => {
+        //                     axios.get(env.api_Url + 'moneyViewActivityStatus?loanId=' + loanData.data.data.loanId)
+        //                         .then((res) => {
+        //                             if (res.data.data.leadStatus === 'DOCS_REQUIRED') {
+        //                                 navigate(routes.MONEY_VIEW_BANKSTATEMENT)
+
+        //                             }
+        //                             if (res.data.data.leadStatus === 'NOT_REQUIRED') {
+        //                                 navigate(routes.MV_CONGRATULATIONS)
 
 
-
-                                })
-                        })
-                }
+        //                             }
 
 
 
-            })
-        setShowPopOver(false)
+        //                         })
+        //                 })
+        //         }
+
+
+
+        //     })
+        // setShowPopOver(false)
     }
     const checkdigitapdataForAthMate = () => {
         axios.get(env.api_Url + "checkAMFlowGreenOrAmber?userId=" + userId)

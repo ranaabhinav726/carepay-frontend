@@ -177,6 +177,12 @@ function AppRouter() {
           <Route path={OurRoutes.FLEX_APPROVAL_WAIT} element={<Routers.FLEX_APPROVAL_WAIT />} />
           <Route path={OurRoutes.REDIRECT_AUTO_MANDATE} element={<Routers.REDIRECT_AUTO_MANDATE />} />
           <Route path={OurRoutes.FLEX_USER_WAIT} element={<Routers.FLEX_USER_WAIT />} />
+          <Route path={OurRoutes.FINZY_AADHAR_WAIT} element={<Routers.FINZY_AADHAR_WAIT />} />
+          <Route path={OurRoutes.FINZY_AADHAR_VERIFICATION} element={<Routers.FINZY_AADHAR_VERIFICATION />} />
+          <Route path={OurRoutes.FINZY_APPROVAL} element={<Routers.FINZY_APPROVAL />} />
+          <Route path={OurRoutes.FINZY_AGREEMENT} element={<Routers.FINZY_AGREEMENT />} />
+          <Route path={OurRoutes.FINZY_WAIT} element={<Routers.FINZY_WAIT />} />
+          <Route path={OurRoutes.FINZY_ESIGN_TRY_AGAIN} element={<Routers.FINZY_ESIGN_TRY_AGAIN />} />
 
           <Route path={OurRoutes.CONNECTING_WITH_LENDERS} element={<Routers.CONNECTING_WITH_LENDERS />} />
           <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />
