@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchingDoc from '../../../../assets/GIFs/Document in process.gif'
 import NoteText from "../../../Fibe flow/Comps/NoteText";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,25 +14,36 @@ const WaitLegality = () => {
     let userId = localStorage.getItem('userId')
     const refreshScreen = () => {
         setLoader(true)
-        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
-            .then((response) => {
-                setLoader(false)
-                if (response.data.message === 'success') {
-                    axios.get(env.api_Url + 'finzy/eSignStatus?loanId=' + response.data.data.loanId)
-                        .then((esignData) => {
-                            console.log(esignData)
-                            setLoader(false)
-                            if(esignData.data.data==='REQUESTED'){
+        // axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+        //     .then((response) => {
+        //         setLoader(false)
+        //         if (response.data.message === 'success') {
+        //             axios.get(env.api_Url + 'finzy/eSignStatus?loanId=' + response.data.data.loanId)
+        //                 .then((esignData) => {
+        //                     console.log(esignData)
+        //                     setLoader(false)
+        //                     if(esignData.data.data==='REQUESTED'){
 
-                            }
-                        })
-                }
+        //                     }
+        //                 })
+        //         }
 
 
-            })
+        //     })
 
 
     }
+    // const messageFromChildWindowCallback = (message) => {
+    //     console.log(message, 'message')
+    //     let originUrl = message.origin + '/';
+    //     if (message != null) {
+    //         console.log(message)
+    //     }
+    // }
+    // useEffect(() => {
+    //     window.addEventListener('message', messageFromChildWindowCallback);
+
+    // }, [])
 
     return (
         <>

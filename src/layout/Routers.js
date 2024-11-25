@@ -208,6 +208,9 @@ export const FINZY_APPROVAL = React.lazy(() => import('../patient/components/Art
 export const FINZY_AGREEMENT = React.lazy(() => import('../patient/components/Arthmate/Modules/Esigning/finzyagreement/loanagreement'));
 export const FINZY_WAIT = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finzyesignwait'));
 export const FINZY_ESIGN_TRY_AGAIN = React.lazy(() => import('../patient/components/Arthmate/Modules/Esigning/finzyTryAgain'));
+export const FINZY_NACH_MANDATE = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finzynach'));
+export const FINZY_APPROVE_LESS_AMOUNT = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/finzyApproveamount'));
+export const STATUS_WAIT_FINZY = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/statuswaitfinzy'));
 
 
 export const DEMO = React.lazy(() => import('../patient/components/flexmoney/demo'));

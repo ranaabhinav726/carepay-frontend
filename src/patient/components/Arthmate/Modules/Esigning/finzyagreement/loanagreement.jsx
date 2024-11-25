@@ -2,7 +2,7 @@ import { Header } from "../../../comps/Header";
 import LoanAgreement from '../../../assets/Loan agreement.svg';
 import Redirecting from '../../../assets/Redirecting.gif';
 import Doc from '../../../assets/Verifying document.gif';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { env } from "../../../../../environment/environment";
 import { useNavigate } from "react-router-dom";
@@ -43,10 +43,47 @@ export default function ArthCreditAgreement() {
     };
 
     const gotoEsign = (url) => {
-        // navigate(routes.WAIT_LEGALITY);
-        window.open(url, "_blank");
+
+        window.open('https://ext.digio.in/#/gateway/login/DID241121132336954I5TE1W67UCL2SE/1732175614789/7721823857?token_id=GWT2411211323379291YUQQVVQ1XWPHS&redirect_url=http://localhost:3000/patient/fmandate', "_blank");
         console.log(url)
+        navigate(routes.FINZY_WAIT)
     };
+
+
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams(url.search);
+        const digioDocId = params.get('digio_doc_id');
+        const message = params.get('message');
+        if (message === 'Document Signed Successfully!' && digioDocId !== null) {
+            axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+                .then((loandata) => {
+                    if (loandata.data.message === 'success') {
+                        axios.get(env.api_Url + 'finzy/eSignComplete?loanId=' + loandata.data.data.loanId + '&documentId=' + digioDocId + '&status=success')
+                            .then((res) => {
+                                console.log(res.data);
+                                if (res.data.message === 'success') {
+                                    if(res.data.data==='SUCCESS'){
+                                        screenState('verifying')
+                                        setTimeout(() => {
+                                            setScreenState("redirecting");
+                                            setTimeout(() => navigate(routes.FINZY_NACH_MANDATE), 5000);
+                                        }, 5000);
+                                    }
+
+                                }
+                            })
+
+                    } else {
+                        setScreenState("landing");
+                    }
+                })
+            console.log("digio_doc_id:", digioDocId);
+            console.log(message)
+        } else {
+            proceedhandler()
+        }
+    }, []);
 
     return (
         <main>
@@ -87,6 +124,7 @@ export default function ArthCreditAgreement() {
                     <p style={{ fontSize: "16px", textAlign: "center", lineHeight: "150%" }}>Redirecting to partner platform <br />for e-signing...</p>
                 </>
             }
+           
         </main>
     );
 }

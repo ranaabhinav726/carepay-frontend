@@ -15,7 +15,7 @@ import SearchingDoc from '../../../../assets/GIFs/Document in process.gif'
 import Loadinggif from '../../../../../utils/loader/loadergif';
 import FinzyLogo from '../../../../assets/New-IFA-Dashboard.svg'
 
-
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 
 const Congrats = () => {
     const navigate = useNavigate()
@@ -30,15 +30,16 @@ const Congrats = () => {
     useEffect(() => {
         ref.current = document.getElementById('animation-wrapper');
         setLoader(true)
-        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
-            .then((response) => {
-                setLoader(false)
+        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+            .then((loanData) => {
+                axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loanData.data.data.loanId)
 
-                console.log(response.data.status)
-                // if (response.data.data.status === '105') {
-                console.log(response.data.data.status)
-                setAmount(response.data.data.loanAmount)
-                // }
+                    .then((res) => {
+                        if (res.data.message === 'success') {
+                            setAmount(res.data.data.amount)
+                            setLoader(false)
+                        }
+                    })
             })
 
     }, [])
@@ -46,60 +47,6 @@ const Congrats = () => {
         // if (amount !== '0') {
         //     navigate(routes.ARTH_KYC)
         // }
-        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
-            .then((loanData) => {
-                axios.get(env.api_Url + 'finzy/bankInfo?loanId=' + loanData.data.data.loanId)
-                    .then((res) => {
-                        if (res.data.message === 'success') {
-                            axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                .then((res) => {
-                                    if (res.data.message === 'success' && res.data.data === 'APPROVED') {
-                                        axios.get(env.api_Url + 'finzy/loanAccept?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                            .then((res) => {
-                                                if (res.data.message === 'success') {
-                                                    axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                        .then((res) => {
-                                                            if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
-                                                                //  navigate()
-                                                                navigate(routes.FINZY_AGREEMENT)
-                                                            }
-                                                        })
-                                                }
-                                            })
-                                    }
-                                    if (res.data.message === 'success' && res.data.data === 'PRE-APPROVED') {
-                                        axios.get(env.api_Url + 'finzy/loanSanction?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                            .then((res) => {
-                                                if (res.data.message === 'success') {
-                                                    axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                        .then((res) => {
-                                                            if (res.data.message === 'success' && res.data.data === 'APPROVED') {
-                                                                axios.get(env.api_Url + 'loanAccept?loanId=' + loanData.data.data.loanId + '&accept=true')
-                                                                    .then((res) => {
-                                                                        if (res.data.message === 'success') {
-                                                                            axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                                                .then((res) => {
-                                                                                    if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
-                                                                                        // esignscreennavigate
-                                                                                        navigate(routes.FINZY_AGREEMENT)
-                                                                                    }
-                                                                                })
-                                                                        }
-                                                                    })
-                                                            }
-                                                        })
-                                                }
-                                            })
-                                    }
-                                    if (res.data.message === 'success' && res.data.data === 'KYC') {
-                                        navigate(routes.STATUS_WAIT_FINZY)
-                                    }
-                                })
-
-                        }
-                    })
-            })
-
     }
 
     // async function checkStatus(){
@@ -148,12 +95,16 @@ const Congrats = () => {
                 {loaderState ? <Loadinggif /> : ""}
                 {loaderState === false && amount !== '0' ?
                     <>
-                        <div style={{ display: "flex", position: "relative", flexDirection: "row", alignItems: "baseline", justifyContent: "space-around", marginTop: "1rem" }}>
+                        {/* <div style={{ display: "flex", position: "relative", flexDirection: "row", alignItems: "baseline", justifyContent: "space-around", marginTop: "1rem" }}>
                             <img src={Confetti} style={{ transform: "scaleX(-1)", maxWidth: "25%" }} alt="" />
                             <p style={{ position: "absolute", fontSize: "24px", lineHeight: "26px", color: "#149540", fontWeight: "700", marginTop: "1rem" }}>Congratulations</p>
                             <img src={Confetti} style={{ maxWidth: "25%" }} alt="" />
+                        </div> */}
+                        <div style={{ background: "#FAE1CD", marginTop: '40px',padding:'10px',borderRadius:'5px',display:'flex' }}>
+                           <ReportProblemIcon style={{color:'#F37B20'}}/> <p style={{fontSize:'14px',marginLeft:'5px'}}>Our lending partners could not approve your loan of Rs. 36,000. But, you may continue with
+                                a lesser loan amount under the credit limit assigned to you, by your best matched lender.</p>
                         </div>
-                        <p className='subtitle'>Your credit application is <span style={{ color: "#149540", fontWeight: "700" }}>approved</span> for</p>
+                        <p style={{marginTop:'15px',marginBottom:'15px'}} className='subtitle'>Your credit application is <span style={{ color: "#149540", fontWeight: "700" }}>approved</span> for</p>
                         <div style={{ width: "90%", color: "#149540", height: "max-content", padding: "10px 16px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "700", borderRadius: "4px", border: "1px solid #000", background: "#EBFEED", boxShadow: "-4px 6px 0px 0px #514C9F" }}>
                             <BiRupee /> {amount}
                         </div>

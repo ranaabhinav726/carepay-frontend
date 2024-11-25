@@ -126,56 +126,20 @@ export default function ArthSelfie() {
                 }
                 if (response.data.data === 'FINZY') {
 
+
                     axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                         .then((loanData) => {
-                            axios.get(env.api_Url + 'finzy/bankInfo?loanId=' + loanData.data.data.loanId)
+                            axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loanData.data.data.loanId)
                                 .then((res) => {
                                     if (res.data.message === 'success') {
-                                        axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                            .then((res) => {
-                                                if (res.data.message === 'success' && res.data.data === 'APPROVED') {
-                                                    axios.get(env.api_Url + 'finzy/loanAccept?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                        .then((res) => {
-                                                            if (res.data.message === 'success') {
-                                                                axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                                    .then((res) => {
-                                                                        if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
-                                                                            //  navigate()
-                                                                        }
-                                                                    })
-                                                            }
-                                                        })
-                                                }
-                                                if (res.data.message === 'success' && res.data.data === 'PRE-APPROVED') {
-                                                    axios.get(env.api_Url + 'finzy/loanSanction?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                        .then((res) => {
-                                                            if (res.data.message === 'success') {
-                                                                axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                                    .then((res) => {
-                                                                        if (res.data.message === 'success' && res.data.data === 'APPROVED') {
-                                                                            axios.get(env.api_Url + 'loanAccept?loanId=' + loanData.data.data.loanId + '&accept=true')
-                                                                                .then((res) => {
-                                                                                    if (res.data.message === 'success') {
-                                                                                        axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
-                                                                                            .then((res) => {
-                                                                                                if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
+                                        if (res.data.data.amount === loanData.data.data.loanAmount) {
+                                            navigate(routes.FINZY_APPROVAL)
+                                        } else {
+                                            navigate(routes.FINZY_APPROVE_LESS_AMOUNT)
 
-                                                                                                }
-                                                                                            })
-                                                                                    }
-                                                                                })
-                                                                        }
-                                                                    })
-                                                            }
-                                                        })
-                                                }
-                                                
-                                            })
+                                        }
+
                                     }
-
-
-
-
                                 })
                         })
                 }
@@ -308,6 +272,9 @@ export default function ArthSelfie() {
                                                         })
                                                 }
                                             })
+                                    }
+                                    if (res.data.message === 'success' && res.data.data === 'KYC') {
+                                        navigate(routes.STATUS_WAIT_FINZY)
                                     }
                                 })
                             //     }
