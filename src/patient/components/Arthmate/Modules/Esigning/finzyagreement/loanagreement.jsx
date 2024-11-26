@@ -44,7 +44,7 @@ export default function ArthCreditAgreement() {
 
     const gotoEsign = (url) => {
 
-        window.open('https://ext.digio.in/#/gateway/login/DID241121132336954I5TE1W67UCL2SE/1732175614789/7721823857?token_id=GWT2411211323379291YUQQVVQ1XWPHS&redirect_url=http://localhost:3000/patient/fmandate', "_blank");
+        window.open(url, "_blank");
         console.log(url)
         navigate(routes.FINZY_WAIT)
     };
