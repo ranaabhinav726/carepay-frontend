@@ -99,8 +99,8 @@ export default function ArthCreditAgreement() {
                         It is recommended that you take your time and read the agreement.
                     </div>
 
-                    {esignurl === '' ? <button className="submit" onClick={proceedhandler}>Proceed</button> : ""}
-                    {esignurl !== '' ? <button className="submit" onClick={gotoEsign}>Go To Esign Link</button> : ""}
+                    {esignurl === '' ? <button className="submit" onClick={()=>proceedhandler()}>Proceed</button> : ""}
+                    {esignurl !== '' ? <button className="submit" onClick={()=>gotoEsign()}>Go To Esign Link</button> : ""}
 
                     <p style={{ textAlign: "center", maxWidth: "60%", margin: "1rem auto" }}>For any details and enquiries, reach out to us</p>
                     <button className="submit lite" style={{ marginTop: "0" }}>Contact Support</button>
