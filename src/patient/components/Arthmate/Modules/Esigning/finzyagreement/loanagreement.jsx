@@ -55,7 +55,8 @@ export default function ArthCreditAgreement() {
         const params = new URLSearchParams(url.search);
         const digioDocId = params.get('digio_doc_id');
         const message = params.get('message');
-        if (message === 'Document Signed Successfully!' && digioDocId !== null) {
+        console.log(message,digioDocId)
+        if ((message === 'Document Signed Successfully!'||message === 'Signed Successfully') && digioDocId !== null) {
             axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                 .then((loandata) => {
                     if (loandata.data.message === 'success') {
@@ -82,7 +83,7 @@ export default function ArthCreditAgreement() {
             console.log(message)
         } else {
             // proceedhandler()
-            setScreenState('landing')
+            // setScreenState('landing')
         }
     }, []);
 
