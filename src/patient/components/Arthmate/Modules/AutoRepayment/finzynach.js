@@ -64,7 +64,7 @@ const NachFinzy = () => {
                 enableAbortResponse:true
             },
             consumerData: {
-                deviceId: 'WEBSH2',
+                deviceId: nachData.consumerData.deviceId,
                 returnUrl:nachData.consumerData.returnUrl,
                 token: nachData.consumerData.token,
                 responseHandler: responseHandler(),
@@ -83,7 +83,6 @@ const NachFinzy = () => {
                     BUTTON_COLOR_CODE_1: '#514c9f',
                     BUTTON_COLOR_CODE_2: '#FFFFFF'
                 },
-                // accountNo: nachData.consumerData.accountNo,
                 accountNo: 257721823857,
                 accountHolderName: 'Aditya Navrang Meshram',
                 ifscCode: 'Indb0000025',

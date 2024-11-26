@@ -63,7 +63,6 @@ export default function ArthCreditAgreement() {
                         axios.get(env.api_Url + 'finzy/eSignComplete?loanId=' + loandata.data.data.loanId + '&documentId=' + digioDocId + '&status=success')
                             .then((res) => {
                                 console.log(res.data);
-                                if (res.data.message === 'success') {
                                     if(res.data.data==='SUCCESS'){
                                         screenState('verifying')
                                         setTimeout(() => {
@@ -72,7 +71,7 @@ export default function ArthCreditAgreement() {
                                         }, 5000);
                                     }
 
-                                }
+                                
                             })
 
                     } else {
