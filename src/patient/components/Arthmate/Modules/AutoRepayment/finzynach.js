@@ -76,7 +76,7 @@ const NachFinzy = () => {
                 consumerMobileNo: nachData.consumerData.consumerMobileNo,
                 consumerEmailId: nachData.consumerData.consumerEmailId,
                 txnId: nachData.consumerData.txnId,
-                items: [{ itemId: 'FIRST', amount: '1', comAmt: '0' }],
+                items: [{ itemId: 'TEST', amount: '1', comAmt: '0' }],
                 customStyle: {
                     PRIMARY_COLOR_CODE: '#b4b0ff',
                     SECONDARY_COLOR_CODE: '#FFFFFF',
