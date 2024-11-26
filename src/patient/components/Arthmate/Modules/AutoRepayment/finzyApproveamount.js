@@ -47,6 +47,60 @@ const Congrats = () => {
         // if (amount !== '0') {
         //     navigate(routes.ARTH_KYC)
         // }
+        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+        .then((loanData) => {
+            axios.get(env.api_Url + 'finzy/bankInfo?loanId=' + loanData.data.data.loanId)
+                .then((res) => {
+                    if (res.data.message === 'success') {
+                        axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                            .then((res) => {
+                                if (res.data.message === 'success' && res.data.data === 'APPROVED') {
+                                    axios.get(env.api_Url + 'finzy/loanAccept?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                        .then((res) => {
+                                            if (res.data.message === 'success') {
+                                                axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                                    .then((res) => {
+                                                        if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
+                                                            //  navigate()
+                                                            navigate(routes.FINZY_AGREEMENT)
+                                                        }
+                                                    })
+                                            }
+                                        })
+                                }
+                                if (res.data.message === 'success' && res.data.data === 'PRE-APPROVED') {
+                                    axios.get(env.api_Url + 'finzy/loanSanction?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                        .then((res) => {
+                                            if (res.data.message === 'success') {
+                                                axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                                    .then((res) => {
+                                                        if (res.data.message === 'success' && res.data.data === 'APPROVED') {
+                                                            axios.get(env.api_Url + 'loanAccept?loanId=' + loanData.data.data.loanId + '&accept=true')
+                                                                .then((res) => {
+                                                                    if (res.data.message === 'success') {
+                                                                        axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                                                            .then((res) => {
+                                                                                if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
+                                                                                    // esignscreennavigate
+                                                                                    navigate(routes.FINZY_AGREEMENT)
+                                                                                }
+                                                                            })
+                                                                    }
+                                                                })
+                                                        }
+                                                    })
+                                            }
+                                        })
+                                }
+                                if (res.data.message === 'success' && res.data.data === 'KYC') {
+                                    navigate(routes.STATUS_WAIT_FINZY)
+                                }
+                            })
+
+                    }
+                })
+        })
+
     }
 
     // async function checkStatus(){
@@ -101,8 +155,8 @@ const Congrats = () => {
                             <img src={Confetti} style={{ maxWidth: "25%" }} alt="" />
                         </div> */}
                         <div style={{ background: "#FAE1CD", marginTop: '40px',padding:'10px',borderRadius:'5px',display:'flex' }}>
-                           <ReportProblemIcon style={{color:'#F37B20'}}/> <p style={{fontSize:'14px',marginLeft:'5px'}}>Our lending partners could not approve your loan of Rs. 36,000. But, you may continue with
-                                a lesser loan amount under the credit limit assigned to you, by your best matched lender.</p>
+                           <ReportProblemIcon style={{color:'#F37B20'}}/> <p style={{fontSize:'14px',marginLeft:'5px'}}>Our lending partners could not approve your loan. But, you may continue with the credit limit assigned to you, by your best matched lender.
+</p>
                         </div>
                         <p style={{marginTop:'15px',marginBottom:'15px'}} className='subtitle'>Your credit application is <span style={{ color: "#149540", fontWeight: "700" }}>approved</span> for</p>
                         <div style={{ width: "90%", color: "#149540", height: "max-content", padding: "10px 16px", marginTop: "1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px", fontWeight: "700", borderRadius: "4px", border: "1px solid #000", background: "#EBFEED", boxShadow: "-4px 6px 0px 0px #514C9F" }}>

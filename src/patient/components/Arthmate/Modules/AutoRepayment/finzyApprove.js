@@ -102,26 +102,7 @@ const Congrats = () => {
 
     }
 
-    // async function checkStatus(){
-    //     showWrapper(ref.current)
-    //     await axios
-    //     .post(env.api_Url + "initiateFlow?userId=" + userId + "&type=loan_details_get")
-    //         .then(async(response) => {
-    //             console.log(response)
-    //             if(response.data.message === "success"){
-    //                 // console.log(response)
-    //                 let data = response?.data?.data;
-    //                 let amt = parseInt(data.amount).toLocaleString('en-IN');
-    //                 setAmount(amt);
-    //                 if(data.loan_status === "107"){
-    //                     navigate('/patient/loanAppSuccessful')
-    //                 }
-    //             }
-    //         }).catch(error =>{
-    //             console.log(error)
-    //         })
-    //         hideWrapper(ref.current)
-    // }
+
     const checkStatus = () => {
         setLoader(true)
         axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)

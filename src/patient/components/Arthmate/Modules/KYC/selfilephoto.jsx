@@ -49,6 +49,7 @@ export default function ArthSelfie() {
     };
     function checkAndNavigate() {
         // navigate(routes.ARTH_CONGRATULATIONS)
+        setLoaderState(false)
         axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
             .then((response) => {
                 console.log(response.data.data)
@@ -151,6 +152,8 @@ export default function ArthSelfie() {
     }
     function checkAndNavigatedigitap() {
         // navigate(routes.ARTH_CONGRATULATIONS)
+        setLoaderState(false)
+
         axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
             .then((response) => {
                 console.log(response.data.data)
@@ -353,7 +356,7 @@ export default function ArthSelfie() {
         axios.post(`${env.api_Url}getImageLivelinessInfo`, data)
             .then((res) => {
                 if (res.status === 200 && res.data.message === 'success') {
-                    setLoaderState(false);
+                   
                     axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                         .then((loanData) => {
                             axios.get(env.api_Url + 'finzy/liveliness?loanId=' + loanData.data.data.loanId)
@@ -394,6 +397,7 @@ export default function ArthSelfie() {
 
                 } else {
                     setLoaderState(false);
+                    alert(res.data.data)
 
                 }
             }).catch(e => console.warn(e));
