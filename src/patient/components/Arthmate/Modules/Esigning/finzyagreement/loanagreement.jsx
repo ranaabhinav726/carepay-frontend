@@ -81,7 +81,8 @@ export default function ArthCreditAgreement() {
             console.log("digio_doc_id:", digioDocId);
             console.log(message)
         } else {
-            proceedhandler()
+            // proceedhandler()
+            setScreenState('landing')
         }
     }, []);
 
