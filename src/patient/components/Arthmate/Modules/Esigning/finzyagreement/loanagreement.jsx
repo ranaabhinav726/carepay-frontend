@@ -64,11 +64,12 @@ export default function ArthCreditAgreement() {
                             .then((res) => {
                                 console.log(res.data.data);
                                 if (res.data.data === 'SUCCESS') {
-                                    setScreenState('redirectingNach')
-                                    setTimeout(() => {
-                                        // setScreenState("redirectingNach");
-                                        setTimeout(() => navigate('/patient/fach/' + loandata.data.data.loanId), 5000);
-                                    }, 5000);
+                                    navigate('/patient/fach/' + loandata.data.data.loanId)
+                                    // setScreenState('redirectingNach')
+                                    // setTimeout(() => {
+                                    //     // setScreenState("redirectingNach");
+                                    //     setTimeout(() => navigate('/patient/fach/' + loandata.data.data.loanId), 5000);
+                                    // }, 5000);
                                 }
 
 

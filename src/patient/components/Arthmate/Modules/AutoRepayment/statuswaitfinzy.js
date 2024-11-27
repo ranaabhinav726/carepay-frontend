@@ -24,9 +24,12 @@ const WaitLegality = () => {
                             axios.get(env.api_Url + 'finzy/loanAccept?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
                                 .then((res) => {
                                     if (res.data.message === 'success') {
+                                      
+
                                         axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
                                             .then((res) => {
                                                 if (res.data.message === 'success' && res.data.data === 'DOCUMENTATION') {
+                                                    
                                                     //  navigate()
                                                     navigate(routes.FINZY_AGREEMENT)
                                                 }
@@ -34,9 +37,10 @@ const WaitLegality = () => {
                                     }
                                 })
                         }
-                        {console.log(res.data.data)}
+                        { console.log(res.data.data) }
                         if (res.data.message === 'success' && res.data.data === 'PRE_APPROVED') {
-                              {console.log(res.data.data)}
+                            { console.log(res.data.data) }
+                            setLoader(true)
                             axios.get(env.api_Url + 'finzy/loanSanction?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
                                 .then((res) => {
                                     if (res.data.message === 'success') {
@@ -79,8 +83,8 @@ const WaitLegality = () => {
                         <div style={{ display: "flex", placeContent: "center", marginTop: "3rem" }}>
                             <img src={SearchingDoc} alt="" style={{ width: "50%" }} />
                         </div>
-                        <NoteText text="Assessing your credit..." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
-                        <NoteText text="This may take up to 5-10 minutes." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
+                        <NoteText text="Generating your credit agreement.." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
+                        {/* <NoteText text="This may take up to 5-10 minutes." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} /> */}
 
                         <button className="submit" style={{ margin: "2rem 0 12px 0" }} onClick={() => refreshScreen()}>Refresh status</button>
                         <NoteText text="For more details and enquiries, reach out to us" styles={{ textAlign: "center", color: "#000000C", fontSize: "16px", lineHeight: "20px", marginTop: "1.7rem" }} />
