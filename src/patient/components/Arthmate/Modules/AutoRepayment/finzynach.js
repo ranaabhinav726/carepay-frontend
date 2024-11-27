@@ -186,10 +186,10 @@ const NachFinzy = () => {
                                             }
                                         )
                                             .then((eNachComplete) => {
-                                                if (eNachComplete.data.message === 'success'&& eNachComplete.data.data!=='failed') {
+                                                if (eNachComplete.data.message === 'success' && eNachComplete.data.data !== 'failed') {
                                                     navigate(routes.FINAL_SCREEN_ARTH)
-                                                }else{
-                                                    navigate(routes.FINZY_TRY_AGAIN) 
+                                                } else {
+                                                    navigate(routes.FINZY_TRY_AGAIN)
                                                 }
                                             })
                                             .catch((error) => {
@@ -204,7 +204,7 @@ const NachFinzy = () => {
                         console.error("Error fetching data:", error);
                     });
             }
-            if (res == 'failure') {
+            if (res !== 'success') {
                 navigate(routes.FINZY_TRY_AGAIN)
 
 
