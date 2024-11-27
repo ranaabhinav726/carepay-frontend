@@ -359,6 +359,7 @@ export default function ArthSelfie() {
                    
                     axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                         .then((loanData) => {
+                            
                             axios.get(env.api_Url + 'finzy/liveliness?loanId=' + loanData.data.data.loanId)
                                 .then((live) => {
                                     if (live.status === 200 && live.data.message === 'success') {
@@ -367,7 +368,10 @@ export default function ArthSelfie() {
                                                 if (upload.status === 200 && upload.data.message === 'success') {
                                                     axios.get(env.api_Url + 'finzy/additionalInfo?loanId=' + loanData.data.data.loanId)
                                                         .then((additional) => {
-                                                            if (additional.status === 200 && additional.data.message === 'success') {
+                                                            console.log(additional,'additionalinfo')
+
+                                                            if (additional.data.message === 'success') {
+                                                                console.log(loanData.data.data.loanAmount,'loanData.data.data.loanAmount')
                                                                 if (loanData.data.data.loanAmount >= 75000) {
                                                                     checkAndNavigatedigitap()
                                                                 } else {
