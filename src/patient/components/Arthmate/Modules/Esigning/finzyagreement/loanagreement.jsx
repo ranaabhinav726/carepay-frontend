@@ -64,9 +64,9 @@ export default function ArthCreditAgreement() {
                             .then((res) => {
                                 console.log(res.data.data);
                                 if (res.data.data === 'SUCCESS') {
-                                    setScreenState('verifying')
+                                    setScreenState('redirectingNach')
                                     setTimeout(() => {
-                                        setScreenState("redirecting");
+                                        // setScreenState("redirectingNach");
                                         setTimeout(() => navigate('/patient/fach/' + loandata.data.data.loanId), 5000);
                                     }, 5000);
                                 }
@@ -123,6 +123,16 @@ export default function ArthCreditAgreement() {
                         <img src={Redirecting} alt="Redirecting" style={{ maxWidth: "60%" }} />
                     </div>
                     <p style={{ fontSize: "16px", textAlign: "center", lineHeight: "150%" }}>Redirecting to partner platform <br />for e-signing...</p>
+                </>
+            }
+            {screenState === "redirectingNach" &&
+                <>
+                    <Header progressBar="hidden" />
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        <img src={Doc} alt="Verifying Document" style={{ maxWidth: "60%" }} />
+                    </div>
+                    <p style={{ fontSize: "16px", textAlign: "center", lineHeight: "150%" }}>Generating your credit agreement..</p>
+
                 </>
             }
 
