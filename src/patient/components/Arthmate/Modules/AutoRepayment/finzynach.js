@@ -8,6 +8,8 @@ import { env } from "../../../../environment/environment";
 import Loadinggif from "../../../../../utils/loader/loadergif";
 import { Header } from "../../comps/Header";
 import Logo from '../../../../assets/Logo-carepay.svg'
+import routes from "../../../../../layout/Routes";
+let res
 
 const NachFinzy = () => {
     let navigate = useNavigate();
@@ -41,7 +43,7 @@ const NachFinzy = () => {
 
         script2.onload = () => {
             console.log("Paynimo checkout script loaded successfully.");
-            setScriptLoaded(true);  
+            setScriptLoaded(true);
         };
 
         script2.onerror = () => {
@@ -55,21 +57,21 @@ const NachFinzy = () => {
         var configJson = {
             tarCall: false,
             features: {
-                showPGResponseMsg:true,
-                enableNewWindowFlow:  false,
-                enableExpressPay:  true,
-                siDetailsAtMerchantEnd:  true,
-                enableSI:  true,
-                payDetailsAtMerchantEnd:  true,
-                enableAbortResponse:true
+                showPGResponseMsg: true,
+                enableNewWindowFlow: false,
+                enableExpressPay: true,
+                siDetailsAtMerchantEnd: true,
+                enableSI: true,
+                payDetailsAtMerchantEnd: true,
+                enableAbortResponse: true
             },
             consumerData: {
                 deviceId: nachData.consumerData.deviceId,
-                returnUrl:nachData.consumerData.returnUrl,
+                returnUrl: nachData.consumerData.returnUrl,
                 token: nachData.consumerData.token,
-                responseHandler: responseHandler(),
+                responseHandler: responseHandler,
                 paymentMode: nachData.consumerData.paymentMode,
-                merchantLogoUrl: nachData.consumerData.merchantLogoUrl ,
+                merchantLogoUrl: nachData.consumerData.merchantLogoUrl,
                 merchantId: nachData.consumerData.merchantId,
                 currency: 'INR',
                 consumerId: nachData.consumerData.consumerId,
@@ -104,21 +106,34 @@ const NachFinzy = () => {
         } else {
             console.error("Paynimo script not loaded properly. Please check the script URL.");
         }
-        console.log(configJson,'configJson')
-    };
-    const responseHandler=(res)=>{
-
-    }
-
-    const handleResponse = (res) => {
-        console.log(res)
-        // if (res.status === 'success') {
-        //     console.log('Payment successful!', res);
-        // } else if (res.status === 'failed') {
-        //     console.log('Payment failed', res);
-        // }
+        console.log(configJson, 'configJson')
     };
 
+
+    // const handleResponse = (res) => {
+    //     console.log(res)
+    //     // if (res.status === 'success') {
+    //     //     console.log('Payment successful!', res);
+    //     // } else if (res.status === 'failed') {
+    //     //     console.log('Payment failed', res);
+    //     // }
+    // };
+
+    const responseHandler = (response) => {
+        // response will contain the status of the payment
+        if (response.status === 'success') {
+            console.log('Payment successful!', response);
+            // Handle success (e.g., redirect to a success page or update UI)
+            navigate('/success');
+        } else if (response.status === 'failed') {
+            console.log('Payment failed', response);
+            // Handle failure (e.g., show error message or log)
+            navigate('/failure');
+        } else if (response.status === 'aborted') {
+            console.log('Payment was aborted by user', response);
+            // Handle aborted state (e.g., show a message or log)
+        }
+    };
     const proceed = () => {
         if (nachData) {
             paymentHandler2(nachData);
@@ -128,7 +143,7 @@ const NachFinzy = () => {
     };
 
     useEffect(() => {
-        loadPaynimoScripts();  
+        loadPaynimoScripts();
         setLoader(true);
         axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
             .then((response) => {
@@ -138,7 +153,7 @@ const NachFinzy = () => {
                         .then((nachDataResponse) => {
                             if (response.data.message === 'success') {
 
-                            setNachData(JSON.parse(nachDataResponse.data.data)); 
+                                setNachData(JSON.parse(nachDataResponse.data.data));
                             }
                         });
                 }
@@ -147,10 +162,60 @@ const NachFinzy = () => {
                 setLoader(false);
                 console.error("Error fetching data:", error);
             });
-    }, [userId]);  
+    }, [userId]);
+    useEffect(() => {
+
+        let params = new URL(window.location.href).searchParams
+        if (params.get('response') != undefined && params.get('response') != null) {
+            res = params.get('response').replace(/"/g, '')
+            console.log(res)
+            if (res == 'success') {
+                axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + userId)
+                    .then((response) => {
+                        setLoader(false);
+                        if (response.data.message === 'success') {
+                            axios.get(env.api_Url + 'finzy/getMandateData?loanId=' + response.data.data.loanId)
+                                .then((mandateData) => {
+                                    if (mandateData.data.message === 'success') {
+                                        console.log(mandateData.data.data[0].msg)
+                                        axios.post(
+                                            env.api_Url + 'finzy/eNachComplete',
+                                            {
+                                                loanId: response.data.data.loanId,
+                                                msg: mandateData.data.data[0].msg
+                                            }
+                                        )
+                                            .then((eNachComplete) => {
+                                                if (eNachComplete.data.message === 'success'&& eNachComplete.data.data!=='failed') {
+                                                    navigate(routes.FINAL_SCREEN_ARTH)
+                                                }else{
+                                                    navigate(routes.FINZY_TRY_AGAIN) 
+                                                }
+                                            })
+                                            .catch((error) => {
+                                                console.error(error);
+                                            });
+                                    }
+                                });
+                        }
+                    })
+                    .catch((error) => {
+                        setLoader(false);
+                        console.error("Error fetching data:", error);
+                    });
+            }
+            if (res == 'failure') {
+                navigate(routes.FINZY_TRY_AGAIN)
+
+
+            }
+        }
+    }, [])
+
+
     return (
         <main>
-            {console.log(nachData,'nachData')}
+            {console.log(nachData, 'nachData')}
             <Header />
             {loaderState === false ? (
                 <>

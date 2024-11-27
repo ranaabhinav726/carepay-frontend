@@ -67,7 +67,7 @@ export default function ArthCreditAgreement() {
                                         screenState('verifying')
                                         setTimeout(() => {
                                             setScreenState("redirecting");
-                                            setTimeout(() => navigate(routes.FINZY_NACH_MANDATE), 5000);
+                                            setTimeout(() => navigate('/patient/fach/' + loandata.data.data.loanId), 5000);
                                         }, 5000);
                                     }
 

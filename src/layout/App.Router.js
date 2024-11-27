@@ -186,6 +186,7 @@ function AppRouter() {
           <Route path={OurRoutes.FINZY_NACH_MANDATE} element={<Routers.FINZY_NACH_MANDATE />} />
           <Route path={OurRoutes.FINZY_APPROVE_LESS_AMOUNT} element={<Routers.FINZY_APPROVE_LESS_AMOUNT />} />
           <Route path={OurRoutes.STATUS_WAIT_FINZY} element={<Routers.STATUS_WAIT_FINZY />} />
+          <Route path={OurRoutes.FINZY_TRY_AGAIN} element={<Routers.FINZY_TRY_AGAIN />} />
 
           <Route path={OurRoutes.CONNECTING_WITH_LENDERS} element={<Routers.CONNECTING_WITH_LENDERS />} />
           <Route path={OurRoutes.PLEASE_WAIT} element={<Routers.PLEASE_WAIT />} />

@@ -190,9 +190,10 @@ const routes = {
   FINZY_AGREEMENT:'/patient/fmandate',
   FINZY_WAIT:'/patient/fwait',
   FINZY_ESIGN_TRY_AGAIN:'/patient/ftryagain',
-  FINZY_NACH_MANDATE:'/patient/fach',
+  FINZY_NACH_MANDATE:'/patient/fach/:loanId',
   FINZY_APPROVE_LESS_AMOUNT:'/patient/approvefinzy',
   STATUS_WAIT_FINZY:'/patient/fstatuswait',
+  FINZY_TRY_AGAIN:'/patient/retryfinzymandate',
 
 
 
