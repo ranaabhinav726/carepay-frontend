@@ -44,7 +44,8 @@ const APIS = {
     GET_INACTIVE_CLINICS: BASE_URL + 'getInActiveClinicForScout?scoutId=',
     SEARCH_API_DOCTOR_DETAILS: BASE_URL + 'searchDoctorDetail?searchBy=',
     GET_AVERAGE_PERCENTAGE_BY_SCOUT_ID: BASE_URL + 'getAverageApprovalRateScout?scoutId=',
-    GET_BANK_LIST_FOR_USERS_API:BASE_URL+'getBanksInformation?page_no=1&no_of_entry=300'
+    GET_BANK_LIST_FOR_USERS_API: BASE_URL + 'getBanksInformation?page_no=1&no_of_entry=300',
+    GET_BS_INFO_API: BASE_URL + 'finzy/bankStatement?loanId='
 
 
 
