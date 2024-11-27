@@ -55,23 +55,23 @@ export default function ArthCreditAgreement() {
         const params = new URLSearchParams(url.search);
         const digioDocId = params.get('digio_doc_id');
         const message = params.get('message');
-        console.log(message,digioDocId)
-        if ((message === 'Document Signed Successfully!'||message === 'Signed Successfully') && digioDocId !== null) {
+        console.log(message, digioDocId)
+        if ((message === 'Document Signed Successfully!' || message === 'Signed Successfully') && digioDocId !== null) {
             axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                 .then((loandata) => {
                     if (loandata.data.message === 'success') {
                         axios.get(env.api_Url + 'finzy/eSignComplete?loanId=' + loandata.data.data.loanId + '&documentId=' + digioDocId + '&status=success')
                             .then((res) => {
-                                console.log(res.data);
-                                    if(res.data.data==='SUCCESS'){
-                                        screenState('verifying')
-                                        setTimeout(() => {
-                                            setScreenState("redirecting");
-                                            setTimeout(() => navigate('/patient/fach/' + loandata.data.data.loanId), 5000);
-                                        }, 5000);
-                                    }
+                                console.log(res.data.data);
+                                if (res.data.data === 'SUCCESS') {
+                                    setScreenState('verifying')
+                                    setTimeout(() => {
+                                        setScreenState("redirecting");
+                                        setTimeout(() => navigate('/patient/fach/' + loandata.data.data.loanId), 5000);
+                                    }, 5000);
+                                }
 
-                                
+
                             })
 
                     } else {
@@ -100,8 +100,8 @@ export default function ArthCreditAgreement() {
                         It is recommended that you take your time and read the agreement.
                     </div>
 
-                    {esignurl === '' ? <button className="submit" onClick={()=>proceedhandler()}>Proceed</button> : ""}
-                    {esignurl !== '' ? <button className="submit" onClick={()=>gotoEsign()}>Go To Esign Link</button> : ""}
+                    {esignurl === '' ? <button className="submit" onClick={() => proceedhandler()}>Proceed</button> : ""}
+                    {esignurl !== '' ? <button className="submit" onClick={() => gotoEsign()}>Go To Esign Link</button> : ""}
 
                     <p style={{ textAlign: "center", maxWidth: "60%", margin: "1rem auto" }}>For any details and enquiries, reach out to us</p>
                     <button className="submit lite" style={{ marginTop: "0" }}>Contact Support</button>
@@ -125,7 +125,7 @@ export default function ArthCreditAgreement() {
                     <p style={{ fontSize: "16px", textAlign: "center", lineHeight: "150%" }}>Redirecting to partner platform <br />for e-signing...</p>
                 </>
             }
-           
+
         </main>
     );
 }
