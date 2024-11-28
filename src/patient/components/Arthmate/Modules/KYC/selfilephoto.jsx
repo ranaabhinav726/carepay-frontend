@@ -389,6 +389,8 @@ export default function ArthSelfie() {
                                                             }
 
                                                         })
+                                                }else{
+                                                    navigate(routes.WAIT_DOC_UPLOAD)
                                                 }
 
                                             })

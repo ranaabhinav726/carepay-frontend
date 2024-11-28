@@ -210,6 +210,7 @@ function AppRouter() {
           <Route path={OurRoutes.MV_CONGRATULATIONS} element={<Routers.MV_CONGRATULATIONS />} />
           <Route path={OurRoutes.MVREFRESH_FINAL} element={<Routers.MVREFRESH_FINAL />} />
           <Route path={OurRoutes.MVREFRESH_TRY_AGAIN} element={<Routers.MVREFRESH_TRY_AGAIN />} />
+          <Route path={OurRoutes.WAIT_DOC_UPLOAD} element={<Routers.WAIT_DOC_UPLOAD />} />
 
           <Route path={OurRoutes.DEMO} element={<Routers.DEMO />} />
 
