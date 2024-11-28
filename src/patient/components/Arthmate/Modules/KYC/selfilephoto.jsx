@@ -433,7 +433,7 @@ export default function ArthSelfie() {
                         <p className='group-title'>Selfie</p>
                         {imgSrc ? (
                             <>
-                                <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '66%' }}>
+                                <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '300px' }}>
                                     <img src={imgSrc} alt="Selfie" className="captured-image" style={{ borderRadius: '10px', border: '5px solid #504c9a', padding: '5px', }} />
 
                                 </div>

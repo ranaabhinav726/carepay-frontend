@@ -460,41 +460,39 @@ export default function DataVerified() {
                     ))}
                 </div>
             )}
-            <div style={{ marginTop: "10px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
-                {displayedBanks.map((bank) => (
-                    <div key={bank.bankId} style={{ display: "flex", alignItems: "", justifyContent: 'left' }}>
-                        <div className="bankinput-checkbox" style={{
-                            border: '2px solid #ECEBFF',
-                            borderRadius: '5px',
-                            padding: '10px 23px',
-                         
-                            
-                        }}>
-                            <label  htmlFor={`bank-checkbox-${bank.bankId}`} style={{ display: "flex", alignItems: "center",cursor:'pointer' }}>
-                                {bank.logo ? (
-                                    <img src={bank.logo} alt={`${bank.name} logo`} style={{ width: "50px", height: "50px", marginRight: "10px" }} />
-                                ) : (
-                                    <AccountBalanceIcon style={{ width: "50px", height: "50px", marginRight: "10px" }} />
-                                )}
-                                <div className="bankinput-checkbox round">
-
-                                    <input
-                                    
-                                        type="checkbox"
-                                        id={`bank-checkbox-${bank.bankId}`}
-                                        checked={selectedBanks.includes(bank.bankId)}
-                                        onChange={() => handleBankSelection(bank.bankId)}
-                                        style={{ marginRight: "10px" }}
-                                    />
-                                    <label htmlFor={`bank-checkbox-${bank.bankId}`} ></label>
-
-                                </div>
-                            </label>
-                            <div style={{ fontSize: '12px' }}>{bank.name}</div>
-                        </div>
+         <div className="" style={{ marginTop: "10px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
+    {displayedBanks.map((bank) => (
+        <div key={bank.bankId}  style={{ display: "flex", alignItems: "center", justifyContent: 'left' }}>
+            <div className="bankinput-checkbox" style={{
+                border: '2px solid #ECEBFF',
+                borderRadius: '5px',
+                padding: '5px 12px',
+                boxSizing: 'border-box',
+            }}>
+                <label htmlFor={`bank-checkbox-${bank.bankId}`} style={{ display: "flex", alignItems: "center", cursor: 'pointer' }}>
+                    {bank.logo ? (
+                        <img src={bank.logo} alt={`${bank.name} logo`} style={{ width: "50px", height: "50px", marginRight: "10px" }} />
+                    ) : (
+                        <AccountBalanceIcon style={{ width: "50px", height: "50px", marginRight: "10px" }} />
+                    )}
+                    <div className="bankinput-checkbox round">
+                        <input
+                            type="checkbox"
+                            id={`bank-checkbox-${bank.bankId}`}
+                            checked={selectedBanks.includes(bank.bankId)}
+                            onChange={() => handleBankSelection(bank.bankId)}
+                            style={{ marginRight: "10px" }}
+                        />
+                        <label htmlFor={`bank-checkbox-${bank.bankId}`} ></label>
                     </div>
-                ))}
+                </label>
+                <div style={{ fontSize: '12px', textAlign: 'center', marginTop: '5px' }}>{bank.name}</div>
             </div>
+        </div>
+    ))}
+</div>
+
+
             <div className="bankinput-checkbox" style={{ marginTop: "20px" }}>
                 <h4>Selected Banks:</h4>
                 <div style={{ marginTop: "20px" }}>
