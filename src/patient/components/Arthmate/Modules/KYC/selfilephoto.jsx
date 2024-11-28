@@ -373,6 +373,7 @@ export default function ArthSelfie() {
                                                             if (additional.data.message === 'success') {
                                                                 console.log(loanData.data.data.loanAmount,'loanData.data.data.loanAmount')
                                                                 if (loanData.data.data.loanAmount >= 75000) {
+                                                                    
                                                                     checkAndNavigatedigitap()
                                                                 } else {
                                                                     axios.get(env.api_Url + 'finzy/cibilApi?loanId=' + loanData.data.data.loanId)

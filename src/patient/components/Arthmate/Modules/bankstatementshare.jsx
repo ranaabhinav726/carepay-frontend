@@ -36,10 +36,22 @@ const BankstatementShare = () => {
                                             axios.get(env.api_Url + 'finzy/cibilApi?loanId=' + loandata.data.data.loanId)
                                                 .then((cibildata) => {
                                                     if (cibildata.status === 200 && cibildata.data.data === 'APPROVED') {
-                                                        navigate(routes.FINZY_APPROVAL)
+                                                        axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loandata.data.data.loanId)
+                                                            .then((res) => {
+                                                                if (res.data.message === 'success') {
+                                                                    if (res.data.data.amount === loandata.data.data.loanAmount) {
+                                                                        navigate(routes.FINZY_APPROVAL)
+                                                                    } else {
+                                                                        navigate(routes.FINZY_APPROVE_LESS_AMOUNT)
 
-                                                    }else{
-                                                        navigate(routes.REJECTED_SCREEN)   
+                                                                    }
+
+                                                                }
+                                                            })
+                                                        // navigate(routes.FINZY_APPROVAL)
+
+                                                    } else {
+                                                        navigate(routes.REJECTED_SCREEN)
                                                     }
 
                                                 })
