@@ -16,7 +16,7 @@ const DigitapRedirect = () => {
         axios.get(APIS.GET_DIGITA_BANK_REPORT + userId)
             .then((response) => {
                 console.log(response.data.data.status)
-                if (response.data.data.status === 'Success') {
+                if (response.data.data.status === 'Success'||response.data.data.status === 'success') {
                     navigate(routes.DIGITAP_DATA_RECEIVED)
                 }
                 if (response.data.data.status === 'Failure') {

@@ -431,6 +431,7 @@ export default function ArthSelfie() {
             {console.log(imgSrc)}
             <Header progressBar={successfull === 'two' ? "hidden" : ''} />
             {loaderState && <Loadinggif />}
+            
             {successfull === 'one' && !loaderState && (
                 <>
                     <h3 style={{ margin: "1.5rem 0" }}>Selfie Upload</h3>
