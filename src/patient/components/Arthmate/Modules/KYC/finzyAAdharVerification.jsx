@@ -118,7 +118,7 @@ export default function ArthAadhaarVerification() {
 
                             } else {
                                 setLoader(false)
-
+                                setScreenState('otpSent')
                                 // navigate(routes.ARTH_AADHAAR_PHOTO)
                                 {console.log(response.data.data)}
                                 setError(response.data.data)

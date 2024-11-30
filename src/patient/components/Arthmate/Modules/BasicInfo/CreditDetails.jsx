@@ -436,6 +436,7 @@ const ArthCreditDetails = () => {
                     // await handleNavigation();
                     localStorage.setItem("fullName", firstName + ' ' + lastName);
                     localStorage.setItem("borrower", borrower);
+                    localStorage.setItem('treatment',treatment)
                     navigate(routes.BANK_LIST)
                     if (!number) return;
                     console.log(borrower)

@@ -118,7 +118,7 @@ export default function ArthAadhaarVerification() {
             setError('')
             axios.post(env.api_Url + "aadhaarXmlDownloadValidateOtp?userId=" + userId + "&otp=" + otp)
                 .then((response) => {
-                    console.log(response)
+                    console.log(response.data.message)
 
                     if (response.data.message === "success") {
 
@@ -149,7 +149,7 @@ export default function ArthAadhaarVerification() {
 
                     } else {
                         setLoader(false)
-
+                        setScreenState('otpSent')
                         // navigate(routes.ARTH_AADHAAR_PHOTO)
                         setError(response.data.data)
                     }

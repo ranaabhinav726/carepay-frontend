@@ -156,7 +156,7 @@ export default function DataVerified() {
         }
     }, [])
     const saveDataCredit=()=>{
-        if (treatment !== 'Other') {
+        if (localStorage.getItem('treatment') !== 'Other') {
             if (borrower === 'myself') {
                 if (servicableForMyself.includes(treatment)) {
                     // navigate(routes.ARTH_PERSONAL_DETAILS);
@@ -336,7 +336,7 @@ export default function DataVerified() {
                     navigate(routes.NOT_SERVICEABLE);
                 }
             }
-        } else if (treatment === 'Other') {
+        } else if (localStorage.getItem('treatment')  === 'Other') {
             // navigate(routes.ARTH_PERSONAL_DETAILS);
             // navigate(routes.FLEX_WAIT_SCREEN)
             axios.get(env.api_Url + "checkDoctorMappedByNbfc?doctorId=" + doctorId + '&nbfc=FM')

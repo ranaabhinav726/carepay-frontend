@@ -355,11 +355,12 @@ export default function ArthSelfie() {
 
         axios.post(`${env.api_Url}getImageLivelinessInfo`, data)
             .then((res) => {
+                console.log(res)
                 if (res.status === 200 && res.data.message === 'success') {
-                   
+
                     axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                         .then((loanData) => {
-                            
+
                             axios.get(env.api_Url + 'finzy/liveliness?loanId=' + loanData.data.data.loanId)
                                 .then((live) => {
                                     if (live.status === 200 && live.data.message === 'success') {
@@ -368,12 +369,12 @@ export default function ArthSelfie() {
                                                 if (upload.status === 200 && upload.data.message === 'success') {
                                                     axios.get(env.api_Url + 'finzy/additionalInfo?loanId=' + loanData.data.data.loanId)
                                                         .then((additional) => {
-                                                            console.log(additional,'additionalinfo')
+                                                            console.log(additional, 'additionalinfo')
 
                                                             if (additional.data.message === 'success') {
-                                                                console.log(loanData.data.data.loanAmount,'loanData.data.data.loanAmount')
+                                                                console.log(loanData.data.data.loanAmount, 'loanData.data.data.loanAmount')
                                                                 if (loanData.data.data.loanAmount >= 75000) {
-                                                                    
+
                                                                     checkAndNavigatedigitap()
                                                                 } else {
                                                                     axios.get(env.api_Url + 'finzy/cibilApi?loanId=' + loanData.data.data.loanId)
@@ -381,6 +382,8 @@ export default function ArthSelfie() {
                                                                             if (additional.status === 200 && additional.data.message === 'success') {
                                                                                 checkAndNavigate()
 
+                                                                            }else{
+                                                                                checkAndNavigate()
                                                                             }
 
                                                                         })
@@ -389,7 +392,7 @@ export default function ArthSelfie() {
                                                             }
 
                                                         })
-                                                }else{
+                                                } else {
                                                     navigate(routes.WAIT_DOC_UPLOAD)
                                                 }
 
@@ -460,6 +463,7 @@ export default function ArthSelfie() {
                                     // height={300}
                                     style={{ borderRadius: '10%' }}
                                 />
+                                <p style={{ textAlign: 'center',color:'red',marginTop:'10px' }}>Please submit a clear selfie!</p>
                             </div>
                         )}
                         {!imgSrc && <button className="submit" onClick={capture}>Capture Selfie</button>}
