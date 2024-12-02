@@ -456,7 +456,7 @@ export default function ArthSelfie() {
                                     className="submit"
                                     onClick={saveFiles}
                                 >
-                                    Yes
+                                    Submit Selfie
                                 </button>
                                 <button style={{ padding: '19px' }} className={panCard ? "carepay-button-purple" : 'carepay-button-purple-disable'} onClick={reCaptureImage}>No, let’s retake</button>
 
