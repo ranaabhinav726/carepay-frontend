@@ -135,15 +135,15 @@ const ArthmateOffers = () => {
 
     async function submitLoanData() {
         let creditFairProductId;
-        await axios
-            .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId)
-            .then(async (res) => {
-                creditFairProductId = await res.data.data;
-                if (creditFairProductId === "Product Not configured") {
-                    creditFairProductId = 11111;
-                }
-                console.log(creditFairProductId)
-            })
+        // await axios
+        //     .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId)
+        //     .then(async (res) => {
+        //         creditFairProductId = await res.data.data;
+        //         if (creditFairProductId === "Product Not configured") {
+        //             creditFairProductId = 11111;
+        //         }
+        //         console.log(creditFairProductId)
+        //     })
 
         let submitObj = {
             "userId": userId,
@@ -151,9 +151,10 @@ const ArthmateOffers = () => {
             "loanAmount": loanAmt,
             "loanReason": loanPurpose,
             "loanEMI": selected.tenure,
-            "productId": creditFairProductId, // 5 digit
+            "productId": 11111, // 5 digit
             "internalProductId": selected.productId // 32chars
         }
+        console.log(selected)
 
         if (!(submitObj.loanEMI && submitObj.productId)) {
             setErrorMsg("Please select a offer.");
