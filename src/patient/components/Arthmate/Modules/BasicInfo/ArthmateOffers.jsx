@@ -135,15 +135,15 @@ const ArthmateOffers = () => {
 
     async function submitLoanData() {
         let creditFairProductId;
-        await axios
-            .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId)
-            .then(async (res) => {
-                creditFairProductId = await res.data.data;
-                if (creditFairProductId === "Product Not configured") {
-                    creditFairProductId = 11111;
-                }
-                console.log(creditFairProductId)
-            })
+        // await axios
+        //     .get(env.api_Url + "fetchOfferId" + '?productId=' + selected.productId)
+        //     .then(async (res) => {
+        //         creditFairProductId = await res.data.data;
+        //         if (creditFairProductId === "Product Not configured") {
+        //             creditFairProductId = 11111;
+        //         }
+        //         console.log(creditFairProductId)
+        //     })
 
         let submitObj = {
             "userId": userId,

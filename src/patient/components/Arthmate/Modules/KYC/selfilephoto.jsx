@@ -382,7 +382,7 @@ export default function ArthSelfie() {
                                                                             if (additional.status === 200 && additional.data.message === 'success') {
                                                                                 checkAndNavigate()
 
-                                                                            }else{
+                                                                            } else {
                                                                                 checkAndNavigate()
                                                                             }
 
@@ -431,13 +431,20 @@ export default function ArthSelfie() {
             {console.log(imgSrc)}
             <Header progressBar={successfull === 'two' ? "hidden" : ''} />
             {loaderState && <Loadinggif />}
-            
+
             {successfull === 'one' && !loaderState && (
                 <>
-                    <h3 style={{ margin: "1.5rem 0" }}>Selfie Upload</h3>
-                    <p>Upload your selfie or capture a new one.</p>
+                    <h3 style={{ margin: "1.5rem 0" }}>Selfie time!</h3>
+                    <div style={{ background: '#FAE1CD', padding: '10px', borderRadius: '5px' }}>
+
+                        <b>Note:</b>
+                        <div>1. Please look straight into your camera.</div>
+                        <div>2. Make sure that nobody other than you, is in the frame.</div>
+                        <div>3. Try to capture a clear image.</div>
+                    </div>
+                    {/* <p>Upload your selfie or capture a new one.</p> */}
                     <div className="inputGroup">
-                        <p className='group-title'>Selfie</p>
+                        {/* <p className='group-title'>Selfie</p> */}
                         {imgSrc ? (
                             <>
                                 <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '300px' }}>
@@ -455,16 +462,16 @@ export default function ArthSelfie() {
 
                             </>
                         ) : (
-                            <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '66%', marginTop: '20px', marginBottom: '20px' }}>
+                            <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '100%', marginTop: '20px', marginBottom: '20px' }}>
                                 <Webcam
                                     audio={false}
                                     ref={webcamRef}
                                     screenshotFormat="image/jpeg"
-                                    width={300}
+                                    width={'100%'}
                                     // height={300}
                                     style={{ borderRadius: '10%' }}
                                 />
-                                <p style={{ textAlign: 'center',color:'red',marginTop:'10px' }}>Please submit a clear selfie!</p>
+                                {/* <p style={{ textAlign: 'center',color:'red',marginTop:'10px' }}>Please submit a clear selfie!</p> */}
                             </div>
                         )}
                         {!imgSrc && <button className="submit" onClick={capture}>Capture Selfie</button>}
