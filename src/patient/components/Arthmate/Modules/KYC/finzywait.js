@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 export default function ArthAgreementStatus() {
     let navigate = useNavigate()
     let userId = localStorage.getItem('userId')
-    const [screenState, setScreenState] = useState("refresh");
+    const [screenState, setScreenState] = useState("fetching");
 
     useEffect(() => {
         lottie.loadAnimation({
