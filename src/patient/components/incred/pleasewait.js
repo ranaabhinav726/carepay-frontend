@@ -18,20 +18,7 @@ const ConnectWithLenders = () => {
                             console.log(response)
                             if (response.data.message === "success") {
                                 navigate(routes.ARTH_BANKDETAILS)
-                                // axios.get(env.api_Url + "getFinalNbfc?userId=" + userId)
-                                //     .then(async (response) => {
-                                //         if (response.data === 'AM') {
-                                //             navigate(routes.ARTH_CONGRATULATIONS)
-                                //         }
-                                //         if (response.data === 'CF') {
-                                //             navigate(routes.CONGRATS)
-                                //         }
-                                //         if (response.data === 'FIBE') {
-                                //             navigate(routes.FIBE_LOAN_APPROVED)
-                                //         }
 
-
-                                //     })
                             } else {
                                 navigate(routes.ARTH_BANKDETAILS)
                             }

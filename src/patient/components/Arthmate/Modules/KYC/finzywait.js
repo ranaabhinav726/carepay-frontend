@@ -7,12 +7,14 @@ import axios from "axios";
 import { env } from "../../../../environment/environment";
 import { useNavigate } from "react-router-dom";
 import routes from "../../../../../layout/Routes";
+import NoteText from "../../../Fibe flow/Comps/NoteText";
+import { Link } from "react-router-dom";
 
 
 export default function ArthAgreementStatus() {
-    let navigate=useNavigate()
+    let navigate = useNavigate()
     let userId = localStorage.getItem('userId')
-    const [screenState, setScreenState] = useState("fetching");
+    const [screenState, setScreenState] = useState("refresh");
 
     useEffect(() => {
         lottie.loadAnimation({
@@ -36,14 +38,14 @@ export default function ArthAgreementStatus() {
 
                                 axios.get(env.api_Url + "finzy/createLoan?loanId=" + loanData.data.data.loanId)
                                     .then((response) => {
-                                        if (response.data.message === "success" ||response.data.message === "duplicate" ) {
+                                        if (response.data.message === "success" || response.data.message === "duplicate") {
                                             axios.get(env.api_Url + "finzy/loanAadhaarStep?loanId=" + loanData.data.data.loanId)
                                                 .then((response) => {
                                                     if (response.data.message === "success") {
                                                         navigate(routes.FINZY_AADHAR_VERIFICATION)
-                                                        
+
                                                     } else {
-                                                        
+                                                        setScreenState('refresh')
                                                     }
                                                 })
 
@@ -52,6 +54,8 @@ export default function ArthAgreementStatus() {
                                         }
                                     })
                             })
+                    }else{
+                        checkAndNavigate()
                     }
                 })
         }
@@ -156,7 +160,7 @@ export default function ArthAgreementStatus() {
                                 })
                         })
                 }
-                   if (response.data.data === 'FINZY') {
+                if (response.data.data === 'FINZY') {
 
                     axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                         .then((loanData) => {
@@ -187,7 +191,21 @@ export default function ArthAgreementStatus() {
 
             })
     }
-    
+    const refresh = () => {
+        setScreenState('fetching')
+        axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
+            .then((loanData) => {
+                axios.get(env.api_Url + "finzy/loanAadhaarStep?loanId=" + loanData.data.data.loanId)
+                    .then((response) => {
+                        if (response.data.message === "success") {
+                            navigate(routes.FINZY_AADHAR_VERIFICATION)
+
+                        } else {
+                            setScreenState('refresh')
+                        }
+                    })
+            })
+    }
     return (
         <main>
             {screenState === "fetching" &&
@@ -197,6 +215,18 @@ export default function ArthAgreementStatus() {
                     <p style={{ textAlign: "center", opacity: "0.8" }}>Generating OTP for verifying Aadhaar...</p>
                 </>
             }
+            {screenState === 'refresh' ?
+                <>
+                    <Header progressBar="hidden" />
+                    {/* <div style={{ marginTop: "10%" }} id="searchAnimation"></div> */}
+                    <p style={{ textAlign: "center", opacity: "0.8",marginTop: '200px'  }}>We are unable to send OTP to your number...</p>
+                    <button  className="submit" style={{ marginTop: '30px' }} onClick={() => refresh()}>Retry</button>
+                    <NoteText text="For more details and enquiries, reach out to us" styles={{ textAlign: "center", color: "#000000C", fontSize: "16px", lineHeight: "20px", marginTop: "1.7rem" }} />
+                    <div style={{ textAlign: "center", margin: "1rem 0 2rem 0" }}>
+                            <Link to={"tel:+918069489655"} style={{ color: "#514C9F", fontWeight: "700", textDecoration: "underline", textAlign: "center" }}>Contact Support</Link>
+                        </div>
+                </>
+                : ""}
 
         </main>
     )

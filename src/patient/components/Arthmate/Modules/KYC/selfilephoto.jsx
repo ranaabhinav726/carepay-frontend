@@ -372,22 +372,27 @@ export default function ArthSelfie() {
                                                             console.log(additional, 'additionalinfo')
 
                                                             if (additional.data.message === 'success') {
-                                                                console.log(loanData.data.data.loanAmount, 'loanData.data.data.loanAmount')
-                                                                if (loanData.data.data.loanAmount >= 75000) {
+                                                                axios.get(env.api_Url + 'finzy/finzyLoanDetailByRefId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                                                    .then((finzyData) => {
+                                                                        console.log(finzyData,'finzyData')
+                                                                        if (finzyData.data.message === 'success' ) {
+                                                                            if (finzyData.data.data.amount >= 75000) {
 
-                                                                    checkAndNavigatedigitap()
-                                                                } else {
-                                                                    axios.get(env.api_Url + 'finzy/cibilApi?loanId=' + loanData.data.data.loanId)
-                                                                        .then((additional) => {
-                                                                            if (additional.status === 200 && additional.data.message === 'success') {
-                                                                                checkAndNavigate()
-
+                                                                                checkAndNavigatedigitap()
                                                                             } else {
-                                                                                checkAndNavigate()
-                                                                            }
+                                                                                axios.get(env.api_Url + 'finzy/cibilApi?loanId=' + loanData.data.data.loanId)
+                                                                                    .then((additional) => {
+                                                                                        if (additional.status === 200 && additional.data.message === 'success') {
+                                                                                            checkAndNavigate()
 
-                                                                        })
-                                                                }
+                                                                                        } else {
+                                                                                            checkAndNavigate()
+                                                                                        }
+
+                                                                                    })
+                                                                            }
+                                                                        }
+                                                                    })
 
                                                             }
 
@@ -448,7 +453,7 @@ export default function ArthSelfie() {
                         {imgSrc ? (
                             <>
                                 {/* <div style={{ marginLeft: 'auto', marginRight: 'auto', }}> */}
-                                    <img src={imgSrc} alt="Selfie" className="captured-image" style={{ borderRadius: '10px', border: '5px solid #504c9a', padding: '5px',width:'100%' }} />
+                                <img src={imgSrc} alt="Selfie" className="captured-image" style={{ borderRadius: '10px', border: '5px solid #504c9a', padding: '5px', width: '100%' }} />
 
                                 {/* </div> */}
                                 <button
