@@ -62,6 +62,8 @@ export default function FibeOtpAuthentication(){
             .then((response) => {
                 console.log(response)
                 if(response.data.message === "success"){
+
+                    
                     let userId = response.data.data;
                     if(userId){
                         localStorage.setItem("userId", userId);
