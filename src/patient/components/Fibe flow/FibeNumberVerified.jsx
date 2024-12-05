@@ -151,6 +151,7 @@ export default function FibeNumberVerified() {
             //         if (response.data.message === 'success') {
             axios.get(env.api_Url + 'userDetails/getLoanDetailsByUserId?userId=' + localStorage.getItem('userId'))
                 .then((loanData) => {
+                    if(loanData.data.message==='success'){
                     axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loanData.data.data.loanId)
                         .then((statusData) => {
                             console.log(statusData, 'statusData')
@@ -185,6 +186,9 @@ export default function FibeNumberVerified() {
 
 
                         })
+                    }else{
+                        navigate(routes.ARTH_CREDIT_DETAILS)
+                    }
 
                 })
 
