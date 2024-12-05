@@ -44,7 +44,9 @@ const WaitLegality = () => {
     //     window.addEventListener('message', messageFromChildWindowCallback);
 
     // }, [])
-
+const backtoesign=()=>{
+    navigate(routes.FINZY_AGREEMENT)
+}
     return (
         <>
 
@@ -58,6 +60,12 @@ const WaitLegality = () => {
                         <NoteText text="fetching agreement status..." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
 
                         <button className="submit" style={{ margin: "2rem 0 12px 0" }} onClick={() => refreshScreen()}>Refresh status</button>
+                        <div style={{background:'#FAE1CD',padding:'10px',borderRadius:'5px'}}>
+                            <b>Note</b>
+
+                            <p style={{marginTop:'10px',fontSize:'16px'}}>If you are unable to see the ‘Digio’ portal to sign your agreement, then please try to remove the popup blocker from your browser and try again.</p>
+                            <button onClick={()=>backtoesign()}  className="submit" style={{width:'100px',padding:'10px',height:'auto'}}>Try Again</button>
+                        </div>
                         <NoteText text="For more details and enquiries, reach out to us" styles={{ textAlign: "center", color: "#000000C", fontSize: "16px", lineHeight: "20px", marginTop: "1.7rem" }} />
                         <div style={{ textAlign: "center", margin: "1rem 0 2rem 0" }}>
                             <Link to={"tel:+918069489655"} style={{ color: "#514C9F", fontWeight: "700", textDecoration: "underline", textAlign: "center" }}>Contact Support</Link>
