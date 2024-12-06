@@ -372,7 +372,7 @@ export default function ArthSelfie() {
                                                             console.log(additional, 'additionalinfo')
 
                                                             if (additional.data.message === 'success') {
-                                                                axios.get(env.api_Url + 'finzy/getfinzydetailbyloanid?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
+                                                                axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loanData.data.data.loanId + '&sanctionAmount=' + loanData.data.data.loanAmount)
                                                                     .then((finzyData) => {
                                                                         console.log(finzyData,'finzyData')
                                                                         if (finzyData.data.message === 'success' ) {
