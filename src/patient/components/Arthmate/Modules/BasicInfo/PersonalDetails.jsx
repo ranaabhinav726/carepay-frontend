@@ -253,18 +253,18 @@ const ArthPersonalDetails = () => {
         //     return;
         // }
 
-        if (refNumber == number || refNumber == altNumber) {
-            let elem = document.getElementById("refNumber");
-            if (elem) {
-                setRefErrorMsg("This can't be same as your number.");
-                setTimeout(() => {
-                    setRefErrorMsg("This field can't be empty.");
-                }, 3000)
-                showErrorOnUI(elem);
-            }
+        // if (refNumber == number || refNumber == altNumber) {
+        //     let elem = document.getElementById("refNumber");
+        //     if (elem) {
+        //         setRefErrorMsg("This can't be same as your number.");
+        //         setTimeout(() => {
+        //             setRefErrorMsg("This field can't be empty.");
+        //         }, 3000)
+        //         showErrorOnUI(elem);
+        //     }
 
-            return;
-        }
+        //     return;
+        // }
 
         // if (!refRelation) {
         //     let elem = document.getElementById('refRelation');
