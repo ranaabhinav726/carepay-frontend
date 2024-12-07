@@ -272,11 +272,11 @@ const ArthEmploymentDetails = () => {
             setShowPopOver(true);
             return;
         }
-        if (!familyIncome ) {
-            let elem = document.getElementById('familyIncome');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
+        // if (!familyIncome ) {
+        //     let elem = document.getElementById('familyIncome');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
         console.log("less than 3 lac")
         if (!canSubmit) {
             return;
@@ -751,7 +751,7 @@ const ArthEmploymentDetails = () => {
                     />
                     <span className="fieldError">Please enter your monthly in-hand income.</span>
                 </div>
-                <div className="income">
+                {/* <div className="income">
                     <p>Annual family income</p>
                     <input
                         id="familyIncome"
@@ -762,7 +762,7 @@ const ArthEmploymentDetails = () => {
                         placeholder="Enter Annual family income"
                     />
                     <span className="fieldError">Please enter family's annual income.</span>
-                </div>
+                </div> */}
                
 
                 {/* <div className="salaryDate">
