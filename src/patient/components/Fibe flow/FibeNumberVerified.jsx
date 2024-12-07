@@ -184,7 +184,7 @@ export default function FibeNumberVerified() {
                                     if (statusData.data.data.cpStatus !== 'ESIGN_COMPLETE' && statusData.data.data.cpStatus !== 'LOAN_ACCEPTED' && statusData.data.data.cpStatus !== 'BANK_INFO' && statusData.data.data.cpStatus !== 'FINZY' && statusData.data.data.cpStatus !== 'DIGITAP' && statusData.data.data.cpStatus !== 'AADHAAR_VERIFIED' && statusData.data.data.cpStatus !== 'LOAN_CREATED') {
                                         navigate(routes.ARTH_CREDIT_DETAILS)
                                     }
-                                    if (statusData.data.data.cpStatus === null || statusData.data.data.cpStatus === '') {
+                                    if (statusData.data.data === null || statusData.data.data === '') {
                                         navigate(routes.ARTH_CREDIT_DETAILS)
                                     }
                                 } else {
