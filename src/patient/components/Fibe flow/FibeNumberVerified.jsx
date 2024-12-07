@@ -154,8 +154,10 @@ export default function FibeNumberVerified() {
                     if (loanData.data.message === 'success') {
                         axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loanData.data.data.loanId)
                             .then((statusData) => {
-                                console.log(statusData, 'statusData')
-                                if (statusData.data.message === 'success') {
+
+                                console.log(statusData.data.message, 'statusData')
+                                // let statusData={"status":200,"data":null,"attachment":null,"message":"success"}
+                                if (statusData.data.message === 'success' &&statusData.data.data !==null) {
                                     if (statusData.data.data.cpStatus === 'ESIGN_COMPLETE') {
                                         navigate('/patient/fach/' + loanData.data.data.loanId)
                                     }
@@ -184,9 +186,9 @@ export default function FibeNumberVerified() {
                                     if (statusData.data.data.cpStatus !== 'ESIGN_COMPLETE' && statusData.data.data.cpStatus !== 'LOAN_ACCEPTED' && statusData.data.data.cpStatus !== 'BANK_INFO' && statusData.data.data.cpStatus !== 'FINZY' && statusData.data.data.cpStatus !== 'DIGITAP' && statusData.data.data.cpStatus !== 'AADHAAR_VERIFIED' && statusData.data.data.cpStatus !== 'LOAN_CREATED') {
                                         navigate(routes.ARTH_CREDIT_DETAILS)
                                     }
-                                    if (statusData.data.data === null || statusData.data.data === '') {
-                                        navigate(routes.ARTH_CREDIT_DETAILS)
-                                    }
+                                    // if (statusData.data.data === null || statusData.data.data === '') {
+                                    //     navigate(routes.ARTH_CREDIT_DETAILS)
+                                    // }
                                 } else {
                                     navigate(routes.ARTH_CREDIT_DETAILS)
                                 }
