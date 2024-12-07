@@ -342,12 +342,12 @@ const ArthEmploymentDetails = () => {
         //     expError();
         //     return;
         // }
-        if (totalExpMonth === 0) {
-            if (totalExpYear === 0) {
-                expError();
-                return;
-            }
-        }
+        // if (totalExpMonth === 0) {
+        //     if (totalExpYear === 0) {
+        //         expError();
+        //         return;
+        //     }
+        // }
 
         // if(!consent){
         //     let elem = document.getElementById('consent');
@@ -709,7 +709,7 @@ const ArthEmploymentDetails = () => {
                     </div>
                     :
                     <>
-                        <div className="businessType">
+                        {/* <div className="businessType">
                             <p>Type of business</p>
                             <select
                                 id="businessType"
@@ -725,7 +725,7 @@ const ArthEmploymentDetails = () => {
                                 <option value="Sole Proprietorship">Sole Proprietorship</option>
                                 <option value="One-person company">One-person company</option>
                             </select>
-                        </div>
+                        </div> */}
                         <div className="businessName">
                             <p>Name of business</p>
                             <input
@@ -871,7 +871,7 @@ const ArthEmploymentDetails = () => {
             </div>
         </div> */}
 
-                <div className="totalExp">
+                {/* <div className="totalExp">
                     <p>Experience in this company/business</p>
                     <div className="inputGroup">
                         <select name=""
@@ -892,7 +892,7 @@ const ArthEmploymentDetails = () => {
                         <p>Months</p>
                     </div>
                     <span id="expError" className="fieldError">Please enter your experience in current workplace.</span>
-                </div>
+                </div> */}
 
                 {/* <div id="consent" className="consentBox">
             <input

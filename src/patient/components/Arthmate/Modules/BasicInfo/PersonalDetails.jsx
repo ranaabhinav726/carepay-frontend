@@ -225,33 +225,33 @@ const ArthPersonalDetails = () => {
             if (elem) showErrorOnUI(elem);
             return;
         }
-        if (!motherName) {
-            let elem = document.getElementById('motherName');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
+        // if (!motherName) {
+        //     let elem = document.getElementById('motherName');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
         if (!educationLevel) {
             let elem = document.getElementById('educationLevel');
             if (elem) showErrorOnUI(elem);
             return;
         }
 
-        if (!typeOfEmail) {
-            let elem = document.getElementById('typeOfEmail');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
-        if (!refName) {
-            let elem = document.getElementById('refName');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
+        // if (!typeOfEmail) {
+        //     let elem = document.getElementById('typeOfEmail');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
+        // if (!refName) {
+        //     let elem = document.getElementById('refName');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
-        if (!refNumber) {
-            let elem = document.getElementById('refNumber');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
+        // if (!refNumber) {
+        //     let elem = document.getElementById('refNumber');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
         if (refNumber == number || refNumber == altNumber) {
             let elem = document.getElementById("refNumber");
@@ -266,11 +266,11 @@ const ArthPersonalDetails = () => {
             return;
         }
 
-        if (!refRelation) {
-            let elem = document.getElementById('refRelation');
-            if (elem) showErrorOnUI(elem);
-            return;
-        }
+        // if (!refRelation) {
+        //     let elem = document.getElementById('refRelation');
+        //     if (elem) showErrorOnUI(elem);
+        //     return;
+        // }
 
         localStorage.setItem("email", email);
 
@@ -483,7 +483,7 @@ const ArthPersonalDetails = () => {
 
 
 
-                        <div className="fatherName">
+                        {/* <div className="fatherName">
                             <p>Father's name</p>
                             <input type="text"
                                 id="fatherName"
@@ -493,8 +493,8 @@ const ArthPersonalDetails = () => {
                                 required
                             />
                             <span className="fieldError">This field can't be empty.</span>
-                        </div>
-                        <div className="PAN">
+                        </div> */}
+                        {/* <div className="PAN">
                             <p>Mother's name</p>
                             <input type="text"
                                 id="motherName"
@@ -504,7 +504,7 @@ const ArthPersonalDetails = () => {
                                 required
                             />
                             <span className="fieldError">This field can't be empty.</span>
-                        </div>
+                        </div> */}
                         <div className="email">
                             <p>E-mail ID</p>
                             <input type="email"
@@ -515,7 +515,7 @@ const ArthPersonalDetails = () => {
                             />
                             <span className="fieldError">This field can't be empty.</span>
                         </div>
-                        <div className="gender" id="gender">
+                        {/* <div className="gender" id="gender">
                             <p>Select the type of your email</p>
                             <div className="radioOption">
                                 <input type="radio" id="Professional" name="typeOfEmail" checked={typeOfEmail === "Professional"} onChange={(e) => setTypeOfEmail(e.target.value)} value="Professional" />
@@ -526,7 +526,7 @@ const ArthPersonalDetails = () => {
                                 <label htmlFor="Personal">Personal</label><br />
                             </div>
 
-                        </div>
+                        </div> */}
                         <div className="marital-status">
                             <p>Education</p>
                             <select name="Education" value={educationLevel} onChange={(e) => seteducationLevel(e.target.value)}>
@@ -575,10 +575,10 @@ const ArthPersonalDetails = () => {
                             </select>
                         </div>
                         <span className="fieldError">This field can't be empty.</span>
-                        <h3>Reference details</h3>
-                        <p style={{ marginBottom: "1.5rem" }}>Note: The reference has to be your immediate relative.</p>
+                        {/* <h3>Reference details</h3>
+                        <p style={{ marginBottom: "1.5rem" }}>Note: The reference has to be your immediate relative.</p> */}
 
-                        <div className="referenceName">
+                        {/* <div className="referenceName">
                             <p>Reference name</p>
                             <input type="text"
                                 id="refName"
@@ -588,9 +588,9 @@ const ArthPersonalDetails = () => {
                                 required
                             />
                             <span className="fieldError">This field can't be empty.</span>
-                        </div>
+                        </div> */}
 
-                        <div className="referenceNumber">
+                        {/* <div className="referenceNumber">
                             <p>Reference contact number</p>
                             <input
                                 id="refNumber"
@@ -601,17 +601,11 @@ const ArthPersonalDetails = () => {
                                 placeholder="Mobile number"
                             />
                             <span className="fieldError">{refErrorMsg}</span>
-                        </div>
+                        </div> */}
 
-                        <div className="referenceRelation">
+                        {/* <div className="referenceRelation">
                             <p>Relationship with the reference contact</p>
-                            {/* <input type="text" 
-                id="refRelation"
-                value={refRelation ?? ""} 
-                onChange={(e)=> setRefRelation(e.target.value)} 
-                placeholder="What is your relationship with them?" 
-                required 
-            /> */}
+                      
                             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                                 <span style={{ minWidth: "max-content" }}>Reference is my:</span>
                                 <select name="refRelation" id="refRelation" style={{ marginBottom: "0" }} value={refRelation} onChange={(e) => setRefRelation(e.target.value)}>
@@ -627,7 +621,7 @@ const ArthPersonalDetails = () => {
                                 </select>
                             </div>
                             <span className="fieldError">This field can't be empty.</span>
-                        </div>
+                        </div> */}
 
 
                         <p className={apiError ? "apiError" : "apiError hide"}>An error has occured, please try again.</p>
