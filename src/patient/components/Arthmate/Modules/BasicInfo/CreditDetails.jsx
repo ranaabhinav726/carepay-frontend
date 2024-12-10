@@ -1090,12 +1090,12 @@ const ArthCreditDetails = () => {
 
                 <AutocompleteInput
                     id="treatment"
-                    title="Treatment name"
+                    title="Treatment"
                     value={treatment}
                     setValue={setTreatment}
-                    placeholder="Name of treatment"
+                    placeholder="Treatment"
                     list={treatmentList}
-                    fieldError="Please enter your treatment name"
+                    fieldError="Please enter your treatment"
                     otherValueSettter={otherTreatmentNameAndFocusSetter}
                 />
                 {treatment === "Other" &&

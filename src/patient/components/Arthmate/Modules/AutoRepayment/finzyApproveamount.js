@@ -155,7 +155,7 @@ const Congrats = () => {
                             <img src={Confetti} style={{ maxWidth: "25%" }} alt="" />
                         </div> */}
                         <div style={{ background: "#FAE1CD", marginTop: '40px',padding:'10px',borderRadius:'5px',display:'flex' }}>
-                           <ReportProblemIcon style={{color:'#F37B20'}}/> <p style={{fontSize:'14px',marginLeft:'5px'}}>Our lending partners could not approve your loan. But, you may continue with the credit limit assigned to you, by your best matched lender.
+                           <ReportProblemIcon style={{color:'#F37B20'}}/> <p style={{fontSize:'14px',marginLeft:'5px'}}>Our lending partners could not approve your requested amount. But, you may continue with the credit limit assigned to you.
 </p>
                         </div>
                         <p style={{marginTop:'15px',marginBottom:'15px'}} className='subtitle'>Your credit application is <span style={{ color: "#149540", fontWeight: "700" }}>approved</span> for</p>
