@@ -286,7 +286,7 @@ export default function ArthAgreementStatus() {
                             axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loanData.data.data.loanId)
                                 .then((res) => {
                                     if (res.data.message === 'success') {
-                                        if (res.data.data.amount === loanData.data.data.loanAmount) {
+                                        if (res.data.data.loanAmountOffered === loanData.data.data.loanAmount) {
                                             navigate(routes.FINZY_APPROVAL)
                                         } else {
                                             navigate(routes.FINZY_APPROVE_LESS_AMOUNT)

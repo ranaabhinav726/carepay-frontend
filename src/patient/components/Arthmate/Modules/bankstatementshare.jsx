@@ -39,7 +39,7 @@ const BankstatementShare = () => {
                                                         axios.get(env.api_Url + 'finzy/getFinzyDetailByLoanId?loanId=' + loandata.data.data.loanId)
                                                             .then((res) => {
                                                                 if (res.data.message === 'success') {
-                                                                    if (res.data.data.amount === loandata.data.data.loanAmount) {
+                                                                    if (res.data.data.loanAmountOffered === loandata.data.data.loanAmount) {
                                                                         navigate(routes.FINZY_APPROVAL)
                                                                     } else {
                                                                         navigate(routes.FINZY_APPROVE_LESS_AMOUNT)
