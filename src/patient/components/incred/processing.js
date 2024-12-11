@@ -5,6 +5,9 @@ import axios from "axios";
 import routes from "../../../layout/Routes";
 import { useNavigate } from "react-router";
 import { env } from "../../environment/environment";
+import NoteText from "../Fibe flow/Comps/NoteText";
+import SearchingDoc from '../../assets/GIFs/Document in process.gif'
+
 
 const Processing = () => {
     let navigate = useNavigate()
@@ -122,9 +125,13 @@ const Processing = () => {
         <main>
             <Header />
             <div style={{ marginTop: "12%", textAlign: 'center' }} >
-                <img src={Loader} style={{ width: '30%' }} />
-                <p>Sit back and relax!
-                    while we assess your credit application...</p>
+            <div style={{ display: "flex", placeContent: "center", marginTop: "3rem" }}>
+                    <img src={SearchingDoc} alt="" style={{ width: "50%" }} />
+                </div>
+     
+                <NoteText text="Sit back and relax! while we assess 
+your credit application..." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px" }} />
+                <NoteText text="This may take 5 to 10 minutes." styles={{ textAlign: "center", color: "#000000CC", fontSize: "16px", lineHeight: "20px",marginTop:'20px' }} />
                 <button style={{ marginTop: '20px' }} onClick={() => refreshBtn()} className="submit">Refresh</button>
                 <p style={{ marginTop: '40px' }} className="text-center">Need help? Reach out to us.</p>
 
