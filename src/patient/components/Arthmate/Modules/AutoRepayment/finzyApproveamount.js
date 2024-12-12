@@ -36,7 +36,7 @@ const Congrats = () => {
 
                     .then((res) => {
                         if (res.data.message === 'success') {
-                            setAmount(res.data.data.amount)
+                            setAmount(res.data.data.loanAmountOffered)
                             setLoader(false)
                         }
                     })
