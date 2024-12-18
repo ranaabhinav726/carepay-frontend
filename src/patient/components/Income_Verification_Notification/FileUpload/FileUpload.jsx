@@ -377,9 +377,10 @@ const FileUpload = () => {
                         <p className={apiError ? "apiError" : "apiError hide"} style={{ marginTop: "10px" }}>An error has occured, please try again.</p>
                     </>
                 }
-                {(fileCount > 0 || prevFiles.length > 0) &&
-                    <button onClick={() => uploadFiles()} className='submit'>Continue</button>
-                }
+              {(fileCount > 0 || prevFiles?.length > 0) &&
+    <button onClick={() => uploadFiles()} className='submit'>Continue</button>
+}
+
                 {fileCount == 0 &&
                     <button onClick={() => invokeFileHandler()} className="uploadAccountStatement">
                         <FaArrowUp style={{ color: "#514C9F", fontSize: "20px", marginRight: "10px" }} />
