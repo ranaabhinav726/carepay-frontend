@@ -103,7 +103,7 @@ const FileUpload = () => {
             prevFilesList.push(<PrevFile link={prevFiles[i - 1]} count={i} key={i} />);
         }
     }
-    
+
 
     function handleEyeClick() {
         let inputBox = document.getElementById('password');
@@ -377,9 +377,9 @@ const FileUpload = () => {
                         <p className={apiError ? "apiError" : "apiError hide"} style={{ marginTop: "10px" }}>An error has occured, please try again.</p>
                     </>
                 }
-              {(fileCount > 0 || prevFiles?.length > 0) &&
-    <button onClick={() => uploadFiles()} className='submit'>Continue</button>
-}
+                {(fileCount > 0 || prevFiles?.length > 0) &&
+                    <button onClick={() => uploadFiles()} className='submit'>Continue</button>
+                }
 
                 {fileCount == 0 &&
                     <button onClick={() => invokeFileHandler()} className="uploadAccountStatement">
