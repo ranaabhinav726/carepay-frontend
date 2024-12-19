@@ -76,36 +76,33 @@ const BankstatementShare = () => {
                     <p className="" style={{ color: 'red' }}>{errorMsg}</p>
                     {digitTapData !== '' && digitTapData.AccountAggregator ?
                         <>
-                            <button onClick={() => submitData('accountAggregator', digitTapData.instituteIdForAccountAggregator)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px' ,border:'none',width:'100%',textAlign:'left'}}>
+                            <div onClick={() => submitData('accountAggregator', digitTapData.instituteIdForAccountAggregator)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px' }}>
                                 <p style={{ color: '#504c9a' }}><b>Proceed with Account Aggregator</b></p>
                                 <p style={{ color: '#8e8d98' }}>Faster and secure financial data transfer via<br />
                                     RBI regulated entity</p>
-                                    <div style={{ marginTop: '' }}>
+                            </div>
+                            <div style={{ marginTop: '-10px' }}>
                                 <img src={Faster} />
                             </div>
-                            </button>
-                           
                         </> : ""}
-                       
                     {digitTapData !== '' && digitTapData.NetBanking ?
                         <>
-                            <button onClick={() => submitData('netBanking', digitTapData.instituteIdForNetBanking)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px',marginTop:'20px',border:'none',width:'100%',textAlign:'left' }}>
+                            <div onClick={() => submitData('netBanking', digitTapData.instituteIdForNetBanking)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px' }}>
                                 <p style={{ color: '#504c9a' }}><b>Proceed with Net banking</b></p>
-                                <div style={{ marginTop: '' }}>
+
+                            </div>
+                            <div style={{ marginTop: '-10px' }}>
                                 <img src={Faster} />
                             </div>
-                            </button>
-                           
                         </>
                         : ""}
-                        <br/>
 
                     {digitTapData !== '' && digitTapData.Statement ?
 
-                        <button onClick={() => submitData('statement', digitTapData.instituteIdForStatement)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px',marginTop:'20px',border:'none',width:'100%',textAlign:'left' }}>
+                        <div onClick={() => submitData('statement', digitTapData.instituteIdForStatement)} style={{ background: '#ecebfd', padding: '10px', borderRadius: '5px' }}>
                             <p style={{ color: '#504c9a' }}><b>Upload bank account statement PDF</b></p>
 
-                        </button>
+                        </div>
                         : ""}
                     {/* <div style={{ marginTop: '24px', textAlign: 'center' }}> <img src={ImageBank} /></div> */}
                     {/* <button onClick={() => onSubmit()} className="submit">Continue</button> */}
