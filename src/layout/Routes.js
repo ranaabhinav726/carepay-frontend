@@ -195,6 +195,7 @@ const routes = {
   STATUS_WAIT_FINZY:'/patient/fstatuswait',
   FINZY_TRY_AGAIN:'/patient/retryfinzymandate',
   WAIT_DOC_UPLOAD:'/patient/waitdocument',
+  ADDITIONAL_INFO:'/patient/addinfo',
 
 
 

@@ -158,6 +158,9 @@ export default function FibeNumberVerified() {
                                 console.log(statusData.data.message, 'statusData')
                                 // let statusData={"status":200,"data":null,"attachment":null,"message":"success"}
                                 if (statusData.data.message === 'success' &&statusData.data.data !==null) {
+                                    if (statusData.data.data.cpStatus === 'ADDITONAL-INFO') {
+                                        navigate(routes.ADDITIONAL_INFO)
+                                    }
                                     if (statusData.data.data.cpStatus === 'ESIGN_COMPLETE') {
                                         navigate('/patient/fach/' + loanData.data.data.loanId)
                                     }

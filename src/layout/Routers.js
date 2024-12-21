@@ -213,6 +213,7 @@ export const FINZY_APPROVE_LESS_AMOUNT = React.lazy(() => import('../patient/com
 export const STATUS_WAIT_FINZY = React.lazy(() => import('../patient/components/Arthmate/Modules/AutoRepayment/statuswaitfinzy'));
 export const FINZY_TRY_AGAIN = React.lazy(() => import('../patient/components/Arthmate/Modules/Esigning/retryfinzymandate'));
 export const WAIT_DOC_UPLOAD = React.lazy(() => import('../patient/components/Arthmate/Modules/Esigning/uploaddocrefresh'));
+export const ADDITIONAL_INFO = React.lazy(() => import('../patient/components/Arthmate/Modules/KYC/addInforefresh'));
 
 
 
